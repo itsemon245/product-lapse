@@ -14,6 +14,20 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+            <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+        <!--icon font css-->
+        <link rel="stylesheet" href="{{ asset('vendors/themify-icon/themify-icons.css') }}">
+        <link rel="stylesheet" href="{{ asset('vendors/elagent/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('vendors/flaticon/flaticon.css') }}">
+        <link rel="stylesheet" href="{{ asset('vendors/animation/animate.css') }}">
+        <link rel="stylesheet" href="{{ asset('vendors/owl-carousel/assets/owl.carousel.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('vendors/magnify-pop/magnific-popup.css') }}">
+        <link rel="stylesheet" href="{{ asset('vendors/nice-select/nice-select.css') }}">
+        <link rel="stylesheet" href="{{ asset('vendors/scroll/jquery.mCustomScrollbar.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -33,5 +47,20 @@
                 {{ $slot }}
             </main>
         </div>
+
+           <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ asset('js/propper.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('vendors/wow/wow.min.js') }}"></script>
+    <script src="{{ asset('vendors/sckroller/jquery.parallax-scroll.js') }}"></script>
+    <script src="{{ asset('vendors/owl-carousel/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('vendors/imagesloaded/imagesloaded.pkgd.min.js') }}"></script>
+    <script src="{{ asset('vendors/isotope/isotope-min.js') }}"></script>
+    <script src="{{ asset('vendors/magnify-pop/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('vendors/nice-select/jquery.nice-select.min.js') }}"></script>
+    <script src="{{ asset('vendors/scroll/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+    <script src="{{ asset('js/plugins.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
     </body>
 </html>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('main')
-
+<x-danger-button>There</x-danger-button>
 <section class="agency_banner_area bg_color">
     <img class="banner_shap banner_shap_ar" src="img/banner_bg-ar.png" alt="">
     <img class="banner_shap banner_shap_en" src="img/banner_bg-en.png" alt="">

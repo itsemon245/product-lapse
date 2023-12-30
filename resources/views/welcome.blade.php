@@ -1,11 +1,10 @@
 @extends('layouts.app')
 @section('main')
-<x-danger-button>There</x-danger-button>
 <section class="agency_banner_area bg_color">
     <img class="banner_shap banner_shap_ar" src="img/banner_bg-ar.png" alt="">
     <img class="banner_shap banner_shap_en" src="img/banner_bg-en.png" alt="">
     <div class="container custom_container">
-        <div class="row">
+          <div class="row">
             <div class="col-md-6 d-flex align-items-center">
                 <div class="agency_content">
                     <h2 class="f_700 t_color3 mb_40 wow fadeInLeft" data-wow-delay="0.3s">Join <span class="bold"> ProductLapse </span>Now and enjoy an efficient and user-friendly experience in <span>Manage your products</span></h2>
@@ -23,6 +22,7 @@
 </section>
 <section class="agency_about_area bg_color" id="tolink-2">
     <div class="container custom_container">
+        <x-delete-tost />
         <h2 class="f_size_30 f_600 t_color3 l_height40 text-center wow fadeInUp title-position" data-wow-delay="0.2s">About us</h2>
         <div class="row">
             <div class="col-md-6">
@@ -64,10 +64,10 @@
             </div>
             <div class="col-lg-3 col-6">
                 <div class="p_service_item agency_service_item wow fadeInUp" data-wow-delay="0.4s">
-                    {{-- <div class="icon">
+                    <div class="icon">
                         <img src="img/technical-support.png" alt="">
                         
-                    </div> --}}
+                    </div>
                     <h5 class="f_600 t_color3">Product Support</h5>
                     <p>We are here to support you throughout your product management journey by providing continuous support and timely issue resolution</p>
                     

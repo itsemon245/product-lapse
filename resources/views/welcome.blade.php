@@ -22,7 +22,6 @@
 </section>
 <section class="agency_about_area bg_color" id="tolink-2">
     <div class="container custom_container">
-        <x-delete-tost />
         <h2 class="f_size_30 f_600 t_color3 l_height40 text-center wow fadeInUp title-position" data-wow-delay="0.2s">About us</h2>
         <div class="row">
             <div class="col-md-6">

@@ -3,7 +3,7 @@
         <div class="sign_info">
             <div class="login_info form-layout">
                 <div class="d-flex justify-content-center align-items-center text-center certificate-btns">
-                  <x-btn-primary type="submit" name="Delete" data-toggle="modal" data-target="#myModal2" />
+                  <x-btn-primary type="submit" name="Delete" data-toggle="modal" data-target="#myModal3" />
                     {{-- <button type="submit" class="btn_hover agency_banner_btn btn-bg" data-toggle="modal" data-target="#myModal2">Delete</button> --}}
                 </div>
             </div>

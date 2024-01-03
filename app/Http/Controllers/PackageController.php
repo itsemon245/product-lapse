@@ -13,7 +13,8 @@ class PackageController extends Controller
      */
     public function index()
     {
-        return view('pages.packages.add');
+        $packages = Package::get();
+        return view('pages.packages.index', compact('packages'));
     }
 
     /**
@@ -21,7 +22,7 @@ class PackageController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.packages.create');
     }
 
     /**
@@ -43,6 +44,7 @@ class PackageController extends Controller
             'has_limited_features' => $request->has_limited_features,
             'is_popular' => $request->is_popular,
         ]);
+        return back()->with(['success', 'Store Success!']);
     }
 
     /**
@@ -50,7 +52,8 @@ class PackageController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // $packages = Package::get();
+        // return view('pages.packages.show', compact('packages'));
     }
 
     /**
@@ -58,7 +61,8 @@ class PackageController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = Package::find($id);
+        return view('pages.packages.create', compact('data'));
     }
 
     /**
@@ -66,7 +70,9 @@ class PackageController extends Controller
      */
     public function update(StorePackageRequest $request, string $id)
     {
-        $update = Package::update([
+        // $find = Package::find($id);
+
+        $find = Package::find($id)->update([
             'name' => $request->name,
             'price' => $request->price,
             'monthly_rate' => $request->monthly_rate,
@@ -86,7 +92,8 @@ class PackageController extends Controller
      */
     public function destroy(string $id)
     {
-        $data = Package::find($id);
-        $data->delete();
+        // dd
+        $data = Package::destroy($id);
+        return back();
     }
 }

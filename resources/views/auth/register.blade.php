@@ -1,52 +1,100 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
+@extends('layouts.app')
 
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+@section('main')
+    <section class="breadcrumb_area">
+        <div class="container">
+            <div class="breadcrumb_content text-center">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">@lang('registration.sign_up')</li>
+                </ul>
+            </div>
         </div>
+    </section>
+    <section class="sign_in_area bg_color sec_pad">
+        <div class="container">
+            <div class="sign_info">
+                <div class="login_info">
+                    <h2 class=" f_600 f_size_24 t_color3 mb_40">@lang('registration.sign_up')</h2>
+                    <form method="POST" action="{{ route('register') }}" class="login-form sign-in-form"
+                        enctype="multipart/form-data"> @csrf
+                        <div class="row">
+                            <div class="form-group text_box col-md-6">
+                                <label class=" text_c f_500">@lang('registration.fisrt_name')</label>
+                                <input type="text" placeholder="first name" name="first_name">
+                                @error('first_name')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                            </div>
+                            <div class="form-group text_box col-md-6">
+                                <label class=" text_c f_500">@lang('registration.last_name')</label>
+                                <input type="text" placeholder="last name" name="last_name">
+                                @error('last_name')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group text_box col-md-6">
+                                <label class=" text_c f_500">@lang('registration.email')</label>
+                                <input type="text" placeholder="Enter Email" name="email">
+                                @error('email')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group text_box col-md-6">
+                                <label class=" text_c f_500">@lang('registration.password')</label>
+                                <input type="password" placeholder="" name="password">
+                                @error('password')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group text_box col-md-6">
+                                <label class=" text_c f_500">@lang('registration.phone')</label>
+                                <input type="text" placeholder="phone">
+                                @error('phone')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group text_box col-md-6">
+                                <label class=" text_c f_500">@lang('registration.work_place')</label>
+                                <input type="text" placeholder="work place" name="workplace">
+                                @error('workplace')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group text_box col-md-6">
+                                <label class=" text_c f_500">@lang('registration.position')</label>
+                                <input type="text" placeholder="Position" name="position">
+                                @error('position')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group text_box col-md-6">
+                                <label class=" text_c f_500">@lang('registration.promo_code')</label>
+                                <input type="text" placeholder="Promotional code" name="promotional_code">
+                                @error('promotional_code')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="extra extra2 mb_20">
+                            <div class="checkbox remember">
+                                <label>
+                                    <input type="checkbox"> Agree on<a href="#" data-toggle="modal"
+                                        data-target="#myModal1">
+                                        @lang('registration.terms')</a>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center text-center">
+                            <button type="submit"
+                                class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">@lang('registration.sign_up')</button>
+                            <button class="btn_hover agency_banner_btn btn-bg btn-bg-grey">@lang('registration.cancel')</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ml-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    </section>
+@endsection

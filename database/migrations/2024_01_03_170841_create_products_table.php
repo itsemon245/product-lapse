@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('name');
             $table->string('url');
-            $table->enum('stage', []);
+            $table->enum('stage', ['one', 'two', 'three']);
             $table->string('logo');
             $table->longText('description');
             $table->timestamps();

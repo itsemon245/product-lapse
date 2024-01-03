@@ -5,7 +5,9 @@
                 <img src="img/logo-white.png" class="logo1" srcset="img/logo-white.png 2x" alt="logo">
                 <img src="img/logo.png" class="logo2" srcset="img/logo.png 2x" alt="logo">
             </a>
-            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <span class="menu_toggle">
                     <span class="hamburger">
                         <span></span>
@@ -48,12 +50,12 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#tolink-6">
-                           Contact us
+                            Contact us
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
-                           عربى
+                            عربى
                         </a>
                     </li>
                     <li class="nav-item"><a class="btn_get btn_hover hidden-md visible-sm" href="#get-app">login</a>
@@ -61,6 +63,11 @@
                 </ul>
             </div>
             <a class="btn_get btn_hover hidden-sm hidden-xs btn-bg" href="#">login</a>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="btn_get btn_hover hidden-sm hidden-xs btn-bg">logout</button>
+            </form>
+
         </div>
     </nav>
 </header>

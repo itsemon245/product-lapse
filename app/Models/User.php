@@ -42,4 +42,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    // Define the one-to-many relationship with the Package model
+    public function packages()
+    {
+        return $this->hasMany(Package::class);
+    }
 }

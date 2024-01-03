@@ -19,7 +19,7 @@ return new class extends Migration
             $table->float('monthly_rate');
             $table->float('annual_rate');
             $table->enum('subscription_type', ['Free', 'Basic', 'Golden', 'Diamond']);
-            $table->json('features');
+            $table->string('features');
             $table->dateTime('product_limit');
             $table->dateTime('validity');
             $table->string('has_limited_features');

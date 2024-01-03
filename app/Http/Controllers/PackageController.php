@@ -13,7 +13,7 @@ class PackageController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.packages.add');
     }
 
     /**
@@ -29,7 +29,9 @@ class PackageController extends Controller
      */
     public function store(StorePackageRequest $request)
     {
+        // dd($request);auth()->id()
         $create = Package::create([
+            'user_id' => 1,
             'name' => $request->name,
             'price' => $request->price,
             'monthly_rate' => $request->monthly_rate,

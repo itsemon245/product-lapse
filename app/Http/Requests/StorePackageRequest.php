@@ -24,15 +24,15 @@ class StorePackageRequest extends FormRequest
 
         if(request()->isMethod('post')){
             $role = 'required';
-        }elseif(request()->isMethod('post')){
+        }elseif(request()->isMethod('put')){
             $role= 'sometimes';
         }
         return [
             'name' => [$role, 'max:30'],
-            'price' => [$role, 'numeric'],
-            'monthly_rate' => [$role, 'numeric'],
-            'annual_rate' => [$role, 'numeric'],
-            'subscription_type' => [$role, 'numeric'],
+            'price' => [$role],
+            'monthly_rate' => [$role],
+            'annual_rate' => [$role],
+            'subscription_type' => [$role],
             'features' => [$role],
             'product_limit' => [$role],
             'validity' => [$role],

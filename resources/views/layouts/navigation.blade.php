@@ -62,11 +62,15 @@
                     </li>
                 </ul>
             </div>
-            <a class="btn_get btn_hover hidden-sm hidden-xs btn-bg" href="#">login</a>
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="btn_get btn_hover hidden-sm hidden-xs btn-bg">logout</button>
-            </form>
+            @auth
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="btn_get btn_hover hidden-sm hidden-xs btn-bg">Logout</button>
+                </form>
+            @else
+                <a href="{{ route('login') }}" class="btn_get btn_hover hidden-sm hidden-xs btn-bg">Login</a>
+            @endauth
+
 
         </div>
     </nav>

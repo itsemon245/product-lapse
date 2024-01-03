@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.frontend.app')
 @section('main')
     <form hx-post="{{ route('login') }}" hx-target="body" class="mt-40">
         @csrf

@@ -45,12 +45,12 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#tolink-6">
-                           Contact us
+                            Contact us
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
-                           عربى
+                            عربى
                         </a>
                     </li>
                     <li class="nav-item"><a class="btn_get btn_hover hidden-md visible-sm" href="#get-app">login</a>
@@ -58,6 +58,11 @@
                 </ul>
             </div>
             <a class="btn_get btn_hover hidden-sm hidden-xs btn-bg" href="#">login</a>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="btn_get btn_hover hidden-sm hidden-xs btn-bg">logout</button>
+            </form>
+
         </div>
     </nav>
 </header>

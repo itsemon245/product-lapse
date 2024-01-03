@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePackageRequest extends FormRequest
+class StoreProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,7 +21,6 @@ class StorePackageRequest extends FormRequest
      */
     public function rules(): array
     {
-
         if(request()->isMethod('post')){
             $role = 'required';
         }elseif(request()->isMethod('put')){
@@ -29,16 +28,10 @@ class StorePackageRequest extends FormRequest
         }
         return [
             'name' => [$role, 'max:30'],
-            'price' => [$role],
-            'monthly_rate' => [$role],
-            'annual_rate' => [$role],
-            'subscription_type' => [$role],
-            'features' => [$role],
-            'product_limit' => [$role],
-            'validity' => [$role],
-            'has_limited_features' => [$role],
-            'is_popular' => [$role],
-
+            'url' => [$role],
+            'stage' => [$role],
+            'logo' => [$role],
+            'description' => [$role],
         ];
     }
 }

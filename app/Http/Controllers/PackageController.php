@@ -76,7 +76,7 @@ class PackageController extends Controller
             'has_limited_features' => $request->has_limited_features,
             'is_popular' => $request->is_popular,
         ]);
-        return back()->with('success', 'Update Success!');
+        return back()->with(['success', 'Update Success!']);
     }
 
     /**

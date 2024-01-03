@@ -1,10 +1,7 @@
 <header class="header_area">
     <nav class="navbar navbar-expand-lg menu_one menu_four">
         <div class="container custom_container p0">
-            <a class="navbar-brand" href="#">
-                <img src="img/logo-white.png" class="logo1" srcset="img/logo-white.png 2x" alt="logo">
-                <img src="img/logo.png" class="logo2" srcset="img/logo.png 2x" alt="logo">
-            </a>
+            @include('components.application-logo')
             <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="menu_toggle">
                     <span class="hamburger">

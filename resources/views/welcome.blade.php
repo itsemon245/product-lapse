@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.frontend.app')
 @section('main')
 <section class="agency_banner_area bg_color">
     <img class="banner_shap banner_shap_ar" src="img/banner_bg-ar.png" alt="">

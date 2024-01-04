@@ -24,7 +24,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('pages.products.create');
+        return view('features.package.partials.create');
     }
 
     /**
@@ -32,7 +32,15 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        dd($request);
+        // dd($request);
+        $create = Product::create([
+            'name' => $request->name,
+            'url' => $request->url,
+            'stage' => $request->stage,
+            'logo' => $request->logo,
+            'description' => $request->description,
+        ]);
+        return back()->with(['success', 'Store Success!']);
     }
 
     /**
@@ -48,7 +56,8 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $datum = Product::find($id);
+        return view('features.package.partials.edit', compact('datum'));
     }
 
     /**
@@ -56,7 +65,13 @@ class ProductController extends Controller
      */
     public function update(StoreProductRequest $request, string $id)
     {
-        //
+        $update = Product::find($id)->update([
+            'name' => $request->name,
+            'url' => $request->url,
+            'stage' => $request->stage,
+            'logo' => $request->logo,
+            'description' => $request->description,
+        ]);
     }
 
     /**
@@ -64,6 +79,7 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $data = Product::destroy($id);
+        return back()->with(['success', 'Delete Success!']);
     }
 }

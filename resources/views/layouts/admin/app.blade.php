@@ -39,6 +39,7 @@
     <link rel="stylesheet" href="{{ asset('css/windmil.output.css') }}">
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <script src="{{ asset('js/init-alpine.js') }}"></script>
+    <script src="{{asset('js/htmx.js')}}" defer></script>
     @stack('styles')
 </head>
 

@@ -8,6 +8,7 @@ use App\Models\Package;
 use App\Models\Product;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,11 +19,11 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        \App\Models\User::factory()->create([
+        \App\Models\User::factory(1)->create([
             'first_name' => 'Admin',
             'last_name' => 'Admin',
             'email' => 'admin@gmail.com',
-            'password' => bcrypt('admin'),
+            'password' => Hash::make('password'),
             'phone' => '123456789',
             'workplace' => 'Admin',
             'promotional_code' => 'Admin',
@@ -34,7 +35,7 @@ class DatabaseSeeder extends Seeder
                 'first_name' => 'Admin' . $i,
                 'last_name' => 'Admin' . $i,
                 'email' => 'admin' . $i . '@gmail.com',
-                'password' => bcrypt('admin'),
+                'password' => bcrypt('password'),
                 'phone' => '123456789',
                 'workplace' => 'Admin',
                 'promotional_code' => 'Admin',

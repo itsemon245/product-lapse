@@ -16,7 +16,24 @@ export default {
             },
             screens:{
                 'xs': '380px'
-            }
+            },
+            colors: {
+                transparent: 'transparent',
+                current: 'currentColor',
+                'white': '#ffffff',
+                'purple': '#3f3cbb',
+                'midnight': '#121063',
+                'metal': '#565584',
+                'tahiti': '#3ab7bf',
+                'silver': '#ecebff',
+                'bubble-gum': '#ff77e9',
+                'bermuda': '#78dcca',
+                'primary': '#c357f9',
+                'primary-light': '#c357f9',
+                'primary-dark': 'rgb(162 67 209) 100%)',
+                'secondary': '#1dcdfe',
+              },
+            
         },
     },
 

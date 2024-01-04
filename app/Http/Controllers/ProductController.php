@@ -24,7 +24,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('pages.products.create');
+        return view('features.package.partials.create');
     }
 
     /**
@@ -56,7 +56,8 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $datum = Product::find($id);
+        return view('features.package.partials.edit', compact('datum'));
     }
 
     /**
@@ -78,6 +79,7 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $data = Product::destroy($id);
+        return back()->with(['success', 'Delete Success!']);
     }
 }

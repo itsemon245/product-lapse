@@ -22,7 +22,7 @@ class PackageController extends Controller
      */
     public function create()
     {
-        return view('pages.packages.create');
+        return view('features.package.partials.create');
     }
 
     /**
@@ -52,7 +52,7 @@ class PackageController extends Controller
     public function show(string $id)
     {
         $datum = Package::find($id);
-        return view('pages.packages.show', compact('$datum'));
+        return view('features.package.partials.edit.show', compact('$datum'));
     }
 
     /**
@@ -60,8 +60,8 @@ class PackageController extends Controller
      */
     public function edit(string $id)
     {
-        $data = Package::find($id);
-        return view('pages.packages.create', compact('data'));
+        $datum = Package::find($id);
+        return view('features.package.partials.edit', compact('datum'));
     }
 
     /**

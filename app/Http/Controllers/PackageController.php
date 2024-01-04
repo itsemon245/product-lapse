@@ -4,17 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePackageRequest;
 use App\Models\Package;
-use Illuminate\Http\Request;
 
 class PackageController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $packages = Package::get();
-        return view('pages.packages.index', compact('packages'));
+        return view('features.package.index', compact('packages'));
     }
 
     /**
@@ -30,7 +30,6 @@ class PackageController extends Controller
      */
     public function store(StorePackageRequest $request)
     {
-        // dd($request);auth()->id()
         $create = Package::create([
             'user_id' => 1,
             'name' => $request->name,
@@ -52,8 +51,8 @@ class PackageController extends Controller
      */
     public function show(string $id)
     {
-        // $packages = Package::get();
-        // return view('pages.packages.show', compact('packages'));
+        $datum = Package::find($id);
+        return view('pages.packages.show', compact('$datum'));
     }
 
     /**
@@ -70,8 +69,6 @@ class PackageController extends Controller
      */
     public function update(StorePackageRequest $request, string $id)
     {
-        // $find = Package::find($id);
-
         $find = Package::find($id)->update([
             'name' => $request->name,
             'price' => $request->price,
@@ -92,8 +89,7 @@ class PackageController extends Controller
      */
     public function destroy(string $id)
     {
-        // dd
         $data = Package::destroy($id);
-        return back();
+        return back()->with(['success', 'Delete Success!']);
     }
 }

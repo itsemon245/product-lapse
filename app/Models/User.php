@@ -49,4 +49,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Package::class);
     }
+
+    // Define the one-to-many relationship with the Product model
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

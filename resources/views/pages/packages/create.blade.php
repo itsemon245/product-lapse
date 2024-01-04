@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin.app')
 @section('main')
     <form action="{{ route('package.store') }}" method="post">
         @csrf

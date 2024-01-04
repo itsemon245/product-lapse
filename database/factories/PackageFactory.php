@@ -29,7 +29,7 @@ class PackageFactory extends Factory
             'features' => fake()->paragraph,
             'product_limit' => fake()->dateTime,
             'validity' => fake()->dateTime,
-            'has_limited_features' => fake()->paragraph,
+            'has_limited_features' => fake()->text(),
             'is_popular' => 'popular',
         ];
     }

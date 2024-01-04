@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('name');
             $table->float('price');
-            $table->float('monthly_rate');
+            $table->float('monthly_rate')->nullable();
             $table->float('annual_rate');
             $table->enum('subscription_type', ['Free', 'Basic', 'Golden', 'Diamond']);
             $table->string('features'); //when UI is ready then change this data type JSON

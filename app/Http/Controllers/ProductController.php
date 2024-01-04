@@ -32,7 +32,15 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        dd($request);
+        // dd($request);
+        $create = Product::create([
+            'name' => $request->name,
+            'url' => $request->url,
+            'stage' => $request->stage,
+            'logo' => $request->logo,
+            'description' => $request->description,
+        ]);
+        return back()->with(['success', 'Store Success!']);
     }
 
     /**
@@ -56,7 +64,13 @@ class ProductController extends Controller
      */
     public function update(StoreProductRequest $request, string $id)
     {
-        //
+        $update = Product::find($id)->update([
+            'name' => $request->name,
+            'url' => $request->url,
+            'stage' => $request->stage,
+            'logo' => $request->logo,
+            'description' => $request->description,
+        ]);
     }
 
     /**

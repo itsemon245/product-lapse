@@ -60,8 +60,8 @@ class PackageController extends Controller
      */
     public function edit(string $id)
     {
-        $data = Package::find($id);
-        return view('pages.packages.create', compact('data'));
+        $datum = Package::find($id);
+        return view('pages.packages.edit', compact('datum'));
     }
 
     /**

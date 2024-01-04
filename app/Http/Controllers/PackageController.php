@@ -14,7 +14,7 @@ class PackageController extends Controller
     public function index()
     {
         $packages = Package::get();
-        return view('pages.packages.index', compact('packages'));
+        return view('features.package.index', compact('packages'));
     }
 
     /**

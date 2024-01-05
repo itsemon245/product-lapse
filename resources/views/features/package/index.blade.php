@@ -1,4 +1,4 @@
-@extends('layouts.feature.index', ['title'=> 'Products'])
+@extends('layouts.feature.index', ['title'=> 'Package'])
 @section('main')
 <section class="sign_in_area bg_color sec_pad">
   <div class="container">

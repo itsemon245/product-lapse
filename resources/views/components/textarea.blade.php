@@ -7,7 +7,7 @@
     $placeholder = $attributes->get('placeholder');
 @endphp
 <div class="form-group text_box col-lg-12 col-md-12">
-    <label class=" text_c f_500">{{ $label }}</label>
+    <label class=" m-1 text_c f_500">{{ $label }}</label>
     <textarea {{ $attributes->merge(['placeholder' => $placeholder, 'label' => $label, 'name' => $name ])->merge(['value' => old($name)])->merge(['rows' => $row, 'cols' => $col ]) }}>{{ $slot ? $slot : old($name) }}
     @if ($value )
     {{ $value }}

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\ChangeRequestController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -33,6 +34,6 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('package', PackageController::class);
 Route::resource('product', ProductController::class);
-
+Route::resource('change-request', ChangeRequestController::class);
 
 require __DIR__.'/auth.php';

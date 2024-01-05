@@ -1,7 +1,7 @@
 @php
     $id = $attributes->has('id') ? $attributes->get('id') : 'primary';
     $name = $attributes->has('name') ? $attributes->get('name') : 'primary';
-    $class = $attributes->has('class') ? $attributes->get('class') : 'btn_hover agency_banner_btn btn-bg';
+    $class = $attributes->has('class') ? $attributes->get('class') : '';
     $type = $attributes->has('type') ? $attributes->get('type') : '';
     $target = $name == 'Delete' ? $attributes->get('data-target') : '';
     $toggle = $name == 'Delete' ? $attributes->get('data-toggle') : '';

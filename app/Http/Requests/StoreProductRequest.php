@@ -27,7 +27,7 @@ class StoreProductRequest extends FormRequest
             $role= 'sometimes';
         }
         return [
-            'name' => [$role, 'max:30'],
+            'name' => [$role],
             'url' => [$role],
             'stage' => [$role],
             'logo' => [$role],

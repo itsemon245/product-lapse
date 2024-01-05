@@ -60,8 +60,8 @@
                     </div>
                     
                     <div class="d-flex align-items-center text-center">
-                        <button type="submit" class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">Add package</button>
-                        <button type="button" class="btn_hover agency_banner_btn btn-bg btn-bg-grey" data-dismiss="modal">Cancel</button>
+                        <x-btn-primary name="Add Package" type="submit" />
+                        <x-btn-secondary name="Cancel" type="submit" />
                     </div>
                 </form>
     </div>

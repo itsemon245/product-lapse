@@ -5,7 +5,7 @@ return [
     'last_name' => 'Last Name',
     'email' => 'Email',
     'password' => 'Password',
-    'workplace' => 'Workplace',
+    'work_place' => 'Workplace',
     'phone' => 'Phone',
     'position' => 'Position',
     'sign_up' => 'Sign Up',

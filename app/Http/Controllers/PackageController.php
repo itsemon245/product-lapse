@@ -43,7 +43,7 @@ class PackageController extends Controller
             'has_limited_features' => $request->has_limited_features,
             'is_popular' => $request->is_popular,
         ]);
-        return back()->with(['success', 'Add package!']);;
+        return back()->with(['success', 'Add package!']);
     }
 
     /**
@@ -82,6 +82,7 @@ class PackageController extends Controller
             'is_popular' => $request->is_popular,
         ]);
         return back()->with(['success', 'Update Success!']);
+        
     }
 
     /**

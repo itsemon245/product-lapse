@@ -11,17 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('supports', function (Blueprint $table) {
+        Schema::create('documents', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('owner_id');
             $table->foreign('owner_id')->references('id')->on('users')->cascadeOnDelete();
             $table->string('name');
-            $table->enum('classification', ['working', 'etc']);
-            $table->enum('priority', ['first', 'second']);
-            $table->enum('status', ['disabled', 'etc']);
+            $table->enum('type', ['privat', 'public']);
+            $table->string('version');
             $table->longText('description');
-            $table->string('administrator');
-            $table->dateTime('completion_date');
+            $table->dateTime('date');
+            $table->string('attach_file');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('supports');
+        Schema::dropIfExists('documents');
     }
 };

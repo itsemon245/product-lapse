@@ -1,4 +1,4 @@
-@extends('layouts.feature.index', ['title'=> 'Deliverable'])
+@extends('layouts.feature.index', ['title'=> 'Delivery'])
 @section('main')
 <section class="sign_in_area bg_color sec_pad">
   <div class="container">
@@ -9,12 +9,12 @@
                   <div class="blog-sidebar main-search the-search">
                       <div class="widget sidebar_widget widget_search">
                           <form action="#" class="search-form input-group">
-                              <input type="searproductch" class="form-control widget_input" placeholder="Search deliverables">
+                              <input type="searproductch" class="form-control widget_input" placeholder="Search delivery">
                               <button type="submit"><i class="ti-search"></i></button>
                           </form>
                       </div>
                   </div>
-                  <x-btn-primary-href name="Add Deliverable" value="<i class='ti-plus'></i>" href="{{ route('deliverable.create') }}" />                
+                  <x-btn-primary-href name="Add Delivery" value="<i class='ti-plus'></i>" href="{{ route('delivery.create') }}" />                
               </div>
           </div>
           <div class="col-lg-6 col-md-5 products-order2">
@@ -35,7 +35,7 @@
       <div class="job_listing">
           <div class="listing_tab">
               <div class="row">
-                @foreach ($deliverables as $deliverable)
+                @foreach ($deliveries as $delivery)
                 <div class="col-md-6">
                     <div class="item lon new">
                         <div class="list_item">
@@ -51,14 +51,14 @@
                                     <div class="jobsearch-table-cell">
                                         <div class="jobsearch-job-userlist">
                                             <div class="like-btn">
-                                                <form action="{{ route('deliverable.destroy', $deliverable) }}" method="post">
+                                                <form action="{{ route('delivery.destroy', $delivery) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                     <x-btn-icons type="submit" class="btn" value="<i class='ti-trash'></i>" />
                                                 </form>
                                             </div>
                                             <div class="like-btn">
-                                                <x-btn-icons type="anchor" value="<i class='ti-pencil'></i>" href="{{ route('deliverable.edit', $deliverable) }}" />
+                                                <x-btn-icons type="anchor" value="<i class='ti-pencil'></i>" href="{{ route('delivery.edit', $delivery) }}" />
                                             </div>
                                         </div>
                                     </div>

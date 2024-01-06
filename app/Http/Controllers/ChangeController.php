@@ -13,8 +13,8 @@ class ChangeController extends Controller
      */
     public function index()
     {
-        $changeRequests = Change::get();
-        return view('features.change-request.index', compact('changeRequests'));
+        $changes = Change::get();
+        return view('features.change.index', compact('changes'));
     }
 
     /**
@@ -22,7 +22,7 @@ class ChangeController extends Controller
      */
     public function create()
     {
-        return view('features.change-request.partials.create');
+        return view('features.change.partials.create');
     }
 
     /**
@@ -54,7 +54,7 @@ class ChangeController extends Controller
      */
     public function edit(string $id)
     {
-        dd($id);
+        
     }
 
     /**
@@ -70,7 +70,6 @@ class ChangeController extends Controller
      */
     public function destroy(string $id)
     {
-        dd($id);
         $data = Change::destroy($id);
         return back()->with(['success', 'Delete Success!']);
     }

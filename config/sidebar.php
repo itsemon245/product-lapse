@@ -31,12 +31,12 @@ return [
         ]
     ],
     'Change Request' => (object) [
-        "name" => 'change-request.index',
+        "name" => 'change.index',
         'icon' => '<span class="ti-panel"></span>',
         'hasSubMenu' => false,
     ],
-    'Deliverable' => (object) [
-        "name" => 'deliverable.index',
+    'Delivery' => (object) [
+        "name" => 'delivery.index',
         'icon' => '<span class="ti-panel"></span>',
         'hasSubMenu' => false,
     ],

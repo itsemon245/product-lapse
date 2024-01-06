@@ -14,7 +14,7 @@
                           </form>
                       </div>
                   </div>
-                  <x-btn-primary-href name="Add Change Request" value="<i class='ti-plus'></i>" href="{{ route('change-request.create') }}" />                
+                  <x-btn-primary-href name="Add Change" value="<i class='ti-plus'></i>" href="{{ route('change.create') }}" />                
               </div>
           </div>
           <div class="col-lg-6 col-md-5 products-order2">
@@ -35,7 +35,7 @@
       <div class="job_listing">
           <div class="listing_tab">
               <div class="row">
-                @foreach ($changeRequests as $changeRequest)
+                @foreach ($changes as $change)
                 <div class="col-md-6">
                     <div class="item lon new">
                         <div class="list_item">
@@ -52,14 +52,14 @@
                                     <div class="jobsearch-table-cell">
                                         <div class="jobsearch-job-userlist">
                                             <div class="like-btn">
-                                                <form action="{{ route('change-request.edit', $changeRequest) }}" method="post">
+                                                <form action="{{ route('change.edit', $change) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                     <x-btn-icons type="submit" class="btn" value="<i class='ti-trash'></i>" />
                                                 </form>
                                             </div>
                                             <div class="like-btn">
-                                                <x-btn-icons type="anchor" value="<i class='ti-pencil'></i>" href="{{ route('change-request.destroy', $changeRequest) }}" />
+                                                <x-btn-icons type="anchor" value="<i class='ti-pencil'></i>" href="{{ route('change.destroy', $change) }}" />
                                             </div>
 
                                         </div>

@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('change_requests', function (Blueprint $table) {
+        Schema::create('changes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->unsignedBigInteger('owner_id');
+            $table->foreign('owner_id')->references('id')->on('users')->cascadeOnDelete();
             $table->string('title');
             $table->enum('classification', ['one', 'two', 'three']);
             $table->enum('priority', ['one', 'two', 'three']);

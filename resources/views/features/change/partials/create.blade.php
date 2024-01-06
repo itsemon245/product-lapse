@@ -1,9 +1,9 @@
 @extends('layouts.feature.index', ['title'=> 'Change Request'])
 @section('main')
-<div id="hx-create-change-request" class="sign_info">
+<div id="hx-create-change" class="sign_info">
     <div class="login_info">
         <h2 class=" f_600 f_size_24 t_color3 mb_40">Add Change Request</h2>
-                <form method="post" action="{{ route('change-request.store') }}" hx-post="" class="login-form sign-in-form">
+                <form method="post" action="{{ route('change.store') }}" hx-post="" class="login-form sign-in-form">
                     @csrf
                     <div class="row">
                         <div class="form-group text_box col-lg-6 col-md-6">

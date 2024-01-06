@@ -56,7 +56,7 @@ class User extends Authenticatable
         return $this->hasMany(Product::class);
     }
 
-    public function changeRequests(){
-        return $this->hasMany(ChangeRequest::class);
+    public function changes(){
+        return $this->hasMany(Change::class);
     }
 }

@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('deliverables', function (Blueprint $table) {
+        Schema::create('deliveries', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->unsignedBigInteger('owner_id');
+            $table->foreign('owner_id')->references('id')->on('users')->cascadeOnDelete();
             $table->string('name');
             $table->string('items');
             $table->string('link');
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('deliverables');
+        Schema::dropIfExists('deliveries');
     }
 };

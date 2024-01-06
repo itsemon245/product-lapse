@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreDeliverableRequest;
-use App\Models\Deliverable;
+use App\Models\Delivery;
 use Illuminate\Http\Request;
+use App\Http\Requests\DeliveryRequest;
 
-class DeliverableController extends Controller
+
+class DeliveryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $deliverables = Deliverable::get();
-        return view('features.deliverable.index', compact('deliverables'));
+        $deliveries = Delivery::get();
+        return view('features.delivery.index', compact('deliveries'));
     }
 
     /**
@@ -22,26 +23,26 @@ class DeliverableController extends Controller
      */
     public function create()
     {
-        return view('features.deliverable.partials.create');
+        return view('features.delivery.partials.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDeliverableRequest $request)
+    public function store(DeliveryRequest $request)
     {
-        $store = Deliverable::create([
+        $store = Delivery::create([
             'user_id' => auth()->id(),
             'name' => $request->name,
             'items' => $request->items,
             'link' => $request->link,
-            'attach_file' => saveImage($request->attach_file, 'deliverable/' . auth()->id() . '/' . 'attach-file'),
+            'attach_file' => saveImage($request->attach_file, 'delivery/' . auth()->id() . '/' . 'attach-file'),
             'password' => $request->password,
             'administrator' => $request->administrator,
-            'add_attachments' => saveImage($request->add_attachments, 'deliverable/' . auth()->id() . '/' . 'add-attachments'),
+            'add_attachments' => saveImage($request->add_attachments, 'delivery/' . auth()->id() . '/' . 'add-attachments'),
         ]);
         if($store){
-            return back()->with(['success', 'Add Deliverable!']);
+            return back()->with(['success', 'Add Delivery!']);
         }else{
             return back()->with(['error', 'Something Wrong.']);
         }
@@ -66,22 +67,22 @@ class DeliverableController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreDeliverableRequest $request, string $id)
+    public function update(DeliveryRequest $request, string $id)
     {
-        $find = Deliverable::find($id);
+        $find = Delivery::find($id);
         $find->update([
             $find->name => $request->name,
             $find->items => $request->items,
             $find->link => $request->link,
             $old_path = $find->attach_file,
-            $find->attach_file => updateFile($old_path, 'deliverable/' . auth()->id() . '/' . 'attach-file', 'public'),
+            $find->attach_file => updateFile($old_path, 'delivery/' . auth()->id() . '/' . 'attach-file', 'public'),
             $find->password => $request->password,
             $find->administrator => $request->administrator,
             $old_path = $find->add_attachments,
-            $find->add_attachments => updateFile($old_path , 'deliverable/' . auth()->id() . '/' . 'add-attachments', 'public'),
+            $find->add_attachments => updateFile($old_path , 'delivery/' . auth()->id() . '/' . 'add-attachments', 'public'),
         ]);
         if($find){
-            return back()->with(['success', 'Update Deliverable!']);
+            return back()->with(['success', 'Update Delivery!']);
         }else{
             return back()->with(['error', 'Something Wrong.']);
         }
@@ -92,6 +93,6 @@ class DeliverableController extends Controller
      */
     public function destroy(string $id)
     {
-        Deliverable::find($id)->destroy();
+        Delivery::find($id)->destroy();
     }
 }

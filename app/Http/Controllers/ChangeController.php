@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreChangeRequest;
-use App\Models\ChangeRequest;
+use App\Models\Change;
 use Illuminate\Http\Request;
+use App\Http\Requests\ChangeRequest;
 
-class ChangeRequestController extends Controller
+class ChangeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $changeRequests = ChangeRequest::get();
-        return view('features.change-request.index', compact('changeRequests'));
+        $changes = Change::get();
+        return view('features.change.index', compact('changes'));
     }
 
     /**
@@ -22,16 +22,15 @@ class ChangeRequestController extends Controller
      */
     public function create()
     {
-        return view('features.change-request.partials.create');
+        return view('features.change.partials.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreChangeRequest $request)
+    public function store(ChangeRequest $request)
     {
-        dd($request);
-        ChangeRequest::update([
+        Change::update([
             'title' => $request->title,
             'classification' => $request->classification,
             'priority' => $request->priority,
@@ -55,13 +54,13 @@ class ChangeRequestController extends Controller
      */
     public function edit(string $id)
     {
-        dd($id);
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreChangeRequest $request, string $id)
+    public function update(ChangeRequest $request, string $id)
     {
         //
     }
@@ -71,8 +70,7 @@ class ChangeRequestController extends Controller
      */
     public function destroy(string $id)
     {
-        dd($id);
-        $data = ChangeRequest::destroy($id);
+        $data = Change::destroy($id);
         return back()->with(['success', 'Delete Success!']);
     }
 }

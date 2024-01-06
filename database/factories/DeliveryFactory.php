@@ -6,9 +6,9 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Deliverable>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Delivery>
  */
-class DeliverableFactory extends Factory
+class DeliveryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,7 +18,7 @@ class DeliverableFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => function () {
+            'owner_id' => function () {
                 return User::inRandomOrder()->first()->id;
             },
             'name' => fake()->name,

@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreDeliverableRequest;
+use App\Models\Delivery;
 use App\Models\Deliverable;
 use Illuminate\Http\Request;
+use App\Http\Requests\DeliveryRequest;
 
-class DeliverableController extends Controller
+
+class DeliveryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $deliverables = Deliverable::get();
+        $deliverables = Delivery::get();
         return view('features.deliverable.index', compact('deliverables'));
     }
 
@@ -28,9 +30,9 @@ class DeliverableController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDeliverableRequest $request)
+    public function store(DeliveryRequest $request)
     {
-        $store = Deliverable::create([
+        $store = Delivery::create([
             'user_id' => auth()->id(),
             'name' => $request->name,
             'items' => $request->items,
@@ -66,9 +68,9 @@ class DeliverableController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreDeliverableRequest $request, string $id)
+    public function update(DeliveryRequest $request, string $id)
     {
-        $find = Deliverable::find($id);
+        $find = Delivery::find($id);
         $find->update([
             $find->name => $request->name,
             $find->items => $request->items,
@@ -92,6 +94,6 @@ class DeliverableController extends Controller
      */
     public function destroy(string $id)
     {
-        Deliverable::find($id)->destroy();
+        Delivery::find($id)->destroy();
     }
 }

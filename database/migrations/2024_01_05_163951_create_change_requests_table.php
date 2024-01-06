@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('change_requests', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->string('title');
+            $table->enum('classification', ['one', 'two', 'three']);
+            $table->enum('priority', ['one', 'two', 'three']);
+            $table->enum('status', ['one', 'two', 'three']);
+            $table->longText('details');
+            $table->string('administrator');
+            $table->dateTime('required_completion_date');
             $table->timestamps();
         });
     }

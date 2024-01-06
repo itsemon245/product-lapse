@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\ChangeRequest;
 use App\Models\User;
 use App\Models\Package;
 use App\Models\Product;
@@ -43,7 +44,8 @@ class DatabaseSeeder extends Seeder
                 'name' => 'User' . $i,
             ]);
         }
-        Package::factory(10)->create();;
-        Product::factory(10)->create();;
+        Package::factory(10)->create();
+        Product::factory(10)->create();
+        ChangeRequest::factory(10)->create();
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreProductRequest extends FormRequest
+class StoreDeliverableRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,14 +24,16 @@ class StoreProductRequest extends FormRequest
         if(request()->isMethod('post')){
             $role = 'required';
         }elseif(request()->isMethod('put')){
-            $role= 'sometimes';
+            $role = 'sometimes';
         }
         return [
             'name' => [$role],
-            'url' => [$role],
-            'stage' => [$role],
-            'logo' => [$role],
-            'description' => [$role],
+            'items' => [$role],
+            'link' => [$role],
+            'attach_file' => [$role],
+            'password' => [$role],
+            'administrator' => [$role],
+            'add_attachments' => [$role],
         ];
     }
 }

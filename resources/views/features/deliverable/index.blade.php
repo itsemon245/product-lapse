@@ -1,4 +1,4 @@
-@extends('layouts.feature.index', ['title'=> 'Products'])
+@extends('layouts.feature.index', ['title'=> 'Deliverable'])
 @section('main')
 <section class="sign_in_area bg_color sec_pad">
   <div class="container">
@@ -9,18 +9,18 @@
                   <div class="blog-sidebar main-search the-search">
                       <div class="widget sidebar_widget widget_search">
                           <form action="#" class="search-form input-group">
-                              <input type="search" class="form-control widget_input" placeholder="Search product">
+                              <input type="searproductch" class="form-control widget_input" placeholder="Search deliverables">
                               <button type="submit"><i class="ti-search"></i></button>
                           </form>
                       </div>
                   </div>
-                  <x-btn-primary-href value="<i class='ti-plus'></i>" name="Add Product" href="{{ route('product.create') }}" />
-              </div> 
+                  <x-btn-primary-href name="Add Deliverable" value="<i class='ti-plus'></i>" href="{{ route('deliverable.create') }}" />                
+              </div>
           </div>
           <div class="col-lg-6 col-md-5 products-order2">
               <div class="shop_menu_left d-flex align-items-center justify-content-end">
                   
-                  <h5>Showing products</h5>
+                  <h5>Showing packages</h5>
                   <form method="get" action="#">
                       <select class="selectpickers selectpickers2" style="display: none;">
                           <option value="">All</option>
@@ -35,33 +35,31 @@
       <div class="job_listing">
           <div class="listing_tab">
               <div class="row">
-                @foreach ($products as $product)
+                @foreach ($deliverables as $deliverable)
                 <div class="col-md-6">
                     <div class="item lon new">
                         <div class="list_item">
-                            <figure><a href="#"><img src="img/p1.jpg" alt=""></a></figure>
-                            <div class="joblisting_text">
+                            <div class="joblisting_text document-list">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell">
-                                        <h4><a href="#" class="f_500 t_color3">T-shirt for men</a></h4>
+                                        <h4><a href="#" class="f_500 t_color3">Trial version</a></h4>
                                         <ul class="list-unstyled">
-                                            <li class="p_color1">Durable product</li>
-                                            <li>More text about product</li>
+                                            
+                                            <li>12 June 2023</li>
                                         </ul>
                                     </div>
                                     <div class="jobsearch-table-cell">
                                         <div class="jobsearch-job-userlist">
                                             <div class="like-btn">
-                                                <form action="{{ route('product.destroy', $product) }}" method="POST" >
-                                                @csrf
-                                                @method('DELETE')
-                                                <x-btn-icons class="btn" value="<i class='ti-trash'></i>" type="submit" />
+                                                <form action="{{ route('deliverable.destroy', $deliverable) }}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <x-btn-icons type="submit" class="btn" value="<i class='ti-trash'></i>" />
                                                 </form>
                                             </div>
                                             <div class="like-btn">
-                                                <x-btn-icons value="<i class='ti-pencil'></i>" type="anchor" href="{{route('product.edit', $product)}}" />
+                                                <x-btn-icons type="anchor" value="<i class='ti-pencil'></i>" href="{{ route('deliverable.edit', $deliverable) }}" />
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -80,4 +78,4 @@
       </div>
   </div>
 </section>
-@endsection
+@endsection 

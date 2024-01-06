@@ -24,7 +24,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('features.package.partials.create');
+        return view('features.product.partials.create');
     }
 
     /**
@@ -32,7 +32,6 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        // dd($request);
         $create = Product::create([
             'name' => $request->name,
             'url' => $request->url,
@@ -40,7 +39,9 @@ class ProductController extends Controller
             'logo' => $request->logo,
             'description' => $request->description,
         ]);
-        return back()->with(['success', 'Store Success!']);
+        if($create){
+            return redirect()->route('product.index')->with(['success', 'Store Success!']);
+        }
     }
 
     /**
@@ -57,7 +58,7 @@ class ProductController extends Controller
     public function edit(string $id)
     {
         $datum = Product::find($id);
-        return view('features.package.partials.edit', compact('datum'));
+        return view('features.product.partials.edit', compact('datum'));
     }
 
     /**

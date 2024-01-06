@@ -13,4 +13,9 @@ class ProductStage extends Model
         'name',
         'text_color',
     ];
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'owner_id', 'id');
+    }
 }

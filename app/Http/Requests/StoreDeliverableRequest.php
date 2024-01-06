@@ -21,19 +21,14 @@ class StoreDeliverableRequest extends FormRequest
      */
     public function rules(): array
     {
-        if(request()->isMethod('post')){
-            $role = 'required';
-        }elseif(request()->isMethod('put')){
-            $role = 'sometimes';
-        }
         return [
-            'name' => [$role],
-            'items' => [$role],
-            'link' => [$role],
-            'attach_file' => [$role],
-            'password' => [$role],
-            'administrator' => [$role],
-            'add_attachments' => [$role],
+            'name' => ['sometimes'],
+            'items' => ['sometimes'],
+            'link' => ['sometimes'],
+            'attach_file' => ['sometimes'],
+            'password' => ['sometimes'],
+            'administrator' => ['sometimes'],
+            'add_attachments' => ['sometimes'],
         ];
     }
 }

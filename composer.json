@@ -13,6 +13,7 @@
         "laravel/tinker": "^2.8",
         "nwidart/laravel-modules": "^10.0",
         "spatie/laravel-data": "^3.9",
+        "spatie/laravel-permission": "^6.3",
         "swoole/ide-helper": "^5.1"
     },
     "require-dev": {

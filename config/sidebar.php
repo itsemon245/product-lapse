@@ -35,5 +35,10 @@ return [
         'icon' => '<span class="ti-panel"></span>',
         'hasSubMenu' => false,
     ],
+    'Deliverable' => (object) [
+        "name" => 'deliverable.index',
+        'icon' => '<span class="ti-panel"></span>',
+        'hasSubMenu' => false,
+    ],
 
 ];

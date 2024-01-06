@@ -6,6 +6,8 @@ use App\Http\Controllers\DeliverableController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Features\Product\ProductCategoryController;
+use App\Http\Controllers\Features\Product\ProductStageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,8 +26,8 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
-// ->middleware(['auth', 'verified'])
-->name('dashboard');
+    // ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -38,4 +40,10 @@ Route::resource('product', ProductController::class);
 Route::resource('change-request', ChangeRequestController::class);
 Route::resource('deliverable', DeliverableController::class);
 
-require __DIR__.'/auth.php';
+Route::resource('product-category', ProductCategoryController::class);
+Route::resource('product-stage', ProductStageController::class);
+
+
+
+
+require __DIR__ . '/auth.php';

@@ -22,11 +22,11 @@ return [
             ],
             (object) [
                 'label' => 'Category',
-                "name" => 'product.index',
+                "name" => 'product-category.index',
             ],
             (object) [
                 'label' => 'Stage',
-                "name" => 'product.index',
+                "name" => 'product-stage.index',
             ],
         ]
     ],

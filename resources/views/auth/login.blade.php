@@ -70,7 +70,7 @@
                                 <li><i class="ti-check"></i>@lang('login.team_collaboration')</li>
                                 <li><i class="ti-check"></i>@lang('login.many_features')</li>
                             </ul>
-                            <button type="submit" class="btn_three sign_btn_transparent">@lang('login.sign_up')</button>
+                            <a href="{{ route('register') }}" class="btn_three sign_btn_transparent">@lang('login.sign_up')</a>
                         </div>
                     </div>
                 </div>

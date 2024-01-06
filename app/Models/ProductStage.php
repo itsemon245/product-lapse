@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class ProductStage extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'owner_id',
+        'name',
+        'text_color',
+    ];
 }

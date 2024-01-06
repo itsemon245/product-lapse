@@ -14,8 +14,8 @@
                                 </form>
                             </div>
                         </div>
-                        <a href="{{ route('product-category.create') }}" class="btn_hover agency_banner_btn btn-bg"><i
-                                class="ti-plus"></i>Add Category</a>
+                        <a href="{{ route('product-stage.create') }}" class="btn_hover agency_banner_btn btn-bg"><i
+                                class="ti-plus"></i>Add Stage</a>
 
                     </div>
                 </div>
@@ -24,24 +24,24 @@
             <div class="job_listing">
                 <div class="listing_tab">
                     <div class="row">
-                        @foreach ($categories as $category)
+                        @foreach ($stages as $stage)
                             <div class="col-md-6">
                                 <div class="item lon new">
                                     <div class="list_item">
                                         <div class="joblisting_text">
                                             <div class="job_list_table">
                                                 <div class="jobsearch-table-cell">
-                                                    <h4><a href="#" class="f_500 t_color3">{{ $category->name }}</a>
+                                                    <h4><a href="#" class="f_500 t_color3">{{ $stage->name }}</a>
                                                     </h4>
                                                     <ul class="list-unstyled">
-                                                        <li class="p_color4">{{ $category->text_color }}</li>
+                                                        <li class="p_color4">{{ $stage->text_color }}</li>
                                                     </ul>
                                                 </div>
                                                 <div class="jobsearch-table-cell">
                                                     <div class="jobsearch-job-userlist">
                                                         <div class="like-btn">
                                                             <form
-                                                                action="{{ route('product-category.destroy', ['product_category' => base64_encode($category->id)]) }}"
+                                                                action="{{ route('product-stage.destroy', ['product_stage' => base64_encode($stage->id)]) }}"
                                                                 method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
@@ -53,7 +53,7 @@
 
                                                         </div>
                                                         <div class="like-btn">
-                                                            <a href="{{ route('product-category.edit', ['product_category' => base64_encode($category->id)]) }}"
+                                                            <a href="{{ route('product-stage.edit', ['product_stage' => base64_encode($stage->id)]) }}"
                                                                 class="shortlist" title="Edit">
                                                                 <i class="ti-pencil"></i>
                                                             </a>

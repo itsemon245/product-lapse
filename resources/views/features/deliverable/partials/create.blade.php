@@ -3,7 +3,7 @@
 <div id="hx-create-deliverable" class="sign_info">
     <div class="login_info">
         <h2 class=" f_600 f_size_24 t_color3 mb_40">Add Deliverable</h2>
-                <form method="post" action="{{ route('deliverable.store') }}" class="login-form sign-in-form">
+                <form method="post" action="{{ route('deliverable.store') }}" enctype="multipart/form-data" class="login-form sign-in-form">
                     @csrf
                     <div class="row">
                         <div class="form-group text_box col-lg-6 col-md-6">

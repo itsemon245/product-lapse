@@ -30,15 +30,21 @@ class DeliverableController extends Controller
      */
     public function store(StoreDeliverableRequest $request)
     {
-        Deliverable::create([
+        $store = Deliverable::create([
+            'user_id' => auth()->id(),
             'name' => $request->name,
             'items' => $request->items,
             'link' => $request->link,
-            // 'attach_file' => saveImage(),
+            'attach_file' => saveImage($request->attach_file, 'deliverable/' . auth()->id() . '/' . 'attach-file'),
             'password' => $request->password,
             'administrator' => $request->administrator,
-            'add_attachments' => $request->add_attachments
+            'add_attachments' => saveImage($request->add_attachments, 'deliverable/' . auth()->id() . '/' . 'add-attachments'),
         ]);
+        if($store){
+            return back()->with(['success', 'Add Deliverable!']);
+        }else{
+            return back()->with(['error', 'Something Wrong.']);
+        }
     }
 
     /**
@@ -54,7 +60,7 @@ class DeliverableController extends Controller
      */
     public function edit(string $id)
     {
-        dd($id);
+        
     }
 
     /**
@@ -62,7 +68,23 @@ class DeliverableController extends Controller
      */
     public function update(StoreDeliverableRequest $request, string $id)
     {
-        //
+        $find = Deliverable::find($id);
+        $find->update([
+            $find->name => $request->name,
+            $find->items => $request->items,
+            $find->link => $request->link,
+            $old_path = $find->attach_file,
+            $find->attach_file => updateFile($old_path, 'deliverable/' . auth()->id() . '/' . 'attach-file', 'public'),
+            $find->password => $request->password,
+            $find->administrator => $request->administrator,
+            $old_path = $find->add_attachments,
+            $find->add_attachments => updateFile($old_path , 'deliverable/' . auth()->id() . '/' . 'add-attachments', 'public'),
+        ]);
+        if($find){
+            return back()->with(['success', 'Update Deliverable!']);
+        }else{
+            return back()->with(['error', 'Something Wrong.']);
+        }
     }
 
     /**

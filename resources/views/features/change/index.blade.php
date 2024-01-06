@@ -14,7 +14,7 @@
                           </form>
                       </div>
                   </div>
-                  <x-btn-primary-href name="Add Change Request" value="<i class='ti-plus'></i>" href="{{ route('change.create') }}" />                
+                  <x-btn-primary-href name="Add Change" value="<i class='ti-plus'></i>" href="{{ route('change.create') }}" />                
               </div>
           </div>
           <div class="col-lg-6 col-md-5 products-order2">

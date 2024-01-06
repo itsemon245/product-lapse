@@ -18,7 +18,7 @@ class PackageFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => function () {
+            'owner_id' => function () {
                 return User::inRandomOrder()->first()->id;
             },
             'name' => fake()->name,

@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('changes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->unsignedBigInteger('owner_id');
+            $table->foreign('owner_id')->references('id')->on('users')->cascadeOnDelete();
             $table->string('title');
             $table->enum('classification', ['one', 'two', 'three']);
             $table->enum('priority', ['one', 'two', 'three']);

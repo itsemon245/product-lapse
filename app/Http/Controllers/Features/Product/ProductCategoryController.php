@@ -20,7 +20,10 @@ class ProductCategoryController extends Controller
     {
         $id = base64_decode($id);
 
+        dd("here show");
+
         $category = ProductCategory::find($id);
+
 
         if ($category == null || $category->owner_id != auth()->user()->id) {
             return redirect()->back();
@@ -40,20 +43,18 @@ class ProductCategoryController extends Controller
             'name' => 'required',
             'text_color' => 'required',
         ]);
-
         $category = new ProductCategory();
         $category->owner_id = auth()->user()->id;
         $category->name = $request->name;
         $category->text_color = $request->text_color;
         $category->save();
 
-        return redirect()->route('product.category.show', $category->id);
+        return redirect()->route('product-category.show', base64_encode($category->id));
     }
 
     public function edit($id)
     {
         $id = base64_decode($id);
-
         $category = ProductCategory::find($id);
 
         if ($category == null || $category->owner_id != auth()->user()->id) {
@@ -77,12 +78,12 @@ class ProductCategoryController extends Controller
         if ($category == null || $category->owner_id != auth()->user()->id) {
             return redirect()->back();
         }
+        $category->update([
+            'name' => $request->input('name'),
+            'text_color' => $request->input('text_color'),
+        ]);
 
-        $category->name = $request->name;
-        $category->text_color = $request->text_color;
-        $category->save();
-
-        return redirect()->route('product.category.show', $category->id);
+        return redirect()->route('product-category.show', base64_encode($category->id));
     }
 
     public function destroy($id)
@@ -90,14 +91,13 @@ class ProductCategoryController extends Controller
         $id = base64_decode($id);
 
         $category = ProductCategory::find($id);
-
         if ($category == null || $category->owner_id != auth()->user()->id) {
             return redirect()->back();
         }
 
         $category->delete();
 
-        return redirect()->route('product.index');
+        return redirect()->route('product-category.index');
     }
 
 }

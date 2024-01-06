@@ -14,7 +14,7 @@ class ProductStageController extends Controller
         $stages = ProductStage::where('owner_id', auth()->user()->id)->get();
 
         if ($stages->count() == 0) {
-            return redirect()->route('product.stage.create');
+            return redirect()->route('product-stage.create');
         }
 
         return view('features.product.stage.index', compact('stages'));
@@ -24,7 +24,7 @@ class ProductStageController extends Controller
         $id = base64_decode($id);
 
         $product = ProductStage::find($id);
-
+        dd($product);
         if ($product == null || $product->owner_id != auth()->user()->id) {
             return redirect()->back();
         }
@@ -49,7 +49,7 @@ class ProductStageController extends Controller
         $stage->text_color = $request->text_color;
         $stage->save();
 
-        return redirect()->route('product.stage.show', $request->product_id);
+        return redirect()->route('product-stage.show', base64_encode($stage->id));
     }
 
     public function edit($id)
@@ -80,12 +80,12 @@ class ProductStageController extends Controller
             return redirect()->back();
         }
 
-        $stage->name = $request->name;
-        $stage->text_color = $request->text_color;
-        $stage->save();
+        $stage->update([
+            'name' => $request->name,
+            'text_color' => $request->text_color,
+        ]);
 
-
-        return redirect()->route('product.stage.show', $request->product_id);
+        return redirect()->route('product-stage.index', base64_encode($stage->id));
     }
 
     public function destroy($id)

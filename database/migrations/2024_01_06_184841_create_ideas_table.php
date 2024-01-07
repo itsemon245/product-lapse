@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -15,9 +14,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('owner_id');
             $table->foreign('owner_id')->references('id')->on('users')->cascadeOnDelete();
-            $table->string('name');
-            $table->string('owner');
-            $table->enum('priority', ['first', 'second']);
+            $table->string('name', 200);
+            $table->string('owner', 30);
+            $table->string('priority', 15);
             $table->longText('details');
             $table->longText('requirements');
             $table->timestamps();

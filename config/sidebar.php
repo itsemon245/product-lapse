@@ -32,6 +32,10 @@ return [
                 'label' => 'Invitation',
                 "name" => 'invitation.index',
             ],
+            (object) [
+                'label' => 'Idea',
+                "name" => 'idea.index',
+            ],
         ]
     ],
     'Change Request' => (object) [

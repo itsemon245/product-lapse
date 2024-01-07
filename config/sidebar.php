@@ -28,6 +28,10 @@ return [
                 'label' => 'Stage',
                 "name" => 'product-stage.index',
             ],
+            (object) [
+                'label' => 'Invitation',
+                "name" => 'invitation.index',
+            ],
         ]
     ],
     'Change Request' => (object) [

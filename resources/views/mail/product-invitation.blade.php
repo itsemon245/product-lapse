@@ -24,7 +24,7 @@
         </ul>
 
         <p>
-            <a href="{{ route('invitation.edit', ['invitation' => $token]) }}"
+            <a href="{{ route('invitation.accept', ['token' => $token]) }}"
                 style="display: inline-block; padding: 10px 15px; background-color: #28a745; color: #fff; text-decoration: none;">
                 Accept Invitation
             </a>

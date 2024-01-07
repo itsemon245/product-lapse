@@ -101,7 +101,7 @@ class InvitationController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($token)
+    public function accept($token)
     {
         $invitation = Invitation::where('token', $token)->first();
 

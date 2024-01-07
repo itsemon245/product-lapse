@@ -53,10 +53,11 @@ class User extends Authenticatable
     // Define the one-to-many relationship with the Product model
     public function products()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Product::class, 'owner_id', 'id');
     }
 
-    public function changes(){
+    public function changes()
+    {
         return $this->hasMany(Change::class);
     }
 }

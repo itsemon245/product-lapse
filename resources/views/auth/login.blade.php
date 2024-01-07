@@ -16,6 +16,11 @@
             <div class="sign_info">
                 <div class="row">
                     <div class="col-lg-7">
+                        @if (session('success'))
+                            <div class="bg-green-500 text-white p-4 mb-4">
+                                {{ session('success') }}
+                            </div>
+                        @endif
                         <div class="login_info">
                             <h2 class=" f_600 f_size_24 t_color3 mb_40">@lang('login.login')</h2>
                             <form action="{{ route('login') }}" method="POST" enctype="multipart/form-data"

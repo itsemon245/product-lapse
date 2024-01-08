@@ -3,7 +3,7 @@
 <div id="hx-create-package" class="sign_info">
     <div class="login_info">
         <h2 class=" f_600 f_size_24 t_color3 mb_40">Add package</h2>
-                <form hx-post="{{ route('package.store') }}" class="login-form sign-in-form">
+                <form hx-post="{{ route('package.store') }}" method="post" hx-target="body" class="login-form sign-in-form">
                     @csrf
                     <div class="row">
                         <div class="form-group text_box col-lg-4 col-md-6">

@@ -14,7 +14,7 @@
                           </form>
                       </div>
                   </div>
-                  <x-btn-primary-href name="Add package" value="<i class='ti-plus'></i>" href="{{ route('package.create') }}" />                
+                  <x-btn-primary-href name="Add package"  hx-get="{{ route('package.create') }}" hx-target="body" />                
               </div>
           </div>
           <div class="col-lg-6 col-md-5 products-order2">

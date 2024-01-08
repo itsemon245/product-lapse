@@ -36,6 +36,10 @@ return [
                 'label' => 'Idea',
                 "name" => 'idea.index',
             ],
+            (object) [
+                'label' => 'Task',
+                "name" => 'task.index',
+            ],
         ]
     ],
     'Change Request' => (object) [

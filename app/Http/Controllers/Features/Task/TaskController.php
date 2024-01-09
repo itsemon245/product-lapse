@@ -59,7 +59,31 @@ class TaskController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $id = base64_decode($id);
+
+        $task = Task::find($id);
+
+        if ($task->owner_id == auth()->user()->id) {
+            return view('features.task.show', compact('task'));
+        } else {
+            return redirect()->route('task.index')->with('success', 'You are not authorized to view this idea.');
+        }
+    }
+
+    public function changeStatus(Request $request, $id)
+    {
+        $id = base64_decode($id);
+
+        $task = Task::find($id);
+
+        if ($task->owner_id == auth()->user()->id) {
+            $task->update([
+                'status' => $request->status,
+            ]);
+            return redirect()->route('task.show', base64_encode($id))->with('success', 'Task status changed successfully.');
+        } else {
+            return redirect()->route('task.index')->with('success', 'You are not authorized to change this idea status.');
+        }
     }
 
     /**

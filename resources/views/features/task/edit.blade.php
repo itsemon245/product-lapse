@@ -41,14 +41,21 @@
                             </div>
                             <div class="form-group text_box col-lg-6 col-md-6">
                                 <label class=" text_c f_500">@lang('task.status')</label>
+
                                 <select class="selectpickers" name="status">
-                                    <option value="@lang('task.high')"
-                                        {{ $task->category == trans('task.high') ? 'selected' : '' }}>
-                                        @lang('task.high')</option>
-                                    <option value="@lang('task.low')"
-                                        {{ $task->category == trans('task.low') ? 'selected' : '' }}>
-                                        @lang('task.low')</option>
+
+                                    <option value="started" {{ $task->category == 'started' ? 'selected' : '' }}>
+                                        @lang('task.started')
+                                    </option>
+                                    <option value="stopped" {{ $task->category == 'stopped' ? 'selected' : '' }}>
+                                        @lang('task.stopped')
+                                    </option>
+                                    <option value="not_started" {{ $task->category == 'not_started' ? 'selected' : '' }}>
+                                        @lang('task.not_started')
+                                    </option>
+
                                 </select>
+
                                 @error('status')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror

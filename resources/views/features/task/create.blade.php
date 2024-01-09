@@ -20,9 +20,9 @@
                             <div class="form-group text_box col-lg-6 col-md-6">
                                 <label class=" text_c f_500">@lang('task.category')</label>
                                 <select class="selectpickers" name="category">
-                                    <option value="@lang('task.one')">@lang('task.one')</option>
-                                    <option value="@lang('task.two')">@lang('task.two')</option>
-                                    <option value="@lang('task.three')">@lang('task.three')</option>
+                                    <option value="one">@lang('task.one')</option>
+                                    <option value="two">@lang('task.two')</option>
+                                    <option value="three">@lang('task.three')</option>
                                 </select>
                                 @error('category')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -31,9 +31,17 @@
                             <div class="form-group text_box col-lg-6 col-md-6">
                                 <label class=" text_c f_500">@lang('task.status')</label>
                                 <select class="selectpickers" name="status">
-                                    <option value="@lang('task.high')">@lang('task.high')</option>
-                                    <option value="@lang('task.low')">@lang('task.low')</option>
+                                    <option value="started">
+                                        @lang('task.started')
+                                    </option>
+                                    <option value="not_started">
+                                        @lang('task.not_started')
+                                    </option>
+                                    <option value="stopped">
+                                        @lang('task.stopped')
+                                    </option>
                                 </select>
+
                                 @error('status')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror

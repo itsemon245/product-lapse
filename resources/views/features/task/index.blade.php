@@ -46,11 +46,14 @@
                                         <div class="joblisting_text">
                                             <div class="job_list_table">
                                                 <div class="jobsearch-table-cell">
-                                                    <h4><a href="#" class="f_500 t_color3">{{ $task->name }}</a>
+                                                    <h4><a href="{{ route('task.show', ['task' => base64_encode($task->id)]) }}"
+                                                            class="f_500 t_color3">{{ $task->name }}</a>
                                                     </h4>
                                                     <ul class="list-unstyled">
-                                                        <li class="p_color3">stopped</li>
-                                                        <li>{{ $task->created_at }}</li>
+                                                        <li class="p_color3">@lang('task.' . $task->status)</li>
+                                                        <li>
+                                                            {{ \Carbon\Carbon::parse($task->created_at)->format('l, j F Y') }}
+                                                        </li>
                                                     </ul>
                                                 </div>
                                                 <div class="jobsearch-table-cell">

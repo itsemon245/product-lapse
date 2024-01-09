@@ -1,5 +1,6 @@
 @extends('layouts.frontend.app')
 @section('main')
+<div x-data="{value: ''}">
     <section class="agency_banner_area bg_color">
         <img class="banner_shap banner_shap_ar" src="img/banner_bg-ar.png" alt="">
         <img class="banner_shap banner_shap_en" src="img/banner_bg-en.png" alt="">
@@ -7,11 +8,26 @@
             <div class="row">
                 <div class="col-md-6 d-flex align-items-center">
                     <div class="agency_content">
-                        <h2 id="homeSectionTitle" contenteditable="true" class="f_700 t_color3 mb_40 wow fadeInLeft" data-wow-delay="0.3s">Join <span class="bold">
+                        <h2 x-on:keyup="value = $el.innerHTML;" 
+                        hx-trigger="blur"
+                        hx-include=".hx-title-data" 
+                        hx-post="{{route('landing.page.update')."?key=title"}}" 
+                        contenteditable="true" 
+                        class="f_700 t_color3 mb_40 wow fadeInLeft" data-wow-delay="0.3s">Join <span class="bold">
                                 ProductLapse </span>Now and enjoy an efficient and user-friendly experience in <span>Manage
-                                your products</span></h2>
-                        <p id="homeSectionSub" contenteditable="true" class="f_500 l_height28 wow fadeInLeft" data-wow-delay="0.4s">Start your journey towards success
+                                your products</span>
+                        </h2>
+                        <input class="hx-title-data hidden" type="text" name="_token" value="{{csrf_token()}}">
+                        <input class="hx-title-data hidden" x-model="value" type="text" name="value">
+                        <p
+                        x-on:keyup="value = $el.innerHTML;" 
+                        hx-trigger="blur"
+                        hx-include=".hx-subTitle-data" 
+                        hx-post="{{route('landing.page.update')."?key=subTitle"}}" 
+                        contenteditable="true" class="f_500 l_height28 wow fadeInLeft" data-wow-delay="0.4s">Start your journey towards success
                             and excellence in the ever-evolving market</p>
+                        <input class="hx-subTitle-data hidden" type="text" name="_token" value="{{csrf_token()}}">
+                        <input class="hx-subTitle-data hidden" x-model="value" type="text" name="value">
                         <div class="action_btn d-flex align-items-center mt_60">
                             <a href="{{ route('register') }}" class="btn_hover agency_banner_btn wow fadeInLeft btn-bg"
                                 data-wow-delay="0.5s">Sign up now for a free trial!</a>
@@ -488,6 +504,8 @@
             </div>
         </div>
     </section>
+
+</div>
 @endsection
 @pushOnce('customJs')
     <script>
@@ -512,51 +530,6 @@
         });
     </script>
     <script>
-        $(document).ready(function () {
-            $('#homeSectionTitle').on('focus', function () {
-                $(this).on('input', function () {
-                    $(this).data('isChanged', true);
-                });
-            }).on('blur', function () {
-                if ($(this).data('isChanged')) {
-                    var newContent = $(this).html();
-                    console.log(newContent);
-                    $.ajax({
-                        type: 'POST',
-                        url: "{{ route('landing-page.update', 1) }}",
-                        data: {
-                            title: newContent,
-                        },
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        },
-                    });
-                }
-                $(this).data('isChanged', false); 
-            });
-        });
-        $(document).ready(function () {
-            $('#homeSectionSub').on('focus', function () {
-                $(this).on('input', function () {
-                    $(this).data('isChanged', true);
-                });
-            }).on('blur', function () {
-                if ($(this).data('isChanged')) {
-                    var newContent = $(this).html();
-                    console.log(newContent);
-                    $.ajax({
-                        type: 'PUT',
-                        url: "{{ route('landing-page.update', 1) }}",
-                        data: {
-                            subTitle: newContent,
-                        },
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        },
-                    });
-                }
-                $(this).data('isChanged', false); 
-            });
-        });
+        
     </script>
 @endPushOnce

@@ -39,6 +39,7 @@ Route::resource('package', PackageController::class);
 Route::resource('product', ProductController::class);
 Route::resource('change', ChangeController::class);
 Route::resource('delivery', DeliveryController::class);
+// Route::post('/deliveryy/storyy', [DeliveryController::class, 'storyy'])->name('deliveryy.storyy');
 
 Route::resource('product-category', ProductCategoryController::class);
 Route::resource('product-stage', ProductStageController::class);
@@ -48,3 +49,4 @@ Route::resource('product-stage', ProductStageController::class);
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/invitation.php';
+require __DIR__ . '/frontend.php';

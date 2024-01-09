@@ -7,10 +7,10 @@
             <div class="row">
                 <div class="col-md-6 d-flex align-items-center">
                     <div class="agency_content">
-                        <h2 class="f_700 t_color3 mb_40 wow fadeInLeft" data-wow-delay="0.3s">Join <span class="bold">
+                        <h2 id="homeSectionTitle" contenteditable="true" class="f_700 t_color3 mb_40 wow fadeInLeft" data-wow-delay="0.3s">Join <span class="bold">
                                 ProductLapse </span>Now and enjoy an efficient and user-friendly experience in <span>Manage
                                 your products</span></h2>
-                        <p class="f_500 l_height28 wow fadeInLeft" data-wow-delay="0.4s">Start your journey towards success
+                        <p id="homeSectionSub" contenteditable="true" class="f_500 l_height28 wow fadeInLeft" data-wow-delay="0.4s">Start your journey towards success
                             and excellence in the ever-evolving market</p>
                         <div class="action_btn d-flex align-items-center mt_60">
                             <a href="{{ route('register') }}" class="btn_hover agency_banner_btn wow fadeInLeft btn-bg"
@@ -509,6 +509,54 @@
             } else {
                 scrollToTop.fadeOut(200);
             }
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#homeSectionTitle').on('focus', function () {
+                $(this).on('input', function () {
+                    $(this).data('isChanged', true);
+                });
+            }).on('blur', function () {
+                if ($(this).data('isChanged')) {
+                    var newContent = $(this).html();
+                    console.log(newContent);
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ route('landing-page.update', 1) }}",
+                        data: {
+                            title: newContent,
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                    });
+                }
+                $(this).data('isChanged', false); 
+            });
+        });
+        $(document).ready(function () {
+            $('#homeSectionSub').on('focus', function () {
+                $(this).on('input', function () {
+                    $(this).data('isChanged', true);
+                });
+            }).on('blur', function () {
+                if ($(this).data('isChanged')) {
+                    var newContent = $(this).html();
+                    console.log(newContent);
+                    $.ajax({
+                        type: 'PUT',
+                        url: "{{ route('landing-page.update', 1) }}",
+                        data: {
+                            subTitle: newContent,
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                    });
+                }
+                $(this).data('isChanged', false); 
+            });
         });
     </script>
 @endPushOnce

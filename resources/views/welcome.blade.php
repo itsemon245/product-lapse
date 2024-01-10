@@ -49,7 +49,13 @@
                     <img src="img/about.png" class="about-img wow fadeInRight" data-wow-delay="0.2s">
                 </div>
                 <div class="col-md-6">
-                    <p class="f_size_22 f_400 t_color3 l_height40 wow fadeInLeft about-text" data-wow-delay="0.2s">
+                    <p 
+                    x-on:keyup="value = $el.innerHTML;" 
+                        hx-trigger="blur"
+                        hx-include=".hx-title-data-about" 
+                        hx-post="{{route('landing.page.update.about')."?key=title"}}" 
+                        contenteditable="true"
+                    class="f_size_22 f_400 t_color3 l_height40 wow fadeInLeft about-text" data-wow-delay="0.2s">
                         ProductLapse is a comprehensive product management tool and mobile app designed to empower you in
                         realizing your product vision and achieving remarkable success in the competitive market.
                         <br><br>The platform offers the capability to clearly visualize your product, efficient planning,
@@ -58,6 +64,8 @@
                         history and delivery with support for multiple products simultaneously.
                     </p>
                 </div>
+                <input class="hx-title-data-about hidden" type="text" name="_token" value="{{csrf_token()}}">
+                <input class="hx-title-data-about hidden" x-model="value" type="text" name="value">
             </div>
         </div>
     </section>

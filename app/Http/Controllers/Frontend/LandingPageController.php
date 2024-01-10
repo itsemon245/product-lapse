@@ -23,4 +23,22 @@ class LandingPageController extends Controller
         ]);
         return $landingPage->home->{$key};
     }
+    public function updateAbout(LandingPageRequest $request){
+        $key = $request->key;
+        $value = $request->value;
+        $landingPage = LandingPage::first();
+        $landingPage = tap($landingPage)->update([
+            "about_us->$key" => $value
+        ]);
+        return $landingPage->about_us->{$key};
+    }
+    public function updateContact(LandingPageRequest $request){
+        $key = $request->key;
+        $value = $request->value;
+        $landingPage = LandingPage::first();
+        $landingPage = tap($landingPage)->update([
+            "contact_us->$key" => $value
+        ]);
+        return $landingPage->contact_us->{$key};
+    }
 }

@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('landing_pages', function (Blueprint $table) {
             $table->id();
-            $table->json('home');
-            // $table->json('about_us');
-            // $table->json('contact_us');
+            $table->json('home')->nullable();
+            $table->json('about_us')->nullable();
+            $table->json('contact_us')->nullable();
             $table->timestamps();
         });
     }

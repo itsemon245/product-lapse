@@ -1,23 +1,20 @@
-@extends('layouts.feature.index', ['title'=> 'Delivery'])
+@extends('layouts.feature.index', ['title'=> 'Change Request'])
 @section('main')
 <section class="sign_in_area bg_color sec_pad">
   <div class="container">
       <div class="row align-items-center mb_20">
-          
           <div class="col-lg-6 col-md-7 products-order1">
               <div class="shop_menu_right d-flex align-items-center">
                   <div class="blog-sidebar main-search the-search">
                       <div class="widget sidebar_widget widget_search">
-                          <form action="#" class="search-form input-group">
-                              <input type="searproductch" class="form-control widget_input" placeholder="Search delivery">
+                          {{-- <form action="#" class="search-form input-group">
+                              <input type="searproductch" class="form-control widget_input" placeholder="Search packages">
                               <button type="submit"><i class="ti-search"></i></button>
-                          </form>
+                          </form> --}}
                       </div>
                   </div>
-                  <x-button hx-get="{{ route('delivery.create') }}" hx-trigger="click" hx-target=".targetedClass"> 
-                    <i class="ti-plus"></i>
-                    Add Delivey
-                    </x-button> 
+                  <button data-hx-get="{{ route('support.create') }}" hx-trigger="click" hx-target="#prevent" >Addddd</button>
+                  {{-- <x-btn-primary-href name="Add Change" value="<i class='ti-plus'></i>" hx-get="{{ route('support.create') }}" hx-target="body" />                 --}}
               </div>
           </div>
           <div class="col-lg-6 col-md-5 products-order2">
@@ -38,31 +35,33 @@
       <div class="job_listing">
           <div class="listing_tab">
               <div class="row">
-                @foreach ($deliveries as $delivery)
+                @foreach ($supports as $support)
                 <div class="col-md-6">
                     <div class="item lon new">
                         <div class="list_item">
-                            <div class="joblisting_text document-list">
+                            <figure><a href="#"><img src="img/p6.png" alt=""></a></figure>
+                            <div class="joblisting_text">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell">
-                                        <h4><a href="#" class="f_500 t_color3">Trial version</a></h4>
+                                        <h4><a href="#" class="f_500 t_color3">Technical support by logging in</a></h4>
                                         <ul class="list-unstyled">
-                                            
-                                            <li>12 June 2023</li>
+                                            <li class="p_color1">working on</li>
+                                            <li>Sunday, 12 June 2023</li>
                                         </ul>
                                     </div>
                                     <div class="jobsearch-table-cell">
                                         <div class="jobsearch-job-userlist">
                                             <div class="like-btn">
-                                                <form action="{{ route('delivery.destroy', $delivery) }}" method="post">
+                                                <form action="{{ route('support.destroy', $support) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                     <x-btn-icons type="submit" class="btn" value="<i class='ti-trash'></i>" />
                                                 </form>
                                             </div>
                                             <div class="like-btn">
-                                                <x-btn-icons type="anchor" value="<i class='ti-pencil'></i>" href="{{ route('delivery.edit', $delivery) }}" />
+                                                <x-btn-icons type="anchor" value="<i class='ti-pencil'></i>" href="{{ route('support.edit', $support) }}" />
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>

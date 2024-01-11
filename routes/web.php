@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Features\Product\ProductStageController;
 use App\Http\Controllers\Features\Product\ProductCategoryController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -50,3 +51,4 @@ Route::resource('product-stage', ProductStageController::class);
 require __DIR__ . '/auth.php';
 require __DIR__ . '/invitation.php';
 require __DIR__ . '/frontend.php';
+require __DIR__ . '/support.php';

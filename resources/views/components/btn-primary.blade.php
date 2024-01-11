@@ -1,6 +1,6 @@
 @php
     $id = $attributes->has('id') ? $attributes->get('id') : 'primary';
-    $name = $attributes->has('name') ? $attributes->get('name') : 'primary';
+    $name = $attributes->has('name') ? $attributes->get('name') : '';
     $class = $attributes->has('class') ? $attributes->get('class') : '';
     $type = $attributes->has('type') ? $attributes->get('type') : '';
     $target = $name == 'Delete' ? $attributes->get('data-target') : '';

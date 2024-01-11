@@ -46,30 +46,4 @@
                 </form>
     </div>
 </div>
-<div id="editableContent" contenteditable="true" >Hello WOrld</div>
-<script>
-    $(document).ready(function () {
-        $('#editableContent').on('focus', function () {
-            $(this).on('input', function () {
-                $(this).data('isChanged', true);
-            });
-        }).on('blur', function () {
-            if ($(this).data('isChanged')) {
-                var newContent = $(this).html();
-                $.ajax({
-                    type: 'POST',
-                    url: "{{ route('deliveryy.storyy') }}",  // Replace with your Laravel endpoint
-                    data: {
-                        newContent: newContent,
-                    },
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                });
-            }
-            $(this).data('isChanged', false); 
-        });
-    });
-</script>
-
 @endsection

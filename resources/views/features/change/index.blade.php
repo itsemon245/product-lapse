@@ -14,7 +14,10 @@
                           </form>
                       </div>
                   </div>
-                  <x-btn-primary-href name="Add Change" value="<i class='ti-plus'></i>" href="{{ route('change.create') }}" />                
+                  <x-button hx-get="{{ route('change.create') }}" hx-trigger="click" hx-target=".targetedClass"> 
+                    <i class="ti-plus"></i>
+                    Add Change
+                    </x-button>                 
               </div>
           </div>
           <div class="col-lg-6 col-md-5 products-order2">

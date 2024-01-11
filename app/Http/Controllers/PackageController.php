@@ -22,7 +22,7 @@ class PackageController extends Controller
      */
     public function create()
     {
-        return 'hello';
+        return view('features.package.partials.create');
     }
 
     /**

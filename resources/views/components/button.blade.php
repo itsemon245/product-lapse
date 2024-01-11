@@ -12,7 +12,7 @@
     $enctype = $attributes->has('enctype') ? $attributes->has('enctype') : 'multipart/form-data';
 @endphp
 
-@switch(str_lower($type))
+@switch(strtolower($type))
     @case('submit')
         <button
             {{ $attributes->merge(['class' => 'btn_hover agency_banner_btn btn-bg ' . $colorClass]) }}>{!! $slot ?? 'Button' !!}</button>

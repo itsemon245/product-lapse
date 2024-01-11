@@ -3,7 +3,6 @@
 <section class="sign_in_area bg_color sec_pad">
   <div class="container">
       <div class="row align-items-center mb_20">
-          
           <div class="col-lg-6 col-md-7 products-order1">
               <div class="shop_menu_right d-flex align-items-center">
                   <div class="blog-sidebar main-search the-search">
@@ -14,7 +13,10 @@
                           </form>
                       </div>
                   </div>
-                  <x-btn-primary-href name="Add package"  hx-get="{{ route('package.create') }}" hx-target="body" />                
+                  <x-button hx-get="{{ route('package.create') }}" hx-trigger="click" hx-target=".targetedClass"> 
+                    <i class="ti-plus"></i>
+                    Add package
+                    </x-button>                
               </div>
           </div>
           <div class="col-lg-6 col-md-5 products-order2">

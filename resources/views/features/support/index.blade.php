@@ -7,14 +7,16 @@
               <div class="shop_menu_right d-flex align-items-center">
                   <div class="blog-sidebar main-search the-search">
                       <div class="widget sidebar_widget widget_search">
-                          {{-- <form action="#" class="search-form input-group">
+                          <form action="#" class="search-form input-group">
                               <input type="searproductch" class="form-control widget_input" placeholder="Search packages">
                               <button type="submit"><i class="ti-search"></i></button>
-                          </form> --}}
+                          </form>
                       </div>
                   </div>
-                  <button data-hx-get="{{ route('support.create') }}" hx-trigger="click" hx-target="#prevent" >Addddd</button>
-                  {{-- <x-btn-primary-href name="Add Change" value="<i class='ti-plus'></i>" hx-get="{{ route('support.create') }}" hx-target="body" />                 --}}
+                  <x-button hx-get="{{ route('support.create') }}" hx-trigger="click" hx-target=".targetedClass"> 
+                    <i class="ti-plus"></i>
+                    Add Support
+                    </x-button>         
               </div>
           </div>
           <div class="col-lg-6 col-md-5 products-order2">

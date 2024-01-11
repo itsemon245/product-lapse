@@ -46,7 +46,7 @@
 
 <body class="relative overflow-x-hidden targetedClass">
     {{-- Preloader --}}
-    {{-- @include('layouts.frontend.preloader') --}}
+    @include('layouts.frontend.preloader')
     <div class="" id="tolink-1">
         <div class="top-link"><a href="#tolink-1"><i class="ti-angle-up"></i></a></div>
 
@@ -69,9 +69,9 @@
             @include('layouts.admin.sidebar-mobile')
             {{-- Mobile Sidebar --}}
 
-            <div class="flex flex-col flex-1 w-full">
+            <div class="flex flex-col flex-1 w-full" id="hx-global-target">
                 @include('layouts.admin.header')
-                @yield('breadcrumb')
+               
                 {{-- This is main content --}}
                 <main>
                     @yield('main')

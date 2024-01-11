@@ -52,5 +52,10 @@ return [
         'icon' => '<span class="ti-panel"></span>',
         'hasSubMenu' => false,
     ],
+    'Support' => (object) [
+        "name" => 'support.index',
+        'icon' => '<span class="ti-panel"></span>',
+        'hasSubMenu' => false,
+    ],
 
 ];

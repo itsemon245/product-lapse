@@ -13,7 +13,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::where('owner_id', auth()->user()->id)->get();
+        $tasks = Task::where('owner_id', auth()->id())->get();
         return view('features.task.index', compact('tasks'));
     }
 
@@ -50,8 +50,8 @@ class TaskController extends Controller
         if ($request->has('add_attachments')) {
             $task->storeFile($request->add_attachments);
         }
-
-        return redirect()->route('task.index')->with('success', 'Task Created Successfully.');
+        notify()->success(__('Created Successfully!'));
+        return redirect()->route('task.index');
     }
 
     /**
@@ -150,7 +150,8 @@ class TaskController extends Controller
         if ($task->owner_id == auth()->user()->id) {
 
             $task->delete();
-            return redirect()->route('task.index')->with('success', 'Idea deleted successfully.');
+            notify()->success(__('Deleted successfully!'));
+            return redirect()->route('task.index');
         } else {
             return redirect()->route('task.index')->with('error', 'You are not authorized to delete this idea.');
         }

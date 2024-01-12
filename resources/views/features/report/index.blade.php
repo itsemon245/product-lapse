@@ -1,25 +1,26 @@
-@extends('layouts.feature.index', ['title'=> 'Change Request'])
+@extends('layouts.feature.index', ['title'=> 'Package'])
 @section('main')
 <x-feature.index>
     <x-slot:breadcrumb>
-        <x-breadcrumb :list="[['label' => 'Support', 'route' => route('support.index')]]" />
+        <x-breadcrumb :list="[
+            ['label' => 'Package', 'route' => route('package.index')],
+            ]" />
     </x-slot:breadcrumb>
 
     <x-slot:search>
         <form action="#" class="search-form input-group">
-            <input type="search" class="form-control widget_input" placeholder="Search product">
+            <input type="searproductch" class="form-control widget_input" placeholder="Search packages">
             <button type="submit"><i class="ti-search"></i></button>
         </form>
     </x-slot:search>
 
-    <x-slot:actions>
-        <x-button hx-get="{{ route('support.create') }}" hx-push-url="true" hx-target="#hx-global-target"
-                hx-select="#hx-global-target">
-                <i class="ti-plus"></i>
-                Add Support
-            </x-button>
-    </x-slot:actions>
 
+    <x-slot:actions>
+        <x-button hx-get="{{ route('package.create') }}" hx-push-url="true" hx-target="#hx-global-target" hx-select="#hx-global-target"> 
+            <i class="ti-plus"></i>
+            Add package
+        </x-button>   
+    </x-slot:actions>
 
     <x-slot:filter>
         <h5>Showing packages</h5>
@@ -33,34 +34,34 @@
         </form>
     </x-slot:filter>
 
+
     <x-slot:list>
-        @foreach ($supports as $support)
+        @foreach ($$reports as $report)
         <div class="col-md-6">
             <div class="item lon new">
                 <div class="list_item">
-                    <figure><a href="#"><img src="img/p6.png" alt=""></a></figure>
+                    <figure><a href="#"><img src="img/p1.jpg" alt=""></a></figure>
                     <div class="joblisting_text">
                         <div class="job_list_table">
                             <div class="jobsearch-table-cell">
-                                <h4><a href="#" class="f_500 t_color3">Technical support by logging in</a></h4>
+                                <h4><a href="#" class="f_500 t_color3">T-shirt for men</a></h4>
                                 <ul class="list-unstyled">
-                                    <li class="p_color1">working on</li>
-                                    <li>Sunday, 12 June 2023</li>
+                                    <li class="p_color1">Durable product</li>
+                                    <li>More text about product</li>
                                 </ul>
                             </div>
                             <div class="jobsearch-table-cell">
                                 <div class="jobsearch-job-userlist">
                                     <div class="like-btn">
-                                        <form action="{{ route('support.destroy', $support) }}" method="post">
+                                        <form action="{{ route('report.destroy', $report) }}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <x-btn-icons type="submit" class="btn" value="<i class='ti-trash'></i>" />
                                         </form>
                                     </div>
                                     <div class="like-btn">
-                                        <x-btn-icons type="anchor" value="<i class='ti-pencil'></i>" href="{{ route('support.edit', $support) }}" />
+                                        <x-btn-icons type="anchor" value="<i class='ti-pencil'></i>" href="{{ route('report.edit', $report) }}" />
                                     </div>
-
                                 </div>
                             </div>
                         </div>

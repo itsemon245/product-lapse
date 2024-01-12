@@ -41,8 +41,9 @@
     <script src="{{ asset('js/init-alpine.js') }}"></script>
     <script src="{{asset('js/htmx.js')}}" defer></script>
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
-    @stack('styles')
     @notifyCss
+    @stack('styles')
+    
 </head>
 <body class="relative overflow-x-hidden targetedClass">
     {{-- Preloader --}}
@@ -84,7 +85,7 @@
     {{-- Include Script --}}
     @include('layouts.frontend.script')
     @stack('scripts')
-    {{-- <x-notify::notify /> --}}
+    <x-notify::notify />
     @notifyJs
 </body>
 

@@ -1,89 +1,55 @@
-@extends('layouts.feature.index', ['title' => 'Packages'])
+@extends('layouts.feature.index', ['title' => 'Report'])
 @section('main')
     <x-feature.edit>
         <x-slot:breadcrumb>
-           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Exercitationem aut vitae unde facere doloribus optio officiis architecto fugiat quisquam corrupti commodi est asperiores, dolore magnam tenetur soluta at voluptates aspernatur!
+            <x-breadcrumb :list="[
+                ['label' => 'Edit Report', 'route' => route('report.edit', $report)],
+                ]" />
         </x-slot:breadcrumb>
-        <div class="sign_info">
-            <div class="login_info">
-                <x-slot:from>
-                    <h2 class=" f_600 f_size_24 t_color3 mb_40">Edit package</h2>
-                    <form hx-post="{{ route('package.store') }}" class="login-form sign-in-form">
-                        @csrf
-                        <div class="row">
-                            <div class="form-group text_box col-lg-4 col-md-6">
-                                <x-input-label for="name" value="Package name" />
-                                <x-text-input id="name" class="block mt-1 w-full" type="text"
-                                    placeholder="Enter package name" name="name" :value="$datum->name" required autofocus />
-                                <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                            </div>
-                            <div class="form-group text_box col-lg-4 col-md-6">
-                                <x-input-label for="price" value="Package price" />
-                                <x-text-input id="price" class="block mt-1 w-full" type="text"
-                                    placeholder="Enter package price" name="price" :value="$datum->price" required autofocus />
-                                <x-input-error :messages="$errors->get('price')" class="mt-2" />
-                            </div>
-                            <div class="form-group text_box col-lg-4 col-md-6">
-                                <x-input-label for="monthly_rate" value="Monthly rate" />
-                                <x-text-input id="monthly_rate" class="block mt-1 w-full" type="text"
-                                    placeholder="Enter monthly rate" name="monthly_rate" :value="$datum->monthly_rate" required autofocus />
-                                <x-input-error :messages="$errors->get('monthly_rate')" class="mt-2" />
-                            </div>
-                            <div class="form-group text_box col-lg-4 col-md-6">
-                                <x-input-label for="annual_rate" value="Annual rate" />
-                                <x-text-input id="annual_rate" class="block mt-1 w-full" type="text"
-                                    placeholder="Enter annual rate" name="annual_rate" :value="$datum->annual_rate" required autofocus />
-                                <x-input-error :messages="$errors->get('annual_rate')" class="mt-2" />
-                            </div>
-                            <div class="form-group text_box col-lg-4 col-md-6">
-                                <x-select-input label="Subscription type" id="annual_rate" placeholder="Choose one"
-                                    name="subscription_type" required autofocus>
-                                    <option value="jmkk">Option</option>
-                                </x-select-input>
-                            </div>
-                            <div class="form-group text_box col-lg-4 col-md-6">
-                                <x-input-label for="features" value="Features" />
-                                <x-text-input id="features" class="block mt-1 w-full" type="text"
-                                    placeholder="Enter features" name="features" :value="$datum->features" required autofocus />
-                                <x-input-error :messages="$errors->get('features')" class="mt-2" />
-                            </div>
-                            <div class="form-group text_box col-lg-4 col-md-6">
-                                <x-input-label for="product_limit" value="Product limit" />
-                                <x-text-input id="product_limit" class="block mt-1 w-full" type="date" name="product_limit"
-                                    :value="$datum->product_limit" required autofocus />
-                                <x-input-error :messages="$errors->get('product_limit')" class="mt-2" />
-                            </div>
-                            <div class="form-group text_box col-lg-4 col-md-6">
-                                <x-input-label for="validity" value="Validity" />
-                                <x-text-input id="validity" class="block mt-1 w-full" type="date" name="validity"
-                                    :value="$datum->validity" required autofocus />
-                                <x-input-error :messages="$errors->get('validity')" class="mt-2" />
-                            </div>
-                            <div class="form-group text_box col-lg-4 col-md-6">
-                                <x-input-label for="has_limited_features" value="Limited features" />
-                                <x-text-input id="has_limited_features" class="block mt-1 w-full" type="text"
-                                    name="has_limited_features" placeholder="Limited features" :value="$datum->has_limited_features" required
-                                    autofocus />
-                                <x-input-error :messages="$errors->get('has_limited_features')" class="mt-2" />
-                            </div>
-                            <div class="form-group text_box col-lg-4 col-md-6">
-    
-                                <x-checkbox-input class="ml-4" checked label="Set propular tag." />
-                            </div>
-    
-    
-                        </div>
-    
-                        <div class="d-flex align-items-center text-center">
-                            <x-btn-primary name="Add Package" type="submit" />
-                            <x-button :color="dark" >
-                                Cancel
-                            </x-button>
-                            <x-btn-secondary name="Cancel" type="submit" />
-                        </div>
-                    </form>
-                </x-slot:from>
+        <x-slot:from>
+            <h2 class=" f_600 f_size_24 t_color3 mb_40">Edit Report</h2>
+        <form action="{{ route('report.update', $report) }}" method="POST" enctype="multipart/form-data" >
+            @csrf
+            @method('PUT')
+            <div class="row">
+                <div class="form-group text_box col-lg-6 col-md-6">
+                    <x-input-label for="name" value="Report name" />
+                    <x-text-input id="name" value="{{ $report->name }}" class="block mt-1 w-full" type="text" placeholder="Enter Report name" name="name" :value="old('name')" required autofocus />
+                    <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                </div>
+                <div class="form-group text_box col-lg-6 col-md-6">
+                    <x-select-input label="Report type" id="type"  placeholder="Choose one" name="type" required autofocus> 
+                        <option value="Free">Free</option>
+                        <option value="Basic">Basic</option>
+                        <option value="Golden">Golden</option>
+                        <option value="Dimond">Dimond</option>
+                    </x-select-input>
+                </div>
+                <div class="form-group text_box col-lg-6 col-md-6">
+                    <x-input-label for="report_date" value="Report date" />
+                    <x-text-input id="report_date" value="{{ $report->report_date }}" class="block mt-1 w-full" type="text" placeholder="Enter report date" name="report_date" :value="old('report_date')" required autofocus />
+                    <x-input-error :messages="$errors->get('report_date')" class="mt-2" />
+                </div>
+                <div class="form-group text_box col-lg-6 col-md-6">
+                    <x-attach name='file' />
+                </div>
+                <div class="form-group text_box col-lg-12 col-md-6">
+                    <x-textarea placeholder="Write description" rows="5" cols="10" name="descriptio n" label="Description"> 
+                        {{ $report->descriptio }}
+                    </x-textarea>
+                </div>                       
+                
             </div>
-        </div>
+            
+            <div class="d-flex align-items-center text-center">
+                <x-button type="submit" > 
+                    Add Report
+                </x-button>
+                <x-button > 
+                    Cancle
+                </x-button>
+            </div>
+        </form>
+        </x-slot:from>
     </x-feature.edit>
 @endsection

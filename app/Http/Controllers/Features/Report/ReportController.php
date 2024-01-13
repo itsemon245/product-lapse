@@ -23,7 +23,7 @@ class ReportController extends Controller
      */
     public function create()
     {
-        return view('features.package.partials.create');
+        return view('features.report.partials.create');
     }
 
     /**
@@ -31,7 +31,18 @@ class ReportController extends Controller
      */
     public function store(ReportRequest $request)
     {
-        //
+        // dd($request->file);
+        $report = Report::create([
+            'owner_id' => auth()->id(),
+            'name' => $request->name,
+            'type' => $request->type,
+            'report_date' => $request->report_date,
+            'description' => $request->description,
+        ]);
+        $file = $report->storeImage($request->file);
+        if($file){
+            return redirect()->route('report.index')->with(['success', 'Store Success!']);
+        }
     }
 
     /**
@@ -39,7 +50,8 @@ class ReportController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $report = Report::find($id);
+        return view('features.report.partials.show', compact('report'));
     }
 
     /**
@@ -47,7 +59,8 @@ class ReportController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $report = Report::find($id);
+        return view('features.report.partials.edit', compact('report'));
     }
 
     /**
@@ -55,7 +68,15 @@ class ReportController extends Controller
      */
     public function update(ReportRequest $request, string $id)
     {
-        //
+        $report = Report::find($id);
+        $file = $report->updateImage($request->file, $report->file);
+        $report->update([
+            $report->name => $request->name,
+            $report->type => $request->type,
+            $report->report_date => $request->report_date,
+            $report->description => $request->description,
+        ]);
+        return redirect()->route('report.index')->with(['success', 'Update Success!']);
     }
 
     /**
@@ -63,6 +84,12 @@ class ReportController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $report = Report::find($id);
+        $image = $report->deleteImage($report->file);
+        if($image){
+            $report->destroy();
+            return redirect()->route('report.index')->with(['success', 'Delete Success!']);
+        }
+  
     }
 }

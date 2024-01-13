@@ -1,9 +1,9 @@
-@extends('layouts.feature.index', ['title'=> 'Package'])
+@extends('layouts.feature.index', ['title'=> 'Report'])
 @section('main')
 <x-feature.index>
     <x-slot:breadcrumb>
         <x-breadcrumb :list="[
-            ['label' => 'Package', 'route' => route('package.index')],
+            ['label' => 'Report', 'route' => route('report.index')],
             ]" />
     </x-slot:breadcrumb>
 
@@ -16,14 +16,14 @@
 
 
     <x-slot:actions>
-        <x-button hx-get="{{ route('package.create') }}" hx-push-url="true" hx-target="#hx-global-target" hx-select="#hx-global-target"> 
+        <x-button hx-get="{{ route('report.create') }}" hx-push-url="true" hx-target="#hx-global-target" hx-select="#hx-global-target"> 
             <i class="ti-plus"></i>
-            Add package
+            Add Report
         </x-button>   
     </x-slot:actions>
 
     <x-slot:filter>
-        <h5>Showing packages</h5>
+        <h5>Showing Reports</h5>
         <form method="get" action="#">
             <select class="selectpickers selectpickers2" style="display: none;">
                 <option value="">All</option>
@@ -36,11 +36,11 @@
 
 
     <x-slot:list>
-        @foreach ($$reports as $report)
+        @foreach ($reports as $report)
         <div class="col-md-6">
             <div class="item lon new">
                 <div class="list_item">
-                    <figure><a href="#"><img src="img/p1.jpg" alt=""></a></figure>
+                    <figure><a href="{{ route('report.show', $report) }}"><img src="img/p1.jpg" alt=""></a></figure>
                     <div class="joblisting_text">
                         <div class="job_list_table">
                             <div class="jobsearch-table-cell">

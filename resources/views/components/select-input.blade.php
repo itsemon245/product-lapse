@@ -4,7 +4,7 @@
     $placeholder = $attributes->has('placeholder') ? $attributes->get('placeholder') : 'Select one...';
 @endphp
 <label class=" m-0 text_c f_500">{{ $label }}</label>
-<select class="selectpickers">
+<select class="selectpickers" name="{{ $name }}" >
     <option selected disabled>{{ $placeholder }}</option>
     {{ $slot }}
 </select>

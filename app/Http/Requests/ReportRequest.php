@@ -22,7 +22,12 @@ class ReportRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'sometimes',
+            'type' => 'sometimes',
+            'report_date' => 'sometimes',
+            'file' => 'sometimes',
+            'description' =>  'sometimes',
+
         ];
     }
 }

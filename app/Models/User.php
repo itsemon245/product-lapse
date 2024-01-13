@@ -74,4 +74,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Report::class);
     }
+    public function supports()
+    {
+        return $this->hasMany(Support::class);
+    }
+
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
 }

@@ -61,5 +61,25 @@ return [
         'icon' => '<span class="ti-panel"></span>',
         'hasSubMenu' => false,
     ],
+    'Support' => (object) [
+        "name" => 'support.index',
+        'icon' => '<span class="ti-panel"></span>',
+        'hasSubMenu' => false,
+    ],
+    'Innovate' => (object) [
+        "name" => 'idea.index',
+        'icon' => '<span class="ti-panel"></span>',
+        'hasSubMenu' => false,
+    ],
+    'Task' => (object) [
+        "name" => 'task.index',
+        'icon' => '<span class="ti-panel"></span>',
+        'hasSubMenu' => false,
+    ],
+    'Report' => (object) [
+        "name" => 'report.index',
+        'icon' => '<span class="ti-panel"></span>',
+        'hasSubMenu' => false,
+    ],
 
 ];

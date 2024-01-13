@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Delivery;
 use App\Models\LandingPage;
+use App\Models\Report;
 use App\Models\User;
 use App\Models\Change;
 use App\Models\Package;
@@ -50,5 +51,6 @@ class DatabaseSeeder extends Seeder
         Product::factory(10)->create();
         Change::factory(10)->create();
         Delivery::factory(10)->create();
+        Report::factory(10)->create();
     }
 }

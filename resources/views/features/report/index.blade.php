@@ -1,11 +1,12 @@
-@extends('layouts.feature.index', ['title'=> 'Products'])
+@extends('layouts.feature.index', ['title'=> 'Package'])
 @section('main')
 <x-feature.index>
     <x-slot:breadcrumb>
         <x-breadcrumb :list="[
-            ['label' => 'Product', 'route' => route('product.index')],
+            ['label' => 'Package', 'route' => route('package.index')],
             ]" />
     </x-slot:breadcrumb>
+
     <x-slot:search>
         <form action="#" class="search-form input-group">
             <input type="searproductch" class="form-control widget_input" placeholder="Search packages">
@@ -13,16 +14,16 @@
         </form>
     </x-slot:search>
 
+
     <x-slot:actions>
-        <x-button
-        hx-get="{{ route('product.create') }}"
-        hx-push-url="true" hx-target="#hx-global-target" hx-select="#hx-global-target">
-        <i class="ti-plus"></i>
-        Add Product
-        </x-button>
+        <x-button hx-get="{{ route('package.create') }}" hx-push-url="true" hx-target="#hx-global-target" hx-select="#hx-global-target"> 
+            <i class="ti-plus"></i>
+            Add package
+        </x-button>   
     </x-slot:actions>
+
     <x-slot:filter>
-        <h5>Showing Product</h5>
+        <h5>Showing packages</h5>
         <form method="get" action="#">
             <select class="selectpickers selectpickers2" style="display: none;">
                 <option value="">All</option>
@@ -33,8 +34,9 @@
         </form>
     </x-slot:filter>
 
+
     <x-slot:list>
-        @foreach ($products as $product)
+        @foreach ($$reports as $report)
         <div class="col-md-6">
             <div class="item lon new">
                 <div class="list_item">
@@ -51,16 +53,15 @@
                             <div class="jobsearch-table-cell">
                                 <div class="jobsearch-job-userlist">
                                     <div class="like-btn">
-                                        <form action="{{ route('product.destroy', $product) }}" method="POST" >
-                                        @csrf
-                                        @method('DELETE')
-                                        <x-btn-icons class="btn" value="<i class='ti-trash'></i>" type="submit" />
+                                        <form action="{{ route('report.destroy', $report) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <x-btn-icons type="submit" class="btn" value="<i class='ti-trash'></i>" />
                                         </form>
                                     </div>
                                     <div class="like-btn">
-                                        <x-btn-icons value="<i class='ti-pencil'></i>" type="anchor" href="{{route('product.edit', $product)}}" />
+                                        <x-btn-icons type="anchor" value="<i class='ti-pencil'></i>" href="{{ route('report.edit', $report) }}" />
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -71,4 +72,4 @@
         @endforeach
     </x-slot:list>
 </x-feature.index>
-@endsection
+@endsection 

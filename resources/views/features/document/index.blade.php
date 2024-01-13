@@ -1,4 +1,4 @@
-@extends('layouts.feature.index', ['title' => 'Support List'])
+@extends('layouts.feature.index', ['title' => 'Document List'])
 @section('main')
     <section class="sign_in_area bg_color sec_pad">
         <div class="container">
@@ -9,28 +9,28 @@
                         <div class="blog-sidebar main-search the-search">
                             <div class="widget sidebar_widget widget_search">
                                 <form action="#" class="search-form input-group">
-                                    <input type="search" class="form-control widget_input" placeholder="search for ticket">
+                                    <input type="search" class="form-control widget_input" placeholder="Search Document">
                                     <button type="submit"><i class="ti-search"></i></button>
                                 </form>
                             </div>
                         </div>
 
-                        <a class="btn_hover agency_banner_btn btn-bg" href="{{ route('support.create') }}">
-                            <i class="ti-plus"></i>
-                            Add ticket</a>
+                        <a href="{{ route('document.create') }}" class="btn_hover agency_banner_btn btn-bg"><i
+                                class="ti-plus"></i>Add
+                            document</a>
 
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-5 products-order2">
                     <div class="shop_menu_left d-flex align-items-center justify-content-end tasks-filter">
 
-                        <h5>Status</h5>
+                        <h5>Document Type</h5>
                         <form method="get" action="#">
                             <select class="selectpickers selectpickers2">
                                 <option value="">All</option>
-                                <option value="">working on</option>
-                                <option value="">pending</option>
-                                <option value="">stopped</option>
+                                <option value="">Type</option>
+                                <option value="">Type</option>
+                                <option value="">Type</option>
                             </select>
                         </form>
                     </div>
@@ -39,54 +39,63 @@
             <div class="job_listing">
                 <div class="listing_tab">
                     <div class="row">
-                        @foreach ($supports as $support)
+                        @foreach ($documents as $document)
                             <div class="col-md-6">
                                 <div class="item lon new">
                                     <div class="list_item">
-                                        <figure><a href="#"><img src="img/p6.png" alt=""></a></figure>
-                                        <div class="joblisting_text">
+                                        <div class="joblisting_text document-list">
                                             <div class="job_list_table">
                                                 <div class="jobsearch-table-cell">
-                                                    <h4><a href="{{ route('support.show', ['support' => base64_encode($support->id)]) }}"
-                                                            class="f_500 t_color3">{{ $support->name }}</a>
+                                                    <h4><a href="{{ route('document.show', ['document' => base64_encode($document->id)]) }}"
+                                                            class="f_500 t_color3">{{ $document->name }}</a>
                                                     </h4>
                                                     <ul class="list-unstyled">
-                                                        <li class="p_color1">@lang('support.' . $support->status)</li>
                                                         <li>
-                                                            {{ \Carbon\Carbon::parse($support->created_at)->format('l, j F Y') }}
+                                                            {{ \Carbon\Carbon::parse($document->date)->format('l, j F Y') }}
                                                         </li>
+
                                                     </ul>
                                                 </div>
                                                 <div class="jobsearch-table-cell">
                                                     <div class="jobsearch-job-userlist">
                                                         <div class="like-btn">
+                                                            <a href="javascript:void(0);" class="shortlist" title="Details">
+                                                                <i class="ti-more"></i> </a>
+                                                        </div>
+                                                        <div class="like-btn">
                                                             <form
-                                                                action="{{ route('support.destroy', ['support' => base64_encode($support->id)]) }}"
-                                                                method="POST">
+                                                                action="{{ route('document.download', ['id' => base64_encode($document->id)]) }}"
+                                                                method="post" enctype="multipart/form-data">
+                                                                @csrf
+                                                                <button type="submit" class="shortlist">
+                                                                    <i class="ti-download"></i>
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                        <div class="like-btn">
+                                                            <a class="shortlist" title="Edit"
+                                                                href="{{ route('document.edit', ['document' => base64_encode($document->id)]) }}">
+                                                                <i class="ti-pencil"></i>
+                                                            </a>
+                                                        </div>
+                                                        <div>
+                                                            <form
+                                                                action="{{ route('document.destroy', ['document' => base64_encode($document->id)]) }}"
+                                                                method="POST" style="display: inline;">
                                                                 @csrf
                                                                 @method('DELETE')
 
-                                                                <button type="submit" class="shortlist" title="Delete">
+                                                                <button type="submit" class="like-btn" title="Delete">
                                                                     <i class="ti-trash"></i>
                                                                 </button>
                                                             </form>
-
                                                         </div>
-                                                        <div class="like-btn">
-                                                            <a href="{{ route('support.edit', ['support' => base64_encode($support->id)]) }}"
-                                                                class="shortlist" title="Edit">
-                                                                <i class="ti-pencil"></i>
-                                                            </a>
-
-                                                        </div>
-
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                         @endforeach
                     </div>
                 </div>

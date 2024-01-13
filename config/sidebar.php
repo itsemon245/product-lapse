@@ -81,5 +81,10 @@ return [
         'icon' => '<span class="ti-panel"></span>',
         'hasSubMenu' => false,
     ],
+    'Document' => (object) [
+        "name" => 'document.index',
+        'icon' => '<span class="ti-panel"></span>',
+        'hasSubMenu' => false,
+    ],
 
 ];

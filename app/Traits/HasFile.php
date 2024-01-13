@@ -44,14 +44,13 @@ trait HasFile
 
     public function storeFile(UploadedFile $file, ?string $name = null): File
     {
+        // Validate the uploaded file
         $this->validateUploadedFile($file);
-
         $type = $this->fileableType ?? get_class($this);
         $id = $this->id;
         $ext = $file->getClientOriginalExtension();
         $name = $name ?? Str::slug($file->getClientOriginalName()) . '-' . uniqid() . '.' . $ext;
         $path = $file->storeAs($this->baseDir . $this->dir, $name, $this->disk);
-
         $fileRecord = File::create([
             'fileable_id' => $id,
             'fileable_type' => $type,
@@ -62,12 +61,14 @@ trait HasFile
 
         return $fileRecord;
     }
+
     /**
      * Updates the old File to the defined directory in a polymorphic way
      * @param UploadedFile $file
      * @param ?string $name
      * @param File|null $oldFile keep null if eager loaded or not inside a loop
      */
+
     public function updateFile(UploadedFile $file, ?string $name = null, File $oldFile = null): File
     {
         $oldFile = $oldFile ?? $this->file;
@@ -76,9 +77,8 @@ trait HasFile
         $ext = $file->getClientOriginalExtension();
         $name = $name ?? $file->getClientOriginalName();
         $name = str($name)->slug() . uniqid() . $ext;
-        $path = $file->storeAs($this->baseDir . $this->dir, $name, $this->disk);
+        $path = $file->storeAs($this->baseDir . "/" . $this->dir, $name, $this->disk);
         $this->deleteFile($oldFile, true);
-
         $file = tap($oldFile)->update([
             'fileable_id' => $id,
             'fileable_type' => $type,
@@ -99,7 +99,7 @@ trait HasFile
 
         try {
             if ($file && Storage::disk($this->disk)->exists($file->path)) {
-                Storage::delete($file->path);
+                Storage::delete($this->disk . "/" . $file->path);
             }
 
             if ($fileOnly) {

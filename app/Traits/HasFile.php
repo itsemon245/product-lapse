@@ -7,6 +7,8 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 
 trait HasFile
 {
@@ -16,13 +18,13 @@ trait HasFile
      */
     public function file(): MorphOne
     {
-        return $this->morphOne(File::class, 'imageable');
+        return $this->morphOne(File::class, 'fileable');
     }
 
     /**
      * For one to many relationship
      */
-    public function images(): MorphMany
+    public function files(): MorphMany
     {
         return $this->morphMany(File::class, 'fileable');
     }
@@ -35,19 +37,22 @@ trait HasFile
     protected ?string $fileableType = null;
 
     /**
-     * Stores an Image to the defined directory in a polymorphic way
+     * Stores a File to the defined directory in a polymorphic way
      * @param UploadedFile $file
      * @param ?string $name leave null for Original name
      */
+
     public function storeFile(UploadedFile $file, ?string $name = null): File
     {
+        $this->validateUploadedFile($file);
+
         $type = $this->fileableType ?? get_class($this);
         $id = $this->id;
         $ext = $file->getClientOriginalExtension();
-        $name = $name ?? $file->getClientOriginalName();
-        $name = str($name)->slug() . uniqid() . $ext;
-        $path = $file->storeAs($this->baseDir . "/" . $this->dir, $name, $this->disk);
-        $file = File::create([
+        $name = $name ?? Str::slug($file->getClientOriginalName()) . '-' . uniqid() . '.' . $ext;
+        $path = $file->storeAs($this->baseDir . $this->dir, $name, $this->disk);
+
+        $fileRecord = File::create([
             'fileable_id' => $id,
             'fileable_type' => $type,
             'path' => $path,
@@ -55,24 +60,25 @@ trait HasFile
             'mime_type' => $ext
         ]);
 
-        return $file;
+        return $fileRecord;
     }
     /**
-     * Updates the old Image to the defined directory in a polymorphic way
+     * Updates the old File to the defined directory in a polymorphic way
      * @param UploadedFile $file
      * @param ?string $name
      * @param File|null $oldFile keep null if eager loaded or not inside a loop
      */
     public function updateFile(UploadedFile $file, ?string $name = null, File $oldFile = null): File
     {
-        $oldFile = $oldFile ?? $this->image;
+        $oldFile = $oldFile ?? $this->file;
         $type = $this->fileableType ?? get_class($this);
         $id = $this->id;
         $ext = $file->getClientOriginalExtension();
         $name = $name ?? $file->getClientOriginalName();
         $name = str($name)->slug() . uniqid() . $ext;
-        $path = $file->storeAs($this->baseDir . "/" . $this->dir, $name, $this->disk);
+        $path = $file->storeAs($this->baseDir . $this->dir, $name, $this->disk);
         $this->deleteFile($oldFile, true);
+
         $file = tap($oldFile)->update([
             'fileable_id' => $id,
             'fileable_type' => $type,
@@ -84,18 +90,43 @@ trait HasFile
     }
 
     /**
-     * Deletes an Image to the defined directory in a polymorphic way
+     * Deletes an File to the defined directory in a polymorphic way
      * @param File $file keep null if eager loaded or not inside a loop
      * @param bool $fileOnly set true if you want the only file to be deleted
      */
     public function deleteFile(File $file = null, ?bool $fileOnly = false): bool
     {
-        if (Storage::disk($this->disk)->exists($file->path)) {
-            Storage::delete($file->path);
+
+        try {
+            if ($file && Storage::disk($this->disk)->exists($file->path)) {
+                Storage::delete($file->path);
+            }
+
+            if ($fileOnly) {
+                return true;
+
+            }
+
+            return $file->delete();
+        } catch (\Exception $e) {
+            // Log the exception for debugging
+            \Log::error("Error in deleteFile method: " . $e->getMessage());
+
+            return false; // Return false to indicate failure
         }
-        if ($fileOnly) {
-            return true;
+    }
+
+
+
+    protected function validateUploadedFile(UploadedFile $file)
+    {
+        $validator = Validator::make(
+            ['file' => $file],
+            ['file' => 'required|file|mimes:pdf,doc,docx|max:10240']
+        );
+
+        if ($validator->fails()) {
+            throw new \RuntimeException($validator->errors()->first());
         }
-        return $file->delete();
     }
 }

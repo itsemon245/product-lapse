@@ -70,4 +70,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Task::class);
     }
+
+    public function supports()
+    {
+        return $this->hasMany(Support::class);
+    }
+
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
 }

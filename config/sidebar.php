@@ -40,6 +40,15 @@ return [
                 'label' => 'Task',
                 "name" => 'task.index',
             ],
+            (object) [
+                'label' => 'Support',
+                "name" => 'support.index',
+            ],
+            (object) [
+                'label' => 'Documents',
+                "name" => 'document.index',
+            ],
+
         ]
     ],
     'Change Request' => (object) [

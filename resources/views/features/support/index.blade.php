@@ -85,6 +85,10 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="like-btn">
+                                        <x-btn-icons type="anchor" value="<i class='ti-pencil'></i>" href="{{ route('support.edit', $support) }}" />
+                                    </div>
+
                                 </div>
                             </div>
                         @endforeach

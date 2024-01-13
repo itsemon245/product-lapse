@@ -41,12 +41,13 @@
     <script src="{{ asset('js/init-alpine.js') }}"></script>
     <script src="{{asset('js/htmx.js')}}" defer></script>
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
-    @stack('styles')
     @notifyCss
+    @stack('styles')
+    
 </head>
 <body class="relative overflow-x-hidden targetedClass">
     {{-- Preloader --}}
-    {{-- @include('layouts.frontend.preloader') --}}
+    @include('layouts.frontend.preloader')
     <div class="" id="tolink-1">
         <div class="top-link"><a href="#tolink-1"><i class="ti-angle-up"></i></a></div>
 
@@ -69,9 +70,9 @@
             @include('layouts.admin.sidebar-mobile')
             {{-- Mobile Sidebar --}}
 
-            <div class="flex flex-col flex-1 w-full">
+            <div class="flex flex-col flex-1 w-full" id="hx-global-target">
                 @include('layouts.admin.header')
-                @yield('breadcrumb')
+               
                 {{-- This is main content --}}
                 <main>
                     @yield('main')

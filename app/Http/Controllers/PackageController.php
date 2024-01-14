@@ -30,8 +30,9 @@ class PackageController extends Controller
      */
     public function store(StorePackageRequest $request)
     {
+        // dd($request);
         $create = Package::create([
-            'user_id' => 1,
+            'owner_id' => auth()->id(),
             'name' => $request->name,
             'price' => $request->price,
             'monthly_rate' => $request->monthly_rate,
@@ -51,8 +52,8 @@ class PackageController extends Controller
      */
     public function show(string $id)
     {
-        $datum = Package::find($id);
-        return view('features.package.partials.edit.show', compact('$datum'));
+        $package = Package::find($id);
+        return view('features.package.partials.show', compact('package'));
     }
 
     /**
@@ -60,8 +61,8 @@ class PackageController extends Controller
      */
     public function edit(string $id)
     {
-        $datum = Package::find($id);
-        return view('features.package.partials.edit', compact('datum'));
+        $package = Package::find($id);
+        return view('features.package.partials.edit', compact('package'));
     }
 
     /**
@@ -81,7 +82,10 @@ class PackageController extends Controller
             'has_limited_features' => $request->has_limited_features,
             'is_popular' => $request->is_popular,
         ]);
-        return back()->with(['success', 'Update Success!']);
+        if($find){
+            return redirect()->route('package.index')->with(['success', 'Update Success!']);
+        }
+        return redirect()->route('package.index')->with(['error', 'Something Wrong!']);
         
     }
 

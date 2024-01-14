@@ -22,22 +22,17 @@ class StorePackageRequest extends FormRequest
     public function rules(): array
     {
 
-        if(request()->isMethod('post')){
-            $role = 'required';
-        }elseif(request()->isMethod('put')){
-            $role= 'sometimes';
-        }
         return [
-            'name' => [$role, 'max:30'],
-            'price' => [$role],
-            'monthly_rate' => [$role],
-            'annual_rate' => [$role],
-            'subscription_type' => [$role],
-            'features' => [$role],
-            'product_limit' => [$role],
-            'validity' => [$role],
-            'has_limited_features' => [$role],
-            'is_popular' => [$role],
+            'name' => 'sometimes',
+            'price' => 'sometimes',
+            'monthly_rate' => 'sometimes',
+            'annual_rate' => 'sometimes',
+            'subscription_type' => 'sometimes',
+            'features' => 'sometimes',
+            'product_limit' => 'sometimes',
+            'validity' => 'sometimes',
+            'has_limited_features' => 'sometimes',
+            'is_popular' => 'sometimes',
 
         ];
     }

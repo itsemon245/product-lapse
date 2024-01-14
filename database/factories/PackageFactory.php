@@ -25,7 +25,7 @@ class PackageFactory extends Factory
             'price' => fake()->randomDigit,
             'monthly_rate' => fake()->randomDigit,
             'annual_rate' => fake()->randomDigit,
-            'subscription_type' => 'Free',
+            'subscription_type' => fake()->lastName,
             'features' => fake()->paragraph,
             'product_limit' => fake()->dateTime,
             'validity' => fake()->dateTime,

@@ -16,15 +16,15 @@ return new class extends Migration
             $table->unsignedBigInteger('owner_id');
             $table->foreign('owner_id')->references('id')->on('users')->cascadeOnDelete();
             $table->string('name');
-            $table->float('price');
-            $table->float('monthly_rate')->nullable();
-            $table->float('annual_rate');
-            $table->enum('subscription_type', ['Free', 'Basic', 'Golden', 'Diamond']);
+            $table->integer('price');
+            $table->integer('monthly_rate')->nullable();
+            $table->integer('annual_rate');
+            $table->string('subscription_type');
             $table->longText('features'); //when UI is ready then change this data type JSON
             $table->dateTime('product_limit');
             $table->dateTime('validity');
             $table->longText('has_limited_features'); //when UI is ready then change this data type JSON
-            $table->integer('is_popular');
+            $table->string('is_popular')->nullable();
             $table->timestamps();
         });
     }

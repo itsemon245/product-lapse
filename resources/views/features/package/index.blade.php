@@ -40,7 +40,7 @@
         <div class="col-md-6">
             <div class="item lon new">
                 <div class="list_item">
-                    <figure><a href="#"><img src="img/p1.jpg" alt=""></a></figure>
+                    <figure><a href="{{ route('package.show', $package) }}"><img src="img/p1.jpg" alt=""></a></figure>
                     <div class="joblisting_text">
                         <div class="job_list_table">
                             <div class="jobsearch-table-cell">

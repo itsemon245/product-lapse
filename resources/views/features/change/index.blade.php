@@ -48,7 +48,8 @@
                             <div class="joblisting_text">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell">
-                                        <h4><a href="#" class="f_500 t_color3">{{ $change->title }}</a></h4>
+                                        <h4><a href="{{ route('change.show', base64_encode($change->id)) }}"
+                                                class="f_500 t_color3">{{ $change->title }}</a></h4>
                                         <ul class="list-unstyled">
                                             <li class="p_color1">Working on</li>
                                             <li>{{ \Carbon\Carbon::parse($change->created_at)->format('l, j F Y') }}</li>

@@ -55,10 +55,12 @@
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-input-label for="required_completion_date" value="Required Completion Date" />
-                        <x-text-input id="required_completion_date" class="block mt-1 w-full" type="text"
-                            placeholder="dd/mm/yyyy (Exp:13/03/2024)" name="required_completion_date"
-                            value="{{ $change->required_completion_date }}" required autofocus />
-                        <x-input-error :messages="$errors->get('required_completion_date')" class="mt-2" />
+                        <x-text-input id="required_completion_date" class="block mt-1 w-full" type="date"
+                            name="required_completion_date"
+                            value="{{ \Carbon\Carbon::parse($change->required_completion_date)->format('Y-m-d') }}" required
+                            autofocus />
+
+                        <x-input-error :messages="$errors->get('required_completion_date')" class="mt-2" /> 
                     </div>
                 </div>
 

@@ -50,7 +50,7 @@
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-input-label for="required_completion_date" value="Required Completion Date" />
-                        <x-text-input id="required_completion_date" class="block mt-1 w-full" type="text"
+                        <x-text-input id="required_completion_date" class="block mt-1 w-full" type="date"
                             placeholder="dd/mm/yyyy (Exp:13/03/2024)" name="required_completion_date" :value="old('required_completion_date')"
                             required autofocus />
                         <x-input-error :messages="$errors->get('required_completion_date')" class="mt-2" />
@@ -58,8 +58,9 @@
                 </div>
 
                 <div class="d-flex align-items-center text-center">
-                    <x-btn-primary name="Add Change Request" type="submit" />
-                    <x-btn-secondary name="Cancel" />
+                    <button type="submit" class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">Add Change
+                        Request</button>
+                    <a href="{{ route('change.index') }}" class="btn_hover agency_banner_btn btn-bg btn-bg-grey">Cancel</a>
                 </div>
             </form>
         </div>

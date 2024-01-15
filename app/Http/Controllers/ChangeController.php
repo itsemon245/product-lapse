@@ -29,7 +29,6 @@ class ChangeController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
         $request->validate(Change::rules());
         $data = $request->except('_token');
         $data['owner_id'] = auth()->id();
@@ -41,7 +40,7 @@ class ChangeController extends Controller
             return redirect()->route('change.index');
         }
 
-        notify()->success(__('Create success!'));
+        notify()->success(__('Created successfully!'));
         return redirect()->route('change.index');
     }
 
@@ -82,7 +81,6 @@ class ChangeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        dd($request->all());
         $id = base64_decode($id);
         $change = Change::find($id);
 
@@ -92,7 +90,7 @@ class ChangeController extends Controller
         }
 
         $request->validate(Change::rules());
-        $data = $request->except('_token');
+        $data = $request->except('_token', '_method');
         $data['owner_id'] = auth()->id();
 
         $change->update($data);

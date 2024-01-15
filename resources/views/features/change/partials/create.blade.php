@@ -40,7 +40,8 @@
                         </x-select-input>
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-6">
-                        <x-textarea label="Details" name="details" placeholder="Write details..." />
+                        <x-textarea label="Details" name="details" placeholder="Write details..." required autfocus />
+                        <x-input-error :messages="$errors->get('details')" class="mt-2" />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-input-label for="administrator" value="Administrator" />

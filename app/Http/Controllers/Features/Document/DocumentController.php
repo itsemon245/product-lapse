@@ -24,7 +24,7 @@ class DocumentController extends Controller
      */
     public function create()
     {
-        return view('features.document.create');
+        return view('features.document.partials.create');
     }
 
     /**
@@ -83,7 +83,7 @@ class DocumentController extends Controller
             return redirect()->route('document.index');
         }
 
-        return view('features.document.show', compact('document'));
+        return view('features.document.partials.show', compact('document'));
     }
 
     /**
@@ -99,7 +99,7 @@ class DocumentController extends Controller
             return redirect()->route('document.index');
         }
 
-        return view('features.document.edit', compact('document'));
+        return view('features.document.partials.edit', compact('document'));
     }
 
     /**
@@ -107,6 +107,7 @@ class DocumentController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
         $rules = Document::rules();
         Arr::forget($rules, 'attach_file');
 
@@ -119,12 +120,15 @@ class DocumentController extends Controller
             notify()->success(__('Document not found!'));
             return redirect()->route('document.index');
         }
-        $file = $document->updateFile($request->attach_file, $document->file);
+
+        if ($request->has('attach_file')) {
+            $file = $document->updateFile($request->attach_file, $document->file);
+        }
 
         $data = $request->except('_token', 'attach_file');
         $data['owner_id'] = auth()->id();
-        $document->update($data);
 
+        $document->update($data);
         notify()->success(__('Updated successfully!'));
 
         return redirect()->route('document.index');

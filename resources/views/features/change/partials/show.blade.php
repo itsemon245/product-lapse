@@ -1,30 +1,36 @@
-@extends('layouts.feature.index', ['title' => 'Release'])
+@extends('layouts.feature.index', ['title' => 'Details OF Change Request'])
 @section('main')
     <x-feature.show>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => 'Release', 'route' => route('release.show', $release)]]" />
+            <x-breadcrumb :list="[['label' => 'Change Request', 'route' => route('change.show', base64_encode($change->id))]]" />
         </x-slot:breadcrumb>
 
         <x-slot:details>
             <div class="col-lg-8 blog_sidebar_left">
                 <div class="blog_single mb_50">
                     <div class="row">
-                        <h5 class="f_size_20 f_500 col-md-12">{{ $release->name }}</h5>
+                        <h5 class="f_size_20 f_500 col-md-12">{{ $change->title }}</h5>
                         <div class="entry_post_info col-md-12">
-                            {{ \Carbon\Carbon::parse($release->created_at)->format('l, j F Y') }}
+                            {{ \Carbon\Carbon::parse($change->required_completion_date)->format('l, j F Y') }}
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-lg-6 col-md-6"">
+                            <h6 class="title2">Priority</h6>
+                            <p class="f_400 mb-30 text-font">{{ $change->priority }}</p>
+                        </div>
+                        <div class="col-lg-6 col-md-6"">
                             <h6 class="title2">Classification</h6>
                             <p class="f_400 mb-30 text-font">Web design</p>
                         </div>
                         <div class="col-md-12">
-                            <h6 class="title2">Release details</h6>
+                            <h6 class="title2">Report details</h6>
                             <p class="f_400 mb-30 text-font">
-                                {{ $release->description }}
+                                {{ $change->details }}
                             </p>
                         </div>
+
                     </div>
                 </div>
+
             </div>
         </x-slot:details>
         <x-slot:profile>

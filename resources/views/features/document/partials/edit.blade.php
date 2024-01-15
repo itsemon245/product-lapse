@@ -19,9 +19,12 @@
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-select-input label="{{ __('document.type') }}" id="type" placeholder="Choose one"
                             name="type" required autofocus>
-                            <option value="pdf">@lang('document.pdf')</option>
-                            <option value="zip">@lang('document.zip')</option>
-                            <option value="rar">@lang('document.rar')</option>
+                            <option value="pdf" {{ $document->type === 'pdf' ? 'selected' : '' }}>
+                                @lang('document.pdf')</option>
+                            <option value="zip" {{ $document->type === 'zip' ? 'selected' : '' }}>
+                                @lang('document.zip')</option>
+                            <option value="rar" {{ $document->type === 'rar' ? 'selected' : '' }}>
+                                @lang('document.rar')</option>
                         </x-select-input>
                     </div>
 

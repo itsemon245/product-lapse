@@ -7,7 +7,7 @@
 
         <x-slot:search>
             <form action="#" class="search-form input-group">
-                <input type="search" class="form-control widget_input" placeholder="Search product">
+                <input type="search" class="form-control widget_input" placeholder="Search idea">
                 <button type="submit"><i class="ti-search"></i></button>
             </form>
         </x-slot:search>
@@ -49,7 +49,7 @@
                             <div class="joblisting_text">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell">
-                                        <h4><a href="#" class="f_500 t_color3">{{ $idea->name }}</a>
+                                        <h4><a href="{{ route('idea.show', ['idea' => base64_encode($idea->id)]) }}" class="f_500 t_color3">{{ $idea->name }}</a>
                                         </h4>
                                         <ul class="list-unstyled">
                                             <li class="p_color4">{{ $idea->owner }}</li>

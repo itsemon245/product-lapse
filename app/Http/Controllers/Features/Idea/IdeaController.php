@@ -51,7 +51,16 @@ class IdeaController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $id = base64_decode($id);
+
+        $idea = Idea::where('owner_id', auth()->id())->find($id);
+
+        if (!$idea) {
+            notify()->error(__('Not authorized!'));
+            return redirect()->route('idea.index');
+        }
+
+        return view('features.idea.partials.show', compact('idea'));
     }
 
     /**

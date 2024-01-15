@@ -70,17 +70,13 @@ class TaskController extends Controller
         }
     }
 
-    public function changeStatus(Request $request, $id)
+    public function changeStatus(Request $request, Task $task)
     {
-        $id = base64_decode($id);
-
-        $task = Task::find($id);
-
         if ($task->owner_id == auth()->user()->id) {
             $task->update([
                 'status' => $request->status,
             ]);
-            return redirect()->route('task.show', base64_encode($id))->with('success', 'Task status changed successfully.');
+            return redirect()->route('task.show', $task)->with('success', 'Task status changed successfully.');
         } else {
             return redirect()->route('task.index')->with('success', 'You are not authorized to change this idea status.');
         }

@@ -171,7 +171,7 @@
                     <h4 class="modal-title">Change state</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <form action="{{ route('task.change.status', ['id' => base64_encode($task->id)]) }}" method="POST">
+                <form action="{{ route('task.change.status', $task) }}" method="POST">
                     <!-- Modal body -->
                     <div class="modal-body">
                         <div class="container-fluid">

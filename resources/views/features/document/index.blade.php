@@ -47,7 +47,6 @@
                 <div class="col-md-6">
                     <div class="item lon new">
                         <div class="list_item">
-
                             <div class="joblisting_text">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell">

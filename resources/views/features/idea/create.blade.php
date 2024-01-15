@@ -27,13 +27,13 @@
                             <div class="form-group text_box col-lg-12">
                                 <label class=" text_c f_500">@lang('idea.priority')</label>
                                 <select class="selectpickers" name="priority" required>
-                                    <option value="@lang('idea.new')">@lang('idea.new')</option>
-                                    <option value="@lang('idea.evaluate')">@lang('idea.evaluate')</option>
-                                    <option value="@lang('idea.discuss')">@lang('idea.discuss')</option>
-                                    <option value="@lang('idea.final_wording')">@lang('idea.final_wording')</option>
-                                    <option value="@lang('idea.accepted')">@lang('idea.accepted')</option>
-                                    <option value="@lang('idea.refused')">@lang('idea.refused')</option>
-                                    <option value="@lang('idea.deleted')">@lang('idea.deleted')</option>
+                                    <option value="@idea.new">@lang('idea.new')</option>
+                                    <option value="@idea.evaluate">@lang('idea.evaluate')</option>
+                                    <option value="@idea.discuss">@lang('idea.discuss')</option>
+                                    <option value="@idea.final_wording">@lang('idea.final_wording')</option>
+                                    <option value="@idea.accepted">@lang('idea.accepted')</option>
+                                    <option value="@idea.refused">@lang('idea.refused')</option>
+                                    <option value="@idea.deleted">@lang('idea.deleted')</option>
                                 </select>
                                 @error('priority')
                                     <div class="alert alert-danger">{{ $message }}</div>

@@ -53,8 +53,9 @@
                                         </h4>
                                         <ul class="list-unstyled">
                                             <li class="p_color4">{{ $idea->owner }}</li>
-                                            <li class="p_color4">{{ $idea->priority }}</li>
-                                            <li class="p_color4">{{ $idea->created_at }}</li>
+                                            <li class="p_color4"> @lang('idea.' . $idea->priority) </li>
+                                            <li class="p_color4">
+                                                {{ \Carbon\Carbon::parse($idea->created_at)->format('l, j F Y') }}</li>
                                         </ul>
                                     </div>
                                     <div class="jobsearch-table-cell">

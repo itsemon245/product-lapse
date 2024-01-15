@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Change;
 use Illuminate\Http\Request;
-use App\Http\Requests\ChangeRequest;
 
 class ChangeController extends Controller
 {
@@ -13,7 +12,7 @@ class ChangeController extends Controller
      */
     public function index()
     {
-        $changes = Change::get();
+        $changes = Change::where('owner_id', auth()->id())->get();
         return view('features.change.index', compact('changes'));
     }
 
@@ -28,17 +27,22 @@ class ChangeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ChangeRequest $request)
+    public function store(Request $request)
     {
-        Change::update([
-            'title' => $request->title,
-            'classification' => $request->classification,
-            'priority' => $request->priority,
-            'status' => $request->status,
-            'details' => $request->details,
-            'administrator' => $request->administrator,
-            'required_completion_date' => $request->required_completion_date,
-        ]);
+        dd($request->all());
+        $request->validate(Change::rules());
+        $data = $request->except('_token');
+        $data['owner_id'] = auth()->id();
+
+        $change = Change::create($data);
+
+        if (!$change) {
+            notify()->success(__('Create failed!'));
+            return redirect()->route('change.index');
+        }
+
+        notify()->success(__('Create success!'));
+        return redirect()->route('change.index');
     }
 
     /**
@@ -46,7 +50,15 @@ class ChangeController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $id = base64_decode($id);
+        $change = Change::find($id);
+
+        if (!$change) {
+            notify()->success(__('Not found!'));
+            return redirect()->route('change.index');
+        }
+
+        return view('features.change.partials.show', compact('change'));
     }
 
     /**
@@ -54,15 +66,44 @@ class ChangeController extends Controller
      */
     public function edit(string $id)
     {
-        
+        $id = base64_decode($id);
+        $change = Change::find($id);
+
+        if (!$change) {
+            notify()->success(__('Not found!'));
+            return redirect()->route('change.index');
+        }
+
+        return view('features.change.partials.edit', compact('change'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(ChangeRequest $request, string $id)
+    public function update(Request $request, string $id)
     {
-        //
+        dd($request->all());
+        $id = base64_decode($id);
+        $change = Change::find($id);
+
+        if (!$change) {
+            notify()->success(__('Not found!'));
+            return redirect()->route('change.index');
+        }
+
+        $request->validate(Change::rules());
+        $data = $request->except('_token');
+        $data['owner_id'] = auth()->id();
+
+        $change->update($data);
+
+        if (!$change) {
+            notify()->success(__('Update failed!'));
+            return redirect()->route('change.index');
+        }
+
+        notify()->success(__('Update success!'));
+        return redirect()->route('change.index');
     }
 
     /**
@@ -70,7 +111,22 @@ class ChangeController extends Controller
      */
     public function destroy(string $id)
     {
-        $data = Change::destroy($id);
-        return back()->with(['success', 'Delete Success!']);
+        $id = base64_decode($id);
+        $change = Change::where('owner_id', auth()->id())->find($id);
+
+        if (!$change) {
+            notify()->success(__('Not found!'));
+            return redirect()->route('change.index');
+        }
+
+        $change->delete();
+
+        if (!$change) {
+            notify()->success(__('Delete failed!'));
+            return redirect()->route('change.index');
+        }
+
+        notify()->success(__('Delete success!'));
+        return redirect()->route('change.index');
     }
 }

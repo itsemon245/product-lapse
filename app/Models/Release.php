@@ -11,7 +11,20 @@ class Release extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
+    }
+
+    //make validation rules for this model
+
+    public static function rules()
+    {
+        return [
+            'name' => 'required|string',
+            'version' => 'required|string',
+            'release_date' => 'required|date',
+            'description' => 'required|string',
+        ];
     }
 }

@@ -53,3 +53,4 @@ require __DIR__ . '/invitation.php';
 require __DIR__ . '/frontend.php';
 require __DIR__ . '/support.php';
 require __DIR__ . '/report.php';
+require __DIR__ . '/release.php';

@@ -18,10 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('items');
             $table->string('link');
-            $table->string('attach_file');
             $table->string('password');
             $table->string('administrator');
-            $table->string('add_attachments');
             $table->timestamps();
         });
     }

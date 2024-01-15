@@ -47,7 +47,7 @@ class User extends Authenticatable
     // Define the one-to-many relationship with the Package model
     public function packages()
     {
-        return $this->hasMany(Package::class);
+        return $this->hasMany(Package::class, 'owner_id', 'id');
     }
 
     // Define the one-to-many relationship with the Product model
@@ -58,32 +58,33 @@ class User extends Authenticatable
 
     public function changes()
     {
-        return $this->hasMany(Change::class);
+        return $this->hasMany(Change::class, 'owner_id', 'id');
     }
 
     public function ideas()
     {
-        return $this->hasMany(Idea::class);
+        return $this->hasMany(Idea::class, 'owner_id', 'id');
     }
 
     public function tasks()
     {
-        return $this->hasMany(Task::class);
+        return $this->hasMany(Task::class, 'owner_id', 'id');
     }
     public function reports()
     {
-        return $this->hasMany(Report::class);
+        return $this->hasMany(Report::class, 'owner_id', 'id');
     }
     public function supports()
     {
-        return $this->hasMany(Support::class);
+        return $this->hasMany(Support::class, 'owner_id', 'id');
     }
 
     public function documents()
     {
-        return $this->hasMany(Document::class);
+        return $this->hasMany(Document::class, 'owner_id', 'id');
     }
-    public function releases(){
-        return $this->hasMany(Release::class);
+    public function releases()
+    {
+        return $this->hasMany(Release::class, 'owner_id', 'id');
     }
 }

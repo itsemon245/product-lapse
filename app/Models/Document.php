@@ -19,8 +19,8 @@ class Document extends Model
             'type' => 'required',
             'version' => 'required',
             'description' => 'required|string|max:255',
-            'date' => 'required|string',
-            'attach_file' => 'required|file|max:1024|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx',
+            'date' => 'required',
+            'attach_file' => 'required',
         ];
     }
 

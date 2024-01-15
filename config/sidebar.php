@@ -48,6 +48,10 @@ return [
                 'label' => 'Documents',
                 "name" => 'document.index',
             ],
+            (object) [
+                'label' => 'Release',
+                "name" => 'release.index',
+            ],
 
         ]
     ],

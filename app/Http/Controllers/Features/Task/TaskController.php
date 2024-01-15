@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Features\Task;
 
-use App\Http\Controllers\Controller;
 use App\Models\Task;
-use Illuminate\Http\Request;
+use App\Http\Requests\TaskRequest;
+use App\Http\Controllers\Controller;
 
 class TaskController extends Controller
 {
@@ -29,11 +29,8 @@ class TaskController extends Controller
      * Store a newly created resource in storage.
      */
 
-    public function store(Request $request)
+    public function store(TaskRequest $request)
     {
-
-        $request->validate(Task::rules());
-
         $task = Task::create([
             'owner_id' => auth()->user()->id,
             'name' => $request->name,
@@ -57,11 +54,8 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Task $task)
     {
-        $id = base64_decode($id);
-
-        $task = Task::find($id);
 
         if ($task->owner_id == auth()->user()->id) {
             return view('features.task.show', compact('task'));
@@ -70,7 +64,7 @@ class TaskController extends Controller
         }
     }
 
-    public function changeStatus(Request $request, Task $task)
+    public function changeStatus(TaskRequest $request, Task $task)
     {
         if ($task->owner_id == auth()->user()->id) {
             $task->update([
@@ -100,9 +94,8 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(TaskRequest $request, string $id)
     {
-        $request->validate(Task::rules());
 
         $id = base64_decode($id);
 
@@ -112,7 +105,7 @@ class TaskController extends Controller
             return redirect()->route('idea.index')->with('success', 'Something went wrong.');
         }
         if ($request->has('add_attachments')) {
-            $file = $task->updateFile($request->add_attachments, $task->add_attachments);
+            $file = $task->updateFile($request->add_attachments);
         }
 
         $task->update([

@@ -26,9 +26,6 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])
-    // ->middleware(['auth', 'verified'])
-    ->name('dashboard'); 
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -41,16 +38,10 @@ Route::resource('change', ChangeController::class);
 Route::resource('delivery', DeliveryController::class);
 // Route::post('/deliveryy/storyy', [DeliveryController::class, 'storyy'])->name('deliveryy.storyy');
 
-Route::resource('product-category', ProductCategoryController::class);
-Route::resource('product-stage', ProductStageController::class);
 
 
 
 
 require __DIR__ . '/auth.php';
-require __DIR__ . '/invitation.php';
 require __DIR__ . '/frontend.php';
-require __DIR__ . '/support.php';
-require __DIR__ . '/report.php';
-require __DIR__ . '/release.php';
-require __DIR__ . '/product.php';
+

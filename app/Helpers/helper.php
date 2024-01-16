@@ -89,7 +89,3 @@ function deleteFile($old_path, $disk = 'public')
     }
     return $deleted;
 }
-/**
- * An Array for social media platform data
- * @return array
- */

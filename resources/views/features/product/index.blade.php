@@ -38,11 +38,11 @@
         <div class="col-md-6">
             <div class="item lon new">
                 <div class="list_item">
-                    <figure><a href="#"><img src="img/p1.jpg" alt=""></a></figure>
+                    <figure><a href="{{route('product.show', $product)}}"><img src="{{$product->image?->url}}" alt=""></a></figure>
                     <div class="joblisting_text">
                         <div class="job_list_table">
                             <div class="jobsearch-table-cell">
-                                <h4><a href="#" class="f_500 t_color3">T-shirt for men</a></h4>
+                                <h4><a href="{{route('product.show', $product)}}" class="f_500 t_color3">T-shirt for men</a></h4>
                                 <ul class="list-unstyled">
                                     <li class="p_color1">Durable product</li>
                                     <li>More text about product</li>

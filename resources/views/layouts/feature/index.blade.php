@@ -1,4 +1,4 @@
-@extends('layouts.admin.app', ['title'=> $title])
+@extends('layouts.subscriber.app', ['title'=> $title])
 
 @section('breadcrumb')
     <x-breadcrumb/>

@@ -32,16 +32,17 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        $create = Product::create([
+        // dd($request->logo);
+        $product = Product::create([
+            'owner_id' => auth()->id(),
             'name' => $request->name,
             'url' => $request->url,
             'stage' => $request->stage,
-            'logo' => $request->logo,
             'description' => $request->description,
         ]);
-        if($create){
-            return redirect()->route('product.index')->with(['success', 'Store Success!']);
-        }
+        $image = $product->storeImage($request->logo);
+        notify()->success(__('notify/success.create'));
+        return redirect()->route('product.index');
     }
 
     /**
@@ -49,7 +50,8 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $product = Product::find($id);
+        return view('subscriber.show', compact('product'));
     }
 
     /**
@@ -57,22 +59,25 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        $datum = Product::find($id);
-        return view('features.product.partials.edit', compact('datum'));
+        $product = Product::find($id);
+        return view('features.product.partials.edit', compact('product'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreProductRequest $request, string $id)
+    public function update(StoreProductRequest $request, Product $product)
     {
-        $update = Product::find($id)->update([
+        $product->update([
             'name' => $request->name,
             'url' => $request->url,
             'stage' => $request->stage,
-            'logo' => $request->logo,
             'description' => $request->description,
         ]);
+        $image = $product->updateImage($request->logo, $product->image);
+        notify()->success(__('notify/success.update'));
+        return redirect()->route('product.index')->with(['success', 'Update Success!']);
+
     }
 
     /**

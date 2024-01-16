@@ -23,16 +23,16 @@ class StorePackageRequest extends FormRequest
     {
 
         return [
-            'name' => 'sometimes',
-            'price' => 'sometimes',
-            'monthly_rate' => 'sometimes',
-            'annual_rate' => 'sometimes',
-            'subscription_type' => 'sometimes',
-            'features' => 'sometimes',
-            'product_limit' => 'sometimes',
-            'validity' => 'sometimes',
-            'has_limited_features' => 'sometimes',
-            'is_popular' => 'sometimes',
+            'name' => 'sometimes | required',
+            'price' => 'sometimes | required',
+            'monthly_rate' => 'sometimes | required',
+            'annual_rate' => 'sometimes | required',
+            'subscription_type' => 'sometimes | required',
+            'features' => 'sometimes | required',
+            'product_limit' => 'sometimes | required',
+            'validity' => 'sometimes | required',
+            'has_limited_features' => 'sometimes | required',
+            'is_popular' => 'sometimes | required',
 
         ];
     }

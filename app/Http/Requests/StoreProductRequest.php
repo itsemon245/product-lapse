@@ -21,17 +21,11 @@ class StoreProductRequest extends FormRequest
      */
     public function rules(): array
     {
-        if(request()->isMethod('post')){
-            $role = 'required';
-        }elseif(request()->isMethod('put')){
-            $role= 'sometimes';
-        }
         return [
-            'name' => [$role],
-            'url' => [$role],
-            'stage' => [$role],
-            'logo' => [$role],
-            'description' => [$role],
+            'name' => 'required',
+            'url' => 'required',
+            'stage' => 'required',
+            'description' => 'required',
         ];
     }
 }

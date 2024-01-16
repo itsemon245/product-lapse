@@ -60,7 +60,7 @@
                 <div class="box-item">
                     <span class="box-item-num">4</span>
                     <a href="#"></a>
-                    <img src="img/solution.png">
+                    <img src="{{ asset('img/solution.png') }}">
                     <h5 class="f_600 t_color2">Innovate</h5>
                 </div>
             </div>

@@ -11,4 +11,5 @@ Route::resource('product', ProductController::class);
 Route::resource('product-category', ProductCategoryController::class);
 Route::resource('product-stage', ProductStageController::class);
 
+
 ?>

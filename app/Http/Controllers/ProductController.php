@@ -51,7 +51,7 @@ class ProductController extends Controller
     public function show(string $id)
     {
         $product = Product::find($id);
-        return view('features.product.partials.show', compact('product'));
+        return view('subscriber.show', compact('product'));
     }
 
     /**
@@ -68,7 +68,6 @@ class ProductController extends Controller
      */
     public function update(StoreProductRequest $request, Product $product)
     {
-        // dd($request->logo);
         $product->update([
             'name' => $request->name,
             'url' => $request->url,

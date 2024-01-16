@@ -23,8 +23,7 @@ class ProductFactory extends Factory
             },
             'name' => fake()->name,
             'url' => fake()->url,
-            'stage' => 'two',
-            'logo' => fake()->url,
+            'stage' => fake()->lastName,
             'description' => fake()->paragraph,
         ];
     }

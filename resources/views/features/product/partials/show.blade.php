@@ -1,8 +1,8 @@
-@extends('layouts.feature.index', ['title' => 'Package'])
+@extends('layouts.feature.index', ['title' => 'Product'])
 @section('main')
 <x-feature.show>
     <x-slot:breadcrumb>
-        <x-breadcrumb :list="[['label' => 'Package', 'route' => route('package.show', $package)]]" />
+        <x-breadcrumb :list="[['label' => 'Product', 'route' => route('product.show', $product)]]" />
     </x-slot:breadcrumb>
 
     <x-slot:details>

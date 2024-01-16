@@ -29,7 +29,7 @@ class {{ class }} extends Controller
      */
     public function store({{ storeRequest }} $request)
     {
-        //
+        notify()->success(__('notify/success.create'));
     }
 
     /**
@@ -53,7 +53,7 @@ class {{ class }} extends Controller
      */
     public function update({{ updateRequest }} $request, {{ model }} ${{ modelVariable }})
     {
-        //
+        notify()->success(__('notify/success.update'));
     }
 
     /**
@@ -61,6 +61,6 @@ class {{ class }} extends Controller
      */
     public function destroy({{ model }} ${{ modelVariable }})
     {
-        //
+               notify()->success(__('notify/success.delete'));
     }
 }

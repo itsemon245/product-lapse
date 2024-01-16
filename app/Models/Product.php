@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use App\Traits\HasImages;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Product extends Model
 {
@@ -18,5 +19,13 @@ class Product extends Model
     public function invitations()
     {
         return $this->hasMany(Invitation::class);
+    }
+
+    /**
+     * Get all of the tasks that are assigned this tag.
+     */
+    public function tasks(): MorphToMany
+    {
+        return $this->morphedByMany(Task::class, 'productable');
     }
 }

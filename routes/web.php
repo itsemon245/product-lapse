@@ -37,7 +37,6 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('package', PackageController::class);
-Route::resource('product', ProductController::class);
 Route::resource('change', ChangeController::class);
 Route::resource('delivery', DeliveryController::class);
 // Route::post('/deliveryy/storyy', [DeliveryController::class, 'storyy'])->name('deliveryy.storyy');
@@ -54,3 +53,4 @@ require __DIR__ . '/frontend.php';
 require __DIR__ . '/support.php';
 require __DIR__ . '/report.php';
 require __DIR__ . '/release.php';
+require __DIR__ . '/product.php';

@@ -24,10 +24,8 @@ class DeliveryFactory extends Factory
             'name' => fake()->name,
             'items' => fake()->text,
             'link' => fake()->url,
-            'attach_file' => fake()->url,
             'password' => fake()->text,
             'administrator' => fake()->text,
-            'add_attachments' =>  fake()->url,
         ];
     }
 }

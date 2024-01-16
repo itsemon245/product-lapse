@@ -1,69 +1,58 @@
-@extends('layouts.feature.index', ['title'=> 'Packages'])
+@extends('layouts.feature.index', ['title' => 'Edit Delivery'])
 @section('main')
-<div id="hx-edit-package" class="sign_info">
-    <div class="login_info">
-        <h2 class=" f_600 f_size_24 t_color3 mb_40">Edit package</h2>
-                <form hx-post="{{ route('delivery.store') }}" class="login-form sign-in-form">
-                    @csrf
-                    <div class="row">
-                        <div class="form-group text_box col-lg-4 col-md-6">
-                            <x-input-label for="name" value="Package name" />
-                            <x-text-input id="name" class="block mt-1 w-full" type="text" placeholder="Enter package name" name="name" :value="$datum->name" required autofocus />
-                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                        </div>
-                        <div class="form-group text_box col-lg-4 col-md-6">
-                            <x-input-label for="price" value="Package price" />
-                            <x-text-input id="price" class="block mt-1 w-full" type="text" placeholder="Enter package price" name="price" :value="$datum->price" required autofocus />
-                            <x-input-error :messages="$errors->get('price')" class="mt-2" />
-                        </div>
-                        <div class="form-group text_box col-lg-4 col-md-6">
-                            <x-input-label for="monthly_rate" value="Monthly rate" />
-                            <x-text-input id="monthly_rate" class="block mt-1 w-full" type="text" placeholder="Enter monthly rate" name="monthly_rate" :value="$datum->monthly_rate" required autofocus />
-                            <x-input-error :messages="$errors->get('monthly_rate')" class="mt-2" />
-                        </div>
-                        <div class="form-group text_box col-lg-4 col-md-6">
-                            <x-input-label for="annual_rate" value="Annual rate" />
-                            <x-text-input id="annual_rate" class="block mt-1 w-full" type="text" placeholder="Enter annual rate" name="annual_rate" :value="$datum->annual_rate" required autofocus />
-                            <x-input-error :messages="$errors->get('annual_rate')" class="mt-2" />
-                        </div>
-                        <div class="form-group text_box col-lg-4 col-md-6">
-                            <x-select-input label="Subscription type" id="annual_rate"  placeholder="Choose one" name="subscription_type" required autofocus> 
-                                <option value="jmkk">Option</option>
-                            </x-select-input>
-                        </div>
-                        <div class="form-group text_box col-lg-4 col-md-6">
-                            <x-input-label for="features" value="Features" />
-                            <x-text-input id="features" class="block mt-1 w-full" type="text" placeholder="Enter features" name="features" :value="$datum->features" required autofocus />
-                            <x-input-error :messages="$errors->get('features')" class="mt-2" />
-                        </div>
-                        <div class="form-group text_box col-lg-4 col-md-6">
-                            <x-input-label for="product_limit" value="Product limit" />
-                            <x-text-input id="product_limit" class="block mt-1 w-full" type="date" name="product_limit" :value="$datum->product_limit" required autofocus />
-                            <x-input-error :messages="$errors->get('product_limit')" class="mt-2" />
-                        </div>
-                        <div class="form-group text_box col-lg-4 col-md-6">
-                            <x-input-label for="validity" value="Validity" />
-                            <x-text-input id="validity" class="block mt-1 w-full" type="date" name="validity" :value="$datum->validity" required autofocus />
-                            <x-input-error :messages="$errors->get('validity')" class="mt-2" />
-                        </div>
-                        <div class="form-group text_box col-lg-4 col-md-6">
-                            <x-input-label for="has_limited_features" value="Limited features" />
-                            <x-text-input id="has_limited_features" class="block mt-1 w-full" type="text" name="has_limited_features" placeholder="Limited features" :value="$datum->has_limited_features" required autofocus />
-                            <x-input-error :messages="$errors->get('has_limited_features')" class="mt-2" />
-                        </div>
-                        <div class="form-group text_box col-lg-4 col-md-6">
-                           
-                            <x-checkbox-input class="ml-4" checked label="Set propular tag." />
-                        </div>
-                        
-                        
+    <div id="hx-edit-package" class="sign_info">
+        <div class="login_info">
+            <h2 class=" f_600 f_size_24 t_color3 mb_40">Edit Delivery</h2>
+            <form method="POST" action="{{ route('delivery.update', base64_encode($delivery->id)) }}"
+                class="login-form sign-in-form" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="row">
+                    <div class="form-group text_box col-lg-6 col-md-6">
+                        <x-input-label for="name" value="Delivery name" />
+                        <x-text-input id="name" class="block mt-1 w-full" type="text"
+                            placeholder="Enter change request name" name="name" value="{{ $delivery->name }}" required
+                            autofocus />
+                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
-                    
-                    <div class="d-flex align-items-center text-center">
-                        <x-btn-primary name="Add Package" type="submit" />
-                        <x-btn-secondary name="Cancel" type="submit" />
+
+                    <div class="form-group text_box col-12">
+                        <x-textarea label="Change request items" name="items" value="{{ $delivery->items }}"
+                            placeholder="Write details..." required autfocus />
+                        <x-input-error :messages="$errors->get('items')" class="mt-2" />
                     </div>
-                </form>
+                    <div class="form-group text_box col-lg-12 col-md-6">
+                        <x-input-label for="link" value="Delivery link" />
+                        <x-text-input id="link" class="block mt-1 w-full" type="text" placeholder="https://"
+                            name="link" value="{{ $delivery->link }}" required autofocus />
+                        <x-input-error :messages="$errors->get('link')" class="mt-2" />
+                    </div>
+
+                    <div class="form-group text_box col-lg-6 col-md-6">
+                        <x-input-label for="password" value="Password" />
+                        <x-text-input id="password" class="block mt-1 w-full" type="text" placeholder="Password"
+                            name="password" value="{{ $delivery->password }}" required autofocus />
+                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                    </div>
+                    <div class="form-group text_box col-lg-6 col-md-6">
+                        <x-input-label for="administrator" value="Administrator" />
+                        <x-text-input id="administrator" class="block mt-1 w-full" type="text"
+                            placeholder="Administrator" name="administrator" value="{{ $delivery->administrator }}" required
+                            autofocus />
+                        <x-input-error :messages="$errors->get('administrator')" class="mt-2" />
+                    </div>
+                    <div class="form-group text_box col-lg-6 col-md-6">
+                        <x-attach label="Add Attach" name="add_attachments" />
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center text-center">
+                    <button type="submit" class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">Edit
+                        Delivery</button>
+                    <a href="{{ route('delivery.index') }}"
+                        class="btn_hover agency_banner_btn btn-bg btn-bg-grey">Cancel</a>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 @endsection

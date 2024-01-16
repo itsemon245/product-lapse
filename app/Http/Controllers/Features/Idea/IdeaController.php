@@ -22,7 +22,7 @@ class IdeaController extends Controller
      */
     public function create()
     {
-        return view('features.idea.create');
+        return view('features.idea.partials.create');
     }
 
     /**
@@ -32,15 +32,17 @@ class IdeaController extends Controller
     {
         $request->validate(Idea::rules());
 
-        Idea::create([
-            'owner_id' => auth()->user()->id,
-            'name' => $request->input('name'),
-            'owner' => $request->input('owner'),
-            'priority' => $request->input('priority'),
-            'details' => $request->input('details'),
-            'requirements' => $request->input('requirements'),
-        ]);
+        $data = $request->except('_token');
+        $data['owner_id'] = auth()->user()->id;
 
+        $idea = Idea::create($data);
+
+        if (!$idea) {
+            notify()->error(__('Created failed!'));
+            return redirect()->route('idea.index');
+        }
+
+        notify()->success(__('Created successfully!'));
         return redirect()->route('idea.index');
     }
 
@@ -49,7 +51,16 @@ class IdeaController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $id = base64_decode($id);
+
+        $idea = Idea::where('owner_id', auth()->id())->find($id);
+
+        if (!$idea) {
+            notify()->error(__('Not authorized!'));
+            return redirect()->route('idea.index');
+        }
+
+        return view('features.idea.partials.show', compact('idea'));
     }
 
     /**
@@ -61,9 +72,10 @@ class IdeaController extends Controller
 
         $idea = Idea::find($id);
         if ($idea->owner_id == auth()->user()->id) {
-            return view('features.idea.edit', compact('idea'));
+            return view('features.idea.partials.edit', compact('idea'));
         } else {
-            return redirect()->route('idea.index')->with('success', 'You are not authorized to edit this idea.');
+            notify()->error(__('Not authorized!'));
+            return redirect()->route('idea.index');
         }
     }
 
@@ -75,22 +87,19 @@ class IdeaController extends Controller
         $request->validate(Idea::rules());
 
         $id = base64_decode($id);
-
         $idea = Idea::find($id);
 
         if (!$idea || $idea->owner_id != auth()->user()->id) {
-            return redirect()->route('idea.index')->with('success', 'Something went wrong.');
+            notify()->error(__('Not authorized!'));
+            return redirect()->route('idea.index');
         }
 
-        $idea->update([
-            'name' => $request->input('name'),
-            'owner' => $request->input('owner'),
-            'priority' => $request->input('priority'),
-            'details' => $request->input('details'),
-            'requirements' => $request->input('requirements'),
-        ]);
+        $data = $request->except('_token', '_method');
+        $data['owner_id'] = auth()->user()->id;
+        $idea->update($data);
 
-        return redirect()->route('idea.index')->with('success', 'Idea updated successfully');
+        notify()->success(__('Updated successfully!'));
+        return redirect()->route('idea.index');
     }
 
     /**
@@ -103,9 +112,11 @@ class IdeaController extends Controller
         $idea = Idea::find($id);
         if ($idea->owner_id == auth()->user()->id) {
             $idea->delete();
-            return redirect()->route('idea.index')->with('success', 'Idea deleted successfully.');
+            notify()->success(__('Deleted successfully!'));
+            return redirect()->route('idea.index');
         } else {
-            return redirect()->route('idea.index')->with('error', 'You are not authorized to delete this idea.');
+            notify()->success(__('Delete failed!'));
+            return redirect()->route('idea.index');
         }
     }
 }

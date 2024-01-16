@@ -14,7 +14,7 @@ class Idea extends Model
     {
         return [
             'name' => 'required|max:200',
-            'owner' => 'required|max:30',
+            'owner' => 'required|max:200',
             'priority' => 'required',
             'details' => 'required',
             'requirements' => 'required',

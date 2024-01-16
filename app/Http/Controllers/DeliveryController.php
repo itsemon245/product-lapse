@@ -6,8 +6,6 @@ use App\Models\Hello;
 use Exception;
 use App\Models\Delivery;
 use Illuminate\Http\Request;
-use App\Http\Requests\DeliveryRequest;
-
 
 class DeliveryController extends Controller
 {
@@ -16,7 +14,8 @@ class DeliveryController extends Controller
      */
     public function index()
     {
-        $deliveries = Delivery::get();
+        $deliveries = Delivery::where('owner_id', auth()->id())->get();
+
         return view('features.delivery.index', compact('deliveries'));
     }
 
@@ -25,8 +24,7 @@ class DeliveryController extends Controller
      */
     public function create()
     {
-        $deliveries = Delivery::get();
-        return view('features.delivery.partials.create', compact('deliveries'));
+        return view('features.delivery.partials.create');
     }
 
     /**
@@ -34,23 +32,22 @@ class DeliveryController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-        // dd($yourModel);
-        // $store = Delivery::create([
-        //     'owner_id' => auth()->id(),
-        //     'name' => $request->name,
-        //     'items' => $request->items,
-        //     'link' => $request->link,
-        //     'attach_file' => saveImage($request->attach_file, 'delivery/' . auth()->id() . '/' . 'attach-file'),
-        //     'password' => $request->password,
-        //     'administrator' => $request->administrator,
-        //     'add_attachments' => saveImage($request->add_attachments, 'delivery/' . auth()->id() . '/' . 'add-attachments'),
-        // ]);
-        // if($store){
-        //     return back()->with(['success', 'Add Delivery!']);
-        // }else{
-        //     return back()->with(['error', 'Something Wrong.']);
-        // }
+        $request->validate(Delivery::rules());
+
+        $data = $request->except('_token', 'add_attachments');
+        $data['owner_id'] = auth()->id();
+
+        try {
+            Delivery::create($data);
+
+            notify()->success(__('Created successfully!'));
+
+            return redirect()->route('delivery.index');
+        } catch (Exception $e) {
+
+            notify()->error(__('Create failed!'));
+            return redirect()->route('delivery.index');
+        }
     }
 
     /**
@@ -58,7 +55,15 @@ class DeliveryController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $id = base64_decode($id);
+        $delivery = Delivery::find($id);
+
+        if (!$delivery) {
+            notify()->success(__('Not found!'));
+            return redirect()->route('delivery.index');
+        }
+
+        return view('features.delivery.partials.show', compact('delivery'));
     }
 
     /**
@@ -66,50 +71,44 @@ class DeliveryController extends Controller
      */
     public function edit(string $id)
     {
-        
+        $id = base64_decode($id);
+        $delivery = Delivery::find($id);
+
+        if (!$delivery) {
+            notify()->success(__('Not found!'));
+            return redirect()->route('delivery.index');
+        }
+
+        return view('features.delivery.partials.edit', compact('delivery'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(DeliveryRequest $request, string $id)
+    public function update(Request $request, string $id)
     {
-        try {
-            // Assuming the model has a 'content' column
-            $yourModel = Delivery::find($request->input('itemId'));
-                dd($yourModel);
-            if ($yourModel) {
-                // Update the content
-                $yourModel->content = $request->input('newContent');
-                $yourModel->save();
+        $id = base64_decode($id);
+        $delivery = Delivery::find($id);
 
-                return response()->json(['success' => true]);
-            } else {
-                return response()->json(['error' => 'Item not found'], 404);
-            }
-        } catch (\Exception $e) {
-            // Handle exceptions if any
-            return response()->json(['error' => $e->getMessage()], 500);
+        if (!$delivery) {
+            notify()->success(__('Not found!'));
+            return redirect()->route('delivery.index');
         }
 
-        // $find = Delivery::find($id);
-        // dd($find);
-        // $find->update([
-        //     $find->name => $request->name,
-        //     $find->items => $request->items,
-        //     $find->link => $request->link,
-        //     $old_path = $find->attach_file,
-        //     $find->attach_file => updateFile($old_path, 'delivery/' . auth()->id() . '/' . 'attach-file', 'public'),
-        //     $find->password => $request->password,
-        //     $find->administrator => $request->administrator,
-        //     $old_path = $find->add_attachments,
-        //     $find->add_attachments => updateFile($old_path , 'delivery/' . auth()->id() . '/' . 'add-attachments', 'public'),
-        // ]);
-        // if($find){
-        //     return back()->with(['success', 'Update Delivery!']);
-        // }else{
-        //     return back()->with(['error', 'Something Wrong.']);
-        // }
+        $request->validate(Delivery::rules());
+
+        $data = $request->except('_token', '_method', 'add_attachments');
+        $data['owner_id'] = auth()->id();
+
+        try {
+            $delivery->update($data);
+            notify()->success(__('Updated successfully!'));
+
+            return redirect()->route('delivery.index');
+        } catch (Exception $e) {
+            notify()->error(__('Update failed!'));
+            return redirect()->route('delivery.index');
+        }
     }
 
     /**
@@ -117,15 +116,24 @@ class DeliveryController extends Controller
      */
     public function destroy(string $id)
     {
-        Delivery::find($id)->destroy();
-    }
+        $id = base64_decode($id);
+        $delivery = Delivery::find($id);
 
-    // public function storyy(Request $request){
-    //     $data = $request->all();
-    //     $name = $request->input('newContent');
-    //     // var_dump($name);
-    //     Hello::create([
-    //         'data' => $name,
-    //     ]);
-    // }
+        if (!$delivery) {
+            notify()->success(__('Not found!'));
+            return redirect()->route('delivery.index');
+        }
+
+        try {
+            $delivery->delete();
+
+            notify()->success(__('Deleted successfully!'));
+
+            return redirect()->route('delivery.index');
+        } catch (Exception $e) {
+
+            notify()->error(__('Delete failed!'));
+            return redirect()->route('delivery.index');
+        }
+    }
 }

@@ -10,7 +10,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $products = Product::get();
-        return view('subscriber.index', compact('products'));
+        return redirect()->route('product.index');
     }
 }

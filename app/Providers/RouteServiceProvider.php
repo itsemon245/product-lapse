@@ -33,18 +33,18 @@ class RouteServiceProvider extends ServiceProvider
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
 
-            Route::middleware('web')
+            Route::middleware(['web'])
                 ->group(base_path('routes/web.php'));
 
-            Route::middleware('web')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/idea.php'));
-            Route::middleware('web')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/task.php'));
-            Route::middleware('web')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/document.php'));
+            $this->mapDashboardRoutes();
         });
+    }
+
+    protected function mapDashboardRoutes()
+    {
+        Route::middleware(['web', 'auth'])
+            ->prefix('dashboard')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/dashboard.php'));
     }
 }

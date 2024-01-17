@@ -51,7 +51,75 @@ class ProductController extends Controller
     public function show(string $id)
     {
         $product = Product::find($id);
-        return view('features.product.home', compact('product'));
+        $features = [
+            'innovate' => [
+                'name' => 'Innovate',
+                'counter' => 5,
+                'icon' => 'img/solution.png',
+                'route' => route('idea.index'),
+            ],
+            'product-planning' => [
+                'name' => 'Product Planning',
+                'counter' => 0,
+                'icon' => 'img/plan.png',
+                'route' => '#',
+            ],
+            'product-support' => [
+                'name' => 'Product Support',
+                'counter' => 0,
+                'icon' => 'img/technical-support.png',
+                'route' => route('support.index'),
+            ],
+            'change-management' => [
+                'name' => 'Change Management',
+                'counter' => 0,
+                'icon' => 'img/cycle.png',
+                'route' => "route('change.index')",
+            ],
+            'product-documentation' => [
+                'name' => 'Product Documentation',
+                'counter' => 0,
+                'icon' => 'img/checklist.png',
+                'route' => route('document.index'),
+            ],
+            'product-team' => [
+                'name' => 'Product Team',
+                'counter' => 0,
+                'icon' => 'img/help.png',
+                'route' => '#',
+            ],
+            'product-reporting' => [
+                'name' => 'Product Reporting',
+                'counter' => 0,
+                'icon' => 'img/dashboard.png',
+                'route' => route('report.index'),
+            ],
+            'product-info' => [
+                'name' => 'Product Info',
+                'counter' => 0,
+                'icon' => 'img/website.png',
+                'route' => '#',
+            ],
+            'product-history' => [
+                'name' => 'Product History',
+                'counter' => 0,
+                'icon' => 'img/bank-account.png',
+                'route' => '#'
+            ],
+            'historical-images' => [
+                'name' => 'Historical Images',
+                'counter' => 0,
+                'icon' => 'img/photo.png',
+                'route' => '#'
+            ],
+            'product-delivery' => [
+                'name' => 'Product Delivery',
+                'counter' => 0,
+                'icon' => 'img/delivered.png',
+                'route' => route('delivery.index'),
+            ],
+        ];
+        return view('features.product.home', compact('product', 'features'));
     }
 
     /**

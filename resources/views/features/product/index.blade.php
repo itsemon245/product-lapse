@@ -14,9 +14,9 @@
     </x-slot:search>
 
     <x-slot:actions>
-        <x-button
-        hx-get="{{ route('product.create') }}"
-        hx-push-url="true" hx-target="#hx-global-target" hx-select="#hx-global-target">
+        {{-- hx-get="{{ route('product.create') }}"
+        hx-push-url="true" hx-target="#hx-global-target" hx-select="#hx-global-target" --}}
+        <x-button type="link" href="{{ route('product.create') }}">
         <i class="ti-plus"></i>
         Add Product
         </x-button>

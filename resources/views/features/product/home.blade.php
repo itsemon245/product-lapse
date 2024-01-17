@@ -46,94 +46,17 @@
                     </div>
                 </div>
                 <div class="row">
+                    @foreach ($features as $feature)
+       
                     <div class="col-lg-3 col-md-4 col-6">
                         <div class="box-item">
-                            <span class="box-item-num">4</span>
-                            <a href="#"></a>
-                            <img src="img/solution.png">
-                            <h5 class="f_600 t_color2">Innovate</h5>
+                            <span class="box-item-num">{{ $feature['counter'] }}</span>
+                            <a href="{{ $feature['route'] }}"></a>
+                            <img src="{{ asset($feature['icon']) }}">
+                            <h5 class="f_600 t_color2">{{ $feature['name'] }}</h5>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-4 col-6">
-                        <div class="box-item">
-                            <span class="box-item-num">4</span>
-                            <a href="#"></a>
-                            <img src="img/plan.png">
-                            <h5 class="f_600 t_color2">Product Planning</h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-6">
-                        <div class="box-item">
-                            <span class="box-item-num">4</span>
-                            <a href="#"></a>
-                            <img src="img/technical-support.png">
-                            <h5 class="f_600 t_color2">Product Support</h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-6">
-                        <div class="box-item">
-                            <span class="box-item-num">4</span>
-                            <a href="#"></a>
-                            <img src="img/cycle.png">
-                            <h5 class="f_600 t_color2">Change Management</h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-6">
-                        <div class="box-item">
-                            <span class="box-item-num">4</span>
-                            <a href="#"></a>
-                            <img src="img/checklist.png">
-                            <h5 class="f_600 t_color2">Product Documentation</h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-6">
-                        <div class="box-item">
-                            <span class="box-item-num">4</span>
-                            <a href="#"></a>
-                            <img src="img/help.png">
-                            <h5 class="f_600 t_color2">Product Team</h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-6">
-                        <div class="box-item">
-                            <span class="box-item-num">4</span>
-                            <a href="#"></a>
-                            <img src="img/dashboard.png">
-                            <h5 class="f_600 t_color2">Product Reporting</h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-6">
-                        <div class="box-item">
-                            <span class="box-item-num">4</span>
-                            <a href="#"></a>
-                            <img src="img/website.png">
-                            <h5 class="f_600 t_color2">Product info</h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-6">
-                        <div class="box-item">
-                            <span class="box-item-num">4</span>
-                            <a href="#"></a>
-                            <img src="img/bank-account.png">
-                            <h5 class="f_600 t_color2">Product History</h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-6">
-                        <div class="box-item">
-                            <span class="box-item-num">4</span>
-                            <a href="#"></a>
-                            <img src="img/photo.png">
-                            <h5 class="f_600 t_color2">Historical Images</h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-6">
-                        <div class="box-item">
-                            <span class="box-item-num">4</span>
-                            <a href="#"></a>
-                            <img src="img/delivered.png">
-                            <h5 class="f_600 t_color2">Product Delivery</h5>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </section>

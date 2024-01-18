@@ -51,6 +51,7 @@ class ProductController extends Controller
     public function show(string $id)
     {
         $product = Product::find($id);
+        $products = Product::get();
         $features = [
             'innovate' => [
                 'name' => 'Innovate',
@@ -119,7 +120,7 @@ class ProductController extends Controller
                 'route' => route('delivery.index'),
             ],
         ];
-        return view('features.product.home', compact('product', 'features'));
+        return view('features.product.home', compact('product', 'features', 'products'));
     }
 
     /**

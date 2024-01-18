@@ -13,7 +13,7 @@ class IdeaController extends Controller
      */
     public function index()
     {
-        $ideas = Idea::where('owner_id', auth()->user()->id)->get();
+        $ideas = Idea::where('owner_id', auth()->user()->id)->limit(5)->get();
         return view('features.idea.index', compact('ideas'));
     }
 

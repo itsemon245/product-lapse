@@ -1,4 +1,4 @@
-@extends('layouts.feature.index', ['title' => 'Ideas'])
+@extends('layouts.subscriber.app', ['title' => 'Ideas'])
 @section('main')
     <x-feature.index>
         <x-slot:breadcrumb>
@@ -13,8 +13,7 @@
         </x-slot:search>
 
         <x-slot:actions>
-            <x-button hx-get="{{ route('idea.create') }}" hx-push-url="true" hx-target="#hx-global-target"
-                hx-select="#hx-global-target">
+            <x-button type="link" href="{{ route('idea.create') }}" >
                 <i class="ti-plus"></i>
                 Add Innovate
             </x-button>

@@ -1,4 +1,4 @@
-@extends('layouts.feature.index', ['title' => 'Product'])
+@extends('layouts.subscriber.app', ['title' => 'Product'])
 @section('main')
     <x-breadcrumb :list="[['label' => 'Product', 'route' => route('product.show', $product)]]" />
         <section class="sign_in_area bg_color sec_pad" style="padding-top: 20px">
@@ -7,14 +7,14 @@
                     
                     <div class="col-lg-12 col-md-12 products-order2">
                         <div class="shop_menu_left d-flex align-items-center justify-content-end">
-                            
                             <h5>Products</h5>
                             <form method="get" action="#">
                                 <select class="selectpickers selectpickers2">
-                                    <option value="">T-shirt for men</option>
-                                    <option value="">T-shirt for men</option>
-                                    <option value="">T-shirt for men</option>
-                                    <option value="">T-shirt for men</option>
+                                    @forelse ($products as $item)
+                                    <option value="">{{ $item->name }}</option>
+                                    @empty
+                                    <option value="">Choose Products..</option>
+                                    @endforelse
                                 </select>
                             </form>
                         </div>
@@ -52,7 +52,7 @@
                         <div class="box-item">
                             <span class="box-item-num">{{ $feature['counter'] }}</span>
                             <a href="{{ $feature['route'] }}"></a>
-                            <img src="{{ asset($feature['icon']) }}">
+                            <img style="margin:auto; margin-bottom:1rem;" src="{{ asset($feature['icon']) }}">
                             <h5 class="f_600 t_color2">{{ $feature['name'] }}</h5>
                         </div>
                     </div>

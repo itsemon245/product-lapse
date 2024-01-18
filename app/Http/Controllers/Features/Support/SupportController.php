@@ -13,7 +13,7 @@ class SupportController extends Controller
      */
     public function index()
     {
-        $supports = Support::where('owner_id', auth()->id())->get();
+        $supports = Support::where('owner_id', auth()->id())->limit(8)->get();
         return view('features.support.index', compact('supports'));
     }
 

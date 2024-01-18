@@ -65,7 +65,6 @@
                                                     method="POST">
                                                     @csrf
                                                     @method('DELETE')
-
                                                     <button type="submit" class="shortlist" title="Delete">
                                                         <i class="ti-trash"></i>
                                                     </button>

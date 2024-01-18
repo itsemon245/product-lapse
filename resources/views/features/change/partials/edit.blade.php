@@ -1,8 +1,12 @@
 @extends('layouts.feature.index', ['title' => 'Edit Change Request'])
 @section('main')
-    <div id="hx-edit-package" class="sign_info">
-        <div class="login_info">
-            <h2 class=" f_600 f_size_24 t_color3 mb_40">Edit Change Request</h2>
+<x-feature.edit>
+    <x-slot:breadcrumb>
+        <x-breadcrumb :list="[['label' => 'Edit Change Request', 'route' => route('change.edit', $change)]]" />
+    </x-slot:breadcrumb>
+
+    <x-slot:from>
+        <h2 class=" f_600 f_size_24 t_color3 mb_40">Edit Change Request</h2>
             <form action="{{ route('change.update', base64_encode($change->id)) }}" method="POST"
                 enctype="multipart/form-data">
                 @csrf
@@ -74,6 +78,7 @@
                     </x-button>
                 </div>
             </form>
-        </div>
-    </div>
+    </x-slot:from>
+
+</x-feature.edit>
 @endsection

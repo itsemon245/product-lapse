@@ -12,7 +12,7 @@ class ChangeController extends Controller
      */
     public function index()
     {
-        $changes = Change::where('owner_id', auth()->id())->get();
+        $changes = Change::where('owner_id', auth()->id())->limit(8)->get();
         return view('features.change.index', compact('changes'));
     }
 

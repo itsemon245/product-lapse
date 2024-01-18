@@ -1,8 +1,12 @@
 @extends('layouts.feature.index', ['title' => 'Change Request'])
 @section('main')
-    <div id="hx-create-change" class="sign_info">
-        <div class="login_info">
-            <h2 class=" f_600 f_size_24 t_color3 mb_40">Add Change Request</h2>
+<x-feature.create>
+    <x-slot:breadcrumb>
+        <x-breadcrumb :list="[['label' => 'Add Changes', 'route' => route('change.create')]]" />
+    </x-slot:breadcrumb>
+
+    <x-slot:from>
+        <h2 class=" f_600 f_size_24 t_color3 mb_40">Add Change Request</h2>
             <form method="post" action="{{ route('change.store') }}" class="login-form sign-in-form">
                 @csrf
                 <div class="row">
@@ -64,6 +68,6 @@
                     <a href="{{ route('change.index') }}" class="btn_hover agency_banner_btn btn-bg btn-bg-grey">Cancel</a>
                 </div>
             </form>
-        </div>
-    </div>
+    </x-slot:from>
+</x-feature.create>
 @endsection

@@ -30,4 +30,11 @@ class Product extends Model
         return $this->morphedByMany(Task::class, 'productable');
     }
 
+    /**
+     * Get all of the product history that are assigned this product
+     */
+    public function productHistory()
+    {
+        return $this->hasMany(ProductHistory::class);
+    }
 }

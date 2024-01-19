@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Features\Report;
 
-use App\Http\Requests\ReportRequest;
 use App\Models\Report;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ReportRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ReportController extends Controller
 {
@@ -91,5 +92,23 @@ class ReportController extends Controller
             return redirect()->route('report.index')->with(['success', 'Delete Success!']);
         }
   
+    }
+
+    public function download(string $id){
+        $file = Report::with('file')->find($id);
+        if (!$file) {
+            notify()->success(__('Something went wrong!'));
+
+            return redirect()->route('document.index');
+        }
+
+        $filePath = $file->file->path;
+        if (!Storage::disk('public')->exists($filePath)) {
+            notify()->error(__('File not found!'));
+
+            return redirect()->route('report.index');
+        }
+
+        return Storage::download('public/' . $filePath);
     }
 }

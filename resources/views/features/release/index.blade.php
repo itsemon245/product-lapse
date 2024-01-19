@@ -14,8 +14,7 @@
 
 
         <x-slot:actions>
-            <x-button hx-get="{{ route('release.create') }}" hx-push-url="true" hx-target="#hx-global-target"
-                hx-select="#hx-global-target">
+            <x-button type="link" href="{{ route('release.create') }}" >
                 <i class="ti-plus"></i>
                 Add Release
             </x-button>

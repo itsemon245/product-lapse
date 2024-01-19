@@ -105,7 +105,7 @@ class ProductController extends Controller
                 'name' => 'Product History',
                 'counter' => 0,
                 'icon' => 'img/bank-account.png',
-                'route' => '#'
+                'route' => route('product-history.index', $product),
             ],
             'historical-images' => [
                 'name' => 'Historical Images',

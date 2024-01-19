@@ -44,3 +44,4 @@ Route::resource('delivery', DeliveryController::class);
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/frontend.php';
+require __DIR__ . '/productHistory.php';

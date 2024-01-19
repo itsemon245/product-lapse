@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Select;
+use App\Models\Product;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,6 +24,20 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        view()->composer('*', function ($view) {
+            // $product = Product::find(2);
+            // $value = [
+            //     'en'=> 'English Stage',
+            //     'ar'=> 'Arabic Stage',
+            // ];
+            // Select::create([
+            //     'owner_id'=> auth()->id(),
+            //     'model_type'=> 'product',
+            //     'type'=> 'stage',
+            //     'value'=> $value
+            // ]);
+            // $productStages = Select::of('product')->type('stage')->get();
+            // dd($productStages); 
+        });
     }
 }

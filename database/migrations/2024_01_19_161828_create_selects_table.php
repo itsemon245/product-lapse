@@ -11,10 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('productables', function (Blueprint $table) {
+        Schema::create('selects', function (Blueprint $table) {
             $table->id();
-            $table->morphs('productable');
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->string('model_type');
+            $table->unsignedBigInteger('owner_id');
+            $table->foreign('owner_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->string('type');
+            $table->json('value');
+            $table->string('color')->default('black');
             $table->timestamp('assigned_at')->default(now());
             $table->timestamps();
         });
@@ -25,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('productables');
+        Schema::dropIfExists('selects');
     }
 };

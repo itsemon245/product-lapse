@@ -1,4 +1,4 @@
-@extends('layouts.feature.index', ['title' => 'Document'])
+@extends('layouts.feature.index', ['title' => __('feature/document.title')])
 @section('main')
     <x-feature.index>
         <x-slot:breadcrumb>
@@ -16,7 +16,7 @@
         <x-slot:actions>
             <x-button type="link" href="{{ route('document.create') }}">
                 <i class="ti-plus"></i>
-                Add Document
+                @__('feature/document.add')
             </x-button>
         </x-slot:actions>
 

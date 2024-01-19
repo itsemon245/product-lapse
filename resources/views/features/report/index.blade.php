@@ -16,7 +16,7 @@
 
 
     <x-slot:actions>
-        <x-button hx-get="{{ route('report.create') }}" hx-push-url="true" hx-target="#hx-global-target" hx-select="#hx-global-target"> 
+        <x-button type="link" href="{{ route('report.create') }}" > 
             <i class="ti-plus"></i>
             Add Report
         </x-button>   
@@ -44,23 +44,23 @@
                     <div class="joblisting_text">
                         <div class="job_list_table">
                             <div class="jobsearch-table-cell">
-                                <h4><a href="#" class="f_500 t_color3">T-shirt for men</a></h4>
+                                <h4><a href="#" class="f_500 t_color3">{{ $report->name }}</a></h4>
                                 <ul class="list-unstyled">
-                                    <li class="p_color1">Durable product</li>
-                                    <li>More text about product</li>
+                                    <li>{{ $report->created_at->formatLocalized('%A %d %B %Y') }}</li>
                                 </ul>
                             </div>
                             <div class="jobsearch-table-cell">
                                 <div class="jobsearch-job-userlist">
                                     <div class="like-btn">
-                                        <form action="{{ route('report.destroy', $report) }}" method="post">
+                                        {{-- <form action="{{ route('report.destroy', $report) }}" method="post">
                                             @csrf
                                             @method('DELETE')
-                                            <x-btn-icons type="submit" class="btn" value="<i class='ti-trash'></i>" />
-                                        </form>
+                                           
+                                        </form> --}}
+                                        <x-btn-icons type="submit" class="btn" value="<i class='ti-more'></i>" />
                                     </div>
                                     <div class="like-btn">
-                                        <x-btn-icons type="anchor" value="<i class='ti-pencil'></i>" href="{{ route('report.edit', $report) }}" />
+                                        <x-btn-icons type="anchor" value="<i class='ti-download'></i>" href="{{ route('report.edit', $report) }}" />
                                     </div>
                                 </div>
                             </div>

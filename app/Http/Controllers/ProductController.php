@@ -75,7 +75,7 @@ class ProductController extends Controller
                 'name' => 'Change Management',
                 'counter' => 0,
                 'icon' => 'img/cycle.png',
-                'route' => "route('change.index')",
+                'route' => route('change.index'),
             ],
             'product-documentation' => [
                 'name' => 'Product Documentation',

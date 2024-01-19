@@ -12,8 +12,7 @@
         </x-slot:search>
 
         <x-slot:actions>
-            <x-button hx-get="{{ route('change.create') }}" hx-push-url="true" hx-target="#hx-global-target"
-                hx-select="#hx-global-target">
+            <x-button type="link" href="{{ route('change.create') }}" >
                 <i class="ti-plus"></i>
                 Add Change
             </x-button>

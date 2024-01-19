@@ -15,3 +15,7 @@
     border-radius: 50px;
     background:linear-gradient(to top, rgb(195 87 249) 0%, rgb(162 67 209) 50%, rgb(195 87 249) 100% );
 } 
+
+html[lang="ar"]{
+   --font-family: "Tajawal"
+}

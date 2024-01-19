@@ -169,6 +169,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
+        /*
+         * User Service Providers...
+         */
+        App\Providers\BladeServiceProvider::class,
+
     ])->toArray(),
 
     /*

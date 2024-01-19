@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'add_support_ticket' => 'Add Support Ticket',
+    'update_support_ticket' => 'Update Support Ticket',
+    'name' => 'Ticket name',
+    'classification' => 'Classification',
+    'web' => 'Web Design',
+    'ios' => 'IOS Development',
+    'android' => 'Android Development',
+    'priority' => 'Priority',
+    'high' => 'High',
+    'low' => 'Low',
+    'medium' => 'Medium',
+    'status' => 'Ticket Status',
+    'started' => 'Started',
+    'not_started' => 'Not Started',
+    'stopped' => 'Stopped',
+    'description' => 'Ticket Description',
+    'administrator' => 'Administrator',
+    'completion_date' => 'Required completion date',
+    'add' => 'Add Ticket',
+    'update' => 'Update',
+    'cancel' => 'Cancel',
+];

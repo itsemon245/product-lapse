@@ -42,11 +42,11 @@ trait HasImages
     public function storeImage(UploadedFile $image, ?string $name = null): Image
     {
         $type = $this->imageableType ?? get_class($this);
-        $id =  $this->id;
+        $id = $this->id;
         $ext = $image->getClientOriginalExtension();
         $name = $name ?? $image->getClientOriginalName();
         $name = str($name)->slug() . uniqid() . '.' . $ext;
-        $path = $image->storeAs($this->baseDir . "/" . $this->dir, $name, $this->disk);
+        $path = $image->storeAs($this->baseDir . $this->dir, $name, $this->disk);
         $image = Image::create([
             'imageable_id' => $id,
             'imageable_type' => $type,
@@ -63,15 +63,15 @@ trait HasImages
      * @param ?string $name
      * @param Image|null $oldImage keep null if eager loaded or not inside a loop
      */
-    public function updateImage(UploadedFile $image, ?string $name = null, Image $oldImage = null ): Image
+    public function updateImage(UploadedFile $image, ?string $name = null, Image $oldImage = null): Image
     {
         $oldImage = $oldImage ?? $this->image;
         $type = $this->imageableType ?? get_class($this);
-        $id =  $this->id;
+        $id = $this->id;
         $ext = $image->getClientOriginalExtension();
         $name = $name ?? $image->getClientOriginalName();
         $name = str($name)->slug() . uniqid() . '.' . $ext;
-        $path = $image->storeAs($this->baseDir . "/" . $this->dir, $name, $this->disk);
+        $path = $image->storeAs($this->baseDir . $this->dir, $name, $this->disk);
         $this->deleteImage($oldImage, true);
         $image = tap($oldImage)->update([
             'imageable_id' => $id,
@@ -90,7 +90,7 @@ trait HasImages
      */
     public function deleteImage(Image $image = null, ?bool $fileOnly = false): bool
     {
-        if(Storage::disk($this->disk)->exists($image->path)){
+        if (Storage::disk($this->disk)->exists($image->path)) {
             Storage::delete($image->path);
         }
         if ($fileOnly) {

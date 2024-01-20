@@ -1,13 +1,13 @@
-@extends('layouts.subscriber.app', ['title' => 'Ideas'])
+@extends('layouts.subscriber.app', ['title' => @__('feature/idea.title')])
 @section('main')
     <x-feature.index>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => 'Innovate', 'route' => route('idea.index')]]" />
+            <x-breadcrumb :list="[['label' => @__('feature/idea.title'), 'route' => route('idea.index')]]" />
         </x-slot:breadcrumb>
 
         <x-slot:search>
             <form action="#" class="search-form input-group">
-                <input type="search" class="form-control widget_input" placeholder="Search idea">
+                <input type="search" class="form-control widget_input" placeholder="@__('feature/idea.search')">
                 <button type="submit"><i class="ti-search"></i></button>
             </form>
         </x-slot:search>
@@ -15,13 +15,13 @@
         <x-slot:actions>
             <x-button type="link" href="{{ route('idea.create') }}" >
                 <i class="ti-plus"></i>
-                Add Innovate
+                @__('feature/idea.add')
             </x-button>
         </x-slot:actions>
 
 
         <x-slot:filter>
-            <h5>Showing packages</h5>
+            <h5>@__('feature/idea.select')</h5>
             <form method="get" action="#">
                 <select class="selectpickers selectpickers2" style="display: none;">
                     <option value="">All</option>

@@ -2,7 +2,7 @@
 return [
 
     //list page
-    'title' => 'Innovate',
+    'title' => 'arobic',
     'add' => 'Add Innovate',
     'search' => 'Search Innovate',
     'select' => 'Showing Innovate',
@@ -12,7 +12,7 @@ return [
     'name-input' => 'Idea name',
     'owner-input' => 'Idea Owner', // + details page
     'priority-input' => 'Priority', // + details page
-    'details-input' => 'Idea details',// + edit page
+    'details-input' => 'Idea details',
     'requirements-input' => 'Idea requirements', // + details page
     'cancel-btn' => 'Cancel',
 
@@ -25,6 +25,7 @@ return [
     'priority-4' => 'Final wording',
     'priority-5' => 'Accept idea',
     'priority-6' => 'Refuse idea',
+    'title-page' => 'Man perfume',
     'update-btn' => 'Update',
     'change-btn' => 'Convert to change request',
     'task-btn' => 'Convert fo task for execution',

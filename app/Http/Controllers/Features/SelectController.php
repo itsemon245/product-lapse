@@ -85,7 +85,7 @@ class SelectController extends Controller
             Log::error($e->getMessage());
             notify()->error(__('notify/error.update'));
         }
-        return redirect()->route('product-select.index');
+        return redirect()->route('select.index');
     }
 
     public function destroy(Select $select)

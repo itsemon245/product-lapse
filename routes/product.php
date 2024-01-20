@@ -10,6 +10,3 @@ use App\Http\Controllers\Features\Product\ProductCategoryController;
 Route::resource('product', ProductController::class);
 Route::resource('product-category', ProductCategoryController::class);
 Route::resource('product-stage', ProductStageController::class);
-
-
-?>

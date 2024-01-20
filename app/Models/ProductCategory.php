@@ -8,11 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class ProductCategory extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'owner_id',
-        'name',
-        'text_color',
-    ];
+    protected $gaurded = [];
+
+    public static function rules()
+    {
+        return [
+            'name_en' => 'required',
+            'name_ar' => 'required',
+            'text_color' => 'required',
+        ];
+    }
 
     public function owner()
     {

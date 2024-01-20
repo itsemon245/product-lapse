@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('owner_id');
             $table->foreign('owner_id')->references('id')->on('users')->cascadeOnDelete();
-            $table->string('name');
+            $table->json('name');
             $table->string('text_color')->nullable();
             $table->timestamps();
         });

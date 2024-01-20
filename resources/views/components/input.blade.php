@@ -1,13 +1,14 @@
 @php
     $name = $attributes->get('name');
-    $labelValue = $attributes->has('label') ? $attributes->get('label') : $name;
-    $placeholder = $attributes->has('placeholder') ? $attributes->get('placeholder') : $name;
 @endphp
 
-<div class="form-group text_box col-lg-4 col-md-12">
-    {!! $label ?? '<label class="text_c f_500">{{ $labelValue }}</label>' !!}
-    <input type="text" placeholder="{{ $placeholder }}">
+<div>
+    @if ($attributes->has('label'))
+        <label for="{{ $attributes->get('id') }}" class="text_c f_500">{{ $attributes->get('label') }}</label>
+    @endif
+    <input {{ $attributes->merge(['class' => 'block w-full']) }} />
     @error($name)
-    <span class="text-danger">{{ $message }}</span>
+        <div class="text-danger">{{ $message }}</div>
     @enderror
+
 </div>

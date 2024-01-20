@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Features\Product;
 
-use App\Http\Controllers\Controller;
+use App\Enums\Feature;
+use App\Enums\SelectType;
+use App\Models\Select;
 use Illuminate\Http\Request;
 use App\Models\ProductCategory;
-use App\Models\Select;
+use App\Http\Controllers\Controller;
 
 class ProductCategoryController extends Controller
 {
@@ -27,7 +29,9 @@ class ProductCategoryController extends Controller
 
     public function create()
     {
-        return view('features.product.category.create');
+        $features = Feature::cases();
+        $types = SelectType::cases();
+        return view('features.product.category.create', compact('features', 'types'));
     }
 
     public function store(Request $request)

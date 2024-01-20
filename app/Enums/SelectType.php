@@ -1,7 +1,8 @@
 <?php 
+namespace App\Enums;
 
-// enum SelectType {
-//     case Product = ;
-// }
+enum SelectType:string {
+    case CATEGORY = 'category';
+}
 
 ?>

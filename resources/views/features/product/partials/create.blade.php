@@ -53,10 +53,10 @@
                 </div>
 
                 <div class="d-flex align-items-center text-center">
-                    <x-btn-primary name="Add Product" type="submit" />
-                </form>
-                    <x-btn-secondary type="reset" name="Cancel" />
+                    <x-button>Add Product</x-button>
+                    <x-button type="button" color="secondary">Cancel</x-button>
                 </div>
+            </form>
 
         </x-slot:from>
     </x-feature.create>

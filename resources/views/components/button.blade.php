@@ -1,8 +1,8 @@
 @props(['color' => 'primary'])
 @php
     $colorClass = match ($color) {
-        'primary' => 'btn-bg1',
-        'secondary' => 'btn-bg2',
+        'primary' => 'agency_banner_btn2',
+        'secondary' => 'btn-bg-grey',
         'dark' => 'btn-bg3',
         'success' => 'btn-bg1',
         default => ''
@@ -30,7 +30,7 @@
         <form action="{{$action}}" method="post" enctype="{{$enctype}}">
             @csrf
             @method('DELETE')
-            <button {{ $attributes->merge(['class' => 'btn_hover agency_banner_btn btn-bg' . $colorClass]) }}>
+            <button {{ $attributes->merge(['class' => 'btn_hover agency_banner_btn btn-bg ' . $colorClass]) }}>
                 {!! $slot ?? 'Form Submit' !!}
             </button>
         </form>

@@ -119,6 +119,12 @@ class ProductController extends Controller
                 'icon' => 'img/delivered.png',
                 'route' => route('delivery.index'),
             ],
+            'product-categories' => [
+                'name' => 'Product Categories',
+                'counter' => 0,
+                'icon' => 'img/delivered.png',
+                'route' => route('product-category.index'),
+            ],
         ];
         return view('features.product.home', compact('product', 'features', 'products'));
     }

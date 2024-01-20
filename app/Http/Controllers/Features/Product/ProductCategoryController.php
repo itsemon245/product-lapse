@@ -5,30 +5,23 @@ namespace App\Http\Controllers\Features\Product;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ProductCategory;
+use App\Models\Select;
 
 class ProductCategoryController extends Controller
 {
     public function index()
     {
-
-        $categories = ProductCategory::where('owner_id', auth()->user()->id)->get();
-
+        $categories = Select::of("product")->type("category")->get();
         return view('features.product.category.index', compact('categories'));
     }
 
     public function show($id)
     {
-        $id = base64_decode($id);
 
-        dd("here show");
-
-        $category = ProductCategory::find($id);
-
-
-        if ($category == null || $category->owner_id != auth()->user()->id) {
+        $category = Select::find($id);
+        if ($category == null) {
             return redirect()->back();
         }
-
         return view('features.product.category.show', compact('category'));
     }
 
@@ -39,63 +32,79 @@ class ProductCategoryController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'text_color' => 'required',
-        ]);
-        $category = new ProductCategory();
-        $category->owner_id = auth()->user()->id;
-        $category->name = $request->name;
-        $category->text_color = $request->text_color;
-        $category->save();
-
-        return redirect()->route('product-category.show', base64_encode($category->id));
+        try {
+            $request->validate(ProductCategory::rules());
+            $value = [
+                'en' => $request->name_en,
+                'ar' => $request->name_ar,
+            ];
+            $select = Select::create([
+                'owner_id' => auth()->id(),
+                'model_type' => 'product',
+                'type' => 'category',
+                'color' => $request->text_color,
+                'value' => $value
+            ]);
+            notify()->success(__('notify/success.create'));
+            return redirect()->route('product-category.show', $select->id);
+        } catch (\Exception $e) {
+            \Log::error($e->getMessage());
+            notify()->error(__('notify/error.create'));
+            return redirect()->back();
+        }
     }
+
 
     public function edit($id)
     {
-        $id = base64_decode($id);
-        $category = ProductCategory::find($id);
+        $category = Select::find($id);
 
-        if ($category == null || $category->owner_id != auth()->user()->id) {
+        if ($category == null) {
             return redirect()->back();
         }
-
         return view('features.product.category.edit', compact('category'));
     }
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required',
-            'text_color' => 'required',
-        ]);
+        try {
+            $request->validate(ProductCategory::rules());
+            $value = [
+                'en' => $request->name_en,
+                'ar' => $request->name_ar,
+            ];
 
-        $id = base64_decode($id);
+            $category = Select::findOrFail($id);
 
-        $category = ProductCategory::find($id);
+            $category->color = $request->text_color;
+            $category->value = $value;
+            $category->save();
 
-        if ($category == null || $category->owner_id != auth()->user()->id) {
-            return redirect()->back();
+            notify()->success(__('notify/success.update'));
+
+        } catch (\Exception $e) {
+            \Log::error($e->getMessage());
+            notify()->error(__('notify/error.update'));
         }
-        $category->update([
-            'name' => $request->input('name'),
-            'text_color' => $request->input('text_color'),
-        ]);
-
-        return redirect()->route('product-category.show', base64_encode($category->id));
+        return redirect()->route('product-category.index');
     }
 
     public function destroy($id)
     {
-        $id = base64_decode($id);
 
-        $category = ProductCategory::find($id);
-        if ($category == null || $category->owner_id != auth()->user()->id) {
-            return redirect()->back();
+        try {
+            $category = Select::find($id);
+            if ($category == null) {
+                notify()->error(__('notify/error.delete'));
+                return redirect()->back();
+            }
+            $category->delete();
+            notify()->error(__('notify/success.create'));
+        } catch (\Exception $e) {
+            \Log::error($e->getMessage());
+            notify()->error(__('notify/error.delete'));
         }
 
-        $category->delete();
 
         return redirect()->route('product-category.index');
     }

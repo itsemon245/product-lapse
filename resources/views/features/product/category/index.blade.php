@@ -1,6 +1,6 @@
 @extends('layouts.feature.index', ['title' => 'Product Category'])
 @section('main')
-    <section class="sign_in_area bg_color sec_pad">
+    <section class="sign_in_area bg_color sec_pad" style="margin-top:100px;">
         <div class="container">
             <div class="row align-items-center mb_20">
 
@@ -31,17 +31,20 @@
                                         <div class="joblisting_text">
                                             <div class="job_list_table">
                                                 <div class="jobsearch-table-cell">
-                                                    <h4><a href="#" class="f_500 t_color3">{{ $category->name }}</a>
+                                                    <h4>
+                                                        (En)
+                                                        {{ $category->value->en }} <br>
+                                                        (Ar) {{ $category->value->ar }}
                                                     </h4>
                                                     <ul class="list-unstyled">
-                                                        <li class="p_color4">{{ $category->text_color }}</li>
+                                                        <li class="p_color4">{{ $category->color }}</li>
                                                     </ul>
                                                 </div>
                                                 <div class="jobsearch-table-cell">
                                                     <div class="jobsearch-job-userlist">
                                                         <div class="like-btn">
                                                             <form
-                                                                action="{{ route('product-category.destroy', ['product_category' => base64_encode($category->id)]) }}"
+                                                                action="{{ route('product-category.destroy', ['product_category' => $category->id]) }}"
                                                                 method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
@@ -53,7 +56,7 @@
 
                                                         </div>
                                                         <div class="like-btn">
-                                                            <a href="{{ route('product-category.edit', ['product_category' => base64_encode($category->id)]) }}"
+                                                            <a href="{{ route('product-category.edit', ['product_category' => $category->id]) }}"
                                                                 class="shortlist" title="Edit">
                                                                 <i class="ti-pencil"></i>
                                                             </a>

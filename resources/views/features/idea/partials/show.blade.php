@@ -1,13 +1,10 @@
-@extends('layouts.feature.index', ['title' => 'Details OF Idea'])
+@extends('layouts.feature.index', ['title' => @__('feature/idea.title-details')])
 @section('main')
     <x-feature.show>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => 'Idea', 'route' => route('idea.show', base64_encode($idea->id))]]" />
+            <x-breadcrumb :list="[['label' => @__('feature/idea.title-details'), 'route' => route('idea.show', base64_encode($idea->id))]]" />
         </x-slot:breadcrumb>
 
-        <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => 'Idea', 'route' => route('idea.show', base64_encode($idea->id))]]" />
-        </x-slot:breadcrumb>
 
         <x-slot:details>
             <div class="container mb_20">
@@ -26,11 +23,11 @@
                         <div class="entry_post_info">
                             {{ \Carbon\Carbon::parse($idea->date)->format('l, j F Y') }}
                         </div>
-                        <h6 class="title2">Idea details</h6>
+                        <h6 class="title2">@__('feature/idea.title-details')</h6>
                         <p class="f_400 mb-30 text-font">
                             {{ $idea->details }}
                         </p>
-                        <h6 class="title2">Idea requirements</h6>
+                        <h6 class="title2">@__('feature/idea.requirements-input')</h6>
                         <ul class="list-unstyled f_400 mb-30 text-font list-details">
                             <li><i class="ti-check"></i>It is a long established fact that a reader will be distracted by
                                 the readable content of a page.</li>

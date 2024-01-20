@@ -3,7 +3,7 @@
 <x-feature.index>
     <x-slot:breadcrumb>
         <x-breadcrumb :list="[
-            ['label' => 'Product', 'route' => route('product.index')],
+            ['label' => 'Products', 'route' => route('product.index')],
             ]" />
     </x-slot:breadcrumb>
     <x-slot:search>

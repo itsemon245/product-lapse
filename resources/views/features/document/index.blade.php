@@ -1,13 +1,13 @@
-@extends('layouts.feature.index', ['title' => __('feature/document.title')])
+@extends('layouts.feature.index', ['title' => @__('feature/document.title')])
 @section('main')
     <x-feature.index>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => 'Document', 'route' => route('document.index')]]" />
+            <x-breadcrumb :list="[['label' => @__('feature/document.title'), 'route' => route('document.index')]]" />
         </x-slot:breadcrumb>
 
         <x-slot:search>
             <form action="#" class="search-form input-group">
-                <input type="searproductch" class="form-control widget_input" placeholder="Search Document">
+                <input type="searproductch" class="form-control widget_input" placeholder="{{ __('feature/document.search') }}">
                 <button type="submit"><i class="ti-search"></i></button>
             </form>
         </x-slot:search>
@@ -21,7 +21,7 @@
         </x-slot:actions>
 
         <x-slot:filter>
-            <h5>Showing Document</h5>
+            <h5>@__('feature/document.showing')</h5>
             <form method="get" action="#">
                 <select class="selectpickers selectpickers2" style="display: none;">
                     <option value="">All</option>

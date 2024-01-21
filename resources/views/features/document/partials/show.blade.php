@@ -1,28 +1,30 @@
-@extends('layouts.feature.index', ['title' => 'Details OF Document'])
+@extends('layouts.feature.index', ['title' => @__('feature/document.show')])
 @section('main')
     <x-feature.show>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => 'Document', 'route' => route('document.show', base64_encode($document->id))]]" />
+            <x-breadcrumb :list="[['label' => @__('feature/document.show'), 'route' => route('document.show', base64_encode($document->id))]]" />
         </x-slot:breadcrumb>
 
         <x-slot:details>
             <div class="col-lg-8 blog_sidebar_left">
                 <div class="blog_single mb_50">
                     <div class="row">
+                        {{ dd($document) }}
                         <h5 class="f_size_20 f_500 col-md-12">{{ $document->name }}</h5>
                         <div class="entry_post_info col-md-12">
                             {{ \Carbon\Carbon::parse($document->date)->format('l, j F Y') }}
                         </div>
-                        <div class="col-lg-6 col-md-6"">
-                            <h6 class="title2">Priority</h6>
+                        <div class="col-lg-6 col-md-6">
+                            <h6 class="title2">@__('feature/document.placeholder.version')</h6>
                             <p class="f_400 mb-30 text-font">{{ $document->version }}</p>
                         </div>
-                        <div class="col-lg-6 col-md-6"">
-                            <h6 class="title2">Classification</h6>
-                            <p class="f_400 mb-30 text-font">@lang('document.' . $document->type)</p>
+                       
+                        <div class="col-lg-6 col-md-6">
+                            <h6 class="title2">@__('feature/document.type')</h6>
+                            <p class="f_400 mb-30 text-font">{{ $document->type }}</p>
                         </div>
                         <div class="col-md-12">
-                            <h6 class="title2">Document details</h6>
+                            <h6 class="title2">@__('feature/document.placeholder.description')</h6>
                             <p class="f_400 mb-30 text-font">
                                 {{ $document->description }}
                             </p>
@@ -40,15 +42,15 @@
                         <div class="media post_author mt_60">
                             <img class="rounded-circle" src="img/profile1.png" alt="">
                             <div class="media-body">
-                                <h5 class=" t_color3 f_size_18 f_500">Ahmed Mahmoud</h5>
+                                <h5 class=" t_color3 f_size_18 f_500">@__('feature/document.classification')</h5>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-6">
-                                <span class="button-1 btn-bg-1">Working on</span>
+                                <span class="button-1 btn-bg-1"></span>
                             </div>
                             <div class="col-6">
-                                <a href="#" class="button-1 btn-bg-2"><i class="ti-reload"></i>Update</a>
+                                <a href="#" class="button-1 btn-bg-2"><i class="ti-reload"></i>@__('feature/document.classification')</a>
                             </div>
                             <div class="col-12">
                                 <form action="{{ route('document.download', ['id' => base64_encode($document->id)]) }}"

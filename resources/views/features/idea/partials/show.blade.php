@@ -1,8 +1,8 @@
-@extends('layouts.feature.index', ['title' => @__('feature/idea.title-details')])
+@extends('layouts.feature.index', ['title' => @__('feature/idea.details')])
 @section('main')
     <x-feature.show>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => @__('feature/idea.title-details'), 'route' => route('idea.show', base64_encode($idea->id))]]" />
+            <x-breadcrumb :list="[['label' => @__('feature/idea.details'), 'route' => route('idea.show', base64_encode($idea->id))]]" />
         </x-slot:breadcrumb>
 
 
@@ -27,7 +27,7 @@
                         <p class="f_400 mb-30 text-font">
                             {{ $idea->details }}
                         </p>
-                        <h6 class="title2">@__('feature/idea.requirements-input')</h6>
+                        <h6 class="title2">@__('feature/idea.placeholder.requirements')</h6>
                         <ul class="list-unstyled f_400 mb-30 text-font list-details">
                             <li><i class="ti-check"></i>It is a long established fact that a reader will be distracted by
                                 the readable content of a page.</li>
@@ -56,14 +56,13 @@
                         <h6 class="title2 the-priority">Priority : <span>{{ $idea->priority }}</span></h6>
                         <div class="row">
                             <div class="col-12">
-                                <a href="#" class="button-1 btn-bg-2"><i class="ti-reload"></i>Update</a>
+                                <a href="#" class="button-1 btn-bg-2"><i class="ti-reload"></i>@__('feature/idea.update')</a>
                             </div>
                             <div class="col-12">
-                                <a href="#" class="button-1">Convert to change request</a>
+                                <a href="#" class="button-1">@__('feature/idea.change-request')</a>
                             </div>
                             <div class="col-12">
-                                <a href="#" class="button-1" style="background: #6c84ee">Convert to task for
-                                    execution</a>
+                                <a href="#" class="button-1" style="background: #6c84ee">@__('feature/idea.task')</a>
                             </div>
                         </div>
                         <h6 class="title2 the-priority">Idea owner : <span>Ahmed Shalaby</span></h6>

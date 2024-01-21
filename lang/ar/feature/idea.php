@@ -2,8 +2,8 @@
 return [
 
     //list page
-    'title' => 'arobic',
-    'add' => 'Add Innovate',
+    'title' => 'Innovate List',
+    'add' => 'hello',
     'search' => 'Search Innovate',
     'showing' => 'Showing Innovate',
 

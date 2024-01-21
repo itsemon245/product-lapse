@@ -21,7 +21,7 @@
 
 
         <x-slot:filter>
-            <h5>@__('feature/idea.select')</h5>
+            <h5>@__('feature/idea.showing')</h5>
             <form method="get" action="#">
                 <select class="selectpickers selectpickers2" style="display: none;">
                     <option value="">All</option>

@@ -33,12 +33,6 @@ return [
 
     //Edit page
     'edit' => 'Edit Idea',
-]
+];
 
 
-
-
-
-
-
-?>

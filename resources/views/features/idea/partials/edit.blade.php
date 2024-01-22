@@ -18,17 +18,16 @@
 
                 <div class="form-group text_box col-lg-12 col-md-12">
                     <x-input-label for="name" value="{{ __('feature/idea.label.name')}}" />
-                    <x-text-input id="name" class="block mt-1 w-full" type="text"
+                    <x-input id="name" class="block mt-1 w-full" type="text"
                         placeholder="{{ __('feature/idea.placeholder.name')}}" name="name"
                         value="{{ $idea->name }}" required autofocus />
-                    <x-input-error :messages="$errors->get('name')" class="mt-2" />
                 </div>
                 <div class="form-group text_box col-lg-12 col-md-12">
                     <x-input-label for="owner" value="{{ __('feature/idea.label.owner') }}" />
-                    <x-text-input id="owner" class="block mt-1 w-full" type="text"
+                    <x-input id="owner" class="block mt-1 w-full" type="text"
                         placeholder="{{ __('feature/idea.placeholder.owner') }}" name="owner"
                         value="{{ $idea->owner }}" required autofocus />
-                    <x-input-error :messages="$errors->get('owner')" class="mt-2" />
+                   
                 </div>
                 <div class="form-group text_box col-lg-12">
                     <x-select-input label="{{ __('feature/idea.label.priority') }}" id="priority" placeholder="{{ __('feature/idea.label.priority') }}"
@@ -64,7 +63,6 @@
                     <x-textarea id="details" class="block mt-1 w-full" name="details"
                         value="{{ $idea->details }}" placeholder="{{ __('feature/idea.placeholder.details') }}"
                         cols="30" rows="10" required autofocus />
-                    <x-input-error :messages="$errors->get('details')" class="mt-2" />
                 </div>
 
                 <div class="form-group text_box col-lg-12">
@@ -73,7 +71,6 @@
                         value="{{ $idea->requirements }}"
                         placeholder="{{ __('feature/idea.placeholder.requirements') }}" cols="30" rows="10"
                         required autofocus />
-                    <x-input-error :messages="$errors->get('requirements')" class="mt-2" />
                 </div>
             </div>
 

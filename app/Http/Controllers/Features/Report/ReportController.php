@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Features\Report;
 
 use App\Models\Report;
+use App\Models\Select;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ReportRequest;
@@ -24,7 +25,8 @@ class ReportController extends Controller
      */
     public function create()
     {
-        return view('features.report.partials.create');
+        $type = Select::of('report')->type('type')->get();
+        return view('features.report.partials.create', compact('type'));
     }
 
     /**
@@ -41,7 +43,7 @@ class ReportController extends Controller
             'description' => $request->description,
         ]);
         $file = $report->storeImage($request->file);
-        if($file){
+        if ($file) {
             return redirect()->route('report.index')->with(['success', 'Store Success!']);
         }
     }
@@ -52,7 +54,11 @@ class ReportController extends Controller
     public function show(string $id)
     {
         $report = Report::find($id);
-        return view('features.report.partials.show', compact('report'));
+        if ($report != null) {
+            return view('features.report.partials.show', compact('report'));
+        }
+        return redirect()->back();
+
     }
 
     /**
@@ -61,7 +67,11 @@ class ReportController extends Controller
     public function edit(string $id)
     {
         $report = Report::find($id);
-        return view('features.report.partials.edit', compact('report'));
+        $type = Select::of('report')->type('type')->get();
+        if ($report != null) {
+            return view('features.report.partials.show', compact('report', 'type'));
+        }
+        return redirect()->back();
     }
 
     /**
@@ -87,14 +97,15 @@ class ReportController extends Controller
     {
         $report = Report::find($id);
         $image = $report->deleteImage($report->file);
-        if($image){
+        if ($image) {
             $report->destroy();
             return redirect()->route('report.index')->with(['success', 'Delete Success!']);
         }
-  
+
     }
 
-    public function download(string $id){
+    public function download(string $id)
+    {
         $file = Report::with('file')->find($id);
         if (!$file) {
             notify()->success(__('Something went wrong!'));

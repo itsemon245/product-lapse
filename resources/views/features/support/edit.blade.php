@@ -20,12 +20,15 @@
                                 <label class=" text_c f_500">@lang('support.classification')</label>
 
                                 <select class="selectpickers" name="classification">
-                                    <option value="web" {{ $support->classification == 'web' ? 'selected' : '' }}>
-                                        @lang('support.web')</option>
-                                    <option value="ios" {{ $support->classification == 'ios' ? 'selected' : '' }}>
-                                        @lang('support.ios')</option>
-                                    <option value="android" {{ $support->classification == 'android' ? 'selected' : '' }}>
-                                        @lang('support.android')</option>
+                                    @if ($classification)
+                                        @forelse ($classification as $category)
+                                            <option value="<?= $category->value->{app()->getLocale()} ?>">
+                                                <?= $category->value->{app()->getLocale()} ?>
+                                            </option>
+                                        @empty
+                                            <option disabled>No classification available</option>
+                                        @endforelse
+                                    @endif
                                 </select>
                                 @error('classification')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -36,12 +39,15 @@
                                 <label class=" text_c f_500">@lang('support.priority')</label>
 
                                 <select class="selectpickers" name="priority">
-                                    <option value="low" {{ $support->priority == 'low' ? 'selected' : '' }}>
-                                        @lang('support.low')</option>
-                                    <option value="medium" {{ $support->priority == 'medium' ? 'selected' : '' }}>
-                                        @lang('support.medium')</option>
-                                    <option value="high" {{ $support->priority == 'high' ? 'selected' : '' }}>
-                                        @lang('support.high')</option>
+                                    @if ($priority)
+                                        @forelse ($priority as $category)
+                                            <option value="<?= $category->value->{app()->getLocale()} ?>">
+                                                <?= $category->value->{app()->getLocale()} ?>
+                                            </option>
+                                        @empty
+                                            <option disabled>No priority available</option>
+                                        @endforelse
+                                    @endif
                                 </select>
                                 @error('priority')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -51,12 +57,15 @@
                             <div class="form-group text_box col-lg-6 col-md-6">
                                 <label class=" text_c f_500">@lang('support.status')</label>
                                 <select class="selectpickers" name="status">
-                                    <option value="started" {{ $support->status == 'started' ? 'selected' : '' }}>
-                                        @lang('support.started')</option>
-                                    <option value="not_started" {{ $support->status == 'not_started' ? 'selected' : '' }}>
-                                        @lang('support.not_started')</option>
-                                    <option value="stopped" {{ $support->status == 'stopped' ? 'selected' : '' }}>
-                                        @lang('support.stopped')</option>
+                                    @if ($status)
+                                        @forelse ($status as $category)
+                                            <option value="<?= $category->value->{app()->getLocale()} ?>">
+                                                <?= $category->value->{app()->getLocale()} ?>
+                                            </option>
+                                        @empty
+                                            <option disabled>No status available</option>
+                                        @endforelse
+                                    @endif
                                 </select>
                                 @error('status')
                                     <div class="alert alert-danger">{{ $message }}</div>

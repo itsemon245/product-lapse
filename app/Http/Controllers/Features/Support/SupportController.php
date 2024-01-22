@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Features\Support;
 
 use App\Models\Support;
+use App\Models\Select;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -23,7 +24,11 @@ class SupportController extends Controller
      */
     public function create()
     {
-        return view('features.support.create');
+        $priority = Select::of('support')->type('priority')->get();
+        $status = Select::of('support')->type('status')->get();
+        $classification = Select::of('support')->type('classification')->get();
+
+        return view('features.support.create', compact('priority', 'status', 'classification'));
     }
 
     /**
@@ -65,6 +70,10 @@ class SupportController extends Controller
     {
         $id = base64_decode($id);
 
+        $priority = Select::of('support')->type('priority')->get();
+        $status = Select::of('support')->type('status')->get();
+        $classification = Select::of('support')->type('classification')->get();
+
         $support = Support::find($id);
 
         if ($support == null) {
@@ -73,7 +82,7 @@ class SupportController extends Controller
             return redirect()->route('support.index');
         }
 
-        return view('features.support.edit', compact('support'));
+        return view('features.support.edit', compact('support', 'priority', 'status', 'classification'));
     }
 
     /**

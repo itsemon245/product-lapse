@@ -19,23 +19,7 @@
             </x-button>
         </x-slot:actions>
         <x-slot:filter>
-            <h5>Showing Select Items</h5>
-            <form method="get" action="#">
-                <select class="selectpickers selectpickers2" style="display: none;">
-                    <option value="">All</option>
-                    <option value="">Durable product</option>
-                    <option value="">Initial idea</option>
-                    <option value="">Stopped</option>
-                </select>
-                <div class="nice-select selectpickers selectpickers2" tabindex="0"><span class="current">All</span>
-                    <ul class="list">
-                        <li data-value="" class="option selected focus">All</li>
-                        <li data-value="" class="option">Durable product</li>
-                        <li data-value="" class="option">Initial idea</li>
-                        <li data-value="" class="option">Stopped</li>
-                    </ul>
-                </div>
-            </form>
+
         </x-slot:filter>
 
         <x-slot:list>
@@ -52,15 +36,15 @@
                                             (Ar) {{ $select->value->ar }}
                                         </h4>
                                         <ul class="list-unstyled">
+                                            <li class="p_color4">{{ $select->model_type }}</li>
+                                            <li class="p_color4">{{ $select->type }}</li>
                                             <li class="p_color4">{{ $select->color }}</li>
                                         </ul>
                                     </div>
                                     <div class="jobsearch-table-cell">
                                         <div class="jobsearch-job-userlist">
                                             <div class="like-btn">
-                                                <form
-                                                    action="{{ route('select.destroy', $select) }}"
-                                                    method="POST">
+                                                <form action="{{ route('select.destroy', $select) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
 
@@ -71,8 +55,8 @@
 
                                             </div>
                                             <div class="like-btn">
-                                                <a href="{{ route('select.edit', $select) }}"
-                                                    class="shortlist" title="Edit">
+                                                <a href="{{ route('select.edit', $select) }}" class="shortlist"
+                                                    title="Edit">
                                                     <i class="ti-pencil"></i>
                                                 </a>
 

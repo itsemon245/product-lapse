@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Features\Release;
 
 use App\Http\Controllers\Controller;
 use App\Models\Release;
+use App\Models\Select;
 use Illuminate\Http\Request;
 
 class ReleaseController extends Controller
@@ -17,23 +18,13 @@ class ReleaseController extends Controller
         return view('features.release.index', compact('releases'));
     }
 
-    // Schema::create('releases', function (Blueprint $table) {
-    //     $table->id();
-    //     $table->unsignedBigInteger('owner_id');
-    //     $table->foreign('owner_id')->references('id')->on('users')->cascadeOnDelete();
-    //     $table->string('name');
-    //     $table->float('version');
-    //     $table->string('release_date');
-    //     $table->string('description');
-    //     $table->timestamps();
-    // });
-
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('features.release.partials.create');
+        $type = Select::of('release')->type('type')->get();
+        return view('features.release.partials.create', compact('type'));
     }
 
     /**
@@ -74,12 +65,15 @@ class ReleaseController extends Controller
     public function edit(string $id)
     {
         $id = base64_decode($id);
+
+        $type = Select::of('release')->type('type')->get();
+
         $release = Release::where('owner_id', auth()->id())->find($id);
 
         if (!$release)
             return redirect()->route('release.index');
 
-        return view('features.release.partials.edit', compact('release'));
+        return view('features.release.partials.edit', compact('release', 'type'));
     }
 
     /**

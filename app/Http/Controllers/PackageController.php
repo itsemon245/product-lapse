@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePackageRequest;
 use App\Models\Package;
+use App\Models\Select;
 
 class PackageController extends Controller
 {
@@ -22,7 +23,8 @@ class PackageController extends Controller
      */
     public function create()
     {
-        return view('features.package.partials.create');
+        $type = Select::of('package')->type('type')->get();
+        return view('features.package.partials.create', compact('type'));
     }
 
     /**
@@ -44,7 +46,7 @@ class PackageController extends Controller
             'has_limited_features' => $request->has_limited_features,
             'is_popular' => $request->is_popular,
         ]);
-        return back();
+        return redirect()->back();
     }
 
     /**
@@ -53,6 +55,9 @@ class PackageController extends Controller
     public function show(string $id)
     {
         $package = Package::find($id);
+        if (!$package) {
+            return redirect()->back();
+        }
         return view('features.package.partials.show', compact('package'));
     }
 
@@ -62,7 +67,11 @@ class PackageController extends Controller
     public function edit(string $id)
     {
         $package = Package::find($id);
-        return view('features.package.partials.edit', compact('package'));
+        if (!$package) {
+            return redirect()->back();
+        }
+        $type = Select::of('package')->type('type')->get();
+        return view('features.package.partials.edit', compact('package', 'type'));
     }
 
     /**
@@ -82,11 +91,11 @@ class PackageController extends Controller
             'has_limited_features' => $request->has_limited_features,
             'is_popular' => $request->is_popular,
         ]);
-        if($find){
+        if ($find) {
             return redirect()->route('package.index')->with(['success', 'Update Success!']);
         }
         return redirect()->route('package.index')->with(['error', 'Something Wrong!']);
-        
+
     }
 
     /**

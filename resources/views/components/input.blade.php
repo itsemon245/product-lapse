@@ -2,7 +2,7 @@
     $name = $attributes->get('name');
 @endphp
 
-<div>
+<div class="form-group text_box">
     @if ($attributes->has('label'))
         <label for="{{ $attributes->get('id') }}" class="text_c f_500">{{ $attributes->get('label') }}</label>
     @endif

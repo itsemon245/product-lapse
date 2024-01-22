@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProductStoreRequest;
 use App\Http\Requests\StoreProductRequest;
 use App\Models\Product;
+use App\Models\Select;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -24,7 +25,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('features.product.partials.create');
+        $categories = Select::of('product')->type('category')->get();
+        $stages = Select::of('product')->type('stage')->get();
+        return view('features.product.partials.create',compact('categories', 'stages'));
     }
 
     /**

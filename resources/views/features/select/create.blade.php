@@ -13,22 +13,6 @@
                 <div class="login_info">
                     <div class="row">
                         <div class="form-group text_box col-lg-6 col-md-6">
-                            <x-input label="Name (English)" id="name_en" type="text" placeholder="Enter category name"
-                                name="name_en" :value="old('name_en')" required autofocus />
-                        </div>
-
-                        <div class="form-group text_box col-lg-6 col-md-6">
-
-                            <x-input label="Name (Arabic)" id="name_ar" type="text" placeholder="Enter category name"
-                                name="name_ar" :value="old('name_ar')" required autofocus />
-                        </div>
-
-                        <div class="form-group text_box col-lg-6 col-md-6">
-                            <x-input label="Text Color" id="text-color" type="text" placeholder="Enter text color"
-                                name="text_color" :value="old('text_color')" required autofocus />
-                        </div>
-
-                        <div class="form-group text_box col-lg-6 col-md-6">
                             <x-select-input label="Feature Name" id="model-type" placeholder="Choose Feature Name"
                                 name="model_type" autofocus>
                                 @foreach ($features as $feature)
@@ -37,13 +21,34 @@
                             </x-select-input>
                         </div>
                         <div class="form-group text_box col-lg-6 col-md-6">
-                            <x-select-input label="Type Of Item" id="type" placeholder="Choose Type"
-                                name="type" autofocus>
+                            <x-select-input label="Type Of Item" id="type" placeholder="Choose Type" name="type"
+                                autofocus>
                                 @foreach ($types as $type)
                                     <option value="{{ $type->value }}">{{ str($type->value)->headline() }}</option>
                                 @endforeach
                             </x-select-input>
                         </div>
+
+                        <div class="form-group text_box col-lg-6 col-md-6">
+                            <x-input label="Name (English)" id="name_en" type="text" placeholder="Enter category name"
+                                name="name_en" :value="old('name_en')" required autofocus />
+                            <x-input-error :messages="$errors->get('name_en')" class="mt-2" />
+                        </div>
+
+                        <div class="form-group text_box col-lg-6 col-md-6">
+
+                            <x-input label="Name (Arabic)" id="name_ar" type="text" placeholder="Enter category name"
+                                name="name_ar" :value="old('name_ar')" required autofocus />
+                            <x-input-error :messages="$errors->get('name_ar')" class="mt-2" />
+                        </div>
+
+                        <div class="form-group text_box col-lg-6 col-md-6">
+                            <x-input label="Text Color" id="text-color" type="text" placeholder="Enter text color"
+                                name="text_color" :value="old('text_color')" required autofocus />
+                            <x-input-error :messages="$errors->get('text_color')" class="mt-2" />
+                        </div>
+
+
                     </div>
                 </div>
 

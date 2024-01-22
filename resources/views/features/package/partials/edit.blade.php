@@ -41,7 +41,15 @@
                             <div class="form-group text_box col-lg-4 col-md-6">
                                 <x-select-input label="Subscription type" id="annual_rate" placeholder="Choose one"
                                     name="subscription_type" required autofocus>
-                                    <option value="jmkk">Option</option>
+                                    @if ($type)
+                                        @forelse ($type as $category)
+                                            <option value="<?= $category->value->{app()->getLocale()} ?>">
+                                                <?= $category->value->{app()->getLocale()} ?>
+                                            </option>
+                                        @empty
+                                            <option disabled>No subscription type available</option>
+                                        @endforelse
+                                    @endif
                                 </x-select-input>
                             </div>
                             <div class="form-group text_box col-lg-4 col-md-6">
@@ -75,8 +83,10 @@
                             </div>
                         </div>
                         <div class="d-flex align-items-center text-center">
-                            <x-btn-primary name="Add Package" type="submit" />
-                            <x-btn-secondary name="Cancle" type="submit" />
+                            <button type="submit" class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">Edit
+                                package</button>
+                            <a href="{{ route('package.index') }}"
+                                class="btn_hover agency_banner_btn btn-bg btn-bg-grey">Cancel</a>
                         </div>
                     </form>
                 </x-slot:from>

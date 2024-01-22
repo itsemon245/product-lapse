@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Change;
+use App\Models\Select;
 use Illuminate\Http\Request;
 
 class ChangeController extends Controller
@@ -21,7 +22,10 @@ class ChangeController extends Controller
      */
     public function create()
     {
-        return view('features.change.partials.create');
+        $priority = Select::of('change')->type('priority')->get();
+        $status = Select::of('change')->type('status')->get();
+        $classification = Select::of('change')->type('classification')->get();
+        return view('features.change.partials.create', compact('priority', 'status', 'classification'));
     }
 
     /**
@@ -68,12 +72,16 @@ class ChangeController extends Controller
         $id = base64_decode($id);
         $change = Change::find($id);
 
+        $priority = Select::of('change')->type('priority')->get();
+        $status = Select::of('change')->type('status')->get();
+        $classification = Select::of('change')->type('classification')->get();
+
         if (!$change) {
             notify()->success(__('Not found!'));
             return redirect()->route('change.index');
         }
 
-        return view('features.change.partials.edit', compact('change'));
+        return view('features.change.partials.edit', compact('change', 'priority', 'status', 'classification'));
     }
 
     /**

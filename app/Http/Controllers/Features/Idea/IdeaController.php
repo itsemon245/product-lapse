@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Features\Idea;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Idea;
+use App\Models\Select;
 
 class IdeaController extends Controller
 {
@@ -22,7 +23,8 @@ class IdeaController extends Controller
      */
     public function create()
     {
-        return view('features.idea.partials.create');
+        $priority = Select::of('idea')->type('priority')->get();
+        return view('features.idea.partials.create', compact('priority'));
     }
 
     /**
@@ -69,10 +71,10 @@ class IdeaController extends Controller
     public function edit(string $id)
     {
         $id = base64_decode($id);
-
+        $priority = Select::of('idea')->type('priority')->get();
         $idea = Idea::find($id);
         if ($idea->owner_id == auth()->user()->id) {
-            return view('features.idea.partials.edit', compact('idea'));
+            return view('features.idea.partials.edit', compact('idea', 'priority' ));
         } else {
             notify()->error(__('Not authorized!'));
             return redirect()->route('idea.index');

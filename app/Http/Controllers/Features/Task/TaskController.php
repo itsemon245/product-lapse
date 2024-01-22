@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Features\Task;
 
 use App\Models\Task;
+use App\Models\Select;
 use App\Http\Requests\TaskRequest;
 use App\Http\Controllers\Controller;
 
@@ -22,7 +23,10 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return view('features.task.create');
+        $category = Select::of('task')->type('category')->get();
+        $status = Select::of('task')->type('status')->get();
+
+        return view('features.task.create', compact('category', 'status'));
     }
 
     /**
@@ -85,7 +89,11 @@ class TaskController extends Controller
 
         $task = Task::find($id);
         if ($task->owner_id == auth()->user()->id) {
-            return view('features.task.edit', compact('task'));
+
+            $category = Select::of('task')->type('category')->get();
+            $status = Select::of('task')->type('status')->get();
+
+            return view('features.task.edit', compact('task', 'category', 'status'));
         } else {
             return redirect()->route('task.index')->with('success', 'You are not authorized to edit this idea.');
         }

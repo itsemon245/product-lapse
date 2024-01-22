@@ -23,17 +23,15 @@
                             <div class="form-group text_box col-lg-6 col-md-6">
                                 <label class=" text_c f_500">@lang('task.category')</label>
                                 <select class="selectpickers" name="category">
-                                    <option value="@lang('task.one')"
-                                        {{ $task->category == trans('task.one') ? 'selected' : '' }}>
-                                        @lang('task.one')</option>
-
-                                    <option value="@lang('task.two')"
-                                        {{ $task->category == trans('task.two') ? 'selected' : '' }}>
-                                        @lang('task.two')</option>
-
-                                    <option value="@lang('task.three')"
-                                        {{ $task->category == trans('task.three') ? 'selected' : '' }}>
-                                        @lang('task.three')</option>
+                                    @if ($category)
+                                        @forelse ($category as $category)
+                                            <option value="<?= $category->value->{app()->getLocale()} ?>">
+                                                <?= $category->value->{app()->getLocale()} ?>
+                                            </option>
+                                        @empty
+                                            <option disabled>No category available</option>
+                                        @endforelse
+                                    @endif
                                 </select>
                                 @error('category')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -44,15 +42,15 @@
 
                                 <select class="selectpickers" name="status">
 
-                                    <option value="started" {{ $task->category == 'started' ? 'selected' : '' }}>
-                                        @lang('task.started')
-                                    </option>
-                                    <option value="stopped" {{ $task->category == 'stopped' ? 'selected' : '' }}>
-                                        @lang('task.stopped')
-                                    </option>
-                                    <option value="not_started" {{ $task->category == 'not_started' ? 'selected' : '' }}>
-                                        @lang('task.not_started')
-                                    </option>
+                                    @if ($status)
+                                        @forelse ($status as $category)
+                                            <option value="<?= $category->value->{app()->getLocale()} ?>">
+                                                <?= $category->value->{app()->getLocale()} ?>
+                                            </option>
+                                        @empty
+                                            <option disabled>No status available</option>
+                                        @endforelse
+                                    @endif
 
                                 </select>
 

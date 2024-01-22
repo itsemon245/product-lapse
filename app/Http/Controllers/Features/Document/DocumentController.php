@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Features\Document;
 
 use App\Http\Controllers\Controller;
 use App\Models\Document;
+use App\Models\Select;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
@@ -24,7 +25,8 @@ class DocumentController extends Controller
      */
     public function create()
     {
-        return view('features.document.partials.create');
+        $type = Select::of('document')->type('type')->get();
+        return view('features.document.partials.create', compact('type'));
     }
 
     /**
@@ -98,8 +100,8 @@ class DocumentController extends Controller
             notify()->success(__('Document not found!'));
             return redirect()->route('document.index');
         }
-
-        return view('features.document.partials.edit', compact('document'));
+        $type = Select::of('document')->type('type')->get();
+        return view('features.document.partials.edit', compact('document', 'type'));
     }
 
     /**

@@ -1,12 +1,12 @@
 @extends('layouts.feature.index', ['title' => 'Change Request'])
 @section('main')
-<x-feature.create>
-    <x-slot:breadcrumb>
-        <x-breadcrumb :list="[['label' => 'Add Changes', 'route' => route('change.create')]]" />
-    </x-slot:breadcrumb>
+    <x-feature.create>
+        <x-slot:breadcrumb>
+            <x-breadcrumb :list="[['label' => 'Add Changes', 'route' => route('change.create')]]" />
+        </x-slot:breadcrumb>
 
-    <x-slot:from>
-        <h2 class=" f_600 f_size_24 t_color3 mb_40">Add Change Request</h2>
+        <x-slot:from>
+            <h2 class=" f_600 f_size_24 t_color3 mb_40">Add Change Request</h2>
             <form method="post" action="{{ route('change.store') }}" class="login-form sign-in-form">
                 @csrf
                 <div class="row">
@@ -19,28 +19,43 @@
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-select-input label="Classification" id="classification" placeholder="Choose one"
                             name="classification" required autofocus>
-                            <option value="Free">Free</option>
-                            <option value="Basic">Basic</option>
-                            <option value="Golden">Golden</option>
-                            <option value="Dimond">Dimond</option>
+                            @if ($classification)
+                                @forelse ($classification as $category)
+                                    <option value="<?= $category->value->{app()->getLocale()} ?>">
+                                        <?= $category->value->{app()->getLocale()} ?>
+                                    </option>
+                                @empty
+                                    <option disabled>No classification available</option>
+                                @endforelse
+                            @endif
                         </x-select-input>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-select-input label="Priority" id="priority" placeholder="Choose one" name="priority" required
                             autofocus>
-                            <option value="Free">Free</option>
-                            <option value="Basic">Basic</option>
-                            <option value="Golden">Golden</option>
-                            <option value="Dimond">Dimond</option>
+                            @if ($priority)
+                                @forelse ($priority as $category)
+                                    <option value="<?= $category->value->{app()->getLocale()} ?>">
+                                        <?= $category->value->{app()->getLocale()} ?>
+                                    </option>
+                                @empty
+                                    <option disabled>No priority available</option>
+                                @endforelse
+                            @endif
                         </x-select-input>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-select-input label="Status" id="status" placeholder="Choose one" name="status" required
                             autofocus>
-                            <option value="Free">Free</option>
-                            <option value="Basic">Basic</option>
-                            <option value="Golden">Golden</option>
-                            <option value="Dimond">Dimond</option>
+                            @if ($status)
+                                @forelse ($status as $category)
+                                    <option value="<?= $category->value->{app()->getLocale()} ?>">
+                                        <?= $category->value->{app()->getLocale()} ?>
+                                    </option>
+                                @empty
+                                    <option disabled>No status available</option>
+                                @endforelse
+                            @endif
                         </x-select-input>
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-6">
@@ -68,6 +83,6 @@
                     <a href="{{ route('change.index') }}" class="btn_hover agency_banner_btn btn-bg btn-bg-grey">Cancel</a>
                 </div>
             </form>
-    </x-slot:from>
-</x-feature.create>
+        </x-slot:from>
+    </x-feature.create>
 @endsection

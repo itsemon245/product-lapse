@@ -1,12 +1,12 @@
 @extends('layouts.feature.index', ['title' => 'Edit Change Request'])
 @section('main')
-<x-feature.edit>
-    <x-slot:breadcrumb>
-        <x-breadcrumb :list="[['label' => 'Edit Change Request', 'route' => route('change.edit', $change)]]" />
-    </x-slot:breadcrumb>
+    <x-feature.edit>
+        <x-slot:breadcrumb>
+            <x-breadcrumb :list="[['label' => 'Edit Change Request', 'route' => route('change.edit', $change)]]" />
+        </x-slot:breadcrumb>
 
-    <x-slot:from>
-        <h2 class=" f_600 f_size_24 t_color3 mb_40">Edit Change Request</h2>
+        <x-slot:from>
+            <h2 class=" f_600 f_size_24 t_color3 mb_40">Edit Change Request</h2>
             <form action="{{ route('change.update', base64_encode($change->id)) }}" method="POST"
                 enctype="multipart/form-data">
                 @csrf
@@ -22,28 +22,43 @@
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-select-input label="Classification" id="classification" placeholder="Choose one"
                             name="classification" required autofocus>
-                            <option value="Free">Free</option>
-                            <option value="Basic">Basic</option>
-                            <option value="Golden">Golden</option>
-                            <option value="Dimond">Dimond</option>
+                            @if ($classification)
+                                @forelse ($classification as $category)
+                                    <option value="<?= $category->value->{app()->getLocale()} ?>">
+                                        <?= $category->value->{app()->getLocale()} ?>
+                                    </option>
+                                @empty
+                                    <option disabled>No classification available</option>
+                                @endforelse
+                            @endif
                         </x-select-input>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-select-input label="Priority" id="priority" placeholder="Choose one" name="priority" required
                             autofocus>
-                            <option value="Free">Free</option>
-                            <option value="Basic">Basic</option>
-                            <option value="Golden">Golden</option>
-                            <option value="Dimond">Dimond</option>
+                            @if ($priority)
+                                @forelse ($priority as $category)
+                                    <option value="<?= $category->value->{app()->getLocale()} ?>">
+                                        <?= $category->value->{app()->getLocale()} ?>
+                                    </option>
+                                @empty
+                                    <option disabled>No priority available</option>
+                                @endforelse
+                            @endif
                         </x-select-input>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-select-input label="Status" id="status" placeholder="Choose one" name="status" required
                             autofocus>
-                            <option value="Free">Free</option>
-                            <option value="Basic">Basic</option>
-                            <option value="Golden">Golden</option>
-                            <option value="Dimond">Dimond</option>
+                            @if ($status)
+                                @forelse ($status as $category)
+                                    <option value="<?= $category->value->{app()->getLocale()} ?>">
+                                        <?= $category->value->{app()->getLocale()} ?>
+                                    </option>
+                                @empty
+                                    <option disabled>No status available</option>
+                                @endforelse
+                            @endif
                         </x-select-input>
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-6">
@@ -64,7 +79,7 @@
                             value="{{ \Carbon\Carbon::parse($change->required_completion_date)->format('Y-m-d') }}" required
                             autofocus />
 
-                        <x-input-error :messages="$errors->get('required_completion_date')" class="mt-2" /> 
+                        <x-input-error :messages="$errors->get('required_completion_date')" class="mt-2" />
                     </div>
                 </div>
 
@@ -78,7 +93,7 @@
                     </x-button>
                 </div>
             </form>
-    </x-slot:from>
+        </x-slot:from>
 
-</x-feature.edit>
+    </x-feature.edit>
 @endsection

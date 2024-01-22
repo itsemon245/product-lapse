@@ -30,7 +30,7 @@ class SelectController extends Controller
     public function create()
     {
         $features = Feature::cases();
-        $types    = SelectType::cases();
+        $types = SelectType::cases();
         return view('features.select.create', compact('features', 'types'));
     }
 
@@ -40,16 +40,16 @@ class SelectController extends Controller
             $value = [
                 'en' => $request->name_en,
                 'ar' => $request->name_ar,
-             ];
+            ];
             $select = Select::create([
-                'owner_id'   => auth()->id(),
+                'owner_id' => auth()->id(),
                 'model_type' => $request->model_type,
-                'type'       => $request->type,
-                'color'      => $request->text_color,
-                'value'      => $value,
-             ]);
+                'type' => $request->type,
+                'color' => $request->text_color,
+                'value' => $value,
+            ]);
             notify()->success(__('notify/success.create'));
-            return back();
+            return redirect()->route('select.index');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             notify()->error(__('notify/error.create'));
@@ -60,7 +60,7 @@ class SelectController extends Controller
     public function edit(Select $select)
     {
         $features = Feature::cases();
-        $types    = SelectType::cases();
+        $types = SelectType::cases();
 
         return view('features.select.edit', compact('select', 'features', 'types'));
     }
@@ -71,13 +71,13 @@ class SelectController extends Controller
             $value = [
                 'en' => $request->name_en,
                 'ar' => $request->name_ar,
-             ];
+            ];
             $select->update([
                 'model_type' => $request->model_type,
-                'type'       => $request->type,
-                'color'      => $request->text_color,
-                'value'      => $value,
-             ]);
+                'type' => $request->type,
+                'color' => $request->text_color,
+                'value' => $value,
+            ]);
 
             notify()->success(__('notify/success.update'));
 

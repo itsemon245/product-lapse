@@ -7,47 +7,58 @@
 
         <x-slot:from>
             <h2 class=" f_600 f_size_24 t_color3 mb_40">Add Product</h2>
-            <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data" class="login-form sign-in-form">
+            <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data"
+                class="login-form sign-in-form">
                 @csrf
                 <div class="row">
                     <div class="form-group text_box col-lg-4 col-md-6">
                         <x-input-label for="name" value="Product name" />
-                        <x-text-input id="name" class="block mt-1 w-full" type="text"
-                            placeholder="Enter product name" name="name" :value="old('name')" autofocus />
+                        <x-input id="name" class="" type="text" placeholder="Enter product name" name="name"
+                            :value="old('name')" autofocus />
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
                     <div class="form-group text_box col-lg-4 col-md-6">
-                        <x-select-input label="Stage" id="stage" placeholder="Choose one" name="stage"
-                            autofocus>
-                            <option value="one">One</option>
-                            <option value="two">Two</option>
-                            <option value="three">Three</option>
-                            <option value="four">Four</option>
+                        <x-select-input label="Stage" id="stage" placeholder="Choose one" name="stage" autofocus>
+                            @if ($stages)
+                                @forelse ($stages as $category)
+                                    <option value="<?= $category->value->{app()->getLocale()} ?>">
+                                        <?= $category->value->{app()->getLocale()} ?>
+                                    </option>
+                                @empty
+                                    <option disabled>No stages available</option>
+                                @endforelse
+                            @endif
                         </x-select-input>
                     </div>
                     <div class="form-group text_box col-lg-4 col-md-6">
                         <x-input-label for="url" value="Product url" />
-                        <x-text-input id="url" class="block mt-1 w-full" type="text" placeholder="https://"
-                            name="url" :value="old('url')" autofocus />
+                        <x-input id="url" class="" type="text" placeholder="https://" name="url"
+                            :value="old('url')" autofocus />
                         <x-input-error :messages="$errors->get('url')" class="mt-2" />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-select-input label="Stage" id="stage" placeholder="Choose one" name="stage"
-                            autofocus>
-                            <option value="one">One</option>
-                            <option value="two">Two</option>
-                            <option value="three">Three</option>
-                            <option value="four">Four</option>
+                        <x-select-input label="Category" id="category" placeholder="Choose one" name="category" autofocus>
+                            @if ($categories)
+                                @forelse ($categories as $category)
+                                    <option value="<?= $category->value->{app()->getLocale()} ?>">
+                                        <?= $category->value->{app()->getLocale()} ?>
+                                    </option>
+                                @empty
+                                    <option disabled>No categories available</option>
+                                @endforelse
+                            @endif
                         </x-select-input>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-attach name='logo' />
+                        <x-input class="input-file" type='file' placeholder="Choose Logo" label="Logo"
+                            name='logo' />
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-6">
                         <x-textarea placeholder="Write description" rows="5" cols="10" name="description"
-                            label="Description" />
+                            label="Description">
+                        </x-textarea>
                     </div>
-                    
+
 
 
                 </div>

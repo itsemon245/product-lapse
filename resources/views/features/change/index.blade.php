@@ -1,12 +1,12 @@
-@extends('layouts.feature.index', ['title' => 'Change Request'])
+@extends('layouts.feature.index', ['title' => @__('feature/change.title')])
 @section('main')
     <x-feature.index>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => 'Change Request', 'route' => route('change.index')]]" />
+            <x-breadcrumb :list="[['label' => @__('feature/change.title'), 'route' => route('change.index')]]" />
         </x-slot:breadcrumb>
         <x-slot:search>
             <form action="#" class="search-form input-group">
-                <input type="searproductch" class="form-control widget_input" placeholder="Search packages">
+                <input type="searproductch" class="form-control widget_input" placeholder="{{ __('feature/change.search') }}">
                 <button type="submit"><i class="ti-search"></i></button>
             </form>
         </x-slot:search>
@@ -14,12 +14,12 @@
         <x-slot:actions>
             <x-button type="link" href="{{ route('change.create') }}" >
                 <i class="ti-plus"></i>
-                Add Change
+                @__('feature/change.add')
             </x-button>
         </x-slot:actions>
 
         <x-slot:filter>
-            <h5>Showing packages</h5>
+            <h5>@__('feature/change.showing')</h5>
             <form method="get" action="#">
                 <select class="selectpickers selectpickers2" style="display: none;">
                     <option value="">All</option>

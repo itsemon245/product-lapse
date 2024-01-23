@@ -1,15 +1,15 @@
-@extends('layouts.feature.index', ['title'=> 'Report'])
+@extends('layouts.feature.index', ['title'=> @__('feature/report.title')])
 @section('main')
 <x-feature.index>
     <x-slot:breadcrumb>
         <x-breadcrumb :list="[
-            ['label' => 'Report', 'route' => route('report.index')],
+            ['label' => @__('feature/report.title'), 'route' => route('report.index')],
             ]" />
     </x-slot:breadcrumb>
 
     <x-slot:search>
         <form action="#" class="search-form input-group">
-            <input type="searproductch" class="form-control widget_input" placeholder="Search packages">
+            <input type="searproductch" class="form-control widget_input" placeholder="{{ __('feature/report.search') }}">
             <button type="submit"><i class="ti-search"></i></button>
         </form>
     </x-slot:search>
@@ -18,12 +18,12 @@
     <x-slot:actions>
         <x-button type="link" href="{{ route('report.create') }}" > 
             <i class="ti-plus"></i>
-            Add Report
+            @__('feature/report.add')
         </x-button>   
     </x-slot:actions>
 
     <x-slot:filter>
-        <h5>Showing Reports</h5>
+        <h5>@__('feature/report.showing')</h5>
         <form method="get" action="#">
             <select class="selectpickers selectpickers2" style="display: none;">
                 <option value="">All</option>

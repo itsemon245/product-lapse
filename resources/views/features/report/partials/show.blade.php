@@ -1,8 +1,8 @@
-@extends('layouts.feature.index', ['title' => 'Report'])
+@extends('layouts.feature.index', ['title' => @__('feature/report.show')])
 @section('main')
 <x-feature.show>
     <x-slot:breadcrumb>
-        <x-breadcrumb :list="[['label' => 'Report', 'route' => route('support.show', $report)]]" />
+        <x-breadcrumb :list="[['label' => @__('feature/report.show'), 'route' => route('support.show', $report)]]" />
     </x-slot:breadcrumb>
 
     <x-slot:details>
@@ -14,11 +14,11 @@
                         Sunday, 12 June 2023
                     </div>
                     <div class="col-md-12">
-                        <h6 class="title2">Classification</h6>
+                        <h6 class="title2">@__('feature/report.classification')</h6>
                         <p class="f_400 mb-30 text-font">Web design</p>
                     </div>
                     <div class="col-md-12">
-                        <h6 class="title2">Report details</h6>
+                        <h6 class="title2">@__('feature/report.details')</h6>
                         <p class="f_400 mb-30 text-font">
                             It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English
                         </p>
@@ -41,10 +41,10 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <span class="button-1 btn-bg-1">Workin on</span>
+                            <span class="button-1 btn-bg-1">@__('feature/report.working')</span>
                         </div>
                         <div class="col-6">
-                            <a href="#" class="button-1 btn-bg-2"><i class="ti-reload"></i>Update</a>
+                            <a href="#" class="button-1 btn-bg-2"><i class="ti-reload"></i>@__('feature/report.update')</a>
                         </div>
                     </div>
                 </div>

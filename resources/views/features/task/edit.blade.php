@@ -8,9 +8,8 @@
                     <h2 class=" f_600 f_size_24 t_color3 mb_40">@lang('task.edit_task')</h2>
                     <form action="{{ route('task.update', ['task' => base64_encode($task->id)]) }}" method="POST"
                         class="login-form sign-in-form" enctype="multipart/form-data">
-                        @method('PUT')
-
                         @csrf
+                        @method('PUT')
                         <div class="row">
                             <div class="form-group text_box col-lg-12 col-md-12">
                                 <label class=" text_c f_500">@lang('task.task_name')</label>

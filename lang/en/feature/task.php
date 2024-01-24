@@ -35,12 +35,13 @@ return [
     'classification' => 'Classification',
     'details' => 'Task details',
     'task' => 'Task details',
+    'name' => 'Name',
     'attach' => 'Attachments',
+    't-name' => 'The Name',
     'view' => 'View',
     'added' => 'Added by',
     'working' => 'Working on',
     'update' => 'Update',
-
 
     //Edit page
     'edit' => 'Edit Task',

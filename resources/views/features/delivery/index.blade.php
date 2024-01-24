@@ -15,7 +15,7 @@
         <x-slot:actions>
             <x-button hx-get="{{ route('delivery.create') }}" >
                 <i class="ti-plus"></i>
-                @__('feature/delivery.ADD')
+                @__('feature/delivery.add')
             </x-button>
         </x-slot:actions>
 

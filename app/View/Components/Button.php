@@ -12,7 +12,8 @@ class Button extends Component
      * Create a new component instance.
      */
     public function __construct(
-        public string $color = 'primary'
+        public string $color = 'primary',
+        public bool $hasIcon = false
     )
     {
         //

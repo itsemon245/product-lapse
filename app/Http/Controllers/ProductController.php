@@ -66,7 +66,7 @@ class ProductController extends Controller
                 'name' => 'Product Planning',
                 'counter' => 0,
                 'icon' => 'img/plan.png',
-                'route' => '#',
+                'route' => route('task.index'),
             ],
             'product-support' => [
                 'name' => 'Product Support',
@@ -105,16 +105,16 @@ class ProductController extends Controller
                 'route' => '#',
             ],
             'product-history' => [
-                'name' => 'Product History',
+                'name' => 'Product Release',
                 'counter' => 0,
                 'icon' => 'img/bank-account.png',
-                'route' => route('product-history.index', $product),
+                'route' => route('release.index'),
             ],
             'historical-images' => [
                 'name' => 'Historical Images',
                 'counter' => 0,
                 'icon' => 'img/photo.png',
-                'route' => '#'
+                'route' => route('product-history.index')
             ],
             'product-delivery' => [
                 'name' => 'Product Delivery',
@@ -161,9 +161,10 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Product $product)
     {
-        $data = Product::destroy($id);
-        return back()->with(['success', 'Delete Success!']);
+        $data = $product->delete();
+        notify()->success(__('notify/success.delete'));
+        return redirect()->route('product.index');
     }
 }

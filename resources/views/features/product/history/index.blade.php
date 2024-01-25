@@ -25,53 +25,7 @@
                             data-toggle="modal" data-target="#myModal"><i class="ti-plus"></i>New group</button>
                     </div>
                     <div class="tab-content faq_content" id="myTabContent">
-                        @foreach ($productHistory as $history)
-                            <div class="tab-pane fade show active" id="purchas{{ $history->id }}" role="tabpanel"
-                                aria-labelledby="purchas-tab">
-                                <div id="accordion{{ $history->id }}">
-                                    <div class="card">
-                                        <div class="card-header" id="headingTwo">
-                                            <h5 class="mb-0">
-                                                <button class="btn btn-link collapsed" data-toggle="collapse"
-                                                    data-target="#collapseTwo{{ $history->id }}" aria-expanded="false"
-                                                    aria-controls="collapseTwo{{ $history->id }}">
-                                                    {{ $history->date }}
-                                                    <i class="ti-angle-down"></i><i class="ti-angle-up"></i>
-                                                </button>
-                                            </h5>
-                                        </div>
-                                        <div id="collapseTwo{{ $history->id }}" class="collapse"
-                                            aria-labelledby="headingTwo" data-parent="#accordion{{ $history->id }}">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-12 history-notes">
-                                                        <button type="submit" class="btn_hover agency_banner_btn btn-bg"><i
-                                                                class="ti-pencil"></i>Edit</button>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <h6 class="title2">Description</h6>
-                                                        <p class="f_400 mb-30 text-font">
-                                                            {{ $history->description }}
-                                                        </p>
-                                                    </div>
-                                                    @if ($history->images)
-                                                        @foreach ($history->images as $image)
-                                                            <div class="col-xl-2 col-lg-3 col-md-4 col-6">
-                                                                <div class="product-history">
-                                                                    <img src="{{ asset($image->path) }}">
-                                                                    <h6>Rolex watch</h6>
-                                                                    <a href="#"></a>
-                                                                </div>
-                                                            </div>
-                                                        @endforeach
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
+                        
                     </div>
                 </div>
             </div>
@@ -82,7 +36,8 @@
     <div class="modal fade" id="myModal">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form method="POST" action="{{ route('product-history.store', $id) }}" enctype="multipart/form-data"> @csrf
+                <form method="POST" action="" enctype="multipart/form-data"> 
+                    @csrf
                     <div class="modal-header">
                         <h4 class="modal-title">Add new group</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>

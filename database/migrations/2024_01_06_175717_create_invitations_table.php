@@ -13,14 +13,12 @@ return new class extends Migration {
         Schema::create('invitations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('owner_id');
-            $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('role_id');
-            $table->string('email', 100);
-            $table->string('first_name', 40);
-            $table->string('last_name', 40);
-            $table->string('phone', 15);
-            $table->string('position', 15);
-            $table->string('token', 40)->unique();
+            $table->string('email', 255);
+            $table->string('first_name', 255);
+            $table->string('last_name', 255);
+            $table->string('phone', 255);
+            $table->string('position', 255);
+            $table->string('token', 255)->unique();
             $table->timestamp('accepted_at')->nullable();
             $table->timestamps();
         });

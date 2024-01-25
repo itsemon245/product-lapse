@@ -3,18 +3,16 @@
 namespace App\Http\Controllers\Features\Product;
 
 use App\Http\Controllers\Controller;
-
+use App\Http\Requests\Feature\TeamInvitationRequest;
+use App\Mail\InvitationMail;
 use App\Models\Invitation;
 use App\Models\InvitationProduct;
 use App\Models\ProductUser;
 use App\Models\User;
+use App\Services\InvitationService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\InvitationMail;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class InvitationController extends Controller
 {
@@ -42,53 +40,12 @@ class InvitationController extends Controller
      * Store a newly created resource in storage.
      */
 
-
-    public function store(Request $request)
+    public function store(TeamInvitationRequest $request)
     {
-        return DB::transaction(function () use ($request) {
-            $request->validate([
-                'email' => [
-                    'required',
-                    'email',
-                    Rule::unique('users')->where(function ($query) {
-                        return $query->where('email', request('email'));
-                    }),
-                ],
-                'first_name' => 'required|string|max:255',
-                'last_name' => 'required|string|max:255',
-                'phone' => 'string|max:20',
-                'position' => 'string|max:255',
-                'products' => 'required|array|min:1',
-            ]);
-
-            $token = (string) Str::uuid();
-
-            $invitation = Invitation::create([
-                'owner_id' => auth()->user()->id,
-                'role_id' => 1,
-                'email' => $request->email,
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
-                'phone' => $request->phone,
-                'position' => $request->position,
-                'token' => $token,
-            ]);
-
-            // Create invitation products for every product
-            foreach ($request->products as $product) {
-                InvitationProduct::create([
-                    'invitation_id' => $invitation->id,
-                    'product_id' => $product,
-                ]);
-            }
-
-            // Send invitation mail
-            $status = Mail::to($request->email)->send(new InvitationMail($invitation));
-
-            return redirect()->route('invitation.index')->with('success', 'Invitation sent successfully');
-        });
+        $service = new InvitationService($request);
+        $invitation = $service->store();
+        return redirect()->route('invitation.index')->with('success', 'Invitation sent successfully');
     }
-
 
     /**
      * Display the specified resource.
@@ -104,7 +61,6 @@ class InvitationController extends Controller
     public function accept($token)
     {
         $invitation = Invitation::where('token', $token)->first();
-
         if ($invitation == null) {
             return redirect()->back();
         }
@@ -121,7 +77,7 @@ class InvitationController extends Controller
     {
         $request->validate([
             'password' => 'required|string|min:6|confirmed',
-        ]);
+         ]);
 
         $id = base64_decode($request->id);
 
@@ -138,23 +94,23 @@ class InvitationController extends Controller
         } else {
 
             $user = User::create([
-                'role_id' => $invitation->role_id,
-                'email' => $invitation->email,
-                'password' => Hash::make($request->password),
+                'role_id'    => $invitation->role_id,
+                'email'      => $invitation->email,
+                'password'   => Hash::make($request->password),
                 'first_name' => $invitation->first_name,
-                'last_name' => $invitation->last_name,
-                'phone' => $invitation->phone,
-                'position' => $invitation->position,
-            ]);
+                'last_name'  => $invitation->last_name,
+                'phone'      => $invitation->phone,
+                'position'   => $invitation->position,
+             ]);
 
             foreach ($invitation->products as $product) {
                 if ($product->is_accepted == false) {
-                    InvitationProduct::where('product_id', $product->id)->update(['is_accepted' => true]);
+                    InvitationProduct::where('product_id', $product->id)->update([ 'is_accepted' => true ]);
 
                     ProductUser::create([
                         'product_id' => $product->id,
-                        'user_id' => $user->id,
-                    ]);
+                        'user_id'    => $user->id,
+                     ]);
                 }
 
             }
@@ -162,10 +118,6 @@ class InvitationController extends Controller
 
         return redirect()->route('login')->with('success', 'Password created successfully');
     }
-
-
-
-
 
     /**
      * Update the specified resource in storage.
@@ -180,7 +132,7 @@ class InvitationController extends Controller
      */
     public function destroy($id)
     {
-        $id = base64_decode($id);
+        $id         = base64_decode($id);
         $invitation = Invitation::find($id);
         if ($invitation == null || $invitation->owner_id != auth()->user()->id) {
             return redirect()->back();

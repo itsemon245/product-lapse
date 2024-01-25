@@ -66,7 +66,7 @@ class ProductController extends Controller
                 'name' => 'Product Planning',
                 'counter' => 0,
                 'icon' => 'img/plan.png',
-                'route' => '#',
+                'route' => route('task.index'),
             ],
             'product-support' => [
                 'name' => 'Product Support',
@@ -108,13 +108,13 @@ class ProductController extends Controller
                 'name' => 'Product History',
                 'counter' => 0,
                 'icon' => 'img/bank-account.png',
-                'route' => route('product-history.index', $product),
+                'route' => route('release.index'),
             ],
             'historical-images' => [
                 'name' => 'Historical Images',
                 'counter' => 0,
                 'icon' => 'img/photo.png',
-                'route' => '#'
+                'route' => route('product-history.index', $product),
             ],
             'product-delivery' => [
                 'name' => 'Product Delivery',

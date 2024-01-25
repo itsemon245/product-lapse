@@ -1,13 +1,13 @@
-@extends('layouts.feature.index', ['title' => 'Release'])
+@extends('layouts.feature.index', ['title' => @__('feature/release.title')])
 @section('main')
     <x-feature.index>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => 'Release', 'route' => route('release.index')]]" />
+            <x-breadcrumb :list="[['label' => @__('feature/release.title'), 'route' => route('release.index')]]" />
         </x-slot:breadcrumb>
 
         <x-slot:search>
             <form action="#" class="search-form input-group">
-                <input type="searproductch" class="form-control widget_input" placeholder="Search releases">
+                <input type="searproductch" class="form-control widget_input" placeholder="{{ __('feature/release.search') }}">
                 <button type="submit"><i class="ti-search"></i></button>
             </form>
         </x-slot:search>
@@ -16,28 +16,12 @@
         <x-slot:actions>
             <x-button type="link" href="{{ route('release.create') }}" >
                 <i class="ti-plus"></i>
-                Add Release
+               @__('feature/release.add')
             </x-button>
         </x-slot:actions>
 
         <x-slot:filter>
-            <h5>Showing Releases</h5>
-            <form method="get" action="#">
-                <select class="selectpickers selectpickers2" style="display: none;">
-                    <option value="">All</option>
-                    <option value="">Durable product</option>
-                    <option value="">Initial idea</option>
-                    <option value="">Stopped</option>
-                </select>
-                <div class="nice-select selectpickers selectpickers2" tabindex="0"><span class="current">All</span>
-                    <ul class="list">
-                        <li data-value="" class="option selected focus">All</li>
-                        <li data-value="" class="option">Durable product</li>
-                        <li data-value="" class="option">Initial idea</li>
-                        <li data-value="" class="option">Stopped</li>
-                    </ul>
-                </div>
-            </form>
+        {{-- Empty --}}
         </x-slot:filter>
 
 

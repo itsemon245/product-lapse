@@ -1,8 +1,8 @@
-@extends('layouts.feature.index', ['title' => 'Release'])
+@extends('layouts.feature.index', ['title' => @__('feature/release.show')])
 @section('main')
     <x-feature.show>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => 'Release', 'route' => route('release.show', $release)]]" />
+            <x-breadcrumb :list="[['label' => @__('feature/release.show'), 'route' => route('release.show', $release)]]" />
         </x-slot:breadcrumb>
 
         <x-slot:details>
@@ -14,7 +14,7 @@
                             {{ \Carbon\Carbon::parse($release->created_at)->format('l, j F Y') }}
                         </div>
                         <div class="col-md-12">
-                            <h6 class="title2">Classification</h6>
+                            <h6 class="title2">@__('feature/release.version')</h6>
                             <p class="f_400 mb-30 text-font">Web design</p>
                         </div>
                         <div class="col-md-12">

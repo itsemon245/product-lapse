@@ -1,8 +1,8 @@
-@extends('layouts.feature.index', ['title' => 'Details OF Delivery'])
+@extends('layouts.feature.index', ['title' => @__('feature/delivery.show')])
 @section('main')
     <x-feature.show>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => 'Change Request', 'route' => route('change.show', base64_encode($delivery->id))]]" />
+            <x-breadcrumb :list="[['label' => @__('feature/delivery.show'), 'route' => route('change.show', base64_encode($delivery->id))]]" />
         </x-slot:breadcrumb>
 
         <x-slot:details>
@@ -13,11 +13,11 @@
                         <div class="entry_post_info col-md-12">
                             {{ \Carbon\Carbon::parse($delivery->required_completion_date)->format('l, j F Y') }}
                         </div>
-                        <div class="col-lg-6 col-md-6"">
+                        <div class="col-lg-6 col-md-6">
                             <h6 class="title2">Priority</h6>
                             <p class="f_400 mb-30 text-font">{{ $delivery->priority }}</p>
                         </div>
-                        <div class="col-lg-6 col-md-6"">
+                        <div class="col-lg-6 col-md-6">
                             <h6 class="title2">Classification</h6>
                             <p class="f_400 mb-30 text-font">Web design</p>
                         </div>

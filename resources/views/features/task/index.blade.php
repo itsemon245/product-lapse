@@ -1,12 +1,12 @@
-@extends('layouts.feature.index', ['title' => 'Tasks'])
+@extends('layouts.feature.index', ['title' => @__('feature/task.title')])
 @section('main')
     <x-feature.index>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => 'Task', 'route' => route('task.index')]]" />
+            <x-breadcrumb :list="[['label' => @__('feature/task.title'), 'route' => route('task.index')]]" />
         </x-slot:breadcrumb>
         <x-slot:search>
             <form action="#" class="search-form input-group">
-                <input type="search" class="form-control widget_input" placeholder="Search product">
+                <input type="search" class="form-control widget_input" placeholder="{{ __('feature/task.search') }}">
                 <button type="submit"><i class="ti-search"></i></button>
             </form>
         </x-slot:search>
@@ -14,28 +14,51 @@
         <x-slot:actions>
             <x-button href="{{ route('task.create') }}" type="link">
                 <i class="ti-plus"></i>
-                Add Task
+                @__('feature/task.add')
             </x-button>
         </x-slot:actions>
 
         <x-slot:filter>
-            <h5>Showing packages</h5>
-            <form method="get" action="#">
-                <select class="selectpickers selectpickers2" style="display: none;">
-                    <option value="">All</option>
-                    <option value="">Durable product</option>
-                    <option value="">Initial idea</option>
-                    <option value="">Stopped</option>
-                </select>
-                <div class="nice-select selectpickers selectpickers2" tabindex="0"><span class="current">All</span>
-                    <ul class="list">
-                        <li data-value="" class="option selected focus">All</li>
-                        <li data-value="" class="option">Durable product</li>
-                        <li data-value="" class="option">Initial idea</li>
-                        <li data-value="" class="option">Stopped</li>
-                    </ul>
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>@__('feature/task.showing1')</h5>
+                    <form method="get" action="#">
+                        <select class="selectpickers selectpickers2" style="display: none;">
+                            <option value="">All</option>
+                            <option value="">Durable product</option>
+                            <option value="">Initial idea</option>
+                            <option value="">Stopped</option>
+                        </select>
+                        <div class="nice-select selectpickers selectpickers2" tabindex="0"><span class="current">All</span>
+                            <ul class="list">
+                                <li data-value="" class="option selected focus">All</li>
+                                <li data-value="" class="option">Durable product</li>
+                                <li data-value="" class="option">Initial idea</li>
+                                <li data-value="" class="option">Stopped</li>
+                            </ul>
+                        </div>
+                    </form>
                 </div>
-            </form>
+                <div class="col-md-6">
+                    <h5>@__('feature/task.showing2')</h5>
+                    <form method="get" action="#">
+                        <select class="selectpickers selectpickers2" style="display: none;">
+                            <option value="">All</option>
+                            <option value="">Durable product</option>
+                            <option value="">Initial idea</option>
+                            <option value="">Stopped</option>
+                        </select>
+                        <div class="nice-select selectpickers selectpickers2" tabindex="0"><span class="current">All</span>
+                            <ul class="list">
+                                <li data-value="" class="option selected focus">All</li>
+                                <li data-value="" class="option">Durable product</li>
+                                <li data-value="" class="option">Initial idea</li>
+                                <li data-value="" class="option">Stopped</li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </x-slot:filter>
 
         <x-slot:list>

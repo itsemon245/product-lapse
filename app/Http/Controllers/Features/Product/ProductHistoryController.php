@@ -13,11 +13,9 @@ class ProductHistoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Product $product)
+    public function index()
     {
-        $productHistory = ProductHistory::with('images')->where('product_id', $product->id)->get();
-        $id = $product->id;
-        return view('features.product.history.index', compact('productHistory', 'id'));
+        return view('features.product.history.index');
     }
 
     /**

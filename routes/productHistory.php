@@ -7,7 +7,4 @@ use App\Http\Controllers\Features\Product\ProductHistoryController;
 
 
 //product-history index route 
-Route::get('product-history/{product}', [ProductHistoryController::class, 'index'])->name('product-history.index');
-
-//product-history store route
-Route::post('product-history/{id}', [ProductHistoryController::class, 'store'])->name('product-history.store');
+Route::resource('product-history', ProductHistoryController::class);

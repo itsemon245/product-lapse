@@ -1,63 +1,77 @@
 @extends('layouts.feature.index', ['title' => @__('feature/invitaion.title')])
 @section('main')
-    <x-feature.create>
-        <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => @__('feature/invitaion.title'), 'route' => route('invitation.create')]]" />
-        </x-slot:breadcrumb>
-        <x-slot:from>
-            <h2 class=" f_600 f_size_24 t_color3 mb_40">@__('feature/invitaion.title')</h2>
-            <form method="POST" action="{{ route('invitation.store') }}" class="login-form sign-in-form"
-                enctype="multipart/form-data">
-                @csrf
-                <div class="row">
-                    <div class="form-group text_box col-lg-4 col-md-6">
-                        <x-input-label for="first_name" value="{{ __('feature/invitaion.label.fname') }}" />
-                        <x-input id="first_name" class="block mt-1 w-full" type="text"
-                            placeholder="{{ __('feature/invitaion.placeholder.fname') }}" name="first_name"
-                            :value="old('first_name')" autofocus />
-                    </div>
-                    <div class="form-group text_box col-lg-4 col-md-6">
-                        <x-input-label for="last_name" value="{{ __('feature/invitaion.label.lname') }}" />
-                        <x-input id="last_name" class="block mt-1 w-full" type="text"
-                            placeholder="{{ __('feature/invitaion.placeholder.fname') }}" name="last_name" :value="old('last_name')"
-                            autofocus />
-                    </div>
-                    <div class="form-group text_box col-lg-4 col-md-6">
-                        <x-input-label for="email" value="{{ __('feature/invitaion.label.email') }}" />
-                        <x-input id="email" class="block mt-1 w-full" type="text"
-                            placeholder="{{ __('feature/invitaion.placeholder.email') }}" name="email" :value="old('email')"
-                            autofocus />
-
-                    </div>
-                    <div class="form-group text_box col-lg-4 col-md-6">
-                        <x-input-label for="phone" value="{{ __('feature/invitaion.label.phone') }}" />
-                        <x-input id="phone" class="block mt-1 w-full" type="text"
-                            placeholder="{{ __('feature/invitaion.placeholder.phone') }}" name="phone" :value="old('phone')"
-                            autofocus />
-                    </div>
-                    <div class="form-group text_box col-lg-4 col-md-6">
-                        <x-input-label for="position" value="{{ __('feature/invitaion.label.position') }}">
-                            <x-input id="position" class="block mt-1 w-full" type="text"
-                                placeholder="{{ __('feature/invitaion.placeholder.position') }}" name="position"
-                                :value="old('position')" autofocus />
-                    </div>
-                    <div class="form-group text_box col-lg-4 col-md-6">
-                        <x-input-label for="role" value="{{ __('feature/invitaion.label.role') }}" />
-                        <x-input id="role" class="block mt-1 w-full" type="text"
-                            placeholder="{{ __('feature/invitaion.placeholder.role') }}" name="role" :value="old('role')"
-                            autofocus />
-                    </div>
-                    <div class="form-group text_box col-lg-12 col-md-12">
-                        <label>@__('feature/invitaion.choose')</label>
+    <section class="sign_in_area bg_color sec_pad">
+        <div class="container">
+            <div class="sign_info">
+                <div class="login_info">
+                    <h2 class=" f_600 f_size_24 t_color3 mb_40">@lang('invitation.send_invitaion')</h2>
+                    <form method="POST" action="{{ route('invitation.store') }}" class="login-form sign-in-form"
+                        enctype="multipart/form-data"> 
+                        @csrf
                         <div class="row">
-                            @foreach ($products as $product)
-                                <div class="col-lg-4 col-md-6">
-                                    <div class="checkbox remember">
-                                        <label>
-                                            <input type="checkbox" value="{{ $product->id }}" name="products[]">
-                                            {{ $product->name }}
-                                        </label>
-                                    </div>
+                            <div class="form-group text_box col-lg-4 col-md-6">
+                                <label class=" text_c f_500">@lang('invitation.fisrt_name')</label>
+                                <input type="text" placeholder="first name" name="first_name">
+                                @error('first_name')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+
+                            </div>
+                            <div class="form-group text_box col-lg-4 col-md-6">
+                                <label class=" text_c f_500">@lang('invitation.last_name')</label>
+                                <input type="text" placeholder="last name" name="last_name">
+                                @error('last_name')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group text_box col-lg-4 col-md-6">
+                                <label class=" text_c f_500">@lang('invitation.email')</label>
+                                <input type="text" placeholder="Enter Email" name="email">
+                                @error('email')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group text_box col-lg-4 col-md-6">
+                                <label class=" text_c f_500">@lang('invitation.phone')</label>
+                                <input type="text" placeholder="phone" name="phone">
+                                @error('phone')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group text_box col-lg-4 col-md-6">
+                                <x-select-input :label="__('invitation.position')" id="position" placeholder="Choose one"
+                                    name="position" autofocus>
+                                    @if ($roles)
+                                        @forelse ($roles as $role)
+                                            <option value="{{ $role->name }}" class="capitalize">
+                                                @lang($role->name)
+                                            </option>
+                                        @empty
+                                            <option disabled>
+                                                @lang('No items available')
+                                            </option>
+                                        @endforelse
+                                    @endif
+                                </x-select-input>
+                            </div>
+
+                            <div class="form-group text_box col-lg-12 col-md-12">
+                                <label class=" text_c f_500">@lang('invitation.choose')</label>
+                                <div class="row">
+                                    @foreach ($products as $product)
+                                        <div class="col-lg-4 col-md-6">
+                                            <div class="checkbox remember">
+                                                <label>
+                                                    <input type="checkbox" value="{{ $product->id }}" name="products[]">
+                                                    {{ $product->name }}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                    @error('products')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             @endforeach
                             @error('products')

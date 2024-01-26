@@ -20,7 +20,6 @@ class BladeServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        app()->setLocale('en');
         Blade::directive('__', function ($expression) {
             return "<?php echo __($expression) ?>";
         });

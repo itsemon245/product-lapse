@@ -2,9 +2,8 @@
 
 namespace App\Providers;
 
-use App\Models\Select;
-use App\Models\Product;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,19 +24,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         view()->composer('*', function ($view) {
-            // $product = Product::find(2);
-            // $value = [
-            //     'en'=> 'English Stage',
-            //     'ar'=> 'Arabic Stage',
-            // ];
-            // Select::create([
-            //     'owner_id'=> auth()->id(),
-            //     'model_type'=> 'product',
-            //     'type'=> 'stage',
-            //     'value'=> $value
-            // ]);
-            // $productStages = Select::of('product')->type('stage')->get();
-            // dd($productStages); 
+            $cookie = request()->cookie('locale');
+            if (isset($cookie) && !Str::contains($cookie, array('en', 'ar'))) {
+                $decrypted = decrypt($cookie, false);
+                $arr       = explode('|', $decrypted);
+                $locale    = array_pop($arr);
+            } else {
+                $locale = $cookie;
+            }
+            app()->setLocale($locale);
         });
     }
 }

@@ -24,3 +24,4 @@ require __DIR__ . '/document.php';
 require __DIR__ . '/idea.php';
 require __DIR__ . '/task.php';
 require __DIR__ . '/select.php';
+require __DIR__ . '/team.php';

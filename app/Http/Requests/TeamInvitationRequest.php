@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Feature;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -21,7 +21,7 @@ class TeamInvitationRequest extends FormRequest
             'phone'      => 'sometimes|string|max:20',
             'position'   => 'sometimes|string|max:255|exists:roles,name',
             'task'       => 'sometimes|string|max:255',
-            'products'   => 'sometimes|required',
+            'products'   => 'required',
          ];
     }
 }

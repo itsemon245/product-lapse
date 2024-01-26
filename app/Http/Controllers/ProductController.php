@@ -90,7 +90,7 @@ class ProductController extends Controller
                 'name' => 'Product Team',
                 'counter' => 0,
                 'icon' => 'img/help.png',
-                'route' => '#',
+                'route' => route('team.index'),
             ],
             'product-reporting' => [
                 'name' => 'Product Reporting',

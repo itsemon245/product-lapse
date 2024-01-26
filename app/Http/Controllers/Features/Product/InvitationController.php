@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Features\Product;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Feature\TeamInvitationRequest;
-use App\Mail\InvitationMail;
-use App\Models\Invitation;
-use App\Models\InvitationProduct;
-use App\Models\ProductUser;
 use App\Models\User;
-use App\Services\InvitationService;
+use App\Models\Product;
+use App\Models\Invitation;
+use App\Models\ProductUser;
 use Illuminate\Http\Request;
+use App\Models\InvitationProduct;
+use Spatie\Permission\Models\Role;
+use App\Services\InvitationService;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\TeamInvitationRequest;
 
 class InvitationController extends Controller
 {
@@ -31,9 +31,9 @@ class InvitationController extends Controller
      */
     public function create()
     {
-        $products = auth()->user()->products;
-
-        return view('features.product.invitation.create', compact('products'));
+        $products = Product::get();
+        $roles = Role::get();
+        return view('features.product.invitation.create', compact('products', 'roles'));
     }
 
     /**

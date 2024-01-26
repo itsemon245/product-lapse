@@ -7,7 +7,8 @@
                 <div class="login_info">
                     <h2 class=" f_600 f_size_24 t_color3 mb_40">@lang('invitation.send_invitaion')</h2>
                     <form method="POST" action="{{ route('invitation.store') }}" class="login-form sign-in-form"
-                        enctype="multipart/form-data"> @csrf
+                        enctype="multipart/form-data"> 
+                        @csrf
                         <div class="row">
                             <div class="form-group text_box col-lg-4 col-md-6">
                                 <label class=" text_c f_500">@lang('invitation.fisrt_name')</label>
@@ -40,18 +41,20 @@
                                 @enderror
                             </div>
                             <div class="form-group text_box col-lg-4 col-md-6">
-                                <label class=" text_c f_500">@lang('invitation.position')</label>
-                                <input type="text" placeholder="Position" name="position">
-                                @error('position')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group text_box col-lg-4 col-md-6">
-                                <label class=" text_c f_500">@lang('invitation.role')</label>
-                                <input type="text" placeholder="Role" name="role">
-                                @error('workplace')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
+                                <x-select-input :label="__('invitation.position')" id="position" placeholder="Choose one"
+                                    name="position" autofocus>
+                                    @if ($roles)
+                                        @forelse ($roles as $role)
+                                            <option value="{{ $role->name }}" class="capitalize">
+                                                @lang($role->name)
+                                            </option>
+                                        @empty
+                                            <option disabled>
+                                                @lang('No items available')
+                                            </option>
+                                        @endforelse
+                                    @endif
+                                </x-select-input>
                             </div>
 
                             <div class="form-group text_box col-lg-12 col-md-12">

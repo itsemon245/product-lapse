@@ -1,12 +1,12 @@
 <?php
 namespace App\Services;
 
-use App\Models\Invitation;
-use Illuminate\Support\Str;
+use App\Http\Requests\TeamInvitationRequest;
 use App\Mail\InvitationMail;
+use App\Models\Invitation;
 use App\Models\InvitationProduct;
 use Illuminate\Support\Facades\Mail;
-use App\Http\Requests\Feature\TeamInvitationRequest;
+use Illuminate\Support\Str;
 
 class InvitationService
 {
@@ -36,11 +36,13 @@ class InvitationService
             'token'      => $token,
          ]);
         // Create invitation products for every product
-        foreach ($request->products as $product) {
-            InvitationProduct::create([
-                'invitation_id' => $invitation->id,
-                'product_id'    => $product,
-             ]);
+        if ($request->has('products')) {
+            foreach ($request->products as $product) {
+                InvitationProduct::create([
+                    'invitation_id' => $invitation->id,
+                    'product_id'    => $product,
+                 ]);
+            }
         }
         $status = Mail::to($request->email)->send(new InvitationMail($invitation));
         return $invitation;

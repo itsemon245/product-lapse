@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Features\Product;
 
-use App\Models\User;
-use App\Models\Product;
-use App\Models\Invitation;
-use App\Models\ProductUser;
-use Illuminate\Http\Request;
-use App\Models\InvitationProduct;
-use Spatie\Permission\Models\Role;
-use App\Services\InvitationService;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\TeamInvitationRequest;
+use App\Models\Invitation;
+use App\Models\InvitationProduct;
+use App\Models\Product;
+use App\Models\ProductUser;
+use App\Models\User;
+use App\Services\InvitationService;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class InvitationController extends Controller
 {
@@ -32,7 +32,7 @@ class InvitationController extends Controller
     public function create()
     {
         $products = Product::get();
-        $roles = Role::get();
+        $roles    = Role::get();
         return view('features.product.invitation.create', compact('products', 'roles'));
     }
 
@@ -42,9 +42,9 @@ class InvitationController extends Controller
 
     public function store(TeamInvitationRequest $request)
     {
-        $service = new InvitationService($request);
-        $invitation = $service->store();
-        return redirect()->route('invitation.index')->with('success', 'Invitation sent successfully');
+        $invitation = InvitationService::store($request);
+        notify()->success(__('notify/success.invitation_sent'));
+        return redirect()->route('invitation.index');
     }
 
     /**

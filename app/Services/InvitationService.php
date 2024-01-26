@@ -22,7 +22,7 @@ class InvitationService
      */
     public static function store(TeamInvitationRequest $request = null): Invitation
     {
-        if ($request = null) {
+        if ($request == null) {
             $request = self::$request;
         }
         $token      = (string) Str::uuid();

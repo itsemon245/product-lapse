@@ -20,7 +20,11 @@ class BladeServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        app()->setLocale('en');
+        $cookie = request()->cookie('locale');
+        $decrypted = decrypt($cookie, false);
+        $arr = explode('|', $decrypted);
+        $locale = array_pop($arr);
+        app()->setLocale($locale);
         Blade::directive('__', function ($expression) {
             return "<?php echo __($expression) ?>";
         });

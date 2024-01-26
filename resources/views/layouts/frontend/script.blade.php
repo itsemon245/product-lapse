@@ -12,5 +12,9 @@
 <script src="{{ asset('vendors/nice-select/jquery.nice-select.min.js') }}"></script>
 <script src="{{ asset('vendors/scroll/jquery.mCustomScrollbar.concat.min.js') }}"></script>
 <script src="{{ asset('js/plugins.js') }}"></script>
-<script src="{{ asset('js/main.js') }}"></script>
+@if (app()->getLocale() == 'ar')
+    <script src="{{ asset('js/main-rtl.js') }}"></script>
+@else
+    <script src="{{ asset('js/main.js') }}"></script>
+@endif
 @stack('customJs')

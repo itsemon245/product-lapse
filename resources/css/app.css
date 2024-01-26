@@ -19,3 +19,8 @@
 html[lang="ar"]{
    --font-family: "Tajawal"
 }
+
+/* Toggle */
+input:checked ~ .dot {
+    @apply translate-x-[100%] bg-primary;
+  }

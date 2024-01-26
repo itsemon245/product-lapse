@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" x-data="data()">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : '' }}"
+    x-data="data()">
 {{-- Include Haed part and CSS Link --}}
 
 <head>
@@ -9,42 +10,11 @@
     @yield('meta')
     <title>{{ isset($title) ? $title : 'dashboard' }}</title>
 
+    @include('layouts.global.styles')
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-    <script src="https://unpkg.com/htmx.org@1.9.6"
-        integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni" crossorigin="anonymous">
-    </script>
 
-    <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendors/bootstrap-selector/css/bootstrap-select.min.css') }}">
-    <!--icon font css-->
-    <link rel="stylesheet" href="{{ asset('vendors/themify-icon/themify-icons.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendors/elagent/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendors/flaticon/flaticon.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendors/animation/animate.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendors/owl-carousel/assets/owl.carousel.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendors/magnify-pop/magnific-popup.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendors/nice-select/nice-select.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendors/scroll/jquery.mCustomScrollbar.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
-
-    {{-- Must Needed --}}
-    <link rel="stylesheet" href="{{ asset('css/windmil.output.css') }}">
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-    <script src="{{ asset('js/init-alpine.js') }}"></script>
-    <script src="{{asset('js/htmx.js')}}" defer></script>
-    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
-    @notifyCss
-    @stack('styles')
-    
 </head>
+
 <body class="relative overflow-x-hidden targetedClass">
     {{-- Preloader --}}
     @include('layouts.frontend.preloader')
@@ -72,7 +42,7 @@
 
             <div class="flex flex-col flex-1 w-full" id="hx-global-target">
                 @include('layouts.admin.header')
-               
+
                 {{-- This is main content --}}
                 <main>
                     @yield('main')

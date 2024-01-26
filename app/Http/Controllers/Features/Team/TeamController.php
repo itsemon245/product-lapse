@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Features\Team;
 
 
 use App\Models\Invitation;
+use App\Services\InvitationService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TeamInvitationRequest;
@@ -32,7 +33,8 @@ class TeamController extends Controller
      */
     public function store(TeamInvitationRequest $request)
     {
-        dd($request);
+        // dd($request);
+        InvitationService::store($request);
         notify()->success(__('notify/success.create'));
     }
 

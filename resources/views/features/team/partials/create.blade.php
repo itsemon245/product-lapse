@@ -56,7 +56,22 @@
                                     <div class="media post_author">
                                         <div class="checkbox remember">
                                             <label class="mt-4">
-                                                <x-input name="products" type="checkbox" />
+                                                <x-input name="products[]" value="2" type="checkbox" />
+                                            </label>
+                                        </div>
+                                        <img class="rounded-circle" src="{{ asset('img/p1.jpg') }}" alt="">
+                                        <div class="media-body">
+                                            <h5 class=" t_color3 f_size_15 f_500">T-shirt max for men</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="extra extra2 extra3">
+                                    <div class="media post_author">
+                                        <div class="checkbox remember">
+                                            <label class="mt-4">
+                                                <x-input name="products[]" value="1" type="checkbox" />
                                             </label>
                                         </div>
                                         <img class="rounded-circle" src="{{ asset('img/p1.jpg') }}" alt="">

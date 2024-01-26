@@ -34,13 +34,13 @@ Route::resource('change', ChangeController::class);
 Route::resource('delivery', DeliveryController::class);
 // Route::post('/deliveryy/storyy', [DeliveryController::class, 'storyy'])->name('deliveryy.storyy');
 Route::post('set-locale', function (Request $request) {
-    $response = new Illuminate\Http\Response('Language switched');
-    if(app()->getLocale() == 'en'){
-        $cookie = Cookie::forever('locale', 'ar');
-    }else{
-        $cookie = Cookie::forever('locale', 'en');
-    }
-    return back()->withCookie($cookie);
+    $newLocale = app()->getLocale() == 'en' ? 'ar' : 'en';
+    $cookie    = Cookie::forever('locale', $newLocale);
+    $response  = new Illuminate\Http\Response([
+        'success' => true,
+        'locale'  => $newLocale,
+     ]);
+    return $response->withCookie($cookie);
 
 })->name('lang.toggle');
 

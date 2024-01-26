@@ -29,5 +29,4 @@
  @if (app()->getLocale() == 'ar')
      <link rel="stylesheet" href="{{ asset('css/rtl.css') }}">
  @endif
- <link rel="stylesheet" href="{{ asset('js/jquery-3.2.1.min.js') }}">
  @stack('styles')

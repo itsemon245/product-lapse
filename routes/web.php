@@ -35,7 +35,6 @@ Route::resource('delivery', DeliveryController::class);
 // Route::post('/deliveryy/storyy', [DeliveryController::class, 'storyy'])->name('deliveryy.storyy');
 Route::post('set-locale', function (Request $request) {
     $locale = app()->getLocale() == 'en' ? 'ar' : 'en';
-    dd($locale);
     if ($locale != 'en') {
         $cookie = Cookie::forever('locale', $locale);
     } else {

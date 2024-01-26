@@ -1,5 +1,5 @@
 @extends('layouts.feature.index', ['title' => @__('feature/task.add')])
-
+@section('main')
 <x-feature.create>
     <x-slot:breadcrumb>
         <x-breadcrumb :list="[['label' => @__('feature/task.add'), 'route' => route('task.create')]]" />
@@ -12,8 +12,8 @@
             @csrf
             <div class="row">
                 <div class="form-group text_box col-lg-12 col-md-12">
-                    <label class=" text_c f_500">{{ @__('feature/task.label.name') }}</label>
-                    <input type="text" placeholder="{{ @__('feature/task.placeholder.name') }}" name="name">
+                    <label class=" text_c f_500">{{ __('feature/task.label.name') }}</label>
+                    <input type="text" placeholder="{{ __('feature/task.placeholder.name') }}" name="name">
                     @error('name')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -127,3 +127,4 @@
     </x-slot:from>
 </x-feature.create>
 @endsection
+

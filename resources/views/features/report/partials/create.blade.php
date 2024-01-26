@@ -6,14 +6,14 @@
         </x-slot:breadcrumb>
 
         <x-slot:from>
-            <h2 class=" f_600 f_size_24 t_color3 mb_40">Add Report</h2>
+            <h2 class=" f_600 f_size_24 t_color3 mb_40">@__('feature/report.add')</h2>
             <form action="{{ route('report.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-input-label for="name" value="{{ __('feature/report.label.name') }}" />
                         <x-input id="name" class="block mt-1 w-full" type="text"
-                            placeholder="__('feature/report.placeholder.name')" name="name" :value="old('name')"  autofocus />
+                            placeholder="{{ __('feature/report.placeholder.name') }}" name="name" :value="old('name')"  autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-select-input label="{{ __('feature/report.label.type') }}" id="type" placeholder="Choose one" name="type" 
@@ -32,16 +32,16 @@
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-input-label for="report_date" value="{{ __('feature/report.label.date') }}" />
-                        <x-input id="report_date" class="block mt-1 w-full" type="text"
-                            placeholder="{{ __('feature/report.placeholder.date') }}" name="report_date" :value="old('report_date')"  autofocus />
+                        <x-input id="report_date" class="block mt-1 w-full" type="date"
+                             name="report_date" :value="old('report_date')"  autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-attach label="{{ __('feature/report.label.upload') }}" name='file' />
                         <x-input-error :messages="$errors->get('file')" class="mt-2" />
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-6">
-                        <x-textarea placeholder="{{ __('feature/report.label.description') }}" rows="5" cols="10" name="description"
-                            label="{{ __('feature/report.placeholder.description') }}" />                        
+                        <x-textarea label="{{ __('feature/report.label.description') }}" rows="5" cols="10" name="description"
+                             />                        
                     </div>
 
                 </div>

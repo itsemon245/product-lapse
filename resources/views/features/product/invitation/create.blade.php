@@ -1,5 +1,4 @@
-@extends('layouts.feature.index', ['title' => 'Send Invitation'])
-
+@extends('layouts.feature.index', ['title' => @__('feature/invitaion.title')])
 @section('main')
     <section class="sign_in_area bg_color sec_pad">
         <div class="container">
@@ -74,18 +73,21 @@
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
-                            </div>
-
+                            @endforeach
+                            @error('products')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
+                    </div>
 
-
-                        <div class="d-flex align-items-center text-center">
-                            <button type="submit"
-                                class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">@lang('invitation.send_invitaion')</button>
-                        </div>
-                    </form>
                 </div>
-            </div>
-        </div>
-    </section>
+
+
+                <div class="d-flex align-items-center text-center">
+                    <button type="submit"
+                        class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">@__('feature/invitaion.submit')</button>
+                </div>
+            </form>
+        </x-slot:from>
+    </x-feature.create>
 @endsection

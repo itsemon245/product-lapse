@@ -8,6 +8,7 @@ use App\Models\InvitationProduct;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
+
 class InvitationService
 {
     public function __construct(protected TeamInvitationRequest $request)

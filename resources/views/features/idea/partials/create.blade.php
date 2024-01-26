@@ -1,4 +1,4 @@
-@extends('layouts.feature.index', ['title' => @__('feature/idea.add')])
+@extends('layouts.subscriber.app', ['title' => @__('feature/idea.add')])
 
 @section('main')
     <x-feature.create>

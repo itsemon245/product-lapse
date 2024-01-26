@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Features\Team;
 
 
+use App\Models\User;
+use App\Models\Product;
 use App\Models\Invitation;
-use App\Services\InvitationService;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use App\Services\InvitationService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TeamInvitationRequest;
 
@@ -16,7 +19,9 @@ class TeamController extends Controller
      */
     public function index()
     {
-        $teams = Invitation::latest()->get();
+
+        $teams = Product::with('user')->get();
+        // dd($teams);
         return view('features.team.index', compact('teams'));
     }
 
@@ -25,7 +30,9 @@ class TeamController extends Controller
      */
     public function create()
     {
-        return view('features.team.partials.create');
+        $products = Product::get();
+        $roles    = Role::get();
+        return view('features.team.partials.create', compact('products', 'roles'));
     }
 
     /**
@@ -33,9 +40,12 @@ class TeamController extends Controller
      */
     public function store(TeamInvitationRequest $request)
     {
-        // dd($request);
-        InvitationService::store($request);
-        notify()->success(__('notify/success.create'));
+        $teamStore = InvitationService::store($request);
+        if($teamStore){
+            notify()->success(__('notify/success.create'));
+            return redirect()->route('team.index');
+        }
+
     }
 
     /**
@@ -67,6 +77,12 @@ class TeamController extends Controller
      */
     public function destroy(Invitation $invitation)
     {
-               notify()->success(__('notify/success.delete'));
+        $delete = $invitation->delete();
+        if($delete){
+            notify()->success(__('notify/success.delete'));
+            return redirect()->route('team.index');
+        }
+        
+
     }
 }

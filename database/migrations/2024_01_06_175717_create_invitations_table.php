@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('first_name', 255);
             $table->string('last_name', 255);
             $table->string('phone', 255);
-            $table->string('position', 255);
+            $table->string('role', 255);
             $table->string('token', 255)->unique();
             $table->timestamp('accepted_at')->nullable();
             $table->timestamps();

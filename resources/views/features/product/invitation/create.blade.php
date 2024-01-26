@@ -42,7 +42,7 @@
                         @enderror
                     </div>
                     <div class="form-group text_box col-lg-4 col-md-6">
-                        <x-select-input :label="__('invitation.position')" id="position" placeholder="Choose one" name="position" autofocus>
+                        <x-select-input :label="__('invitation.position')" id="position" placeholder="Choose one" name="role" autofocus>
                             @if ($roles)
                                 @forelse ($roles as $role)
                                     <option value="{{ $role->name }}" class="capitalize">

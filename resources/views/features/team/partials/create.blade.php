@@ -34,11 +34,20 @@
                         </select>
                         <x-input-error :messages="$errors->get('details')" class="mt-2" />
                     </div>
-                    
                     <div class="form-group text_box col-lg-4 col-md-6">
-                        <x-input-label for="position" value="{{ __('feature/team.label.position') }}" class=" text_c f_500" />
-                        <x-input type="text" id="position" class="block mt-1 w-full" type="text"
-                    placeholder="{{ __('feature/team.placeholder.position') }}" name="position" :value="old('position')"  autofocus />
+                        <x-select-input :label="__('feature/team.label.position')" id="role" placeholder="Choose one" name="role" autofocus>
+                            @if ($roles)
+                                @forelse ($roles as $role)
+                                    <option value="{{ $role->name }}" class="capitalize">
+                                        @lang($role->name)
+                                    </option>
+                                @empty
+                                    <option disabled>
+                                        @lang('No items available')
+                                    </option>
+                                @endforelse
+                            @endif
+                        </x-select-input>
                     </div>
                     <div class="form-group text_box col-lg-4 col-md-6">
                         <x-input-label for="email" value="{{ __('feature/team.label.email') }}" class=" text_c f_500" />
@@ -51,36 +60,23 @@
                             <label class=" text_c f_500">@__('feature/team.choose')</label>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            @foreach ($products as $product)
+                            <div class="col-md-4">
                                 <div class="extra extra2 extra3">
                                     <div class="media post_author">
                                         <div class="checkbox remember">
                                             <label class="mt-4">
-                                                <x-input name="products[]" value="2" type="checkbox" />
+                                                <x-input name="products[]" value="{{ $product->id }}" type="checkbox" />
                                             </label>
                                         </div>
-                                        <img class="rounded-circle" src="{{ asset('img/p1.jpg') }}" alt="">
+                                        <img class="rounded-circle" src="{{ $product->url }}" alt="">
                                         <div class="media-body">
-                                            <h5 class=" t_color3 f_size_15 f_500">T-shirt max for men</h5>
+                                            <h5 class=" t_color3 f_size_15 f_500">{{ $product->name }}</h5>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="extra extra2 extra3">
-                                    <div class="media post_author">
-                                        <div class="checkbox remember">
-                                            <label class="mt-4">
-                                                <x-input name="products[]" value="1" type="checkbox" />
-                                            </label>
-                                        </div>
-                                        <img class="rounded-circle" src="{{ asset('img/p1.jpg') }}" alt="">
-                                        <div class="media-body">
-                                            <h5 class=" t_color3 f_size_15 f_500">T-shirt max for men</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            </div> 
+                            @endforeach
                         </div>
                      </div>
                     

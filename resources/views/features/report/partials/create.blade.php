@@ -6,7 +6,7 @@
         </x-slot:breadcrumb>
 
         <x-slot:from>
-            <h2 class=" f_600 f_size_24 t_color3 mb_40">Add Report</h2>
+            <h2 class=" f_600 f_size_24 t_color3 mb_40">@__('feature/report.add')</h2>
             <form action="{{ route('report.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row">

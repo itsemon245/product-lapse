@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Features\Product;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Feature\TeamInvitationRequest;
-use App\Mail\InvitationMail;
-use App\Models\Invitation;
-use App\Models\InvitationProduct;
-use App\Models\ProductUser;
 use App\Models\User;
-use App\Services\InvitationService;
+use App\Models\Invitation;
+use App\Models\ProductUser;
+use App\Mail\InvitationMail;
 use Illuminate\Http\Request;
+use App\Models\InvitationProduct;
+use App\Services\InvitationService;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\TeamInvitationRequest;
 
 class InvitationController extends Controller
 {

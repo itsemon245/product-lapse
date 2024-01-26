@@ -6,7 +6,7 @@ use Illuminate\Support\Str;
 use App\Mail\InvitationMail;
 use App\Models\InvitationProduct;
 use Illuminate\Support\Facades\Mail;
-use App\Http\Requests\Feature\TeamInvitationRequest;
+use App\Http\Requests\TeamInvitationRequest;
 
 class InvitationService
 {

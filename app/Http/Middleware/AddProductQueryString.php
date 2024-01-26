@@ -15,10 +15,10 @@ class AddProductQueryString
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $productId = $request->route('product') ?? $request->query('product_id');
-        if ($productId != null) {
-            $request->query->add(['product_id' => $productId]);
-        }
+        // $productId = $request->route('product') ?? $request->query('product_id');
+        // if ($productId != null) {
+        //     $request->query->add(['product_id' => $productId]);
+        // }
         return $next($request);
     }
 }

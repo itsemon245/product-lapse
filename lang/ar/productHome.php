@@ -16,7 +16,8 @@ return [
     'product-history' => 'اصدارات المنتج',
     'historical-image' => 'صور تاريخية',
     'product-delivery' => 'تسليمات المنتج',
-    'categories' => 'تسليمات المنتج'
+    'categories' => 'تسليمات المنتج',
+    'certificate' => 'صنع الشهادة',
 
     
 ];

@@ -17,7 +17,8 @@ return [
     'product-history' => 'Product Release',
     'historical-image' => 'Historical Images',
     'product-delivery' => 'Product Delivery',
-    'categories' => 'Product Category'
+    'categories' => 'Product Category',
+    'certificate' => 'Certificate Make',
 
     
 ];

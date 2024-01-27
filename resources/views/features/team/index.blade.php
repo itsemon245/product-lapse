@@ -29,17 +29,16 @@
 
     <x-slot:list>
         @foreach ($teams as $team)
-        {{-- {{ dd($team) }} --}}
         <div class="col-md-6">
             <div class="item lon new">
                 <div class="list_item">
-                    <figure><a href="#"><img src="" alt=""></a></figure>
+                    <figure><a href="#"><img src="{{ $team->product->url }}" alt=""></a></figure>
                     <div class="joblisting_text">
                         <div class="job_list_table">
                             <div class="jobsearch-table-cell">
-                                <h4><a href="#" class="f_500 t_color3"></a></h4>
+                                <h4><a href="#" class="f_500 t_color3"></a>{{ $team->product->name }}</h4>
                                 <ul class="list-unstyled">
-                                    <li></li> 
+                                    <li>{{ $team->is_accepted == !null ? 'Accepet' : 'Pending' }}</li> 
                                 </ul>
                             </div>
                             <div class="jobsearch-table-cell">

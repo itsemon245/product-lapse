@@ -2,43 +2,43 @@
 return [
 
     //list page
-    'title' => 'Document List',
-    'add' => 'Add Document',
-    'search' => 'Search Document',
-    'showing' => 'Document type',
+    'title' => 'قائمة التسليم',
+    'add' => 'اضف تسليم',
+    'search' => 'البحث عن اصدار',
+    'showing' => 'نوع الوثيقة',
 
     //add page + edit page
     'label' => [
-        'name' => 'Document name',
-        'type' => 'Document type', 
-        'version' => 'Version', 
-        'description' => 'Document Description',
-        'date' => 'Document date', 
-        'attach' => 'Attach file',
+        'name' => 'اسم التسليم',
+        'type' => 'نوع الوثيقة', 
+        'version' => 'إصدار', 
+        'description' => 'مسئول الموافقة',
+        'date' => 'كلمة المرور', 
+        'attach' => 'اضافة مرفقات',
     ],
     'placeholder' => [
-        'name' => 'Document name',
-        'version' => 'Version', 
-        'description' => 'Document description',
-        'date' => 'Document date',
+        'name' => 'اسم التسليم',
+        'version' => 'إصدار', 
+        'description' => 'مسئول الموافقة',
+        'date' => 'كلمة المرور',
     ],
-    'cancel' => 'Cancel',
-    'submit' => 'Add document',
+    'cancel' => 'يلغي',
+    'submit' => 'اضافة تسليم',
 
     //details page
-    'priority' => 'Priority',
-    'classification' => 'Classification',
+    'priority' => 'أولوية',
+    'classification' => 'تصنيف',
     'end-date' => 'End date',
-    'realy-date' => 'Realy end date',
-    'type' => 'Document type',
-    'details' => 'Document details',
-    'working' => 'Working on',
-    'update' => 'Update',
-    'download' => 'Download document',
+    'realy-date' => 'تاريخ الانتهاء',
+    'type' => 'نوع الوثيقة',
+    'details' => 'تفاصيل الوثيقة',
+    'working' => 'يعمل على',
+    'update' => 'تحديث',
+    'download' => 'تنزيل المستند',
 
     //Edit page
-    'edit' => 'Edit Document',
+    'edit' => 'تحرير المستند',
 
     //show page
-    'show' => 'Show document',
+    'show' => 'إظهار المستند',
 ];

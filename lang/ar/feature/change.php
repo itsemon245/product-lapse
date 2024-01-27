@@ -2,41 +2,41 @@
 return [
 
     //list page
-    'title' => 'Add change request',
-    'add' => 'Add request',
-    'search' => 'Search request',
-    'showing' => 'Status',
+    'title' => 'طلبات التغيير',
+    'add' => 'اضف طلب',
+    'search' => 'البحث عن طلب',
+    'showing' => 'الحالة',
 
     //add page + edit page
     'label' => [
-        'title' => 'Change request title',
-        'classification' => 'Classification', 
-        'priority' => 'Priority', 
-        'status' => 'Status',
-        'details' => 'Change request details', 
-        'administrator' => 'Administrator',
-        'date' => 'Required completion date',
+        'title' => 'عنوان طلب التغيير',
+        'classification' => 'تصنيف طلب التغيير', 
+        'priority' => 'الاولوية', 
+        'status' => 'حالة الطلب',
+        'details' => 'تفاصيل طلب التغيير', 
+        'administrator' => 'المسؤول',
+        'date' => 'تاريخ الانجاز المطلوب',
     ],
     'placeholder' => [
-        'title' => 'Change request title',
-        'details' => 'Change request details', 
-        'administrator' => 'Administrator',
+        'title' => 'عنوان طلب التغيير',
+        'details' => 'تفاصيل طلب التغيير', 
+        'administrator' => 'المسؤول',
     ],
-    'cancel' => 'Cancel',
-    'submit' => 'Add request',
+    'cancel' => 'الغاء',
+    'submit' => 'اضافة طلب',
 
     //details page
-    'priority' => 'Priority',
-    'classification' => 'Classification',
-    'end-date' => 'End date',
-    'realy-date' => 'Realy end date',
-    'details' => 'Change request details',
-    'working' => 'Working on',
-    'update' => 'Update',
+    'priority' => 'الاولوية',
+    'classification' => 'تصنيف التذكرة',
+    'end-date' => 'التاريخ المخطط',
+    'realy-date' => 'تاريخ الانتهاء الفعلى',
+    'details' => 'تفاصيل طلب التغيير',
+    'working' => 'جارى العمل',
+    'update' => 'تحديث',
 
     //Edit page
-    'edit' => 'Edit Document',
+    'edit' => 'تحرير المستند',
 
     //show page
-    'show' => 'Change request details',
+    'show' => 'تغيير تفاصيل الطلب',
 ];

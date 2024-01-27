@@ -66,7 +66,6 @@
                     <x-button type="button" color="secondary">{{  __('feature/product.cancel') }}</x-button>
                 </div>
             </form>
-
         </x-slot:from>
     </x-feature.create>
 @endsection

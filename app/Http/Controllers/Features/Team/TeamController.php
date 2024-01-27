@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Features\Team;
 
 
+use App\Models\ProductUser;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Invitation;
@@ -19,9 +20,9 @@ class TeamController extends Controller
      */
     public function index()
     {
-
-        $teams = Product::with('user')->get();
-        // dd($teams);
+        $data = ProductUser::get();
+        $teams = User::with('products')->get();
+        dd($data);
         return view('features.team.index', compact('teams'));
     }
 

@@ -1,17 +1,30 @@
-<?php 
-
+<?php
 return [
+
+    //list page
     'title' => 'Products',
-    'add' => 'Add product',
-    'search' => 'Search product',
-    'select' => 'Showing products',
-    'name-input' => 'Product name',
-    'category-input' => 'Category',
-    'url-input' => 'URL',
-    'stage-input' => 'Product stage',
-    'logo-input' => 'Product logo',
-    'description' => 'Description',
-    'cancel-btn' => 'Cancel',
+    'add' => 'Add Product',
+    'search' => 'Search products',
+    'showing' => 'Showing Product',
+
+    //add page + edit page
+    'label' => [
+        'name' => 'Product name',
+        'category' => 'category', 
+        'url' => 'URL', 
+        'stage' => 'Product stage',
+        'logo' => 'Product logo', 
+        'description' => 'Description',
+    ],
+    'placeholder' => [
+        'name' => 'Product name',
+        'url' => 'https://', 
+        'description' => 'Description',
+    ],
+    'cancel' => 'Cancel',
+    'submit' => 'Add product',
+
+    //Edit page
+    'edit' => 'Edit Product',
 
 ];
-

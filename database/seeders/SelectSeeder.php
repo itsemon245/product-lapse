@@ -35,5 +35,15 @@ class SelectSeeder extends Seeder
                 'ar'=> 'لم يبدأ'
             ],
         ]);
+        Select::create([
+            'owner_id' => 1,
+            'model_type' => Feature::INNOVATE->value,
+            'type' => SelectType::PRIORITY->value,
+            'color' => "#fff",
+            'value' => [
+                'en'=> 'Not Started',
+                'ar'=> 'لم يبدأ'
+            ],
+        ]);
     }
 }

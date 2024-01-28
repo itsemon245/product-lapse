@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Features\Idea;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Idea;
 use App\Models\Select;
+use App\Models\Product;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class IdeaController extends Controller
 {
@@ -14,7 +15,7 @@ class IdeaController extends Controller
      */
     public function index()
     {
-        $ideas = Idea::where('owner_id', auth()->user()->id)->limit(5)->get();
+        $ideas = Product::find(1)->ideas;
         return view('features.idea.index', compact('ideas'));
     }
 
@@ -23,7 +24,7 @@ class IdeaController extends Controller
      */
     public function create()
     {
-        $priority = Select::of('idea')->type('priority')->get();
+        $priority = Select::of('innovate')->type('priority')->get();
         return view('features.idea.partials.create', compact('priority'));
     }
 

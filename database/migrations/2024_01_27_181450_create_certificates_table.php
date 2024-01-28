@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('owner_id');
             $table->foreign('owner_id')->references('id')->on('users')->cascadeOnDelete();
-            $table->string('name');
+            $table->unsignedBigInteger('received_id');
+            $table->foreign('received_id')->references('id')->on('users')->cascadeOnDelete();
             $table->string('company_name');
             $table->longText('description');
             $table->dateTime('issue_date');
-            $table->longText('signature');
             $table->timestamps();
         });
     }

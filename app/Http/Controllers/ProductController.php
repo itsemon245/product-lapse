@@ -128,12 +128,6 @@ class ProductController extends Controller
                 'icon' => 'img/delivered.png',
                 'route' => route('product-category.index'),
             ],
-            'certificate' => [
-                'name' => @__('productHome.certificate'),
-                'counter' => 0,
-                'icon' => 'img/delivered.png',
-                'route' => route('certificate.index'),
-            ],
         ];
         return view('features.product.home', compact('product', 'features', 'products'));
     }

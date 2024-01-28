@@ -23,6 +23,7 @@ return new class extends Migration {
             $table->text('workplace')->nullable();
             $table->text('position')->nullable();
             $table->text('promotional_code')->nullable();
+            $table->json('flag')->nullable()->comment('application feature flags for the dedicated user');
             $table->timestamps();
         });
     }

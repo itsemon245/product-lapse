@@ -1,12 +1,12 @@
 <?php
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Cookie;
 use App\Http\Controllers\ChangeController;
-use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DeliveryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,12 +34,15 @@ Route::resource('change', ChangeController::class);
 Route::resource('delivery', DeliveryController::class);
 // Route::post('/deliveryy/storyy', [DeliveryController::class, 'storyy'])->name('deliveryy.storyy');
 Route::post('set-locale', function (Request $request) {
-    $locale = app()->getLocale() == 'en' ? 'ar' : 'en';
-    if ($locale != 'en') {
-        $cookie = Cookie::forever('locale', $locale);
-    } else {
-        $cookie = Cookie::forget('locale');
+    $cookie = request()->cookie('locale');
+    if ($cookie == null) {
+        $cookie = Cookie::forever('locale', 'en');
+    }elseif ($cookie == 'en') {
+        $cookie = Cookie::forever('locale', 'ar');
+    }else{
+        $cookie = Cookie::forever('locale', 'en');
     }
+    // dd($cookie);
     return back()->withCookie($cookie);
 
 })->name('lang.toggle');

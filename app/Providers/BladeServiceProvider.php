@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class BladeServiceProvider extends ServiceProvider
@@ -25,6 +26,9 @@ class BladeServiceProvider extends ServiceProvider
         });
         Blade::directive('trans', function ($expression) {
             return "<?php echo trans($expression) ?>";
+        });
+        View::composer("*", function () {
+            app()->setLocale(request()->cookie('locale'));
         });
     }
 }

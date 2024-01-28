@@ -14,7 +14,7 @@
 
 <body class="relative overflow-x-hidden">
     {{-- Preloader --}}
-    @include('layouts.frontend.preloader')
+    {{-- @include('layouts.frontend.preloader') --}}
     <div class="" id="tolink-1">
         <div class="top-link"><a href="#tolink-1"><i class="ti-angle-up"></i></a></div>
 

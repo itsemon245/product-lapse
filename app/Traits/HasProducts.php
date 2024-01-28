@@ -22,7 +22,7 @@ trait HasProducts
     {
         static::created(function ($model) {
             DB::table('productables')->insert([
-                'product_id'       => request()->cookie('product_id'),
+                'product_id'       => productId(),
                 'productable_id'   => $model->id,
                 'productable_type' => __CLASS__,
                 'user_id'          => auth()->id(),

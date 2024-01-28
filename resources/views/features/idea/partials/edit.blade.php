@@ -10,7 +10,7 @@
 
         <x-slot:from>
             <h2 class=" f_600 f_size_24 t_color3 mb_40">@__('feature/idea.edit')</h2>
-            <form action="{{ route('idea.update', ['idea' => base64_encode($idea->id)]) }}" method="POST"
+            <form action="{{ route('idea.update', $idea) }}" method="POST"
                 class="login-form sign-in-form" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')

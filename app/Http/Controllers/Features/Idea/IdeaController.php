@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Features\Idea;
 
-use App\Models\Idea;
-use App\Models\Select;
-use App\Models\Product;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\IdeaRequest;
+use App\Models\Idea;
+use App\Models\Product;
+use App\Models\Select;
+use Illuminate\Http\Request;
 
 class IdeaController extends Controller
 {
@@ -15,7 +16,7 @@ class IdeaController extends Controller
      */
     public function index()
     {
-        $ideas = Product::find(1)->ideas;
+        $ideas = Product::find(productId())->ideas()->paginate(10);
         return view('features.idea.index', compact('ideas'));
     }
 
@@ -31,19 +32,11 @@ class IdeaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(IdeaRequest $request)
     {
-        $request->validate(Idea::rules());
-
-        $data = $request->except('_token');
-        $data['owner_id'] = auth()->user()->id;
-
+        $data               = $request->except('_token');
+        $data[ 'owner_id' ] = ownerId();
         $idea = Idea::create($data);
-
-        if (!$idea) {
-            notify()->error(__('Created failed!'));
-            return redirect()->route('idea.index');
-        }
 
         notify()->success(__('Created successfully!'));
         return redirect()->route('idea.index');
@@ -52,54 +45,28 @@ class IdeaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Idea $idea)
     {
-        $id = base64_decode($id);
-
-        $idea = Idea::where('owner_id', auth()->id())->find($id);
-
-        if (!$idea) {
-            notify()->error(__('Not authorized!'));
-            return redirect()->route('idea.index');
-        }
-
         return view('features.idea.partials.show', compact('idea'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Idea $idea)
     {
-        $id = base64_decode($id);
         $priority = Select::of('idea')->type('priority')->get();
-        $idea = Idea::find($id);
-        if ($idea->owner_id == auth()->user()->id) {
-            return view('features.idea.partials.edit', compact('idea', 'priority' ));
-        } else {
-            notify()->error(__('Not authorized!'));
-            return redirect()->route('idea.index');
-        }
+        return view('features.idea.partials.edit', compact('idea', 'priority'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(IdeaRequest $request, Idea $idea)
     {
-        $request->validate(Idea::rules());
-
-        $id = base64_decode($id);
-        $idea = Idea::find($id);
-
-        if (!$idea || $idea->owner_id != auth()->user()->id) {
-            notify()->error(__('Not authorized!'));
-            return redirect()->route('idea.index');
-        }
-
-        $data = $request->except('_token', '_method');
-        $data['owner_id'] = auth()->user()->id;
-        $idea->update($data);
+        $data               = $request->except('_token', '_method');
+        $data[ 'owner_id' ] = ownerId();
+        $idea->update();
 
         notify()->success(__('Updated successfully!'));
         return redirect()->route('idea.index');
@@ -108,18 +75,11 @@ class IdeaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Idea $idea)
     {
-        $id = base64_decode($id);
 
-        $idea = Idea::find($id);
-        if ($idea->owner_id == auth()->user()->id) {
-            $idea->delete();
-            notify()->success(__('Deleted successfully!'));
-            return redirect()->route('idea.index');
-        } else {
-            notify()->success(__('Delete failed!'));
-            return redirect()->route('idea.index');
-        }
+        $idea->delete();
+        notify()->success(__('Deleted successfully!'));
+        return redirect()->route('idea.index');
     }
 }

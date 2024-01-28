@@ -89,3 +89,11 @@ function deleteFile($old_path, $disk = 'public')
     }
     return $deleted;
 }
+
+function ownerId() {
+    return 1;
+}
+
+function productId() {
+    return request()->cookie('product_id');
+}

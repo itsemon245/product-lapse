@@ -15,12 +15,11 @@ class IdeaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'sometimes|required',
-            'owner' => 'sometimes|required',
-            'priority' => 'sometimes|required',
-            'details' => 'sometimes|required',
+            'name'         => 'sometimes|required|max:200',
+            'owner'        => 'sometimes|required|max:200',
+            'priority'     => 'sometimes|required',
+            'details'      => 'sometimes|required',
             'requirements' => 'sometimes|required',
-            
-        ];
+         ];
     }
 }

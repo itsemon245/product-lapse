@@ -32,24 +32,24 @@
         <div class="col-md-6">
             <div class="item lon new">
                 <div class="list_item">
-                    <figure><a href="#"><img src="img/profile2.png" alt=""></a></figure>
+                    <figure><a href="#"><img src="{{ $team->product->url }}" alt=""></a></figure>
                     <div class="joblisting_text">
                         <div class="job_list_table">
                             <div class="jobsearch-table-cell">
-                                <h4><a href="#" class="f_500 t_color3">Ahmed Mahmoud</a></h4>
+                                <h4><a href="#" class="f_500 t_color3"></a>{{ $team->product->name }}</h4>
                                 <ul class="list-unstyled">
-                                    <li>Graphic designer</li>
+                                    <li>{{ $team->is_accepted == !null ? 'Accepet' : 'Pending' }}</li> 
                                 </ul>
                             </div>
                             <div class="jobsearch-table-cell">
                                 <div class="jobsearch-job-userlist">
                                     <div class="like-btn">
-                                        <a href="javascript:void(0);" class="shortlist" title="Delete"> <i class="ti-trash"></i> </a>
+                                        <form action="{{ route('team.destroy', $team) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <x-btn-icons type="submit" value="<i class='ti-trash'></i>" />
+                                        </form>
                                     </div>
-                                    <div class="like-btn">
-                                        <a href="javascript:void(0);" class="shortlist" title="Edit"> <i class="ti-pencil"></i> </a>
-                                    </div>
-
                                 </div>
                             </div>
                         </div>

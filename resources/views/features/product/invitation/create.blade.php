@@ -1,48 +1,48 @@
-@extends('layouts.feature.index', ['title' => @__('feature/invitaion.title')])
+@extends('layouts.feature.index', ['title' => @__('feature/invitation.label.title')])
 @section('main')
     <x-feature.create>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => @__('feature/report.add'), 'route' => route('report.create')]]" />
+            <x-breadcrumb :list="[['label' => @__('feature/invitation.label.title'), 'route' => route('invitation.create')]]" />
         </x-slot:breadcrumb>
         <x-slot:from>
 
-            <h2 class=" f_600 f_size_24 t_color3 mb_40">@lang('invitation.send_invitaion')</h2>
+            <h2 class=" f_600 f_size_24 t_color3 mb_40">@__('feature/invitation.label.title')</h2>
             <form method="POST" action="{{ route('invitation.store') }}" class="login-form sign-in-form"
                 enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="form-group text_box col-lg-4 col-md-6">
-                        <label class=" text_c f_500">@lang('invitation.fisrt_name')</label>
-                        <input type="text" placeholder="first name" name="first_name">
+                        <label class=" text_c f_500">@__('feature/invitation.label.fname')</label>
+                        <input type="text" placeholder="{{ __('feature/invitation.placeholder.fname') }}" name="first_name">
                         @error('first_name')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
 
                     </div>
                     <div class="form-group text_box col-lg-4 col-md-6">
-                        <label class=" text_c f_500">@lang('invitation.last_name')</label>
-                        <input type="text" placeholder="last name" name="last_name">
+                        <label class=" text_c f_500">@__('feature/invitation.label.lname')</label>
+                        <input type="text" placeholder="{{ __('feature/invitation.placeholder.lname') }}" name="last_name">
                         @error('last_name')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form-group text_box col-lg-4 col-md-6">
-                        <label class=" text_c f_500">@lang('invitation.email')</label>
-                        <input type="text" placeholder="Enter Email" name="email">
+                        <label class=" text_c f_500">@__('feature/invitation.label.email')</label>
+                        <input type="text" placeholder="{{ __('feature/invitation.placeholder.email') }}" name="email">
                         @error('email')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
 
                     <div class="form-group text_box col-lg-4 col-md-6">
-                        <label class=" text_c f_500">@lang('invitation.phone')</label>
-                        <input type="text" placeholder="phone" name="phone">
+                        <label class=" text_c f_500">@__('feature/invitation.label.phone')</label>
+                        <input type="text" placeholder="{{ __('feature/invitation.placeholder.phone') }}" name="phone">
                         @error('phone')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form-group text_box col-lg-4 col-md-6">
-                        <x-select-input :label="__('invitation.position')" id="position" placeholder="Choose one" name="position" autofocus>
+                        <x-select-input :label="__('feature/invitation.label.role')" id="role" placeholder="Choose one" name="role" autofocus>
                             @if ($roles)
                                 @forelse ($roles as $role)
                                     <option value="{{ $role->name }}" class="capitalize">
@@ -58,7 +58,7 @@
                     </div>
 
                     <div class="form-group text_box col-lg-12 col-md-12">
-                        <label class=" text_c f_500">@lang('invitation.choose')</label>
+                        <label class=" text_c f_500">@__('feature/invitation.choose')</label>
                         <div class="row">
                             @foreach ($products as $product)
                                 <div class="col-lg-4 col-md-6">

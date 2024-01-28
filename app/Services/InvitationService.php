@@ -33,7 +33,7 @@ class InvitationService
             'first_name' => $request->first_name,
             'last_name'  => $request->last_name,
             'phone'      => $request->phone,
-            'position'   => $request->position,
+            'role'   => $request->role,
             'token'      => $token,
          ]);
         // Create invitation products for every product

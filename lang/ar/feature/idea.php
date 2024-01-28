@@ -2,37 +2,37 @@
 return [
 
     //list page
-    'title' => 'Innovate List',
-    'add' => 'hello',
-    'search' => 'Search Innovate',
-    'showing' => 'Showing Innovate',
+    'title' => 'ابتكر',
+    'add' => 'اضافة فكرة',
+    'search' => 'البحث عن منتج',
+    'showing' => 'الافكار المعروضة',
 
     //add page
     'label' => [
-        'name' => 'Idea name',
-        'owner' => 'Idea Owner', // + details page
-        'priority' => 'Priority', // + details page
-        'details' => 'Idea details',
-        'requirements' => 'Idea requirements', // + details page
+        'name' => 'عنوان الفكرة',
+        'owner' => 'صاحب الفكرة الأساسية', // + details page
+        'priority' => 'حالة الفكرة', // + details page
+        'details' => 'تفاصيل الفكرة',
+        'requirements' => 'متطلبات تنفيذ الفكرة', // + details page
     ],
     'placeholder' => [
-        'name' => 'Idea name',
-        'owner' => 'Idea Owner', // + details page
-        'priority' => 'Priority', // + details page
-        'details' => 'Idea details',
-        'requirements' => 'Idea requirements', // + details page
+        'name' => 'عنوان الفكرة',
+        'owner' => 'صاحب الفكرة الأساسية', // + details page
+        'priority' => 'حالة الفكرة', // + details page
+        'details' => 'تفاصيل الفكرة',
+        'requirements' => 'متطلبات تنفيذ الفكرة', // + details page
     ],
-    'cancel' => 'Cancel',
-    'submit' => 'Submit',
+    'cancel' => 'يلغي',
+    'submit' => 'اضافة فكرة',
 
     //details page
-    'details' => 'Idea details',
-    'update' => 'Update',
-    'change-request' => 'Convert to change request',
-    'task' => 'Convert fo task for execution',
+    'details' => 'تفاصيل الفكرة',
+    'update' => 'تحديث',
+    'change-request' => 'تحويل الى طلب تغيير',
+    'task' => 'تحويل الى مهمة للتنفيذ',
 
     //Edit page
-    'edit' => 'Edit Idea',
+    'edit' => 'تحرير الفكرة',
 ]
 
 

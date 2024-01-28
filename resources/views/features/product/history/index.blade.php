@@ -1,45 +1,130 @@
-@extends('layouts.subscriber.app', ['title' => 'History'])
+@extends('layouts.subscriber.app', ['title' => @__('feature/productHistory.title')])
 @push('styles')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.8/css/fileinput.min.css">
 @endpush
 @section('main')
-    <section class="breadcrumb_area">
-        <div class="container d-flex">
-            <div class="breadcrumb_content text-center ml-auto">
-                <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Product History</li>
-                </ul>
-            </div>
+    <x-breadcrumb :list="[['label' => @__('feature/productHistory.title'), 'route' => route('product-history.index')]]" />
 
-        </div>
-    </section>
-
-    <section class="sign_in_area bg_color sec_pad">
-        <div class="container">
-            <div class="sign_info">
-                <div class="login_info">
-                    <div class="d-flex justify-content-between align-items-center mb_20">
-                        <h2 class=" f_600 f_size_24 t_color3">Product history</h2>
-                        <button type="submit" class="btn_hover agency_banner_btn btn-bg" style="margin: 0"
-                            data-toggle="modal" data-target="#myModal"><i class="ti-plus"></i>New group</button>
-                    </div>
-                    <div class="tab-content faq_content" id="myTabContent">
-                        
+        <section class="sign_in_area bg_color sec_pad">
+            <div class="container">
+                <div class="sign_info">
+                    <div class="login_info">
+                        <div class="d-flex justify-content-between align-items-center mb_20">
+                            <h2 class=" f_600 f_size_24 t_color3">@__('feature/productHistory.title')</h2>
+                            <button type="submit" class="btn_hover agency_banner_btn btn-bg" style="margin: 0"
+                                data-toggle="modal" data-target="#myModal"><i class="ti-plus"></i>@__('feature/productHistory.button')</button>
+                        </div>
+                        <div class="tab-content faq_content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="purchas" role="tabpanel" aria-labelledby="purchas-tab">
+                                <div id="accordion">
+                                    <div class="card">
+                                        <div class="card-header" id="headingTwo">
+                                            <h5 class="mb-0">
+                                                <button class="btn btn-link collapsed" data-toggle="collapse"
+                                                    data-target="#collapseTwo" aria-expanded="false"
+                                                    aria-controls="collapseTwo">
+                                                    10 January 2029<i class="ti-angle-down"></i><i class="ti-angle-up"></i>
+                                                </button>
+                                            </h5>
+                                        </div>
+                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                            data-parent="#accordion">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-12 history-notes">
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <h6 class="title2">Description</h6>
+                                                        <p class="f_400 mb-30 text-font">
+                                                            It is a long established fact that a reader will be distracted by
+                                                            the readable content of a page when looking at its layout It is a
+                                                            long established fact that a reader will be distracted by the
+                                                            readable content of a page when looking at its layout
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                                                        <div class="product-history">
+                                                            <img src="img/p1.jpg">
+                                                            <h6>Rolex watch</h6>
+                                                            <a href="#"></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                                                        <div class="product-history">
+                                                            <img src="img/p1.jpg">
+                                                            <h6>Rolex watch</h6>
+                                                            <a href="#"></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                                                        <div class="product-history">
+                                                            <img src="img/p1.jpg">
+                                                            <h6>Rolex watch</h6>
+                                                            <a href="#"></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                                                        <div class="product-history">
+                                                            <img src="img/p1.jpg">
+                                                            <h6>Rolex watch</h6>
+                                                            <a href="#"></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                                                        <div class="product-history">
+                                                            <img src="img/p1.jpg">
+                                                            <h6>Rolex watch</h6>
+                                                            <a href="#"></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                                                        <div class="product-history">
+                                                            <img src="img/p1.jpg">
+                                                            <h6>Rolex watch</h6>
+                                                            <a href="#"></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                                                        <div class="product-history">
+                                                            <img src="img/p1.jpg">
+                                                            <h6>Rolex watch</h6>
+                                                            <a href="#"></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                                                        <div class="product-history">
+                                                            <img src="img/p1.jpg">
+                                                            <h6>Rolex watch</h6>
+                                                            <a href="#"></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                                                        <div class="product-history">
+                                                            <img src="img/p1.jpg">
+                                                            <h6>Rolex watch</h6>
+                                                            <a href="#"></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
     <!-- The Modal -->
     <div class="modal fade" id="myModal">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form method="POST" action="" enctype="multipart/form-data"> 
+                <form method="POST" action="" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-header">
-                        <h4 class="modal-title">Add new group</h4>
+                        <h4 class="modal-title">@__('feature/productHistory.modal-title')</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
 
@@ -47,7 +132,7 @@
                     <div class="modal-body">
                         <div class="container-fluid">
                             <div class="form-group text_box col-lg-12 col-md-12">
-                                <label class=" text_c f_500">Date</label>
+                                <label class=" text_c f_500">@__('feature/productHistory.date')</label>
                                 <input type="date" placeholder="date" name="date" required>
                             </div>
                             <div class="form-group text_box col-lg-12 col-md-12">
@@ -55,7 +140,7 @@
                                 <textarea name="description" id="message" cols="30" rows="10" placeholder="Description" required></textarea>
                             </div>
                             <div class="form-group text_box col-lg-12 col-md-12">
-                                <label class=" text_c f_500">Images</label>
+                                <label class=" text_c f_500">@__('feature/productHistory.images')</label>
                                 <div class="verify-sub-box">
                                     <div class="file-loading">
                                         <input id="multiplefileupload" name="image[]" type="file" accept=".jpg,.gif,.png"
@@ -68,9 +153,7 @@
 
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <button type="submit" class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">Add</button>
-                        {{-- <button type="button" class="btn_hover agency_banner_btn btn-bg btn-bg-grey"
-                            data-dismiss="modal">Cancel</button> --}}
+                        <button type="submit" class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">@__('feature/productHistory.modal-btn')</button>
                     </div>
                 </form>
             </div>

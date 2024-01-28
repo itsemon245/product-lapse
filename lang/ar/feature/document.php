@@ -2,43 +2,43 @@
 return [
 
     //list page
-    'title' => 'Document List',
-    'add' => 'Add Document',
-    'search' => 'Search Document',
-    'showing' => 'Document type',
+    'title' => 'وثائق المنتج',
+    'add' => 'اضف وثيقة',
+    'search' => 'البحث عن وثيقة',
+    'showing' => 'نوع الوثيقة',
 
     //add page + edit page
     'label' => [
-        'name' => 'Document name',
-        'type' => 'Document type', 
-        'version' => 'Version', 
-        'description' => 'Document Description',
-        'date' => 'Document date', 
+        'name' => 'اسم الوثيقة',
+        'type' => 'نوع الوثيقة',
+        'version' => 'الاصدار', 
+        'description' => 'وصف الوثيقة',
+        'date' => 'تاريخ الوثيقة', 
         'attach' => 'Attach file',
     ],
     'placeholder' => [
-        'name' => 'Document name',
-        'version' => 'Version', 
-        'description' => 'Document description',
-        'date' => 'Document date',
+        'name' => 'اسم الوثيقة',
+        'version' => 'الاصدار', 
+        'description' => 'وصف الوثيقة',
+        'date' => 'تاريخ الوثيقة',
     ],
-    'cancel' => 'Cancel',
-    'submit' => 'Add document',
+    'cancel' => 'الغاء',
+    'submit' => 'اضافة مهمة',
 
     //details page
-    'priority' => 'Priority',
-    'classification' => 'Classification',
-    'end-date' => 'End date',
-    'realy-date' => 'Realy end date',
-    'type' => 'Document type',
-    'details' => 'Document details',
-    'working' => 'Working on',
-    'update' => 'Update',
-    'download' => 'Download document',
+    'priority' => 'الاولوية',
+    'classification' => 'تصنيف التذكرة',
+    'end-date' => 'التاريخ المخطط',
+    'realy-date' => 'تاريخ الانتهاء الفعلى',
+    'type' => 'نوع الوثيقة',
+    'details' => 'تفاصيل الوثيقة',
+    'working' => 'جارى العمل',
+    'update' => 'تحديث',
+    'download' => 'تحميل الوثيقة',
 
     //Edit page
-    'edit' => 'Edit Document',
+    'edit' => 'تحرير المستند',
 
     //show page
-    'show' => 'Show document',
+    'show' => 'إظهار المستند',
 ];

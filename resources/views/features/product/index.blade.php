@@ -1,12 +1,12 @@
-@extends('layouts.feature.index', ['title' => 'Products'])
+@extends('layouts.feature.index', ['title' => @__('feature/product.add')])
 @section('main')
     <x-feature.index>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => 'Products', 'route' => route('product.index')]]" />
+            <x-breadcrumb :list="[['label' => @__('feature/product.add'), 'route' => route('product.index')]]" />
         </x-slot:breadcrumb>
         <x-slot:search>
             <form action="#" class="search-form input-group">
-                <input type="searproductch" class="form-control widget_input" placeholder="Search packages">
+                <input type="searproductch" class="form-control widget_input" placeholder="{{ __('feature/product.search') }}">
                 <button type="submit"><i class="ti-search"></i></button>
             </form>
         </x-slot:search>
@@ -16,11 +16,11 @@
         hx-push-url="true" hx-target="#hx-global-target" hx-select="#hx-global-target" --}}
             <x-button type="link" href="{{ route('product.create') }}">
                 <i class="ti-plus"></i>
-                Add Product
+                @__('feature/product.add')
             </x-button>
         </x-slot:actions>
         <x-slot:filter>
-            <h5>Showing Product</h5>
+            <h5>@__('feature/product.showing')</h5>
             <form method="get" action="#">
                 <select class="selectpickers selectpickers2" style="display: none;">
                     <option value="">All</option>

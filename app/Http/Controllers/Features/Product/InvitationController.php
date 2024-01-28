@@ -23,7 +23,6 @@ class InvitationController extends Controller
     public function index()
     {
         $invitations = Invitation::where('owner_id', auth()->user()->id)->get();
-
         return view('features.product.invitation.index', compact('invitations'));
     }
 

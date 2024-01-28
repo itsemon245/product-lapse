@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\HasImages;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Certificate extends Model
 {
-    use HasFactory;
+    use HasFactory, HasImages;
     protected $guarded = [];
 
     public function user(){

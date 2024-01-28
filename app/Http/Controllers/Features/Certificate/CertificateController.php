@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Features\Certificate;
 
 use App\Http\Requests\CertificateRequest;
 use App\Models\Certificate;
+use App\Models\Invitation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +15,8 @@ class CertificateController extends Controller
      */
     public function index()
     {
-        return view('features.certificate.index');
+        $certificates = Certificate::with('image')->with('user')->get();
+        return view('features.certificate.index', compact('certificates'));
     }
 
     /**
@@ -22,7 +24,9 @@ class CertificateController extends Controller
      */
     public function create()
     {
-        return view('features.certificate.partials.create');
+        $teams = Invitation::where('owner_id', auth()->id())->where('accepted_at', 1)->get();
+        // dd($teams);
+        return view('features.certificate.partials.create', compact('teams'));
     }
 
     /**
@@ -30,7 +34,18 @@ class CertificateController extends Controller
      */
     public function store(CertificateRequest $request)
     {
-        notify()->success(__('notify/success.create'));
+        $store = Certificate::create([
+            'owner_id' => auth()->id(),
+            'received_id' => $request->received_id,
+            'company_name' => $request->company_name,
+            'description' => $request->description,
+            'issue_date' => $request->issue_date,
+        ]);
+        $image = $store->storeImage($request->signature);
+        if($image ){
+            notify()->success(__('notify/success.create'));
+        }
+        return redirect()->route('certificate.index');
     }
 
     /**

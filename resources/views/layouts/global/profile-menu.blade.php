@@ -4,7 +4,7 @@
     <li class="nav-item"><a href="{{ route('dashboard') }}" class="nav-link">My Products</a></li>
     <li class="nav-item"><a href="#" class="nav-link">Reports</a></li>
     <li class="nav-item"><a href="#" class="nav-link">Packages</a></li>
-    <li class="nav-item"><a href="#" class="nav-link">Certificate</a></li>
+    <li class="nav-item"><a href="{{ route('certificate.index') }}" class="nav-link">Certificate</a></li>
     <li class="nav-item"><a href="#" class="nav-link">Settings</a></li>
     <form  action="{{ route('logout') }}" method="post">
         @csrf

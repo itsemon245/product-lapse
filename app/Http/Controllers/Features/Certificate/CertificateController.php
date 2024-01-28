@@ -46,7 +46,7 @@ class CertificateController extends Controller
             notify()->success(__('notify/success.create'));
         }
         return redirect()->route('certificate.index');
-    }
+        }
 
     /**
      * Display the specified resource.

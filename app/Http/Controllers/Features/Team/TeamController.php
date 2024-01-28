@@ -30,7 +30,7 @@ class TeamController extends Controller
      */
     public function create()
     {
-        $products = Product::get();
+        $products = Product::with('image')->get();
         $roles    = Role::get();
         return view('features.team.partials.create', compact('products', 'roles'));
     }

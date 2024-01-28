@@ -69,7 +69,7 @@
                                                 <x-input name="products[]" value="{{ $product->id }}" type="checkbox" />
                                             </label>
                                         </div>
-                                        <img class="rounded-circle" src="{{ $product->url }}" alt="">
+                                        <img class="rounded-circle" src="{{ $product->image?->url }}" alt="">
                                         <div class="media-body">
                                             <h5 class=" t_color3 f_size_15 f_500">{{ $product->name }}</h5>
                                         </div>

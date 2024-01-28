@@ -48,7 +48,7 @@
                             <div class="joblisting_text">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell">
-                                        <h4><a href="{{ route('idea.show', ['idea' => base64_encode($idea->id)]) }}" class="f_500 t_color3">{{ $idea->name }}</a>
+                                        <h4><a href="{{ route('idea.show', $idea) }}" class="f_500 t_color3">{{ $idea->name }}</a>
                                         </h4>
                                         <ul class="list-unstyled">
                                             <li class="p_color4">{{ $idea->owner }}</li>
@@ -61,7 +61,7 @@
                                         <div class="jobsearch-job-userlist">
                                             <div class="like-btn">
                                                 <form
-                                                    action="{{ route('idea.destroy', ['idea' => base64_encode($idea->id)]) }}"
+                                                    action="{{ route('idea.destroy',$idea) }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('DELETE')
@@ -72,7 +72,7 @@
 
                                             </div>
                                             <div class="like-btn">
-                                                <a href="{{ route('idea.edit', ['idea' => base64_encode($idea->id)]) }}"
+                                                <a href="{{ route('idea.edit', $idea) }}"
                                                     class="shortlist" title="Edit">
                                                     <i class="ti-pencil"></i>
                                                 </a>

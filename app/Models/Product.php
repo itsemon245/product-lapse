@@ -23,6 +23,9 @@ class Product extends Model
         return $this->hasMany(Invitation::class);
     }
 
+    
+    #---Morph Relations----#
+
     /**
      * Get all of the tasks that are assigned this tag.
      */
@@ -30,12 +33,19 @@ class Product extends Model
     {
         return $this->morphedByMany(Task::class, 'productable');
     }
+    /**
+     * Get all of the tasks that are assigned this tag.
+     */
+    public function ideas(): MorphToMany
+    {
+        return $this->morphedByMany(Idea::class, 'productable');
+    }
 
     /**
      * Get all of the product history that are assigned this product
      */
-    public function productHistory()
+    public function productHistories()
     {
-        return $this->hasMany(ProductHistory::class);
+        return $this->morphedByMany(ProductHistory::class, 'productable');
     }
 }

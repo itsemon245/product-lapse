@@ -16,7 +16,6 @@ return new class extends Migration
             $table->unsignedBigInteger('owner_id');
             $table->foreign('owner_id')->references('id')->on('users')->cascadeOnDelete();
             $table->string('name');
-            $table->string('url');
             $table->string('stage');
             $table->longText('description');
             $table->timestamps();

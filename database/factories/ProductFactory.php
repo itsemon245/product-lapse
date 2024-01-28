@@ -22,7 +22,6 @@ class ProductFactory extends Factory
                 return User::inRandomOrder()->first()->id;
             },
             'name' => fake()->name,
-            'url' => fake()->url,
             'stage' => fake()->lastName,
             'description' => fake()->paragraph,
         ];

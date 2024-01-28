@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('productables', function (Blueprint $table) {
             $table->id();
             $table->morphs('productable');
+            $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamp('assigned_at')->default(now());
             $table->timestamps();

@@ -1,7 +1,8 @@
-<?php 
+<?php
 namespace App\Traits;
 
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 trait HasProducts
@@ -13,6 +14,19 @@ trait HasProducts
     {
         return $this->morphToMany(Product::class, 'taggable');
     }
-}
 
-?>
+    /**
+     * The "booted" method of the model.
+     */
+    protected static function booted(): void
+    {
+        static::created(function ($model) {
+            DB::table('productables')->insert([
+                'product_id'       => request()->cookie('product_id'),
+                'productable_id'   => $model->id,
+                'productable_type' => __CLASS__,
+                'user_id'          => auth()->id(),
+             ]);
+        });
+    }
+}

@@ -30,6 +30,13 @@ class Product extends Model
     {
         return $this->morphedByMany(Task::class, 'productable');
     }
+    /**
+     * Get all of the tasks that are assigned this tag.
+     */
+    public function ideas(): MorphToMany
+    {
+        return $this->morphedByMany(Idea::class, 'productable');
+    }
 
     /**
      * Get all of the product history that are assigned this product

@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 
 class AddProductQueryString
@@ -15,10 +16,6 @@ class AddProductQueryString
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // $productId = $request->route('product') ?? $request->query('product_id');
-        // if ($productId != null) {
-        //     $request->query->add(['product_id' => $productId]);
-        // }
         return $next($request);
     }
 }

@@ -5,8 +5,8 @@
             <x-breadcrumb :list="[['label' => @__('feature/product.add'), 'route' => route('product.index')]]" />
         </x-slot:breadcrumb>
         <x-slot:search>
-            <form action="#" class="search-form input-group">
-                <input type="searproductch" class="form-control widget_input" placeholder="{{ __('feature/product.search') }}">
+            <form action="{{ route('product.search') }}" method="GET" hx-get="{{ route('product.search') }}" hx-trigger="submit" hx-target="#search-results" hx-select="#search-results" class="search-form input-group">
+                <input type="searproductch" name="search" class="form-control widget_input" placeholder="{{ __('feature/product.search') }}" hx-vals="#search-results">
                 <button type="submit"><i class="ti-search"></i></button>
             </form>
         </x-slot:search>
@@ -40,32 +40,30 @@
         </x-slot:filter>
 
         <x-slot:list>
-            @foreach ($products as $product)
-                <div class="col-md-6">
-                    <div class="item lon new">
-                        <div class="list_item">
-                            <figure><a href="{{ route('product.show', $product) }}"><img src="{{ $product->image?->url }}"
-                                        alt=""></a></figure>
-                            <div class="joblisting_text">
-                                <div class="job_list_table">
-                                    <div class="jobsearch-table-cell">
-                                        <h4><a href="{{ route('product.show', $product) }}" class="f_500 t_color3">T-shirt
-                                                for men</a></h4>
-                                        <ul class="list-unstyled">
-                                            <li class="p_color1">Durable product</li>
-                                            <li>More text about product</li>
-                                        </ul>
-                                    </div>
-                                    <div class="jobsearch-table-cell">
-                                        <div class="jobsearch-job-userlist">
-                                            <div class="like-btn flex items-center">
-                                                <x-button type="link" class="mt-1" :href="route('product.edit', $product)" :has-icon="true">
-                                                    <span class="ti-pencil"></span>
-                                                </x-button>
-                                                <x-button type="delete" :action="route('product.destroy', $product)" :has-icon="true">
-                                                    <span class="ti-trash"></span>
-                                                </x-button>
-                                            </div>
+            @forelse ($products as $product)
+            <div class="col-md-6">
+                <div class="item lon new">
+                    <div class="list_item">
+                        <figure><a href="{{ route('product.show', $product) }}"><img src="{{ $product->image?->url }}"
+                                    alt=""></a></figure>
+                        <div class="joblisting_text">
+                            <div class="job_list_table">
+                                <div class="jobsearch-table-cell">
+                                    <h4><a href="{{ route('product.show', $product) }}" class="f_500 t_color3">{{ $product->name }}</a></h4>
+                                    <ul class="list-unstyled">
+                                        <li class="p_color1">{{ $product->stage }}</li>
+                                        <li>More text about product</li>
+                                    </ul>
+                                </div>
+                                <div class="jobsearch-table-cell">
+                                    <div class="jobsearch-job-userlist">
+                                        <div class="like-btn flex items-center">
+                                            <x-button type="link" class="mt-1" :href="route('product.edit', $product)" :has-icon="true">
+                                                <span class="ti-pencil"></span>
+                                            </x-button>
+                                            <x-button type="delete" :action="route('product.destroy', $product)" :has-icon="true">
+                                                <span class="ti-trash"></span>
+                                            </x-button>
                                         </div>
                                     </div>
                                 </div>
@@ -73,7 +71,12 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            </div>
+            @empty
+                <div class="col-12" style="height: 40vh;"   >
+                    <h1>Not found</h1>
+                </div>
+            @endforelse
         </x-slot:list>
     </x-feature.index>
 @endsection

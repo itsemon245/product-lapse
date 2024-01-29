@@ -186,4 +186,13 @@ class ProductController extends Controller
              ],
          ];
     }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $products = Product::where('name', 'like', '%' . $search . '%')
+        ->orWhere('stage', 'like', '%' . $search . '%')->paginate(10);
+        return view('features.product.index', compact('products'));
+        
+    }
 }

@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-        <div class="job_listing">
+        <div class="job_listing" id="search-results">
             <div class="listing_tab">
                 <div class="row">
                     {{ $list }}

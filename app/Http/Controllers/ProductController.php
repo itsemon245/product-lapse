@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SearchRequest;
 use App\Http\Requests\StoreProductRequest;
 use App\Models\Product;
 use App\Models\Select;
+use App\Services\SearchService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 
@@ -187,12 +189,9 @@ class ProductController extends Controller
          ];
     }
 
-    public function search(Request $request)
+    public function search(SearchRequest $request)
     {
-        $search = $request->input('search');
-        $products = Product::where('name', 'like', '%' . $search . '%')
-        ->orWhere('stage', 'like', '%' . $search . '%')->paginate(10);
+        $products = SearchService::items($request);
         return view('features.product.index', compact('products'));
-        
     }
 }

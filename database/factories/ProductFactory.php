@@ -18,11 +18,10 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'owner_id' => function () {
-                return User::inRandomOrder()->first()->id;
-            },
+            'owner_id' => 1,
             'name' => fake()->name,
             'stage' => fake()->lastName,
+            'category' => fake()->lastName,
             'description' => fake()->paragraph,
         ];
     }

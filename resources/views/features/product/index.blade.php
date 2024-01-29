@@ -5,8 +5,12 @@
             <x-breadcrumb :list="[['label' => @__('feature/product.add'), 'route' => route('product.index')]]" />
         </x-slot:breadcrumb>
         <x-slot:search>
-            <form action="{{ route('product.search') }}" method="GET" hx-get="{{ route('product.search') }}" hx-trigger="submit" hx-target="#search-results" hx-select="#search-results" class="search-form input-group">
-                <input type="searproductch" name="search" class="form-control widget_input" placeholder="{{ __('feature/product.search') }}" hx-vals="#search-results">
+            <form method="GET" hx-get="{{ route('product.search') }}" hx-trigger="submit" hx-target="#search-results" hx-select="#search-results" class="search-form input-group">
+                <input type="hidden" name="columns[]" value="name">
+                <input type="hidden" name="columns[]" value="stage">
+                <input type="hidden" name="columns[]" value="category">
+                <input type="hidden" name="model" value="product">
+                <input type="search" name="search" class="form-control widget_input" placeholder="{{ __('feature/product.search') }}" hx-vals="#search-results">
                 <button type="submit"><i class="ti-search"></i></button>
             </form>
         </x-slot:search>

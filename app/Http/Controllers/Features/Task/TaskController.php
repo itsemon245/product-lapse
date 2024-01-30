@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Features\Task;
 
 use App\Models\Task;
 use App\Models\Select;
+use App\Services\SearchService;
 use App\Http\Requests\TaskRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SearchRequest;
 
 class TaskController extends Controller
 {
@@ -152,5 +154,11 @@ class TaskController extends Controller
         } else {
             return redirect()->route('task.index')->with('error', 'You are not authorized to delete this idea.');
         }
+    }
+
+    public function search(SearchRequest $request)
+    {
+        $tasks = SearchService::items($request);
+        return view('features.task.index', compact('tasks'));
     }
 }

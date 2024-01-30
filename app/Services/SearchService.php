@@ -1,6 +1,8 @@
 <?php
 namespace App\Services;
 
+use App\Models\Task;
+use App\Models\Product;
 use Illuminate\Support\Str;
 use App\Http\Requests\SearchRequest;
 use Illuminate\Database\Eloquent\Model;
@@ -19,7 +21,7 @@ class SearchService
      * @param SearchRequest|null $request
      * @return Builder
      */
-    public static function items(SearchRequest $request = null, int $limit = 10): Collection
+    public static function items(SearchRequest $request = null, int $limit = 10)
     {
         if ($request == null) {
             $request = self::$request;

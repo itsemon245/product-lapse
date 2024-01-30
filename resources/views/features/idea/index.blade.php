@@ -6,10 +6,18 @@
         </x-slot:breadcrumb>
 
         <x-slot:search>
-            <form action="#" class="search-form input-group">
-                <input type="search" class="form-control widget_input" placeholder="@__('feature/idea.search')">
-                <button type="submit"><i class="ti-search"></i></button>
-            </form>
+
+
+
+        <form method="GET" hx-get="{{ route('idea.search') }}" hx-trigger="submit" hx-target="#search-results" hx-select="#search-results" class="search-form input-group">
+            <input type="hidden" name="columns[]" value="name">
+            <input type="hidden" name="columns[]" value="owner">
+            <input type="hidden" name="model" value="Idea">
+            <input type="search" name="search" class="form-control widget_input" placeholder="{{ __('feature/idea.search') }}" hx-vals="#search-results">
+            <button type="submit"><i class="ti-search"></i></button>
+        </form>
+
+
         </x-slot:search>
 
         <x-slot:actions>
@@ -41,7 +49,7 @@
         </x-slot:filter>
 
         <x-slot:list>
-            @foreach ($ideas as $idea)
+            @forelse ($ideas as $idea)
                 <div class="col-md-6">
                     <div class="item lon new">
                         <div class="list_item">
@@ -86,7 +94,13 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+                @empty
+                <div class="col-md-12 row" style="height: 40vh;"   >
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4"><img  src="{{ asset('img/not-found.png') }}" alt=""></div>
+                    <div class="col-md-4"></div>
+                </div>
+            @endforelse
         </x-slot:list>
     </x-feature.index>
 @endsection

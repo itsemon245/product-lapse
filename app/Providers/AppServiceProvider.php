@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Task;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;

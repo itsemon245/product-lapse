@@ -2,16 +2,14 @@
 return [
 
     //list page
-    'title' => 'Deliver List',
-    'add' => 'Add deliver',
-    'search' => 'Search deliver',
+    'title' => 'Delivery List',
+    'add' => 'Add delivery',
+    'search' => 'Search delivery',
 
-    //add page + edit page
-    'add-title' => 'Add deliverable',
     'label' => [
         'name' => 'Delivery name',
-        'items' => 'Delivery items', 
-        'link' => 'link', 
+        'items' => 'Delivery items',
+        'link' => 'link',
         'attach' => 'Attach file',
         'user' => 'Username',
         'password' => 'Password',
@@ -20,8 +18,8 @@ return [
     ],
     'placeholder' => [
         'name' => 'Delivery name',
-        'items' => 'Delivery items', 
-        'link' => 'https://', 
+        'items' => 'Delivery items',
+        'link' => 'https://',
         'user' => 'Username',
         'password' => 'Password',
         'administrator' => 'Administrator',
@@ -44,5 +42,5 @@ return [
     'edit' => 'Edit Delivery',
 
     //show page
-    'show' => 'Show Delivery',
+    'showing' => 'Show Delivery',
 ];

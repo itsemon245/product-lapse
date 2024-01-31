@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Hello;
+use App\Http\Requests\DeliveryRequest;
+use App\Models\Product;
 use Exception;
 use App\Models\Delivery;
 use Illuminate\Http\Request;
@@ -14,8 +15,7 @@ class DeliveryController extends Controller
      */
     public function index()
     {
-        $deliveries = Delivery::where('owner_id', auth()->id())->get();
-
+        $deliveries = Product::find(productId())->deliveries()->paginate(10);
         return view('features.delivery.index', compact('deliveries'));
     }
 
@@ -30,21 +30,15 @@ class DeliveryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(DeliveryRequest $request)
     {
-        $request->validate(Delivery::rules());
-
         $data = $request->except('_token', 'add_attachments');
-        $data['owner_id'] = auth()->id();
-
+        $data['owner_id'] = ownerId();
         try {
             Delivery::create($data);
-
             notify()->success(__('Created successfully!'));
-
             return redirect()->route('delivery.index');
         } catch (Exception $e) {
-
             notify()->error(__('Create failed!'));
             return redirect()->route('delivery.index');
         }
@@ -53,52 +47,27 @@ class DeliveryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Delivery $delivery)
     {
-        $id = base64_decode($id);
-        $delivery = Delivery::find($id);
-
-        if (!$delivery) {
-            notify()->success(__('Not found!'));
-            return redirect()->route('delivery.index');
-        }
-
         return view('features.delivery.partials.show', compact('delivery'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Delivery $delivery)
     {
-        $id = base64_decode($id);
-        $delivery = Delivery::find($id);
-
-        if (!$delivery) {
-            notify()->success(__('Not found!'));
-            return redirect()->route('delivery.index');
-        }
-
         return view('features.delivery.partials.edit', compact('delivery'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(DeliveryRequest $request, Delivery $delivery)
     {
-        $id = base64_decode($id);
-        $delivery = Delivery::find($id);
-
-        if (!$delivery) {
-            notify()->success(__('Not found!'));
-            return redirect()->route('delivery.index');
-        }
-
-        $request->validate(Delivery::rules());
 
         $data = $request->except('_token', '_method', 'add_attachments');
-        $data['owner_id'] = auth()->id();
+        $data['owner_id'] = ownerId();
 
         try {
             $delivery->update($data);
@@ -114,26 +83,10 @@ class DeliveryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Delivery $delivery)
     {
-        $id = base64_decode($id);
-        $delivery = Delivery::find($id);
-
-        if (!$delivery) {
-            notify()->success(__('Not found!'));
-            return redirect()->route('delivery.index');
-        }
-
-        try {
-            $delivery->delete();
-
-            notify()->success(__('Deleted successfully!'));
-
-            return redirect()->route('delivery.index');
-        } catch (Exception $e) {
-
-            notify()->error(__('Delete failed!'));
-            return redirect()->route('delivery.index');
-        }
+        $delivery->delete();
+        notify()->success(__('Deleted successfully!'));
+        return redirect()->route('delivery.index');
     }
 }

@@ -62,7 +62,6 @@ class ReportController extends Controller
     public function edit(Report $report)
     {
         $type = Select::of('report')->type('type')->get();
-
         return view('features.report.partials.edit', compact('report', 'type'));
     }
 

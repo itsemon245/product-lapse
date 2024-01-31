@@ -66,6 +66,16 @@ class Product extends Model
         return $this->morphedByMany(Report::class, 'productable');
     }
 
+    public function releases(): MorphToMany
+    {
+        return $this->morphedByMany(Release::class, 'productable');
+    }
+
+    public function deliveries(): MorphToMany
+    {
+        return $this->morphedByMany(Delivery::class, 'productable');
+    }
+
     /**
      * Get all of the product history that are assigned this product
      */

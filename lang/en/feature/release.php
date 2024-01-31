@@ -11,14 +11,14 @@ return [
     'label' => [
         'name' => 'Release name',
         'version' => 'Release version',
-        'date' => 'Release date', 
-        'details' => 'Release Details', 
+        'date' => 'Release date',
+        'details' => 'Release Details',
     ],
     'placeholder' => [
         'name' => 'Release name',
         'version' => 'Release version',
-        'date' => 'Release date', 
-        'details' => 'Release Details', 
+        'date' => 'Release date',
+        'details' => 'Release Details',
     ],
     'submit' => 'Add release',
 
@@ -34,4 +34,5 @@ return [
 
     //show page
     'show' => 'Show release info',
+    'cancel' => 'Cancel',
 ];

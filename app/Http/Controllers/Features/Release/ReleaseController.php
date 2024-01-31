@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Features\Release;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ReleaseRequest;
 use App\Models\Release;
+use App\Models\Product;
 use App\Models\Select;
 use Illuminate\Http\Request;
 
@@ -14,7 +16,7 @@ class ReleaseController extends Controller
      */
     public function index()
     {
-        $releases = Release::where('owner_id', auth()->user()->id)->get();
+        $releases = Product::find(productId())->releases()->paginate(10);
         return view('features.release.index', compact('releases'));
     }
 
@@ -23,20 +25,16 @@ class ReleaseController extends Controller
      */
     public function create()
     {
-        $type = Select::of('release')->type('type')->get();
-        return view('features.release.partials.create', compact('type'));
+        return view('features.release.partials.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ReleaseRequest $request)
     {
-
-        $request->validate(Release::rules());
-
         $data = $request->except('_token');
-        $data['owner_id'] = auth()->user()->id;
+        $data['owner_id'] = ownerId();
         Release::create($data);
 
         notify()->success(__('Created successfully!'));
@@ -48,48 +46,26 @@ class ReleaseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Release $release)
     {
-        $id = base64_decode($id);
-        $release = Release::where('owner_id', auth()->id())->find($id);
-
-        if (!$release)
-            return redirect()->route('release.index');
-
         return view('features.release.partials.show', compact('release'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Release $release)
     {
-        $id = base64_decode($id);
-
-        $type = Select::of('release')->type('type')->get();
-
-        $release = Release::where('owner_id', auth()->id())->find($id);
-
-        if (!$release)
-            return redirect()->route('release.index');
-
-        return view('features.release.partials.edit', compact('release', 'type'));
+        return view('features.release.partials.edit', compact('release'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Release $release)
     {
-        $request->validate(Release::rules());
-        $id = base64_decode($id);
-        $release = Release::where('owner_id', auth()->id())->find($id);
-
-        if (!$release)
-            return redirect()->route('release.index');
-
         $data = $request->except('_token', '_method');
-        $data['owner_id'] = auth()->id();
+        $data['owner_id'] = ownerId();
         $release->update($data);
 
         notify()->success(__('Updated successfully!'));
@@ -99,14 +75,8 @@ class ReleaseController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Release $release)
     {
-        $id = base64_decode($id);
-        $release = Release::where('owner_id', auth()->id())->find($id);
-
-        if (!$release)
-            return redirect()->route('release.index');
-
         $release->delete();
 
         notify()->success(__('Deleted successfully!'));

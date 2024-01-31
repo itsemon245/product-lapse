@@ -3,15 +3,19 @@
 <x-feature.index>
     <x-slot:breadcrumb>
         <x-breadcrumb :list="[
-            ['label' => @__('feature/team.title'), 'route' => route('report.index')],
+            ['label' => @__('feature/team.title'), 'route' => route('team.index')],
             ]" />
     </x-slot:breadcrumb>
 
     <x-slot:search>
-        <form action="#" class="search-form input-group">
-            <input type="searproductch" class="form-control widget_input" placeholder="{{ __('feature/team.search') }}">
-            <button type="submit"><i class="ti-search"></i></button>
-        </form>
+
+    <form method="GET" hx-get="{{ route('team.search') }}" hx-trigger="submit" hx-target="#search-results" hx-select="#search-results" class="search-form input-group">
+        <input type="hidden" name="columns[]" value="email">
+        <input type="hidden" name="columns[]" value="first_name">
+        <input type="hidden" name="model" value="invitation">
+        <input type="search" name="search" class="form-control widget_input" placeholder="{{ __('feature/team.search') }}" hx-vals="#search-results">
+        <button type="submit"><i class="ti-search"></i></button>
+    </form>
     </x-slot:search>
 
 
@@ -28,7 +32,7 @@
 
 
     <x-slot:list>
-        @foreach ($teams as $team)
+        @forelse ($teams as $team)
         <div class="col-md-6">
             <div class="item lon new">
                 <div class="list_item">
@@ -57,7 +61,9 @@
                 </div>
             </div>
         </div>
-        @endforeach
+        @empty 
+        <x-feature.not-found /> 
+        @endforelse
     </x-slot:list>
 </x-feature.index>
 @endsection 

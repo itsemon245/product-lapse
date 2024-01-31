@@ -76,16 +76,12 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>  
                         </div>
                     </div>
                 </div>
             @empty
-            <div class="col-md-12 row" style="height: 40vh;"   >
-                <div class="col-md-4"></div>
-                <div class="col-md-4"><img  src="{{ asset('img/not-found.png') }}" alt=""></div>
-                <div class="col-md-4"></div>
-            </div>
+            <x-feature.not-found /> 
             @endforelse
         </x-slot:list>
 

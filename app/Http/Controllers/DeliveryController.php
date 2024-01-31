@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SearchRequest;
 use App\Models\Hello;
+use App\Services\SearchService;
 use Exception;
 use App\Models\Delivery;
 use Illuminate\Http\Request;
@@ -135,5 +137,11 @@ class DeliveryController extends Controller
             notify()->error(__('Delete failed!'));
             return redirect()->route('delivery.index');
         }
+    }
+
+    public function search(SearchRequest $request)
+    {
+        $deliveries = SearchService::items($request);
+        return view('features.delivery.index', compact('deliveries'));
     }
 }

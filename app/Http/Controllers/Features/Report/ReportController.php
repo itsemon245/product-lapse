@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Features\Report;
 use App\Models\Report;
 use App\Models\Select;
 use Illuminate\Http\Request;
+use App\Services\SearchService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ReportRequest;
+use App\Http\Requests\SearchRequest;
 use Illuminate\Support\Facades\Storage;
 
 class ReportController extends Controller
@@ -121,5 +123,11 @@ class ReportController extends Controller
         }
 
         return Storage::download('public/' . $filePath);
+    }
+
+    public function search(SearchRequest $request)
+    {
+        $reports = SearchService::items($request);
+        return view('features.report.index', compact('reports'));
     }
 }

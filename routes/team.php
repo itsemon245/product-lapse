@@ -6,3 +6,4 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::resource('team', TeamController::class);
+Route::get('team/search',[TeamController::class, 'search'])->name('team.search');

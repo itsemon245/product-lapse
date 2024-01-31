@@ -5,7 +5,6 @@ return [
     'title' => 'قائمة التسليم',
     'add' => 'اضف تسليم',
     'search' => 'البحث عن اصدار',
-    'showing' => 'نوع الوثيقة',
 
     //add page + edit page
     'label' => [

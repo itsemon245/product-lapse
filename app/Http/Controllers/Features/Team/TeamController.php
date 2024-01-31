@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Features\Team;
 
 
+use App\Http\Requests\SearchRequest;
 use App\Models\InvitationProduct;
 use App\Models\ProductUser;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Invitation;
+use App\Services\SearchService;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Services\InvitationService;
@@ -84,5 +86,11 @@ class TeamController extends Controller
         }
         
 
+    }
+
+    public function search(SearchRequest $request)
+    {
+        $teams = SearchService::items($request);
+        return view('features.team.index', compact('teams'));
     }
 }

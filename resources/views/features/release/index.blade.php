@@ -6,10 +6,16 @@
         </x-slot:breadcrumb>
 
         <x-slot:search>
-            <form action="#" class="search-form input-group">
-                <input type="searproductch" class="form-control widget_input" placeholder="{{ __('feature/release.search') }}">
-                <button type="submit"><i class="ti-search"></i></button>
-            </form>
+
+
+
+        <form method="GET" hx-get="{{ route('release.search') }}" hx-trigger="submit" hx-target="#search-results" hx-select="#search-results" class="search-form input-group">
+            <input type="hidden" name="columns[]" value="name">
+            <input type="hidden" name="columns[]" value="version">
+            <input type="hidden" name="model" value="release">
+            <input type="search" name="search" class="form-control widget_input" placeholder="{{ __('feature/release.search') }}" hx-vals="#search-results">
+            <button type="submit"><i class="ti-search"></i></button>
+        </form>
         </x-slot:search>
 
 
@@ -26,7 +32,7 @@
 
 
         <x-slot:list>
-            @foreach ($releases as $release)
+            @forelse ($releases as $release)
                 <div class="col-md-6">
                     <div class="item lon new">
                         <div class="list_item">
@@ -63,7 +69,9 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty 
+            <x-feature.not-found /> 
+            @endforelse 
         </x-slot:list>
     </x-feature.index>
 @endsection

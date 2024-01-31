@@ -31,7 +31,7 @@ class SearchService
         $search  = $request->search;
         return $model::where(function (Builder $q) use ($columns, $search) {
             foreach ($columns as $column) {
-                $q->orWhere($column, "like", "%$search%");
+                $q->orWhere($column, "like", "%" . $search . "%");
             }
         })->paginate($limit);
     }

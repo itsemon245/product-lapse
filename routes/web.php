@@ -33,7 +33,7 @@ Route::resource('package', PackageController::class);
 Route::resource('change', ChangeController::class);
 Route::get('change/search', [ChangeController::class, 'search'])->name('change.search');
 Route::resource('delivery', DeliveryController::class);
-// Route::post('/deliveryy/storyy', [DeliveryController::class, 'storyy'])->name('deliveryy.storyy');
+Route::get('delivery/search', [DeliveryController::class, 'search'])->name('delivery.search');
 Route::post('set-locale', function (Request $request) {
     $cookie = request()->cookie('locale');
     if ($cookie == null) {

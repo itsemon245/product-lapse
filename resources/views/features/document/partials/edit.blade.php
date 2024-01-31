@@ -6,8 +6,8 @@
         </x-slot:breadcrumb>
         <x-slot:from>
             <h2 class=" f_600 f_size_24 t_color3 mb_40">@__('feature/document.edit')</h2>
-            <form method="POST" action="{{ route('document.update', ['document' => base64_encode($document->id)]) }}"
-                enctype="multipart/form-data" class="login-form sign-in-form">
+            <form method="POST" action="{{ route('document.update', $document) }}" enctype="multipart/form-data"
+                class="login-form sign-in-form">
                 @csrf
                 @method('PUT')
                 <div class="row">
@@ -61,7 +61,7 @@
 
                 <div class="d-flex align-items-center text-center">
                     <button type="submit" class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">
-                        @__('feature/document.submit')</button>
+                        @__('feature/document.edit')</button>
                     <a href="{{ route('document.index') }}"
                         class="btn_hover agency_banner_btn btn-bg btn-bg-grey">@__('feature/document.cancel')</a>
                 </div>

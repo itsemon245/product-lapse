@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Features\Support;
 
+use App\Http\Requests\SupportRequest;
 use App\Models\Support;
+use App\Models\Product;
 use App\Models\Select;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,7 +16,7 @@ class SupportController extends Controller
      */
     public function index()
     {
-        $supports = Support::where('owner_id', auth()->id())->limit(8)->get();
+        $supports = Product::find(productId())->supports;
         return view('features.support.index', compact('supports'));
     }
 
@@ -28,15 +30,14 @@ class SupportController extends Controller
         $status = Select::of('support')->type('status')->get();
         $classification = Select::of('support')->type('classification')->get();
 
-        return view('features.support.create', compact('priority', 'status', 'classification'));
+        return view('features.support.partials.create', compact('priority', 'status', 'classification'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SupportRequest $request)
     {
-        $request->validate(Support::rules());
         $data = $request->except('_token');
         $data['owner_id'] = auth()->id();
 
@@ -49,58 +50,28 @@ class SupportController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Support $support)
     {
-        $id = base64_decode($id);
-        $support = Support::find($id);
-        if ($support == null) {
-            notify()->success(__('Something went wrong!'));
-
-            return redirect()->route('support.index');
-        }
-
-        return view('features.support.show', compact('support'));
-
+        return view('features.support.partials.show', compact('support'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Support $support)
     {
-        $id = base64_decode($id);
-
         $priority = Select::of('support')->type('priority')->get();
         $status = Select::of('support')->type('status')->get();
         $classification = Select::of('support')->type('classification')->get();
 
-        $support = Support::find($id);
-
-        if ($support == null) {
-            notify()->success(__('Something went wrong!'));
-
-            return redirect()->route('support.index');
-        }
-
-        return view('features.support.edit', compact('support', 'priority', 'status', 'classification'));
+        return view('features.support.partials.edit', compact('support', 'priority', 'status', 'classification'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(SupportRequest $request, Support $support)
     {
-        $request->validate(Support::rules());
-
-        $id = base64_decode($id);
-
-        $support = Support::find($id);
-
-        if ($support == null) {
-            notify()->success(__('Something went wrong!'));
-
-            return redirect()->route('support.index');
-        }
         $data = $request->except('_token');
         $data['owner_id'] = auth()->id();
 
@@ -113,15 +84,12 @@ class SupportController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Support $support)
     {
-        $id = base64_decode($id);
 
-        $support = Support::findOrFail($id);
         $support->delete();
 
         notify()->success(__('Deleted successfully!'));
-
         return redirect()->route('support.index');
     }
 }

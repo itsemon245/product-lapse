@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SupportRequest extends FormRequest
+class TeamRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,13 +22,7 @@ class SupportRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'sometimes|required|string|max:255',
-            'classification' => 'sometimes|required',
-            'priority' => 'sometimes|required',
-            'status' => 'sometimes|required',
-            'description' => 'sometimes|required|string |max:255',
-            'administrator' => 'sometimes|required|string|max:40',
-            'completion_date' => 'sometimes|required|date',
+            //
         ];
     }
 }

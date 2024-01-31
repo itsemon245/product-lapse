@@ -23,7 +23,7 @@ class Product extends Model
         return $this->hasMany(Invitation::class);
     }
 
-    
+
     #---Morph Relations----#
 
     /**
@@ -39,6 +39,31 @@ class Product extends Model
     public function ideas(): MorphToMany
     {
         return $this->morphedByMany(Idea::class, 'productable');
+    }
+
+    public function supports(): MorphToMany
+    {
+        return $this->morphedByMany(Support::class, 'productable');
+    }
+
+    public function changeManagements(): MorphToMany
+    {
+        return $this->morphedByMany(Change::class, 'productable');
+    }
+
+    public function documents(): MorphToMany
+    {
+        return $this->morphedByMany(Document::class, 'productable');
+    }
+
+    public function teams(): MorphToMany
+    {
+        return $this->morphedByMany(ProductUser::class, 'productable');
+    }
+
+    public function reports(): MorphToMany
+    {
+        return $this->morphedByMany(Report::class, 'productable');
     }
 
     /**

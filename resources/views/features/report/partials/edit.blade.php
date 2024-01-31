@@ -33,7 +33,7 @@
                 </div>
                 <div class="form-group text_box col-lg-12 col-md-6">
                     <x-textarea placeholder="{{ __('feature/report.placeholder.name') }}" rows="5" cols="10" name="description" label="{{ __('feature/report.placeholder.name') }}"> 
-                        {{ $report->descriptio }}
+                        {{ $report->description }}
                     </x-textarea>
                 </div>                       
                 

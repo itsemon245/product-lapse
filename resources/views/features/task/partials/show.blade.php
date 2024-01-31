@@ -1,39 +1,55 @@
-@extends('layouts.feature.index', ['title' => @__('feature/document.show')])
+@extends('layouts.feature.index', ['title' => @__('feature/task.show')])
 @section('main')
     <x-feature.show>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => @__('feature/document.show'), 'route' => route('document.show', base64_encode($document->id))]]" />
+            <x-breadcrumb :list="[['label' => @__('feature/task.show'), 'route' => route('task.show', $task)]]" />
         </x-slot:breadcrumb>
-
         <x-slot:details>
             <div class="col-lg-8 blog_sidebar_left">
                 <div class="blog_single mb_50">
-                    <div class="row">
-                        <h5 class="f_size_20 f_500 col-md-12">{{ $document->name }}</h5>
-                        <div class="entry_post_info col-md-12">
-                            {{ \Carbon\Carbon::parse($document->date)->format('l, j F Y') }}
+                    <div class="">
+                        <h5 class="f_size_20 f_500">{{ $task->name }}</h5>
+                        <div class="entry_post_info">
+                            {{ \Carbon\Carbon::parse($task->created_at)->format('l, j F Y') }}
                         </div>
-                        <div class="col-lg-6 col-md-6">
-                            <h6 class="title2">@__('feature/document.placeholder.version')</h6>
-                            <p class="f_400 mb-30 text-font">{{ $document->version }}</p>
+                        <h6 class="title2">@__('feature/task.classification')</h6>
+                        <p class="f_400 mb-30 text-font">{{ $task->category }}</p>
+                        <h6 class="title2">@__('feature/task.details')</h6>
+                        <p class="f_400 mb-30 text-font">
+                            {{ $task->details }}
+                        </p>
+                        <h6 class="title2">@__('feature/task.steps')</h6>
+                        <ul class="list-unstyled f_400 mb-30 text-font list-details">
+                            {{ $task->steps }}
+                        </ul>
+                        <div>
+                            <h6 class="title2">@__('feature/task.attach')</h6>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>@__('feature/task.name')</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>@__('feature/task.t-name')</td>
+                                            <td><button class="btn_hover agency_banner_btn btn-bg btn-table"
+                                                    type="submit">@__('feature/task.view')</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                       
-                        <div class="col-lg-6 col-md-6">
-                            <h6 class="title2">@__('feature/document.type')</h6>
-                            <p class="f_400 mb-30 text-font">{{ $document->type }}</p>
-                        </div>
-                        <div class="col-md-12">
-                            <h6 class="title2">@__('feature/document.placeholder.description')</h6>
-                            <p class="f_400 mb-30 text-font">
-                                {{ $document->description }}
-                            </p>
-                        </div>
-
                     </div>
                 </div>
 
             </div>
         </x-slot:details>
+
         <x-slot:profile>
             <div class="col-lg-4">
                 <div class="blog-sidebar box-sidebar">
@@ -41,24 +57,33 @@
                         <div class="media post_author mt_60">
                             <img class="rounded-circle" src="img/profile1.png" alt="">
                             <div class="media-body">
-                                <h5 class=" t_color3 f_size_18 f_500">@__('feature/document.classification')</h5>
+                                <h5 class=" t_color3 f_size_18 f_500">
+                                    {{ $task->owner->first_name }} {{ $task->owner->last_name }}</h5>
+                            </div>
+                        </div>
+                        <h6 class="title2 the-priority">@__('feature/task.added') : <span>Mohamed Ali</span></h6>
+                        <div class="extra extra2 extra3">
+                            <div class="media post_author" style="padding-top: 0">
+                                <div class="checkbox remember">
+                                    <label>
+                                        <input type="checkbox" name="choose_mvp"
+                                            @if ($task->choose_mvp) checked @endif>
+                                    </label>
+                                </div>
+
+                                <div class="media-body">
+                                    <h5 class="t_color3 f_size_17 f_600">MVP</h5>
+                                </div>
+
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-6">
-                                <span class="button-1 btn-bg-1"></span>
+                                <button type="button" class="button-1 btn-bg-1" data-toggle="modal"
+                                    data-target="#myModal1">@__('feature/task.working')</button>
                             </div>
                             <div class="col-6">
-                                <a href="#" class="button-1 btn-bg-2"><i class="ti-reload"></i>@__('feature/document.classification')</a>
-                            </div>
-                            <div class="col-12">
-                                <form action="{{ route('document.download', ['id' => base64_encode($document->id)]) }}"
-                                    method="post" enctype="multipart/form-data">
-                                    @csrf
-                                    <button type="submit" class="button-1">
-                                        <i class="ti-download"></i>Download document
-                                    </button>
-                                </form>
+                                <a href="#" class="button-1 btn-bg-2"><i class="ti-reload"></i>@__('feature/task.update')</a>
                             </div>
                         </div>
                     </div>
@@ -66,6 +91,7 @@
                 </div>
             </div>
         </x-slot:profile>
+
         <x-slot:comments>
             <ul class="comment-box list-unstyled mb-0">
                 <li class="post_comment">

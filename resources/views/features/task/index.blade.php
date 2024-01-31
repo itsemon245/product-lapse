@@ -29,7 +29,8 @@
                             <option value="">Initial idea</option>
                             <option value="">Stopped</option>
                         </select>
-                        <div class="nice-select selectpickers selectpickers2" tabindex="0"><span class="current">All</span>
+                        <div class="nice-select selectpickers selectpickers2" tabindex="0"><span
+                                class="current">All</span>
                             <ul class="list">
                                 <li data-value="" class="option selected focus">All</li>
                                 <li data-value="" class="option">Durable product</li>
@@ -48,7 +49,8 @@
                             <option value="">Initial idea</option>
                             <option value="">Stopped</option>
                         </select>
-                        <div class="nice-select selectpickers selectpickers2" tabindex="0"><span class="current">All</span>
+                        <div class="nice-select selectpickers selectpickers2" tabindex="0"><span
+                                class="current">All</span>
                             <ul class="list">
                                 <li data-value="" class="option selected focus">All</li>
                                 <li data-value="" class="option">Durable product</li>
@@ -70,11 +72,11 @@
                             <div class="joblisting_text">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell">
-                                        <h4><a href="{{ route('task.show', ['task' => base64_encode($task->id)]) }}"
+                                        <h4><a href="{{ route('task.show', $task) }}"
                                                 class="f_500 t_color3">{{ $task->name }}</a>
                                         </h4>
                                         <ul class="list-unstyled">
-                                            <li class="p_color3">@lang('task.' . $task->status)</li>
+                                            <li class="p_color3">{{ $task->status }}</li>
                                             <li>
                                                 {{ \Carbon\Carbon::parse($task->created_at)->format('l, j F Y') }}
                                             </li>
@@ -83,9 +85,7 @@
                                     <div class="jobsearch-table-cell">
                                         <div class="jobsearch-job-userlist">
                                             <div class="like-btn">
-                                                <form
-                                                    action="{{ route('task.destroy', ['task' => base64_encode($task->id)]) }}"
-                                                    method="POST">
+                                                <form action="{{ route('task.destroy', $task) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
 
@@ -93,16 +93,12 @@
                                                         <i class="ti-trash"></i>
                                                     </button>
                                                 </form>
-
                                             </div>
                                             <div class="like-btn">
-                                                <a href="{{ route('task.edit', ['task' => base64_encode($task->id)]) }}"
-                                                    class="shortlist" title="Edit">
+                                                <a href="{{ route('task.edit', $task) }}" class="shortlist" title="Edit">
                                                     <i class="ti-pencil"></i>
                                                 </a>
-
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>

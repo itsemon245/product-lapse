@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SupportRequest extends FormRequest
+class DocumentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,12 +23,11 @@ class SupportRequest extends FormRequest
     {
         return [
             'name' => 'sometimes|required|string|max:255',
-            'classification' => 'sometimes|required',
-            'priority' => 'sometimes|required',
-            'status' => 'sometimes|required',
-            'description' => 'sometimes|required|string |max:255',
-            'administrator' => 'sometimes|required|string|max:40',
-            'completion_date' => 'sometimes|required|date',
+            'type' => 'sometimes|required',
+            'version' => 'sometimes|required',
+            'description' => 'sometimes|required|string|max:255',
+            'date' => 'sometimes|required',
+            'attach_file' => 'sometimes|required',
         ];
     }
 }

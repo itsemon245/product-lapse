@@ -1,69 +1,112 @@
-@extends('layouts.feature.index', ['title'=> 'Packages'])
+@extends('layouts.feature.index', ['title' => @__('feature/support.edit')])
 @section('main')
-<div id="hx-edit-support" class="sign_info">
-    <div class="login_info">
-        <h2 class=" f_600 f_size_24 t_color3 mb_40">Edit package</h2>
-                <form hx-post="{{ route('support.store') }}" class="login-form sign-in-form">
+    <x-feature.edit>
+        <x-slot:breadcrumb>
+            <x-breadcrumb :list="[['label' => @__('feature/support.edit'), 'route' => route('support.edit', $support)]]" />
+        </x-slot:breadcrumb>
+
+        <x-slot:from>
+            <h2 class=" f_600 f_size_24 t_color3 mb_40">@__('feature/support.edit')</h2>
+            <form action="{{ route('support.update', $support) }}" method="POST" enctype="multipart/form-data"
+                class="login-form sign-in-form">
+                <div class="row">
                     @csrf
-                    <div class="row">
-                        <div class="form-group text_box col-lg-4 col-md-6">
-                            <x-input-label for="name" value="Package name" />
-                            <x-text-input id="name" class="block mt-1 w-full" type="text" placeholder="Enter package name" name="name" :value="$datum->name" required autofocus />
-                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                        </div>
-                        <div class="form-group text_box col-lg-4 col-md-6">
-                            <x-input-label for="price" value="Package price" />
-                            <x-text-input id="price" class="block mt-1 w-full" type="text" placeholder="Enter package price" name="price" :value="$datum->price" required autofocus />
-                            <x-input-error :messages="$errors->get('price')" class="mt-2" />
-                        </div>
-                        <div class="form-group text_box col-lg-4 col-md-6">
-                            <x-input-label for="monthly_rate" value="Monthly rate" />
-                            <x-text-input id="monthly_rate" class="block mt-1 w-full" type="text" placeholder="Enter monthly rate" name="monthly_rate" :value="$datum->monthly_rate" required autofocus />
-                            <x-input-error :messages="$errors->get('monthly_rate')" class="mt-2" />
-                        </div>
-                        <div class="form-group text_box col-lg-4 col-md-6">
-                            <x-input-label for="annual_rate" value="Annual rate" />
-                            <x-text-input id="annual_rate" class="block mt-1 w-full" type="text" placeholder="Enter annual rate" name="annual_rate" :value="$datum->annual_rate" required autofocus />
-                            <x-input-error :messages="$errors->get('annual_rate')" class="mt-2" />
-                        </div>
-                        <div class="form-group text_box col-lg-4 col-md-6">
-                            <x-select-input label="Subscription type" id="annual_rate"  placeholder="Choose one" name="subscription_type" required autofocus> 
-                                <option value="jmkk">Option</option>
-                            </x-select-input>
-                        </div>
-                        <div class="form-group text_box col-lg-4 col-md-6">
-                            <x-input-label for="features" value="Features" />
-                            <x-text-input id="features" class="block mt-1 w-full" type="text" placeholder="Enter features" name="features" :value="$datum->features" required autofocus />
-                            <x-input-error :messages="$errors->get('features')" class="mt-2" />
-                        </div>
-                        <div class="form-group text_box col-lg-4 col-md-6">
-                            <x-input-label for="product_limit" value="Product limit" />
-                            <x-text-input id="product_limit" class="block mt-1 w-full" type="date" name="product_limit" :value="$datum->product_limit" required autofocus />
-                            <x-input-error :messages="$errors->get('product_limit')" class="mt-2" />
-                        </div>
-                        <div class="form-group text_box col-lg-4 col-md-6">
-                            <x-input-label for="validity" value="Validity" />
-                            <x-text-input id="validity" class="block mt-1 w-full" type="date" name="validity" :value="$datum->validity" required autofocus />
-                            <x-input-error :messages="$errors->get('validity')" class="mt-2" />
-                        </div>
-                        <div class="form-group text_box col-lg-4 col-md-6">
-                            <x-input-label for="has_limited_features" value="Limited features" />
-                            <x-text-input id="has_limited_features" class="block mt-1 w-full" type="text" name="has_limited_features" placeholder="Limited features" :value="$datum->has_limited_features" required autofocus />
-                            <x-input-error :messages="$errors->get('has_limited_features')" class="mt-2" />
-                        </div>
-                        <div class="form-group text_box col-lg-4 col-md-6">
-                           
-                            <x-checkbox-input class="ml-4" checked label="Set propular tag." />
-                        </div>
-                        
-                        
+                    @method('PUT')
+                    <div class="form-group text_box col-lg-6 col-md-6">
+                        <label class=" text_c f_500">@__('feature/support.label.name')</label>
+                        <input type="text" name="name" placeholder="@__('feature/support.placeholder.name')" value="{{ $support->name }}">
+                        @error('name')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
-                    
-                    <div class="d-flex align-items-center text-center">
-                        <x-btn-primary name="Add Package" type="submit" />
-                        <x-btn-secondary name="Cancel" type="submit" />
+                    <div class="form-group text_box col-lg-6 col-md-6">
+                        <label class=" text_c f_500">@__('feature/support.label.classification')</label>
+
+                        <select class="selectpickers" name="classification">
+                            @if ($classification)
+                                @forelse ($classification as $category)
+                                    <option value="<?= $category->value->{app()->getLocale()} ?>">
+                                        <?= $category->value->{app()->getLocale()} ?>
+                                    </option>
+                                @empty
+                                    <option disabled>No classification available</option>
+                                @endforelse
+                            @endif
+                        </select>
+                        @error('classification')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+
                     </div>
-                </form>
-    </div>
-</div>
+                    <div class="form-group text_box col-lg-6 col-md-6">
+                        <label class=" text_c f_500">@__('feature/support.label.priority')</label>
+
+                        <select class="selectpickers" name="priority">
+                            @if ($priority)
+                                @forelse ($priority as $category)
+                                    <option value="<?= $category->value->{app()->getLocale()} ?>">
+                                        <?= $category->value->{app()->getLocale()} ?>
+                                    </option>
+                                @empty
+                                    <option disabled>No priority available</option>
+                                @endforelse
+                            @endif
+                        </select>
+                        @error('priority')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+
+                    </div>
+                    <div class="form-group text_box col-lg-6 col-md-6">
+                        <label class=" text_c f_500">@__('feature/support.label.ticket')</label>
+                        <select class="selectpickers" name="status">
+                            @if ($status)
+                                @forelse ($status as $category)
+                                    <option value="<?= $category->value->{app()->getLocale()} ?>">
+                                        <?= $category->value->{app()->getLocale()} ?>
+                                    </option>
+                                @empty
+                                    <option disabled>No status available</option>
+                                @endforelse
+                            @endif
+                        </select>
+                        @error('status')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+
+                    </div>
+                    <div class="form-group text_box col-lg-12 col-md-12">
+                        <label class=" text_c f_500">@__('feature/support.label.description')</label>
+                        <textarea name="description" id="description" cols="30" rows="10" placeholder="@__('feature/support.placeholder.description')">{{ $support->description }}</textarea>
+                        @error('description')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group text_box col-lg-6 col-md-6">
+                        <label class=" text_c f_500">@__('feature/support.label.administrator')</label>
+                        <input type="text" name="administrator" placeholder="@__('feature/support.placeholder.administrator')"
+                            value="{{ $support->administrator }}">
+                        @error('administrator')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group text_box col-lg-6 col-md-6">
+                        <label class=" text_c f_500">@__('feature/support.label.date')</label>
+                        <input type="date" name="completion_date"
+                            value="{{ $support->completion_date ? \Carbon\Carbon::parse($support->completion_date)->format('Y-m-d') : '' }}">
+                        @error('completion_date')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+
+                    </div>
+                </div>
+                <div class="d-flex align-items-center text-center">
+                    <button type="submit"
+                        class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">@__('feature/support.edit')</button>
+                    <a href="{{ route('support.index') }}"
+                        class="btn_hover agency_banner_btn btn-bg btn-bg-grey">@__('feature/support.cancel')</a>
+                </div>
+            </form>
+        </x-slot:from>
+    </x-feature.edit>
 @endsection

@@ -3,23 +3,23 @@ return [
 
     //list page
     'title' => 'Add change request',
-    'add' => 'Add request',
+    'add' => 'Add Change',
     'search' => 'Search request',
     'showing' => 'Status',
 
     //add page + edit page
     'label' => [
         'title' => 'Change request title',
-        'classification' => 'Classification', 
-        'priority' => 'Priority', 
+        'classification' => 'Classification',
+        'priority' => 'Priority',
         'status' => 'Status',
-        'details' => 'Change request details', 
+        'details' => 'Change request details',
         'administrator' => 'Administrator',
         'date' => 'Required completion date',
     ],
     'placeholder' => [
         'title' => 'Change request title',
-        'details' => 'Change request details', 
+        'details' => 'Change request details',
         'administrator' => 'Administrator',
     ],
     'cancel' => 'Cancel',
@@ -35,7 +35,7 @@ return [
     'update' => 'Update',
 
     //Edit page
-    'edit' => 'Edit Document',
+    'edit' => 'Edit Change Request',
 
     //show page
     'show' => 'Change request details',

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Features\Report;
 
 use App\Models\Report;
+use App\Models\Product;
 use App\Models\Select;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,7 +17,7 @@ class ReportController extends Controller
      */
     public function index()
     {
-        $reports = Report::get();
+        $reports = Product::find(productId())->reports()->paginate(10);
         return view('features.report.index', compact('reports'));
     }
 
@@ -34,52 +35,43 @@ class ReportController extends Controller
      */
     public function store(ReportRequest $request)
     {
-        // dd($request->file);
         $report = Report::create([
-            'owner_id' => auth()->id(),
+            'owner_id' => ownerId(),
             'name' => $request->name,
             'type' => $request->type,
             'report_date' => $request->report_date,
             'description' => $request->description,
         ]);
         $file = $report->storeImage($request->file);
-        if ($file) {
-            return redirect()->route('report.index')->with(['success', 'Store Success!']);
-        }
+        notify()->success(__('Created successfully!'));
+
+        return redirect()->route('report.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Report $report)
     {
-        $report = Report::find($id);
-        if ($report != null) {
-            return view('features.report.partials.show', compact('report'));
-        }
-        return redirect()->back();
-
+        return view('features.report.partials.show', compact('report'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Report $report)
     {
-        $report = Report::find($id);
         $type = Select::of('report')->type('type')->get();
-        if ($report != null) {
-            return view('features.report.partials.show', compact('report', 'type'));
-        }
-        return redirect()->back();
+
+        return view('features.report.partials.edit', compact('report', 'type'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(ReportRequest $request, string $id)
+    public function update(ReportRequest $request, Report $report)
     {
-        $report = Report::find($id);
+        $report = Report::find($report->id);
         $file = $report->updateImage($request->file, $report->file);
         $report->update([
             $report->name => $request->name,
@@ -87,19 +79,21 @@ class ReportController extends Controller
             $report->report_date => $request->report_date,
             $report->description => $request->description,
         ]);
-        return redirect()->route('report.index')->with(['success', 'Update Success!']);
+        notify()->success(__('Updated successfully!'));
+        return redirect()->route('report.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Report $report)
     {
-        $report = Report::find($id);
+        $report = Report::find($report->id);
         $image = $report->deleteImage($report->file);
         if ($image) {
             $report->destroy();
-            return redirect()->route('report.index')->with(['success', 'Delete Success!']);
+            notify()->success(__('Deleted successfully!'));
+            return redirect()->route('report.index');
         }
 
     }

@@ -7,7 +7,8 @@
 
         <x-slot:search>
             <form action="#" class="search-form input-group">
-                <input type="searproductch" class="form-control widget_input" placeholder="{{ __('feature/document.search') }}">
+                <input type="searproductch" class="form-control widget_input"
+                    placeholder="{{ __('feature/document.search') }}">
                 <button type="submit"><i class="ti-search"></i></button>
             </form>
         </x-slot:search>
@@ -49,12 +50,12 @@
                             <div class="joblisting_text">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell">
-                                        <h4><a href="{{ route('document.show', ['document' => base64_encode($document->id)]) }}"
+                                        <h4><a href="{{ route('document.show', $document) }}"
                                                 class="f_500 t_color3">{{ $document->name }}</a>
                                         </h4>
                                         <ul class="list-unstyled">
                                             <li>
-                                                @lang('document.' . $document->type)
+                                                {{ $document->type }}
                                             <li>
                                                 {{ \Carbon\Carbon::parse($document->date)->format('l, j F Y') }}
                                             </li>
@@ -64,8 +65,7 @@
                                     <div class="jobsearch-table-cell">
                                         <div class="jobsearch-job-userlist">
                                             <div class="like-btn">
-                                                <form action="{{ route('document.destroy', base64_encode($document->id)) }}"
-                                                    method="post">
+                                                <form action="{{ route('document.destroy', $document) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                     <x-btn-icons type="submit" class="btn"
@@ -74,7 +74,7 @@
                                             </div>
                                             <div class="like-btn">
                                                 <x-btn-icons type="anchor" value="<i class='ti-pencil'></i>"
-                                                    href="{{ route('document.edit', base64_encode($document->id)) }}" />
+                                                    href="{{ route('document.edit', $document) }}" />
                                             </div>
                                             <div class="like-btn">
                                                 <form

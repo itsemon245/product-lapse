@@ -5,12 +5,15 @@
             <x-breadcrumb :list="[['label' => @__('feature/report.title'), 'route' => route('report.index')]]" />
         </x-slot:breadcrumb>
 
-        <x-slot:search>
-            <form action="#" class="search-form input-group">
-                <input type="searproductch" class="form-control widget_input" placeholder="{{ __('feature/report.search') }}">
-                <button type="submit"><i class="ti-search"></i></button>
-            </form>
-        </x-slot:search>
+    <x-slot:search>
+    <form method="GET" hx-get="{{ route('report.search') }}" hx-trigger="submit" hx-target="#search-results" hx-select="#search-results" class="search-form input-group">
+        <input type="hidden" name="columns[]" value="name">
+        <input type="hidden" name="columns[]" value="type">
+        <input type="hidden" name="model" value="report">
+        <input type="search" name="search" class="form-control widget_input" placeholder="{{ __('feature/report.search') }}" hx-vals="#search-results">
+        <button type="submit"><i class="ti-search"></i></button>
+    </form>
+    </x-slot:search>
 
 
         <x-slot:actions>
@@ -41,20 +44,29 @@
         </x-slot:filter>
 
 
-        <x-slot:list>
-            @foreach ($reports as $report)
-                <div class="col-md-6">
-                    <div class="item lon new">
-                        <div class="list_item">
-                            <figure><a href="{{ route('report.show', $report) }}"><img src="img/p1.jpg" alt=""></a>
-                            </figure>
-                            <div class="joblisting_text">
-                                <div class="job_list_table">
-                                    <div class="jobsearch-table-cell">
-                                        <h4><a href="#" class="f_500 t_color3">{{ $report->name }}</a></h4>
-                                        <ul class="list-unstyled">
-                                            <li>{{ $report->created_at->formatLocalized('%A %d %B %Y') }}</li>
-                                        </ul>
+    <x-slot:list>
+        @forelse ($reports as $report)
+        <div class="col-md-6">
+            <div class="item lon new">
+                <div class="list_item">
+                    <figure><a href="{{ route('report.show', $report) }}"><img src="img/p1.jpg" alt=""></a></figure>
+                    <div class="joblisting_text">
+                        <div class="job_list_table">
+                            <div class="jobsearch-table-cell">
+                                <h4><a href="#" class="f_500 t_color3">{{ $report->name }}</a></h4>
+                                <ul class="list-unstyled">
+                                    <li>{{ $report->created_at->formatLocalized('%A %d %B %Y') }}</li>
+                                </ul>
+                            </div>
+                            <div class="jobsearch-table-cell">
+                                <div class="jobsearch-job-userlist">
+                                    <div class="like-btn">
+                                        {{-- <form action="{{ route('report.destroy', $report) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                           
+                                        </form> --}}
+                                        <x-btn-icons type="submit" class="btn" value="<i class='ti-more'></i>" />
                                     </div>
                                     <div class="jobsearch-table-cell">
                                         <div class="jobsearch-job-userlist">
@@ -77,7 +89,11 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
-        </x-slot:list>
-    </x-feature.index>
-@endsection
+            </div>
+        </div>
+        @empty 
+        <x-feature.not-found /> 
+        @endforelse
+    </x-slot:list>
+</x-feature.index>
+@endsection 

@@ -8,7 +8,6 @@
             <form method="GET" hx-get="{{ route('product.search') }}" hx-trigger="submit" hx-target="#search-results" hx-select="#search-results" class="search-form input-group">
                 <input type="hidden" name="columns[]" value="name">
                 <input type="hidden" name="columns[]" value="stage">
-                <input type="hidden" name="columns[]" value="category">
                 <input type="hidden" name="model" value="product">
                 <input type="search" name="search" class="form-control widget_input" placeholder="{{ __('feature/product.search') }}" hx-vals="#search-results">
                 <button type="submit"><i class="ti-search"></i></button>
@@ -16,8 +15,6 @@
         </x-slot:search>
 
         <x-slot:actions>
-            {{-- hx-get="{{ route('product.create') }}"
-        hx-push-url="true" hx-target="#hx-global-target" hx-select="#hx-global-target" --}}
             <x-button type="link" href="{{ route('product.create') }}">
                 <i class="ti-plus"></i>
                 @__('feature/product.add')
@@ -77,8 +74,11 @@
                 </div>
             </div>
             @empty
-                <div class="col-12" style="height: 40vh;"   >
-                    <h1>Not found</h1>
+                <div class="col-md-12 row" style="height: 40vh;"   >
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4"><img  src="{{ asset('img/not-found.png') }}" alt=""></div>
+                    <div class="col-md-4"></div>
+                    
                 </div>
             @endforelse
         </x-slot:list>

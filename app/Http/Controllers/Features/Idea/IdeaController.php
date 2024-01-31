@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Features\Idea;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\IdeaRequest;
 use App\Models\Idea;
-use App\Models\Product;
 use App\Models\Select;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Services\SearchService;
+use App\Http\Requests\IdeaRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\SearchRequest;
 
 class IdeaController extends Controller
 {
@@ -80,5 +82,11 @@ class IdeaController extends Controller
         $idea->delete();
         notify()->success(__('Deleted successfully!'));
         return redirect()->route('idea.index');
+    }
+
+    public function search(SearchRequest $request)
+    {
+        $ideas = SearchService::items($request);
+        return view('features.idea.index', compact('ideas'));
     }
 }

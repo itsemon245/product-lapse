@@ -8,6 +8,8 @@ use App\Models\Change;
 use App\Models\Product;
 use App\Models\Select;
 use Illuminate\Http\Request;
+use App\Services\SearchService;
+use App\Http\Requests\SearchRequest;
 
 class ChangeController extends Controller
 {
@@ -92,5 +94,10 @@ class ChangeController extends Controller
 
         notify()->success(__('Delete success!'));
         return redirect()->route('change.index');
+    }
+    public function search(SearchRequest $request)
+    {
+        $changes = SearchService::items($request);
+        return view('features.change.index', compact('changes'));
     }
 }

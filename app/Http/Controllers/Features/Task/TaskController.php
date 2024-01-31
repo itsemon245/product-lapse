@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Features\Task;
 use App\Models\Task;
 use App\Models\Product;
 use App\Models\Select;
+use App\Services\SearchService;
 use App\Http\Requests\TaskRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\QueryException;
+use App\Http\Requests\SearchRequest;
 
 class TaskController extends Controller
 {
@@ -137,5 +139,11 @@ class TaskController extends Controller
 
         notify()->success(__('Deleted successfully!'));
         return redirect()->route('task.index');
+    }
+
+    public function search(SearchRequest $request)
+    {
+        $tasks = SearchService::items($request);
+        return view('features.task.index', compact('tasks'));
     }
 }

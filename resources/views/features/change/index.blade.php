@@ -5,10 +5,13 @@
             <x-breadcrumb :list="[['label' => @__('feature/change.title'), 'route' => route('change.index')]]" />
         </x-slot:breadcrumb>
         <x-slot:search>
-            <form action="#" class="search-form input-group">
-                <input type="searproductch" class="form-control widget_input" placeholder="{{ __('feature/change.search') }}">
-                <button type="submit"><i class="ti-search"></i></button>
-            </form>
+        <form method="GET" hx-get="{{ route('change.search') }}" hx-trigger="submit" hx-target="#search-results" hx-select="#search-results" class="search-form input-group">
+            <input type="hidden" name="columns[]" value="title">
+            <input type="hidden" name="columns[]" value="classification">
+            <input type="hidden" name="model" value="change">
+            <input type="search" name="search" class="form-control widget_input" placeholder="{{  __('feature/change.search') }}" hx-vals="#search-results">
+            <button type="submit"><i class="ti-search"></i></button>
+        </form>
         </x-slot:search>
 
         <x-slot:actions>
@@ -39,7 +42,7 @@
         </x-slot:filter>
 
         <x-slot:list>
-            @foreach ($changes as $change)
+            @forelse ($changes as $change)
                 <div class="col-md-6">
                     <div class="item lon new">
                         <div class="list_item">
@@ -72,11 +75,13 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>  
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+            <x-feature.not-found /> 
+            @endforelse
         </x-slot:list>
 
     </x-feature.index>

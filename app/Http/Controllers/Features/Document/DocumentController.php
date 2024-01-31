@@ -7,8 +7,10 @@ use App\Http\Requests\DocumentRequest;
 use App\Models\Document;
 use App\Models\Product;
 use App\Models\Select;
-use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Http\Request;
+use App\Services\SearchService;
+use App\Http\Requests\SearchRequest;
 use Illuminate\Support\Facades\Storage;
 
 class DocumentController extends Controller
@@ -127,6 +129,12 @@ class DocumentController extends Controller
 
         notify()->success(__('Deleted successfully!'));
         return redirect()->route('document.index');
+    }
+
+    public function search(SearchRequest $request)
+    {
+        $documents = SearchService::items($request);
+        return view('features.document.index', compact('documents'));
     }
 
 }

@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Features\Release;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ReleaseRequest;
+use App\Http\Requests\SearchRequest;
 use App\Models\Release;
 use App\Models\Product;
 use App\Models\Select;
+use App\Services\SearchService;
 use Illuminate\Http\Request;
 
 class ReleaseController extends Controller
@@ -81,5 +83,11 @@ class ReleaseController extends Controller
 
         notify()->success(__('Deleted successfully!'));
         return redirect()->route('release.index');
+    }
+
+    public function search(SearchRequest $request)
+    {
+        $releases = SearchService::items($request);
+        return view('features.release.index', compact('releases'));
     }
 }

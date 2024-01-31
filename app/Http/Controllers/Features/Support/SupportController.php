@@ -7,7 +7,9 @@ use App\Models\Support;
 use App\Models\Product;
 use App\Models\Select;
 use Illuminate\Http\Request;
+use App\Services\SearchService;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SearchRequest;
 
 class SupportController extends Controller
 {
@@ -91,5 +93,11 @@ class SupportController extends Controller
 
         notify()->success(__('Deleted successfully!'));
         return redirect()->route('support.index');
+    }
+
+    public function search(SearchRequest $request)
+    {
+        $supports = SearchService::items($request);
+        return view('features.support.index', compact('supports'));
     }
 }

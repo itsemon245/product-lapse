@@ -34,8 +34,8 @@ class IdeaController extends Controller
      */
     public function store(IdeaRequest $request)
     {
-        $data               = $request->except('_token');
-        $data[ 'owner_id' ] = ownerId();
+        $data = $request->except('_token');
+        $data['owner_id'] = ownerId();
         $idea = Idea::create($data);
 
         notify()->success(__('Created successfully!'));
@@ -64,8 +64,8 @@ class IdeaController extends Controller
      */
     public function update(IdeaRequest $request, Idea $idea)
     {
-        $data               = $request->except('_token', '_method');
-        $data[ 'owner_id' ] = ownerId();
+        $data = $request->except('_token', '_method');
+        $data['owner_id'] = ownerId();
         $idea->update();
 
         notify()->success(__('Updated successfully!'));
@@ -77,7 +77,6 @@ class IdeaController extends Controller
      */
     public function destroy(Idea $idea)
     {
-
         $idea->delete();
         notify()->success(__('Deleted successfully!'));
         return redirect()->route('idea.index');

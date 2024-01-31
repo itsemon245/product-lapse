@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use App\Traits\HasProducts;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class ProductUser extends Model
 {
-    use HasFactory;
+    use HasFactory, HasProducts;
     protected $guarded = [];
 }

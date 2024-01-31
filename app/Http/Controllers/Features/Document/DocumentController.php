@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Features\Document;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DocumentRequest;
 use App\Models\Document;
+use App\Models\Product;
 use App\Models\Select;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -16,7 +18,7 @@ class DocumentController extends Controller
      */
     public function index()
     {
-        $documents = Document::with('file')->where('owner_id', auth()->id())->get();
+        $documents = Product::find(productId())->documents()->paginate(10);
         return view('features.document.index', compact('documents'));
     }
 
@@ -33,12 +35,11 @@ class DocumentController extends Controller
      * Store a newly created resource in storage.
      */
 
-    public function store(Request $request)
+    public function store(DocumentRequest $request)
     {
-        $request->validate(Document::rules());
 
         $data = $request->except('_token', 'attach_file');
-        $data['owner_id'] = auth()->id();
+        $data['owner_id'] = ownerId();
 
         $document = Document::create($data);
         if ($request->has('attach_file')) {
@@ -74,32 +75,16 @@ class DocumentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Document $document)
     {
-        $id = base64_decode($id);
-        $document = Document::with('file')->find($id);
-
-        if (!$document) {
-            notify()->success(__('Something went wrong!'));
-
-            return redirect()->route('document.index');
-        }
-
         return view('features.document.partials.show', compact('document'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Document $document)
     {
-        $id = base64_decode($id);
-        $document = Document::with('file')->find($id);
-
-        if (!$document) {
-            notify()->success(__('Document not found!'));
-            return redirect()->route('document.index');
-        }
         $type = Select::of('document')->type('type')->get();
         return view('features.document.partials.edit', compact('document', 'type'));
     }
@@ -107,28 +92,17 @@ class DocumentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(DocumentRequest $request, Document $document)
     {
 
-        $rules = Document::rules();
-        Arr::forget($rules, 'attach_file');
-
-        $request->validate($rules);
-
-        $id = base64_decode($id);
-        $document = Document::with('file')->find($id);
-
-        if (!$document) {
-            notify()->success(__('Document not found!'));
-            return redirect()->route('document.index');
-        }
+        $document = Document::with('file')->find($document->id);
 
         if ($request->has('attach_file')) {
             $file = $document->updateFile($request->attach_file, $document->file);
         }
 
         $data = $request->except('_token', 'attach_file');
-        $data['owner_id'] = auth()->id();
+        $data['owner_id'] = ownerId();
 
         $document->update($data);
         notify()->success(__('Updated successfully!'));
@@ -140,23 +114,13 @@ class DocumentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Document $document)
     {
-        $id = base64_decode($id);
-        $document = Document::with('file')->find($id);
 
-        if (!$document) {
-            dd("document not found");
-            notify()->success(__('Document not found!'));
-            return redirect()->route('document.index');
-        }
+        $document = Document::with('file')->find($document->id);
 
-        $fileDeleted = $document->deleteFile($document->file);
-
-        if (!$fileDeleted) {
-            dd("delete file failed");
-            notify()->error(__('Error deleting the file.'));
-            return redirect()->route('document.index');
+        if ($document->file) {
+            $fileDeleted = $document->deleteFile($document->file);
         }
 
         $document->delete();

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SupportRequest extends FormRequest
+class ReleaseRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,13 +22,10 @@ class SupportRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'sometimes|required|string|max:255',
-            'classification' => 'sometimes|required',
-            'priority' => 'sometimes|required',
-            'status' => 'sometimes|required',
-            'description' => 'sometimes|required|string |max:255',
-            'administrator' => 'sometimes|required|string|max:40',
-            'completion_date' => 'sometimes|required|date',
+            'name' => 'sometimes|required|string',
+            'version' => 'sometimes|required|string',
+            'release_date' => 'sometimes|required|date',
+            'description' => 'sometimes|required|string',
         ];
     }
 }

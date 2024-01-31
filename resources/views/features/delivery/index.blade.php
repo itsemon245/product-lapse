@@ -7,13 +7,14 @@
 
         <x-slot:search>
             <form action="#" class="search-form input-group">
-                <input type="searproductch" class="form-control widget_input" placeholder="{{ __('feature/delivery.search') }}">
+                <input type="searproductch" class="form-control widget_input"
+                    placeholder="{{ __('feature/delivery.search') }}">
                 <button type="submit"><i class="ti-search"></i></button>
             </form>
         </x-slot:search>
 
         <x-slot:actions>
-            <x-button hx-get="{{ route('delivery.create') }}" >
+            <x-button type="link" href="{{ route('delivery.create') }}">
                 <i class="ti-plus"></i>
                 @__('feature/delivery.add')
             </x-button>
@@ -47,7 +48,7 @@
                             <div class="joblisting_text document-list">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell">
-                                        <h4><a href="{{ route('delivery.show', base64_encode($delivery->id)) }}"
+                                        <h4><a href="{{ route('delivery.show', $delivery) }}"
                                                 class="f_500 t_color3">{{ $delivery->name }}</a></h4>
                                         <ul class="list-unstyled">
                                             <li>
@@ -58,8 +59,7 @@
                                     <div class="jobsearch-table-cell">
                                         <div class="jobsearch-job-userlist">
                                             <div class="like-btn">
-                                                <form action="{{ route('delivery.destroy', base64_encode($delivery->id)) }}"
-                                                    method="post">
+                                                <form action="{{ route('delivery.destroy', $delivery) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                     <x-btn-icons type="submit" class="btn"
@@ -68,7 +68,7 @@
                                             </div>
                                             <div class="like-btn">
                                                 <x-btn-icons type="anchor" value="<i class='ti-pencil'></i>"
-                                                    href="{{ route('delivery.edit', base64_encode($delivery->id)) }}" />
+                                                    href="{{ route('delivery.edit', $delivery) }}" />
                                             </div>
                                         </div>
                                     </div>
@@ -76,6 +76,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
             @endforeach
         </x-slot:list>
     </x-feature.index>

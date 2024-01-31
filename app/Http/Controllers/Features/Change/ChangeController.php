@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Features\Change;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\ChangeRequest;
 use App\Models\Change;
+use App\Models\Product;
 use App\Models\Select;
 use Illuminate\Http\Request;
 
@@ -13,7 +16,7 @@ class ChangeController extends Controller
      */
     public function index()
     {
-        $changes = Change::where('owner_id', auth()->id())->limit(8)->get();
+        $changes = Product::find(productId())->changeManagements()->paginate(10);
         return view('features.change.index', compact('changes'));
     }
 
@@ -31,11 +34,10 @@ class ChangeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ChangeRequest $request)
     {
-        $request->validate(Change::rules());
         $data = $request->except('_token');
-        $data['owner_id'] = auth()->id();
+        $data['owner_id'] = ownerId();
 
         $change = Change::create($data);
 
@@ -51,35 +53,19 @@ class ChangeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Change $change)
     {
-        $id = base64_decode($id);
-        $change = Change::find($id);
-
-        if (!$change) {
-            notify()->success(__('Not found!'));
-            return redirect()->route('change.index');
-        }
-
         return view('features.change.partials.show', compact('change'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Change $change)
     {
-        $id = base64_decode($id);
-        $change = Change::find($id);
-
         $priority = Select::of('change')->type('priority')->get();
         $status = Select::of('change')->type('status')->get();
         $classification = Select::of('change')->type('classification')->get();
-
-        if (!$change) {
-            notify()->success(__('Not found!'));
-            return redirect()->route('change.index');
-        }
 
         return view('features.change.partials.edit', compact('change', 'priority', 'status', 'classification'));
     }
@@ -87,26 +73,11 @@ class ChangeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ChangeRequest $request, Change $change)
     {
-        $id = base64_decode($id);
-        $change = Change::find($id);
-
-        if (!$change) {
-            notify()->success(__('Not found!'));
-            return redirect()->route('change.index');
-        }
-
-        $request->validate(Change::rules());
         $data = $request->except('_token', '_method');
-        $data['owner_id'] = auth()->id();
-
+        $data['owner_id'] = ownerId();
         $change->update($data);
-
-        if (!$change) {
-            notify()->success(__('Update failed!'));
-            return redirect()->route('change.index');
-        }
 
         notify()->success(__('Update success!'));
         return redirect()->route('change.index');
@@ -115,22 +86,9 @@ class ChangeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Change $change)
     {
-        $id = base64_decode($id);
-        $change = Change::where('owner_id', auth()->id())->find($id);
-
-        if (!$change) {
-            notify()->success(__('Not found!'));
-            return redirect()->route('change.index');
-        }
-
         $change->delete();
-
-        if (!$change) {
-            notify()->success(__('Delete failed!'));
-            return redirect()->route('change.index');
-        }
 
         notify()->success(__('Delete success!'));
         return redirect()->route('change.index');

@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\Features\Change\ChangeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Cookie;
-use App\Http\Controllers\ChangeController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DeliveryController;

@@ -16,8 +16,8 @@ class TaskRequest extends FormRequest
     {
         return [
             'name' => 'sometimes|required|string|max:255',
-            'status' => 'sometimes|required|in:started,not_started,stopped',
-            'category' => 'sometimes|required|in:one,two,three',
+            'status' => 'sometimes|required',
+            'category' => 'sometimes|required',
             'details' => 'sometimes|required|string',
             'steps' => 'sometimes|required|string',
             'starting_date' => 'sometimes|required|date',

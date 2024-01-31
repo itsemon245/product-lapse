@@ -21,7 +21,7 @@ class TeamController extends Controller
      */
     public function index()
     {
-        $teams = InvitationProduct::with('product')->get();
+        $teams = Product::find(productId())->teams()->paginate(10);
         return view('features.team.index', compact('teams'));
     }
 
@@ -31,7 +31,7 @@ class TeamController extends Controller
     public function create()
     {
         $products = Product::with('image')->get();
-        $roles    = Role::get();
+        $roles = Role::get();
         return view('features.team.partials.create', compact('products', 'roles'));
     }
 
@@ -41,7 +41,7 @@ class TeamController extends Controller
     public function store(TeamInvitationRequest $request)
     {
         $teamStore = InvitationService::store($request);
-        if($teamStore){
+        if ($teamStore) {
             notify()->success(__('notify/success.create'));
             return redirect()->route('team.index');
         }
@@ -78,11 +78,11 @@ class TeamController extends Controller
     public function destroy(Invitation $invitation)
     {
         $delete = $invitation->delete();
-        if($delete){
+        if ($delete) {
             notify()->success(__('notify/success.delete'));
             return redirect()->route('team.index');
         }
-        
+
 
     }
 }

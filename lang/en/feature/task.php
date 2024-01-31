@@ -11,8 +11,8 @@ return [
     //add page + edit page
     'label' => [
         'name' => 'Task name',
-        'category' => 'Category', 
-        'status' => 'Status', 
+        'category' => 'Category',
+        'status' => 'Status',
         'mvp' => 'Choose MVP',
         'details' => 'Task details',
         'steps' => 'Task steps',
@@ -48,4 +48,5 @@ return [
 
     //show page
     'show' => 'Show Task',
+    'steps' => "Task Steps"
 ];

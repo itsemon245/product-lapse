@@ -12,7 +12,7 @@
         </x-slot:search>
 
         <x-slot:actions>
-            <x-button type="link" href="{{ route('change.create') }}" >
+            <x-button type="link" href="{{ route('change.create') }}">
                 <i class="ti-plus"></i>
                 @__('feature/change.add')
             </x-button>
@@ -47,18 +47,17 @@
                             <div class="joblisting_text">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell">
-                                        <h4><a href="{{ route('change.show', base64_encode($change->id)) }}"
+                                        <h4><a href="{{ route('change.show', $change) }}"
                                                 class="f_500 t_color3">{{ $change->title }}</a></h4>
                                         <ul class="list-unstyled">
-                                            <li class="p_color1">Working on</li>
+                                            <li class="p_color1">{{ $change->status }}</li>
                                             <li>{{ \Carbon\Carbon::parse($change->created_at)->format('l, j F Y') }}</li>
                                         </ul>
                                     </div>
                                     <div class="jobsearch-table-cell">
                                         <div class="jobsearch-job-userlist">
                                             <div class="like-btn">
-                                                <form action="{{ route('change.destroy', base64_encode($change->id)) }}"
-                                                    method="post">
+                                                <form action="{{ route('change.destroy', $change) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                     <x-btn-icons type="submit" class="btn"
@@ -67,7 +66,7 @@
                                             </div>
                                             <div class="like-btn">
                                                 <x-btn-icons type="anchor" value="<i class='ti-pencil'></i>"
-                                                    href="{{ route('change.edit', base64_encode($change->id)) }}" />
+                                                    href="{{ route('change.edit', $change) }}" />
                                             </div>
 
                                         </div>

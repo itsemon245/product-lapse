@@ -14,14 +14,14 @@
 
 
         <x-slot:actions>
-            <x-button type="link" href="{{ route('release.create') }}" >
+            <x-button type="link" href="{{ route('release.create') }}">
                 <i class="ti-plus"></i>
-               @__('feature/release.add')
+                @__('feature/release.add')
             </x-button>
         </x-slot:actions>
 
         <x-slot:filter>
-        {{-- Empty --}}
+            {{-- Empty --}}
         </x-slot:filter>
 
 
@@ -34,7 +34,7 @@
                             <div class="joblisting_text">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell">
-                                        <h4><a href="{{ route('release.show', ['release' => base64_encode($release->id)]) }}"
+                                        <h4><a href="{{ route('release.show', $release) }}"
                                                 class="f_500 t_color3">{{ $release->name }}</a></h4>
                                         <ul class="list-unstyled">
                                             <li class="p_color1">{{ $release->version }}</li>
@@ -44,8 +44,7 @@
                                     <div class="jobsearch-table-cell">
                                         <div class="jobsearch-job-userlist">
                                             <div class="like-btn">
-                                                <form action="{{ route('release.destroy', base64_encode($release->id)) }}"
-                                                    method="post">
+                                                <form action="{{ route('release.destroy', $release) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                     <x-btn-icons type="submit" class="btn"
@@ -54,7 +53,7 @@
                                             </div>
                                             <div class="like-btn">
                                                 <x-btn-icons type="anchor" value="<i class='ti-pencil'></i>"
-                                                    href="{{ route('release.edit', base64_encode($release->id)) }}" />
+                                                    href="{{ route('release.edit', $release) }}" />
                                             </div>
                                         </div>
                                     </div>

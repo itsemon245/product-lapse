@@ -4,11 +4,12 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Models\Comment;
 use App\Casts\Utils\JsonCast;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -88,5 +89,9 @@ class User extends Authenticatable
     public function certificates()
     {
         return $this->hasMany(Certificate::class, 'owner_id', 'id');
+    }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }

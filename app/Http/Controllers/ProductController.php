@@ -160,7 +160,7 @@ class ProductController extends Controller
                 'name'    => @__('productHome.product-info'),
                 'counter' => 0,
                 'icon'    => 'img/website.png',
-                'route'   => '#',
+                'route'   => '',
              ],
             'product-history'       => [
                 'name'    => @__('productHome.product-history'),
@@ -189,9 +189,27 @@ class ProductController extends Controller
          ];
     }
 
+
+     /**
+     * For Search Feature.
+     */
     public function search(SearchRequest $request)
     {
         $products = SearchService::items($request);
         return view('features.product.index', compact('products'));
+    }
+
+
+    /**
+     * Display the specified individual resource.
+     */
+    public function info(string $id)
+    {
+        // Set Cookie for the selected product
+        $cookie   = Cookie::forever('product_id', $id);
+        $product  = Product::find($id);
+        $products = Product::get();
+        $features = $this->getFeatureList();
+        return response(view('features.product.home', compact('product', 'features', 'products')))->withCookie($cookie);
     }
 }

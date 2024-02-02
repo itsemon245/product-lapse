@@ -44,6 +44,7 @@ class ProductController extends Controller
             'owner_id'    => auth()->id(),
             'name'        => $request->name,
             'url'         => $request->url,
+            'category'       => $request->category,
             'stage'       => $request->stage,
             'description' => $request->description,
          ]);
@@ -80,10 +81,11 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Product $product)
     {
-        $product = Product::find($id);
-        return view('features.product.partials.edit', compact('product'));
+        $categories = Select::of('product')->type('category')->get();
+        $stages     = Select::of('product')->type('stage')->get();
+        return view('features.product.partials.edit', compact('product', 'categories', 'stages'));
     }
 
     /**
@@ -94,10 +96,11 @@ class ProductController extends Controller
         $product->update([
             'name'        => $request->name,
             'url'         => $request->url,
+            'category'       => $request->category,
             'stage'       => $request->stage,
             'description' => $request->description,
          ]);
-        $image = $product->updateImage($request->logo, $product->image);
+        $image = $product->updateImage($request->logo);
         notify()->success(__('notify/success.update'));
         return redirect()->route('product.index')->with([ 'success', 'Update Success!' ]);
 
@@ -108,6 +111,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        $product->deleteImage();
         $data = $product->delete();
         notify()->success(__('notify/success.delete'));
         return redirect()->route('product.index');

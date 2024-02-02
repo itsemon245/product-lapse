@@ -22,6 +22,7 @@ class DeliveryFactory extends Factory
                 return User::inRandomOrder()->first()->id;
             },
             'name' => fake()->name,
+            'username' => str(fake()->name)->slug(),
             'items' => fake()->text,
             'link' => fake()->url,
             'password' => fake()->text,

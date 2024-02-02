@@ -1,14 +1,15 @@
-@props(['color' => 'primary', 'hasIcon'=> false])
+@props(['color' => 'primary', 'hasIcon' => false])
 @php
     $colorClass = match ($color) {
         'primary' => 'agency_banner_btn2',
         'secondary' => 'btn-bg-grey',
         'dark' => 'btn-bg3',
         'success' => 'btn-bg1',
-        default => ''
+        default => '',
     };
     $type = $attributes->has('type') ? $attributes->get('type') : 'submit';
-    $action = $attributes->has('action') ? $attributes->has('action') : '';
+    $action = $attributes->has('action') ? $attributes->get('action') : '';
+    $class = $attributes->has('class') ? $attributes->has('class') : '';
     $enctype = $attributes->has('enctype') ? $attributes->has('enctype') : 'multipart/form-data';
 @endphp
 
@@ -22,15 +23,18 @@
         <button
             {{ $attributes->merge(['class' => $hasIcon ? 'btn' : 'btn_hover agency_banner_btn btn-bg ' . $colorClass]) }}>{!! $slot ?? 'Button' !!}</button>
     @break
+
     @case('link')
-        <a {{ $attributes->merge(['class' => $hasIcon ? 'btn' : 'btn_hover agency_banner_btn btn-bg ' . $colorClass]) }}>{!! $slot ?? 'Link' !!}</a>
+        <a
+            {{ $attributes->merge(['class' => $hasIcon ? 'btn' : 'btn_hover agency_banner_btn btn-bg ' . $colorClass]) }}>{!! $slot ?? 'Link' !!}</a>
     @break
 
     @case('delete')
-        <form class="w-max h-max" action="{{$action}}" method="post" enctype="{{$enctype}}">
+        <form class="w-max h-max" action="{{ $action }}" method="post" enctype="{{ $enctype }}">
             @csrf
             @method('DELETE')
-            <button {{ $attributes->merge(['class' => $hasIcon ? 'btn' : 'btn_hover agency_banner_btn btn-bg ' . $colorClass]) }}>
+            <button class="{{ $hasIcon ? 'btn' : 'btn_hover agency_banner_btn btn-bg ' . $colorClass . ' ' . $class }}"
+                type="submit">
                 {!! $slot ?? 'Form Submit' !!}
             </button>
         </form>

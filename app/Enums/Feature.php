@@ -2,7 +2,7 @@
 namespace App\Enums;
 
 enum Feature:string {
-    case INNOVATE = 'innovate';
+    case IDEA = 'idea';
     case TASK = 'task';
     case CHANGE = 'change';
     case SUPPORT = 'support';

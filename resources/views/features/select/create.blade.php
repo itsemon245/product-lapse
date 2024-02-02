@@ -1,4 +1,4 @@
-@extends('layouts.feature.index', ['title' => 'Select Menus'])
+@extends('layouts.subscriber.app', ['title' => 'Select Menus'])
 @section('main')
     <x-feature.create>
         <x-slot:breadcrumb>
@@ -42,8 +42,8 @@
                             <x-input-error :messages="$errors->get('name_ar')" class="mt-2" />
                         </div>
 
-                        <div class="form-group text_box col-lg-6 col-md-6">
-                            <x-input label="Text Color" id="text-color" type="text" placeholder="Enter text color"
+                        <div class="form-group text_box col-lg-12 col-md-6">
+                            <x-input label="Text Color" id="text-color" type="color" placeholder="Enter text color"
                                 name="text_color" :value="old('text_color')" required autofocus />
                             <x-input-error :messages="$errors->get('text_color')" class="mt-2" />
                         </div>

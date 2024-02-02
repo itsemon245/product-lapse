@@ -3,15 +3,16 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Idea;
 use App\Models\Change;
-use App\Models\Delivery;
+use App\Models\Report;
 use App\Models\Package;
 use App\Models\Product;
-use App\Models\Report;
-use Database\Seeders\PermissionSeeder;
+use App\Models\Delivery;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Database\Seeders\PermissionSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -61,6 +62,9 @@ class DatabaseSeeder extends Seeder
 
         Report::unsetEventDispatcher();
         Report::factory(10)->create();
+
+        Idea::unsetEventDispatcher();
+        Idea::factory(10)->create();
 
         $this->call([
             PermissionSeeder::class,

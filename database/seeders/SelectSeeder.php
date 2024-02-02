@@ -6,7 +6,6 @@ use App\Enums\Feature;
 use App\Models\Select;
 use App\Enums\SelectType;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class SelectSeeder extends Seeder
 {
@@ -37,12 +36,32 @@ class SelectSeeder extends Seeder
         ]);
         Select::create([
             'owner_id' => 1,
-            'model_type' => Feature::INNOVATE->value,
+            'model_type' => Feature::IDEA->value,
             'type' => SelectType::PRIORITY->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Not Started',
-                'ar'=> 'لم يبدأ'
+                'en'=> 'Working on',
+                'ar'=> 'يعمل على',
+            ],
+        ]);
+        Select::create([
+            'owner_id' => 1,
+            'model_type' => Feature::IDEA->value,
+            'type' => SelectType::PRIORITY->value,
+            'color' => "#fff",
+            'value' => [
+                'en'=> 'Pending',
+                'ar'=> 'قيد الانتظار',
+            ],
+        ]);
+        Select::create([
+            'owner_id' => 1,
+            'model_type' => Feature::IDEA->value,
+            'type' => SelectType::PRIORITY->value,
+            'color' => "#fff",
+            'value' => [
+                'en'=> 'Stopped',
+                'ar'=> 'توقفت',
             ],
         ]);
     }

@@ -29,8 +29,8 @@ class IdeaController extends Controller
      */
     public function create()
     {
-        $priority = Select::of('innovate')->type('priority')->get();
-        return view('features.idea.partials.create', compact('priority'));
+        $priorities = Select::of('idea')->type('priority')->get();
+        return view('features.idea.partials.create', compact('priorities'));
     }
 
     /**

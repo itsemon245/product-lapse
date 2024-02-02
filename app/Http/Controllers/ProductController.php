@@ -162,7 +162,7 @@ class ProductController extends Controller
                 'name'    => @__('productHome.product-info'),
                 'counter' => null,
                 'icon'    => 'img/website.png',
-                'route'   => route('product.info', $infoId),
+                'route'   => route('product.info'),
              ],
             'product-history'       => [
                 'name'    => @__('productHome.product-history'),
@@ -205,11 +205,10 @@ class ProductController extends Controller
     /**
      * Display the specified individual resource.
      */
-    public function info(string $id)
+    public function info()
     {
-        // Set Cookie for the selected product
-        $product  = Product::with('user')->find($id);
-        $owner = User::where('id', $product->owner_id)->with('image')->first();
+        $product  = Product::with('owner')->find(productId());
+        $owner = $product->owner;
         return view('features.product.partials.show', compact('product', 'owner'));
     }
 }

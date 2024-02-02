@@ -30,22 +30,7 @@
 
         <x-slot:filter>
             <h5>@__('feature/idea.showing')</h5>
-            <form method="get" action="#">
-                <select class="selectpickers selectpickers2" style="display: none;">
-                    <option value="">All</option>
-                    <option value="">Durable product</option>
-                    <option value="">Initial idea</option>
-                    <option value="">Stopped</option>
-                </select>
-                <div class="nice-select selectpickers selectpickers2" tabindex="0"><span class="current">All</span>
-                    <ul class="list">
-                        <li data-value="" class="option selected focus">All</li>
-                        <li data-value="" class="option">Durable product</li>
-                        <li data-value="" class="option">Initial idea</li>
-                        <li data-value="" class="option">Stopped</li>
-                    </ul>
-                </div>
-            </form>
+            <x-filter :route="route('idea.search')" :columns="['priority']" model="idea" :options="$priorities" />
         </x-slot:filter>
 
         <x-slot:list>

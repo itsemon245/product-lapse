@@ -55,8 +55,6 @@
     {{-- Include Script --}}
     @include('layouts.frontend.script')
     @stack('scripts')
-    <x-notify::notify />
-    @notifyJs
 </body>
 
 </html>

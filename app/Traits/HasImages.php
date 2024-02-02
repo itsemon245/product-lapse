@@ -3,10 +3,10 @@
 namespace App\Traits;
 
 use App\Models\Image;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait HasImages
 {
@@ -29,9 +29,9 @@ trait HasImages
     /**
      * Define other required attributes
      */
-    protected string $disk = 'public';
-    protected string $baseDir = 'uploads';
-    protected string $dir = '';
+    protected string $disk           = 'public';
+    protected string $baseDir        = 'uploads';
+    protected string $dir            = '';
     protected ?string $imageableType = null;
 
     /**
@@ -41,19 +41,19 @@ trait HasImages
      */
     public function storeImage(UploadedFile $image, ?string $name = null): Image
     {
-        $type = $this->imageableType ?? get_class($this);
-        $id = $this->id;
-        $ext = $image->getClientOriginalExtension();
-        $name = $name ?? $image->getClientOriginalName();
-        $name = str($name)->slug() . uniqid() . '.' . $ext;
-        $path = $image->storeAs($this->baseDir . $this->dir, $name, $this->disk);
+        $type  = $this->imageableType ?? get_class($this);
+        $id    = $this->id;
+        $ext   = $image->getClientOriginalExtension();
+        $name  = $name ?? $image->getClientOriginalName();
+        $name  = str($name)->slug() . uniqid() . '.' . $ext;
+        $path  = $image->storeAs($this->baseDir . $this->dir, $name, $this->disk);
         $image = Image::create([
-            'imageable_id' => $id,
+            'imageable_id'   => $id,
             'imageable_type' => $type,
-            'path' => $path,
-            'url' => asset('storage/' . $path),
-            'mime_type' => $ext
-        ]);
+            'path'           => $path,
+            'url'            => asset('storage/' . $path),
+            'mime_type'      => $ext,
+         ]);
 
         return $image;
     }
@@ -66,20 +66,20 @@ trait HasImages
     public function updateImage(UploadedFile $image, ?string $name = null, Image $oldImage = null): Image
     {
         $oldImage = $oldImage ?? $this->image;
-        $type = $this->imageableType ?? get_class($this);
-        $id = $this->id;
-        $ext = $image->getClientOriginalExtension();
-        $name = $name ?? $image->getClientOriginalName();
-        $name = str($name)->slug() . uniqid() . '.' . $ext;
-        $path = $image->storeAs($this->baseDir . $this->dir, $name, $this->disk);
+        $type     = $this->imageableType ?? get_class($this);
+        $id       = $this->id;
+        $ext      = $image->getClientOriginalExtension();
+        $name     = $name ?? $image->getClientOriginalName();
+        $name     = str($name)->slug() . uniqid() . '.' . $ext;
+        $path     = $image->storeAs($this->baseDir . $this->dir, $name, $this->disk);
         $this->deleteImage($oldImage, true);
         $image = tap($oldImage)->update([
-            'imageable_id' => $id,
+            'imageable_id'   => $id,
             'imageable_type' => $type,
-            'path' => $path,
-            'url' => asset('storage/' . $path),
-            'mime_type' => $ext
-        ]);
+            'path'           => $path,
+            'url'            => asset('storage/' . $path),
+            'mime_type'      => $ext,
+         ]);
         return $image;
     }
 
@@ -90,6 +90,10 @@ trait HasImages
      */
     public function deleteImage(Image $image = null, ?bool $fileOnly = false): bool
     {
+        $image = $image ?? $this->image;
+        if ($image == null) {
+            return true;
+        }
         if (Storage::disk($this->disk)->exists($image->path)) {
             Storage::delete($image->path);
         }

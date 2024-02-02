@@ -44,8 +44,8 @@ trait HasFile
 
     public function storeFile(UploadedFile $file, ?string $name = null): File
     {
-        // Validate the uploaded file
-        $this->validateUploadedFile($file);
+        //!Validate inside the controller or request not here
+        // $this->validateUploadedFile($file);
         $type = $this->fileableType ?? get_class($this);
         $id = $this->id;
         $ext = $file->getClientOriginalExtension();
@@ -96,37 +96,16 @@ trait HasFile
      */
     public function deleteFile(File $file = null, ?bool $fileOnly = false): bool
     {
-
-        try {
-            if ($file && Storage::disk($this->disk)->exists($file->path)) {
-                Storage::delete($this->disk . "/" . $file->path);
-            }
-
-            if ($fileOnly) {
-                return true;
-
-            }
-
-            return $file->delete();
-        } catch (\Exception $e) {
-            // Log the exception for debugging
-            \Log::error("Error in deleteFile method: " . $e->getMessage());
-
-            return false; // Return false to indicate failure
+        $file = $file ?? $this->file;
+        if ($file == null) {
+            return true;
         }
-    }
-
-
-
-    protected function validateUploadedFile(UploadedFile $file)
-    {
-        $validator = Validator::make(
-            ['file' => $file],
-            ['file' => 'required|file|mimes:pdf,doc,docx|max:10240']
-        );
-
-        if ($validator->fails()) {
-            throw new \RuntimeException($validator->errors()->first());
+        if (Storage::disk($this->disk)->exists($file->path)) {
+            Storage::delete($file->path);
         }
+        if ($fileOnly) {
+            return true;
+        }
+        return $file->delete();
     }
 }

@@ -48,11 +48,6 @@
                 </div>
             </div>
             <div class="row">
-                {{-- @php
-                    
-                    dd( request()->segment(4));
-                @endphp --}}
-                {{-- {{   }} --}}
                 @foreach ($features as $feature)
                     <div class="col-lg-3 col-md-4 col-6">
                         <div class="box-item">

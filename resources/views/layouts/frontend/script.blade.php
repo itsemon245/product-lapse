@@ -18,3 +18,5 @@
     <script src="{{ asset('js/main.js') }}"></script>
 @endif
 @stack('customJs')
+<x-notify::notify />
+@notifyJs

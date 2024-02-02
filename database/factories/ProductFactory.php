@@ -21,6 +21,7 @@ class ProductFactory extends Factory
             'owner_id' => 1,
             'name' => fake()->name,
             'stage' => fake()->lastName,
+            'url' => fake()->name,
             'category' => fake()->lastName,
             'description' => fake()->paragraph,
         ];

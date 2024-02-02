@@ -1,4 +1,4 @@
-@extends('layouts.feature.index', ['title' => @__('feature/product.add')])
+@extends('layouts.subscriber.app', ['title' => @__('feature/product.add')])
 @section('main')
     <x-feature.index>
         <x-slot:breadcrumb>
@@ -32,16 +32,19 @@
                 <div class="col-md-6">
                     <div class="item lon new">
                         <div class="list_item">
-                            <figure><a href="{{ route('product.show', $product) }}"><img src="{{ $product->image?->url }}"
-                                        alt=""></a></figure>
+                            <figure>
+                                <a href="{{ route('product.show', $product) }}">
+                                    <img src="{{ $product->image?->url }}" alt="">
+                                </a>
+                            </figure>
                             <div class="joblisting_text">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell">
                                         <h4><a href="{{ route('product.show', $product) }}"
                                                 class="f_500 t_color3">{{ $product->name }}</a></h4>
                                         <ul class="list-unstyled">
-                                            <li class="p_color1">{{ $product->stage }}</li>
-                                            <li>More text about product</li>
+                                            <li class="p_color1">{{ $product->category }}</li>
+                                            <li>{{str($product->description)->limit(12)}}</li>
                                         </ul>
                                     </div>
                                     <div class="jobsearch-table-cell">

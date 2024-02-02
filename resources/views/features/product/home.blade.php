@@ -48,10 +48,15 @@
                 </div>
             </div>
             <div class="row">
+                {{-- @php
+                    
+                    dd( request()->segment(4));
+                @endphp --}}
+                {{-- {{   }} --}}
                 @foreach ($features as $feature)
                     <div class="col-lg-3 col-md-4 col-6">
                         <div class="box-item">
-                            <span class="box-item-num">{{ $feature['counter'] }}</span>
+                            <span class="box-item-num {{ $feature['counter'] == null ? 'd-none' : '' }}">{{ $feature['counter'] }}</span>
                             <a href="{{ $feature['route'] }}"></a>
                             <img style="margin:auto; margin-bottom:1rem;" src="{{ asset($feature['icon']) }}">
                             <h5 class="f_600 t_color2">{{ $feature['name'] }}</h5>

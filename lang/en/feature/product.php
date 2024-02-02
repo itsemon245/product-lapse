@@ -26,5 +26,13 @@ return [
 
     //Edit page
     'edit' => 'Edit Product',
+    // info page
+    'info' => [
+        'title' => 'Product info',
+        'category' => 'Category',
+        'stage' => 'Stage',
+        'description' => 'Description',
+        'created' => 'Created by',
+    ],
 
 ];

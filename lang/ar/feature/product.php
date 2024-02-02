@@ -26,5 +26,12 @@ return [
 
     //Edit page
     'edit' => 'تحرير المنتج',
-
+    // info page
+    'info' => [
+        'title' => 'معلومات المنتج',
+        'category' => 'فئة',
+        'stage' => 'منصة',
+        'description' => 'وصف',
+        'created' => 'انشأ من قبل',
+    ],
 ];

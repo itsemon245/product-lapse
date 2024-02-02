@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SearchRequest;
-use App\Http\Requests\StoreProductRequest;
-use App\Models\Product;
+use App\Models\User;
 use App\Models\Select;
-use App\Services\SearchService;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Services\SearchService;
+use App\Http\Requests\SearchRequest;
 use Illuminate\Support\Facades\Cookie;
+use App\Http\Requests\StoreProductRequest;
 
 class ProductController extends Controller
 {
@@ -113,6 +114,7 @@ class ProductController extends Controller
 
     protected function getFeatureList(): array
     {
+        $infoId = request()->segment(4) == 'filter' ? request()->product_id : request()->segment(3) ;
         return [
             'innovate'              => [
                 'name'    => @__('productHome.innovate'),
@@ -134,7 +136,7 @@ class ProductController extends Controller
              ],
             'change-management'     => [
                 'name'    => @__('productHome.change-management'),
-                'counter' => 0,
+                'counter' => 6,
                 'icon'    => 'img/cycle.png',
                 'route'   => route('change.index'),
              ],
@@ -158,9 +160,9 @@ class ProductController extends Controller
              ],
             'product-info'          => [
                 'name'    => @__('productHome.product-info'),
-                'counter' => 0,
+                'counter' => null,
                 'icon'    => 'img/website.png',
-                'route'   => '',
+                'route'   => route('product.info', $infoId),
              ],
             'product-history'       => [
                 'name'    => @__('productHome.product-history'),
@@ -206,10 +208,8 @@ class ProductController extends Controller
     public function info(string $id)
     {
         // Set Cookie for the selected product
-        $cookie   = Cookie::forever('product_id', $id);
-        $product  = Product::find($id);
-        $products = Product::get();
-        $features = $this->getFeatureList();
-        return response(view('features.product.home', compact('product', 'features', 'products')))->withCookie($cookie);
+        $product  = Product::with('user')->find($id);
+        $owner = User::where('id', $product->owner_id)->with('image')->first();
+        return view('features.product.partials.show', compact('product', 'owner'));
     }
 }

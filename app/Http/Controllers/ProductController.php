@@ -20,7 +20,8 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::latest()->paginate(10);
-        return view('features.product.index', compact('products'));
+        $categories = Select::of('product')->type('category')->get();
+        return view('features.product.index', compact('products', 'categories'));
     }
 
     /**
@@ -198,7 +199,8 @@ class ProductController extends Controller
     public function search(SearchRequest $request)
     {
         $products = SearchService::items($request);
-        return view('features.product.index', compact('products'));
+        $categories = Select::of('product')->type('category')->get();
+        return view('features.product.index', compact('products', 'categories'));
     }
 
 

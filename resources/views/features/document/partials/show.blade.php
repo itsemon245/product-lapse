@@ -1,8 +1,10 @@
-@extends('layouts.feature.index', ['title' => @__('feature/document.show')])
+@extends('layouts.subscriber.app', ['title' => @__('feature/document.show')])
 @section('main')
     <x-feature.show>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => @__('feature/document.show'), 'route' => route('document.show', base64_encode($document->id))]]" />
+            <x-breadcrumb :list="[
+                ['label' => @__('feature/document.show'), 'route' => route('document.show', base64_encode($document->id))],
+            ]" />
         </x-slot:breadcrumb>
 
         <x-slot:details>
@@ -17,7 +19,7 @@
                             <h6 class="title2">@__('feature/document.placeholder.version')</h6>
                             <p class="f_400 mb-30 text-font">{{ $document->version }}</p>
                         </div>
-                       
+
                         <div class="col-lg-6 col-md-6">
                             <h6 class="title2">@__('feature/document.type')</h6>
                             <p class="f_400 mb-30 text-font">{{ $document->type }}</p>

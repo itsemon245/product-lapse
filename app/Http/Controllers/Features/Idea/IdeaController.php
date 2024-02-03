@@ -27,8 +27,8 @@ class IdeaController extends Controller
      */
     public function create()
     {
-        $priority = Select::of('innovate')->type('priority')->get();
-        return view('features.idea.partials.create', compact('priority'));
+        $priorities = Select::of('innovate')->type('priority')->get();
+        return view('features.idea.partials.create', compact('priorities'));
     }
 
     /**
@@ -57,8 +57,9 @@ class IdeaController extends Controller
      */
     public function edit(Idea $idea)
     {
-        $priority = Select::of('idea')->type('priority')->get();
-        return view('features.idea.partials.edit', compact('idea', 'priority'));
+        $priorities = Select::of('innovate')->type('priority')->get();
+
+        return view('features.idea.partials.edit', compact('idea', 'priorities'));
     }
 
     /**
@@ -68,7 +69,7 @@ class IdeaController extends Controller
     {
         $data = $request->except('_token', '_method');
         $data['owner_id'] = ownerId();
-        $idea->update();
+        $idea->update($data);
 
         notify()->success(__('Updated successfully!'));
         return redirect()->route('idea.index');

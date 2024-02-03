@@ -1,7 +1,6 @@
-@extends('layouts.feature.index', ['title' => @__('feature/idea.edit')])
+@extends('layouts.subscriber.app', ['title' => @__('feature/idea.edit')])
 
 @section('main')
-
     <x-feature.edit>
 
         <x-slot:breadcrumb>
@@ -10,8 +9,8 @@
 
         <x-slot:from>
             <h2 class=" f_600 f_size_24 t_color3 mb_40">@__('feature/idea.edit')</h2>
-            <form action="{{ route('idea.update', $idea) }}" method="POST"
-                class="login-form sign-in-form" enctype="multipart/form-data">
+            <form action="{{ route('idea.update', $idea) }}" method="POST" class="login-form sign-in-form"
+                enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="row">
@@ -30,34 +29,35 @@
 
                     </div>
                     <div class="form-group text_box col-lg-12">
+
                         <x-select-input label="{{ __('feature/idea.label.priority') }}" id="priority"
                             placeholder="{{ __('feature/idea.label.priority') }}" name="priority" required autofocus>
-                            @if ($priority)
-                                @forelse ($priority as $category)
-                                    <option value="<?= $category->value->{app()->getLocale()} ?>">
-                                        <?= $category->value->{app()->getLocale()} ?>
-                                    </option>
-                                @empty
-                                    <option disabled>No priority available</option>
-                                @endforelse
-                            @endif
+
+                            @forelse ($priorities as $priority)
+                                <option value="{{ $priority->value->{app()->getLocale()} }}"
+                                    @if ($idea->priority == $priority->value->{app()->getLocale()}) selected @endif>
+                                    {{ $priority->value->{app()->getLocale()} }}
+                                </option>
+                            @empty
+                                <option disabled>No Priority available</option>
+                            @endforelse
+
                         </x-select-input>
-                        <x-input-error :messages="$errors->get('priority')" class="mt-2" />
                     </div>
 
                     <div class="form-group text_box col-lg-12">
-                        <x-input-label for="details" value="{{ __('feature/idea.label.details') }}" />
-                        <x-textarea id="details" class="block mt-1 w-full" name="details" value="{{ $idea->details }}"
-                            placeholder="{{ __('feature/idea.placeholder.details') }}" cols="30" rows="10"
-                            required autofocus />
+                        <x-textarea id="details" placeholder="{{ __('feature/idea.placeholder.details') }}"
+                            rows="5" cols="10" name="details" label="{{ __('feature/idea.label.details') }}">
+                            {!! $idea->details !!}
+                        </x-textarea>
                     </div>
 
                     <div class="form-group text_box col-lg-12">
-                        <x-input-label for="requirements" value="{{ __('feature/idea.label.requirements') }}" />
-                        <x-textarea id="requirements" class="block mt-1 w-full" name="requirements"
-                            value="{{ $idea->requirements }}"
-                            placeholder="{{ __('feature/idea.placeholder.requirements') }}" cols="30" rows="10"
-                            required autofocus />
+                        <x-textarea id="requirements" placeholder="{{ __('feature/idea.placeholder.requirements') }}"
+                            rows="5" cols="10" name="requirements"
+                            label="{{ __('feature/idea.label.requirements') }}">
+                            {!! $idea->requirements !!}
+                        </x-textarea>
                     </div>
                 </div>
 

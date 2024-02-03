@@ -1,6 +1,5 @@
-@extends('layouts.feature.index', ['title' => @__('feature/document.add')])
+@extends('layouts.subscriber.app', ['title' => @__('feature/document.add')])
 @section('main')
-
     <x-feature.create>
         <x-slot:breadcrumb>
             <x-breadcrumb :list="[['label' => @__('feature/document.add'), 'route' => route('document.create')]]" />
@@ -22,15 +21,15 @@
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-select-input label="{{ __('feature/document.label.type') }}" id="type"
                             placeholder="Choose one" name="type" required autofocus>
-                            @if ($type)
-                                @forelse ($type as $category)
-                                    <option value="<?= $category->value->{app()->getLocale()} ?>">
-                                        <?= $category->value->{app()->getLocale()} ?>
-                                    </option>
-                                @empty
-                                    <option disabled>No type available</option>
-                                @endforelse
-                            @endif
+
+                            @forelse ($type as $category)
+                                <option value="{{ $category->value->{app()->getLocale()} }}">
+                                    {{ $category->value->{app()->getLocale()} }}
+                                </option>
+                            @empty
+                                <option disabled>No type available</option>
+                            @endforelse
+
                         </x-select-input>
                     </div>
 
@@ -42,9 +41,9 @@
                     </div>
 
                     <div class="form-group text_box col-lg-12 col-md-12">
-                        <x-input-label for="description" value="{{ __('feature/document.label.description') }}" />
-                        <x-textarea id="description" class="block mt-1 w-full" name="description" :value="old('description')"
-                            placeholder="{{ __('feature/document.placeholder.description') }}" required autofocus />
+                        <x-textarea placeholder="{{ __('feature/document.placeholder.description') }}" rows="5"
+                            cols="10" name="description" label="{{ __('feature/document.label.description') }}">
+                        </x-textarea>
                     </div>
 
                     <div class="form-group text_box col-lg-6 col-md-6">

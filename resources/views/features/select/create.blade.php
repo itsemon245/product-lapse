@@ -1,4 +1,4 @@
-@extends('layouts.feature.index', ['title' => 'Select Menus'])
+@extends('layouts.subscriber.app', ['title' => 'Select Menus'])
 @section('main')
     <x-feature.create>
         <x-slot:breadcrumb>

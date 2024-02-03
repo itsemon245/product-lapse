@@ -1,4 +1,4 @@
-@extends('layouts.feature.index', ['title' => @__('feature/document.title')])
+@extends('layouts.subscriber.app', ['title' => @__('feature/document.title')])
 @section('main')
     <x-feature.index>
         <x-slot:breadcrumb>
@@ -25,22 +25,7 @@
 
         <x-slot:filter>
             <h5>@__('feature/document.showing')</h5>
-            <form method="get" action="#">
-                <select class="selectpickers selectpickers2" style="display: none;">
-                    <option value="">All</option>
-                    <option value="">Durable product</option>
-                    <option value="">Initial idea</option>
-                    <option value="">Stopped</option>
-                </select>
-                <div class="nice-select selectpickers selectpickers2" tabindex="0"><span class="current">All</span>
-                    <ul class="list">
-                        <li data-value="" class="option selected focus">All</li>
-                        <li data-value="" class="option">Durable product</li>
-                        <li data-value="" class="option">Initial idea</li>
-                        <li data-value="" class="option">Stopped</li>
-                    </ul>
-                </div>
-            </form>
+            <x-filter :route="route('document.search')" :columns="['type']" model="document" :options="$types" />
         </x-slot:filter>
 
 
@@ -58,7 +43,7 @@
                                         <ul class="list-unstyled">
                                             <li>
                                                 {{ $document->type }}
-                                            <li>
+                                            <li class="text-muted">
                                                 {{ \Carbon\Carbon::parse($document->date)->format('l, j F Y') }}
                                             </li>
 

@@ -24,7 +24,7 @@ class ChangeFactory extends Factory
             'title' => fake()->name,
             'classification' => 'one',
             'priority' => 'two',
-            'status' => 'three',
+            'status' => fake()->randomElement(['Working on', 'Pending', 'Stopped']),
             'details' => fake()->paragraph,
             'administrator' => fake()->name,
             'required_completion_date' => fake()->dateTime,

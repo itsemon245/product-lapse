@@ -119,7 +119,6 @@ class ProductController extends Controller
 
     protected function getFeatureList(): array
     {
-        $infoId = request()->segment(4) == 'filter' ? request()->product_id : request()->segment(3) ;
         return [
             'innovate'              => [
                 'name'    => @__('productHome.innovate'),

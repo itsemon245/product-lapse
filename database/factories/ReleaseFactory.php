@@ -6,9 +6,9 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Report>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Release>
  */
-class ReportFactory extends Factory
+class ReleaseFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,10 +18,12 @@ class ReportFactory extends Factory
     public function definition(): array
     {
         return [
-            'owner_id' => 1,
+            'owner_id' => function (){
+                return User::inRandomOrder()->first()->id;
+            },
             'name' => fake()->name,
-            'type' => fake()->randomElement(['PDF', 'Image']),
-            'report_date' => fake()->time,
+            'version' => fake()->randomNumber,
+            'release_date' => fake()->dateTime,
             'description' => fake()->paragraph,
         ];
     }

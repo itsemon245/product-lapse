@@ -1,4 +1,4 @@
-@extends('layouts.feature.index', ['title' => @__('feature/product.info.title')])
+@extends('layouts.subscriber.app', ['title' => @__('feature/product.info.title')])
 @section('main')
     <x-feature.show>
         <x-slot:breadcrumb>
@@ -8,7 +8,7 @@
 
         <x-slot:details>
             {{-- {{ dd($product) }} --}}
-            <div class="col-lg-8 blog_sidebar_left">
+            <div class="col-lg-6 blog_sidebar_left">
                 <div class="blog_single mb_50">
                     <div class="">
                         <h5 class="f_size_20 f_500">{{ $product->name }}</h5>
@@ -39,7 +39,7 @@
             </div>
         </x-slot:details>
         <x-slot:profile>
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 <div class="blog-sidebar box-sidebar">
                     <div class="widget sidebar_widget widget_recent_post mt_60">
                         <div class="media post_author mt_60">
@@ -51,6 +51,12 @@
                         <h6 class="title2">@__('feature/product.info.created'): <span class="f_400 mb-30 text-font">{{ $owner->name }}</span></h6>
                     </div>
 
+                </div>
+
+            </div>
+            <div class="col-lg-3">
+                <div class="mt-5 pt-2">
+                    <img src="{{ $product->image?->url }}" alt="">
                 </div>
 
             </div>

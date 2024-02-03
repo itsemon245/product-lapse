@@ -29,10 +29,10 @@
                     <div class="form-group text_box col-lg-12">
                         <x-select-input label="{{ __('feature/idea.label.priority') }}" id="priority"
                             placeholder="Choose one" name="priority" required autofocus>
-                            @if ($priority)
-                                @forelse ($priority as $category)
-                                    <option value="<?= $category->value->{app()->getLocale()} ?>">
-                                        <?= $category->value->{app()->getLocale()} ?>
+                            @if ($priorities)
+                                @forelse ($priorities as $priority)
+                                    <option value="<?= $priority->value->{app()->getLocale()} ?>">
+                                        <?= $priority->value->{app()->getLocale()} ?>
                                     </option>
                                 @empty
                                     <option disabled>No priority available</option>

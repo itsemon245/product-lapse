@@ -1,4 +1,4 @@
-@extends('layouts.feature.index', ['title' => 'Select Menus'])
+@extends('layouts.subscriber.app', ['title' => 'Select Menus'])
 @section('main')
     <x-feature.create>
         <x-slot:breadcrumb>
@@ -12,23 +12,9 @@
                 @csrf
                 @method('put')
                 <div class="login_info">
+
+
                     <div class="row">
-                        <div class="form-group text_box col-lg-6 col-md-6">
-                            <x-input label="Name (English)" id="name_en" type="text" placeholder="Enter category name"
-                                name="name_en" :value="$select->value->en" required autofocus />
-                        </div>
-
-                        <div class="form-group text_box col-lg-6 col-md-6">
-
-                            <x-input label="Name (Arabic)" id="name_ar" type="text" placeholder="Enter category name"
-                                name="name_ar" :value="$select->value->ar" required autofocus />
-                        </div>
-
-                        <div class="form-group text_box col-lg-6 col-md-6">
-                            <x-input label="Text Color" id="text-color" type="text" placeholder="Enter text color"
-                                name="text_color" :value="$select->color" required autofocus />
-                        </div>
-
                         <div class="form-group text_box col-lg-6 col-md-6">
                             <x-select-input label="Feature Name" id="model-type" placeholder="Choose Feature Name"
                                 name="model_type" autofocus>
@@ -44,6 +30,20 @@
                                     <option value="{{ $type->value }}" @selected($type->value == $select->type)>{{ str($type->value)->headline() }}</option>
                                 @endforeach
                             </x-select-input>
+                        </div>
+                        <div class="form-group text_box col-lg-6 col-md-6">
+                            <x-input label="Name (English)" id="name_en" type="text" placeholder="Enter category name"
+                                name="name_en" :value="$select->value->en" required autofocus />
+                        </div>
+                        <div class="form-group text_box col-lg-6 col-md-6">
+
+                            <x-input label="Name (Arabic)" id="name_ar" type="text" placeholder="Enter category name"
+                                name="name_ar" :value="$select->value->ar" required autofocus />
+                        </div>
+                        <div class="form-group text_box col-lg-12 col-md-6">
+                            <x-input label="Text Color" id="text-color" type="color" placeholder="Enter text color"
+                                name="text_color" :value="$select->color" required autofocus />
+                            <x-input-error :messages="$errors->get('text_color')" class="mt-2" />
                         </div>
                     </div>
                 </div>

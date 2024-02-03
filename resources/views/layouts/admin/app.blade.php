@@ -42,7 +42,6 @@
 
             <div class="flex flex-col flex-1 w-full" id="hx-global-target">
                 @include('layouts.admin.header')
-
                 {{-- This is main content --}}
                 <main>
                     @yield('main')

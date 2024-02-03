@@ -21,7 +21,8 @@ class DocumentController extends Controller
     public function index()
     {
         $documents = Product::find(productId())->documents()->paginate(10);
-        return view('features.document.index', compact('documents'));
+        $types = Select::of('document')->type('type')->get();
+        return view('features.document.index', compact('documents', 'types'));
     }
 
     /**
@@ -134,7 +135,8 @@ class DocumentController extends Controller
     public function search(SearchRequest $request)
     {
         $documents = SearchService::items($request);
-        return view('features.document.index', compact('documents'));
+        $types = Select::of('document')->type('type')->get();
+        return view('features.document.index', compact('documents', 'types'));
     }
 
 }

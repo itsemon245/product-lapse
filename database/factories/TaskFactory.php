@@ -6,9 +6,9 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Idea>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Task>
  */
-class IdeaFactory extends Factory
+class TaskFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -22,10 +22,11 @@ class IdeaFactory extends Factory
                 return User::inRandomOrder()->first()->id;
             },
             'name' => fake()->name,
-            'owner' => fake()->text,
-            'priority' => fake()->randomElement(['Working on', 'Pending', 'Stopped']),
+            'category' => fake()->randomElement(['Working on', 'Pending', 'Stopped']),
+            'status' => fake()->randomElement(['Working on', 'Pending', 'Stopped']),
             'details' => fake()->paragraph,
-            'requirements' => fake()->paragraph,
+            'steps' => fake()->paragraph,
+            'administrator' => fake()->name,
         ];
     }
 }

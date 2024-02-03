@@ -41,8 +41,8 @@
                                 <div class="jobsearch-table-cell">
                                     <h4><a href="{{ route('idea.show', $idea) }}" class="f_500 t_color3">{{ $idea->name }}</a></h4>
                                     <ul class="list-unstyled">
-                                        <li class="p_color4">{{ $idea->priority }}</li>
-                                        <li class="p_color4">
+                                        <li class="p_color3">{{ $idea->priority }}</li>
+                                        <li class="text muted">
                                             {{ \Carbon\Carbon::parse($idea->created_at)->format('l, j F Y') }}</li>
                                     </ul>
                                 </div>

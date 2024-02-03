@@ -1,4 +1,4 @@
-@extends('layouts.feature.index', ['title' => @__('feature/task.title')])
+@extends('layouts.subscriber.app', ['title' => @__('feature/task.title')])
 @section('main')
     <x-feature.index>
         <x-slot:breadcrumb>
@@ -24,48 +24,8 @@
         </x-slot:actions>
 
         <x-slot:filter>
-            <div class="row">
-                <div class="col-md-6">
-                    <h5>@__('feature/task.showing1')</h5>
-                    <form method="get" action="#">
-                        <select class="selectpickers selectpickers2" style="display: none;">
-                            <option value="">All</option>
-                            <option value="">Durable product</option>
-                            <option value="">Initial idea</option>
-                            <option value="">Stopped</option>
-                        </select>
-                        <div class="nice-select selectpickers selectpickers2" tabindex="0"><span
-                                class="current">All</span>
-                            <ul class="list">
-                                <li data-value="" class="option selected focus">All</li>
-                                <li data-value="" class="option">Durable product</li>
-                                <li data-value="" class="option">Initial idea</li>
-                                <li data-value="" class="option">Stopped</li>
-                            </ul>
-                        </div>
-                    </form>
-                </div>
-                <div class="col-md-6">
-                    <h5>@__('feature/task.showing2')</h5>
-                    <form method="get" action="#">
-                        <select class="selectpickers selectpickers2" style="display: none;">
-                            <option value="">All</option>
-                            <option value="">Durable product</option>
-                            <option value="">Initial idea</option>
-                            <option value="">Stopped</option>
-                        </select>
-                        <div class="nice-select selectpickers selectpickers2" tabindex="0"><span
-                                class="current">All</span>
-                            <ul class="list">
-                                <li data-value="" class="option selected focus">All</li>
-                                <li data-value="" class="option">Durable product</li>
-                                <li data-value="" class="option">Initial idea</li>
-                                <li data-value="" class="option">Stopped</li>
-                            </ul>
-                        </div>
-                    </form>
-                </div>
-            </div>
+            <h5>@__('feature/task.showing2')</h5>
+            <x-filter :route="route('task.search')" :columns="['status']" model="task" :options="$priorities" />
         </x-slot:filter>
 
         <x-slot:list>
@@ -82,7 +42,7 @@
                                         </h4>
                                         <ul class="list-unstyled">
                                             <li class="p_color3">{{ $task->status }}</li>
-                                            <li>
+                                            <li class="text-muted">
                                                 {{ \Carbon\Carbon::parse($task->created_at)->format('l, j F Y') }}
                                             </li>
                                         </ul>

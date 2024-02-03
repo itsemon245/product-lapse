@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Idea;
+use App\Models\Task;
 use App\Models\Change;
 use App\Models\Report;
 use App\Models\Package;
@@ -65,6 +66,9 @@ class DatabaseSeeder extends Seeder
 
         Idea::unsetEventDispatcher();
         Idea::factory(10)->create();
+
+        // Task::unsetEventDispatcher();
+        // Task::factory(10)->create();
 
         $this->call([
             PermissionSeeder::class,

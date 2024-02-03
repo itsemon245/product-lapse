@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->enum('status', ['started', 'not_started', 'stopped'])->default('not_started')->change();
+            $table->enum('status', ['Working on', 'Pending', 'Stopped'])->default('Working on')->change();
         });
     }
 

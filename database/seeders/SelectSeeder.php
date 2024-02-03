@@ -144,5 +144,25 @@ class SelectSeeder extends Seeder
                 'ar'=> 'صورة',
             ],
         ]);
+        Select::create([
+            'owner_id' => 1,
+            'model_type' => Feature::REPORT->value,
+            'type' => SelectType::TYPE->value,
+            'color' => "#fff",
+            'value' => [
+                'en'=> 'PDF',
+                'ar'=> 'بي دي إف',
+            ],
+        ]);
+        Select::create([
+            'owner_id' => 1,
+            'model_type' => Feature::REPORT->value,
+            'type' => SelectType::TYPE->value,
+            'color' => "#fff",
+            'value' => [
+                'en'=> 'Image',
+                'ar'=> 'صورة',
+            ],
+        ]);
     }
 }

@@ -24,20 +24,21 @@
                 <div class="listing_tab">
                     <div class="item lon new">
                         <div class="list_item">
-
+                            
                             <div class="joblisting_text">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell">
                                         <h4>
-                                            <a href="#" class="f_500 t_color3">T-shirt for men</a>
-                                            <button type="submit" class="btn_hover agency_banner_btn btn-bg"><i
-                                                    class="ti-pencil"></i> @__('productHome.edit')</button>
+                                            <a href="{{ route('product.info', productId()) }}" class="f_500 t_color3">{{ $product->name }}</a>
+                                            <a href="{{ route('product.edit', productId()) }}" class="btn_hover agency_banner_btn btn-bg"><i
+                                                class="ti-pencil"></i> @__('productHome.edit')</a>
+                                            
                                         </h4>
                                         <ul class="list-unstyled">
-                                            <li class="p_color1">Product status</li>
-                                            <li>More about the product details here</li>
-                                            <li><button type="submit" class="btn_hover agency_banner_btn btn-bg"><i
-                                                        class="ti-pencil"></i> @__('productHome.edit')</button></li>
+                                            <li class="p_color1">{{ $product->stage }}</li>
+                                            <li>{{ $product->description }}</li>
+                                            <li>  <a href="{{ route('product.edit', productId()) }}" class="btn_hover agency_banner_btn btn-bg"><i
+                                                class="ti-pencil"></i> @__('productHome.edit')</a></li>
                                         </ul>
                                     </div>
 

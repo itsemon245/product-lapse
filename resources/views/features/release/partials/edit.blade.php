@@ -1,4 +1,4 @@
-@extends('layouts.feature.index', ['title' => @__('feature/release.edit')])
+@extends('layouts.subscriber.app', ['title' => @__('feature/release.edit')])
 @section('main')
     <x-feature.edit>
         <x-slot:breadcrumb>

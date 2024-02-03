@@ -24,7 +24,6 @@ return new class extends Migration {
             $table->dateTime('starting_date');
             $table->dateTime('ending_date');
             $table->string('administrator');
-            $table->string('add_attachments');
             $table->timestamps();
         });
     }

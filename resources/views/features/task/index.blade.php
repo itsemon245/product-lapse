@@ -1,4 +1,4 @@
-@extends('layouts.feature.index', ['title' => @__('feature/task.title')])
+@extends('layouts.subscriber.app', ['title' => @__('feature/task.title')])
 @section('main')
     <x-feature.index>
         <x-slot:breadcrumb>
@@ -7,13 +7,15 @@
         <x-slot:search>
 
 
-        <form method="GET" hx-get="{{ route('task.search') }}" hx-trigger="submit" hx-target="#search-results" hx-select="#search-results" class="search-form input-group">
-            <input type="hidden" name="columns[]" value="name">
-            <input type="hidden" name="columns[]" value="details">
-            <input type="hidden" name="model" value="task">
-            <input type="search" name="search" class="form-control widget_input" placeholder="{{ __('feature/task.search') }}" hx-vals="#search-results">
-            <button type="submit"><i class="ti-search"></i></button>
-        </form>
+            <form method="GET" hx-get="{{ route('task.search') }}" hx-trigger="submit" hx-target="#search-results"
+                hx-select="#search-results" class="search-form input-group">
+                <input type="hidden" name="columns[]" value="name">
+                <input type="hidden" name="columns[]" value="details">
+                <input type="hidden" name="model" value="task">
+                <input type="search" name="search" class="form-control widget_input"
+                    placeholder="{{ __('feature/task.search') }}" hx-vals="#search-results">
+                <button type="submit"><i class="ti-search"></i></button>
+            </form>
         </x-slot:search>
 
         <x-slot:actions>
@@ -112,7 +114,7 @@
                     </div>
                 </div>
             @empty
-            <x-feature.not-found /> 
+                <x-feature.not-found />
             @endforelse
         </x-slot:list>
     </x-feature.index>

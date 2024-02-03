@@ -44,7 +44,7 @@
 
                         <div class="form-group text_box col-lg-6 col-md-6">
                             <x-input label="Text Color" id="text-color" type="text" placeholder="Enter text color"
-                                name="text_color" :value="old('text_color')" required autofocus />
+                                name="text_color" :value="old('text_color')" required autofocus value="black" />
                             <x-input-error :messages="$errors->get('text_color')" class="mt-2" />
                         </div>
 

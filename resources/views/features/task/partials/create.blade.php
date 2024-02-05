@@ -74,18 +74,12 @@
                             placeholder="{{ __('feature/task.placeholder.steps') }}" required autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <label class=" text_c f_500">{{ __('feature/task.label.str-date') }}</label>
-                        <input type="date" placeholder="date" name="starting_date">
-                        @error('starting_date')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        <x-input label="{{ __('feature/task.label.str-date') }}" id="starting_date"
+                            class="block mt-1 w-full" type="date" name="starting_date" required autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <label class=" text_c f_500">{{ __('feature/task.label.end-date') }}</label>
-                        <input type="date" placeholder="date" name="ending_date">
-                        @error('ending_date')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        <x-input label="{{ __('feature/task.label.end-date') }}" id="ending_date" class="block mt-1 w-full"
+                            type="date" name="ending_date" required autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-input-label for="name" value="{{ __('feature/task.label.administrator') }}" />

@@ -19,7 +19,6 @@
                             value="{{ $support->name }}" required autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-
                         <x-select-input label="{{ __('feature/support.label.classification') }}" id="type"
                             placeholder="Choose one" name="classification" required autofocus>
 
@@ -79,11 +78,10 @@
                         @enderror
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-
-
-                        <x-input-label for="date" value="{{ __('feature/support.label.date') }}" />
-                        <x-input id="date" class="block mt-1 w-full" type="date" name="completion_date"
-                            value="{{ $support->completion_date }}" required autofocus />
+                        <x-input label="{{ __('feature/support.label.date') }}" id="completion_date"
+                            class="block mt-1 w-full" type="date" name="completion_date"
+                            value="{{ \Carbon\Carbon::parse($support->completion_date)->format('Y-m-d') }}" required
+                            autofocus />
                     </div>
                 </div>
                 <div class="d-flex align-items-center text-center">

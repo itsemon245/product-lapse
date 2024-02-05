@@ -75,14 +75,15 @@
                             autofocus>{!! $task->steps !!}</x-textarea>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-input id="starting_date" value="{{ $task->starting_date }}" class="block mt-1 w-full"
-                            type="date" placeholder="{{ __('feature/task.placeholder.str-date') }}" name="starting_date"
-                            required autofocus />
+                        <x-input label="{{ __('feature/task.label.str-date') }}" id="starting_date"
+                            class="block mt-1 w-full" type="date" name="starting_date"
+                            value="{{ \Carbon\Carbon::parse($task->starting_date)->format('Y-m-d') }}" required
+                            autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-input id="ending_date" value="{{ $task->ending_date }}" class="block mt-1 w-full" type="date"
-                            placeholder="{{ __('feature/task.placeholder.end-date') }}" name="ending_date" required
-                            autofocus />
+                        <x-input label="{{ __('feature/task.label.end-date') }}" id="ending_date" class="block mt-1 w-full"
+                            type="date" name="ending_date"
+                            value="{{ \Carbon\Carbon::parse($task->ending_date)->format('Y-m-d') }}" required autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-input-label for="administrator" value="{{ __('feature/task.label.administrator') }}" />

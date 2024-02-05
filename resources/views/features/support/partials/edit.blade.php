@@ -1,103 +1,89 @@
-@extends('layouts.feature.index', ['title' => @__('feature/support.edit')])
+@extends('layouts.subscriber.app', ['title' => @__('feature/support.add')])
 @section('main')
-    <x-feature.edit>
+    <x-feature.create>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => @__('feature/support.edit'), 'route' => route('support.edit', $support)]]" />
+            <x-breadcrumb :list="[['label' => @__('feature/support.title'), 'route' => route('support.index')]]" />
         </x-slot:breadcrumb>
 
         <x-slot:from>
             <h2 class=" f_600 f_size_24 t_color3 mb_40">@__('feature/support.edit')</h2>
             <form action="{{ route('support.update', $support) }}" method="POST" enctype="multipart/form-data"
                 class="login-form sign-in-form">
+                @method('PUT')
                 <div class="row">
                     @csrf
-                    @method('PUT')
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <label class=" text_c f_500">@__('feature/support.label.name')</label>
-                        <input type="text" name="name" placeholder="@__('feature/support.placeholder.name')" value="{{ $support->name }}">
-                        @error('name')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        <x-input-label for="name" value="{{ __('feature/support.label.name') }}" />
+                        <x-input id="name" class="block mt-1 w-full" type="text"
+                            placeholder="{{ __('feature/support.placeholder.name') }}" name="name"
+                            value="{{ $support->name }}" required autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <label class=" text_c f_500">@__('feature/support.label.classification')</label>
 
-                        <select class="selectpickers" name="classification">
-                            @if ($classification)
-                                @forelse ($classification as $category)
-                                    <option value="<?= $category->value->{app()->getLocale()} ?>">
-                                        <?= $category->value->{app()->getLocale()} ?>
-                                    </option>
-                                @empty
-                                    <option disabled>No classification available</option>
-                                @endforelse
-                            @endif
-                        </select>
-                        @error('classification')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        <x-select-input label="{{ __('feature/support.label.classification') }}" id="type"
+                            placeholder="Choose one" name="classification" required autofocus>
 
+                            @forelse ($classifications as $classification)
+                                <option value="{{ $classification->value->{app()->getLocale()} }}"
+                                    @if ($support->classification == $classification->value->{app()->getLocale()}) selected @endif>
+                                    {{ $classification->value->{app()->getLocale()} }}
+                                </option>
+                            @empty
+                                <option disabled>No classification available</option>
+                            @endforelse
+
+                        </x-select-input>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <label class=" text_c f_500">@__('feature/support.label.priority')</label>
+                        <x-select-input label="{{ __('feature/support.label.priority') }}" id="type"
+                            placeholder="Choose one" name="priority" required autofocus>
 
-                        <select class="selectpickers" name="priority">
-                            @if ($priority)
-                                @forelse ($priority as $category)
-                                    <option value="<?= $category->value->{app()->getLocale()} ?>">
-                                        <?= $category->value->{app()->getLocale()} ?>
-                                    </option>
-                                @empty
-                                    <option disabled>No priority available</option>
-                                @endforelse
-                            @endif
-                        </select>
-                        @error('priority')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                            @forelse ($priorities as $priority)
+                                <option value="{{ $priority->value->{app()->getLocale()} }}"
+                                    @if ($support->priority == $priority->value->{app()->getLocale()}) selected @endif>
+                                    {{ $priority->value->{app()->getLocale()} }}
+                                </option>
+                            @empty
+                                <option disabled>No priority available</option>
+                            @endforelse
 
+                        </x-select-input>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <label class=" text_c f_500">@__('feature/support.label.ticket')</label>
-                        <select class="selectpickers" name="status">
-                            @if ($status)
-                                @forelse ($status as $category)
-                                    <option value="<?= $category->value->{app()->getLocale()} ?>">
-                                        <?= $category->value->{app()->getLocale()} ?>
-                                    </option>
-                                @empty
-                                    <option disabled>No status available</option>
-                                @endforelse
-                            @endif
-                        </select>
-                        @error('status')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        <x-select-input label="{{ __('feature/support.label.ticket') }}" id="type"
+                            placeholder="Choose one" name="status" required autofocus>
 
+                            @forelse ($statuses as $status)
+                                <option value="{{ $status->value->{app()->getLocale()} }}"
+                                    @if ($support->status == $status->value->{app()->getLocale()}) selected @endif>
+                                    {{ $status->value->{app()->getLocale()} }}
+                                </option>
+                            @empty
+                                <option disabled>No status available</option>
+                            @endforelse
+
+                        </x-select-input>
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-12">
-                        <label class=" text_c f_500">@__('feature/support.label.description')</label>
-                        <textarea name="description" id="description" cols="30" rows="10" placeholder="@__('feature/support.placeholder.description')">{{ $support->description }}</textarea>
-                        @error('description')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        <x-textarea placeholder="{{ __('feature/support.placeholder.description') }}" rows="5"
+                            cols="10" name="description"
+                            label="{{ __('feature/support.label.description') }}">{{ $support->description }}</x-textarea>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <label class=" text_c f_500">@__('feature/support.label.administrator')</label>
-                        <input type="text" name="administrator" placeholder="@__('feature/support.placeholder.administrator')"
+                        <input type="text" name="administrator"
+                            placeholder="{{ __('feature/support.placeholder.administrator') }}"
                             value="{{ $support->administrator }}">
                         @error('administrator')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <label class=" text_c f_500">@__('feature/support.label.date')</label>
-                        <input type="date" name="completion_date"
-                            value="{{ $support->completion_date ? \Carbon\Carbon::parse($support->completion_date)->format('Y-m-d') : '' }}">
-                        @error('completion_date')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
 
+
+                        <x-input-label for="date" value="{{ __('feature/support.label.date') }}" />
+                        <x-input id="date" class="block mt-1 w-full" type="date" name="completion_date"
+                            value="{{ $support->completion_date }}" required autofocus />
                     </div>
                 </div>
                 <div class="d-flex align-items-center text-center">
@@ -108,5 +94,5 @@
                 </div>
             </form>
         </x-slot:from>
-    </x-feature.edit>
+    </x-feature.create>
 @endsection

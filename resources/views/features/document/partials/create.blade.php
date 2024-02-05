@@ -47,9 +47,8 @@
                     </div>
 
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-input-label for="date" value="{{ __('feature/document.label.date') }}" />
-                        <x-input id="date" class="block mt-1 w-full" type="date" name="date" :value="old('date')"
-                            required autofocus />
+                        <x-input label="{{ __('feature/document.label.date') }}" id="date" class="block mt-1 w-full"
+                            type="date" name="date" required autofocus />
                     </div>
 
                     <div class="form-group text_box col-lg-6 col-md-6">

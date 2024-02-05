@@ -1,19 +1,21 @@
-@extends('layouts.feature.index', ['title' => @__('feature/report.title')])
+@extends('layouts.subscriber.app', ['title' => @__('feature/report.title')])
 @section('main')
     <x-feature.index>
         <x-slot:breadcrumb>
             <x-breadcrumb :list="[['label' => @__('feature/report.title'), 'route' => route('report.index')]]" />
         </x-slot:breadcrumb>
 
-    <x-slot:search>
-    <form method="GET" hx-get="{{ route('report.search') }}" hx-trigger="submit" hx-target="#search-results" hx-select="#search-results" class="search-form input-group">
-        <input type="hidden" name="columns[]" value="name">
-        <input type="hidden" name="columns[]" value="type">
-        <input type="hidden" name="model" value="report">
-        <input type="search" name="search" class="form-control widget_input" placeholder="{{ __('feature/report.search') }}" hx-vals="#search-results">
-        <button type="submit"><i class="ti-search"></i></button>
-    </form>
-    </x-slot:search>
+        <x-slot:search>
+            <form method="GET" hx-get="{{ route('report.search') }}" hx-trigger="submit" hx-target="#search-results"
+                hx-select="#search-results" class="search-form input-group">
+                <input type="hidden" name="columns[]" value="name">
+                <input type="hidden" name="columns[]" value="type">
+                <input type="hidden" name="model" value="report">
+                <input type="search" name="search" class="form-control widget_input"
+                    placeholder="{{ __('feature/report.search') }}" hx-vals="#search-results">
+                <button type="submit"><i class="ti-search"></i></button>
+            </form>
+        </x-slot:search>
 
 
         <x-slot:actions>
@@ -44,43 +46,39 @@
         </x-slot:filter>
 
 
-    <x-slot:list>
-        @forelse ($reports as $report)
-        <div class="col-md-6">
-            <div class="item lon new">
-                <div class="list_item">
-                    <figure><a href="{{ route('report.show', $report) }}"><img src="img/p1.jpg" alt=""></a></figure>
-                    <div class="joblisting_text">
-                        <div class="job_list_table">
-                            <div class="jobsearch-table-cell">
-                                <h4><a href="#" class="f_500 t_color3">{{ $report->name }}</a></h4>
-                                <ul class="list-unstyled">
-                                    <li>{{ $report->created_at->formatLocalized('%A %d %B %Y') }}</li>
-                                </ul>
-                            </div>
-                            <div class="jobsearch-table-cell">
-                                <div class="jobsearch-job-userlist">
-                                    <div class="like-btn">
-                                        {{-- <form action="{{ route('report.destroy', $report) }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                           
-                                        </form> --}}
-                                        <x-btn-icons type="submit" class="btn" value="<i class='ti-more'></i>" />
+        <x-slot:list>
+            @forelse ($reports as $report)
+                <div class="col-md-6">
+                    <div class="item lon new">
+                        <div class="list_item">
+                            <figure><a href="{{ route('report.show', $report) }}"><img src="img/p1.jpg" alt=""></a>
+                            </figure>
+                            <div class="joblisting_text">
+                                <div class="job_list_table">
+                                    <div class="jobsearch-table-cell">
+                                        <h4><a href="#" class="f_500 t_color3">{{ $report->name }}</a></h4>
+                                        <ul class="list-unstyled">
+                                            <li>{{ $report->created_at->formatLocalized('%A %d %B %Y') }}</li>
+                                        </ul>
                                     </div>
                                     <div class="jobsearch-table-cell">
                                         <div class="jobsearch-job-userlist">
-                                            <div class="like-btn">
-                                                <form action="{{ route('report.destroy', $report) }}" method="post">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <x-btn-icons type="submit" class="btn"
-                                                        value="<i class='ti-trash'></i>" />
-                                                </form>
-                                            </div>
-                                            <div class="like-btn">
-                                                <x-btn-icons type="anchor" value="<i class='ti-pencil'></i>"
-                                                    href="{{ route('report.edit', $report) }}" />
+                                            <div class="jobsearch-table-cell">
+                                                <div class="jobsearch-job-userlist">
+                                                    <div class="like-btn">
+                                                        <form action="{{ route('report.destroy', $report) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <x-btn-icons type="submit" class="btn"
+                                                                value="<i class='ti-trash'></i>" />
+                                                        </form>
+                                                    </div>
+                                                    <div class="like-btn">
+                                                        <x-btn-icons type="anchor" value="<i class='ti-pencil'></i>"
+                                                            href="{{ route('report.edit', $report) }}" />
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -89,11 +87,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        @empty 
-        <x-feature.not-found /> 
-        @endforelse
-    </x-slot:list>
-</x-feature.index>
-@endsection 
+            @empty
+                <x-feature.not-found />
+            @endforelse
+        </x-slot:list>
+    </x-feature.index>
+@endsection

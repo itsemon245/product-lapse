@@ -20,7 +20,8 @@ class ReportController extends Controller
     public function index()
     {
         $reports = Product::find(productId())->reports()->paginate(10);
-        return view('features.report.index', compact('reports'));
+        $types = Select::of('report')->type('type')->get();
+        return view('features.report.index', compact('reports', 'types'));
     }
 
     /**
@@ -128,6 +129,7 @@ class ReportController extends Controller
     public function search(SearchRequest $request)
     {
         $reports = SearchService::items($request);
-        return view('features.report.index', compact('reports'));
+        $types = Select::of('report')->type('type')->get();
+        return view('features.report.index', compact('reports', 'types'));
     }
 }

@@ -16,13 +16,13 @@ return new class extends Migration {
             $table->unsignedBigInteger('owner_id');
             $table->foreign('owner_id')->references('id')->on('users')->cascadeOnDelete();
             $table->string('name');
-            $table->string('category', 30);
-            $table->string('status', 30);
-            $table->boolean('choose_mvp');
+            $table->string('category', 255);
+            $table->string('status', 255);
+            $table->integer('choose_mvp')->nullable();
             $table->longText('details');
             $table->longText('steps');
-            $table->dateTime('starting_date');
-            $table->dateTime('ending_date');
+            $table->dateTime('starting_date')->nullable();
+            $table->dateTime('ending_date')->nullable();
             $table->string('administrator');
             $table->timestamps();
         });

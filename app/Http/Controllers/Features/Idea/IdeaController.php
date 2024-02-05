@@ -10,6 +10,7 @@ use App\Services\SearchService;
 use App\Http\Requests\IdeaRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SearchRequest;
+use Illuminate\Support\Facades\Cookie;
 
 class IdeaController extends Controller
 {
@@ -19,7 +20,8 @@ class IdeaController extends Controller
     public function index()
     {
         $ideas = Product::find(productId())->ideas()->paginate(10);
-        return view('features.idea.index', compact('ideas'));
+        $priorities = Select::of('idea')->type('priority')->get();
+        return view('features.idea.index', compact('ideas', 'priorities'));
     }
 
     /**
@@ -28,6 +30,7 @@ class IdeaController extends Controller
     public function create()
     {
         $priorities = Select::of('innovate')->type('priority')->get();
+
         return view('features.idea.partials.create', compact('priorities'));
     }
 
@@ -88,6 +91,7 @@ class IdeaController extends Controller
     public function search(SearchRequest $request)
     {
         $ideas = SearchService::items($request);
-        return view('features.idea.index', compact('ideas'));
+        $priorities = Select::of('idea')->type('priority')->get();
+        return view('features.idea.index', compact('ideas', 'priorities'));
     }
 }

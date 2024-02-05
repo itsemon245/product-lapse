@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->json('home')->nullable();
             $table->json('about_us')->nullable();
+            $table->json('features')->nullable();
             $table->json('contact_us')->nullable();
             $table->timestamps();
         });

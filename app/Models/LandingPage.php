@@ -11,7 +11,10 @@ class LandingPage extends Model
     use HasFactory;
 
     protected $casts = [
-        'home' => JsonCast::class
+        'home' => JsonCast::class,
+        'about_us'=> JsonCast::class,
+        'features'=> JsonCast::class,
+        'contact_us'=> JsonCast::class,
     ];
     protected $guarded = [];
 }

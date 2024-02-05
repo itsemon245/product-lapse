@@ -13,17 +13,16 @@
                 @csrf
                 <div class="row">
                     <div class="form-group text_box col-lg-12 col-md-12">
-                        <label class=" text_c f_500">{{ __('feature/task.label.name') }}</label>
-                        <input type="text" placeholder="{{ __('feature/task.placeholder.name') }}" name="name">
-                        @error('name')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        <x-input-label for="name" value="{{ __('feature/task.label.name') }}" />
+                        <x-input id="name" class="block mt-1 w-full" type="text"
+                            placeholder="{{ __('feature/task.placeholder.name') }}" name="name" :value="old('name')"
+                            required autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <label class=" text_c f_500">{{ __('feature/task.label.category') }}</label>
-                        <select class="selectpickers" name="category">
-                            @if ($category)
-                                @forelse ($category as $category)
+                        <x-select-input label="{{ __('feature/task.label.category') }}" id="category"
+                            placeholder="Select Category" name="category" required autofocus>
+                            @if ($categories)
+                                @forelse ($categories as $category)
                                     <option value="<?= $category->value->{app()->getLocale()} ?>">
                                         <?= $category->value->{app()->getLocale()} ?>
                                     </option>
@@ -31,28 +30,23 @@
                                     <option disabled>No category available</option>
                                 @endforelse
                             @endif
-                        </select>
-                        @error('category')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        </x-select-input>
+                        <x-input-error :messages="$errors->get('category')" class="mt-2" />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <label class=" text_c f_500">{{ __('feature/task.label.status') }}</label>
-                        <select class="selectpickers" name="status">
-                            @if ($status)
-                                @forelse ($status as $category)
-                                    <option value="<?= $category->value->{app()->getLocale()} ?>">
-                                        <?= $category->value->{app()->getLocale()} ?>
+                        <x-select-input label="{{ __('feature/task.label.status') }}" id="status"
+                            placeholder="Select status" name="status" required autofocus>
+                            @if ($statuses)
+                                @forelse ($statuses as $status)
+                                    <option value="<?= $status->value->{app()->getLocale()} ?>">
+                                        <?= $status->value->{app()->getLocale()} ?>
                                     </option>
                                 @empty
                                     <option disabled>No status available</option>
                                 @endforelse
                             @endif
-                        </select>
-
-                        @error('status')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        </x-select-input>
+                        <x-input-error :messages="$errors->get('status')" class="mt-2" />
                     </div>
                     <div class="form-group text_box col-12">
                         <div class="extra extra2 extra3">
@@ -70,49 +64,34 @@
                         </div>
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-12">
-                        <label class=" text_c f_500">{{ __('feature/task.label.details') }}</label>
-                        <textarea name="details" id="message" cols="30" rows="10"
-                            placeholder="{{ __('feature/task.placeholder.details') }}"></textarea>
-                        @error('details')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        <x-input-label for="details" value="{{ __('feature/task.label.details') }}" />
+                        <x-textarea id="details" class="block mt-1 w-full" name="details" :value="old('details')"
+                            placeholder="{{ __('feature/task.placeholder.details') }}" required autofocus />
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-12">
-                        <label class=" text_c f_500">{{ __('feature/task.label.steps') }}</label>
-                        <textarea name="steps" id="message" cols="30" rows="10"
-                            placeholder="{{ __('feature/task.placeholder.steps') }}"></textarea>
-                        @error('steps')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        <x-input-label for="steps" value="{{ __('feature/task.label.steps') }}" />
+                        <x-textarea id="steps" class="block mt-1 w-full" name="steps" :value="old('steps')"
+                            placeholder="{{ __('feature/task.placeholder.steps') }}" required autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <label class=" text_c f_500">{{ __('feature/task.label.str-date') }}</label>
-                        <input type="date" placeholder="date" name="starting_date">
-                        @error('starting_date')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        <x-input label="{{ __('feature/task.label.str-date') }}" id="starting_date"
+                            class="block mt-1 w-full" type="date" name="starting_date" required autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <label class=" text_c f_500">{{ __('feature/task.label.end-date') }}</label>
-                        <input type="date" placeholder="date" name="ending_date">
-                        @error('ending_date')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        <x-input label="{{ __('feature/task.label.end-date') }}" id="ending_date" class="block mt-1 w-full"
+                            type="date" name="ending_date" required autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <label class=" text_c f_500">{{ __('feature/task.label.administrator') }}</label>
-                        <input type="text" placeholder="{{ __('feature/task.placeholder.administrator') }}"
-                            name="administrator">
-                        @error('administrator')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        <x-input-label for="name" value="{{ __('feature/task.label.administrator') }}" />
+                        <x-input id="administrator" class="block mt-1 w-full" type="text"
+                            placeholder="{{ __('feature/task.placeholder.administrator') }}" name="administrator"
+                            :value="old('administrator')" required autofocus />
+
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <label class=" text_c f_500">{{ __('feature/task.label.attach') }}</label>
-                        <input type="file" class="input-file" name="add_attachments">
-                        @error('add_attachments')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        <x-input class="input-file" type='file' placeholder="Choose File" :label="__('feature/task.label.attach')"
+                            name='add_attachments' />
+
                     </div>
                 </div>
 

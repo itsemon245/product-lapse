@@ -6,13 +6,15 @@
         </x-slot:breadcrumb>
 
         <x-slot:search>
-        <form method="GET" hx-get="{{ route('document.search') }}" hx-trigger="submit" hx-target="#search-results" hx-select="#search-results" class="search-form input-group">
-            <input type="hidden" name="columns[]" value="name">
-            <input type="hidden" name="columns[]" value="type">
-            <input type="hidden" name="model" value="document">
-            <input type="search" name="search" class="form-control widget_input" placeholder="{{ __('feature/document.search') }}" hx-vals="#search-results">
-            <button type="submit"><i class="ti-search"></i></button>
-        </form>
+            <form method="GET" hx-get="{{ route('document.search') }}" hx-trigger="submit" hx-target="#search-results"
+                hx-select="#search-results" class="search-form input-group">
+                <input type="hidden" name="columns[]" value="name">
+                <input type="hidden" name="columns[]" value="type">
+                <input type="hidden" name="model" value="document">
+                <input type="search" name="search" class="form-control widget_input"
+                    placeholder="{{ __('feature/document.search') }}" hx-vals="#search-results">
+                <button type="submit"><i class="ti-search"></i></button>
+            </form>
         </x-slot:search>
 
 
@@ -80,8 +82,8 @@
                         </div>
                     </div>
                 </div>
-            @empty 
-                <x-feature.not-found /> 
+            @empty
+                <x-feature.not-found />
             @endforelse
         </x-slot:list>
     </x-feature.index>

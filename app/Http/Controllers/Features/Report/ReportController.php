@@ -29,8 +29,8 @@ class ReportController extends Controller
      */
     public function create()
     {
-        $type = Select::of('report')->type('type')->get();
-        return view('features.report.partials.create', compact('type'));
+        $types = Select::of('report')->type('type')->get();
+        return view('features.report.partials.create', compact('types'));
     }
 
     /**
@@ -45,7 +45,9 @@ class ReportController extends Controller
             'report_date' => $request->report_date,
             'description' => $request->description,
         ]);
-        $file = $report->storeImage($request->file);
+        if ($request->has('file')) {
+            $report->storeFile($request->file);
+        }
         notify()->success(__('Created successfully!'));
 
         return redirect()->route('report.index');
@@ -64,8 +66,8 @@ class ReportController extends Controller
      */
     public function edit(Report $report)
     {
-        $type = Select::of('report')->type('type')->get();
-        return view('features.report.partials.edit', compact('report', 'type'));
+        $types = Select::of('report')->type('type')->get();
+        return view('features.report.partials.edit', compact('report', 'types'));
     }
 
     /**
@@ -74,13 +76,15 @@ class ReportController extends Controller
     public function update(ReportRequest $request, Report $report)
     {
         $report = Report::find($report->id);
-        $file = $report->updateImage($request->file, $report->file);
-        $report->update([
-            $report->name => $request->name,
-            $report->type => $request->type,
-            $report->report_date => $request->report_date,
-            $report->description => $request->description,
-        ]);
+
+        if ($request->has('file')) {
+            $file = $report->updateFile($request->file);
+        }
+
+        $data = $request->except('_token', 'file');
+        $data['owner_id'] = ownerId();
+        $report->update($data);
+
         notify()->success(__('Updated successfully!'));
         return redirect()->route('report.index');
     }
@@ -90,14 +94,17 @@ class ReportController extends Controller
      */
     public function destroy(Report $report)
     {
-        $report = Report::find($report->id);
-        $image = $report->deleteImage($report->file);
-        if ($image) {
-            $report->destroy();
-            notify()->success(__('Deleted successfully!'));
-            return redirect()->route('report.index');
+        $reportWithFile = Report::with('file')->find($report->id);
+
+        if ($reportWithFile->file) {
+            $fileDeleted = $reportWithFile->deleteFile();
         }
 
+        $reportWithFile->delete();
+
+        notify()->success(__('Deleted successfully!'));
+
+        return redirect()->route('report.index');
     }
 
     public function download(string $id)

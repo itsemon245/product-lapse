@@ -20,30 +20,29 @@
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-select-input label="{{ __('feature/report.label.type') }}" id="type"
                             placeholder="Choose one" name="type" autofocus>
-                            @if ($type)
-                                @forelse ($type as $category)
-                                    <option value="<?= $category->value->{app()->getLocale()} ?>">
-                                        <?= $category->value->{app()->getLocale()} ?>
-                                    </option>
-                                @empty
-                                    <option disabled>No type available</option>
-                                @endforelse
-                            @endif
+                            @forelse ($types as $type)
+                                <option value="{{ $type->value->{app()->getLocale()} }}"
+                                    @unless ($report->type != $type->value->{app()->getLocale()}) selected @endunless>
+                                    {{ $type->value->{app()->getLocale()} }}
+                                </option>
+                            @empty
+                                <option disabled>No type available</option>
+                            @endforelse
                         </x-select-input>
+
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-input-label for="report_date" value="{{ __('feature/report.label.date') }}" />
-                        <x-input id="report_date" value="{{ $report->report_date }}" class="block mt-1 w-full"
-                            type="text" placeholder="Enter report date" name="report_date" required autofocus />
+                        <x-input label="{{ __('feature/report.label.date') }}" id="report_date" class="block mt-1 w-full"
+                            type="date" name="report_date"
+                            value="{{ \Carbon\Carbon::parse($report->report_date)->format('Y-m-d') }}" required autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-attach label="{{ __('feature/report.label.upload') }}" name='file' />
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-6">
                         <x-textarea placeholder="{{ __('feature/report.placeholder.description') }}" rows="5"
-                            cols="10" name="description" label="{{ __('feature/report.placeholder.description') }}"
-                            value="{{ $report->description }}">
-                        </x-textarea>
+                            cols="10" name="description"
+                            label="{{ __('feature/report.placeholder.description') }}">{{ $report->description }}</x-textarea>
                     </div>
 
                 </div>

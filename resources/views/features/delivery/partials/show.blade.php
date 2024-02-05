@@ -1,4 +1,4 @@
-@extends('layouts.feature.index', ['title' => @__('feature/delivery.show')])
+@extends('layouts.subscriber.app', ['title' => @__('feature/delivery.show')])
 @section('main')
     <x-feature.show>
         <x-slot:breadcrumb>
@@ -9,25 +9,23 @@
             <div class="col-lg-8 blog_sidebar_left">
                 <div class="blog_single mb_50">
                     <div class="row">
-                        <h5 class="f_size_20 f_500 col-md-12">{{ $delivery->title }}</h5>
-                        <div class="entry_post_info col-md-12">
-                            {{ \Carbon\Carbon::parse($delivery->required_completion_date)->format('l, j F Y') }}
+                        <h5 class="f_size_20 f_500 col-md-12">{{ $delivery->name }}<img class="deliver-img" src="img/done.png"
+                                title="Approved"></h5>
+                        <div class="col-md-6">
+                            <h6 class="title2">Delivery link</h6>
+                            <p class="f_400 mb-30 text-font">{{ $delivery->link }}</p>
                         </div>
-                        <div class="col-lg-6 col-md-6">
-                            <h6 class="title2">Priority</h6>
-                            <p class="f_400 mb-30 text-font">{{ $delivery->priority }}</p>
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <h6 class="title2">Classification</h6>
-                            <p class="f_400 mb-30 text-font">Web design</p>
+                        <div class="col-md-6">
+                            <h6 class="title2">Delivery date</h6>
+                            <p class="f_400 mb-30 text-font">
+                                {{ \Carbon\Carbon::parse($delivery->created_at)->format('l, j F Y') }}</p>
                         </div>
                         <div class="col-md-12">
-                            <h6 class="title2">Report details</h6>
+                            <h6 class="title2">Delivery items</h6>
                             <p class="f_400 mb-30 text-font">
-                                {{ $delivery->details }}
+                                {{ $delivery->items }}
                             </p>
                         </div>
-
                     </div>
                 </div>
 

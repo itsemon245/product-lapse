@@ -12,45 +12,40 @@
                 @csrf
                 <div class="row">
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-input-label for="name" value="{{ __('feature/delivery.label.name') }}" />
-                        <x-input id="name" class="block mt-1 w-full" type="text"
-                            placeholder="{{ __('feature/delivery.placeholder.name') }}" name="name" :value="old('name')"
-                            required autofocus />
+                        <x-input id="name" label="{{ __('feature/delivery.label.name') }}" class="block mt-1 w-full"
+                            type="text" placeholder="{{ __('feature/delivery.placeholder.name') }}" name="name"
+                            :value="old('name')" required autofocus />
                     </div>
 
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-textarea label="{{ __('feature/delivery.label.items') }}" name="items" :value="old('items')"
-                            placeholder="{{ __('feature/delivery.placeholder.items') }}" required autfocus />
-                        <x-input-error :messages="$errors->get('items')" class="mt-2" />
+                        <x-input id="items" label="{{ __('feature/delivery.label.items') }}" class="block mt-1 w-full"
+                            type="text" placeholder="{{ __('feature/delivery.placeholder.items') }}" name="items"
+                            :value="old('items')" required autofocus />
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-6">
-                        <x-input-label for="link" value="{{ __('feature/delivery.label.link') }}" />
-                        <x-input id="link" class="block mt-1 w-full" type="text"
-                            placeholder="{{ __('feature/delivery.placeholder.link') }}" name="link" :value="old('link')"
-                            required autofocus />
+                        <x-input id="link" label="{{ __('feature/delivery.label.link') }}" class="block mt-1 w-full"
+                            type="text" placeholder="{{ __('feature/delivery.placeholder.link') }}" name="link"
+                            :value="old('link')" required autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-input-label for="username" value="{{ __('feature/delivery.label.user') }}" />
-                        <x-input id="username" class="block mt-1 w-full" type="text"
-                            placeholder="{{ __('feature/delivery.placeholder.user') }}" name="username" :value="old('username')"
-                            required autofocus />
-                        <x-input-error :messages="$errors->get('username')" class="mt-2" />
+                        <x-input id="username" label="{{ __('feature/delivery.label.user') }}" class="block mt-1 w-full"
+                            type="text" placeholder="{{ __('feature/delivery.placeholder.user') }}" name="username"
+                            :value="old('username')" required autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-input-label for="password" value="{{ __('feature/delivery.label.password') }}" />
-                        <x-input id="password" class="block mt-1 w-full" type="text"
+                        <x-input id="password" label="{{ __('feature/delivery.label.password') }}"
+                            class="block mt-1 w-full" type="text"
                             placeholder="{{ __('feature/delivery.placeholder.password') }}" name="password"
                             :value="old('password')" required autofocus />
-                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-input-label for="administrator" value="{{ __('feature/delivery.label.administrator') }}" />
-                        <x-input id="administrator" class="block mt-1 w-full" type="text"
+                        <x-input label="{{ __('feature/delivery.label.administrator') }}" id="administrator"
+                            class="block mt-1 w-full" type="text"
                             placeholder="{{ __('feature/delivery.placeholder.administrator') }}" name="administrator"
                             :value="old('administrator')" required autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-attach label="Add Attach" class="block mt-1 w-full" name="add_attachments" />
+                        <x-attach label="Add File" class="block mt-1 w-full" name="add_attachments" />
                     </div>
                 </div>
                 <div class="d-flex align-items-center text-center">

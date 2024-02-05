@@ -4,20 +4,17 @@
         <x-slot:breadcrumb>
             <x-breadcrumb :list="[['label' => @__('feature/release.title'), 'route' => route('release.index')]]" />
         </x-slot:breadcrumb>
-
         <x-slot:search>
-
-
-
-        <form method="GET" hx-get="{{ route('release.search') }}" hx-trigger="submit" hx-target="#search-results" hx-select="#search-results" class="search-form input-group">
-            <input type="hidden" name="columns[]" value="name">
-            <input type="hidden" name="columns[]" value="version">
-            <input type="hidden" name="model" value="release">
-            <input type="search" name="search" class="form-control widget_input" placeholder="{{ __('feature/release.search') }}" hx-vals="#search-results">
-            <button type="submit"><i class="ti-search"></i></button>
-        </form>
+            <form method="GET" hx-get="{{ route('release.search') }}" hx-trigger="submit" hx-target="#search-results"
+                hx-select="#search-results" class="search-form input-group">
+                <input type="hidden" name="columns[]" value="name">
+                <input type="hidden" name="columns[]" value="version">
+                <input type="hidden" name="model" value="release">
+                <input type="search" name="search" class="form-control widget_input"
+                    placeholder="{{ __('feature/release.search') }}" hx-vals="#search-results">
+                <button type="submit"><i class="ti-search"></i></button>
+            </form>
         </x-slot:search>
-
 
         <x-slot:actions>
             <x-button type="link" href="{{ route('release.create') }}">
@@ -68,9 +65,9 @@
                         </div>
                     </div>
                 </div>
-            @empty 
-            <x-feature.not-found /> 
-            @endforelse 
+            @empty
+                <x-feature.not-found />
+            @endforelse
         </x-slot:list>
     </x-feature.index>
 @endsection

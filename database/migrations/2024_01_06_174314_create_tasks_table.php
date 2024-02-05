@@ -24,7 +24,6 @@ return new class extends Migration {
             $table->dateTime('starting_date')->nullable();
             $table->dateTime('ending_date')->nullable();
             $table->string('administrator');
-            $table->string('add_attachments');
             $table->timestamps();
         });
     }

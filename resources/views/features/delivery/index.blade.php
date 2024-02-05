@@ -19,10 +19,10 @@
 
         <x-slot:actions>
             <x-button type="link" href="{{ route('delivery.create') }}">
-            <x-button type="submit" action={{ route('delivery.create') }}>
-                <i class="ti-plus"></i>
-                @__('feature/delivery.add')
-            </x-button>
+                <x-button type="submit" action={{ route('delivery.create') }}>
+                    <i class="ti-plus"></i>
+                    @__('feature/delivery.add')
+                </x-button>
         </x-slot:actions>
 
         <x-slot:filter>
@@ -31,34 +31,34 @@
 
         <x-slot:list>
             @forelse ($deliveries as $delivery)
-            <div class="col-md-6">
-                <div class="item lon new">
-                    <div class="list_item">
-                        <div class="joblisting_text document-list">
-                            <div class="job_list_table">
-                                <div class="jobsearch-table-cell">
-                                    <h4><a href="{{ route('delivery.show', base64_encode($delivery->id)) }}"
-                                            class="f_500 t_color3">{{ $delivery->name }}</a></h4>
-                                    <ul class="list-unstyled">
-                                        <li>
-                                            {{ \Carbon\Carbon::parse($delivery->required_completion_date)->format('l, j F Y') }}
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="jobsearch-table-cell">
-                                    <div class="jobsearch-job-userlist">
-                                        <div class="like-btn">
-                                            <form action="{{ route('delivery.destroy', base64_encode($delivery->id)) }}"
-                                                method="post">
-                                                @csrf
-                                                @method('DELETE')
-                                                <x-btn-icons type="submit" class="btn"
-                                                    value="<i class='ti-trash'></i>" />
-                                            </form>
-                                        </div>
-                                        <div class="like-btn">
-                                            <x-btn-icons type="anchor" value="<i class='ti-pencil'></i>"
-                                                href="{{ route('delivery.edit', base64_encode($delivery->id)) }}" />
+                <div class="col-md-6">
+                    <div class="item lon new">
+                        <div class="list_item">
+                            <div class="joblisting_text document-list">
+                                <div class="job_list_table">
+                                    <div class="jobsearch-table-cell">
+                                        <h4><a href="{{ route('delivery.show', $delivery) }}"
+                                                class="f_500 t_color3">{{ $delivery->name }}</a></h4>
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                {{ \Carbon\Carbon::parse($delivery->required_completion_date)->format('l, j F Y') }}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="jobsearch-table-cell">
+                                        <div class="jobsearch-job-userlist">
+                                            <div class="like-btn">
+                                                <form action="{{ route('delivery.destroy', $delivery) }}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <x-btn-icons type="submit" class="btn"
+                                                        value="<i class='ti-trash'></i>" />
+                                                </form>
+                                            </div>
+                                            <div class="like-btn">
+                                                <x-btn-icons type="anchor" value="<i class='ti-pencil'></i>"
+                                                    href="{{ route('delivery.edit', $delivery) }}" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -66,9 +66,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
             @empty
-            <x-feature.not-found />
+                <x-feature.not-found />
             @endforelse
         </x-slot:list>
     </x-feature.index>

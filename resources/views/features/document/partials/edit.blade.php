@@ -21,16 +21,18 @@
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-select-input label="{{ __('feature/document.label.type') }}" id="type"
                             placeholder="Choose one" name="type" required autofocus>
-                            @if ($type)
-                                @forelse ($type as $category)
-                                    <option value="<?= $category->value->{app()->getLocale()} ?>">
-                                        <?= $category->value->{app()->getLocale()} ?>
-                                    </option>
-                                @empty
-                                    <option disabled>No type available</option>
-                                @endforelse
-                            @endif
+
+                            @forelse ($type as $category)
+                                <option value="{{ $category->value->{app()->getLocale()} }}"
+                                    @if ($document->type == $category->value->{app()->getLocale()}) selected @endif>
+                                    {{ $category->value->{app()->getLocale()} }}
+                                </option>
+                            @empty
+                                <option disabled>No type available</option>
+                            @endforelse
+
                         </x-select-input>
+
                     </div>
 
                     <div class="form-group text_box col-lg-6 col-md-6">
@@ -41,10 +43,10 @@
                     </div>
 
                     <div class="form-group text_box col-lg-12 col-md-12">
-                        <x-input-label for="description" value="{{ __('feature/document.label.description') }}" />
-                        <x-textarea id="description" class="block mt-1 w-full" name="description"
-                            value="{{ $document->description }}"
-                            placeholder="{{ __('feature/document.placeholder.description') }}" required autofocus />
+                        <x-textarea placeholder="{{ __('feature/document.placeholder.description') }}" rows="5"
+                            cols="10" name="description" label="{{ __('feature/document.label.description') }}">
+                            {!! $document->description !!}
+                        </x-textarea>
                     </div>
 
                     <div class="form-group text_box col-lg-6 col-md-6">

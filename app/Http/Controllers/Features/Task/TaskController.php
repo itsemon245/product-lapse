@@ -35,10 +35,10 @@ class TaskController extends Controller
      */
     public function create()
     {
-        $category = Select::of('task')->type('category')->get();
-        $status = Select::of('task')->type('status')->get();
+        $categories = Select::of('task')->type('category')->get();
+        $statuses = Select::of('task')->type('status')->get();
 
-        return view('features.task.partials.create', compact('category', 'status'));
+        return view('features.task.partials.create', compact('categories', 'statuses'));
     }
 
     /**
@@ -94,10 +94,10 @@ class TaskController extends Controller
     public function edit(Task $task)
     {
 
-        $category = Select::of('task')->type('category')->get();
-        $status = Select::of('task')->type('status')->get();
+        $categories = Select::of('task')->type('category')->get();
+        $statuses = Select::of('task')->type('status')->get();
 
-        return view('features.task.partials.edit', compact('task', 'category', 'status'));
+        return view('features.task.partials.edit', compact('task', 'categories', 'statuses'));
 
     }
 
@@ -106,9 +106,14 @@ class TaskController extends Controller
      */
     public function update(TaskRequest $request, Task $task)
     {
+        $task = Task::with('file')->find($task->id);
+
         if ($request->has('add_attachments')) {
             $file = $task->updateFile($request->add_attachments);
         }
+
+        $data = $request->except('_token', 'add_attachments');
+        $data['owner_id'] = ownerId();
 
         $task->update([
             'owner_id' => ownerId(),
@@ -123,10 +128,6 @@ class TaskController extends Controller
             'administrator' => $request->administrator,
         ]);
 
-        if ($request->has('add_attachments')) {
-            $task->storeFile($request->add_attachments);
-        }
-
         notify()->success(__('Updated Successfully!'));
         return redirect()->route('task.index');
     }
@@ -136,10 +137,18 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        $task->delete();
+
+        $taskk = Task::with('file')->find($task->id);
+
+        if ($taskk->file) {
+            $fileDeleted = $taskk->deleteFile($task->file);
+        }
+        $taskk->delete();
 
         notify()->success(__('Deleted successfully!'));
         return redirect()->route('task.index');
+
+
     }
 
     public function search(SearchRequest $request)

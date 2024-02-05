@@ -101,7 +101,7 @@ class DocumentController extends Controller
         $document = Document::with('file')->find($document->id);
 
         if ($request->has('attach_file')) {
-            $file = $document->updateFile($request->attach_file, $document->file);
+            $file = $document->updateFile($request->attach_file);
         }
 
         $data = $request->except('_token', 'attach_file');

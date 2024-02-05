@@ -28,10 +28,11 @@ class ChangeController extends Controller
      */
     public function create()
     {
-        $priority = Select::of('change')->type('priority')->get();
-        $status = Select::of('change')->type('status')->get();
-        $classification = Select::of('change')->type('classification')->get();
-        return view('features.change.partials.create', compact('priority', 'status', 'classification'));
+        $priorities = Select::of('change')->type('priority')->get();
+        $statuses = Select::of('change')->type('status')->get();
+        $classifications = Select::of('change')->type('classification')->get();
+
+        return view('features.change.partials.create', compact('priorities', 'statuses', 'classifications'));
     }
 
     /**
@@ -66,11 +67,11 @@ class ChangeController extends Controller
      */
     public function edit(Change $change)
     {
-        $priority = Select::of('change')->type('priority')->get();
-        $status = Select::of('change')->type('status')->get();
-        $classification = Select::of('change')->type('classification')->get();
+        $priorities = Select::of('change')->type('priority')->get();
+        $statuses = Select::of('change')->type('status')->get();
+        $classifications = Select::of('change')->type('classification')->get();
 
-        return view('features.change.partials.edit', compact('change', 'priority', 'status', 'classification'));
+        return view('features.change.partials.edit', compact('change', 'priorities', 'statuses', 'classifications'));
     }
 
     /**

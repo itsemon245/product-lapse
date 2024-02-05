@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Features\Delivery;
+
+use App\Http\Controllers\Controller;
 
 use App\Http\Requests\DeliveryRequest;
 use App\Models\Product;

@@ -1,4 +1,4 @@
-@extends('layouts.feature.index', ['title' => @__('feature/delivery.edit')])
+@extends('layouts.subscriber.app', ['title' => @__('feature/delivery.edit')])
 @section('main')
     <x-feature.edit>
         <x-slot:breadcrumb>
@@ -13,41 +13,34 @@
                 @method('PUT')
                 <div class="row">
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-input-label for="name" value="{{ __('feature/delivery.label.name') }}" />
-                        <x-input id="name" class="block mt-1 w-full" type="text"
-                            placeholder="{{ __('feature/delivery.placeholder.name') }}" name="name"
+                        <x-input id="name" label="{{ __('feature/delivery.label.name') }}" class="block mt-1 w-full"
+                            type="text" placeholder="{{ __('feature/delivery.placeholder.name') }}" name="name"
                             value="{{ $delivery->name }}" required autofocus />
                     </div>
                     <div class="form-group text_box col-12">
                         <x-textarea label="{{ __('feature/delivery.label.items') }}" name="items"
-                            value="{{ $delivery->items }}" placeholder="{{ __('feature/delivery.placeholder.items') }}"
-                            required autfocus />
-                        <x-input-error :messages="$errors->get('items')" class="mt-2" />
+                            placeholder="{{ __('feature/delivery.placeholder.items') }}" required
+                            autfocus>{{ $delivery->items }}</x-textarea>
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-6">
-                        <x-input-label for="link" value="{{ __('feature/delivery.label.link') }}" />
-                        <x-input id="link" class="block mt-1 w-full" type="text"
-                            placeholder="{{ __('feature/delivery.placeholder.link') }}" name="link"
+                        <x-input id="link" label="{{ __('feature/delivery.label.link') }}" class="block mt-1 w-full"
+                            type="text" placeholder="{{ __('feature/delivery.placeholder.link') }}" name="link"
                             value="{{ $delivery->link }}" required autofocus />
-                        <x-input-error :messages="$errors->get('link')" class="mt-2" />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-input-label for="user" value="{{ __('feature/delivery.label.user') }}" />
-                        <x-input id="username" class="block mt-1 w-full" type="text"
-                            placeholder="{{ __('feature/delivery.placeholder.user') }}" name="username"
+                        <x-input id="username" label="{{ __('feature/delivery.label.user') }}" class="block mt-1 w-full"
+                            type="text" placeholder="{{ __('feature/delivery.placeholder.user') }}" name="username"
                             value="{{ $delivery->username }}" required autofocus />
-                        <x-input-error :messages="$errors->get('username')" class="mt-2" />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-input-label for="password" value="{{ __('feature/delivery.label.password') }}" />
-                        <x-input id="password" class="block mt-1 w-full" type="text"
+                        <x-input id="password" label="{{ __('feature/delivery.label.password') }}"
+                            class="block mt-1 w-full" type="text"
                             placeholder="{{ __('feature/delivery.placeholder.password') }}" name="password"
                             value="{{ $delivery->password }}" required autofocus />
-                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-input-label for="administrator" value="{{ __('feature/delivery.label.administrator') }}" />
-                        <x-input id="administrator" class="block mt-1 w-full" type="text"
+                        <x-input id="administrator" label="{{ __('feature/delivery.label.administrator') }}"
+                            class="block mt-1 w-full" type="text"
                             placeholder="{{ __('feature/delivery.placeholder.administrator') }}" name="administrator"
                             value="{{ $delivery->administrator }}" required autofocus />
                     </div>

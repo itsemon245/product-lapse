@@ -42,5 +42,6 @@ return [
     'edit' => 'Edit Delivery',
 
     //show page
-    'showing' => 'Show Delivery',
+    'show' => 'Show Delivery',
+
 ];

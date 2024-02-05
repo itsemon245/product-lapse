@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Cookie;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\DeliveryController;
+use App\Http\Controllers\Features\Delivery\DeliveryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,9 +24,9 @@ Route::get('/', function () {
 })->name('home');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ ProfileController::class, 'edit' ])->name('profile.edit');
-    Route::patch('/profile', [ ProfileController::class, 'update' ])->name('profile.update');
-    Route::delete('/profile', [ ProfileController::class, 'destroy' ])->name('profile.destroy');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 Route::resource('package', PackageController::class);
@@ -38,9 +38,9 @@ Route::post('set-locale', function (Request $request) {
     $cookie = request()->cookie('locale');
     if ($cookie == null) {
         $cookie = Cookie::forever('locale', 'en');
-    }elseif ($cookie == 'en') {
+    } elseif ($cookie == 'en') {
         $cookie = Cookie::forever('locale', 'ar');
-    }else{
+    } else {
         $cookie = Cookie::forever('locale', 'en');
     }
     // dd($cookie);

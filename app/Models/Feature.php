@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Casts\JsonCast;
+use App\Traits\HasImages;
 use Illuminate\Database\Eloquent\Model;
 
 class Feature extends Model

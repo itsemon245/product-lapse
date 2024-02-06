@@ -30,15 +30,15 @@
                             <div class="joblisting_text">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell">
-                                        <h4>
-                                            (En)
-                                            {{ $select->value->en }} <br>
-                                            (Ar) {{ $select->value->ar }}
+                                        <h4 class="d-flex ">
+                                            <span class="mr-2">(En)
+                                                {{ $select->value->en }}</span> | 
+                                            <span class="ml-2">(Ar) {{ $select->value->ar }}</span>
                                         </h4>
                                         <ul class="list-unstyled">
                                             <li class="p_color4">{{ $select->model_type }}</li>
                                             <li class="p_color4">{{ $select->type }}</li>
-                                            <li class="p_color4">{{ $select->color }}</li>
+                                            <li > <input type="color" value="{{ $select->color }}" disabled /> </li>
                                         </ul>
                                     </div>
                                     <div class="jobsearch-table-cell">

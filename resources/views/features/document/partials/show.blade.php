@@ -48,7 +48,7 @@
                         </div>
                         <div class="row">
                             <div class="col-6">
-                                <span class="button-1 btn-bg-1"></span>
+                                <span class="button-1 btn-bg-1">@__('feature/document.working')</span>
                             </div>
                             <div class="col-6">
                                 <a href="#" class="button-1 btn-bg-2"><i class="ti-reload"></i>@__('feature/document.classification')</a>
@@ -58,8 +58,7 @@
                                     method="post" enctype="multipart/form-data">
                                     @csrf
                                     <button type="submit" class="button-1">
-                                        <i class="ti-download"></i>Download document
-                                    </button>
+                                        <i class="ti-download"></i>@__('feature/document.download')</button>
                                 </form>
                             </div>
                         </div>

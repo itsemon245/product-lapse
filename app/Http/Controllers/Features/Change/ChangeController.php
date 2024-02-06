@@ -19,7 +19,8 @@ class ChangeController extends Controller
     public function index()
     {
         $changes = Product::find(productId())->changeManagements()->paginate(10);
-        return view('features.change.index', compact('changes'));
+        $statuses  = Select::of('change')->type('status')->get();
+        return view('features.change.index', compact('changes', 'statuses'));
     }
 
     /**
@@ -99,6 +100,7 @@ class ChangeController extends Controller
     public function search(SearchRequest $request)
     {
         $changes = SearchService::items($request);
-        return view('features.change.index', compact('changes'));
+        $statuses  = Select::of('change')->type('status')->get();
+        return view('features.change.index', compact('changes', 'statuses'));
     }
 }

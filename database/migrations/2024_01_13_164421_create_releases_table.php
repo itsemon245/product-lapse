@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('name');
             $table->string('version');
             $table->string('release_date');
-            $table->string('description');
+            $table->longText('description');
             $table->timestamps();
         });
     }

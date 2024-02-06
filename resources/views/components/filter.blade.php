@@ -1,6 +1,6 @@
 <form method="get" action="{{ $route }}">
     @foreach ($columns as $column)
-        <input type="hidden" name="columns[]" value="category">
+        <input type="hidden" name="columns[]" value="{{ $column }}">
     @endforeach
     <input type="hidden" name="model" value="{{ $model }}">
     @isset($options)

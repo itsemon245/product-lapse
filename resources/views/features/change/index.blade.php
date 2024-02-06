@@ -23,22 +23,7 @@
 
         <x-slot:filter>
             <h5>@__('feature/change.showing')</h5>
-            <form method="get" action="#">
-                <select class="selectpickers selectpickers2" style="display: none;">
-                    <option value="">All</option>
-                    <option value="">Durable product</option>
-                    <option value="">Initial idea</option>
-                    <option value="">Stopped</option>
-                </select>
-                <div class="nice-select selectpickers selectpickers2" tabindex="0"><span class="current">All</span>
-                    <ul class="list">
-                        <li data-value="" class="option selected focus">All</li>
-                        <li data-value="" class="option">Durable product</li>
-                        <li data-value="" class="option">Initial idea</li>
-                        <li data-value="" class="option">Stopped</li>
-                    </ul>
-                </div>
-            </form>
+            <x-filter :route="route('change.search')" :columns="['status']" model="change" :options="$statuses" />
         </x-slot:filter>
 
         <x-slot:list>
@@ -54,7 +39,7 @@
                                                 class="f_500 t_color3">{{ $change->title }}</a></h4>
                                         <ul class="list-unstyled">
                                             <li class="p_color1">{{ $change->status }}</li>
-                                            <li>{{ \Carbon\Carbon::parse($change->created_at)->format('l, j F Y') }}</li>
+                                            <li class="text-muted">{{ \Carbon\Carbon::parse($change->created_at)->format('l, j F Y') }}</li>
                                         </ul>
                                     </div>
                                     <div class="jobsearch-table-cell">

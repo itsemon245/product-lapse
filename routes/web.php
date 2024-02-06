@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Features\Change\ChangeController;
+use App\Models\Faq;
+use App\Models\Feature;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Cookie;
@@ -20,7 +22,10 @@ use App\Http\Controllers\Features\Delivery\DeliveryController;
  */
 
 Route::get('/', function () {
-    return view('welcome');
+    $faqs = Faq::where('status', true)->get();
+    $features = Feature::where('status', true)->get();
+
+    return view('welcome', compact('faqs', 'features'));
 })->name('home');
 
 Route::middleware('auth')->group(function () {

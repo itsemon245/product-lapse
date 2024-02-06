@@ -23,28 +23,28 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         \App\Models\User::factory(1)->create([
-            'first_name'       => 'Admin',
-            'last_name'        => 'Admin',
-            'email'            => 'admin@gmail.com',
-            'password'         => Hash::make('password'),
-            'phone'            => '123456789',
-            'workplace'        => 'Admin',
+            'first_name' => 'Admin',
+            'last_name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('password'),
+            'phone' => '123456789',
+            'workplace' => 'Admin',
             'promotional_code' => 'Admin',
-            'position'         => 'manager',
-         ]);
+            'position' => 'manager',
+        ]);
         $numberOfUsers = 10;
         for ($i = 1; $i <= $numberOfUsers; $i++) {
             DB::table('users')->insert([
-                'first_name'       => 'Admin' . $i,
-                'last_name'        => 'Admin' . $i,
-                'email'            => 'admin' . $i . '@gmail.com',
-                'password'         => bcrypt('password'),
-                'phone'            => '123456789',
-                'workplace'        => 'Admin',
+                'first_name' => 'Admin' . $i,
+                'last_name' => 'Admin' . $i,
+                'email' => 'admin' . $i . '@gmail.com',
+                'password' => bcrypt('password'),
+                'phone' => '123456789',
+                'workplace' => 'Admin',
                 'promotional_code' => 'Admin',
-                'position'         => 'manager' . $i,
-                'name'             => 'User' . $i,
-             ]);
+                'position' => 'manager' . $i,
+                'name' => 'User' . $i,
+            ]);
         }
         // Remove Dispatcher
         Package::unsetEventDispatcher();
@@ -65,6 +65,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PermissionSeeder::class,
             SelectSeeder::class,
-         ]);
+            FaqSeeder::class,
+            FeatureSeeder::class,
+        ]);
     }
 }

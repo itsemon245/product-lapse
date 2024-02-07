@@ -8,56 +8,60 @@
     </x-slot:breadcrumb>
 
     <x-slot:search>
-        <form action="#" class="search-form input-group">
-            <input type="searproductch" class="form-control widget_input" placeholder="{{ __('feature/certificate.search') }}">
-            <button type="submit"><i class="ti-search"></i></button>
-        </form>
+  {{--  --}}
     </x-slot:search>
 
 
     <x-slot:actions>
-        <x-button type="link" href="{{ route('certificate.create') }}" > 
-            <i class="ti-plus"></i>
-            @__('feature/certificate.add')
-        </x-button>   
+  {{--  --}}
     </x-slot:actions>
 
     <x-slot:filter>
     {{-- Empty --}}
     </x-slot:filter>
 
-
     <x-slot:list>
-        @foreach ($certificates as $certificate)
-        <div class="col-md-6">
-            <div class="item lon new">
-                <div class="list_item">
-                    <div class="joblisting_text">
-                        <div class="job_list_table">
-                            <div class="jobsearch-table-cell">
-                                <h4><a href="{{ route('certificate.show', $certificate) }}" class="f_500 t_color3">{{ $certificate->name }}</a></h4>
-                                <ul class="list-unstyled">
-                                    <li>{{ $certificate->created_at->formatLocalized('%A %d %B %Y') }}</li>
-                                    <li>{{ $certificate->company }}</li>
-                                </ul>
-                            </div>
-                            <div class="jobsearch-table-cell">
-                                <div class="jobsearch-job-userlist">
-                                    <div class="like-btn">
-                                        <form action="{{ route('certificate.destroy', $certificate) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <x-btn-icons type="submit" class="btn" value="<i class='ti-trash'></i>" />
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        <div class="container">
+            <div class="sign_info">
+                <div class="login_info form-layout">
+                    <div class="certificate-1" style="display: flex; justify-content: center; align-items: center;" ><img src="{{ asset('img/logo.png') }}"></div> 
+                    <div class="certificate-text">
+                        <p>Get certified <br> Product management professional using <br> <span>Productlapse</span></p>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center text-center certificate-btns">
+                        <x-button type="link" href="{{ route('certificate.status') }}" class="btn_hover agency_banner_btn btn-bg">Get certified</x-button>
+                        
+                    </div>
+                    <div class="certificate-terms">
+                        <a href="#" data-toggle="modal" data-target="#myModal1">Conditions for obtaining the certificate</a>
                     </div>
                 </div>
             </div>
         </div>
-        @endforeach
     </x-slot:list>
 </x-feature.index>
+    <!-- The Modal -->
+    <div class="modal fade " id="myModal1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+      
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Conditions for obtaining the certificate</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+      
+            <!-- Modal body -->
+            <div class="modal-body">
+              <ul class="certificate-conditions">
+                  <li>Subscription to a one-year package (basic, gold, or diamond)</li>
+                  <li>Add data for at least one product with all other data: product information, product versions, view product reports</li>
+                  <li>Attend the recorded training session</li>
+                  <li>Filming a video of the added data with explanation</li>
+                </ul>
+            </div>
+      
+          </div>
+        </div>
+      </div>
 @endsection 

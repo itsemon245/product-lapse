@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Features\Certificate\CertificateController;
 use App\Http\Controllers\Features\Change\ChangeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,8 +29,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
+//Super admin Routes
 Route::resource('package', PackageController::class);
+Route::get('admin-certificate', [CertificateController::class, 'getAllCertificate'])->name('admin.certificate');
+
+
+
 Route::resource('change', ChangeController::class);
 Route::get('change-search', [ChangeController::class, 'search'])->name('change.search');
 Route::resource('delivery', DeliveryController::class);

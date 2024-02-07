@@ -1,4 +1,4 @@
-@extends('layouts.feature.index', ['title'=> 'Package'])
+@extends('layouts.admin.app', ['title'=> 'Package'])
 @section('main')
 <x-feature.index>
     <x-slot:breadcrumb>

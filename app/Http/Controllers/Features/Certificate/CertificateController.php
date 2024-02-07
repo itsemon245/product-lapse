@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Invitation;
 use App\Models\Certificate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CertificateRequest;
 
@@ -16,8 +17,8 @@ class CertificateController extends Controller
      */
     public function index()
     {
-        $certificates = Certificate::with('user')->get();
-        return view('features.certificate.index', compact('certificates'));
+
+        return view('features.certificate.index');
     }
 
     /**
@@ -26,7 +27,8 @@ class CertificateController extends Controller
     public function create()
     {
         $user = User::find(auth()->id());
-        return view('features.certificate.partials.create', compact('user'));
+        $certificate = Certificate::where('achieved_id', auth()->id())->first();
+        return view('features.certificate.partials.create', compact('user', 'certificate'));
     }
 
     /**
@@ -40,7 +42,7 @@ class CertificateController extends Controller
             'company' => $request->company,
         ]);
         notify()->success(__('notify/success.create'));
-        return redirect()->route('certificate.index');
+        return redirect()->route('certificate.create');
         }
 
     /**
@@ -64,6 +66,7 @@ class CertificateController extends Controller
      */
     public function update(CertificateRequest $request, Certificate $certificate)
     {
+
         notify()->success(__('notify/success.update'));
     }
 
@@ -74,5 +77,35 @@ class CertificateController extends Controller
     {
         $certificate->delete();
         notify()->success(__('notify/success.delete'));
+        return back();
+    }
+
+
+    public function getCertificate()
+    {
+        $certificates = Certificate::with('user')->get();
+        return view('features.certificate.index', compact('certificates'));
+
+    }
+    public function certificateStatus()
+    {
+        return $this->create();
+    }
+
+
+    //super admin method
+    public function getAllCertificate(){
+        $certificates = Certificate::with('user')->get();
+        return view('pages.certificate.index', compact('certificates'));
+    }
+
+    public function approval(string $id)
+    {
+        $certificate = Certificate::find($id);
+        $certificate->update([
+            'approved_id' => auth()->id(),
+        ]);
+        notify()->success(__('notify/success.update'));
+        return back();
     }
 }

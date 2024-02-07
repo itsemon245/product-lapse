@@ -8,27 +8,20 @@
                 <div class="row">
                     <div class="col-md-6 d-flex align-items-center">
                         <div class="agency_content">
-
                             <h2 class="f_700 t_color3 mb_40 wow fadeInLeft" data-wow-delay="0.3s">
-                                <x-editable key="home->title">
-                                    {!! $landingPage?->home?->title ??
-                                        'Join <span class="bold"> ProductLapse </span> Now and enjoy an efficient and user-friendly experience in Manage your products' !!}
-                                </x-editable>
+                                {!! $info->home->title->{app()->getLocale()} !!}
                             </h2>
                             <p class="f_500 l_height28 wow fadeInLeft" data-wow-delay="0.4s">
-                                <x-editable key="home->subtitle">
-                                    {!! $landingPage?->home?->subtitle ??
-                                        'Start your journey towards success and excellence in the ever-evolving market' !!}
-                                </x-editable>
-                            </p>
+                                {{ $info->home->caption->{app()->getLocale()} }}</p>
                             <div class="action_btn d-flex align-items-center mt_60">
                                 <a href="{{ route('register') }}" class="btn_hover agency_banner_btn wow fadeInLeft btn-bg"
-                                    data-wow-delay="0.5s">Sign up now for a free trial!</a>
+                                    data-wow-delay="0.5s"> {!! $info->home->button->{app()->getLocale()} !!}</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 text-right">
-                        <img class="protype_img wow fadeInRight" data-wow-delay="0.3s" src="img/home.png" alt="">
+                        <img class="protype_img wow fadeInRight" data-wow-delay="0.3s" src="{{ asset($info->home->image) }}"
+                            alt="home">
                     </div>
                 </div>
             </div>
@@ -36,160 +29,38 @@
         <section class="agency_about_area bg_color" id="tolink-2">
             <div class="container custom_container">
                 <h2 class="f_size_30 f_600 t_color3 l_height40 text-center wow fadeInUp title-position"
-                    data-wow-delay="0.2s">
-                    About us</h2>
+                    data-wow-delay="0.2s">@lang('welcome.about_us')</h2>
                 <div class="row">
                     <div class="col-md-6">
-                        <img src="img/about.png" class="about-img wow fadeInRight" data-wow-delay="0.2s">
+                        <img src="{{ asset($info->about_us->image) }}" alt="about" class="about-img wow fadeInRight"
+                            data-wow-delay="0.2s">
                     </div>
                     <div class="col-md-6">
                         <p class="f_size_22 f_400 t_color3 l_height40 wow fadeInLeft about-text" data-wow-delay="0.2s">
-                            <x-editable key="about_us->description">
-                                {!! $landingPage?->about_us?->description ??
-                                    'ProductLapse is a comprehensive product management tool and mobile app designed to empower you
-                                                                    in
-                                                                    realizing your product vision and achieving remarkable success in the competitive market.
-                                                                    <br><br>The platform offers the capability to clearly visualize your product, efficient
-                                                                    planning,
-                                                                    continuous support, change management, enhanced team collaboration, product documentation, and
-                                                                    comprehensive reporting.<br><br>You can also manage the product release process and track its
-                                                                    history and delivery with support for multiple products simultaneously.' !!}
-                            </x-editable>
+                            {!! $info->about_us->caption->{app()->getLocale()} !!}
                         </p>
                     </div>
                 </div>
             </div>
         </section>
-        <section class="agency_service_area" id="tolink-3">
+        <section class="agency_service_area" id="tolink-3" style="background-color: white;">
             <div class="container custom_container">
                 <h2 class="f_size_30 f_600 t_color3 l_height40 text-center mb_90 wow fadeInUp" data-wow-delay="0.2s">
-                    Features
+                    @lang('welcome.features')
                 </h2>
                 <div class="row mb_30">
-                    <div class="col-lg-3 col-6">
-                        <div class="p_service_item agency_service_item wow fadeInUp" data-wow-delay="0.3s">
-                            <div class="icon">
-                                <img src="img/solution.png" alt="">
+                    @foreach ($features as $feature)
+                        <div class="col-lg-3 col-6">
+                            <div class="p_service_item agency_service_item wow fadeInUp" data-wow-delay="0.3s">
+                                <div class="icon">
+                                    <img src="{{ asset($feature->image) }}" alt="">
 
+                                </div>
+                                <h5 class="f_600 t_color3">{{ $feature->title->{app()->getLocale()} }}</h5>
+                                <p>{{ $feature->caption->{app()->getLocale()} }}</p>
                             </div>
-                            <h5 class="f_600 t_color3">
-                                <x-editable key="features->one->title">
-                                    {!! $landingPage->features->one->title ?? 'Product Vision and Ideas' !!}
-                                </x-editable>
-                            </h5>
-                            <p>Make your product vision and ideas clear, organized, and ready for execution with an advanced
-                                product vision tool</p>
-
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-6">
-                        <div class="p_service_item agency_service_item wow fadeInUp" data-wow-delay="0.4s">
-                            <div class="icon">
-                                <img src="img/plan.png" alt="">
-
-                            </div>
-                            <h5 class="f_600 t_color3">Product Planning</h5>
-                            <p>Efficiently plan your product and create an integrated action plan to ensure maximum
-                                efficiency
-                                in achieving your goals</p>
-
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-6">
-                        <div class="p_service_item agency_service_item wow fadeInUp" data-wow-delay="0.4s">
-                            <div class="icon">
-                                <img src="img/technical-support.png" alt="">
-
-                            </div>
-                            <h5 class="f_600 t_color3">Product Support</h5>
-                            <p>We are here to support you throughout your product management journey by providing continuous
-                                support and timely issue resolution</p>
-
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-6">
-                        <div class="p_service_item agency_service_item wow fadeInUp" data-wow-delay="0.4s">
-                            <div class="icon">
-                                <img src="img/cycle.png" alt="">
-
-                            </div>
-                            <h5 class="f_600 t_color3">Change Management</h5>
-                            <p>Enable precise and effective changes to your products without any hassle with our change
-                                management tool</p>
-
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-6">
-                        <div class="p_service_item agency_service_item wow fadeInUp" data-wow-delay="0.4s">
-                            <div class="icon">
-                                <img src="img/help.png" alt="">
-
-                            </div>
-                            <h5 class="f_600 t_color3">Team Collaboration</h5>
-                            <p>Foster team collaboration and enhance communication to ensure seamless execution of projects
-                                and
-                                ideas</p>
-
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-6">
-                        <div class="p_service_item agency_service_item wow fadeInUp" data-wow-delay="0.4s">
-                            <div class="icon">
-                                <img src="img/checklist.png" alt="">
-
-                            </div>
-                            <h5 class="f_600 t_color3">Product Documentation</h5>
-                            <p>Manage all your product documentation easily and efficiently in one centralized location</p>
-
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-6">
-                        <div class="p_service_item agency_service_item wow fadeInUp" data-wow-delay="0.4s">
-                            <div class="icon">
-                                <img src="img/dashboard.png" alt="">
-
-                            </div>
-                            <h5 class="f_600 t_color3">Product Reporting</h5>
-                            <p>Gain comprehensive insights into the performance of your products through detailed and
-                                customized
-                                reports</p>
-
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-6">
-                        <div class="p_service_item agency_service_item wow fadeInUp" data-wow-delay="0.4s">
-                            <div class="icon">
-                                <img src="img/release.png" alt="">
-
-                            </div>
-                            <h5 class="f_600 t_color3">Product Release Management</h5>
-                            <p>Organize the product release process efficiently to ensure smooth and effective deliveryل</p>
-
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-6">
-                        <div class="p_service_item agency_service_item wow fadeInUp" data-wow-delay="0.4s">
-                            <div class="icon">
-                                <img src="img/bank-account.png" alt="">
-
-                            </div>
-                            <h5 class="f_600 t_color3">Product History</h5>
-                            <p>Track the history of your product and changes with precision and transparency</p>
-
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-6">
-                        <div class="p_service_item agency_service_item pl_50 wow fadeInUp" data-wow-delay="0.4s">
-                            <div class="icon">
-                                <img src="img/delivered.png" alt="">
-
-                            </div>
-                            <h5 class="f_600 t_color3">Product Delivery with Multi-Product Support</h5>
-                            <p>Manage the product delivery process efficiently and effectively with the ability to support
-                                multiple products simultaneously</p>
-
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </section>
@@ -265,180 +136,35 @@
         <section class="faq_area" id="tolink-5">
             <div class="container custom_container p0">
                 <div class="sec_title text-center wow fadeInUp" data-wow-delay="0.2s">
-                    <h2 class="f_size_30 l_height50 f_700 t_color2">Faq</h2>
+                    <h2 class="f_size_30 l_height50 f_700 t_color2">@lang('welcome.faqs')</h2>
                 </div>
                 <div class="tab-content faq_content wow fadeInUp" data-wow-delay="0.3s" id="myTabContent">
                     <div class="tab-pane fade show active" id="care">
                         <div id="accordion6">
                             <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="card">
-                                        <div class="card-header" id="heading24">
-                                            <h5 class="mb-0">
-                                                <button class="btn btn-link collapsed" data-toggle="collapse"
-                                                    data-target="#collapse24" aria-expanded="false"
-                                                    aria-controls="collapse24">
-                                                    What services can I get from the Product Labs application?<i
-                                                        class="ti-plus"></i><i class="ti-minus"></i>
-                                                </button>
-                                            </h5>
-                                        </div>
+                                @foreach ($faqs as $faq)
+                                    <div class="col-lg-6">
+                                        <div class="card">
+                                            <div class="card-header" id="heading{{ $faq->id }}">
+                                                <h5 class="mb-0">
+                                                    <button class="btn btn-link collapsed" data-toggle="collapse"
+                                                        data-target="#collapse{{ $faq->id }}" aria-expanded="false"
+                                                        aria-controls="collapse{{ $faq->id }}">
+                                                        {{ $faq->question->{app()->getLocale()} }}<i
+                                                            class="ti-plus"></i><i class="ti-minus"></i>
+                                                    </button>
+                                                </h5>
+                                            </div>
 
-                                        <div id="collapse24" class="collapse" aria-labelledby="heading24"
-                                            data-parent="#accordion6">
-                                            <div class="card-body">
-                                                It is a long established fact that a reader will be distracted by the
-                                                readable
-                                                content of a page when looking at its layout
+                                            <div id="collapse{{ $faq->id }}" class="collapse"
+                                                aria-labelledby="heading{{ $faq->id }}" data-parent="#accordion6">
+                                                <div class="card-body">
+                                                    {{ $faq->answer->{app()->getLocale()} }}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card">
-                                        <div class="card-header" id="heading25">
-                                            <h5 class="mb-0">
-                                                <button class="btn btn-link collapsed" data-toggle="collapse"
-                                                    data-target="#collapse25" aria-expanded="false"
-                                                    aria-controls="collapse25">
-                                                    Can i add more than one product at the same time ?<i
-                                                        class="ti-plus"></i><i class="ti-minus"></i>
-                                                </button>
-                                            </h5>
-                                        </div>
-                                        <div id="collapse25" class="collapse" aria-labelledby="heading25"
-                                            data-parent="#accordion6">
-                                            <div class="card-body">
-                                                It is a long established fact that a reader will be distracted by the
-                                                readable
-                                                content of a page when looking at its layout
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-header" id="heading26">
-                                            <h5 class="mb-0">
-                                                <button class="btn btn-link collapsed" data-toggle="collapse"
-                                                    data-target="#collapse26" aria-expanded="false"
-                                                    aria-controls="collapse26">
-                                                    What services can I get from the Product Labs application?<i
-                                                        class="ti-plus"></i><i class="ti-minus"></i>
-                                                </button>
-                                            </h5>
-                                        </div>
-                                        <div id="collapse26" class="collapse" aria-labelledby="heading26"
-                                            data-parent="#accordion6">
-                                            <div class="card-body">
-                                                It is a long established fact that a reader will be distracted by the
-                                                readable
-                                                content of a page when looking at its layout
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-header" id="heading27">
-                                            <h5 class="mb-0">
-                                                <button class="btn btn-link collapsed" data-toggle="collapse"
-                                                    data-target="#collapse27" aria-expanded="false"
-                                                    aria-controls="collapse27">
-                                                    Can i add more than one product at the same time ?<i
-                                                        class="ti-plus"></i><i class="ti-minus"></i>
-                                                </button>
-                                            </h5>
-                                        </div>
-                                        <div id="collapse27" class="collapse" aria-labelledby="heading27"
-                                            data-parent="#accordion6">
-                                            <div class="card-body">
-                                                It is a long established fact that a reader will be distracted by the
-                                                readable
-                                                content of a page when looking at its layout
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="card">
-                                        <div class="card-header" id="heading28">
-                                            <h5 class="mb-0">
-                                                <button class="btn btn-link collapsed" data-toggle="collapse"
-                                                    data-target="#collapse28" aria-expanded="false"
-                                                    aria-controls="collapse28">
-                                                    What services can I get from the Product Labs application?<i
-                                                        class="ti-plus"></i><i class="ti-minus"></i>
-                                                </button>
-                                            </h5>
-                                        </div>
-
-                                        <div id="collapse28" class="collapse" aria-labelledby="heading28"
-                                            data-parent="#accordion6">
-                                            <div class="card-body">
-                                                It is a long established fact that a reader will be distracted by the
-                                                readable
-                                                content of a page when looking at its layout
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-header" id="heading29">
-                                            <h5 class="mb-0">
-                                                <button class="btn btn-link collapsed" data-toggle="collapse"
-                                                    data-target="#collapse29" aria-expanded="false"
-                                                    aria-controls="collapse29">
-                                                    Can i add more than one product at the same time ?<i
-                                                        class="ti-plus"></i><i class="ti-minus"></i>
-                                                </button>
-                                            </h5>
-                                        </div>
-                                        <div id="collapse29" class="collapse" aria-labelledby="heading29"
-                                            data-parent="#accordion6">
-                                            <div class="card-body">
-                                                It is a long established fact that a reader will be distracted by the
-                                                readable
-                                                content of a page when looking at its layout
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-header" id="heading30">
-                                            <h5 class="mb-0">
-                                                <button class="btn btn-link collapsed" data-toggle="collapse"
-                                                    data-target="#collapse30" aria-expanded="false"
-                                                    aria-controls="collapse30">
-                                                    What services can I get from the Product Labs application?<i
-                                                        class="ti-plus"></i><i class="ti-minus"></i>
-                                                </button>
-                                            </h5>
-                                        </div>
-                                        <div id="collapse30" class="collapse" aria-labelledby="heading30"
-                                            data-parent="#accordion6">
-                                            <div class="card-body">
-                                                It is a long established fact that a reader will be distracted by the
-                                                readable
-                                                content of a page when looking at its layout
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card">
-                                        <div class="card-header" id="heading31">
-                                            <h5 class="mb-0">
-                                                <button class="btn btn-link collapsed" data-toggle="collapse"
-                                                    data-target="#collapse31" aria-expanded="false"
-                                                    aria-controls="collapse31">
-                                                    Can i add more than one product at the same time ?<i
-                                                        class="ti-plus"></i><i class="ti-minus"></i>
-                                                </button>
-                                            </h5>
-                                        </div>
-                                        <div id="collapse31" class="collapse" aria-labelledby="heading31"
-                                            data-parent="#accordion6">
-                                            <div class="card-body">
-                                                It is a long established fact that a reader will be distracted by the
-                                                readable
-                                                content of a page when looking at its layout
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -452,13 +178,12 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="action_content text-center">
-                            <h2 class="f_600 f_size_30 l_height45 mb_40 wow fadeInUp" data-wow-delay="0.2s">Join now and
-                                enjoy
-                                an efficient and user-friendly experience<br> in managing your products !</h2>
+                            <h2 class="f_600 f_size_30 l_height45 mb_40 wow fadeInUp" data-wow-delay="0.2s">
+                                {!! $info->join->{app()->getLocale()} !!}</h2>
                             <a href="{{ route('login') }}" class="about_btn white_btn wow fadeInRight btn_get"
-                                data-wow-delay="0.3s">Login</a>
+                                data-wow-delay="0.3s">@lang('welcome.login')</a>
                             <a href="{{ route('register') }}" class="about_btn wow fadeInLeft btn_get"
-                                data-wow-delay="0.4s">Sign up</a>
+                                data-wow-delay="0.4s">@lang('welcome.sign_up')</a>
                         </div>
                     </div>
                 </div>

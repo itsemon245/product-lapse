@@ -1,7 +1,7 @@
 <header class="header_area header_area_inner">
     <nav class="navbar navbar-expand-lg menu_one menu_four">
         <div class="container custom_container p0">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/">
                 <img src="{{ asset('img/logo-white.png') }}" class="logo1" srcset="{{ asset('img/logo-white.png') }} 2x"
                     alt="logo">
                 <img src="{{ asset('img/logo.png') }}" class="logo2" srcset="{{ asset('img/logo.png') }} 2x"

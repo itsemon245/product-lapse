@@ -3,6 +3,7 @@
 use App\Http\Controllers\Features\Change\ChangeController;
 use App\Models\Faq;
 use App\Models\Feature;
+use App\Models\LandingPage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Cookie;
@@ -22,10 +23,11 @@ use App\Http\Controllers\Features\Delivery\DeliveryController;
  */
 
 Route::get('/', function () {
+    $info = LandingPage::first();
     $faqs = Faq::where('status', true)->get();
     $features = Feature::where('status', true)->get();
 
-    return view('welcome', compact('faqs', 'features'));
+    return view('welcome', compact('info', 'faqs', 'features'));
 })->name('home');
 
 Route::middleware('auth')->group(function () {

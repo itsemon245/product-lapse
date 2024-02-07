@@ -8,31 +8,20 @@
                 <div class="row">
                     <div class="col-md-6 d-flex align-items-center">
                         <div class="agency_content">
-                            <h2 x-on:keyup="value = $el.innerHTML;" hx-trigger="blur" hx-include=".hx-title-data"
-                                hx-post="{{ route('landing.page.update') . '?key=title' }}" contenteditable="true"
-                                class="f_700 t_color3 mb_40 wow fadeInLeft" data-wow-delay="0.3s">Join <span class="bold">
-                                    ProductLapse </span>Now and enjoy an efficient and user-friendly experience in
-                                <span>Manage
-                                    your products</span>
+                            <h2 class="f_700 t_color3 mb_40 wow fadeInLeft" data-wow-delay="0.3s">
+                                {!! $info->home->title->{app()->getLocale()} !!}
                             </h2>
-                            <input class="hx-title-data hidden" type="text" name="_token" value="{{ csrf_token() }}">
-                            <input class="hx-title-data hidden" x-model="value" type="text" name="value">
-                            <p x-on:keyup="value = $el.innerHTML;" hx-trigger="blur" hx-include=".hx-subTitle-data"
-                                hx-post="{{ route('landing.page.update') . '?key=subTitle' }}" contenteditable="true"
-                                class="f_500 l_height28 wow fadeInLeft" data-wow-delay="0.4s">Start your journey towards
-                                success
-                                and excellence in the ever-evolving market</p>
-                            <input class="hx-subTitle-data hidden" type="text" name="_token"
-                                value="{{ csrf_token() }}">
-                            <input class="hx-subTitle-data hidden" x-model="value" type="text" name="value">
+                            <p class="f_500 l_height28 wow fadeInLeft" data-wow-delay="0.4s">
+                                {{ $info->home->caption->{app()->getLocale()} }}</p>
                             <div class="action_btn d-flex align-items-center mt_60">
                                 <a href="{{ route('register') }}" class="btn_hover agency_banner_btn wow fadeInLeft btn-bg"
-                                    data-wow-delay="0.5s">Sign up now for a free trial!</a>
+                                    data-wow-delay="0.5s"> {!! $info->home->button->{app()->getLocale()} !!}</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 text-right">
-                        <img class="protype_img wow fadeInRight" data-wow-delay="0.3s" src="img/home.png" alt="">
+                        <img class="protype_img wow fadeInRight" data-wow-delay="0.3s" src="{{ asset($info->home->image) }}"
+                            alt="home">
                     </div>
                 </div>
             </div>
@@ -40,35 +29,24 @@
         <section class="agency_about_area bg_color" id="tolink-2">
             <div class="container custom_container">
                 <h2 class="f_size_30 f_600 t_color3 l_height40 text-center wow fadeInUp title-position"
-                    data-wow-delay="0.2s">
-                    About us</h2>
+                    data-wow-delay="0.2s">@lang('welcome.about_us')</h2>
                 <div class="row">
                     <div class="col-md-6">
-                        <img src="img/about.png" class="about-img wow fadeInRight" data-wow-delay="0.2s">
+                        <img src="{{ asset($info->about_us->image) }}" alt="about" class="about-img wow fadeInRight"
+                            data-wow-delay="0.2s">
                     </div>
                     <div class="col-md-6">
-                        <p x-on:keyup="value = $el.innerHTML;" hx-trigger="blur" hx-include=".hx-title-data-about"
-                            hx-post="{{ route('landing.page.update.about') . '?key=title' }}" contenteditable="true"
-                            class="f_size_22 f_400 t_color3 l_height40 wow fadeInLeft about-text" data-wow-delay="0.2s">
-                            ProductLapse is a comprehensive product management tool and mobile app designed to empower you
-                            in
-                            realizing your product vision and achieving remarkable success in the competitive market.
-                            <br><br>The platform offers the capability to clearly visualize your product, efficient
-                            planning,
-                            continuous support, change management, enhanced team collaboration, product documentation, and
-                            comprehensive reporting.<br><br>You can also manage the product release process and track its
-                            history and delivery with support for multiple products simultaneously.
+                        <p class="f_size_22 f_400 t_color3 l_height40 wow fadeInLeft about-text" data-wow-delay="0.2s">
+                            {!! $info->about_us->caption->{app()->getLocale()} !!}
                         </p>
                     </div>
-                    <input class="hx-title-data-about hidden" type="text" name="_token" value="{{ csrf_token() }}">
-                    <input class="hx-title-data-about hidden" x-model="value" type="text" name="value">
                 </div>
             </div>
         </section>
         <section class="agency_service_area" id="tolink-3" style="background-color: white;">
             <div class="container custom_container">
                 <h2 class="f_size_30 f_600 t_color3 l_height40 text-center mb_90 wow fadeInUp" data-wow-delay="0.2s">
-                    Features
+                    @lang('welcome.features')
                 </h2>
                 <div class="row mb_30">
                     @foreach ($features as $feature)
@@ -158,7 +136,7 @@
         <section class="faq_area" id="tolink-5">
             <div class="container custom_container p0">
                 <div class="sec_title text-center wow fadeInUp" data-wow-delay="0.2s">
-                    <h2 class="f_size_30 l_height50 f_700 t_color2">Faq</h2>
+                    <h2 class="f_size_30 l_height50 f_700 t_color2">@lang('welcome.faqs')</h2>
                 </div>
                 <div class="tab-content faq_content wow fadeInUp" data-wow-delay="0.3s" id="myTabContent">
                     <div class="tab-pane fade show active" id="care">
@@ -200,13 +178,12 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="action_content text-center">
-                            <h2 class="f_600 f_size_30 l_height45 mb_40 wow fadeInUp" data-wow-delay="0.2s">Join now and
-                                enjoy
-                                an efficient and user-friendly experience<br> in managing your products !</h2>
+                            <h2 class="f_600 f_size_30 l_height45 mb_40 wow fadeInUp" data-wow-delay="0.2s">
+                                {!! $info->join->{app()->getLocale()} !!}</h2>
                             <a href="{{ route('login') }}" class="about_btn white_btn wow fadeInRight btn_get"
-                                data-wow-delay="0.3s">Login</a>
+                                data-wow-delay="0.3s">@lang('welcome.login')</a>
                             <a href="{{ route('register') }}" class="about_btn wow fadeInLeft btn_get"
-                                data-wow-delay="0.4s">Sign up</a>
+                                data-wow-delay="0.4s">@lang('welcome.sign_up')</a>
                         </div>
                     </div>
                 </div>

@@ -81,6 +81,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PermissionSeeder::class,
             SelectSeeder::class,
+            LandingPageSeeder::class,
             FaqSeeder::class,
             FeatureSeeder::class,
         ]);

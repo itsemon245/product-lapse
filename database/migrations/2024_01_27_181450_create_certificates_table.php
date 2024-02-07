@@ -19,6 +19,7 @@ return new class extends Migration
         $table->string('name');
         $table->longText('company');
         $table->dateTime('issue_date')->nullable();
+        $table->longText('link');
         $table->timestamps();
     });
     }

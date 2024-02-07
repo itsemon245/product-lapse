@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Features\Idea;
 use App\Models\Idea;
 use App\Models\Select;
 use App\Models\Product;
+use App\Notifications\IdeaNotification;
 use Illuminate\Http\Request;
 use App\Services\SearchService;
 use App\Http\Requests\IdeaRequest;
@@ -93,5 +94,11 @@ class IdeaController extends Controller
         $ideas = SearchService::items($request);
         $priorities = Select::of('idea')->type('priority')->get();
         return view('features.idea.index', compact('ideas', 'priorities'));
+    }
+
+
+    public function notify(){
+        $idea = Idea::first();
+        auth()->user()->notify(new IdeaNotification($idea));
     }
 }

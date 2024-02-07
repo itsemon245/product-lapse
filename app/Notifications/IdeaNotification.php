@@ -11,12 +11,13 @@ class IdeaNotification extends Notification
 {
     use Queueable;
 
+    public $idea;
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct($idea)
     {
-        //
+        $this->idea = $idea;
     }
 
     /**
@@ -37,7 +38,9 @@ class IdeaNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            //
+            'owner_id' => $this->idea['id'],
+            'name' => $this->idea['name'],
+            'owner' => $this->idea['owner'],
         ];
     }
 }

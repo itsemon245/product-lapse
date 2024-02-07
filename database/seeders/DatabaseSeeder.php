@@ -54,8 +54,6 @@ class DatabaseSeeder extends Seeder
         LandingPage::create([
             'home' => [],
             'about_us'=> [],
-            'features'=> [],
-            'contact_us'=> []
         ]);
         // Remove Dispatcher
         Package::unsetEventDispatcher();

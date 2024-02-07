@@ -113,11 +113,16 @@
             </ul>
         </x-slot:comments>
         <x-slot:writeComment>
-            <form class="get_quote_form row" action="#" method="post">
+            <form class="get_quote_form row" action="{{ route('comment.store') }}" method="post">
+                @csrf
                 <div class="col-md-12 form-group">
-                    <textarea class="form-control message" placeholder="Write your comment here .."></textarea>
+                    <input type="hidden" name="commentable_type" value="idea">
+                    <input type="hidden" name="commentable_id" value="{{ $idea->id }}">
+                    <textarea class="form-control message" name="comment" placeholder="Write your comment here .."></textarea>
                 </div>
-                <div class="col-md-12"><button class="btn_hover agency_banner_btn btn-bg" type="submit">Send</button></div>
+                <div class="col-md-12">
+                    <button class="btn_hover agency_banner_btn btn-bg" type="submit">Send</button>
+                </div>
             </form>
         </x-slot:writeComment>
     </x-feature.show>

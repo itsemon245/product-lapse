@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Features\Certificate;
 
-use App\Http\Requests\CertificateRequest;
-use App\Models\Certificate;
+use App\Models\User;
 use App\Models\Invitation;
+use App\Models\Certificate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CertificateRequest;
 
 class CertificateController extends Controller
 {
@@ -15,7 +16,7 @@ class CertificateController extends Controller
      */
     public function index()
     {
-        $certificates = Certificate::with('image')->with('user')->get();
+        $certificates = Certificate::with('user')->get();
         return view('features.certificate.index', compact('certificates'));
     }
 
@@ -24,9 +25,8 @@ class CertificateController extends Controller
      */
     public function create()
     {
-        $teams = Invitation::where('owner_id', auth()->id())->where('accepted_at', 1)->get();
-        // dd($teams);
-        return view('features.certificate.partials.create', compact('teams'));
+        $user = User::find(auth()->id());
+        return view('features.certificate.partials.create', compact('user'));
     }
 
     /**
@@ -35,16 +35,11 @@ class CertificateController extends Controller
     public function store(CertificateRequest $request)
     {
         $store = Certificate::create([
-            'owner_id' => auth()->id(),
-            'received_id' => $request->received_id,
-            'company_name' => $request->company_name,
-            'description' => $request->description,
-            'issue_date' => $request->issue_date,
+            'achieved_id' => $request->achieved_id,
+            'name' => $request->name,
+            'company' => $request->company,
         ]);
-        $image = $store->storeImage($request->signature);
-        if($image ){
-            notify()->success(__('notify/success.create'));
-        }
+        notify()->success(__('notify/success.create'));
         return redirect()->route('certificate.index');
         }
 
@@ -77,6 +72,7 @@ class CertificateController extends Controller
      */
     public function destroy(Certificate $certificate)
     {
-               notify()->success(__('notify/success.delete'));
+        $certificate->delete();
+        notify()->success(__('notify/success.delete'));
     }
 }

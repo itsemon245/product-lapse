@@ -12,6 +12,7 @@ use App\Models\Report;
 use App\Models\Package;
 use App\Models\Product;
 use App\Models\Delivery;
+use App\Models\LandingPage;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -50,6 +51,12 @@ class DatabaseSeeder extends Seeder
                 'name' => 'User' . $i,
             ]);
         }
+        LandingPage::create([
+            'home' => [],
+            'about_us'=> [],
+            'features'=> [],
+            'contact_us'=> []
+        ]);
         // Remove Dispatcher
         Package::unsetEventDispatcher();
         Package::factory(10)->create();

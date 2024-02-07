@@ -29,18 +29,16 @@
 
     <x-slot:list>
         @foreach ($certificates as $certificate)
-        {{ dd($certificate) }}
         <div class="col-md-6">
             <div class="item lon new">
                 <div class="list_item">
-                    <figure><a href="{{ route('certificate.show', $certificate) }}"><img src="{{ $certificate->image->url }}" alt=""></a></figure>
                     <div class="joblisting_text">
                         <div class="job_list_table">
                             <div class="jobsearch-table-cell">
-                                <h4><a href="#" class="f_500 t_color3">{{ $certificate->name }}</a></h4>
+                                <h4><a href="{{ route('certificate.show', $certificate) }}" class="f_500 t_color3">{{ $certificate->name }}</a></h4>
                                 <ul class="list-unstyled">
                                     <li>{{ $certificate->created_at->formatLocalized('%A %d %B %Y') }}</li>
-                                    <li>{{ $certificate->company_name }}</li>
+                                    <li>{{ $certificate->company }}</li>
                                 </ul>
                             </div>
                             <div class="jobsearch-table-cell">

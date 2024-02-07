@@ -28,8 +28,7 @@ class BladeServiceProvider extends ServiceProvider
             return "<?php echo trans($expression) ?>";
         });
         View::composer("*", function () {
-            // app()->setLocale(request()->cookie('locale'));
-             app()->setLocale('en');
+            app()->setLocale(request()->cookie('locale'));
         });
     }
 }

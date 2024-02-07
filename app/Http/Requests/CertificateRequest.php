@@ -15,11 +15,9 @@ class CertificateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'received_id' => 'required',
-            'company_name' => 'sometimes|required',
-            'description' => 'sometimes|required',
-            'issue_date' => 'sometimes|required',
-            'signature' => 'sometimes|required',
+            'achieved_id' => 'required',
+            'name' => 'sometimes|required',
+            'company' => 'sometimes|required',
         ];
     }
 }

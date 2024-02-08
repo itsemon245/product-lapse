@@ -67,68 +67,36 @@
         <section class="pricing_area sec_pad" id="tolink-4">
             <div class="container custom_container p0">
                 <div class="sec_title text-center">
-                    <h2 class="f_size_30 l_height50 f_700 t_color2 wow fadeInUp" data-wow-delay="0.2s">Packages</h2>
-                    <p class="f_400 f_size_16 l_height30 mb-0 wow fadeInUp" data-wow-delay="0.2s">Different packages to
-                        suit
-                        all needs .. Get Started Today !</p>
+                    <h2 class="f_size_30 l_height50 f_700 t_color2 wow fadeInUp" data-wow-delay="0.2s">@lang('welcome.packages')
+                    </h2>
+                    <p class="f_400 f_size_16 l_height30 mb-0 wow fadeInUp" data-wow-delay="0.2s">
+                        {{ $info->package->{app()->getLocale()} }}</p>
                 </div>
                 <div class="price_content">
                     <div class="row wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="col-lg-3 col-6">
-                            <div class="price_item">
-
-                                <h5 class="f_size_20 f_600 t_color2 mt_30">Free package</h5>
-                                <div class="price f_700 f_size_40 t_color2">0<sub class="f_size_16 f_400"> SR</sub></div>
-                                <ul class="list-unstyled p_list">
-                                    <li><i class="ti-check"></i>1 Product</li>
-                                    <li><i class="ti-check"></i>Limited features</li>
-                                </ul>
-                                <a href="#" class="price_btn btn_hover">Subscribe</a>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-6">
-                            <div class="price_item">
-                                <div class="tag"><span>popular</span></div>
-
-                                <h5 class="f_size_20 f_600 t_color2 mt_30">Basic Package</h5>
-                                <div class="price f_700 f_size_40 t_color2">199<sub class="f_size_16 f_400"> SR</sub>
+                        @foreach ($packages as $package)
+                            <div class="col-lg-3 col-6">
+                                <div class="price_item">
+                                    @if ($package->is_popular)
+                                        <div class="tag"><span>@lang('welcome.popular')</span></div>
+                                    @endif
+                                    <h5 class="f_size_20 f_600 t_color2 mt_30"> {{ $package->name->{app()->getLocale()} }}
+                                    </h5>
+                                    <div class="price f_700 f_size_40 t_color2">{{ $package->price }}<sub
+                                            class="f_size_16 f_400"> @lang('welcome.price')</sub>
+                                    </div>
+                                    <ul class="list-unstyled p_list">
+                                        <li><i class="ti-check"></i>{{ $package->product_limit->{app()->getLocale()} }}
+                                        </li>
+                                        @if ($package->validity)
+                                            <li><i class="ti-check"></i>{{ $package->validity->{app()->getLocale()} }}</li>
+                                        @endif
+                                        <li><i class="ti-check"></i>{{ $package->features->{app()->getLocale()} }}</li>
+                                    </ul>
+                                    <a href="#" class="price_btn btn_hover">@lang('welcome.subscribe')</a>
                                 </div>
-                                <ul class="list-unstyled p_list">
-                                    <li><i class="ti-check"></i>3 Products</li>
-                                    <li><i class="ti-check"></i>one year</li>
-                                    <li><i class="ti-check"></i>All features</li>
-                                </ul>
-                                <a href="#" class="price_btn btn_hover">Subscribe</a>
                             </div>
-                        </div>
-                        <div class="col-lg-3 col-6">
-                            <div class="price_item">
-
-                                <h5 class="f_size_20 f_600 t_color2 mt_30">Golden Package</h5>
-                                <div class="price f_700 f_size_40 t_color2">299<sub class="f_size_16 f_400"> SR </sub>
-                                </div>
-                                <ul class="list-unstyled p_list">
-                                    <li><i class="ti-check"></i>10 Products</li>
-                                    <li><i class="ti-check"></i>one year</li>
-                                    <li><i class="ti-check"></i>All features</li>
-                                </ul>
-                                <a href="#" class="price_btn btn_hover">Subscribe</a>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-6">
-                            <div class="price_item">
-
-                                <h5 class="f_size_20 f_600 t_color2 mt_30">Diamond Package</h5>
-                                <div class="price f_700 f_size_40 t_color2">499<sub class="f_size_16 f_400"> SR </sub>
-                                </div>
-                                <ul class="list-unstyled p_list">
-                                    <li><i class="ti-check"></i>30 Products</li>
-                                    <li><i class="ti-check"></i>one year</li>
-                                    <li><i class="ti-check"></i>All features</li>
-                                </ul>
-                                <a href="#" class="price_btn btn_hover">Subscribe</a>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -150,8 +118,8 @@
                                                     <button class="btn btn-link collapsed" data-toggle="collapse"
                                                         data-target="#collapse{{ $faq->id }}" aria-expanded="false"
                                                         aria-controls="collapse{{ $faq->id }}">
-                                                        {{ $faq->question->{app()->getLocale()} }}<i
-                                                            class="ti-plus"></i><i class="ti-minus"></i>
+                                                        {{ $faq->question->{app()->getLocale()} }}<i class="ti-plus"></i><i
+                                                            class="ti-minus"></i>
                                                     </button>
                                                 </h5>
                                             </div>
@@ -194,24 +162,23 @@
             <div class="container">
                 <div class="row flex-row-reverse app_feature_info">
                     <div class="col-xl-12 col-lg-12 text-center">
-                        <h2 class=" f_size_30 f_700 t_color3 l_height45 mb-30 wow fadeInUp" data-wow-delay="0.2s">Contact
-                            us
-                        </h2>
+                        <h2 class=" f_size_30 f_700 t_color3 l_height45 mb-30 wow fadeInUp" data-wow-delay="0.2s">
+                            @lang('welcome.contact_us')</h2>
                     </div>
                     <div class="col-xl-4 col-lg-4 pr-0">
                         <div class="contact_info_item wow fadeInLeft" data-wow-delay="0.2s">
-                            <h6 class=" f_size_20 t_color3 f_500 mb_20">Contact details</h6>
-                            <p class=""><span class="f_400 t_color3">Phone:</span> <a href="#"
-                                    class="phone-num">00000000000</a></p>
-                            <p class=""><span class="f_400 t_color3">Fax:</span> <a href="#"
-                                    class="phone-num">00000000000</a></p>
-                            <p class=""><span class="f_400 t_color3">Email:</span> <a
-                                    href="#">abcd_example@gmail.com</a></p>
+                            <h6 class=" f_size_20 t_color3 f_500 mb_20">@lang('welcome.contact_details')</h6>
+                            <p class=""><span class="f_400 t_color3">@lang('welcome.phone')</span> <a href="#"
+                                    class="phone-num">{{ $contact->phone }}</a></p>
+                            <p class=""><span class="f_400 t_color3">@lang('welcome.fax')</span> <a href="#"
+                                    class="phone-num">{{ $contact->fax }}</a></p>
+                            <p class=""><span class="f_400 t_color3">@lang('welcome.email'):</span> <a
+                                    href="#">{{ $contact->email }}</a></p>
                             <div class="f_social_icon">
-                                <a href="#" class="ti-facebook"></a>
-                                <a href="#" class="ti-twitter-alt"></a>
-                                <a href="#" class="ti-vimeo-alt"></a>
-                                <a href="#" class="ti-pinterest"></a>
+                                <a href="{{ $contact->facebook }}" class="ti-facebook"></a>
+                                <a href="{{ $contact->twitter }}" class="ti-twitter-alt"></a>
+                                <a href="{{ $contact->vimeo }}" class="ti-vimeo-alt"></a>
+                                <a href="{{ $contact->pinterest }}" class="ti-pinterest"></a>
                             </div>
                         </div>
 
@@ -222,28 +189,27 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group text_box">
-                                            <input type="text" placeholder="Name">
+                                            <input type="text" placeholder="@lang('welcome.name')">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group text_box">
-                                            <input type="text" placeholder="Phone">
+                                            <input type="text" placeholder="@lang('welcome.phone')">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group text_box">
-                                            <input type="text" placeholder="Email">
+                                            <input type="text" placeholder="@lang('welcome.email')">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group text_box">
-                                            <textarea placeholder="Message . . ."></textarea>
+                                            <textarea placeholder="@lang('welcome.message')"></textarea>
                                         </div>
                                     </div>
                                 </div>
                                 <button type="submit"
-                                    class="app_btn btn_hover cus_mb-10 btn_hover agency_banner_btn btn-bg">Send
-                                    message</button>
+                                    class="app_btn btn_hover cus_mb-10 btn_hover agency_banner_btn btn-bg">@lang('welcome.send')</button>
                             </form>
                         </div>
                     </div>

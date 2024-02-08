@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\Features\Certificate\CertificateController;
 use App\Http\Controllers\Features\Change\ChangeController;
+use App\Models\Contact;
 use App\Models\Faq;
 use App\Models\Feature;
 use App\Models\LandingPage;
+use App\Models\Package;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Cookie;
@@ -27,8 +29,10 @@ Route::get('/', function () {
     $info = LandingPage::first();
     $faqs = Faq::where('status', true)->get();
     $features = Feature::where('status', true)->get();
+    $contact = Contact::first();
+    $packages = Package::get();
 
-    return view('welcome', compact('info', 'faqs', 'features'));
+    return view('welcome', compact('info', 'faqs', 'features', 'contact', 'packages'));
 })->name('home');
 
 Route::middleware('auth')->group(function () {

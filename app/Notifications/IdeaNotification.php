@@ -38,9 +38,8 @@ class IdeaNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'owner_id' => $this->idea['id'],
-            'name' => $this->idea['name'],
-            'owner' => $this->idea['owner'],
+            'owner_id' => $this->idea['owner_id'],
+            'reason' => $this->idea['name'],
         ];
     }
 }

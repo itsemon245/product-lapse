@@ -12,7 +12,7 @@ trait HasProducts
      */
     public function products(): MorphToMany
     {
-        return $this->morphToMany(Product::class, 'taggable');
+        return $this->morphToMany(Product::class, 'productable');
     }
 
     /**

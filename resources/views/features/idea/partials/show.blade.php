@@ -29,14 +29,7 @@
                         </p>
                         <h6 class="title2">@__('feature/idea.placeholder.requirements')</h6>
                         <ul class="list-unstyled f_400 mb-30 text-font list-details">
-                            <li><i class="ti-check"></i>It is a long established fact that a reader will be distracted by
-                                the readable content of a page.</li>
-                            <li><i class="ti-check"></i>It is a long established fact that a reader will be distracted by
-                                the readable content of a page.</li>
-                            <li><i class="ti-check"></i>It is a long established fact that a reader will be distracted by
-                                the readable content of a page.</li>
-                            <li><i class="ti-check"></i>It is a long established fact that a reader will be distracted by
-                                the readable content of a page.</li>
+                            {!! $idea->requirements !!}
                         </ul>
                     </div>
                 </div>
@@ -80,36 +73,50 @@
         </x-slot:profile>
         <x-slot:comments>
             <ul class="comment-box list-unstyled mb-0">
-                <li class="post_comment">
-                    <div class="media post_author mt_60">
-                        <div class="media-left">
-                            <img class="rounded-circle" src="img/profile1.png" alt="">
-                            <a href="#" class="replay"><i class="ti-share"></i></a>
-                        </div>
-                        <div class="media-body">
-                            <h5 class=" t_color3 f_size_18 f_500">Mohamed Ali</h5>
-                            <h6 class=" f_size_15 f_400 mb_20">24 March 2023</h6>
-                            <p>It is a long established fact that a reader will be distracted by the readable content of a
-                                page when looking at its layout</p>
-                        </div>
-                    </div>
-                    <ul class="reply-comment list-unstyled">
-                        <li class="post-comment">
-                            <div class="media post_author comment-content">
+                @if ($comments)
+                    @forelse ($comments as $comment)
+                        <li class="post_comment">
+                            <div class="media post_author mt_60">
                                 <div class="media-left">
-                                    <img class="rounded-circle" src="img/profile2.png" alt="">
+                                    <img class="rounded-circle" src="{{$comment->user->avatar}}" alt="">
                                     <a href="#" class="replay"><i class="ti-share"></i></a>
                                 </div>
                                 <div class="media-body">
-                                    <h5 class=" t_color3 f_size_18 f_500">Mohamed Ali</h5>
-                                    <h6 class=" f_size_15 f_400 mb_20">24 March 2023</h6>
-                                    <p>It is a long established fact that a reader will be distracted by the readable
-                                        content of a page when looking at its layout</p>
+                                    <h5 class=" t_color3 f_size_18 f_500">{{ $comment->user->name }}</h5>
+                                    <h6 class=" f_size_15 f_400 mb_20">{{ $comment->created_at->format('d F, Y') }}</h6>
+                                    <p>
+                                        {{ $comment->body }}
+                                    </p>
                                 </div>
                             </div>
+                            <ul class="reply-comment list-unstyled">
+                                @if ($comment->replies)
+                                    @foreach ($comment->replies as $reply)
+                                        <li class="post-comment">
+                                            <div class="media post_author comment-content">
+                                                <div class="media-left">
+                                                    <img class="rounded-circle" src="img/profile2.png" alt="">
+                                                    <a href="#" class="replay"><i class="ti-share"></i></a>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h5 class=" t_color3 f_size_18 f_500">{{ $reply->user->name }}</h5>
+                                                    <h6 class=" f_size_15 f_400 mb_20">{{ $reply->created_at->format('d F, Y') }}</h6>
+                                                    <p>
+                                                        {{ $reply->body }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                @endif
+                            </ul>
                         </li>
-                    </ul>
-                </li>
+                        @empty
+                        <li class="post_comment text-center my-4">
+                            @__('comments.not-found')
+                        </li>
+                    @endforelse
+                @endif
             </ul>
         </x-slot:comments>
         <x-slot:writeComment>

@@ -29,7 +29,9 @@ class SearchService
         $model   = "App\\Models\\". Str::studly($request->model);
         $columns = $request->columns;
         $search  = $request->search;
-        return $model::where(function (Builder $q) use ($columns, $search) {
+        return $model::whereHas('products', function(Builder $q){
+            $q->where('product_id', productId());
+        })->where(function (Builder $q) use ($columns, $search) {
             foreach ($columns as $column) {
                 $q->orWhere($column, "like", "%" . $search . "%");
             }

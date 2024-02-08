@@ -10,12 +10,15 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('landing_pages', function (Blueprint $table) {
+        Schema::create('contacts', function (Blueprint $table) {
             $table->id();
-            $table->json('home')->nullable();
-            $table->json('about_us')->nullable();
-            $table->json('join')->nullable();
-            $table->json('package');
+            $table->string('phone');
+            $table->string('fax');
+            $table->string('email');
+            $table->string('facebook')->nullable();
+            $table->string('pinterest')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('vimeo')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +28,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('landing_pages');
+        Schema::dropIfExists('contacts');
     }
 };

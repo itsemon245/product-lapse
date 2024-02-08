@@ -15,3 +15,6 @@ Route::put('/update-about-us/{id}', [LandingPageController::class, 'updateAboutU
 
 Route::get('/edit-intro', [LandingPageController::class, 'editIntro'])->name('edit.intro');
 Route::put('/update-intro/{id}', [LandingPageController::class, 'updateIntro'])->name('intro.update');
+
+Route::get('/edit-contact-us', [LandingPageController::class, 'editContact'])->name('edit.contact.us');
+Route::put('/update-contact/{id}', [LandingPageController::class, 'updateContactUs'])->name('contact.us.update');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Requests\LandingPageRequest;
+use App\Models\Contact;
 use App\Models\LandingPage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -169,5 +170,23 @@ class LandingPageController extends Controller
         notify()->success(__('notify/success.update'));
 
         return redirect()->route('edit.intro');
+    }
+
+    public function editContact()
+    {
+        $contact = Contact::first();
+
+        return view('edit-contact', compact('contact'));
+    }
+
+    public function updateContactUs(Request $request, int $id)
+    {
+        $contact = Contact::find($id);
+
+        $contact->update(request()->except('_method', '_token'));
+
+        notify()->success(__('notify/success.update'));
+
+        return redirect()->route('edit.contact.us');
     }
 }

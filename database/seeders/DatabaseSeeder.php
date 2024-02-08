@@ -52,8 +52,8 @@ class DatabaseSeeder extends Seeder
             ]);
         }
         // Remove Dispatcher
-        Package::unsetEventDispatcher();
-        Package::factory(10)->create();
+        // Package::unsetEventDispatcher();
+        // Package::factory(10)->create();
 
         Product::unsetEventDispatcher();
         Product::factory(10)->create();
@@ -83,6 +83,8 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             SelectSeeder::class,
             LandingPageSeeder::class,
+            PackageSeeder::class,
+            ContactSeeder::class,
             FaqSeeder::class,
             FeatureSeeder::class,
         ]);

@@ -51,7 +51,6 @@ class DatabaseSeeder extends Seeder
                 'name' => 'User' . $i,
             ]);
         }
-
         // Remove Dispatcher
         // Package::unsetEventDispatcher();
         // Package::factory(10)->create();

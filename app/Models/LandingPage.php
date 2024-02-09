@@ -14,6 +14,7 @@ class LandingPage extends Model
         'home' => JsonCast::class,
         'about_us' => JsonCast::class,
         'join' => JsonCast::class,
+        'package' => JsonCast::class,
     ];
     protected $guarded = [];
 }

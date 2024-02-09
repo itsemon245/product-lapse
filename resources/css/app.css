@@ -24,3 +24,9 @@ html[lang="ar"]{
 input:checked ~ .dot {
     @apply translate-x-[100%] bg-primary;
   }
+
+
+#laravel-notify{
+    position: fixed;
+    z-index: 1000!important;
+}

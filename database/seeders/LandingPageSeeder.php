@@ -42,10 +42,16 @@ class LandingPageSeeder extends Seeder
             'ar' => 'اشترك الان و استمتع بتجربة فعالة وسهلة في إدارة منتجاتك !'
         ];
 
+        $package = [
+            'en' => 'Different packages to suit all needs .. Get Started Today !',
+            'ar' => 'باقات مختلفه تناسب جميع الاحتياجات .. اشترك الان !',
+        ];
+
         \App\Models\LandingPage::create([
             'home' => $home,
             'about_us' => $about_us,
             'join' => $join,
+            'package' => $package,
         ]);
     }
 }

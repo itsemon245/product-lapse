@@ -64,23 +64,17 @@
                                                 <a href="{{ route('idea.edit', $idea) }}" class="shortlist" title="Edit">
                                                     <i class="ti-pencil"></i>
                                                 </a>
-                                        </div>
-                                        <div class="like-btn">
-                                            <a href="{{ route('idea.edit', $idea) }}"
-                                                class="shortlist" title="Edit">
-                                                <i class="ti-pencil"></i>
-                                            </a>
+
+                                            </div>
 
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            @empty
-                <x-feature.not-found />
+                @empty
+                    <x-feature.not-found />
             @endforelse
         </x-slot:list>
     </x-feature.index>

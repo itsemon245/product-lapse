@@ -18,3 +18,6 @@ Route::put('/update-intro/{id}', [LandingPageController::class, 'updateIntro'])-
 
 Route::get('/edit-contact-us', [LandingPageController::class, 'editContact'])->name('edit.contact.us');
 Route::put('/update-contact/{id}', [LandingPageController::class, 'updateContactUs'])->name('contact.us.update');
+
+Route::get('/edit-package/{id}', [LandingPageController::class, 'editPackage'])->name('edit.package');
+Route::put('/update-package/{id}', [LandingPageController::class, 'updatePackage'])->name('package.update');

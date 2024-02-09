@@ -23,4 +23,10 @@ return [
     'vimeo' => 'Vimeo',
     'price' => 'SR',
     'popular' => 'Popular',
+    'edit_package' => 'Edit Package',
+    'price_field' => 'Price',
+    'feature' => 'Feature',
+    'product_limit' => 'Product Limit',
+    'validity' => 'Validity',
+    'is_popular' => 'Is Popular',
 ];

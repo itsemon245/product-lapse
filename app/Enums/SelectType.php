@@ -10,6 +10,7 @@ enum SelectType: string
     case PRIORITY = 'priority';
     case ROLE = 'role';
     case TYPE = 'type';
+    case SUBMISSION = 'submission';
 
 }
 

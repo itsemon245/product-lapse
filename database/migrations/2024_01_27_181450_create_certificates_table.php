@@ -17,7 +17,7 @@ return new class extends Migration
         $table->unsignedBigInteger('achieved_id');
         $table->foreign('achieved_id')->references('id')->on('users')->cascadeOnDelete();
         $table->string('name');
-        $table->integer('status');
+        $table->integer('status')->nullable();
         $table->longText('company');
         $table->dateTime('issue_date')->nullable();
         $table->longText('link');

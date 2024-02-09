@@ -18,6 +18,9 @@ class CertificateRequest extends FormRequest
             'achieved_id' => 'required',
             'name' => 'sometimes|required',
             'company' => 'sometimes|required',
+            'status' => 'sometimes|required',
+            'issue_date' => 'sometimes|required',
+            'link' => 'sometimes|required',
         ];
     }
 }

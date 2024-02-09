@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Features\Certificate;
 
 use App\Models\User;
+use App\Models\Select;
 use App\Models\Invitation;
 use App\Models\Certificate;
 use Illuminate\Http\Request;
+use App\Services\SearchService;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CertificateRequest;
@@ -40,6 +42,8 @@ class CertificateController extends Controller
             'achieved_id' => $request->achieved_id,
             'name' => $request->name,
             'company' => $request->company,
+            'status' => null,
+            'link' => 'shareable link here',
         ]);
         notify()->success(__('notify/success.create'));
         return redirect()->route('certificate.create');
@@ -96,7 +100,8 @@ class CertificateController extends Controller
     //super admin method
     public function getAllCertificate(){
         $certificates = Certificate::with('user')->get();
-        return view('pages.certificate.index', compact('certificates'));
+        $statuses  = Select::of('certificate')->type('status')->get();
+        return view('pages.certificate.index', compact('certificates', 'statuses'));
     }
 
     public function approval(string $id)
@@ -104,8 +109,28 @@ class CertificateController extends Controller
         $certificate = Certificate::find($id);
         $certificate->update([
             'approved_id' => auth()->id(),
+            'status' => 1,
+            'issue_date' => now(),
         ]);
         notify()->success(__('notify/success.update'));
         return back();
     }
+
+    public function cancel(string $id)
+    {
+        $certificate = Certificate::find($id);
+        $certificate->update([
+            'status' => 2,
+        ]);
+        notify()->success(__('notify/success.update'));
+        return back();
+    }
+
+    public function search(CertificateRequest $request)
+    {
+        $certificates = SearchService::items($request);
+        $statuses  = Select::of('certificate')->type('status')->get();
+        return view('pages.certificate.index', compact('certificates', 'statuses'));
+    }
+
 }

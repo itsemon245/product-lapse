@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function () {
 //Super admin Routes
 Route::resource('package', PackageController::class);
 Route::get('admin-certificate', [CertificateController::class, 'getAllCertificate'])->name('admin.certificate');
+Route::get('certificate-search', [CertificateController::class, 'search'])->name('search.certificate');
 
 
 

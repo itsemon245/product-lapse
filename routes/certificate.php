@@ -8,3 +8,4 @@ Route::resource('certificate', CertificateController::class);
 Route::get('get-certificate', [CertificateController::class, 'getCertificate'])->name('get.certificate');
 Route::get('certificate-status', [CertificateController::class, 'certificateStatus'])->name('certificate.status');
 Route::post('certificate-approval/{id}', [CertificateController::class, 'approval'])->name('certificate.approval');
+Route::post('certificate-cancel/{id}', [CertificateController::class, 'cancel'])->name('certificate.cancel');

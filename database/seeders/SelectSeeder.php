@@ -164,5 +164,25 @@ class SelectSeeder extends Seeder
                 'ar'=> 'صورة',
             ],
         ]);
+        Select::create([
+            'owner_id' => 1,
+            'model_type' => Feature::CERTIFICATE->value,
+            'type' => SelectType::SUBMISSION->value,
+            'color' => "#fff",
+            'value' => [
+                'en'=> 'Approved',
+                'ar'=> 'موافقة',
+            ],
+        ]);
+        Select::create([
+            'owner_id' => 1,
+            'model_type' => Feature::CERTIFICATE->value,
+            'type' => SelectType::SUBMISSION->value,
+            'color' => "#fff",
+            'value' => [
+                'en'=> 'Cancel',
+                'ar'=> 'يلغي',
+            ],
+        ]);
     }
 }

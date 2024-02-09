@@ -21,6 +21,9 @@ class DocumentFactory extends Factory
             'owner_id' => function(){
                 return User::inRandomOrder()->first()->id;
             },
+            'creator_id' => function(){
+                return User::inRandomOrder()->first()->id;
+            },
             'name' => fake()->name,
             'type' => fake()->randomElement(['PDF', 'Image']),
             'version' => fake()->randomNumber(),

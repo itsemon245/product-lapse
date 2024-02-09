@@ -21,6 +21,9 @@ class ReleaseFactory extends Factory
             'owner_id' => function (){
                 return User::inRandomOrder()->first()->id;
             },
+            'creator_id' => function(){
+                return User::inRandomOrder()->first()->id;
+            },
             'name' => fake()->name,
             'version' => fake()->randomNumber,
             'release_date' => fake()->dateTime,

@@ -21,6 +21,9 @@ class IdeaFactory extends Factory
             'owner_id' => function () {
                 return User::inRandomOrder()->first()->id;
             },
+            'creator_id' => function(){
+                return User::inRandomOrder()->first()->id;
+            },
             'name' => fake()->name,
             'owner' => fake()->text,
             'priority' => fake()->randomElement(['Working on', 'Pending', 'Stopped']),

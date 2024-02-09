@@ -21,6 +21,9 @@ class DeliveryFactory extends Factory
             'owner_id' => function () {
                 return User::inRandomOrder()->first()->id;
             },
+            'creator_id' => function(){
+                return User::inRandomOrder()->first()->id;
+            },
             'name' => fake()->name,
             'username' => str(fake()->name)->slug(),
             'items' => fake()->text,

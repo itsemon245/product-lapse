@@ -21,6 +21,9 @@ class TaskFactory extends Factory
             'owner_id' => function () {
                 return User::inRandomOrder()->first()->id;
             },
+            'creator_id' => function(){
+                return User::inRandomOrder()->first()->id;
+            },
             'name' => fake()->name,
             'category' => fake()->randomElement(['Working on', 'Pending', 'Stopped']),
             'status' => fake()->randomElement(['Working on', 'Pending', 'Stopped']),

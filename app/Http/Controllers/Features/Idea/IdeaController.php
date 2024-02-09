@@ -43,7 +43,9 @@ class IdeaController extends Controller
         $data = $request->except('_token');
         $data['owner_id'] = ownerId();
         $idea = Idea::create($data);
-
+        $request->session()->flash(
+            'massage', 'Store success'
+        );
         notify()->success(__('Created successfully!'));
         return redirect()->route('idea.index');
     }

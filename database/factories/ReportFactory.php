@@ -18,7 +18,12 @@ class ReportFactory extends Factory
     public function definition(): array
     {
         return [
-            'owner_id' => 1,
+            'owner_id' => function(){
+                return User::inRandomOrder()->first()->id;
+            },
+            'creator_id' => function(){
+                return User::inRandomOrder()->first()->id;
+            },
             'name' => fake()->name,
             'type' => fake()->randomElement(['PDF', 'Image']),
             'report_date' => fake()->time,

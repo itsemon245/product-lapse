@@ -21,6 +21,9 @@ class ChangeFactory extends Factory
             'owner_id' => function () {
                 return User::inRandomOrder()->first()->id;
             },
+            'creator_id' => function(){
+                return User::inRandomOrder()->first()->id;
+            },
             'title' => fake()->name,
             'classification' => 'one',
             'priority' => 'two',

@@ -186,12 +186,6 @@ class ProductController extends Controller
                 'icon'    => 'img/delivered.png',
                 'route'   => route('delivery.index'),
              ],
-            'certificate'           => [
-                'name'    => @__('productHome.certificate'),
-                'counter' => 0,
-                'icon'    => 'img/delivered.png',
-                'route'   => route('certificate.index'),
-             ],
          ];
     }
 

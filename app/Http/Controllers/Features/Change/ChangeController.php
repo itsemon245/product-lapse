@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Features\Change;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\ChangeRequest;
+use App\Models\Idea;
 use App\Models\Change;
-use App\Models\Product;
 use App\Models\Select;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Services\SearchService;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\ChangeRequest;
 use App\Http\Requests\SearchRequest;
 
 class ChangeController extends Controller
@@ -28,11 +29,12 @@ class ChangeController extends Controller
      */
     public function create()
     {
+        $idea = Idea::find(request()->query('idea'));
         $priorities = Select::of('change')->type('priority')->get();
         $statuses = Select::of('change')->type('status')->get();
         $classifications = Select::of('change')->type('classification')->get();
 
-        return view('features.change.partials.create', compact('priorities', 'statuses', 'classifications'));
+        return view('features.change.partials.create', compact('priorities', 'statuses', 'classifications', 'idea'));
     }
 
     /**

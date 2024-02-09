@@ -52,7 +52,8 @@
                                 <a href="#" class="button-1 btn-bg-2"><i class="ti-reload"></i>@__('feature/idea.update')</a>
                             </div>
                             <div class="col-12">
-                                <a href="#" class="button-1">@__('feature/idea.change-request')</a>
+                                <a href="{{ route('change.create', ['idea' => $idea->id]) }}"
+                                    class="button-1">@__('feature/idea.change-request')</a>
                             </div>
                             <div class="col-12">
                                 <a href="#" class="button-1" style="background: #6c84ee">@__('feature/idea.task')</a>
@@ -78,7 +79,7 @@
                         <li class="post_comment">
                             <div class="media post_author mt_60">
                                 <div class="media-left">
-                                    <img class="rounded-circle" src="{{$comment->user->avatar}}" alt="">
+                                    <img class="rounded-circle" src="{{ $comment->user->avatar }}" alt="">
                                     <a href="#" class="replay"><i class="ti-share"></i></a>
                                 </div>
                                 <div class="media-body">
@@ -100,7 +101,8 @@
                                                 </div>
                                                 <div class="media-body">
                                                     <h5 class=" t_color3 f_size_18 f_500">{{ $reply->user->name }}</h5>
-                                                    <h6 class=" f_size_15 f_400 mb_20">{{ $reply->created_at->format('d F, Y') }}</h6>
+                                                    <h6 class=" f_size_15 f_400 mb_20">
+                                                        {{ $reply->created_at->format('d F, Y') }}</h6>
                                                     <p>
                                                         {{ $reply->body }}
                                                     </p>
@@ -111,7 +113,7 @@
                                 @endif
                             </ul>
                         </li>
-                        @empty
+                    @empty
                         <li class="post_comment text-center my-4">
                             @__('comments.not-found')
                         </li>

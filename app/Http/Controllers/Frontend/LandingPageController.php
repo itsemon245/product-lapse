@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Requests\LandingPageRequest;
+use App\Http\Requests\PackageRequest;
 use App\Models\Contact;
 use App\Models\LandingPage;
+use App\Models\Package;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -58,45 +60,30 @@ class LandingPageController extends Controller
             'caption_en' => 'required',
             'caption_ar' => 'required',
         ]);
+
         $old = LandingPage::find($id);
-
         $imagePath = $old->about_us->image;
+        $image = $request->file('image');
 
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('img'), $imageName);
+        $about_us = [
+            'image' => $image ? 'img/' . time() . '_' . $image->getClientOriginalName() : $imagePath,
+            'caption' => [
+                'en' => $validatedData['caption_en'],
+                'ar' => $validatedData['caption_ar'],
+            ],
+        ];
 
-            $about_us = [
-                'image' => 'img/' . $imageName,
-                'caption' => [
-                    'en' => $validatedData['caption_en'],
-                    'ar' => $validatedData['caption_ar'],
-                ],
-            ];
-
-            $old->update([
-                'about_us' => $about_us,
-            ]);
-
-        } else {
-            $about_us = [
-                'image' => $imagePath,
-                'caption' => [
-                    'en' => $validatedData['caption_en'],
-                    'ar' => $validatedData['caption_ar'],
-                ],
-            ];
-
-            $old->update([
-                'about_us' => $about_us,
-            ]);
+        if ($image) {
+            $image->move(public_path('img'), $about_us['image']);
         }
+
+        $old->update(['about_us' => $about_us]);
 
         notify()->success(__('notify/success.update'));
 
         return redirect()->route('edit.about_us');
     }
+
 
     public function editIntro()
     {
@@ -114,58 +101,42 @@ class LandingPageController extends Controller
             'caption_ar' => 'required',
             'button_en' => 'required',
             'button_ar' => 'required',
+            'package_en' => 'required',
+            'package_ar' => 'required',
         ]);
 
         $old = LandingPage::find($id);
-
         $imagePath = $old->about_us->image;
+        $image = $request->file('image');
 
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('img'), $imageName);
+        $intro = [
+            'image' => $image ? 'img/' . time() . '_' . $image->getClientOriginalName() : $imagePath,
+            'title' => [
+                'en' => $validatedData['title_en'],
+                'ar' => $validatedData['title_ar'],
+            ],
+            'caption' => [
+                'en' => $validatedData['caption_en'],
+                'ar' => $validatedData['caption_ar'],
+            ],
+            'button' => [
+                'en' => $validatedData['button_en'],
+                'ar' => $validatedData['button_ar'],
+            ],
 
-            $intro = [
-                'image' => 'img/' . $imageName,
-                'title' => [
-                    'en' => $validatedData['title_en'],
-                    'ar' => $validatedData['title_ar'],
-                ],
-                'caption' => [
-                    'en' => $validatedData['caption_en'],
-                    'ar' => $validatedData['caption_ar'],
-                ],
-                'button' => [
-                    'en' => $validatedData['button_en'],
-                    'ar' => $validatedData['button_ar'],
-                ],
-            ];
+        ];
 
-            $old->update([
-                'home' => $intro,
-            ]);
-
-        } else {
-            $intro = [
-                'image' => $imagePath,
-                'title' => [
-                    'en' => $validatedData['title_en'],
-                    'ar' => $validatedData['title_ar'],
-                ],
-                'caption' => [
-                    'en' => $validatedData['caption_en'],
-                    'ar' => $validatedData['caption_ar'],
-                ],
-                'button' => [
-                    'en' => $validatedData['button_en'],
-                    'ar' => $validatedData['button_ar'],
-                ],
-            ];
-
-            $old->update([
-                'home' => $intro,
-            ]);
+        if ($image) {
+            $image->move(public_path('img'), $intro['image']);
         }
+
+        $old->update([
+            'home' => $intro,
+            'package' => [
+                'en' => $validatedData['package_en'],
+                'ar' => $validatedData['package_ar'],
+            ],
+        ]);
 
         notify()->success(__('notify/success.update'));
 
@@ -189,4 +160,47 @@ class LandingPageController extends Controller
 
         return redirect()->route('edit.contact.us');
     }
+
+    public function editPackage(int $id)
+    {
+        $package = Package::find($id);
+
+        return view('edit-package', compact('package'));
+    }
+
+
+
+    public function updatePackage(PackageRequest $request, int $id)
+    {
+
+        $package = Package::find($id);
+
+        $package->update([
+            'owner_id' => ownerId(),
+            'name' => [
+                'en' => $request->input('name_en'),
+                'ar' => $request->input('name_ar'),
+            ],
+            'price' => $request->input('price'),
+            'product_limit' => [
+                'en' => $request->input('product_limit_en'),
+                'ar' => $request->input('product_limit_ar'),
+            ],
+            'validity' => [
+                'en' => $request->input('validity_en'),
+                'ar' => $request->input('validity_ar'),
+            ],
+            'features' => [
+                'en' => $request->input('feature_en'),
+                'ar' => $request->input('feature_ar'),
+            ],
+            'is_popular' => $request->has('is_popular') ? true : false,
+        ]);
+
+        notify()->success(__('notify/success.update'));
+
+        return redirect()->route('edit.package', $id);
+
+    }
+
 }

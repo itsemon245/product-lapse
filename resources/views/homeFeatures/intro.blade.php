@@ -53,6 +53,18 @@
                                 autofocus />
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="form-group text_box col-lg-6 col-md-6">
+                            <x-input label="Package Caption (English)" id="package_en" type="text"
+                                placeholder="Enter Package Caption In English" name="package_en" :value="$info->package->en" required
+                                autofocus />
+                        </div>
+                        <div class="form-group text_box col-lg-6 col-md-6">
+                            <x-input label="Package Caption (Arabic)" id="package_ar" type="text"
+                                placeholder="Enter Package Caption In Arabic" name="package_ar" :value="$info->package->ar" required
+                                autofocus />
+                        </div>
+                    </div>
                 </div>
 
                 <div class="d-flex align-items-center text-center gap-2">

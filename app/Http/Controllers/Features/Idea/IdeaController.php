@@ -55,7 +55,7 @@ class IdeaController extends Controller
      */
     public function show(Idea $idea)
     {
-        $idea->load(['comments', 'comments.user', 'comments.replies']);
+        $idea->loadComments();
         $comments = $idea->comments;
         return view('features.idea.partials.show', compact('idea', 'comments'));
     }
@@ -66,7 +66,6 @@ class IdeaController extends Controller
     public function edit(Idea $idea)
     {
         $priorities = Select::of('idea')->type('priority')->get();
-
         return view('features.idea.partials.edit', compact('idea', 'priorities'));
     }
 

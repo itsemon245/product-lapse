@@ -8,7 +8,7 @@
     </x-slot:breadcrumb>
 
     <x-slot:search>
-        <form method="GET" hx-get="{{ route('change.search') }}" hx-trigger="submit" hx-target="#search-results" hx-select="#search-results" class="search-form input-group">
+        <form method="GET" hx-get="{{ route('search.certificate') }}" hx-trigger="submit" hx-target="#search-results" hx-select="#search-results" class="search-form input-group">
             <input type="hidden" name="columns[]" value="name">
             <input type="hidden" name="columns[]" value="status">
             <input type="hidden" name="model" value="certificate">
@@ -64,7 +64,7 @@
                                     <div class="like-btn">
                                         <form action="{{ route('certificate.cancel', $certificate) }}" method="POST">
                                             @csrf
-                                            <x-btn-icons type="submit" class="btn" value="<i class='ti-close'></i>" />
+                                            <x-btn-icons type="submit" class="btn {{ $certificate->status == 1 ? 'd-none' : '' }}" value="<i class='ti-close'></i>" />
                                         </form>
                                     </div>
                                 </div>

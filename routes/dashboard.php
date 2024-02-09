@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/', [ DashboardController::class, 'index' ])->name('dashboard');
 
 require __DIR__ . '/support.php';
 require __DIR__ . '/report.php';
@@ -27,3 +27,4 @@ require __DIR__ . '/team.php';
 require __DIR__ . '/certificate.php';
 require __DIR__ . '/faqs.php';
 require __DIR__ . '/features.php';
+require __DIR__ . '/comment.php';

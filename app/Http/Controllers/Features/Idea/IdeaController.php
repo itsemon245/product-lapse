@@ -53,7 +53,9 @@ class IdeaController extends Controller
      */
     public function show(Idea $idea)
     {
-        return view('features.idea.partials.show', compact('idea'));
+        $idea->load(['comments', 'comments.user', 'comments.replies']);
+        $comments = $idea->comments;
+        return view('features.idea.partials.show', compact('idea', 'comments'));
     }
 
     /**

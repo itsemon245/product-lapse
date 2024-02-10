@@ -4,7 +4,7 @@
         <i class="ti-bell"></i><span class="notifi-num">{{ count(auth()->user()->notifications) }}</span>
     </a>
     <ul class="dropdown-menu">
-        @foreach (auth()->user()->notifications as $notification)
+        @forelse (auth()->user()->notifications as $notification)
         <li class="nav-item {{ $notification->read_at == null ? 'bg-light' : '' }}">
             @php
                 $user = App\Models\User::with('image')->find($notification->data['owner_id']);
@@ -26,7 +26,9 @@
                 </div>
             </a>
         </li>
-        @endforeach
-        <li class="nav-item text-center"><a href="#" class="nav-link">View all</a></li>
+        @empty
+            <img style="opacity: .5;" src="{{ asset('img/not-found.png') }}" alt="">
+        @endforelse
+        <li class="nav-item text-center {{ count(auth()->user()->notifications) > 0 ? '' : 'd-none' }} "><a href="#" class="nav-link ">@__('navigation.notifications.view')</a></li>  
     </ul>
 </li>

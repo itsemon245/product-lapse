@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasCreator;
 use App\Traits\HasProducts;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Idea extends Model
 {
-    use HasFactory, HasProducts;
+    use HasFactory, HasProducts, HasCreator;
     protected $guarded = [  ];
 
     public function owner()

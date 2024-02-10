@@ -1,4 +1,14 @@
 @extends('layouts.subscriber.app', ['title' => @__('feature/delivery.show')])
+@push('styles')
+<style>
+    .password-container {
+      position: relative;
+    }
+    .toggle-password {
+      cursor: pointer;
+    }
+  </style>
+@endpush
 @section('main')
     <x-feature.show>
         <x-slot:breadcrumb>
@@ -20,6 +30,17 @@
                             <p class="f_400 mb-30 text-font">
                                 {{ \Carbon\Carbon::parse($delivery->created_at)->format('l, j F Y') }}</p>
                         </div>
+                        <div class="col-md-6">
+                            <h6 class="title2">Username</h6>
+                            <p class="f_400 mb-30 text-font">{{ $delivery->username }}</p>
+                        </div>
+                        <div class="col-md-6" class="password-container">
+                            <h6 class="title2">Password</h6>
+                            <p id="password" class="f_400 mb-30 text-font">
+                               ******************
+                            <span class="toggle-password" onclick="togglePasswordVisibility()"><button href="#" class="btn-bg-1 p-1 rounded"><i class="ti-eye"></i>Show</button></span>
+                            </p>
+                        </div>
                         <div class="col-md-12">
                             <h6 class="title2">Delivery items</h6>
                             <p class="f_400 mb-30 text-font">
@@ -36,9 +57,9 @@
                 <div class="blog-sidebar box-sidebar">
                     <div class="widget sidebar_widget widget_recent_post mt_60">
                         <div class="media post_author mt_60">
-                            <img class="rounded-circle" src="img/profile1.png" alt="">
+                            <img class="rounded-circle" src="{{ $creator->image->url ?? asset('img/profile1.png') }}" alt="">
                             <div class="media-body">
-                                <h5 class=" t_color3 f_size_18 f_500">Ahmed Mahmoud</h5>
+                                <h5 class=" t_color3 f_size_18 f_500">{{ $creator->name }}</h5>
                             </div>
                         </div>
                         <div class="row">
@@ -98,3 +119,19 @@
         </x-slot:writeComment>
     </x-feature.show>
 @endsection
+<script>
+    var password = "{{ $delivery->password }}"; // Replace with your actual password
+    
+    function togglePasswordVisibility() {
+      var passwordField = document.getElementById("password");
+      var toggleButton = document.querySelector(".toggle-password");
+  
+      if (passwordField.tagName === "P") {
+        passwordField.innerHTML = password;
+        toggleButton.textContent = "Hide";
+      } else {
+        passwordField.innerHTML = "**********";
+        toggleButton.textContent = "Show";
+      }
+    }
+  </script>

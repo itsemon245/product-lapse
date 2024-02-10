@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('owner_id');
+            $table->unsignedBigInteger('owner_id')->nullable();
             $table->foreign('owner_id')->references('id')->on('users')->cascadeOnDelete();
-            $table->unsignedBigInteger('creator_id')->nullable();
+            $table->unsignedBigInteger('creator_id');
             $table->foreign('creator_id')->references('id')->on('users')->cascadeOnDelete();
             $table->string('name');
             $table->string('type')->comment('Select Element');

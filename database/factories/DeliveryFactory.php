@@ -28,8 +28,10 @@ class DeliveryFactory extends Factory
             'username' => str(fake()->name)->slug(),
             'items' => fake()->text,
             'link' => fake()->url,
-            'password' => fake()->text,
-            'administrator' => fake()->text,
+            'password' => fake()->lastName,
+            'administrator' => function(){
+                return User::inRandomOrder()->first()->id;
+            },
         ];
     }
 }

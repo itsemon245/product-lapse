@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Features\Delivery;
 
-use App\Http\Controllers\Controller;
-
-use App\Http\Requests\DeliveryRequest;
-use App\Models\Product;
-use App\Http\Requests\SearchRequest;
-use App\Models\Hello;
-use App\Services\SearchService;
 use Exception;
+
+use App\Models\User;
+use App\Models\Hello;
+use App\Models\Product;
 use App\Models\Delivery;
 use Illuminate\Http\Request;
+use App\Services\SearchService;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\SearchRequest;
+use App\Http\Requests\DeliveryRequest;
 
 class DeliveryController extends Controller
 {
@@ -20,7 +21,7 @@ class DeliveryController extends Controller
      */
     public function index()
     {
-        $deliveries = Product::find(productId())->deliveries()->paginate(10);
+        $deliveries = Delivery::find(productId())->paginate(10);
         return view('features.delivery.index', compact('deliveries'));
     }
 
@@ -29,7 +30,8 @@ class DeliveryController extends Controller
      */
     public function create()
     {
-        return view('features.delivery.partials.create');
+        $users = User::get();
+        return view('features.delivery.partials.create', compact('users'));
     }
 
     /**
@@ -38,7 +40,7 @@ class DeliveryController extends Controller
     public function store(DeliveryRequest $request)
     {
         $data = $request->except('_token', 'add_attachments');
-        $data['owner_id'] = ownerId();
+        $data['creator_id'] = ownerId();
         try {
             Delivery::create($data);
             notify()->success(__('Created successfully!'));
@@ -54,7 +56,8 @@ class DeliveryController extends Controller
      */
     public function show(Delivery $delivery)
     {
-        return view('features.delivery.partials.show', compact('delivery'));
+        $creator= User::with('image')->find($delivery->creator_id)->first();
+        return view('features.delivery.partials.show', compact('delivery', 'creator'));
     }
 
     /**
@@ -62,7 +65,8 @@ class DeliveryController extends Controller
      */
     public function edit(Delivery $delivery)
     {
-        return view('features.delivery.partials.edit', compact('delivery'));
+        $users = User::get();
+        return view('features.delivery.partials.edit', compact('delivery', 'users'));
     }
 
     /**

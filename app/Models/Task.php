@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasCreator;
 use App\Traits\HasFile;
 use App\Traits\HasProducts;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Task extends Model
 {
-    use HasFactory, HasFile, HasProducts;
+    use HasFactory, HasFile, HasProducts, HasCreator;
     protected $guarded = [];
 
     protected $casts = [

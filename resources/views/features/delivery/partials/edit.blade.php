@@ -17,16 +17,17 @@
                             type="text" placeholder="{{ __('feature/delivery.placeholder.name') }}" name="name"
                             value="{{ $delivery->name }}" required autofocus />
                     </div>
+                    <div class="form-group text_box col-lg-6 col-md-6">
+                        <x-input id="link" label="{{ __('feature/delivery.label.link') }}" class="block mt-1 w-full"
+                            type="text" placeholder="{{ __('feature/delivery.placeholder.link') }}" name="link"
+                            value="{{ $delivery->link }}" required autofocus />
+                    </div>
                     <div class="form-group text_box col-12">
                         <x-textarea label="{{ __('feature/delivery.label.items') }}" name="items"
                             placeholder="{{ __('feature/delivery.placeholder.items') }}" required
                             autfocus>{{ $delivery->items }}</x-textarea>
                     </div>
-                    <div class="form-group text_box col-lg-12 col-md-6">
-                        <x-input id="link" label="{{ __('feature/delivery.label.link') }}" class="block mt-1 w-full"
-                            type="text" placeholder="{{ __('feature/delivery.placeholder.link') }}" name="link"
-                            value="{{ $delivery->link }}" required autofocus />
-                    </div>
+                
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-input id="username" label="{{ __('feature/delivery.label.user') }}" class="block mt-1 w-full"
                             type="text" placeholder="{{ __('feature/delivery.placeholder.user') }}" name="username"
@@ -39,13 +40,22 @@
                             value="{{ $delivery->password }}" required autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-input id="administrator" label="{{ __('feature/delivery.label.administrator') }}"
-                            class="block mt-1 w-full" type="text"
-                            placeholder="{{ __('feature/delivery.placeholder.administrator') }}" name="administrator"
-                            value="{{ $delivery->administrator }}" required autofocus />
+                        <x-select-input label="{{ __('feature/delivery.label.administrator') }}" id="administrator"
+                        placeholder="{{ __('feature/delivery.placeholder.administrator') }}" name="administrator" required autofocus>
+                        @if ($users)
+                            @forelse ($users as $user)
+                            {{-- {{ dd($delivery) }} --}}
+                                <option value="{{ $user->id }}" {{ $delivery->administrator == $user->id ? 'Selected' : '' }}>
+                                    {{ $user->name }}
+                                </option>
+                            @empty
+                                <option disabled>No category available</option>
+                            @endforelse
+                        @endif
+                    </x-select-input>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-attach label="{{ __('feature/delivery.label.attachments') }}" name="add_attachments" />
+                        <x-attach label="{{ __('feature/delivery.label.attachments') }}" name="add_attachments[]" />
                     </div>
                 </div>
 

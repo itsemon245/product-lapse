@@ -4,4 +4,5 @@ return [
         //comments part
         'comments' => 'تعليقات',
         'write-comment' => 'اكتب تعليقا',
+        'send' => 'يرسل',
 ];

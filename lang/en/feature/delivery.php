@@ -8,9 +8,8 @@ return [
 
     'label' => [
         'name' => 'Delivery name',
-        'items' => 'Delivery items',
         'link' => 'link',
-        'attach' => 'Attach file',
+        'items' => 'Delivery items',
         'user' => 'Username',
         'password' => 'Password',
         'administrator' => 'Administrator',
@@ -18,8 +17,8 @@ return [
     ],
     'placeholder' => [
         'name' => 'Delivery name',
-        'items' => 'Delivery items',
         'link' => 'https://',
+        'items' => 'Delivery items',
         'user' => 'Username',
         'password' => 'Password',
         'administrator' => 'Administrator',
@@ -30,6 +29,8 @@ return [
     //details page
     'link' => 'Delivery link',
     'date' => 'Delivery date',
+    'user' => 'Username',
+    'password' => 'Password',
     'items' => 'Delivery items',
     'attachments' => 'Attachments',
     'title-2' => 'Title',
@@ -37,11 +38,13 @@ return [
     'administrator' => 'Delivery administrator',
     'agree' => 'Agree',
     'disagree' => 'Disagree',
+    'show-btn' => 'Show',
 
     //Edit page
     'edit' => 'Edit Delivery',
 
     //show page
     'show' => 'Show Delivery',
+    
 
 ];

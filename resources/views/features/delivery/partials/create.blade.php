@@ -51,7 +51,7 @@
                     </x-select-input>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-attach label="Add File" class="block mt-1 w-full" name="add_attachments[]" />
+                        <x-attach label="{{ __('feature/delivery.attachments') }}" class="block mt-1 w-full" name="add_attachments[]" />
                     </div>
                 </div>
                 <div class="d-flex align-items-center text-center">

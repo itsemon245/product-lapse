@@ -13,7 +13,7 @@
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-input-label for="title" value="{{ __('feature/change.label.title') }}" />
                         <x-input id="title" class="block mt-1 w-full" type="text"
-                            placeholder="{{ __('feature/change.label.title') }}" name="title" :value="old('title')" required
+                            placeholder="{{ __('feature/change.label.title') }}" name="title" :value="$idea->name ?? old('title')" required
                             autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
@@ -35,7 +35,7 @@
                             placeholder="Choose one" name="priority" required autofocus>
 
                             @forelse ($priorities as $priority)
-                                <option value="{{ $priority->value->{app()->getLocale()} }}">
+                                <option value="{{ $priority->value->{app()->getLocale()} }}" @selected($idea?->priority == $priority->value->en || $idea?->priority == $priority->value->ar)>
                                     {{ $priority->value->{app()->getLocale()} }}
                                 </option>
                             @empty
@@ -60,8 +60,8 @@
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-6">
                         <x-textarea label="{{ __('feature/change.label.details') }}" name="details"
-                            placeholder="{{ __('feature/change.placeholder.details') }}" required autfocus /><x-input-error
-                            :messages="$errors->get('details')" class="mt-2" />
+                            placeholder="{{ __('feature/change.placeholder.details') }}" required
+                            autfocus>{!! $idea->details ?? '' !!}</x-textarea>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-input-label for="administrator" value="{{ __('feature/change.label.administrator') }}" />

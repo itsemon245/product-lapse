@@ -52,7 +52,8 @@
                                 <a href="#" class="button-1 btn-bg-2"><i class="ti-reload"></i>@__('feature/idea.update')</a>
                             </div>
                             <div class="col-12">
-                                <a href="#" class="button-1">@__('feature/idea.change-request')</a>
+                                <a href="{{ route('change.create', ['idea' => $idea->id]) }}"
+                                    class="button-1">@__('feature/idea.change-request')</a>
                             </div>
                             <div class="col-12">
                                 <a href="#" class="button-1" style="background: #6c84ee">@__('feature/idea.task')</a>
@@ -71,66 +72,6 @@
 
             </div>
         </x-slot:profile>
-        <x-slot:comments>
-            <ul class="comment-box list-unstyled mb-0">
-                @if ($comments)
-                    @forelse ($comments as $comment)
-                        <li class="post_comment">
-                            <div class="media post_author mt_60">
-                                <div class="media-left">
-                                    <img class="rounded-circle" src="{{$comment->user->avatar}}" alt="">
-                                    <a href="#" class="replay"><i class="ti-share"></i></a>
-                                </div>
-                                <div class="media-body">
-                                    <h5 class=" t_color3 f_size_18 f_500">{{ $comment->user->name }}</h5>
-                                    <h6 class=" f_size_15 f_400 mb_20">{{ $comment->created_at->format('d F, Y') }}</h6>
-                                    <p>
-                                        {{ $comment->body }}
-                                    </p>
-                                </div>
-                            </div>
-                            <ul class="reply-comment list-unstyled">
-                                @if ($comment->replies)
-                                    @foreach ($comment->replies as $reply)
-                                        <li class="post-comment">
-                                            <div class="media post_author comment-content">
-                                                <div class="media-left">
-                                                    <img class="rounded-circle" src="img/profile2.png" alt="">
-                                                    <a href="#" class="replay"><i class="ti-share"></i></a>
-                                                </div>
-                                                <div class="media-body">
-                                                    <h5 class=" t_color3 f_size_18 f_500">{{ $reply->user->name }}</h5>
-                                                    <h6 class=" f_size_15 f_400 mb_20">{{ $reply->created_at->format('d F, Y') }}</h6>
-                                                    <p>
-                                                        {{ $reply->body }}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    @endforeach
-                                @endif
-                            </ul>
-                        </li>
-                        @empty
-                        <li class="post_comment text-center my-4">
-                            @__('comments.not-found')
-                        </li>
-                    @endforelse
-                @endif
-            </ul>
-        </x-slot:comments>
-        <x-slot:writeComment>
-            <form class="get_quote_form row" action="{{ route('comment.store') }}" method="post">
-                @csrf
-                <div class="col-md-12 form-group">
-                    <input type="hidden" name="commentable_type" value="idea">
-                    <input type="hidden" name="commentable_id" value="{{ $idea->id }}">
-                    <textarea class="form-control message" name="comment" placeholder="Write your comment here .."></textarea>
-                </div>
-                <div class="col-md-12">
-                    <button class="btn_hover agency_banner_btn btn-bg" type="submit">Send</button>
-                </div>
-            </form>
-        </x-slot:writeComment>
+        <x-comments :model="$idea" :comments="$idea->comments" />
     </x-feature.show>
 @endsection

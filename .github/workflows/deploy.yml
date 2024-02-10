@@ -1,0 +1,31 @@
+name: Deploy on Production
+on: [push]
+jobs:
+  Deploy_to_production_server:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+    - name: Deploy to QBSOFT
+      uses: appleboy/ssh-action@v0.1.10
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        command_timeout: 30m
+        script: |
+          cd ${{secrets.PROJECT_DIR}}
+          export GIT_TRACE_PACKET=1
+          export GIT_TRACE=1
+          export GIT_CURL_VERBOSE=1
+          git stash -u
+          git pull origin main
+          composer update
+          php artisan optimize:clear
+          php artisan event:cache
+          php artisan route:cache
+          php artisan view:cache
+          php artisan migrate
+
+
+

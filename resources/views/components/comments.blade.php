@@ -1,0 +1,25 @@
+@props(['comments' => []])
+<x-slot:comments>
+    <ul class="comment-box list-unstyled mb-0">
+        @if ($comments)
+            @include('recursive.comments', ['comments' => $comments, 'model' => $model])
+        @else
+            <li class="post_comment text-center my-4">
+                @__('comments.not-found')
+            </li>
+        @endif
+    </ul>
+</x-slot:comments>
+<x-slot:writeComment>
+    <form class="get_quote_form row" action="{{ route('comment.store') }}" method="post">
+        @csrf
+        <div class="col-md-12 form-group">
+            <input type="hidden" name="commentable_type" value="{{ get_class($model) }}">
+            <input type="hidden" name="commentable_id" value="{{ $model->id }}">
+            <textarea class="form-control message" name="comment" placeholder="Write your comment here .."></textarea>
+        </div>
+        <div class="col-md-12">
+            <button class="btn_hover agency_banner_btn btn-bg" type="submit">Send</button>
+        </div>
+    </form>
+</x-slot:writeComment>

@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Features\Task;
 
 use App\Models\Task;
-use App\Models\Product;
+use App\Models\User;
 use App\Models\Select;
+use App\Models\Product;
 use App\Services\SearchService;
 use App\Http\Requests\TaskRequest;
 use App\Http\Controllers\Controller;
-use Illuminate\Database\QueryException;
 use App\Http\Requests\SearchRequest;
+use Illuminate\Database\QueryException;
 
 class TaskController extends Controller
 {
@@ -73,7 +74,8 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        return view('features.task.partials.show', compact('task'));
+        $user = User::with('image')->find($task->creator_id);
+        return view('features.task.partials.show', compact('task', 'user'));
 
     }
 

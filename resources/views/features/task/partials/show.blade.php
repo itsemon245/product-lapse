@@ -55,13 +55,13 @@
                 <div class="blog-sidebar box-sidebar">
                     <div class="widget sidebar_widget widget_recent_post mt_60">
                         <div class="media post_author mt_60">
-                            <img class="rounded-circle" src="img/profile1.png" alt="">
+                            <img class="rounded-circle" src="{{ $user->image->url ?? asset('img/profile1.png') }}" alt="">
                             <div class="media-body">
                                 <h5 class=" t_color3 f_size_18 f_500">
                                     {{ $task->owner->first_name }} {{ $task->owner->last_name }}</h5>
                             </div>
                         </div>
-                        <h6 class="title2 the-priority">@__('feature/task.added') : <span>Mohamed Ali</span></h6>
+                        <h6 class="title2 the-priority">@__('feature/task.added') : <span>{{ $user->name }}</span></h6>
                         <div class="extra extra2 extra3">
                             <div class="media post_author" style="padding-top: 0">
                                 <div class="checkbox remember">

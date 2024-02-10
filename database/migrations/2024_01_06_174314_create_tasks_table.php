@@ -18,8 +18,8 @@ return new class extends Migration {
             $table->unsignedBigInteger('creator_id');
             $table->foreign('creator_id')->references('id')->on('users')->cascadeOnDelete();
             $table->string('name');
-            $table->string('category', 255);
-            $table->string('status', 255);
+            $table->longText('category');
+            $table->longText('status');
             $table->integer('choose_mvp')->nullable();
             $table->longText('details');
             $table->longText('steps');

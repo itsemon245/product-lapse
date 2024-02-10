@@ -96,6 +96,36 @@ class SelectSeeder extends Seeder
         ]);
         Select::create([
             'owner_id' => 1,
+            'model_type' => Feature::TASK->value,
+            'type' => SelectType::CATEGORY->value,
+            'color' => "#fff",
+            'value' => [
+                'en'=> 'Working on',
+                'ar'=> 'يعمل على',
+            ],
+        ]);
+        Select::create([
+            'owner_id' => 1,
+            'model_type' => Feature::TASK->value,
+            'type' => SelectType::CATEGORY->value,
+            'color' => "#fff",
+            'value' => [
+                'en'=> 'Pending',
+                'ar'=> 'قيد الانتظار',
+            ],
+        ]);
+        Select::create([
+            'owner_id' => 1,
+            'model_type' => Feature::TASK->value,
+            'type' => SelectType::CATEGORY->value,
+            'color' => "#fff",
+            'value' => [
+                'en'=> 'Stopped',
+                'ar'=> 'توقفت',
+            ],
+        ]);
+        Select::create([
+            'owner_id' => 1,
             'model_type' => Feature::CHANGE->value,
             'type' => SelectType::STATUS->value,
             'color' => "#fff",

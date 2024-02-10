@@ -1,4 +1,4 @@
-@extends('layouts.feature.index', ['title' => @__('feature/task.show')])
+@extends('layouts.subscriber.app', ['title' => @__('feature/task.show')])
 @section('main')
     <x-feature.show>
         <x-slot:breadcrumb>
@@ -131,7 +131,7 @@
                 <div class="col-md-12 form-group">
                     <textarea class="form-control message" placeholder="Write your comment here .."></textarea>
                 </div>
-                <div class="col-md-12"><button class="btn_hover agency_banner_btn btn-bg" type="submit">Send</button></div>
+                <div class="col-md-12"><button class="btn_hover agency_banner_btn btn-bg" type="submit">@__('feature/task.send')</button></div>
             </form>
         </x-slot:writeComment>
     </x-feature.show>

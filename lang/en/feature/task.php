@@ -42,6 +42,7 @@ return [
     'added' => 'Added by',
     'working' => 'Working on',
     'update' => 'Update',
+    'send' => 'Send',
 
     //Edit page
     'edit' => 'Edit Task',

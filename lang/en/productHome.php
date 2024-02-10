@@ -1,7 +1,6 @@
 <?php 
 
 return [
-    //
     'title' => 'Product',
     'choose' => 'Choose Products..',
     'edit' => 'Edit product',

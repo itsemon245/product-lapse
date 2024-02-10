@@ -37,7 +37,6 @@ class TaskController extends Controller
     {
         $categories = Select::of('task')->type('category')->get();
         $statuses = Select::of('task')->type('status')->get();
-
         return view('features.task.partials.create', compact('categories', 'statuses'));
     }
 
@@ -48,7 +47,7 @@ class TaskController extends Controller
     public function store(TaskRequest $request)
     {
         $task = Task::create([
-            'owner_id' => ownerId(),
+            'creator_id' => ownerId(),
             'name' => $request->name,
             'category' => $request->category,
             'status' => $request->status,
@@ -96,7 +95,6 @@ class TaskController extends Controller
 
         $categories = Select::of('task')->type('category')->get();
         $statuses = Select::of('task')->type('status')->get();
-
         return view('features.task.partials.edit', compact('task', 'categories', 'statuses'));
 
     }

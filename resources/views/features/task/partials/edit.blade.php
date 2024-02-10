@@ -10,8 +10,8 @@
             <h2 class=" f_600 f_size_24 t_color3 mb_40">@__('feature/task.edit')</h2>
             <form action="{{ route('task.update', $task) }}" method="POST" class="login-form sign-in-form"
                 enctype="multipart/form-data">
-                @method('PUT')
                 @csrf
+                @method('PUT')
                 <div class="row">
                     <div class="form-group text_box col-lg-12 col-md-12">
                         <x-input-label for="name" value="{{ __('feature/task.label.name') }}" />

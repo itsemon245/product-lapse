@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Features\Change;
 
 use App\Models\Idea;
+use App\Models\User;
 use App\Models\Change;
 use App\Models\Select;
 use App\Models\Product;
@@ -33,7 +34,6 @@ class ChangeController extends Controller
         $priorities = Select::of('change')->type('priority')->get();
         $statuses = Select::of('change')->type('status')->get();
         $classifications = Select::of('change')->type('classification')->get();
-
         return view('features.change.partials.create', compact('priorities', 'statuses', 'classifications', 'idea'));
     }
 
@@ -43,7 +43,7 @@ class ChangeController extends Controller
     public function store(ChangeRequest $request)
     {
         $data = $request->except('_token');
-        $data['owner_id'] = ownerId();
+        $data['creator_id'] = ownerId();
 
         $change = Change::create($data);
 
@@ -61,7 +61,10 @@ class ChangeController extends Controller
      */
     public function show(Change $change)
     {
-        return view('features.change.partials.show', compact('change'));
+        $user = User::with('image')->find($change->creator_id);
+        $change->loadComments();
+        $comments = $change->comments;
+        return view('features.change.partials.show', compact('change', 'user', 'comments'));
     }
 
     /**
@@ -82,7 +85,6 @@ class ChangeController extends Controller
     public function update(ChangeRequest $request, Change $change)
     {
         $data = $request->except('_token', '_method');
-        $data['owner_id'] = ownerId();
         $change->update($data);
 
         notify()->success(__('Update success!'));

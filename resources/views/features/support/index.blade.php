@@ -24,22 +24,7 @@
         </x-slot:actions>
         <x-slot:filter>
             <h5>@__('feature/support.showing')</h5>
-            <form method="get" action="#">
-                <select class="selectpickers selectpickers2" style="display: none;">
-                    <option value="">All</option>
-                    <option value="">working on</option>
-                    <option value="">panding</option>
-                    <option value="">stopped</option>
-                </select>
-                <div class="nice-select selectpickers selectpickers2" tabindex="0"><span class="current">All</span>
-                    <ul class="list">
-                        <li data-value="" class="option selected focus">All</li>
-                        <li data-value="" class="option">working on</li>
-                        <li data-value="" class="option">panding</li>
-                        <li data-value="" class="option">stopped</li>
-                    </ul>
-                </div>
-            </form>
+            <x-filter :route="route('support.search')" :columns="['status']" model="support" :options="$statuses" />
         </x-slot:filter>
 
         <x-slot:list>
@@ -51,7 +36,7 @@
                             <div class="joblisting_text">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell">
-                                        <h4><a href="{{ route('support.show', ['support' => base64_encode($support->id)]) }}"
+                                        <h4><a href="{{ route('support.show', $support) }}"
                                                 class="f_500 t_color3">{{ $support->name }}</a>
                                         </h4>
                                         <ul class="list-unstyled">

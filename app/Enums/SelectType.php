@@ -11,6 +11,7 @@ enum SelectType: string
     case ROLE = 'role';
     case TYPE = 'type';
     case SUBMISSION = 'submission';
+    case TICKET = 'ticket';
 
 }
 

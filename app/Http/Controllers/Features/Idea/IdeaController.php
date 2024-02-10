@@ -41,7 +41,7 @@ class IdeaController extends Controller
     public function store(IdeaRequest $request)
     {
         $data = $request->except('_token');
-        $data['owner_id'] = ownerId();
+        $data['creator_id'] = ownerId();
         $idea = Idea::create($data);
         $request->session()->flash(
             'massage', 'Store success'

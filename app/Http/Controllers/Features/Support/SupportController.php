@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Features\Support;
 
-use App\Http\Requests\SupportRequest;
-use App\Models\Support;
-use App\Models\Product;
+use App\Models\User;
 use App\Models\Select;
+use App\Models\Product;
+use App\Models\Support;
 use Illuminate\Http\Request;
 use App\Services\SearchService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SearchRequest;
+use App\Http\Requests\SupportRequest;
 
 class SupportController extends Controller
 {
@@ -19,7 +20,8 @@ class SupportController extends Controller
     public function index()
     {
         $supports = Product::find(productId())->supports;
-        return view('features.support.index', compact('supports'));
+        $statuses = Select::of('support')->type('ticket')->get();
+        return view('features.support.index', compact('supports', 'statuses'));
     }
 
 
@@ -29,7 +31,7 @@ class SupportController extends Controller
     public function create()
     {
         $priorities = Select::of('support')->type('priority')->get();
-        $statuses = Select::of('support')->type('status')->get();
+        $statuses = Select::of('support')->type('ticket')->get();
         $classifications = Select::of('support')->type('classification')->get();
 
         return view('features.support.partials.create', compact('priorities', 'statuses', 'classifications'));
@@ -41,7 +43,7 @@ class SupportController extends Controller
     public function store(SupportRequest $request)
     {
         $data = $request->except('_token');
-        $data['owner_id'] = auth()->id();
+        $data['creator_id'] = auth()->id();
 
         Support::create($data);
 
@@ -54,7 +56,11 @@ class SupportController extends Controller
      */
     public function show(Support $support)
     {
-        return view('features.support.partials.show', compact('support'));
+        $user = User::with('image')->find($support->creator_id);
+        $support->loadComments();
+        $comments = $support->comments;
+        // dd($user);
+        return view('features.support.partials.show', compact('user', 'support', 'comments'));
     }
 
     /**
@@ -98,6 +104,7 @@ class SupportController extends Controller
     public function search(SearchRequest $request)
     {
         $supports = SearchService::items($request);
-        return view('features.support.index', compact('supports'));
+        $statuses = Select::of('support')->type('ticket')->get();
+        return view('features.support.index', compact('supports', 'statuses'));
     }
 }

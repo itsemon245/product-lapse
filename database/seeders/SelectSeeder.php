@@ -214,5 +214,145 @@ class SelectSeeder extends Seeder
                 'ar'=> 'يلغي',
             ],
         ]);
+        Select::create([
+            'owner_id' => 1,
+            'model_type' => Feature::SUPPORT->value,
+            'type' => SelectType::PRIORITY->value,
+            'color' => "#fff",
+            'value' => [
+                'en'=> 'Low',
+                'ar'=> 'قليل',
+            ],
+        ]);
+        Select::create([
+            'owner_id' => 1,
+            'model_type' => Feature::SUPPORT->value,
+            'type' => SelectType::PRIORITY->value,
+            'color' => "#fff",
+            'value' => [
+                'en'=> 'Medium',
+                'ar'=> 'واسطة',
+            ],
+        ]);
+        Select::create([
+            'owner_id' => 1,
+            'model_type' => Feature::SUPPORT->value,
+            'type' => SelectType::PRIORITY->value,
+            'color' => "#fff",
+            'value' => [
+                'en'=> 'High',
+                'ar'=> 'عالي',
+            ],
+        ]);
+        Select::create([
+            'owner_id' => 1,
+            'model_type' => Feature::SUPPORT->value,
+            'type' => SelectType::TICKET->value,
+            'color' => "#fff",
+            'value' => [
+                'en'=> 'Start',
+                'ar'=> 'يبدأ',
+            ],
+        ]);
+        Select::create([
+            'owner_id' => 1,
+            'model_type' => Feature::SUPPORT->value,
+            'type' => SelectType::TICKET->value,
+            'color' => "#fff",
+            'value' => [
+                'en'=> 'Not start',
+                'ar'=> 'لا تبدأ',
+            ],
+        ]);
+        Select::create([
+            'owner_id' => 1,
+            'model_type' => Feature::SUPPORT->value,
+            'type' => SelectType::CLASSIFICATION->value,
+            'color' => "#fff",
+            'value' => [
+                'en'=> 'Good',
+                'ar'=> 'جيد',
+            ],
+        ]);
+        Select::create([
+            'owner_id' => 1,
+            'model_type' => Feature::SUPPORT->value,
+            'type' => SelectType::CLASSIFICATION->value,
+            'color' => "#fff",
+            'value' => [
+                'en'=> 'Not bad',
+                'ar'=> 'ليس سيئًا',
+            ],
+        ]);
+        Select::create([
+            'owner_id' => 1,
+            'model_type' => Feature::SUPPORT->value,
+            'type' => SelectType::CLASSIFICATION->value,
+            'color' => "#fff",
+            'value' => [
+                'en'=> 'Best',
+                'ar'=> 'أفضل',
+            ],
+        ]);
+        Select::create([
+            'owner_id' => 1,
+            'model_type' => Feature::CHANGE->value,
+            'type' => SelectType::CLASSIFICATION->value,
+            'color' => "#fff",
+            'value' => [
+                'en'=> 'Good',
+                'ar'=> 'يعمل على',
+            ],
+        ]);
+        Select::create([
+            'owner_id' => 1,
+            'model_type' => Feature::CHANGE->value,
+            'type' => SelectType::CLASSIFICATION->value,
+            'color' => "#fff",
+            'value' => [
+                'en'=> 'Not bad',
+                'ar'=> 'قيد الانتظار',
+            ],
+        ]);
+        Select::create([
+            'owner_id' => 1,
+            'model_type' => Feature::CHANGE->value,
+            'type' => SelectType::CLASSIFICATION->value,
+            'color' => "#fff",
+            'value' => [
+                'en'=> 'Best',
+                'ar'=> 'توقفت',
+            ],
+        ]);
+        Select::create([
+            'owner_id' => 1,
+            'model_type' => Feature::CHANGE->value,
+            'type' => SelectType::PRIORITY->value,
+            'color' => "#fff",
+            'value' => [
+                'en'=> 'Low',
+                'ar'=> 'قليل',
+            ],
+        ]);
+        Select::create([
+            'owner_id' => 1,
+            'model_type' => Feature::CHANGE->value,
+            'type' => SelectType::PRIORITY->value,
+            'color' => "#fff",
+            'value' => [
+                'en'=> 'High',
+                'ar'=> 'عالي',
+            ],
+        ]);
+        Select::create([
+            'owner_id' => 1,
+            'model_type' => Feature::CHANGE->value,
+            'type' => SelectType::PRIORITY->value,
+            'color' => "#fff",
+            'value' => [
+                'en'=> 'Medium',
+                'ar'=> 'واسطة',
+            ],
+        ]);
     }
 }

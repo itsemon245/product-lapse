@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class Idea extends Model
 {
     use HasFactory, HasProducts, HasComments, HasCreator;
-    protected $guarded = [  ];
+    protected $guarded = [];
 
     public function owner()
     {

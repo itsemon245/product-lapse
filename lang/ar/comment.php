@@ -5,4 +5,5 @@ return [
         'comments' => 'تعليقات',
         'write-comment' => 'اكتب تعليقا',
         'send' => 'يرسل',
+        'comment-not-found' => 'لا تعليق هنا...',
 ];

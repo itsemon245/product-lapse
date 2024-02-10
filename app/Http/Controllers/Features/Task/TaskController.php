@@ -75,7 +75,9 @@ class TaskController extends Controller
     public function show(Task $task)
     {
         $user = User::with('image')->find($task->creator_id);
-        return view('features.task.partials.show', compact('task', 'user'));
+        $task->loadComments();
+        $comments = $task->comments;
+        return view('features.task.partials.show', compact('task', 'user', 'comments'));
 
     }
 

@@ -4,9 +4,7 @@
         @if ($comments)
             @include('recursive.comments', ['comments' => $comments, 'model' => $model])
         @else
-            <li class="post_comment text-center my-4">
-                @__('comments.not-found')
-            </li>
+        <li>@__('comment.comment-not-found')</li>
         @endif
     </ul>
 </x-slot:comments>
@@ -19,7 +17,7 @@
             <textarea class="form-control message" name="comment" placeholder="Write your comment here .."></textarea>
         </div>
         <div class="col-md-12">
-            <button class="btn_hover agency_banner_btn btn-bg" type="submit">Send</button>
+            <button class="btn_hover agency_banner_btn btn-bg" type="submit">@__('comment.send')</button>
         </div>
     </form>
 </x-slot:writeComment>

@@ -27,14 +27,14 @@
                                 class="login-form sign-in-form">@csrf
                                 <div class="form-group text_box">
                                     <label class=" text_c f_500">@lang('login.email')</label>
-                                    <input type="text" placeholder="enter email" name="email">
+                                    <input type="text" placeholder="@lang('login.enter-email')" name="email">
                                     @error('email')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="form-group text_box">
                                     <label class=" text_c f_500">@lang('login.password')</label>
-                                    <input type="password" name="password">
+                                    <input type="password" name="password" placeholder="@lang('login.enter-pass')" >
                                     @error('password')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror

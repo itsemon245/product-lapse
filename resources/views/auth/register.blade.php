@@ -5,8 +5,8 @@
         <div class="container">
             <div class="breadcrumb_content text-center">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">@lang('registration.sign_up')</li>
+                    <li class="breadcrumb-item"><a href="#">@__('singup.home')</a></li>
+                    <li class="breadcrumb-item active">@__('singup.singup')</li>
                 </ul>
             </div>
         </div>
@@ -15,63 +15,63 @@
         <div class="container">
             <div class="sign_info">
                 <div class="login_info">
-                    <h2 class=" f_600 f_size_24 t_color3 mb_40">@lang('registration.sign_up')</h2>
+                    <h2 class=" f_600 f_size_24 t_color3 mb_40">@__('singup.singup')</h2>
                     <form method="POST" action="{{ route('register') }}" class="login-form sign-in-form"
                         enctype="multipart/form-data"> @csrf
                         <div class="row">
                             <div class="form-group text_box col-md-6">
-                                <label class=" text_c f_500">@lang('registration.fisrt_name')</label>
-                                <input type="text" placeholder="first name" name="first_name">
+                                <label class=" text_c f_500">@__('singup.label.fname')</label>
+                                <input type="text" placeholder="{{ __('singup.placeholder.fname') }}" name="first_name">
                                 @error('first_name')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
 
                             </div>
                             <div class="form-group text_box col-md-6">
-                                <label class=" text_c f_500">@lang('registration.last_name')</label>
-                                <input type="text" placeholder="last name" name="last_name">
+                                <label class=" text_c f_500">@__('singup.label.lname')</label>
+                                <input type="text" placeholder="{{ __('singup.placeholder.lname') }}" name="last_name">
                                 @error('last_name')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group text_box col-md-6">
-                                <label class=" text_c f_500">@lang('registration.email')</label>
-                                <input type="text" placeholder="Enter Email" name="email">
+                                <label class=" text_c f_500">@__('singup.label.email')</label>
+                                <input type="text" placeholder="{{ __('singup.placeholder.email') }}" name="email">
                                 @error('email')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group text_box col-md-6">
-                                <label class=" text_c f_500">@lang('registration.password')</label>
-                                <input type="password" placeholder="" name="password">
+                                <label class=" text_c f_500">@__('singup.label.password')</label>
+                                <input type="password" placeholder="{{ __('singup.placeholder.email') }}" name="password">
                                 @error('password')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group text_box col-md-6">
-                                <label class=" text_c f_500">@lang('registration.phone')</label>
-                                <input type="text" placeholder="phone">
+                                <label class=" text_c f_500">@__('singup.label.phone')</label>
+                                <input type="text" placeholder="{{ __('singup.placeholder.phone') }}">
                                 @error('phone')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group text_box col-md-6">
-                                <label class=" text_c f_500">@lang('registration.work_place')</label>
-                                <input type="text" placeholder="work place" name="workplace">
+                                <label class=" text_c f_500">@__('singup.label.work-place')</label>
+                                <input type="text" placeholder="{{ __('singup.placeholder.work-place') }}" name="workplace">
                                 @error('workplace')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group text_box col-md-6">
-                                <label class=" text_c f_500">@lang('registration.position')</label>
-                                <input type="text" placeholder="Position" name="position">
+                                <label class=" text_c f_500">@__('singup.label.position')</label>
+                                <input type="text" placeholder="{{ __('singup.placeholder.position') }}" name="position">
                                 @error('position')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group text_box col-md-6">
-                                <label class=" text_c f_500">@lang('registration.promo_code')</label>
-                                <input type="text" placeholder="Promotional code" name="promotional_code">
+                                <label class=" text_c f_500">@__('singup.label.promo-code')</label>
+                                <input type="text" placeholder="{{ __('singup.placeholder.poeition') }}" name="promotional_code">
                                 @error('promotional_code')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -81,20 +81,64 @@
                         <div class="extra extra2 mb_20">
                             <div class="checkbox remember">
                                 <label>
-                                    <input type="checkbox"> Agree on<a href="#" data-toggle="modal"
-                                        data-target="#myModal1">
-                                        @lang('registration.terms')</a>
+                                    <input type="checkbox">
+                                    @__('singup.agree')</a>
                                 </label>
                             </div>
                         </div>
                         <div class="d-flex align-items-center text-center">
                             <button type="submit"
-                                class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">@lang('registration.sign_up')</button>
-                            <button class="btn_hover agency_banner_btn btn-bg btn-bg-grey">@lang('registration.cancel')</button>
+                                class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">@__('singup.singup')</button>
+                            <button class="btn_hover agency_banner_btn btn-bg btn-bg-grey">@__('singup.cancel')</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </section>
+    <!-- The Modal -->
+<div class="modal fade" id="myModal1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">@__('singup.conditions')</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="text-wrap">
+                    <h5>Terms &amp; conditions</h5>
+                    <ul>
+                        <li>It is a long established fact that a reader will be distracted by the readable content of a
+                            page when looking at it has a more-or-less normal distribution</li>
+                        <li>It is a long established fact that a reader will be distracted by the readable content of a
+                            page when looking at it has a more-or-less normal distribution</li>
+                        <li>It is a long established fact that a reader will be distracted by the readable content of a
+                            page when looking at it has a more-or-less normal distribution</li>
+                        <li>It is a long established fact that a reader will be distracted by the readable content of a
+                            page when looking at it has a more-or-less normal distribution</li>
+                    </ul>
+
+                    <h5>Terms &amp; conditions</h5>
+                    <ul>
+                        <li>It is a long established fact that a reader will be distracted by the readable content of a
+                            page when looking at it has a more-or-less normal distribution</li>
+                        <li>It is a long established fact that a reader will be distracted by the readable content of a
+                            page when looking at it has a more-or-less normal distribution</li>
+                        <li>It is a long established fact that a reader will be distracted by the readable content of a
+                            page when looking at it has a more-or-less normal distribution</li>
+                        <li>It is a long established fact that a reader will be distracted by the readable content of a
+                            page when looking at it has a more-or-less normal distribution</li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
 @endsection
+

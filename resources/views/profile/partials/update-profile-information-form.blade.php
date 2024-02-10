@@ -1,11 +1,10 @@
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ __('Profile Information') }}
+            {{ __('profile.profile.info') }}
         </h2>
-
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __("Update your account's profile information and email address.") }}
+            {{ __('profile.profile.description') }}
         </p>
     </header>
 
@@ -17,15 +16,14 @@
         @csrf
         @method('patch')
 
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
+        <div class="col-md-12 p-0">
+            <x-input-label for="name" :value="__('profile.profile.name')" />
+            <x-input placeholder="{{ __('profile.profile.namef') }}" id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
-
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
+        <div class="col-md-12 p-0">
+            <x-input-label for="email" :value="__('profile.profile.email')" />
+            <x-input id="email" placeholder="{{ __('profile.profile.emailf') }}" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
@@ -46,9 +44,8 @@
                 </div>
             @endif
         </div>
-
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <x-primary-button >{{ __('profile.password.save') }}</x-primary-button>
 
             @if (session('status') === 'profile-updated')
                 <p

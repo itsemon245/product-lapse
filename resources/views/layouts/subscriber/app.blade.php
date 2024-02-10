@@ -47,10 +47,13 @@
                             @include('layouts.frontend.locale-switcher')
                         </li>
                         @auth
-        
                             <li class="nav-item dropdown submenu m-0">
                                 <a class="nav-link dropdown-toggle btn-bg btn-icon" href="{{ route('dashboard') }}" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    @php
+                                        $currentUser = auth()->user()->with('image')->first();
+                                    @endphp
+                                    <img src="{{ $currentUser->image->url ?? asset('img/about.png') }}" alt="">
                                     <i class="ti-user"></i>
                                 </a>
                                 @include('layouts.global.profile-menu')

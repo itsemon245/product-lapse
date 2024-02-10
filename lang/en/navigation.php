@@ -11,6 +11,7 @@ return [
         'packages' => 'Packages',
         'faq' => 'Faq',
         'contact' => 'Contact us',
+        'login' => 'Login'
     ],
     'profile' => [
         'profile' => 'Profile',

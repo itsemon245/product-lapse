@@ -17,16 +17,6 @@ class SelectController extends Controller
         return view('features.select.index', compact('selects'));
     }
 
-    // public function show($id)
-    // {
-
-    //     $select = Select::find($id);
-    //     if ($select == null) {
-    //         return redirect()->back();
-    //     }
-    //     return view('features.select.show', compact('select'));
-    // }
-
     public function create()
     {
         $features = Feature::cases();

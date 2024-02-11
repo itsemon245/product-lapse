@@ -21,6 +21,16 @@
                             placeholder="{{ __('feature/idea.placeholder.name') }}" name="name"
                             value="{{ $idea->name }}" required autofocus />
                     </div>
+
+                    <div class="form-group text_box col-lg-12 col-md-12">
+                        <x-select-input label="Idea Stage" id="stage" placeholder="Choose Stage" name="stage"
+                            autofocus required>
+                            @foreach ($stages as $stage)
+                                <option value="{{ $stage->value }}" @selected($stage->value == $idea->stage)>
+                                    {{ str($stage->value)->headline() }}</option>
+                            @endforeach
+                        </x-select-input>
+                    </div>
                     <div class="form-group text_box col-lg-12 col-md-12">
                         <x-input-label for="owner" value="{{ __('feature/idea.label.owner') }}" />
                         <x-input id="owner" class="block mt-1 w-full" type="text"

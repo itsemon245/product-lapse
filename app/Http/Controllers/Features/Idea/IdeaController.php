@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Features\Idea;
 
+use App\Enums\Stage;
 use App\Models\Idea;
 use App\Models\Select;
 use App\Models\Product;
@@ -31,8 +32,9 @@ class IdeaController extends Controller
     public function create()
     {
         $priorities = Select::of('idea')->type('priority')->get();
+        $stages = Stage::cases();
 
-        return view('features.idea.partials.create', compact('priorities'));
+        return view('features.idea.partials.create', compact('priorities', 'stages'));
     }
 
     /**
@@ -44,7 +46,8 @@ class IdeaController extends Controller
         $data['creator_id'] = ownerId();
         $idea = Idea::create($data);
         $request->session()->flash(
-            'massage', 'Store success'
+            'massage',
+            'Store success'
         );
         notify()->success(__('Created successfully!'));
         return redirect()->route('idea.index');
@@ -57,7 +60,9 @@ class IdeaController extends Controller
     {
         $idea->loadComments();
         $comments = $idea->comments;
-        return view('features.idea.partials.show', compact('idea', 'comments'));
+        $stages = Stage::cases();
+
+        return view('features.idea.partials.show', compact('idea', 'comments', 'stages'));
     }
 
     /**
@@ -66,7 +71,8 @@ class IdeaController extends Controller
     public function edit(Idea $idea)
     {
         $priorities = Select::of('idea')->type('priority')->get();
-        return view('features.idea.partials.edit', compact('idea', 'priorities'));
+        $stages = Stage::cases();
+        return view('features.idea.partials.edit', compact('idea', 'priorities', 'stages'));
     }
 
     /**
@@ -100,7 +106,8 @@ class IdeaController extends Controller
     }
 
 
-    public function notify(){
+    public function notify()
+    {
         $idea = Idea::first();
         auth()->user()->notify(new IdeaNotification($idea));
     }

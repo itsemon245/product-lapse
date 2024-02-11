@@ -18,7 +18,8 @@ return new class extends Migration {
             $table->foreign('creator_id')->references('id')->on('users')->cascadeOnDelete();
             $table->string('name', 255);
             $table->string('owner', 255);
-            $table->string('priority', 255);
+            $table->string('priority', 30);
+            $table->string('stage', 30)->default('new');
             $table->longText('details');
             $table->longText('requirements');
             $table->timestamps();

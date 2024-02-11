@@ -26,6 +26,7 @@ return [
     'submit' => 'Submit',
 
     //details page
+    'title-details' => 'Idea details',
     'details' => 'Idea details',
     'update' => 'Update',
     'change-request' => 'Convert to change request',

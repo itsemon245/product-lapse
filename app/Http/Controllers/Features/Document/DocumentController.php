@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Features\Document;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\DocumentRequest;
-use App\Models\Document;
-use App\Models\Product;
+use App\Models\User;
 use App\Models\Select;
+use App\Models\Product;
+use App\Models\Document;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use App\Services\SearchService;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\SearchRequest;
+use App\Http\Requests\DocumentRequest;
 use Illuminate\Support\Facades\Storage;
 
 class DocumentController extends Controller
@@ -42,7 +43,7 @@ class DocumentController extends Controller
     {
 
         $data = $request->except('_token', 'attach_file');
-        $data['owner_id'] = ownerId();
+        $data['creator_id'] = ownerId();
 
         $document = Document::create($data);
         if ($request->has('attach_file')) {
@@ -80,7 +81,10 @@ class DocumentController extends Controller
      */
     public function show(Document $document)
     {
-        return view('features.document.partials.show', compact('document'));
+        $user = User::with('image')->find($document->creator_id);
+        $document->loadComments();
+        $comments = $document->comments;
+        return view('features.document.partials.show', compact('document', 'user', 'comments'));
     }
 
     /**
@@ -105,8 +109,6 @@ class DocumentController extends Controller
         }
 
         $data = $request->except('_token', 'attach_file');
-        $data['owner_id'] = ownerId();
-
         $document->update($data);
         notify()->success(__('Updated successfully!'));
 

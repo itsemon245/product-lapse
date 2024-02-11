@@ -203,10 +203,18 @@ class ProductController extends Controller
     /**
      * Display the specified individual resource.
      */
-    public function info()
+    public function info(Product $product)
     {
+<<<<<<< HEAD
         $product = Product::with('owner')->find(productId());
         $owner = $product->owner;
         return view('features.product.partials.show', compact('product', 'owner'));
+=======
+        $data  = Product::with('owner')->find(productId());
+        $owner = $data->owner;
+        $product->loadComments();
+        $comments = $product->comments;
+        return view('features.product.partials.show', compact('data', 'owner', 'product', 'comments'));
+>>>>>>> a4fa51c891a29f409e8b89773aa5e5ded69b1109
     }
 }

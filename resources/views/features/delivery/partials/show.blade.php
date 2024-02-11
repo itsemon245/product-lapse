@@ -103,49 +103,7 @@
                 </div>
             </div>
         </x-slot:profile>
-        <x-slot:comments>
-          
-            <ul class="comment-box list-unstyled mb-0">
-                <li class="post_comment">
-                    <div class="media post_author mt_60">
-                        <div class="media-left">
-                            <img class="rounded-circle" src="img/profile1.png" alt="">
-                            <a href="#" class="replay"><i class="ti-share"></i></a>
-                        </div>
-                        <div class="media-body">
-                            <h5 class=" t_color3 f_size_18 f_500">Mohamed Ali</h5>
-                            <h6 class=" f_size_15 f_400 mb_20">24 March 2023</h6>
-                            <p>It is a long established fact that a reader will be distracted by the readable content of a
-                                page when looking at its layout</p>
-                        </div>
-                    </div>
-                    <ul class="reply-comment list-unstyled">
-                        <li class="post-comment">
-                            <div class="media post_author comment-content">
-                                <div class="media-left">
-                                    <img class="rounded-circle" src="img/profile2.png" alt="">
-                                    <a href="#" class="replay"><i class="ti-share"></i></a>
-                                </div>
-                                <div class="media-body">
-                                    <h5 class=" t_color3 f_size_18 f_500">Mohamed Ali</h5>
-                                    <h6 class=" f_size_15 f_400 mb_20">24 March 2023</h6>
-                                    <p>It is a long established fact that a reader will be distracted by the readable
-                                        content of a page when looking at its layout</p>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </x-slot:comments>
-        <x-slot:writeComment>
-            <form class="get_quote_form row" action="#" method="post">
-                <div class="col-md-12 form-group">
-                    <textarea class="form-control message" placeholder="{{ __('comment.write-comment') }}"></textarea>
-                </div>
-                <div class="col-md-12"><button class="btn_hover agency_banner_btn btn-bg" type="submit">@__('comment.send')</button></div>
-            </form>
-        </x-slot:writeComment>
+        <x-comments :model="$delivery" :comments="$delivery->comments" />
     </x-feature.show>
 @endsection
 <script>

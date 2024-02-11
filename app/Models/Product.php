@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasComments;
 use App\Traits\HasImages;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\JoinClause;
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Product extends Model
 {
-    use HasFactory, HasImages;
+    use HasFactory, HasImages, HasComments;
 
     protected $guarded = [];
     public function user()

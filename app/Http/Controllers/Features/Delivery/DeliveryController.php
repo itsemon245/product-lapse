@@ -56,8 +56,10 @@ class DeliveryController extends Controller
      */
     public function show(Delivery $delivery)
     {
-        $creator= User::with('image')->find($delivery->creator_id)->first();
-        return view('features.delivery.partials.show', compact('delivery', 'creator'));
+        $creator= User::with('image')->find($delivery->creator_id);
+        $delivery->loadComments();
+        $comments = $delivery->comments;
+        return view('features.delivery.partials.show', compact('delivery', 'creator', 'comments'));
     }
 
     /**

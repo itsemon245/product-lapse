@@ -3,17 +3,18 @@
 namespace App\Http\Controllers\Features\Team;
 
 
-use App\Http\Requests\SearchRequest;
-use App\Models\InvitationProduct;
-use App\Models\ProductUser;
 use App\Models\User;
+use App\Models\Select;
 use App\Models\Product;
 use App\Models\Invitation;
-use App\Services\SearchService;
+use App\Models\ProductUser;
 use Illuminate\Http\Request;
+use App\Services\SearchService;
+use App\Models\InvitationProduct;
 use Spatie\Permission\Models\Role;
 use App\Services\InvitationService;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SearchRequest;
 use App\Http\Requests\TeamInvitationRequest;
 
 class TeamController extends Controller
@@ -34,7 +35,9 @@ class TeamController extends Controller
     {
         $products = Product::with('image')->get();
         $roles = Role::get();
-        return view('features.team.partials.create', compact('products', 'roles'));
+        $tasks = Select::of('user')->type('task')->get();
+        // dd($tasks); 
+        return view('features.team.partials.create', compact('products', 'roles', 'tasks'));
     }
 
     /**

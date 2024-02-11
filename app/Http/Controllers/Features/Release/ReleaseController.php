@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Features\Release;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\ReleaseRequest;
-use App\Http\Requests\SearchRequest;
-use App\Models\Release;
-use App\Models\Product;
+use App\Models\User;
 use App\Models\Select;
-use App\Services\SearchService;
+use App\Models\Product;
+use App\Models\Release;
 use Illuminate\Http\Request;
+use App\Services\SearchService;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\SearchRequest;
+use App\Http\Requests\ReleaseRequest;
 
 class ReleaseController extends Controller
 {
@@ -36,7 +37,7 @@ class ReleaseController extends Controller
     public function store(ReleaseRequest $request)
     {
         $data = $request->except('_token');
-        $data['owner_id'] = ownerId();
+        $data['creator_id'] = ownerId();
         Release::create($data);
 
         notify()->success(__('Created successfully!'));
@@ -50,7 +51,10 @@ class ReleaseController extends Controller
      */
     public function show(Release $release)
     {
-        return view('features.release.partials.show', compact('release'));
+        $user = User::with('image')->find($release->creator_id);
+        $release->loadComments();
+        $comments = $release->comments;
+        return view('features.release.partials.show', compact('release', 'user', 'comments'));
     }
 
     /**
@@ -67,9 +71,7 @@ class ReleaseController extends Controller
     public function update(Request $request, Release $release)
     {
         $data = $request->except('_token', '_method');
-        $data['owner_id'] = ownerId();
         $release->update($data);
-
         notify()->success(__('Updated successfully!'));
         return redirect()->route('release.index');
     }

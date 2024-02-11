@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Features\Report;
 
+use App\Models\User;
 use App\Models\Report;
-use App\Models\Product;
 use App\Models\Select;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Services\SearchService;
 use App\Http\Controllers\Controller;
@@ -39,7 +40,7 @@ class ReportController extends Controller
     public function store(ReportRequest $request)
     {
         $report = Report::create([
-            'owner_id' => ownerId(),
+            'creator_id' => auth()->id(),
             'name' => $request->name,
             'type' => $request->type,
             'report_date' => $request->report_date,
@@ -58,7 +59,10 @@ class ReportController extends Controller
      */
     public function show(Report $report)
     {
-        return view('features.report.partials.show', compact('report'));
+        $user = User::with('image')->find($report->creator_id);
+        $report->loadComments();
+        $comments = $report->comments;
+        return view('features.report.partials.show', compact('report', 'user', 'comments'));
     }
 
     /**
@@ -82,7 +86,6 @@ class ReportController extends Controller
         }
 
         $data = $request->except('_token', 'file');
-        $data['owner_id'] = ownerId();
         $report->update($data);
 
         notify()->success(__('Updated successfully!'));

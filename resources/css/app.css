@@ -24,7 +24,15 @@ html[lang="ar"]{
 input:checked ~ .dot {
     @apply translate-x-[100%] bg-primary;
   }
+/* Fix default collapse for bootstrap compatibility */
+.collapse:not(.show) {
+    display: none;
+    visibility: visible;
+}
 
+.collapse.show{
+    visibility: visible;
+}
 
 #laravel-notify{
     position: fixed;

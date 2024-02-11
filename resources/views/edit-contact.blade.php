@@ -1,6 +1,7 @@
-@extends('layouts.subscriber.app', ['title' => @__('welcome.edit_contact_us')])
+@extends('layouts.admin.app', ['title' => @__('welcome.edit_contact_us')])
+
 @section('main')
-    <x-feature.create>
+    <x-feature.edit>
         <x-slot:breadcrumb>
             <x-breadcrumb :list="[['label' => @__('welcome.edit_contact_us'), 'route' => route('edit.contact.us')]]" />
         </x-slot:breadcrumb>
@@ -56,5 +57,5 @@
             </form>
 
         </x-slot:from>
-    </x-feature.create>
+    </x-feature.edit>
 @endsection

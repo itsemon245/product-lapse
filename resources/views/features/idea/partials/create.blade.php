@@ -26,6 +26,15 @@
                             required autofocus />
                     </div>
 
+                    <div class="form-group text_box col-lg-12 col-md-12">
+                        <x-select-input label="Idea Stage" id="stage" placeholder="Choose Stage" name="stage" required
+                            autofocus>
+                            @foreach ($stages as $stage)
+                                <option value="{{ $stage->value }}">{{ str($stage->value)->headline() }}</option>
+                            @endforeach
+                        </x-select-input>
+                    </div>
+
                     <div class="form-group text_box col-lg-12">
                         <x-select-input label="{{ __('feature/idea.label.priority') }}" id="priority"
                             placeholder="Choose one" name="priority" required autofocus>

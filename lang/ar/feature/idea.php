@@ -26,6 +26,7 @@ return [
     'submit' => 'اضافة فكرة',
 
     //details page
+    'title-details' => 'تفاصيل الفكرة',
     'details' => 'تفاصيل الفكرة',
     'update' => 'تحديث',
     'change-request' => 'تحويل الى طلب تغيير',
@@ -41,4 +42,4 @@ return [
 
 
 
-?>
+    ?>

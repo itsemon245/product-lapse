@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Features\Task;
 
+use App\Models\Idea;
 use App\Models\Task;
 use App\Models\User;
 use App\Models\Select;
@@ -36,9 +37,11 @@ class TaskController extends Controller
      */
     public function create()
     {
+        $task = Idea::find(request()->query('idea'));
         $categories = Select::of('task')->type('category')->get();
         $statuses = Select::of('task')->type('status')->get();
-        return view('features.task.partials.create', compact('categories', 'statuses'));
+
+        return view('features.task.partials.create', compact('categories', 'statuses', 'task'));
     }
 
     /**

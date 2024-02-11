@@ -1,4 +1,4 @@
-@extends('layouts.subscriber.app', ['title' => 'Create FAQ'])
+@extends('layouts.admin.app', ['title' => 'Create FAQ'])
 @section('main')
     <x-feature.create>
         <x-slot:breadcrumb>

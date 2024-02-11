@@ -13,10 +13,7 @@ return new class extends Migration {
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('owner_id')->nullable();
-            $table->foreign('owner_id')->references('id')->on('users')->cascadeOnDelete();
-            $table->unsignedBigInteger('creator_id');
-            $table->foreign('creator_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->hasCreatorAndOwner();
             $table->string('name');
             $table->longText('category');
             $table->longText('status');

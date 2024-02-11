@@ -5,14 +5,15 @@ namespace App\Models;
 use App\Models\User;
 use App\Traits\HasComments;
 use App\Traits\HasCreator;
+use App\Traits\HasOwner;
 use App\Traits\HasProducts;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Release extends Model
 {
-    use HasFactory, HasProducts, HasCreator, HasComments;
-    protected $guarded = [];
+    use HasFactory, HasProducts, HasCreator, HasOwner, HasComments;
+    protected $guarded = [  ];
 
     public function user()
     {

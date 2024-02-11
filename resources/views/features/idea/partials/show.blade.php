@@ -9,11 +9,12 @@
         <x-slot:details>
             <div class="container mb_20">
                 <ul class="step d-flex flex-nowrap">
-                    @foreach (['new', 'evaluate', 'discuss', 'final_wording', 'accepted', 'refused', 'deleted'] as $index => $step)
-                        <li class="step-item {{ $idea->priority == $step ? 'active' : '' }}">
-                            <a href="#!" class="">@lang('idea.' . $step)</a>
+                    @foreach ($stages as $stage)
+                        <li class="step-item {{ $idea->stage == $stage->value ? 'active' : '' }}">
+                            <a href="#!" class="">@lang('Idea ' . $stage->value)</a>
                         </li>
                     @endforeach
+
                 </ul>
             </div>
             <div class="col-lg-8 blog_sidebar_left">
@@ -56,7 +57,8 @@
                                     class="button-1">@__('feature/idea.change-request')</a>
                             </div>
                             <div class="col-12">
-                                <a href="#" class="button-1" style="background: #6c84ee">@__('feature/idea.task')</a>
+                                <a href="{{ route('task.create', ['idea' => $idea->id]) }}" class="button-1"
+                                    style="background: #6c84ee">@__('feature/idea.task')</a>
                             </div>
                         </div>
                         <h6 class="title2 the-priority">Idea owner : <span>Ahmed Shalaby</span></h6>
@@ -64,7 +66,9 @@
 
                 </div>
                 <div class="d-flex justify-content-between align-items-center text-center mt_15 mb_20">
-                    <a href="#" class="icon-square" title="edit"><i class="ti-pencil"></i></a>
+                    <a href="{{ route('idea.edit', $idea) }}" class="icon-square" title="Edit">
+                        <i class="ti-pencil"></i>
+                    </a>
                     <a href="#" class="icon-square icon-square2" title="share"><i class="ti-sharethis"></i></a>
                     <a href="#" class="icon-square icon-square3" title="save"><img src="img/pdf2.png"
                             height="20"></a>

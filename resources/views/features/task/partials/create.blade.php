@@ -15,7 +15,7 @@
                     <div class="form-group text_box col-lg-12 col-md-12">
                         <x-input-label for="name" value="{{ __('feature/task.label.name') }}" />
                         <x-input id="name" class="block mt-1 w-full" type="text"
-                            placeholder="{{ __('feature/task.placeholder.name') }}" name="name" :value="old('name')"
+                            placeholder="{{ __('feature/task.placeholder.name') }}" name="name" :value="$task->name ?? old('name')"
                             required autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
@@ -65,13 +65,15 @@
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-12">
                         <x-input-label for="details" value="{{ __('feature/task.label.details') }}" />
-                        <x-textarea id="details" class="block mt-1 w-full" name="details" :value="old('details')"
-                            placeholder="{{ __('feature/task.placeholder.details') }}" required autofocus />
+                        <x-textarea id="details" class="block mt-1 w-full" name="details"
+                            placeholder="{{ __('feature/task.placeholder.details') }}" required
+                            autofocus>{!! $task->details ?? '' !!}</x-textarea>
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-12">
                         <x-input-label for="steps" value="{{ __('feature/task.label.steps') }}" />
-                        <x-textarea id="steps" class="block mt-1 w-full" name="steps" :value="old('steps')"
-                            placeholder="{{ __('feature/task.placeholder.steps') }}" required autofocus />
+                        <x-textarea id="steps" class="block mt-1 w-full" name="steps"
+                            placeholder="{{ __('feature/task.placeholder.steps') }}" required
+                            autofocus>{!! $idea->steps ?? '' !!}</x-textarea>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-input label="{{ __('feature/task.label.str-date') }}" id="starting_date"

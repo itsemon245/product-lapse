@@ -39,7 +39,7 @@
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-attach label="{{ __('feature/report.label.upload') }}" name='file' />
                     </div>
-                    <div class="form-group text_box col-lg-12 col-md-6">
+                    <div class="form-group text_box col-lg-12 col-md-12">
                         <x-textarea placeholder="{{ __('feature/report.placeholder.description') }}" rows="5"
                             cols="10" name="description"
                             label="{{ __('feature/report.placeholder.description') }}">{{ $report->description }}</x-textarea>

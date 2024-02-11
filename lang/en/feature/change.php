@@ -12,7 +12,7 @@ return [
         'title' => 'Change request title',
         'classification' => 'Classification',
         'priority' => 'Priority',
-        'status' => 'Status',
+        'status' => 'Ticket status',
         'details' => 'Change request details',
         'administrator' => 'Administrator',
         'date' => 'Required completion date',

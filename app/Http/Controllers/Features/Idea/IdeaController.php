@@ -1,13 +1,10 @@
 <?php
-
 namespace App\Http\Controllers\Features\Idea;
-
 use App\Enums\Stage;
 use App\Models\Idea;
 use App\Models\Select;
 use App\Models\Product;
 use App\Notifications\IdeaNotification;
-use Illuminate\Http\Request;
 use App\Services\SearchService;
 use App\Http\Requests\IdeaRequest;
 use App\Http\Controllers\Controller;
@@ -33,7 +30,6 @@ class IdeaController extends Controller
     {
         $priorities = Select::of('idea')->type('priority')->get();
         $stages = Stage::cases();
-
         return view('features.idea.partials.create', compact('priorities', 'stages'));
     }
 

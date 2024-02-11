@@ -17,7 +17,7 @@
                             autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-select-input label="{{ __('feature/support.label.classification') }}" id="type"
+                        <x-select-input label="{{ __('feature/change.label.classification') }}" id="type"
                             placeholder="Choose one" name="classification" required autofocus>
 
                             @forelse ($classifications as $classification)
@@ -31,7 +31,7 @@
                         </x-select-input>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-select-input label="{{ __('feature/support.label.priority') }}" id="type"
+                        <x-select-input label="{{ __('feature/change.label.priority') }}" id="type"
                             placeholder="Choose one" name="priority" required autofocus>
 
                             @forelse ($priorities as $priority)
@@ -45,7 +45,7 @@
                         </x-select-input>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-select-input label="{{ __('feature/support.label.ticket') }}" id="type"
+                        <x-select-input label="{{ __('feature/change.label.status') }}" id="type"
                             placeholder="Choose one" name="status" required autofocus>
 
                             @forelse ($statuses as $status)

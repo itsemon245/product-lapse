@@ -13,6 +13,7 @@ enum Feature:string {
     case PRODUCT = 'product';
     case RELEASE = 'release';
     case CERTIFICATE = 'certificate' ;
+    case USER = 'user';
     
 }
 

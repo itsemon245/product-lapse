@@ -28,9 +28,16 @@
                     <div class="form-group text_box col-lg-4 col-md-6">
                         <x-input-label for="task" value="{{ __('feature/team.label.task') }}" class=" text_c f_500" />
                         <select id="task" name="task"  class="selectpickers">
-                            <option>e-marketing</option>
-                            <option>e-marketing</option>
-                            <option>e-marketing</option>
+                            @if($tasks)
+                                @forelse ($tasks as $task)
+                                <option value="{{ $task->value->{app()->getLocale()} }}">{{ $task->value->{app()->getLocale()} }}</option>
+                                @empty
+                                <option disabled>
+                                    @lang('No items available')
+                                </option>
+                                @endforelse
+
+                            @endif
                         </select>
                         <x-input-error :messages="$errors->get('details')" class="mt-2" />
                     </div>

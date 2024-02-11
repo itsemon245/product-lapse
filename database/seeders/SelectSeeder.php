@@ -354,5 +354,35 @@ class SelectSeeder extends Seeder
                 'ar'=> 'واسطة',
             ],
         ]);
+        Select::create([
+            'owner_id' => 1,
+            'model_type' => Feature::USER->value,
+            'type' => SelectType::TASK->value,
+            'color' => "#fff",
+            'value' => [
+                'en'=> 'Low',
+                'ar'=> 'قليل',
+            ],
+        ]);
+        Select::create([
+            'owner_id' => 1,
+            'model_type' => Feature::USER->value,
+            'type' => SelectType::TASK->value,
+            'color' => "#fff",
+            'value' => [
+                'en'=> 'High',
+                'ar'=> 'عالي',
+            ],
+        ]);
+        Select::create([
+            'owner_id' => 1,
+            'model_type' => Feature::USER->value,
+            'type' => SelectType::TASK->value,
+            'color' => "#fff",
+            'value' => [
+                'en'=> 'Medium',
+                'ar'=> 'واسطة',
+            ],
+        ]);
     }
 }

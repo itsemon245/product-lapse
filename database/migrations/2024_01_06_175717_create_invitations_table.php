@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->string('phone', 255);
             $table->string('role', 255);
             $table->string('token', 255)->unique();
-            $table->boolean('accepted_at')->nullable();
+            $table->dateTime('accepted_at')->nullable();
             $table->timestamps();
         });
 

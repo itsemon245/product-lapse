@@ -40,7 +40,7 @@
                             <div class="joblisting_text">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell">
-                                        <h4><a href="#" class="f_500 t_color3">{{ $report->name }}</a></h4>
+                                        <h4><a href="{{ route('report.show', $report) }} class="f_500 t_color3">{{ $report->name }}</a></h4>
                                         <ul class="list-unstyled">
                                             <li>{{ $report->created_at->formatLocalized('%A %d %B %Y') }}</li>
                                         </ul>

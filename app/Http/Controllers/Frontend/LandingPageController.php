@@ -88,7 +88,6 @@ class LandingPageController extends Controller
     public function editIntro()
     {
         $info = LandingPage::first();
-
         return view('homeFeatures.intro', compact('info'));
     }
 

@@ -21,6 +21,7 @@ export default {
             },
             screens: {
                 xs: "380px",
+                "bs-lg": "990px"
             },
             colors: {
                 transparent: "transparent",

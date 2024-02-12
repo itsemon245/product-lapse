@@ -18,7 +18,7 @@ trait HasProducts
     /**
      * The "booted" method of the model.
      */
-    protected static function booted(): void
+    protected static function bootHasProducts(): void
     {
         static::created(function ($model) {
             DB::table('productables')->insert([

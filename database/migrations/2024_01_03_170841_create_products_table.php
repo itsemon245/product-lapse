@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('owner_id');
-            $table->foreign('owner_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->hasCreatorAndOwner();
             $table->string('name');
             $table->string('url');
             $table->string('stage');

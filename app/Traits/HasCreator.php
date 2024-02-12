@@ -1,23 +1,28 @@
 <?php
 namespace App\Traits;
 
+use App\Models\User;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 trait HasCreator
 {
     /**
-     * The "booted" method of the model.
-     */
-    protected static function creator(): void
+     * The Model is in use will belong to user as creator
+     *
+     * @return BelongsTo
+     */ 
+    public function creator(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'creator_id');
+    }
+    protected static function bootHasCreator(): void
     {
         static::created(function ($model) {
-            DB::table('creatortables')->insert([
-                'creator_id'       => auth()->id(),
-                'creatortable_id'   => $model->id,
-                'creatortable_type' => __CLASS__,
-             ]);
+            $model->creator_id = auth()->id();
+            $model->save();
         });
     }
 }

@@ -27,6 +27,7 @@ use App\Http\Controllers\Features\Delivery\DeliveryController;
 
 Route::get('/', function () {
     $info = LandingPage::first();
+    // dd($info->home->title->{app()->getLocale()});
     $faqs = Faq::where('status', true)->get();
     $features = Feature::where('status', true)->get();
     $contact = Contact::first();

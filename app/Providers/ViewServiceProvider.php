@@ -3,8 +3,8 @@
 namespace App\Providers;
 
 use App\Models\LandingPage;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\View\View;
 
 class ViewServiceProvider extends ServiceProvider
 {
@@ -21,9 +21,11 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        view()->composer('*', function (View $view) {
-            $landingPage = LandingPage::first();
-            $view->with('landingPage', $landingPage);
+        View::composer("*", function () {
+            $locale = request()->cookie('locale');
+            if ($locale) {
+                app()->setLocale(request()->cookie('locale'));
+            }
         });
     }
 }

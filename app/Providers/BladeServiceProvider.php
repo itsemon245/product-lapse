@@ -27,8 +27,5 @@ class BladeServiceProvider extends ServiceProvider
         Blade::directive('trans', function ($expression) {
             return "<?php echo trans($expression) ?>";
         });
-        View::composer("*", function () {
-            app()->setLocale(request()->cookie('locale'));
-        });
     }
 }

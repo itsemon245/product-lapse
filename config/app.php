@@ -171,8 +171,8 @@ return [
         /*
          * User Service Providers...
          */
-        App\Providers\ViewServiceProvider::class,
         App\Providers\BladeServiceProvider::class,
+        App\Providers\ViewServiceProvider::class,
 
     ])->toArray(),
 

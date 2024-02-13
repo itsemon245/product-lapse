@@ -1,6 +1,8 @@
 @extends('layouts.frontend.app')
+@php
+@endphp
 @section('main')
-    <div x-data="{ value: '' }">
+    <div>
         <section class="agency_banner_area bg_color">
             <img class="banner_shap banner_shap_ar" src="img/banner_bg-ar.png" alt="">
             <img class="banner_shap banner_shap_en" src="img/banner_bg-en.png" alt="">
@@ -9,18 +11,18 @@
                     <div class="col-md-6 d-flex align-items-center">
                         <div class="agency_content">
                             <h2 class="f_700 t_color3 mb_40 wow fadeInLeft" data-wow-delay="0.3s">
-                                {!! $info->home->title->{app()->getLocale()} !!}
+                                <?= $info?->home?->title?->{app()->getLocale()} ?>
                             </h2>
                             <p class="f_500 l_height28 wow fadeInLeft" data-wow-delay="0.4s">
-                                {{ $info->home->caption->{app()->getLocale()} }}</p>
+                                <?= $info?->home?->caption?->{app()->getLocale()} ?></p>
                             <div class="action_btn d-flex align-items-center mt_60">
                                 <a href="{{ route('register') }}" class="btn_hover agency_banner_btn wow fadeInLeft btn-bg"
-                                    data-wow-delay="0.5s"> {!! $info->home->button->{app()->getLocale()} !!}</a>
+                                    data-wow-delay="0.5s"> <?= $info?->home?->button?->{app()->getLocale()} ?></a>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 text-right">
-                        <img class="protype_img wow fadeInRight" data-wow-delay="0.3s" src="{{ asset($info->home->image) }}"
+                        <img class="protype_img wow fadeInRight" data-wow-delay="0.3s" src="{{ asset($info?->home?->image) }}"
                             alt="home">
                     </div>
                 </div>
@@ -32,12 +34,12 @@
                     data-wow-delay="0.2s">@lang('welcome.about_us')</h2>
                 <div class="row">
                     <div class="col-md-6">
-                        <img src="{{ asset($info->about_us->image) }}" alt="about" class="about-img wow fadeInRight"
+                        <img src="{{ asset($info?->about_us?->image) }}" alt="about" class="about-img wow fadeInRight"
                             data-wow-delay="0.2s">
                     </div>
                     <div class="col-md-6">
                         <p class="f_size_22 f_400 t_color3 l_height40 wow fadeInLeft about-text" data-wow-delay="0.2s">
-                            {!! $info->about_us->caption->{app()->getLocale()} !!}
+                            <?= $info?->about_us?->caption?->{app()->getLocale()} ?>
                         </p>
                     </div>
                 </div>
@@ -53,11 +55,11 @@
                         <div class="col-lg-3 col-6">
                             <div class="p_service_item agency_service_item wow fadeInUp" data-wow-delay="0.3s">
                                 <div class="icon">
-                                    <img src="{{ asset($feature->image) }}" alt="">
+                                    <img src="{{ asset($feature?->image) }}" alt="">
 
                                 </div>
-                                <h5 class="f_600 t_color3">{{ $feature->title->{app()->getLocale()} }}</h5>
-                                <p>{{ $feature->caption->{app()->getLocale()} }}</p>
+                                <h5 class="f_600 t_color3">{{ $feature?->title?->{app()->getLocale()} }}</h5>
+                                <p><?= $feature?->caption?->{app()->getLocale()} ?></p>
                             </div>
                         </div>
                     @endforeach
@@ -70,7 +72,7 @@
                     <h2 class="f_size_30 l_height50 f_700 t_color2 wow fadeInUp" data-wow-delay="0.2s">@lang('welcome.packages')
                     </h2>
                     <p class="f_400 f_size_16 l_height30 mb-0 wow fadeInUp" data-wow-delay="0.2s">
-                        {{ $info->package->{app()->getLocale()} }}</p>
+                        <?= $info?->package?->{app()->getLocale()} ?></p>
                 </div>
                 <div class="price_content">
                     <div class="row wow fadeInUp" data-wow-delay="0.3s">
@@ -78,21 +80,21 @@
                         {{ dd(app()->getLocale()) }}
                             <div class="col-lg-3 col-6">
                                 <div class="price_item">
-                                    @if ($package->is_popular)
+                                    @if ($package?->is_popular)
                                         <div class="tag"><span>@lang('welcome.popular')</span></div>
                                     @endif
-                                    <h5 class="f_size_20 f_600 t_color2 mt_30"> {{ $package->package->{app()->getLocale()} }}
+                                    <h5 class="f_size_20 f_600 t_color2 mt_30"> {{ $package?->name?->{app()->getLocale()} }}
                                     </h5>
-                                    <div class="price f_700 f_size_40 t_color2">{{ $package->price }}<sub
+                                    <div class="price f_700 f_size_40 t_color2">{{ $package?->price }}<sub
                                             class="f_size_16 f_400"> @lang('welcome.price')</sub>
                                     </div>
                                     <ul class="list-unstyled p_list">
-                                        <li><i class="ti-check"></i>{{ $package->product_limit->{app()->getLocale()} }}
+                                        <li><i class="ti-check"></i>{{ $package?->product_limit?->{app()->getLocale()} }}
                                         </li>
-                                        @if ($package->validity)
-                                            <li><i class="ti-check"></i>{{ $package->validity->{app()->getLocale()} }}</li>
+                                        @if ($package?->validity)
+                                            <li><i class="ti-check"></i>{{ $package?->validity?->{app()->getLocale()} }}</li>
                                         @endif
-                                        <li><i class="ti-check"></i>{{ $package->features->{app()->getLocale()} }}</li>
+                                        <li><i class="ti-check"></i>{{ $package?->features?->{app()->getLocale()} }}</li>
                                     </ul>
                                     <a href="#" class="price_btn btn_hover">@lang('welcome.subscribe')</a>
                                 </div>
@@ -114,21 +116,21 @@
                                 @foreach ($faqs as $faq)
                                     <div class="col-lg-6">
                                         <div class="card">
-                                            <div class="card-header" id="heading{{ $faq->id }}">
+                                            <div class="card-header" id="heading{{ $faq?->id }}">
                                                 <h5 class="mb-0">
                                                     <button class="btn btn-link collapsed" data-toggle="collapse"
-                                                        data-target="#collapse{{ $faq->id }}" aria-expanded="false"
-                                                        aria-controls="collapse{{ $faq->id }}">
-                                                        {{ $faq->question->{app()->getLocale()} }}<i class="ti-plus"></i><i
+                                                        data-target="#collapse{{ $faq?->id }}" aria-expanded="false"
+                                                        aria-controls="collapse{{ $faq?->id }}">
+                                                        <?= $faq?->question?->{app()->getLocale()} ?><i class="ti-plus"></i><i
                                                             class="ti-minus"></i>
                                                     </button>
                                                 </h5>
                                             </div>
 
-                                            <div id="collapse{{ $faq->id }}" class="collapse"
-                                                aria-labelledby="heading{{ $faq->id }}" data-parent="#accordion6">
+                                            <div id="collapse{{ $faq?->id }}" class="collapse"
+                                                aria-labelledby="heading{{ $faq?->id }}" data-parent="#accordion6">
                                                 <div class="card-body">
-                                                    {{ $faq->answer->{app()->getLocale()} }}
+                                                    <? $faq?->answer?->{app()->getLocale()} ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -148,7 +150,7 @@
                     <div class="col-lg-12">
                         <div class="action_content text-center">
                             <h2 class="f_600 f_size_30 l_height45 mb_40 wow fadeInUp" data-wow-delay="0.2s">
-                                {!! $info->join->{app()->getLocale()} !!}</h2>
+                                <?= $info?->join?->{app()->getLocale()} ?></h2>
                             <a href="{{ route('login') }}" class="about_btn white_btn wow fadeInRight btn_get"
                                 data-wow-delay="0.3s">@lang('welcome.login')</a>
                             <a href="{{ route('register') }}" class="about_btn wow fadeInLeft btn_get"
@@ -158,7 +160,7 @@
                 </div>
             </div>
         </section>
-        <!-- start contact -->
+        <!-- start contact -?->
         <section class="app_featured_area bg-grey contact-section" id="tolink-6">
             <div class="container">
                 <div class="row flex-row-reverse app_feature_info">
@@ -170,16 +172,16 @@
                         <div class="contact_info_item wow fadeInLeft" data-wow-delay="0.2s">
                             <h6 class=" f_size_20 t_color3 f_500 mb_20">@lang('welcome.contact_details')</h6>
                             <p class=""><span class="f_400 t_color3">@lang('welcome.phone')</span> <a href="#"
-                                    class="phone-num">{{ $contact->phone }}</a></p>
+                                    class="phone-num">{{ $contact?->phone }}</a></p>
                             <p class=""><span class="f_400 t_color3">@lang('welcome.fax')</span> <a href="#"
-                                    class="phone-num">{{ $contact->fax }}</a></p>
+                                    class="phone-num">{{ $contact?->fax }}</a></p>
                             <p class=""><span class="f_400 t_color3">@lang('welcome.email'):</span> <a
-                                    href="#">{{ $contact->email }}</a></p>
+                                    href="#">{{ $contact?->email }}</a></p>
                             <div class="f_social_icon">
-                                <a href="{{ $contact->facebook }}" class="ti-facebook"></a>
-                                <a href="{{ $contact->twitter }}" class="ti-twitter-alt"></a>
-                                <a href="{{ $contact->vimeo }}" class="ti-vimeo-alt"></a>
-                                <a href="{{ $contact->pinterest }}" class="ti-pinterest"></a>
+                                <a href="{{ $contact?->facebook }}" class="ti-facebook"></a>
+                                <a href="{{ $contact?->twitter }}" class="ti-twitter-alt"></a>
+                                <a href="{{ $contact?->vimeo }}" class="ti-vimeo-alt"></a>
+                                <a href="{{ $contact?->pinterest }}" class="ti-pinterest"></a>
                             </div>
                         </div>
 

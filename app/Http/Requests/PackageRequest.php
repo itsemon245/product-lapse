@@ -22,15 +22,19 @@ class PackageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name_en' => 'required',
-            'name_ar' => 'required',
-            'price' => 'required|numeric',
-            'feature_en' => 'required',
-            'feature_ar' => 'required',
-            'product_limit_en' => 'required',
-            'product_limit_ar' => 'required',
-            'validity_en' => 'nullable',
-            'validity_ar' => 'nullable',
+            'info_en' => 'sometimes|required',
+            'info_ar' => 'sometimes|required',
+            // 'package' => 'required',
+            'price' => 'required',
+            'money_en' => 'sometimes|required',
+            'money_ar' => 'sometimes|required',
+            'feature_one_en' => 'sometimes|required',
+            'feature_one_ar' => 'sometimes|required',
+            'feature_two_en' => 'sometimes|required',
+            'feature_two_ar' => 'sometimes|required',
+            'feature_three_en' => 'sometimes|required',
+            'feature_three_ar' => 'sometimes|required',
+            
         ];
     }
 }

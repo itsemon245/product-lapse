@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePackageRequest;
-use App\Models\Package;
 use App\Models\Select;
+use App\Models\Package;
+use App\Http\Requests\PackageRequest;
+use App\Http\Requests\StorePackageRequest;
 
 class PackageController extends Controller
 {
@@ -15,7 +16,7 @@ class PackageController extends Controller
     public function index()
     {
         $packages = Package::get();
-        return view('features.package.index', compact('packages'));
+        return view('pages.package.index', compact('packages'));
     }
 
     /**
@@ -23,29 +24,54 @@ class PackageController extends Controller
      */
     public function create()
     {
-        $type = Select::of('package')->type('type')->get();
-        return view('features.package.partials.create', compact('type'));
+        $types = Select::of('package')->type('type')->get();
+        return view('pages.package.partials.create', compact('types'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePackageRequest $request)
+    public function store(PackageRequest $request)
     {
-        // dd($request);
-        $create = Package::create([
-            'owner_id' => auth()->id(),
-            'name' => $request->name,
-            'price' => $request->price,
-            'monthly_rate' => $request->monthly_rate,
-            'annual_rate' => $request->annual_rate,
-            'subscription_type' => $request->subscription_type,
-            'features' => $request->features,
-            'product_limit' => $request->product_limit,
-            'validity' => $request->validity,
-            'has_limited_features' => $request->has_limited_features,
-            'is_popular' => $request->is_popular,
-        ]);
+        $olddata = Package::first();
+        if($olddata == !null){
+            $delete = Package::destroy($olddata);
+            if($delete){
+                $info = ['en' => $request->info_en, 'ar' => $request->info_ar];
+                $money = ['en' => $request->money_en, 'ar' => $request->money_ar];
+                $featureOne = ['en' => $request->feature_one_en, 'ar' => $request->feature_one_ar];
+                $featureTwo = ['en' => $request->feature_two_en, 'ar' => $request->feature_two_ar];
+                $featureThree = ['en' => $request->feature_three_en, 'ar' => $request->feature_three_ar];
+                Package::insert([
+                    'creator_id' => auth()->id(),
+                    'info' => json_encode($info),
+                    'package' => $request->package,
+                    'price' => $request->price,
+                    'money' => json_encode($money),
+                    'feature_one' => json_encode($featureOne),
+                    'feature_two' => json_encode($featureTwo),
+                    'feature_three' => json_encode($featureThree),
+                    // 'is_popular' => $request->is_popular,
+                ]);
+            }
+        }else{
+            $info = ['en' => $request->info_en, 'ar' => $request->info_ar];
+            $money = ['en' => $request->money_en, 'ar' => $request->money_ar];
+            $featureOne = ['en' => $request->feature_one_en, 'ar' => $request->feature_one_ar];
+            $featureTwo = ['en' => $request->feature_two_en, 'ar' => $request->feature_two_ar];
+            $featureThree = ['en' => $request->feature_three_en, 'ar' => $request->feature_three_ar];
+            Package::insert([
+                'creator_id' => auth()->id(),
+                'info' => json_encode($info),
+                'package' => $request->package,
+                'price' => $request->price,
+                'money' => json_encode($money),
+                'feature_one' => json_encode($featureOne),
+                'feature_two' => json_encode($featureTwo),
+                'feature_three' => json_encode($featureThree),
+                // 'is_popular' => $request->is_popular,
+            ]);
+        }
         return redirect()->back();
     }
 
@@ -58,7 +84,7 @@ class PackageController extends Controller
         if (!$package) {
             return redirect()->back();
         }
-        return view('features.package.partials.show', compact('package'));
+        return view('pages.package.partials.show', compact('package'));
     }
 
     /**
@@ -71,32 +97,34 @@ class PackageController extends Controller
             return redirect()->back();
         }
         $type = Select::of('package')->type('type')->get();
-        return view('features.package.partials.edit', compact('package', 'type'));
+        return view('pages.package.partials.edit', compact('package', 'type'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(StorePackageRequest $request, string $id)
-    {
-        $find = Package::find($id)->update([
-            'name' => $request->name,
-            'price' => $request->price,
-            'monthly_rate' => $request->monthly_rate,
-            'annual_rate' => $request->annual_rate,
-            'subscription_type' => $request->subscription_type,
-            'features' => $request->features,
-            'product_limit' => $request->product_limit,
-            'validity' => $request->validity,
-            'has_limited_features' => $request->has_limited_features,
-            'is_popular' => $request->is_popular,
-        ]);
-        if ($find) {
-            return redirect()->route('package.index')->with(['success', 'Update Success!']);
-        }
-        return redirect()->route('package.index')->with(['error', 'Something Wrong!']);
-
-    }
+    // public function update(PackageRequest $request, string $id)
+    // {
+    //     $oldData = Package::find($id);
+    //     if($oldData){
+    //         $info = ['en' => $request->info_en, 'ar' => $request->info_ar];
+    //         $money = ['en' => $request->money_en, 'ar' => $request->money_ar];
+    //         $featureOne = ['en' => $request->feature_one_en, 'ar' => $request->feature_one_ar];
+    //         $featureTwo = ['en' => $request->feature_two_en, 'ar' => $request->feature_two_ar];
+    //         $featureThree = ['en' => $request->feature_three_en, 'ar' => $request->feature_three_ar];
+    //         Package::update([
+    //             'creator_id' => auth()->id(),
+    //             'info' => json_encode($info),
+    //             'package' => $request->package,
+    //             'price' => $request->price,
+    //             'money' => json_encode($money),
+    //             'feature_one' => json_encode($featureOne),
+    //             'feature_two' => json_encode($featureTwo),
+    //             'feature_three' => json_encode($featureThree),
+    //             // 'is_popular' => $request->is_popular,
+    //         ]);
+    //     }
+    // }
 
     /**
      * Remove the specified resource from storage.
@@ -105,5 +133,10 @@ class PackageController extends Controller
     {
         $data = Package::destroy($id);
         return back()->with(['success', 'Delete Success!']);
+    }
+
+    public function createInput()
+    {
+        return view('pages.package.partials.input');
     }
 }

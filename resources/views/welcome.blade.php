@@ -75,12 +75,13 @@
                 <div class="price_content">
                     <div class="row wow fadeInUp" data-wow-delay="0.3s">
                         @foreach ($packages as $package)
+                        {{ dd(app()->getLocale()) }}
                             <div class="col-lg-3 col-6">
                                 <div class="price_item">
                                     @if ($package->is_popular)
                                         <div class="tag"><span>@lang('welcome.popular')</span></div>
                                     @endif
-                                    <h5 class="f_size_20 f_600 t_color2 mt_30"> {{ $package->name->{app()->getLocale()} }}
+                                    <h5 class="f_size_20 f_600 t_color2 mt_30"> {{ $package->package->{app()->getLocale()} }}
                                     </h5>
                                     <div class="price f_700 f_size_40 t_color2">{{ $package->price }}<sub
                                             class="f_size_16 f_400"> @lang('welcome.price')</sub>

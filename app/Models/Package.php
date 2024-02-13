@@ -10,12 +10,7 @@ class Package extends Model
     protected $guarded = [];
 
 
-    protected $casts = [
-        'name' => JsonCast::class,
-        'product_limit' => JsonCast::class,
-        'features' => JsonCast::class,
-        'validity' => JsonCast::class,
-    ];
+    protected $casts = [];
 
 
     public function user()

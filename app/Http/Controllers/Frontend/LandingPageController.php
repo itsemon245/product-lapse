@@ -201,5 +201,9 @@ class LandingPageController extends Controller
         return redirect()->route('edit.package', $id);
 
     }
+    public function createInput()
+    {
+
+    }
 
 }

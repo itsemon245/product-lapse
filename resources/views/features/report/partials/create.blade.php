@@ -36,7 +36,7 @@
                         <x-attach label="{{ __('feature/report.label.upload') }}" name='file' />
                         <x-input-error :messages="$errors->get('file')" class="mt-2" />
                     </div>
-                    <div class="form-group text_box col-lg-12 col-md-6">
+                    <div class="form-group text_box col-lg-12 col-md-12">
                         <x-textarea label="{{ __('feature/report.label.description') }}" rows="5" cols="10"
                             name="description" />
                     </div>

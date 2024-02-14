@@ -2,36 +2,36 @@
 return [
 
     //list page
-    'title' => 'Release info list',
-    'add' => 'Add release',
-    'search' => 'Search release',
+    'title' => 'اصدارات المنتج',
+    'add' => 'اضف اصدار',
+    'search' => 'البحث عن اصدار',
 
     //add page + edit page
-    'add-page' => 'Add release info',
+    'add-page' => 'اضافة اصدار',
     'label' => [
-        'name' => 'Release name',
-        'version' => 'Release version',
-        'date' => 'Release date', 
-        'details' => 'Release Details', 
+        'name' => 'عنوان الاصدار',
+        'version' => 'رقم الاصدار',
+        'date' => 'تاريخ الاصدار', 
+        'details' => 'تفاصيل الاصدار', 
     ],
     'placeholder' => [
-        'name' => 'Release name',
-        'version' => 'Release version',
-        'date' => 'Release date', 
-        'details' => 'Release Details', 
+        'name' => 'عنوان الاصدار',
+        'version' => 'رقم الاصدار',
+        'date' => 'تاريخ الاصدار', 
+        'details' => 'تفاصيل الاصدار', 
     ],
-    'submit' => 'Add release',
+    'submit' => 'اضف اصدار',
 
     //details page
-    'version' => 'Release version',
-    'date' => 'Release date',
-    'details' => 'Release details',
-    'working' => 'Working on',
-    'update' => 'Update',
+    'version' => 'رقم الاصدار',
+    'date' => 'تاريخ الاصدار',
+    'details' => 'تفاصيل الاصدار',
+    'working' => 'جارى العمل',
+    'update' => 'تحديث',
 
     //Edit page
-    'edit' => 'Edit release info',
+    'edit' => 'تحرير معلومات الإصدار',
 
     //show page
-    'show' => 'Show release info',
+    'show' => 'تفاصيل الاصدار',
 ];

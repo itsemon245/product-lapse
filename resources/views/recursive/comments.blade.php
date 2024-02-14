@@ -26,11 +26,11 @@
 
                         <textarea
                             class="flex-1 w-full px-4 py-2 text-base text-gray-700 placeholder-gray-400 bg-white border border-gray-300 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                            id="reply" placeholder="Enter your reply" name="comment" rows="2"></textarea>
+                            id="reply" placeholder="{{ __('comment.reply') }}" name="comment" rows="2"></textarea>
                     </div>
                     <div class="">
                         <button class="btn_hover agency_banner_btn btn-bg flex items-center gap-2" type="submit">
-                            <span class="ti-location-arrow "></span> @__('Reply')
+                            <span class="ti-location-arrow "></span> @__('comment.reply-btn')
                         </button>
                     </div>
                 </form>

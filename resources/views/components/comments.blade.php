@@ -14,7 +14,7 @@
         <div class="col-md-12 form-group">
             <input type="hidden" name="commentable_type" value="{{ get_class($model) }}">
             <input type="hidden" name="commentable_id" value="{{ $model->id }}">
-            <textarea class="form-control message" name="comment" placeholder="Write your comment here .."></textarea>
+            <textarea class="form-control message" name="comment" placeholder="{{ __('comment.placeholder') }}"></textarea>
         </div>
         <div class="col-md-12">
             <button class="btn_hover agency_banner_btn btn-bg" type="submit">@__('comment.send')</button>

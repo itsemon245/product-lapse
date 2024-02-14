@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('selects', function (Blueprint $table) {
             $table->id();
             $table->string('model_type');
-            $table->unsignedBigInteger('owner_id');
-            $table->foreign('owner_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->hasCreatorAndOwner();
             $table->string('type');
             $table->json('value');
             $table->string('color')->default('black');

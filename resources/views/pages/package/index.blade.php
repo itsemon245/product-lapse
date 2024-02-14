@@ -16,7 +16,7 @@
 
 
     <x-slot:actions>
-        <x-button hx-get="{{ route('package.create') }}" hx-push-url="true" hx-target="#hx-global-target" hx-select="#hx-global-target"> 
+        <x-button type="link" href="{{ route('package.create') }}" > 
             <i class="ti-plus"></i>
             Add package
         </x-button>   

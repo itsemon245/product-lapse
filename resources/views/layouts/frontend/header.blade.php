@@ -1,4 +1,4 @@
-<header class="header_area header_area_inner">
+<header class="header_area ">
     <nav class="navbar navbar-expand-lg menu_one menu_four">
         <div class="container custom_container p0">
             <a class="navbar-brand" href="/">
@@ -7,9 +7,8 @@
                 <img src="{{ asset('img/logo.png') }}" class="logo2" srcset="{{ asset('img/logo.png') }} 2x"
                     alt="logo">
             </a>
-            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
-                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="menu_toggle">
                     <span class="hamburger">
                         <span></span>
@@ -39,7 +38,8 @@
                     @include('layouts.global.notification-list')
                 @else
                     <li class="nav-item dropdown submenu m-0">
-                        <a class="btn_get btn_hover hidden-sm hidden-xs btn-bg" href="{{ route('login') }}">@__('navigation.navbar.login')</a>
+                        <a class="btn_get btn_hover hidden-sm hidden-xs btn-bg"
+                            href="{{ route('login') }}">@__('navigation.navbar.login')</a>
                     <li>
                     @endauth
 
@@ -47,3 +47,14 @@
         </div>
     </nav>
 </header>
+@pushOnce('scripts')
+    <script>
+        // $(document).ready(function() {
+        //     let toggler = $('.navbar-toggler')
+        //     toggler.click(function() {
+        //         console.log('hello')
+        //         $(toggler.data('target')).toggleClass('show')
+        //     })
+        // });
+    </script>
+@endPushOnce

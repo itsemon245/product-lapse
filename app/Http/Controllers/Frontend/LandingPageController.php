@@ -88,7 +88,6 @@ class LandingPageController extends Controller
     public function editIntro()
     {
         $info = LandingPage::first();
-
         return view('homeFeatures.intro', compact('info'));
     }
 
@@ -200,6 +199,10 @@ class LandingPageController extends Controller
         notify()->success(__('notify/success.update'));
 
         return redirect()->route('edit.package', $id);
+
+    }
+    public function createInput()
+    {
 
     }
 

@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use App\Traits\HasComments;
+use App\Traits\HasCreator;
 use App\Traits\HasImages;
+use App\Traits\HasOwner;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -12,17 +14,14 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Product extends Model
 {
-    use HasFactory, HasImages, HasComments;
+    use HasFactory, HasImages, HasComments, HasOwner, HasCreator;
 
     protected $guarded = [];
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    public function owner()
-    {
-        return $this->belongsTo(User::class, 'owner_id');
-    }
+
     public function invitations()
     {
         return $this->hasMany(Invitation::class);

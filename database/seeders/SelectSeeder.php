@@ -384,5 +384,45 @@ class SelectSeeder extends Seeder
                 'ar'=> 'واسطة',
             ],
         ]);
+        Select::create([
+            'owner_id' => 1,
+            'model_type' => Feature::PACKAGE->value,
+            'type' => SelectType::TYPE->value,
+            'color' => "#fff",
+            'value' => [
+                'en'=> 'Free package',
+                'ar'=> 'الباقة المجانية',
+            ],
+        ]);
+        Select::create([
+            'owner_id' => 1,
+            'model_type' => Feature::PACKAGE->value,
+            'type' => SelectType::TYPE->value,
+            'color' => "#fff",
+            'value' => [
+                'en'=> 'Basic Package',
+                'ar'=> 'الباقة الأساسية',
+            ],
+        ]);
+        Select::create([
+            'owner_id' => 1,
+            'model_type' => Feature::PACKAGE->value,
+            'type' => SelectType::TYPE->value,
+            'color' => "#fff",
+            'value' => [
+                'en'=> 'Golden Package',
+                'ar'=> 'الباقة الذهبية',
+            ],
+        ]);
+        Select::create([
+            'owner_id' => 1,
+            'model_type' => Feature::PACKAGE->value,
+            'type' => SelectType::TYPE->value,
+            'color' => "#fff",
+            'value' => [
+                'en'=> 'Diamond Package',
+                'ar'=> 'الباقة الماسية',
+            ],
+        ]);
     }
 }

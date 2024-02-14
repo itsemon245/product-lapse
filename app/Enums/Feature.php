@@ -9,11 +9,14 @@ enum Feature:string {
     case DOCUMENT = 'document';
     case DELIVERY = 'delivery';
     case REPORT = 'report';
-    // case PACKAGE = 'package';
     case PRODUCT = 'product';
     case RELEASE = 'release';
     case CERTIFICATE = 'certificate' ;
     case USER = 'user';
+
+
+    //super admin
+    case PACKAGE = 'package';
     
 }
 

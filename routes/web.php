@@ -27,6 +27,7 @@ use App\Http\Controllers\Features\Delivery\DeliveryController;
 
 Route::get('/', function () {
     $info = LandingPage::first();
+    // dd($info->home->title->{app()->getLocale()});
     $faqs = Faq::where('status', true)->get();
     $features = Feature::where('status', true)->get();
     $contact = Contact::first();
@@ -41,9 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 //Super admin Routes
-Route::resource('package', PackageController::class);
-Route::get('admin-certificate', [CertificateController::class, 'getAllCertificate'])->name('admin.certificate');
-Route::get('certificate-search', [CertificateController::class, 'search'])->name('search.certificate');
+
 
 
 
@@ -68,3 +67,4 @@ Route::post('set-locale', function (Request $request) {
 require __DIR__ . '/auth.php';
 require __DIR__ . '/frontend.php';
 require __DIR__ . '/editable.php';
+require __DIR__ . '/admin.php';

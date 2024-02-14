@@ -2,29 +2,29 @@
 return [
 
     //list page
-    'title' => 'Product team',
-    'add' => 'Add',
-    'search' => 'Search by email',
+    'title' => 'فريق المنتج',
+    'add' => 'اضف',
+    'search' => 'البحث بالبريد الالكترونى',
 
     //add page + edit page
-    'add-page' => 'Add user',
+    'add-page' => 'إضافة مستخدم',
     'label' => [
-        'fname' => 'First name',
-        'lname' => 'Last name',
-        'email' => 'Email', 
+        'fname' => 'الاسم الأول',
+        'lname' => 'اسم العائلة',
+        'email' => 'بريد إلكتروني', 
         'task' => 'Select task', 
-        'phone' => 'Phone',
-        'position' => 'Position',
+        'phone' => 'هاتف',
+        'position' => 'موضع',
     ],
     'placeholder' => [
-        'fname' => 'first name',
-        'lname' => 'last name',
-        'email' => 'email', 
-        'phone' => 'phone',
-        'position' => 'position',
+        'fname' => 'الاسم الأول',
+        'lname' => 'اسم العائلة',
+        'email' => 'بريد إلكتروني', 
+        'phone' => 'هاتف',
+        'position' => 'موضع',
     ],
-    'choose' => 'Choose products',
-    'submit' => 'Add user',
+    'choose' => 'اختر المنتجات',
+    'submit' => 'إضافة مستخدم',
 
     // //details page
     // 'version' => 'Release version',

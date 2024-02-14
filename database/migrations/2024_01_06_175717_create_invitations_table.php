@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('invitations', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('owner_id');
+            $table->hasCreatorAndOwner();
             $table->string('email', 255);
             $table->string('first_name', 255);
             $table->string('last_name', 255);

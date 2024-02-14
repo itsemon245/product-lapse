@@ -83,7 +83,7 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             SelectSeeder::class,
             LandingPageSeeder::class,
-            PackageSeeder::class,
+            // PackageSeeder::class,
             ContactSeeder::class,
             FaqSeeder::class,
             FeatureSeeder::class,

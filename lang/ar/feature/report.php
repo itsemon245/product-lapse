@@ -2,36 +2,36 @@
 return [
 
     //list page
-    'title' => 'Report list',
-    'add' => 'Add report',
-    'search' => 'Search report',
-    'showing' => 'Report type',
+    'title' => 'تقارير المنتج',
+    'add' => 'اضف تقرير',
+    'search' => 'البحث عن تقرير',
+    'showing' => 'نوع التقرير',
 
     //add page + edit page
     'label' => [
-        'name' => 'Report name',
-        'type' => 'Report type', 
-        'date' => 'Report date', 
-        'upload' => 'Upload file',
-        'description' => 'Report description', 
+        'name' => 'اسم التقرير',
+        'type' => 'نوع التقرير', 
+        'date' => 'تاريخ التقرير', 
+        'upload' => 'ارفاق ملف',
+        'description' => 'وصف التقرير', 
     ],
     'placeholder' => [
-        'name' => 'Report name',
-        'type' => 'Report type', 
-        'description' => 'Report description', 
+        'name' => 'اسم التقرير',
+        'type' => 'نوع التقرير', 
+        'description' => 'وصف التقرير', 
     ],
-    'cancel' => 'Cancel',
-    'submit' => 'Add report',
+    'cancel' => 'الغاء',
+    'submit' => 'اضف تقرير',
 
     //details page
-    'classification' => 'Classification',
-    'details' => 'Report details',
-    'working' => 'Working on',
-    'update' => 'Update',
+    'classification' => 'تصنيف التذكرة',
+    'details' => 'تفاصيل التقرير',
+    'working' => 'جارى العمل',
+    'update' => 'تحديث',
 
     //Edit page
-    'edit' => 'Edit Report',
+    'edit' => 'تحرير التقرير',
 
     //show page
-    'show' => 'Report details',
+    'show' => 'تفاصيل التقرير',
 ];

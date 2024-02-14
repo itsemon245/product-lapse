@@ -25,6 +25,5 @@ require __DIR__ . '/task.php';
 require __DIR__ . '/select.php';
 require __DIR__ . '/team.php';
 require __DIR__ . '/certificate.php';
-require __DIR__ . '/faqs.php';
 require __DIR__ . '/features.php';
 require __DIR__ . '/comment.php';

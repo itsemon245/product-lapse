@@ -15,10 +15,10 @@
                         </div>
                         <div class="col-md-12">
                             <h6 class="title2">@__('feature/release.version')</h6>
-                            <p class="f_400 mb-30 text-font">Web design</p>
+                            <p class="f_400 mb-30 text-font">{{ $release->version }}</p>
                         </div>
                         <div class="col-md-12">
-                            <h6 class="title2">Release details</h6>
+                            <h6 class="title2">{{ $release->description }}</h6>
                             <p class="f_400 mb-30 text-font">
                                 {{ $release->description }}
                             </p>
@@ -39,10 +39,10 @@
                         </div>
                         <div class="row">
                             <div class="col-6">
-                                <span class="button-1 btn-bg-1">Workin on</span>
+                                <span class="button-1 btn-bg-1">@__('feature/release.working')</span>
                             </div>
                             <div class="col-6">
-                                <a href="#" class="button-1 btn-bg-2"><i class="ti-reload"></i>Update</a>
+                                <a href="#" class="button-1 btn-bg-2"><i class="ti-reload"></i>@__('feature/release.update')</a>
                             </div>
                         </div>
                     </div>

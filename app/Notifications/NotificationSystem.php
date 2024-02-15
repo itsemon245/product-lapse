@@ -7,17 +7,17 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class IdeaNotification extends Notification
+class NotificationSystem extends Notification
 {
     use Queueable;
 
-    public $idea;
+    public $data;
     /**
      * Create a new notification instance.
      */
-    public function __construct($idea)
+    public function __construct($data)
     {
-        $this->idea = $idea;
+        $this->data = $data;
     }
 
     /**
@@ -38,8 +38,8 @@ class IdeaNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'owner_id' => $this->idea['owner_id'],
-            'reason' => $this->idea['name'],
+            'creator_id' => $this->data['creator_id'],
+            'reason' => $this->data['name'],
         ];
     }
 }

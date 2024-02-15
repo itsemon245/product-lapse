@@ -7,7 +7,7 @@
         @forelse (auth()->user()->notifications as $notification)
         <li class="nav-item {{ $notification->read_at == null ? 'bg-light' : '' }}">
             @php
-                $user = App\Models\User::with('image')->find($notification->data['owner_id']);
+                $user = App\Models\User::with('image')->find($notification->data['creator_id']);
                 // dd($user)
             @endphp
             <a href="blog-grid.html" class="nav-link">
@@ -18,7 +18,7 @@
                                 <img src="{{ $user->image->url ?? asset('img/profile1.png') }} " alt="">
                             </div>
                             <div class="media-body">
-                                <h5 class="f_500"><span>{{ $user->name . ' ' . '|' }} </span> {{ $notification->data['reason'] }} </h5>
+                                {{-- <h5 class="f_500"><span>{{ $user->name . ' ' . '|' }} </span> {{ $notification->data['reason'] }} </h5> --}}
                                 <h6 class="f_400"> {{ $notification->created_at->diffForHumans() }} </h6>
                             </div>
                         </div>

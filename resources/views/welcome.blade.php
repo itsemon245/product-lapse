@@ -129,7 +129,7 @@
                                             <div id="collapse{{ $faq?->id }}" class="collapse"
                                                 aria-labelledby="heading{{ $faq?->id }}" data-parent="#accordion6">
                                                 <div class="card-body">
-                                                    <? $faq?->answer?->{app()->getLocale()} ?>
+                                                    <?= $faq?->answer?->{app()->getLocale()} ?>
                                                 </div>
                                             </div>
                                         </div>

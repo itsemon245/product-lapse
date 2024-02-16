@@ -21,7 +21,7 @@ class DeliveryController extends Controller
      */
     public function index()
     {
-        $deliveries = Delivery::find(productId())->paginate(10);
+        $deliveries = Product::find(productId())->deliveries()->paginate();
         return view('features.delivery.index', compact('deliveries'));
     }
 

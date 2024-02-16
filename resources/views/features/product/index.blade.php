@@ -44,7 +44,7 @@
                                                 class="f_500 t_color3">{{ $product->name }}</a></h4>
                                         <ul class="list-unstyled">
                                             <li class="p_color1">{{ $product->category }}</li>
-                                            <li>{{str($product->description)->limit(12)}}</li>
+                                            <li>{{ str($product->description)->limit(12) }}</li>
                                         </ul>
                                     </div>
                                     <div class="jobsearch-table-cell">
@@ -72,6 +72,11 @@
 
                 </div>
             @endforelse
+
         </x-slot:list>
+        <x-slot:pagination>
+            {!! $products->links() !!}
+        </x-slot:pagination>
+
     </x-feature.index>
 @endsection

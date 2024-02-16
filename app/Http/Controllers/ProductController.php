@@ -18,7 +18,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products   = Product::latest()->paginate(10);
+        $products   = Product::latest()->paginate(5);
         $categories = Select::of('product')->type('category')->get();
         return view('features.product.index', compact('products', 'categories'));
     }

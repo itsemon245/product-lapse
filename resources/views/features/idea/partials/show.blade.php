@@ -71,7 +71,7 @@
                         data-target="#myModal1"><i class="ti-sharethis"></i></a>
                     <a href="{{ route('pdf.generate', $idea) }}" target="_blank" class="icon-square icon-square3"
                         title="save">
-                        <img src="{{ asset('img/pdf2.png') }}">
+                        <i class="ti-save"></i>
                     </a>
                 </div>
 

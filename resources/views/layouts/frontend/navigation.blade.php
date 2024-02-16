@@ -8,7 +8,7 @@
         @auth
             <li class="nav-item hidden-md visible-sm">
                 <a class="nav-link" href="#tolink-6">
-                    @__('navigation.notifications')
+                    @__('navigation.navbar.notifications')
                     <span class="notifi-num notifi-num2">25</span>
                 </a>
             </li>

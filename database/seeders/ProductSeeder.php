@@ -21,7 +21,8 @@ class ProductSeeder extends Seeder
             Image::create([
                 'imageable_id'=> $product->id,
                 'imageable_type'=> get_class($product),
-                'url'=> asset('img/logo.png')
+                'url'=> asset('img/logo.png'),
+                'path'=> ''
             ]);
         }
     }

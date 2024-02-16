@@ -59,7 +59,7 @@
                 @endif
             </form>
         </li>
-        <li class="nav-item"><a class="btn_get btn_hover hidden-md visible-sm" href="#get-app">login</a>
+        <li class="nav-item"><a class="btn_get btn_hover hidden-md visible-sm" href="{{route('login')}}">login</a>
         </li>
     </ul>
 </div>

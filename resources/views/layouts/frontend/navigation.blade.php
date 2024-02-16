@@ -46,17 +46,17 @@
             </a>
         </li>
         <li class="nav-item">
-            @if (app()->getLocale() == 'ar')
-                <form action="{{ route('lang.toggle') }}" method="post">
-                    @csrf
-                    <button class="nav-link">
-                        عربى
-                    </button>
-                @else
+            <form action="{{ route('lang.toggle') }}" method="post">
+                @csrf
+                @if (app()->getLocale() == 'ar')
                     <button class="nav-link">
                         English
                     </button>
-            @endif
+                @else
+                    <button class="nav-link">
+                        عربى
+                    </button>
+                @endif
             </form>
         </li>
         <li class="nav-item"><a class="btn_get btn_hover hidden-md visible-sm" href="#get-app">login</a>

@@ -6,6 +6,7 @@ use App\Models\Idea;
 use App\Models\Select;
 use App\Models\Product;
 use App\Notifications\IdeaNotification;
+use App\Notifications\NotificationSystem;
 use App\Services\SearchService;
 use App\Http\Requests\IdeaRequest;
 use App\Http\Controllers\Controller;
@@ -49,6 +50,7 @@ class IdeaController extends Controller
             'massage',
             'Store success'
         );
+        auth()->user()->notify(new NotificationSystem($request));
         notify()->success(__('Created successfully!'));
         return redirect()->route('idea.index');
     }
@@ -118,9 +120,9 @@ class IdeaController extends Controller
     }
 
 
-    public function notify()
-    {
-        $idea = Idea::first();
-        auth()->user()->notify(new IdeaNotification($idea));
-    }
+    // public function notify()
+    // {
+    //     $idea = Idea::first();
+    //     auth()->user()->notify(new IdeaNotification($idea));
+    // }
 }

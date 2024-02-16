@@ -77,7 +77,6 @@
                 <div class="price_content">
                     <div class="row wow fadeInUp" data-wow-delay="0.3s">
                         @foreach ($packages as $package)
-                        {{-- {{ dd(app()->getLocale()) }} --}}
                             <div class="col-lg-3 col-6">
                                 <div class="price_item">
                                     @if ($package?->is_popular)
@@ -130,7 +129,7 @@
                                             <div id="collapse{{ $faq?->id }}" class="collapse"
                                                 aria-labelledby="heading{{ $faq?->id }}" data-parent="#accordion6">
                                                 <div class="card-body">
-                                                    <? $faq?->answer?->{app()->getLocale()} ?>
+                                                    <?= $faq?->answer?->{app()->getLocale()} ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -160,7 +159,7 @@
                 </div>
             </div>
         </section>
-        <!-- start contact -?->
+        <!-- start contact -->
         <section class="app_featured_area bg-grey contact-section" id="tolink-6">
             <div class="container">
                 <div class="row flex-row-reverse app_feature_info">

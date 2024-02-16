@@ -34,7 +34,7 @@
                         <div class="list_item">
                             <figure>
                                 <a href="{{ route('product.show', $product) }}">
-                                    <img src="{{ $product->image?->url }}" alt="">
+                                    <img src="{{ $product->image?->url ?? asset('img/logo.png') }}" alt="">
                                 </a>
                             </figure>
                             <div class="joblisting_text">

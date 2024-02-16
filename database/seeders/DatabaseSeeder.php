@@ -54,9 +54,8 @@ class DatabaseSeeder extends Seeder
         // Remove Dispatcher
         // Package::unsetEventDispatcher();
         // Package::factory(10)->create();
-
-        Product::unsetEventDispatcher();
-        Product::factory(10)->create();
+        $this->call(ProductSeeder::class);
+        
 
         Change::unsetEventDispatcher();
         Change::factory(10)->create();

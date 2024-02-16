@@ -6,7 +6,7 @@
     @if ($label)
         <label class="text_c f_500">{{ $label }}</label>
     @endif
-    <textarea {{ $attributes->merge(['class' => 'block w-full']) }}>{{ $slot }}</textarea>
+    <textarea {{ $attributes->merge(['class' => 'block w-full']) }}>{{ empty($slot) ? old($name) : $slot }}</textarea>
     @error($name)
         <span class="text-danger">{{ $message }}</span>
     @enderror

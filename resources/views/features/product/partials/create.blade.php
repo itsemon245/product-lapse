@@ -20,7 +20,8 @@
                         <x-select-input :label="__('feature/product.label.stage')" id="stage" placeholder="Choose one" name="stage" autofocus>
                             @if ($stages)
                                 @forelse ($stages as $category)
-                                    <option value="<?= $category->value->{app()->getLocale()} ?>">
+                                    <option value="<?= $category->value->{app()->getLocale()} ?>" 
+                                        @selected(old('stage')== $category->value->{app()->getLocale()})>
                                         <?= $category->value->{app()->getLocale()} ?>
                                     </option>
                                 @empty
@@ -38,7 +39,8 @@
                         <x-select-input :label="__('feature/product.label.category')" id="category" placeholder="Choose one" name="category" autofocus>
                             @if ($categories)
                                 @forelse ($categories as $category)
-                                    <option value="<?= $category->value->{app()->getLocale()} ?>">
+                                    <option value="<?= $category->value->{app()->getLocale()} ?>" 
+                                        @selected(old('category')== $category->value->{app()->getLocale()})>
                                         <?= $category->value->{app()->getLocale()} ?>
                                     </option>
                                 @empty
@@ -53,8 +55,7 @@
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-6">
                         <x-textarea placeholder="{{ __('feature/product.label.description') }}" rows="5" cols="10" name="description"
-                            label="{{  __('feature/product.placeholder.description') }}">
-                        </x-textarea>
+                            label="{{  __('feature/product.placeholder.description') }}">{{old('description')}}</x-textarea>
                     </div>
 
 

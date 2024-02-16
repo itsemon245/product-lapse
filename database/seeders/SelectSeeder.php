@@ -24,16 +24,16 @@ class SelectSeeder extends Seeder
                 'ar' => 'رجال'
             ],
         ]);
-        // Select::create([
-        //     'owner_id' => 1,
-        //     'model_type' => Feature::PRODUCT->value,
-        //     'type' => SelectType::STAGE->value,
-        //     'color' => "#fff",
-        //     'value' => [
-        //         'en'=> 'Not Started',
-        //         'ar'=> 'لم يبدأ'
-        //     ],
-        // ]);
+        Select::create([
+            'owner_id' => 1,
+            'model_type' => Feature::PRODUCT->value,
+            'type' => SelectType::STAGE->value,
+            'color' => "#fff",
+            'value' => [
+                'en'=> 'Not Started',
+                'ar'=> 'لم يبدأ'
+            ],
+        ]);
         Select::create([
             'owner_id' => 1,
             'model_type' => Feature::IDEA->value,

@@ -1,7 +1,8 @@
-<?php 
+<?php
 namespace App\Enums;
 
-enum Feature:string {
+enum Feature: string
+{
     case IDEA = 'idea';
     case TASK = 'task';
     case CHANGE = 'change';
@@ -11,13 +12,11 @@ enum Feature:string {
     case REPORT = 'report';
     case PRODUCT = 'product';
     case RELEASE = 'release';
-    case CERTIFICATE = 'certificate' ;
+    case CERTIFICATE = 'certificate';
     case USER = 'user';
 
 
     //super admin
     case PACKAGE = 'package';
-    
-}
 
-?>
+}

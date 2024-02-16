@@ -20,18 +20,28 @@ class SelectSeeder extends Seeder
             'type' => SelectType::CATEGORY->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Men',
-                'ar'=> 'رجال'
+                'en' => 'Men',
+                'ar' => 'رجال'
             ],
         ]);
+        // Select::create([
+        //     'owner_id' => 1,
+        //     'model_type' => Feature::PRODUCT->value,
+        //     'type' => SelectType::STAGE->value,
+        //     'color' => "#fff",
+        //     'value' => [
+        //         'en'=> 'Not Started',
+        //         'ar'=> 'لم يبدأ'
+        //     ],
+        // ]);
         Select::create([
             'owner_id' => 1,
-            'model_type' => Feature::PRODUCT->value,
-            'type' => SelectType::STAGE->value,
+            'model_type' => Feature::IDEA->value,
+            'type' => SelectType::PRIORITY->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Not Started',
-                'ar'=> 'لم يبدأ'
+                'en' => 'Working on',
+                'ar' => 'يعمل على',
             ],
         ]);
         Select::create([
@@ -40,8 +50,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::PRIORITY->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Working on',
-                'ar'=> 'يعمل على',
+                'en' => 'Pending',
+                'ar' => 'قيد الانتظار',
             ],
         ]);
         Select::create([
@@ -50,18 +60,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::PRIORITY->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Pending',
-                'ar'=> 'قيد الانتظار',
-            ],
-        ]);
-        Select::create([
-            'owner_id' => 1,
-            'model_type' => Feature::IDEA->value,
-            'type' => SelectType::PRIORITY->value,
-            'color' => "#fff",
-            'value' => [
-                'en'=> 'Stopped',
-                'ar'=> 'توقفت',
+                'en' => 'Stopped',
+                'ar' => 'توقفت',
             ],
         ]);
         Select::create([
@@ -70,8 +70,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::STATUS->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Working on',
-                'ar'=> 'يعمل على',
+                'en' => 'Working on',
+                'ar' => 'يعمل على',
             ],
         ]);
         Select::create([
@@ -80,8 +80,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::STATUS->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Pending',
-                'ar'=> 'قيد الانتظار',
+                'en' => 'Pending',
+                'ar' => 'قيد الانتظار',
             ],
         ]);
         Select::create([
@@ -90,8 +90,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::STATUS->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Stopped',
-                'ar'=> 'توقفت',
+                'en' => 'Stopped',
+                'ar' => 'توقفت',
             ],
         ]);
         Select::create([
@@ -100,8 +100,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::CATEGORY->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Working on',
-                'ar'=> 'يعمل على',
+                'en' => 'Working on',
+                'ar' => 'يعمل على',
             ],
         ]);
         Select::create([
@@ -110,8 +110,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::CATEGORY->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Pending',
-                'ar'=> 'قيد الانتظار',
+                'en' => 'Pending',
+                'ar' => 'قيد الانتظار',
             ],
         ]);
         Select::create([
@@ -120,8 +120,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::CATEGORY->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Stopped',
-                'ar'=> 'توقفت',
+                'en' => 'Stopped',
+                'ar' => 'توقفت',
             ],
         ]);
         Select::create([
@@ -130,8 +130,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::STATUS->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Working on',
-                'ar'=> 'يعمل على',
+                'en' => 'Working on',
+                'ar' => 'يعمل على',
             ],
         ]);
         Select::create([
@@ -140,8 +140,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::STATUS->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Pending',
-                'ar'=> 'قيد الانتظار',
+                'en' => 'Pending',
+                'ar' => 'قيد الانتظار',
             ],
         ]);
         Select::create([
@@ -150,8 +150,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::STATUS->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Stopped',
-                'ar'=> 'توقفت',
+                'en' => 'Stopped',
+                'ar' => 'توقفت',
             ],
         ]);
         Select::create([
@@ -160,8 +160,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::TYPE->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'PDF',
-                'ar'=> 'بي دي إف',
+                'en' => 'PDF',
+                'ar' => 'بي دي إف',
             ],
         ]);
         Select::create([
@@ -170,8 +170,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::TYPE->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Image',
-                'ar'=> 'صورة',
+                'en' => 'Image',
+                'ar' => 'صورة',
             ],
         ]);
         Select::create([
@@ -180,8 +180,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::TYPE->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'PDF',
-                'ar'=> 'بي دي إف',
+                'en' => 'PDF',
+                'ar' => 'بي دي إف',
             ],
         ]);
         Select::create([
@@ -190,8 +190,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::TYPE->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Image',
-                'ar'=> 'صورة',
+                'en' => 'Image',
+                'ar' => 'صورة',
             ],
         ]);
         Select::create([
@@ -200,8 +200,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::SUBMISSION->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Approved',
-                'ar'=> 'موافقة',
+                'en' => 'Approved',
+                'ar' => 'موافقة',
             ],
         ]);
         Select::create([
@@ -210,8 +210,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::SUBMISSION->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Cancel',
-                'ar'=> 'يلغي',
+                'en' => 'Cancel',
+                'ar' => 'يلغي',
             ],
         ]);
         Select::create([
@@ -220,8 +220,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::PRIORITY->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Low',
-                'ar'=> 'قليل',
+                'en' => 'Low',
+                'ar' => 'قليل',
             ],
         ]);
         Select::create([
@@ -230,8 +230,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::PRIORITY->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Medium',
-                'ar'=> 'واسطة',
+                'en' => 'Medium',
+                'ar' => 'واسطة',
             ],
         ]);
         Select::create([
@@ -240,8 +240,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::PRIORITY->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'High',
-                'ar'=> 'عالي',
+                'en' => 'High',
+                'ar' => 'عالي',
             ],
         ]);
         Select::create([
@@ -250,8 +250,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::TICKET->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Start',
-                'ar'=> 'يبدأ',
+                'en' => 'Start',
+                'ar' => 'يبدأ',
             ],
         ]);
         Select::create([
@@ -260,8 +260,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::TICKET->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Not start',
-                'ar'=> 'لا تبدأ',
+                'en' => 'Not start',
+                'ar' => 'لا تبدأ',
             ],
         ]);
         Select::create([
@@ -270,8 +270,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::CLASSIFICATION->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Good',
-                'ar'=> 'جيد',
+                'en' => 'Good',
+                'ar' => 'جيد',
             ],
         ]);
         Select::create([
@@ -280,8 +280,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::CLASSIFICATION->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Not bad',
-                'ar'=> 'ليس سيئًا',
+                'en' => 'Not bad',
+                'ar' => 'ليس سيئًا',
             ],
         ]);
         Select::create([
@@ -290,8 +290,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::CLASSIFICATION->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Best',
-                'ar'=> 'أفضل',
+                'en' => 'Best',
+                'ar' => 'أفضل',
             ],
         ]);
         Select::create([
@@ -300,8 +300,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::CLASSIFICATION->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Good',
-                'ar'=> 'يعمل على',
+                'en' => 'Good',
+                'ar' => 'يعمل على',
             ],
         ]);
         Select::create([
@@ -310,8 +310,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::CLASSIFICATION->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Not bad',
-                'ar'=> 'قيد الانتظار',
+                'en' => 'Not bad',
+                'ar' => 'قيد الانتظار',
             ],
         ]);
         Select::create([
@@ -320,8 +320,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::CLASSIFICATION->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Best',
-                'ar'=> 'توقفت',
+                'en' => 'Best',
+                'ar' => 'توقفت',
             ],
         ]);
         Select::create([
@@ -330,8 +330,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::PRIORITY->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Low',
-                'ar'=> 'قليل',
+                'en' => 'Low',
+                'ar' => 'قليل',
             ],
         ]);
         Select::create([
@@ -340,8 +340,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::PRIORITY->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'High',
-                'ar'=> 'عالي',
+                'en' => 'High',
+                'ar' => 'عالي',
             ],
         ]);
         Select::create([
@@ -350,8 +350,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::PRIORITY->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Medium',
-                'ar'=> 'واسطة',
+                'en' => 'Medium',
+                'ar' => 'واسطة',
             ],
         ]);
         Select::create([
@@ -360,8 +360,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::TASK->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Low',
-                'ar'=> 'قليل',
+                'en' => 'Low',
+                'ar' => 'قليل',
             ],
         ]);
         Select::create([
@@ -370,8 +370,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::TASK->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'High',
-                'ar'=> 'عالي',
+                'en' => 'High',
+                'ar' => 'عالي',
             ],
         ]);
         Select::create([
@@ -380,8 +380,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::TASK->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Medium',
-                'ar'=> 'واسطة',
+                'en' => 'Medium',
+                'ar' => 'واسطة',
             ],
         ]);
         Select::create([
@@ -390,8 +390,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::TYPE->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Free package',
-                'ar'=> 'الباقة المجانية',
+                'en' => 'Free package',
+                'ar' => 'الباقة المجانية',
             ],
         ]);
         Select::create([
@@ -400,8 +400,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::TYPE->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Basic Package',
-                'ar'=> 'الباقة الأساسية',
+                'en' => 'Basic Package',
+                'ar' => 'الباقة الأساسية',
             ],
         ]);
         Select::create([
@@ -410,8 +410,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::TYPE->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Golden Package',
-                'ar'=> 'الباقة الذهبية',
+                'en' => 'Golden Package',
+                'ar' => 'الباقة الذهبية',
             ],
         ]);
         Select::create([
@@ -420,8 +420,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::TYPE->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Diamond Package',
-                'ar'=> 'الباقة الماسية',
+                'en' => 'Diamond Package',
+                'ar' => 'الباقة الماسية',
             ],
         ]);
     }

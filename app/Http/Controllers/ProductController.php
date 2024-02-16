@@ -207,7 +207,8 @@ class ProductController extends Controller
      */
     public function info(Product $product)
     {
-        $data  = Product::with('owner')->find(productId());
+
+        $data = Product::with('owner')->find(productId());
         $owner = $data->owner;
         $product->loadComments();
         $comments = $product->comments;

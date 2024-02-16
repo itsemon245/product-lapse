@@ -19,6 +19,7 @@
     },
     "dependencies": {
         "crypto-js": "^4.2.0",
-        "flowbite": "^2.2.1"
+        "flowbite": "^2.2.1",
+        "force": "^0.0.3"
     }
 }

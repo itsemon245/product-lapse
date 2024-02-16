@@ -159,7 +159,7 @@
                 </div>
             </div>
         </section>
-        <!-- start contact -?->
+        <!-- start contact -->
         <section class="app_featured_area bg-grey contact-section" id="tolink-6">
             <div class="container">
                 <div class="row flex-row-reverse app_feature_info">

@@ -4,7 +4,6 @@ namespace App\Enums;
 enum SelectType: string
 {
     case CATEGORY = 'category';
-    case STAGE = 'stage';
     case STATUS = 'status';
     case CLASSIFICATION = 'classification';
     case PRIORITY = 'priority';
@@ -15,5 +14,3 @@ enum SelectType: string
     case TASK = 'task';
 
 }
-
-?>

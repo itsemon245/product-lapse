@@ -77,7 +77,7 @@
                 <div class="price_content">
                     <div class="row wow fadeInUp" data-wow-delay="0.3s">
                         @foreach ($packages as $package)
-                        {{ dd(app()->getLocale()) }}
+                        {{-- {{ dd(app()->getLocale()) }} --}}
                             <div class="col-lg-3 col-6">
                                 <div class="price_item">
                                     @if ($package?->is_popular)

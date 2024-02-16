@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers\Features\Idea;
+
 use App\Enums\Stage;
 use App\Models\Idea;
 use App\Models\Select;
@@ -10,6 +11,9 @@ use App\Http\Requests\IdeaRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SearchRequest;
 use Illuminate\Support\Facades\Cookie;
+use PDF;
+
+use Dompdf\Dompdf;
 
 class IdeaController extends Controller
 {
@@ -59,6 +63,18 @@ class IdeaController extends Controller
         $stages = Stage::cases();
 
         return view('features.idea.partials.show', compact('idea', 'comments', 'stages'));
+    }
+
+    public function generatePdf(Idea $idea)
+    {
+        $stages = Stage::cases();
+
+        // $dompdf = new Dompdf();
+        // $dompdf->loadHtml(view('features.idea.partials.pdf', compact('idea', 'stages')));
+        // $dompdf->setPaper('A4', 'landscape');
+        // $dompdf->render();
+        // $dompdf->stream();
+        return view('features.idea.partials.pdf', compact('idea', 'stages'));
     }
 
     /**

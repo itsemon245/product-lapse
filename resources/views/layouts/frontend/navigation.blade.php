@@ -5,19 +5,21 @@
                 Home
             </a>
         </li>
-        <li class="nav-item hidden-md visible-sm">
-            <a class="nav-link" href="#tolink-6">
-                Notifications
-                <span class="notifi-num notifi-num2">25</span>
-            </a>
-        </li>
-        <li class="nav-item dropdown submenu hidden-md visible-sm">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Profile
-            </a>
-            @include('layouts.global.profile-menu')
-        </li>
+        @auth
+            <li class="nav-item hidden-md visible-sm">
+                <a class="nav-link" href="#tolink-6">
+                    Notifications
+                    <span class="notifi-num notifi-num2">25</span>
+                </a>
+            </li>
+            <li class="nav-item dropdown submenu hidden-md visible-sm">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Profile
+                </a>
+                @include('layouts.global.profile-menu')
+            </li>
+        @endauth
         <li class="nav-item">
             <a class="nav-link" href="#tolink-2">
                 About us

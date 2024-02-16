@@ -70,8 +70,8 @@
                         </div>
 
                         <div class="d-flex align-items-center text-center">
-                            <x-btn-primary name="{{ __('feature/product.submit') }}" type="submit" />
-                            <x-btn-secondary name="{{ __('feature/product.cancel') }}" />
+                            <x-button name="{{ __('feature/product.submit') }}" type="submit">{{  __('feature/product.edit') }}</x-button>
+                            <x-button type="link" href="{{route('product.index')}}" color="secondary">{{  __('feature/product.cancel') }}</x-button>
                         </div>
                     </form>
                 </x-slot:from>

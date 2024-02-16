@@ -125,7 +125,7 @@ class ProductController extends Controller
         return [
             'innovate'              => [
                 'name'    => @__('productHome.innovate'),
-                'counter' => 5,
+                'counter' => 0,
                 'icon'    => 'img/solution.png',
                 'route'   => route('idea.index'),
              ],

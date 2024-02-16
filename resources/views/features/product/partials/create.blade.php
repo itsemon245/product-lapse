@@ -64,7 +64,7 @@
 
                 <div class="d-flex align-items-center text-center">
                     <x-button> @__('feature/product.submit')</x-button>
-                    <x-button type="button" color="secondary">{{  __('feature/product.cancel') }}</x-button>
+                    <x-button type="link" href="{{route('product.index')}}" color="secondary">{{  __('feature/product.cancel') }}</x-button>
                 </div>
             </form>
         </x-slot:from>

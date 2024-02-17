@@ -1,5 +1,5 @@
 <ul class="dropdown-menu">
-    <li class="nav-item"><a href="{{ route('profile.edit') }}" class="nav-link">@__('navigation.profile.profile')</a></li>
+    <li class="nav-item"><a href="{{ route('profile.index') }}" class="nav-link">@__('navigation.profile.profile')</a></li>
     <li class="nav-item"><a href="{{ route('invitation.index') }}" class="nav-link">@__('navigation.profile.invitation')</a></li>
     <li class="nav-item"><a href="{{ route('dashboard') }}" class="nav-link">@__('navigation.profile.products')</a></li>
     <li class="nav-item"><a href="#" class="nav-link">@__('navigation.profile.report')</a></li>

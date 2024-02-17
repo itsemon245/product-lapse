@@ -7,6 +7,11 @@ return [
         'name' => 'Name',
         'namef' => 'Enter name',
         'email' => 'Email',
+        'phone' => 'Phone',
+        'employer' => 'Employer',
+        'free' => 'Free Package',
+        'upgrade' => 'Upgrade',
+        'edit' => 'Edit profile',
         'emailf' => 'Enter email',
     ],
     'password' => [

@@ -2,19 +2,15 @@
 namespace App\Http\Controllers\Features\Idea;
 
 use App\Enums\Stage;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\IdeaRequest;
+use App\Http\Requests\SearchRequest;
 use App\Models\Idea;
-use App\Models\Select;
 use App\Models\Product;
-use App\Notifications\IdeaNotification;
+use App\Models\Select;
+use App\Models\User;
 use App\Notifications\NotificationSystem;
 use App\Services\SearchService;
-use App\Http\Requests\IdeaRequest;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\SearchRequest;
-use Illuminate\Support\Facades\Cookie;
-use PDF;
-
-use Dompdf\Dompdf;
 
 class IdeaController extends Controller
 {
@@ -23,7 +19,7 @@ class IdeaController extends Controller
      */
     public function index()
     {
-        $ideas = Product::find(productId())->ideas()->paginate(10);
+        $ideas      = Product::find(productId())->ideas()->paginate(10);
         $priorities = Select::of('idea')->type('priority')->get();
         return view('features.idea.index', compact('ideas', 'priorities'));
     }
@@ -34,7 +30,7 @@ class IdeaController extends Controller
     public function create()
     {
         $priorities = Select::of('idea')->type('priority')->get();
-        $stages = Stage::cases();
+        $stages     = Stage::cases();
         return view('features.idea.partials.create', compact('priorities', 'stages'));
     }
 
@@ -43,14 +39,18 @@ class IdeaController extends Controller
      */
     public function store(IdeaRequest $request)
     {
-        $data = $request->except('_token');
-        $data['creator_id'] = ownerId();
-        $idea = Idea::create($data);
+        $data                 = $request->except('_token');
+        $data[ 'creator_id' ] = ownerId();
+        $idea                 = Idea::create($data);
+        // $initiator            = $idea->creator ?? $idea->user;
+        // $users                = Product::find(productId())->users->reject(function (User $user) use ($initiator) {
+        //     return $user->id == $initiator->id;
+        // });
         $request->session()->flash(
             'massage',
             'Store success'
         );
-        auth()->user()->notify(new NotificationSystem($request));
+        // auth()->user()->notify(new NotificationSystem($request));
         notify()->success(__('Created successfully!'));
         return redirect()->route('idea.index');
     }
@@ -62,7 +62,7 @@ class IdeaController extends Controller
     {
         $idea->loadComments();
         $comments = $idea->comments;
-        $stages = Stage::cases();
+        $stages   = Stage::cases();
 
         return view('features.idea.partials.show', compact('idea', 'comments', 'stages'));
     }
@@ -85,7 +85,7 @@ class IdeaController extends Controller
     public function edit(Idea $idea)
     {
         $priorities = Select::of('idea')->type('priority')->get();
-        $stages = Stage::cases();
+        $stages     = Stage::cases();
         return view('features.idea.partials.edit', compact('idea', 'priorities', 'stages'));
     }
 
@@ -94,8 +94,8 @@ class IdeaController extends Controller
      */
     public function update(IdeaRequest $request, Idea $idea)
     {
-        $data = $request->except('_token', '_method');
-        $data['owner_id'] = ownerId();
+        $data               = $request->except('_token', '_method');
+        $data[ 'owner_id' ] = ownerId();
         $idea->update($data);
 
         notify()->success(__('Updated successfully!'));
@@ -114,11 +114,10 @@ class IdeaController extends Controller
 
     public function search(SearchRequest $request)
     {
-        $ideas = SearchService::items($request);
+        $ideas      = SearchService::items($request);
         $priorities = Select::of('idea')->type('priority')->get();
         return view('features.idea.index', compact('ideas', 'priorities'));
     }
-
 
     // public function notify()
     // {

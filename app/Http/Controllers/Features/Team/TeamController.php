@@ -35,7 +35,7 @@ class TeamController extends Controller
     {
         $products = Product::with('image')->get();
         $roles = Role::get();
-        $tasks = Select::of('user')->type('task')->get();
+        $tasks = Product::find(productId())->tasks;
         // dd($tasks); 
         return view('features.team.partials.create', compact('products', 'roles', 'tasks'));
     }

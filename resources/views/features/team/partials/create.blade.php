@@ -30,7 +30,7 @@
                         <select id="task" name="task"  class="selectpickers">
                             @if($tasks)
                                 @forelse ($tasks as $task)
-                                <option value="{{ $task->value->{app()->getLocale()} }}">{{ $task->value->{app()->getLocale()} }}</option>
+                                <option value="{{ $task->name }}">{{ $task->name }}</option>
                                 @empty
                                 <option disabled>
                                     @lang('No items available')

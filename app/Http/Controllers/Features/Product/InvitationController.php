@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers\Features\Product;
 
-use App\Models\User;
-use App\Models\Product;
-use App\Models\Invitation;
-use App\Models\ProductUser;
-use App\Mail\InvitationMail;
-use Illuminate\Http\Request;
-use App\Models\InvitationProduct;
-use Illuminate\Support\Facades\DB;
-use Spatie\Permission\Models\Role;
-use App\Services\InvitationService;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\TeamInvitationRequest;
+use App\Models\Invitation;
+use App\Models\Product;
+use App\Models\ProductUser;
+use App\Models\User;
+use App\Services\InvitationService;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class InvitationController extends Controller
 {
@@ -62,6 +61,15 @@ class InvitationController extends Controller
     public function accept($token)
     {
         $invitation = Invitation::where('token', $token)->first();
+        $user       = User::where('email', $invitation->email)->first();
+        if ($user) {
+            Auth::guard('web')->logout();
+            request()->session()->invalidate();
+            request()->session()->regenerateToken();
+            Auth::login($user);
+            notify()->success('You have already accepted the invitation!');
+            return redirect(route('home'));
+        }
         if ($invitation == null) {
             return redirect()->back();
         }
@@ -76,10 +84,13 @@ class InvitationController extends Controller
 
     public function passwordStore(Request $request)
     {
+
         $request->validate([
             'password' => 'required|string|min:6|confirmed',
          ]);
-
+        Auth::guard('web')->logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
         $id = base64_decode($request->id);
 
         $invitation = Invitation::find($id);
@@ -95,15 +106,15 @@ class InvitationController extends Controller
         } else {
 
             $user = User::create([
-                'name'       => $invitation->first_name,
-                'email'      => $invitation->email,
+                'name'              => $invitation->first_name,
+                'email'             => $invitation->email,
                 'email_verified_at' => now(),
-                'password'   => Hash::make($request->password),
-                'first_name' => $invitation->first_name,
-                'last_name'  => $invitation->last_name,
-                'phone'      => $invitation->phone,
-                'position'   => $invitation->position,
-                'owner_id'   => auth()->id(),
+                'password'          => Hash::make($request->password),
+                'first_name'        => $invitation->first_name,
+                'last_name'         => $invitation->last_name,
+                'phone'             => $invitation->phone,
+                'position'          => $invitation->position,
+                'owner_id'          => auth()->id(),
              ]);
 
             foreach ($invitation->products as $product) {

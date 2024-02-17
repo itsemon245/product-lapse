@@ -24,7 +24,7 @@ class TeamController extends Controller
      */
     public function index()
     {
-        $teams = Product::find(productId())->users()->paginate();
+        $teams = Product::find(productId())->users()->paginate(10);
         return view('features.team.index', compact('teams'));
     }
 

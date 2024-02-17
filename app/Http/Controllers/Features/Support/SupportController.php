@@ -19,7 +19,7 @@ class SupportController extends Controller
      */
     public function index()
     {
-        $supports = Product::find(productId())->supports;
+        $supports = Product::find(productId())->supports()->paginate(10);
         $statuses = Select::of('support')->type('ticket')->get();
         return view('features.support.index', compact('supports', 'statuses'));
     }

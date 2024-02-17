@@ -13,10 +13,10 @@ enum Feature: string
     case PRODUCT = 'product';
     case RELEASE = 'release';
     case CERTIFICATE = 'certificate';
-    case USER = 'user';
-
-
-    //super admin
-    case PACKAGE = 'package';
+    
+    
+    //Packages and user should not be in the feature
+    // case PACKAGE = 'package';
+    // case USER = 'user';
 
 }

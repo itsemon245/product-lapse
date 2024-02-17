@@ -24,7 +24,7 @@ class InvitationService
      *  @param $extraData
      * @return Invitation
      */
-    public static function store(TeamInvitationRequest $request = null, $extraData): Invitation
+    public static function store(TeamInvitationRequest $request = null, $extraData = null): Invitation
     {
         // dd($extraData);
         if ($request == null) {

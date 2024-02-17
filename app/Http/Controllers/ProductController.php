@@ -40,7 +40,7 @@ class ProductController extends Controller
     {
         // dd($request->logo);
         $product = Product::create([
-            'owner_id'    => auth()->id(),
+            'creator_id'    => auth()->id(),
             'name'        => $request->name,
             'url'         => $request->url,
             'category'    => $request->category,

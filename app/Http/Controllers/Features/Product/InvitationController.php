@@ -9,6 +9,7 @@ use App\Models\ProductUser;
 use App\Mail\InvitationMail;
 use Illuminate\Http\Request;
 use App\Models\InvitationProduct;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use App\Services\InvitationService;
 use App\Http\Controllers\Controller;
@@ -82,7 +83,7 @@ class InvitationController extends Controller
         $id = base64_decode($request->id);
 
         $invitation = Invitation::find($id);
-
+        // dd($invitation);
         if ($invitation == null) {
             return redirect()->route('login')->with('success', 'Something went wrong');
         }
@@ -94,18 +95,20 @@ class InvitationController extends Controller
         } else {
 
             $user = User::create([
-                'role_id'    => $invitation->role_id,
+                'name'       => $invitation->first_name,
                 'email'      => $invitation->email,
+                'email_verified_at' => now(),
                 'password'   => Hash::make($request->password),
                 'first_name' => $invitation->first_name,
                 'last_name'  => $invitation->last_name,
                 'phone'      => $invitation->phone,
                 'position'   => $invitation->position,
+                'owner_id'   => auth()->id(),
              ]);
 
             foreach ($invitation->products as $product) {
                 if ($product->is_accepted == false) {
-                    InvitationProduct::where('product_id', $product->id)->update([ 'is_accepted' => true ]);
+                    DB::table('invitation_products')->where('product_id', $product->id)->update([ 'is_accepted' => true ]);
 
                     ProductUser::create([
                         'product_id' => $product->id,

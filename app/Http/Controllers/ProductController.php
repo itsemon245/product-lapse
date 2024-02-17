@@ -40,7 +40,7 @@ class ProductController extends Controller
     {
         // dd($request->logo);
         $product = Product::create([
-            'owner_id'    => auth()->id(),
+            'creator_id'    => auth()->id(),
             'name'        => $request->name,
             'url'         => $request->url,
             'category'    => $request->category,
@@ -63,7 +63,7 @@ class ProductController extends Controller
         $cookie   = Cookie::forever('product_id', $id);
         $product  = Product::find($id);
         $products = Product::get();
-        $features = $this->getFeatureList();
+        $features = $this->getFeatureList($id);
         return response(view('features.product.home', compact('product', 'features', 'products')))->withCookie($cookie);
     }
     /**
@@ -120,48 +120,59 @@ class ProductController extends Controller
         return redirect()->route('product.index');
     }
 
-    protected function getFeatureList(): array
+    protected function getFeatureList(int|null $id = null): array
     {
+        $product = Product::withCount([
+            'ideas',
+            'tasks',
+            'supports',
+            'changes',
+            'documents',
+            'users',
+            'reports',
+            'releases',
+            'deliveries'
+        ])->find($id);
         return [
             'innovate'              => [
                 'name'    => @__('productHome.innovate'),
-                'counter' => 0,
+                'counter' => $product->ideas_count,
                 'icon'    => 'img/solution.png',
                 'route'   => route('idea.index'),
              ],
             'product-planning'      => [
                 'name'    => @__('productHome.product-planning'),
-                'counter' => 0,
+                'counter' => $product->tasks_count,
                 'icon'    => 'img/plan.png',
                 'route'   => route('task.index'),
              ],
             'product-support'       => [
                 'name'    => @__('productHome.product-support'),
-                'counter' => 0,
+                'counter' => $product->supports_count,
                 'icon'    => 'img/technical-support.png',
                 'route'   => route('support.index'),
              ],
             'change-management'     => [
                 'name'    => @__('productHome.change-management'),
-                'counter' => 6,
+                'counter' => $product->changes_count,
                 'icon'    => 'img/cycle.png',
                 'route'   => route('change.index'),
              ],
             'product-documentation' => [
                 'name'    => @__('productHome.documentation'),
-                'counter' => 0,
+                'counter' => $product->documents_count,
                 'icon'    => 'img/checklist.png',
                 'route'   => route('document.index'),
              ],
             'product-team'          => [
                 'name'    => @__('productHome.product-team'),
-                'counter' => 0,
+                'counter' => $product->users_count,
                 'icon'    => 'img/help.png',
                 'route'   => route('team.index'),
              ],
             'product-reporting'     => [
                 'name'    => @__('productHome.reporting'),
-                'counter' => 0,
+                'counter' => $product->reports_count,
                 'icon'    => 'img/dashboard.png',
                 'route'   => route('report.index'),
              ],
@@ -173,19 +184,19 @@ class ProductController extends Controller
              ],
             'product-history'       => [
                 'name'    => @__('productHome.product-history'),
-                'counter' => 0,
+                'counter' => $product->releases_count,
                 'icon'    => 'img/bank-account.png',
                 'route'   => route('release.index'),
              ],
             'historical-images'     => [
                 'name'    => @__('productHome.historical-image'),
-                'counter' => 0,
+                'counter' => null,
                 'icon'    => 'img/photo.png',
                 'route'   => route('product-history.index'),
              ],
             'product-delivery'      => [
                 'name'    => @__('productHome.product-delivery'),
-                'counter' => 0,
+                'counter' => $product->deliveries_count,
                 'icon'    => 'img/delivered.png',
                 'route'   => route('delivery.index'),
              ],

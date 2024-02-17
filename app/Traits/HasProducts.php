@@ -25,7 +25,7 @@ trait HasProducts
                 'product_id'       => productId(),
                 'productable_id'   => $model->id,
                 'productable_type' => __CLASS__,
-                'user_id'          => auth()->id(),
+                'user_id'          => auth()->id() ?? demoSub()->id,
              ]);
         });
     }

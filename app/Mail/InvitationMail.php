@@ -20,8 +20,10 @@ class InvitationMail extends Mailable
      */
     public function __construct(
         public Invitation $invitation,
-    ) {}
+        public $extraData
+    ){
 
+    }
     /**
      * Get the message envelope.
      */

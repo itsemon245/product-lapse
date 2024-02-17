@@ -6,27 +6,30 @@ use App\Traits\HasComments;
 use App\Traits\HasCreator;
 use App\Traits\HasImages;
 use App\Traits\HasOwner;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Query\JoinClause;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Product extends Model
 {
     use HasFactory, HasImages, HasComments, HasOwner, HasCreator;
 
-    protected $guarded = [];
+    protected $guarded = [  ];
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'product_users');
     }
 
     public function invitations()
     {
         return $this->hasMany(Invitation::class);
     }
-
 
     #---Morph Relations----#
 
@@ -60,11 +63,6 @@ class Product extends Model
         return $this->morphedByMany(Document::class, 'productable');
     }
 
-    public function teams(): MorphToMany
-    {
-        return $this->morphedByMany(ProductUser::class, 'productable');
-    }
-
     public function reports(): MorphToMany
     {
         return $this->morphedByMany(Report::class, 'productable');
@@ -80,6 +78,11 @@ class Product extends Model
         return $this->morphedByMany(Delivery::class, 'productable');
     }
 
+    public function changes(): MorphToMany
+    {
+        return $this->morphedByMany(Change::class, 'productable');
+    }
+
     /**
      * Get all of the product history that are assigned this product
      */
@@ -87,4 +90,17 @@ class Product extends Model
     {
         return $this->morphedByMany(ProductHistory::class, 'productable');
     }
+
+     #--- Scopes ----#
+
+    public function scopeOfOwner(Builder $q)
+    {
+        if (auth()->user()?->type == 'member') {
+            $ownerId = auth()->user()->owner_id;
+        }else{
+            $ownerId = auth()->user()->id;   
+        }
+        return $q->where('owner_id', $ownerId);
+    }
+
 }

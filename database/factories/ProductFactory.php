@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\User;
+use App\Models\Select;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,13 +18,16 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
+        $sub = demoSub();
+        $stage = Select::of('product')->type('stage')->first();
+        $cat = Select::of('product')->type('category')->first();
         return [
-            'owner_id' => 1,
-            'name' => fake()->name,
-            'stage' => fake()->lastName,
-            'url' => fake()->name,
-            'category' => fake()->lastName,
+            'owner_id'    => $sub->id,
+            'name'        => fake()->name,
+            'stage'       => $stage->value->en,
+            'url'         => fake()->name,
+            'category'    => $cat->value->en,
             'description' => fake()->paragraph,
-        ];
+         ];
     }
 }

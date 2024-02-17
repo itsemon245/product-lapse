@@ -33,16 +33,20 @@
 
     <x-slot:list>
         @forelse ($teams as $team)
+        @php
+            $user = App\Models\User::with('image')->find($team->user_id);
+        @endphp
+        {{-- {{ dd($user) }} --}}
         <div class="col-md-6">
             <div class="item lon new">
                 <div class="list_item">
-                    <figure><a href="#"><img src="{{ $team->product->url }}" alt=""></a></figure>
+                    <figure><a href="#"><img src="{{ $user->image->url ?? asset('img/p1.jpg') }}" alt=""></a></figure>
                     <div class="joblisting_text">
                         <div class="job_list_table">
                             <div class="jobsearch-table-cell">
-                                <h4><a href="#" class="f_500 t_color3"></a>{{ $team->product->name }}</h4>
+                                <h4><a href="#" class="f_500 t_color3"></a>{{ $user->name ?? 'Name' }}</h4>
                                 <ul class="list-unstyled">
-                                    <li>{{ $team->is_accepted == !null ? 'Accepet' : 'Pending' }}</li> 
+                                    <li>{{ $user->created_at == !null ? 'Accept' : 'Pending' }}</li> 
                                 </ul>
                             </div>
                             <div class="jobsearch-table-cell">

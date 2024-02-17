@@ -223,7 +223,7 @@ class SelectSeeder extends Seeder
         ]);
         Select::create([
             'model_type' => Feature::SUPPORT->value,
-            'type' => SelectType::TICKET->value,
+            'type' => SelectType::STATUS->value,
             'color' => "#fff",
             'value' => [
                 'en' => 'Start',
@@ -232,7 +232,7 @@ class SelectSeeder extends Seeder
         ]);
         Select::create([
             'model_type' => Feature::SUPPORT->value,
-            'type' => SelectType::TICKET->value,
+            'type' => SelectType::STATUS->value,
             'color' => "#fff",
             'value' => [
                 'en' => 'Not start',

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\CanSendNotifications;
 use App\Traits\HasComments;
 use App\Traits\HasCreator;
 use App\Traits\HasImages;
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Product extends Model
 {
-    use HasFactory, HasImages, HasComments, HasOwner, HasCreator;
+    use HasFactory, HasImages, HasComments, HasOwner, HasCreator, CanSendNotifications;
 
     protected $guarded = [  ];
     public function user()

@@ -4,6 +4,8 @@ namespace App\Traits;
 use App\Models\Product;
 use App\Models\User;
 use App\Notifications\CreateNotification;
+use App\Notifications\DeleteNotification;
+use App\Notifications\UpdateNotification;
 use Illuminate\Support\Facades\Notification;
 
 trait CanSendNotifications
@@ -15,13 +17,16 @@ trait CanSendNotifications
     protected static function bootCanSendNotifications(): void
     {
         static::created(function ($model) {
-            $initiator = $model->creator ?? $model->user;
-            $users     = Product::find(productId())->users->reject(function (User $user) use ($initiator) {
-                return $user->id == $initiator->id;
-            });
-            if ($users->count() > 0) {
-                Notification::send($users, new CreateNotification($initiator));
-            }
+            [ $users, $initiator, $feature ] = getNotificationData($model);
+            Notification::send($users, new CreateNotification($initiator, $feature));
+        });
+        static::updated(function ($model) {
+            [ $users, $initiator, $feature ] = getNotificationData($model);
+            Notification::send($users, new UpdateNotification($initiator, $feature));
+        });
+        static::deleting(function ($model) {
+            [ $users, $initiator, $feature ] = getNotificationData($model);
+            Notification::send($users, new DeleteNotification($initiator, $feature));
         });
     }
 }

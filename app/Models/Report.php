@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Traits\CanSendNotifications;
 use App\Traits\HasComments;
 use App\Traits\HasCreator;
 use App\Traits\HasFile;
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Report extends Model
 {
-    use HasFactory, HasFile, HasProducts, HasComments, HasCreator, HasOwner;
+    use HasFactory, HasFile, HasProducts, HasComments, HasCreator, HasOwner, CanSendNotifications;
     protected $guarded = [];
 
     public function user()

@@ -73,6 +73,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
                 @empty
                     <x-feature.not-found />
             @endforelse

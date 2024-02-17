@@ -77,5 +77,8 @@
                 <x-feature.not-found />
             @endforelse
         </x-slot:list>
+        <x-slot:pagination>
+            {!! $tasks->links() !!}
+        </x-slot:pagination>
     </x-feature.index>
 @endsection

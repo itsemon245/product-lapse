@@ -27,7 +27,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Product::find(productId())->tasks;
+        $tasks = Product::find(productId())->tasks()->paginate(10);
         $priorities = Select::of('task')->type('status')->get();
         return view('features.task.index', compact('tasks', 'priorities'));
     }

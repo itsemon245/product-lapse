@@ -6,6 +6,7 @@ use App\Http\Requests\SearchRequest;
 use App\Http\Requests\StoreProductRequest;
 use App\Models\Product;
 use App\Models\Select;
+use App\Models\User;
 use App\Services\SearchService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
@@ -18,7 +19,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products   = Product::latest()->paginate(5);
+        $products   = User::find(auth()->id())->myProducts()->paginate();
         $categories = Select::of('product')->type('category')->get();
         return view('features.product.index', compact('products', 'categories'));
     }
@@ -47,6 +48,7 @@ class ProductController extends Controller
             'stage'       => $request->stage,
             'description' => $request->description,
          ]);
+        $product->users()->attach(auth()->id());
         if ($request->logo) {
             $image = $product->storeImage($request->logo);
         }

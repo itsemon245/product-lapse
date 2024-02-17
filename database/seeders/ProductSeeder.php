@@ -17,6 +17,7 @@ class ProductSeeder extends Seeder
         $products = Product::factory(10)->create();
 
         foreach ($products as $product) {
+            $product->users()->attach(demoSub()->id);
             Image::create([
                 'imageable_id'=> $product->id,
                 'imageable_type'=> get_class($product),

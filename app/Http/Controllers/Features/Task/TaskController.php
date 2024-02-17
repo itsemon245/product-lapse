@@ -50,6 +50,7 @@ class TaskController extends Controller
 
     public function store(TaskRequest $request)
     {
+
         $task = Task::create([
             'creator_id' => ownerId(),
             'name' => $request->name,

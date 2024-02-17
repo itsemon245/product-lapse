@@ -15,7 +15,8 @@ class ProductHistoryController extends Controller
      */
     public function index()
     {
-        return view('features.product.history.index');
+        $histories = ProductHistory::with('images')->where('product_id', productId())->get();
+        return view('features.product.history.index', compact('histories'));
     }
 
     /**
@@ -33,7 +34,7 @@ class ProductHistoryController extends Controller
     {
         try {
             $data = $request->except('_token', 'image');
-            $data['product_id'] = $request->id;
+            $data['product_id'] = productId();
             $product = ProductHistory::create($data);
             if ($request->hasFile('image')) {
                 foreach ($request->file('image') as $image) {
@@ -66,7 +67,7 @@ class ProductHistoryController extends Controller
      */
     public function edit(ProductHistory $productHistory)
     {
-        //
+        dd($productHistory);
     }
 
     /**

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Carbon\Carbon;
 use Illuminate\Http\UploadedFile;
@@ -48,7 +48,7 @@ function saveImage($image, string $dir, ?string $prefix = '', string $disk = 'pu
  * @param string $disk default = public
  * @return string $new_path
  */
-function updateFile($file, $old_path, $dir,  $prefix = "", $disk = "public")
+function updateFile($file, $old_path, $dir, $prefix = "", $disk = "public")
 {
     if ($file === null) {
         return $old_path;
@@ -90,10 +90,12 @@ function deleteFile($old_path, $disk = 'public')
     return $deleted;
 }
 
-function ownerId() {
+function ownerId()
+{
     return 1;
 }
 
-function productId() {
+function productId()
+{
     return request()->cookie('product_id');
 }

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 return [
     'title' => 'Product History',
@@ -8,5 +8,6 @@ return [
     'description' => 'Description',
     'images' => 'Images',
     'modal-btn' => 'Add',
+    'edit' => 'Edit',
 ];
 

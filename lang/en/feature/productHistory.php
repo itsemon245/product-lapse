@@ -9,5 +9,6 @@ return [
     'images' => 'Images',
     'modal-btn' => 'Add',
     'edit' => 'Edit',
+    'cancel' => 'Cancel',
 ];
 

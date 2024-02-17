@@ -22,28 +22,30 @@
                         <ul class="list-unstyled f_400 mb-30 text-font list-details">
                             {{ $task->steps }}
                         </ul>
-                        <div>
-                            <h6 class="title2">@__('feature/task.attach')</h6>
-                            <div class="table-responsive">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>@__('feature/task.name')</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>@__('feature/task.t-name')</td>
-                                            <td><button class="btn_hover agency_banner_btn btn-bg btn-table"
-                                                    type="submit">@__('feature/task.view')</button></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                        @if ($task->file)
+                            <div>
+                                <h6 class="title2">@__('feature/task.attach')</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>@__('feature/task.name')</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>@__('feature/task.t-name')</td>
+                                                <td><button class="btn_hover agency_banner_btn btn-bg btn-table"
+                                                        type="submit">@__('feature/task.view')</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
                 </div>
 
@@ -55,7 +57,8 @@
                 <div class="blog-sidebar box-sidebar">
                     <div class="widget sidebar_widget widget_recent_post mt_60">
                         <div class="media post_author mt_60">
-                            <img class="rounded-circle" src="{{ $user->image->url ?? asset('img/profile1.png') }}" alt="">
+                            <img class="rounded-circle" src="{{ $user->image->url ?? asset('img/profile1.png') }}"
+                                alt="">
                             <div class="media-body">
                                 <h5 class=" t_color3 f_size_18 f_500">
                                     {{ $task->name }}</h5>

@@ -67,7 +67,7 @@ class ProductHistoryController extends Controller
      */
     public function edit(ProductHistory $productHistory)
     {
-        dd($productHistory);
+        return view('features.product.history.partials.edit', compact('productHistory'));
     }
 
     /**
@@ -75,14 +75,43 @@ class ProductHistoryController extends Controller
      */
     public function update(Request $request, ProductHistory $productHistory)
     {
+        $history = ProductHistory::with('images')->find($productHistory->id);
+
+        if ($request->hasFile('image')) {
+            if ($history->images->count() > 0) {
+                foreach ($history->images as $image) {
+                    $fileDeleted = $history->deleteImage($image);
+                }
+            }
+            foreach ($request->file('image') as $image) {
+                $history->storeImage($image);
+            }
+        }
+
+        $history->date = $request->date;
+        $history->description = $request->description;
+        $history->save();
+
         notify()->success(__('notify/success.update'));
+
+        return redirect()->route('product-history.index');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(ProductHistory $productHistory)
     {
+        $history = ProductHistory::with('images')->find($productHistory->id);
+
+        if ($history->images->count() > 0) {
+            $fileDeleted = $history->deleteImage($history->image);
+        }
+
+        $history->delete();
         notify()->success(__('notify/success.delete'));
+
+        return redirect()->back();
     }
 }

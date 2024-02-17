@@ -115,7 +115,12 @@ class TaskController extends Controller
         $task = Task::with('file')->find($task->id);
 
         if ($request->has('add_attachments')) {
-            $file = $task->updateFile($request->add_attachments);
+            if ($task->file) {
+                $file = $task->updateFile($request->add_attachments);
+            } else {
+                $task->storeFile($request->add_attachments);
+            }
+
         }
 
         $data = $request->except('_token', 'add_attachments');

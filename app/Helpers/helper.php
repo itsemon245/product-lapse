@@ -1,14 +1,14 @@
-<?php 
+<?php
 
+use App\Models\Product;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
-
-
 /**
  * Returns current timestamp in format = 'Y-m-d-H-m-s-u'
- * @return string 
+ * @return string
  */
 function timestamp()
 {
@@ -29,7 +29,7 @@ function saveImage($image, string $dir, ?string $prefix = '', string $disk = 'pu
         if ($prefix === '' || $prefix === null) {
             $prefix = str($image->getClientOriginalName())->slug();
         }
-        $ext = $image->extension();
+        $ext  = $image->extension();
         $name = $prefix . "-" . timestamp() . '.' . $ext;
         $path = $image->storeAs("uploads/$dir", $name, $disk);
         return $path;
@@ -37,7 +37,6 @@ function saveImage($image, string $dir, ?string $prefix = '', string $disk = 'pu
         return $image;
     }
 }
-
 
 /**
  * Updates a file given a new file and old path
@@ -48,17 +47,17 @@ function saveImage($image, string $dir, ?string $prefix = '', string $disk = 'pu
  * @param string $disk default = public
  * @return string $new_path
  */
-function updateFile($file, $old_path, $dir,  $prefix = "", $disk = "public")
+function updateFile($file, $old_path, $dir, $prefix = "", $disk = "public")
 {
     if ($file === null) {
         return $old_path;
     }
     $new_path = $old_path;
-    $isFile = str($old_path)->contains('/storage');
+    $isFile   = str($old_path)->contains('/storage');
     if ($isFile) {
-        $old_path = explode("storage", $old_path)[1];
+        $old_path = explode("storage", $old_path)[ 1 ];
     }
-    $path = $old_path ? $disk . "/" . $old_path : 'no file exists';
+    $path       = $old_path ? $disk . "/" . $old_path : 'no file exists';
     $fileExists = Storage::exists($path);
     if ($fileExists) {
         if ($file) {
@@ -80,9 +79,9 @@ function deleteFile($old_path, $disk = 'public')
 {
     $isFile = str($old_path)->contains('/storage');
     if ($isFile) {
-        $old_path = explode("storage", $old_path)[1];
+        $old_path = explode("storage", $old_path)[ 1 ];
     }
-    $path = $disk . '/' . $old_path;
+    $path    = $disk . '/' . $old_path;
     $deleted = false;
     if (Storage::exists($path)) {
         $deleted = Storage::delete($path);
@@ -90,10 +89,24 @@ function deleteFile($old_path, $disk = 'public')
     return $deleted;
 }
 
-function ownerId() {
+function ownerId()
+{
     return 1;
 }
 
-function productId() {
+function productId()
+{
+function productId()
+{
+    // Only in development and local server
+    if (config('app.env') == 'local' && config('app.debug') == true && str(config('app.url'))->contains('localhost')) {
+        return Product::first()->id;
+    }
     return request()->cookie('product_id');
+}
+
+function demoSub()
+{
+    $sub = User::where('type', 'subscriber')->first();
+    return $sub;
 }

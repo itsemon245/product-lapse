@@ -4,13 +4,15 @@ namespace App\Models;
 
 use App\Casts\Utils\JsonCast;
 use App\Models\Scopes\OwnerScope;
+use App\Traits\HasCreator;
+use App\Traits\HasOwner;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Select extends Model
 {
-    use HasFactory;
+    use HasFactory, HasOwner, HasCreator;
     protected $guarded = [];
 
 
@@ -31,13 +33,5 @@ class Select extends Model
     public function scopeType(Builder $query, string $type)
     {
         $query->where('type', $type);
-    }
-
-        /**
-     * The "booted" method of the model.
-     */
-    protected static function booted(): void
-    {
-        static::addGlobalScope(new OwnerScope);
     }
 }

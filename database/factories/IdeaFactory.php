@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\User;
+use App\Models\Select;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,16 +18,11 @@ class IdeaFactory extends Factory
      */
     public function definition(): array
     {
+        $priority = Select::of('idea')->type('priority')->first();
         return [
-            'owner_id' => function () {
-                return User::inRandomOrder()->first()->id;
-            },
-            'creator_id' => function(){
-                return User::inRandomOrder()->first()->id;
-            },
             'name' => fake()->name,
             'owner' => fake()->text,
-            'priority' => fake()->randomElement(['Working on', 'Pending', 'Stopped']),
+            'priority' => $priority->value->en,
             'details' => fake()->paragraph,
             'requirements' => fake()->paragraph,
         ];

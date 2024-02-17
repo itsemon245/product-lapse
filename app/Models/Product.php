@@ -6,27 +6,29 @@ use App\Traits\HasComments;
 use App\Traits\HasCreator;
 use App\Traits\HasImages;
 use App\Traits\HasOwner;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Query\JoinClause;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Product extends Model
 {
     use HasFactory, HasImages, HasComments, HasOwner, HasCreator;
 
-    protected $guarded = [];
+    protected $guarded = [  ];
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'product_users');
     }
 
     public function invitations()
     {
         return $this->hasMany(Invitation::class);
     }
-
 
     #---Morph Relations----#
 
@@ -78,6 +80,11 @@ class Product extends Model
     public function deliveries(): MorphToMany
     {
         return $this->morphedByMany(Delivery::class, 'productable');
+    }
+
+    public function changes(): MorphToMany
+    {
+        return $this->morphedByMany(Change::class, 'productable');
     }
 
     /**

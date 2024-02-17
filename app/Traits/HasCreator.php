@@ -21,7 +21,7 @@ trait HasCreator
 
             $creatorId = auth()->user()?->id;
             // Only in development and local server
-            if (config('app.env') == 'local' && config('app.debug') == true && str(config('app.url'))->contains('localhost')) {
+            if (config('app.env') == 'local' && config('app.debug') == true ) {
                 $creatorId = demoSub()->id;
             }
             $model->creator_id = $creatorId;

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('imageable_type');
             $table->string('path')->nullable();
             $table->string('url');
-            $table->string('mime_type');
+            $table->string('mime_type')->nullable();
             $table->timestamps();
         });
     }

@@ -69,7 +69,7 @@ class SupportController extends Controller
     public function edit(Support $support)
     {
         $priorities = Select::of('support')->type('priority')->get();
-        $statuses = Select::of('support')->type('status')->get();
+        $statuses = Select::of('support')->type('ticket')->get();
         $classifications = Select::of('support')->type('classification')->get();
 
         return view('features.support.partials.edit', compact('support', 'priorities', 'statuses', 'classifications'));

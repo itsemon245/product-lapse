@@ -36,12 +36,7 @@
                         {{ $list }}
                     </div>
                 </div>
-                <nav class="navigation pagination text-center mt_60" role="navigation">
-                    <div class="nav-links"><span aria-current="page" class="page-numbers current">1</span>
-                        <a class="page-numbers" href="#">2</a>
-                        <a class="next page-numbers" href="#"><i class="ti-arrow-right"></i></a>
-                    </div>
-                </nav>
+                {{$pagination ?? ''}}
             </div>
         </div>
     </section>

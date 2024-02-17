@@ -36,11 +36,15 @@ trait HasImages
 
     /**
      * Stores an Image to the defined directory in a polymorphic way
-     * @param UploadedFile $image
+     * @param UploadedFile|null $image
      * @param ?string $name leave null for Original name
+     * @return Image|null
      */
-    public function storeImage(UploadedFile $image, ?string $name = null): Image
+    public function storeImage(UploadedFile|null $image, ?string $name = null)
     {
+        if ($image == null) {
+            return true;
+        }
         $type  = $this->imageableType ?? get_class($this);
         $id    = $this->id;
         $ext   = $image->getClientOriginalExtension();
@@ -59,12 +63,16 @@ trait HasImages
     }
     /**
      * Updates the old Image to the defined directory in a polymorphic way
-     * @param UploadedFile $image
+     * @param UploadedFile|null $image
      * @param ?string $name
      * @param Image|null $oldImage keep null if eager loaded or not inside a loop
+     * @return Image|null
      */
-    public function updateImage(UploadedFile $image, ?string $name = null, Image $oldImage = null): Image
+    public function updateImage(UploadedFile|null $image, ?string $name = null, Image $oldImage = null)
     {
+        if ($image == null) {
+            return true;
+        }
         $oldImage = $oldImage ?? $this->image;
         $type     = $this->imageableType ?? get_class($this);
         $id       = $this->id;

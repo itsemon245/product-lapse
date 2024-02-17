@@ -1,13 +1,10 @@
 <?php
 namespace App\Services;
 
-use App\Models\Task;
-use App\Models\Product;
-use Illuminate\Support\Str;
 use App\Http\Requests\SearchRequest;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class SearchService
 {
@@ -26,15 +23,25 @@ class SearchService
         if ($request == null) {
             $request = self::$request;
         }
-        $model   = "App\\Models\\". Str::studly($request->model);
+        $model   = "App\\Models\\" . Str::studly($request->model);
         $columns = $request->columns;
         $search  = $request->search;
-        return $model::whereHas('products', function(Builder $q){
-            $q->where('product_id', productId());
-        })->where(function (Builder $q) use ($columns, $search) {
-            foreach ($columns as $column) {
-                $q->orWhere($column, "like", "%" . $search . "%");
-            }
-        })->paginate($limit);
+
+        if ($model == "App\\Models\\Product") {
+            $items = $model::where(function (Builder $q) use ($columns, $search) {
+                foreach ($columns as $column) {
+                    $q->orWhere($column, "like", "%" . $search . "%");
+                }
+            })->latest()->paginate($limit);
+        } else {
+            $items = $model::whereHas('products', function (Builder $q) {
+                $q->where('product_id', productId());
+            })->where(function (Builder $q) use ($columns, $search) {
+                foreach ($columns as $column) {
+                    $q->orWhere($column, "like", "%" . $search . "%");
+                }
+            })->latest()->paginate($limit);
+        }
+        return $items;
     }
 }

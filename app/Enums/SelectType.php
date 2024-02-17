@@ -15,5 +15,3 @@ enum SelectType: string
     case TASK = 'task';
 
 }
-
-?>

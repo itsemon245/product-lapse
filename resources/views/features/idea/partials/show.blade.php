@@ -14,7 +14,6 @@
                             <a href="#!" class="">@lang('Idea ' . $stage->value)</a>
                         </li>
                     @endforeach
-
                 </ul>
             </div>
             <div class="col-lg-8 blog_sidebar_left">
@@ -34,7 +33,6 @@
                         </ul>
                     </div>
                 </div>
-
             </div>
         </x-slot:details>
         <x-slot:profile>
@@ -42,7 +40,7 @@
                 <div class="blog-sidebar box-sidebar">
                     <div class="widget sidebar_widget widget_recent_post mt_60">
                         <div class="media post_author mt_60">
-                            <img class="rounded-circle" src="img/profile1.png" alt="">
+                            <img class="rounded-circle" src="{{ asset('img/profile1.png') }}" alt="">
                             <div class="media-body">
                                 <h5 class=" t_color3 f_size_18 f_500">Ahmed Mahmoud</h5>
                             </div>
@@ -69,9 +67,12 @@
                     <a href="{{ route('idea.edit', $idea) }}" class="icon-square" title="Edit">
                         <i class="ti-pencil"></i>
                     </a>
-                    <a href="#" class="icon-square icon-square2" title="share"><i class="ti-sharethis"></i></a>
-                    <a href="#" class="icon-square icon-square3" title="save"><img src="img/pdf2.png"
-                            height="20"></a>
+                    <a href="#" class="icon-square icon-square2" title="share" data-toggle="modal"
+                        data-target="#myModal1"><i class="ti-sharethis"></i></a>
+                    <a href="{{ route('pdf.generate', $idea) }}" target="_blank" class="icon-square icon-square3"
+                        title="save">
+                        <i class="ti-save"></i>
+                    </a>
                 </div>
 
             </div>
@@ -79,3 +80,32 @@
         <x-comments :model="$idea" :comments="$idea->comments" />
     </x-feature.show>
 @endsection
+
+@push('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var currentUrl = window.location.href;
+            $('#currentUrl').text(currentUrl);
+
+            var clipboard = new ClipboardJS('#copyButton', {
+                text: function() {
+                    return currentUrl;
+                }
+            });
+
+            clipboard.on('success', function(e) {
+                $('#myModal1').modal('hide');
+                e.clearSelection();
+            });
+
+            clipboard.on('error', function(e) {
+                alert('Failed to copy URL!');
+            });
+        });
+
+        function pdf() {
+            window.print();
+        }
+    </script>
+@endpush

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Select;
-use App\Models\Product;
-use Illuminate\Http\Request;
-use App\Services\SearchService;
 use App\Http\Requests\SearchRequest;
-use Illuminate\Support\Facades\Cookie;
 use App\Http\Requests\StoreProductRequest;
+use App\Models\Product;
+use App\Models\Select;
+use App\Services\SearchService;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class ProductController extends Controller
 {
@@ -18,7 +18,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::latest()->paginate(10);
+        $products   = Product::latest()->paginate(5);
         $categories = Select::of('product')->type('category')->get();
         return view('features.product.index', compact('products', 'categories'));
     }
@@ -29,7 +29,7 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Select::of('product')->type('category')->get();
-        $stages = Select::of('product')->type('stage')->get();
+        $stages     = Select::of('product')->type('stage')->get();
         return view('features.product.partials.create', compact('categories', 'stages'));
     }
 
@@ -40,14 +40,16 @@ class ProductController extends Controller
     {
         // dd($request->logo);
         $product = Product::create([
-            'owner_id' => auth()->id(),
-            'name' => $request->name,
-            'url' => $request->url,
-            'category' => $request->category,
-            'stage' => $request->stage,
+            'owner_id'    => auth()->id(),
+            'name'        => $request->name,
+            'url'         => $request->url,
+            'category'    => $request->category,
+            'stage'       => $request->stage,
             'description' => $request->description,
-        ]);
-        $image = $product->storeImage($request->logo);
+         ]);
+        if ($request->logo) {
+            $image = $product->storeImage($request->logo);
+        }
         notify()->success(__('notify/success.create'));
         return redirect()->route('product.index');
     }
@@ -58,8 +60,8 @@ class ProductController extends Controller
     public function show(string $id)
     {
         // Set Cookie for the selected product
-        $cookie = Cookie::forever('product_id', $id);
-        $product = Product::find($id);
+        $cookie   = Cookie::forever('product_id', $id);
+        $product  = Product::find($id);
         $products = Product::get();
         $features = $this->getFeatureList();
         return response(view('features.product.home', compact('product', 'features', 'products')))->withCookie($cookie);
@@ -70,8 +72,8 @@ class ProductController extends Controller
     public function filter(Request $request)
     {
         // Set Cookie for the selected product
-        $cookie = Cookie::forever('product_id', $request->product_id);
-        $product = Product::find($request->product_id);
+        $cookie   = Cookie::forever('product_id', $request->product_id);
+        $product  = Product::find($request->product_id);
         $products = Product::get();
         $features = $this->getFeatureList();
         return response(view('features.product.home', compact('product', 'features', 'products')))->withCookie($cookie);
@@ -83,7 +85,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $categories = Select::of('product')->type('category')->get();
-        $stages = Select::of('product')->type('stage')->get();
+        $stages     = Select::of('product')->type('stage')->get();
         return view('features.product.partials.edit', compact('product', 'categories', 'stages'));
     }
 
@@ -93,15 +95,17 @@ class ProductController extends Controller
     public function update(StoreProductRequest $request, Product $product)
     {
         $product->update([
-            'name' => $request->name,
-            'url' => $request->url,
-            'category' => $request->category,
-            'stage' => $request->stage,
+            'name'        => $request->name,
+            'url'         => $request->url,
+            'category'    => $request->category,
+            'stage'       => $request->stage,
             'description' => $request->description,
-        ]);
-        $image = $product->updateImage($request->logo);
+         ]);
+        if ($request->logo) {
+            $image = $product->updateImage($request->logo);
+        }
         notify()->success(__('notify/success.update'));
-        return redirect()->route('product.index')->with(['success', 'Update Success!']);
+        return redirect()->route('product.index')->with([ 'success', 'Update Success!' ]);
 
     }
 
@@ -119,97 +123,96 @@ class ProductController extends Controller
     protected function getFeatureList(): array
     {
         return [
-            'innovate' => [
-                'name' => @__('productHome.innovate'),
-                'counter' => 5,
-                'icon' => 'img/solution.png',
-                'route' => route('idea.index'),
-            ],
-            'product-planning' => [
-                'name' => @__('productHome.product-planning'),
+            'innovate'              => [
+                'name'    => @__('productHome.innovate'),
                 'counter' => 0,
-                'icon' => 'img/plan.png',
-                'route' => route('task.index'),
-            ],
-            'product-support' => [
-                'name' => @__('productHome.product-support'),
+                'icon'    => 'img/solution.png',
+                'route'   => route('idea.index'),
+             ],
+            'product-planning'      => [
+                'name'    => @__('productHome.product-planning'),
                 'counter' => 0,
-                'icon' => 'img/technical-support.png',
-                'route' => route('support.index'),
-            ],
-            'change-management' => [
-                'name' => @__('productHome.change-management'),
+                'icon'    => 'img/plan.png',
+                'route'   => route('task.index'),
+             ],
+            'product-support'       => [
+                'name'    => @__('productHome.product-support'),
+                'counter' => 0,
+                'icon'    => 'img/technical-support.png',
+                'route'   => route('support.index'),
+             ],
+            'change-management'     => [
+                'name'    => @__('productHome.change-management'),
                 'counter' => 6,
-                'icon' => 'img/cycle.png',
-                'route' => route('change.index'),
-            ],
+                'icon'    => 'img/cycle.png',
+                'route'   => route('change.index'),
+             ],
             'product-documentation' => [
-                'name' => @__('productHome.documentation'),
+                'name'    => @__('productHome.documentation'),
                 'counter' => 0,
-                'icon' => 'img/checklist.png',
-                'route' => route('document.index'),
-            ],
-            'product-team' => [
-                'name' => @__('productHome.product-team'),
+                'icon'    => 'img/checklist.png',
+                'route'   => route('document.index'),
+             ],
+            'product-team'          => [
+                'name'    => @__('productHome.product-team'),
                 'counter' => 0,
-                'icon' => 'img/help.png',
-                'route' => route('team.index'),
-            ],
-            'product-reporting' => [
-                'name' => @__('productHome.reporting'),
+                'icon'    => 'img/help.png',
+                'route'   => route('team.index'),
+             ],
+            'product-reporting'     => [
+                'name'    => @__('productHome.reporting'),
                 'counter' => 0,
-                'icon' => 'img/dashboard.png',
-                'route' => route('report.index'),
-            ],
-            'product-info' => [
-                'name' => @__('productHome.product-info'),
+                'icon'    => 'img/dashboard.png',
+                'route'   => route('report.index'),
+             ],
+            'product-info'          => [
+                'name'    => @__('productHome.product-info'),
                 'counter' => null,
-                'icon' => 'img/website.png',
-                'route' => route('product.info'),
-            ],
-            'product-history' => [
-                'name' => @__('productHome.product-history'),
+                'icon'    => 'img/website.png',
+                'route'   => route('product.info'),
+             ],
+            'product-history'       => [
+                'name'    => @__('productHome.product-history'),
                 'counter' => 0,
-                'icon' => 'img/bank-account.png',
-                'route' => route('release.index'),
-            ],
-            'historical-images' => [
-                'name' => @__('productHome.historical-image'),
+                'icon'    => 'img/bank-account.png',
+                'route'   => route('release.index'),
+             ],
+            'historical-images'     => [
+                'name'    => @__('productHome.historical-image'),
                 'counter' => 0,
-                'icon' => 'img/photo.png',
-                'route' => route('product-history.index'),
-            ],
-            'product-delivery' => [
-                'name' => @__('productHome.product-delivery'),
+                'icon'    => 'img/photo.png',
+                'route'   => route('product-history.index'),
+             ],
+            'product-delivery'      => [
+                'name'    => @__('productHome.product-delivery'),
                 'counter' => 0,
-                'icon' => 'img/delivered.png',
-                'route' => route('delivery.index'),
-            ],
-        ];
+                'icon'    => 'img/delivered.png',
+                'route'   => route('delivery.index'),
+             ],
+         ];
     }
-
 
     /**
      * For Search Feature.
      */
     public function search(SearchRequest $request)
     {
-        $products = SearchService::items($request);
+        $products   = SearchService::items($request);
         $categories = Select::of('product')->type('category')->get();
         return view('features.product.index', compact('products', 'categories'));
     }
-
 
     /**
      * Display the specified individual resource.
      */
     public function info(Product $product)
     {
-        $data  = Product::with('owner')->find(productId());
+
+        $data = Product::with('owner')->find(productId());
         $owner = $data->owner;
         $product->loadComments();
         $comments = $product->comments;
-      
+
         return view('features.product.partials.show', compact('data', 'owner', 'product', 'comments'));
     }
 }

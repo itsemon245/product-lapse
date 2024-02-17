@@ -77,6 +77,9 @@
             @endforelse
 
         </x-slot:list>
+        <x-slot:pagination>
+            {!! $supports->links() !!}
+        </x-slot:pagination>
 
     </x-feature.index>
 @endsection

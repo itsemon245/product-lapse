@@ -19,7 +19,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products   = User::find(auth()->id())->myProducts()->paginate();
+        $products   = User::find(auth()->id())->myProducts()->paginate(10);
         $categories = Select::of('product')->type('category')->get();
         return view('features.product.index', compact('products', 'categories'));
     }

@@ -96,6 +96,8 @@ function ownerId()
 
 function productId()
 {
+function productId()
+{
     // Only in development and local server
     if (config('app.env') == 'local' && config('app.debug') == true && str(config('app.url'))->contains('localhost')) {
         return Product::first()->id;

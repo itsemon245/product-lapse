@@ -5,123 +5,73 @@
 @section('main')
     <x-breadcrumb :list="[['label' => @__('feature/productHistory.title'), 'route' => route('product-history.index')]]" />
 
-        <section class="sign_in_area bg_color sec_pad">
-            <div class="container">
-                <div class="sign_info">
-                    <div class="login_info">
-                        <div class="d-flex justify-content-between align-items-center mb_20">
-                            <h2 class=" f_600 f_size_24 t_color3">@__('feature/productHistory.title')</h2>
-                            <button type="submit" class="btn_hover agency_banner_btn btn-bg" style="margin: 0"
-                                data-toggle="modal" data-target="#myModal"><i class="ti-plus"></i>@__('feature/productHistory.button')</button>
-                        </div>
-                        <div class="tab-content faq_content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="purchas" role="tabpanel" aria-labelledby="purchas-tab">
-                                <div id="accordion">
+    <section class="sign_in_area bg_color sec_pad">
+        <div class="container">
+            <div class="sign_info">
+                <div class="login_info">
+                    <div class="d-flex justify-content-between align-items-center mb_20">
+                        <h2 class=" f_600 f_size_24 t_color3">@__('feature/productHistory.title')</h2>
+                        <button type="submit" class="btn_hover agency_banner_btn btn-bg" style="margin: 0"
+                            data-toggle="modal" data-target="#myModal"><i class="ti-plus"></i>@__('feature/productHistory.button')</button>
+                    </div>
+                    <div class="tab-content faq_content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="purchas" role="tabpanel" aria-labelledby="purchas-tab">
+                            @foreach ($histories as $history)
+                                <div id="accordion-{{ $history->id }}">
                                     <div class="card">
                                         <div class="card-header" id="headingTwo">
                                             <h5 class="mb-0">
                                                 <button class="btn btn-link collapsed" data-toggle="collapse"
-                                                    data-target="#collapseTwo" aria-expanded="false"
-                                                    aria-controls="collapseTwo">
-                                                    10 January 2029<i class="ti-angle-down"></i><i class="ti-angle-up"></i>
+                                                    data-target="#collapseTwo-{{ $history->id }}" aria-expanded="false"
+                                                    aria-controls="collapseTwo-{{ $history->id }}">
+                                                    {{ $history->date }}<i class="ti-angle-down"></i><i
+                                                        class="ti-angle-up"></i>
                                                 </button>
                                             </h5>
                                         </div>
-                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-                                            data-parent="#accordion">
+                                        <div id="collapseTwo-{{ $history->id }}" class="collapse"
+                                            aria-labelledby="headingTwo-{{ $history->id }}"
+                                            data-parent="#accordion-{{ $history->id }}">
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="col-12 history-notes">
+                                                        <a href="{{ route('product-history.edit', $history) }}"
+                                                            class="btn_hover agency_banner_btn btn-bg"><i
+                                                                class="ti-pencil"></i>@__('feature/productHistory.edit')</a>
                                                     </div>
                                                     <div class="col-12">
                                                         <h6 class="title2">Description</h6>
                                                         <p class="f_400 mb-30 text-font">
-                                                            It is a long established fact that a reader will be distracted by
-                                                            the readable content of a page when looking at its layout It is a
-                                                            long established fact that a reader will be distracted by the
-                                                            readable content of a page when looking at its layout
+                                                            {{ $history->description }}
                                                         </p>
                                                     </div>
-                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-6">
-                                                        <div class="product-history">
-                                                            <img src="img/p1.jpg">
-                                                            <h6>Rolex watch</h6>
-                                                            <a href="#"></a>
+                                                    @foreach ($history->images as $image)
+                                                        <div class="col-xl-2 col-lg-3 col-md-4 col-6">
+                                                            <div class="product-history">
+                                                                <img src="{{ asset($image->path) }}">
+                                                                <h6>Rolex watch</h6>
+                                                                <a href="#"></a>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-6">
-                                                        <div class="product-history">
-                                                            <img src="img/p1.jpg">
-                                                            <h6>Rolex watch</h6>
-                                                            <a href="#"></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-6">
-                                                        <div class="product-history">
-                                                            <img src="img/p1.jpg">
-                                                            <h6>Rolex watch</h6>
-                                                            <a href="#"></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-6">
-                                                        <div class="product-history">
-                                                            <img src="img/p1.jpg">
-                                                            <h6>Rolex watch</h6>
-                                                            <a href="#"></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-6">
-                                                        <div class="product-history">
-                                                            <img src="img/p1.jpg">
-                                                            <h6>Rolex watch</h6>
-                                                            <a href="#"></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-6">
-                                                        <div class="product-history">
-                                                            <img src="img/p1.jpg">
-                                                            <h6>Rolex watch</h6>
-                                                            <a href="#"></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-6">
-                                                        <div class="product-history">
-                                                            <img src="img/p1.jpg">
-                                                            <h6>Rolex watch</h6>
-                                                            <a href="#"></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-6">
-                                                        <div class="product-history">
-                                                            <img src="img/p1.jpg">
-                                                            <h6>Rolex watch</h6>
-                                                            <a href="#"></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-6">
-                                                        <div class="product-history">
-                                                            <img src="img/p1.jpg">
-                                                            <h6>Rolex watch</h6>
-                                                            <a href="#"></a>
-                                                        </div>
-                                                    </div>
+                                                    @endforeach
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
     <!-- The Modal -->
     <div class="modal fade" id="myModal">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <form method="POST" action="" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('product-history.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-header">
                         <h4 class="modal-title">@__('feature/productHistory.modal-title')</h4>
@@ -153,7 +103,8 @@
 
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <button type="submit" class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">@__('feature/productHistory.modal-btn')</button>
+                        <button type="submit"
+                            class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">@__('feature/productHistory.modal-btn')</button>
                     </div>
                 </form>
             </div>

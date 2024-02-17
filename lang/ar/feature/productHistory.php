@@ -1,13 +1,15 @@
-<?php 
+<?php
 
 return [
-    'title' => 'Product History',
-    'button' => 'New group',
-    'modal-title' => 'Add new group',
-    'date' => 'Date',
-    'description' => 'Description',
-    'images' => 'Images',
-    'modal-btn' => 'Add',
+    'title' => 'صور تاريخية',
+    'button' => 'مجموعة جديدة',
+    'modal-title' => 'اضافة مجموعة جديدة',
+    'date' => 'التاريخ',
+    'description' => 'الوصف',
+    'images' => 'الصور',
+    'modal-btn' => 'اضافة',
+    'edit' => 'تعديل',
+    'cancel' => 'الغاء',
 ];
 
 

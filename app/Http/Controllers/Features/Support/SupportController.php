@@ -31,7 +31,7 @@ class SupportController extends Controller
     public function create()
     {
         $priorities = Select::of('support')->type('priority')->get();
-        $statuses = Select::of('support')->type('ticket')->get();
+        $statuses = Select::of('support')->type('status')->get();
         $classifications = Select::of('support')->type('classification')->get();
 
         return view('features.support.partials.create', compact('priorities', 'statuses', 'classifications'));
@@ -59,7 +59,6 @@ class SupportController extends Controller
         $user = User::with('image')->find($support->creator_id);
         $support->loadComments();
         $comments = $support->comments;
-        // dd($user);
         return view('features.support.partials.show', compact('user', 'support', 'comments'));
     }
 
@@ -69,7 +68,7 @@ class SupportController extends Controller
     public function edit(Support $support)
     {
         $priorities = Select::of('support')->type('priority')->get();
-        $statuses = Select::of('support')->type('ticket')->get();
+        $statuses = Select::of('support')->type('status')->get();
         $classifications = Select::of('support')->type('classification')->get();
 
         return view('features.support.partials.edit', compact('support', 'priorities', 'statuses', 'classifications'));

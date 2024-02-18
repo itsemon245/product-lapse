@@ -48,7 +48,7 @@
                                                     @foreach ($history->images as $image)
                                                         <div class="col-xl-2 col-lg-3 col-md-4 col-6">
                                                             <div class="product-history">
-                                                                <img src="{{ asset($image->path) }}">
+                                                                <img src="{{ $image->url }}">
                                                                 <h6>Rolex watch</h6>
                                                                 <a href="#"></a>
                                                             </div>

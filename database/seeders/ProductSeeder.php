@@ -14,7 +14,6 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        Product::unsetEventDispatcher();
         $products = Product::factory(10)->create();
 
         foreach ($products as $product) {

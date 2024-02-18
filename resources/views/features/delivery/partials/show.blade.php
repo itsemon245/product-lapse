@@ -20,7 +20,7 @@
             <div class="col-lg-8 blog_sidebar_left">
                 <div class="blog_single mb_50">
                     <div class="row">
-                        <h5 class="f_size_20 f_500 col-md-12">{{ $delivery->name }}<img class="deliver-img"
+                        <h5 class="f_size_20 f_500 col-md-12 flex items-center">{{ $delivery->name }}<img class="deliver-img"
                                 src="{{ $delivery->is_agreed == !null ? asset('img/done.png') : asset('img/cancel.png') }}"
                                 title="Approved"></h5>
                         <div class="col-md-6">
@@ -38,11 +38,13 @@
                         </div>
                         <div class="col-md-6" class="password-container">
                             <h6 class="title2">@__('feature/delivery.password')</h6>
-                            <p id="password" class="f_400 mb-30 text-font">
-                                ******************
-                                <span class="toggle-password" onclick="togglePasswordVisibility()"><button href="#"
-                                        class="btn-bg-1 p-1 rounded"><i class="ti-eye"></i>@__('feature/delivery.show-btn')</button></span>
-                            </p>
+                            <div class="flex items-center gap-4">
+                                <input disabled id="pass" type="password" class="border-none w-max"
+                                    value="{{ $delivery->password }}">
+                                <div class="p-2 pass-toggle" >
+                                    <span class="ti-eye"></span>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-12">
                             <h6 class="title2">@__('feature/delivery.items')</h6>
@@ -61,8 +63,7 @@
                     <h6 class="title2" style="padding-top: 20px">@__('feature/delivery.administrator')</h6>
                     <div class="widget sidebar_widget widget_recent_post">
                         <div class="media post_author author-title">
-                            <img class="rounded-circle" src="{{ $creator->image->url ?? asset('img/profile1.png') }}"
-                                alt="">
+                            <img class="rounded-circle" src="{{ $creator->image->url ?? favicon() }}" alt="">
                             <div class="media-body">
                                 <h5 class=" t_color3 f_size_18 f_500">{{ $creator->name }}</h5>
                             </div>
@@ -120,19 +121,14 @@
         <x-comments :model="$delivery" :comments="$delivery->comments" />
     </x-feature.show>
 @endsection
-<script>
-    var password = "{{ $delivery->password }}"; // Replace with your actual password
-
-    function togglePasswordVisibility() {
-        var passwordField = document.getElementById("password");
-        var toggleButton = document.querySelector(".toggle-password");
-
-        if (passwordField.tagName === "P") {
-            passwordField.innerHTML = password;
-            toggleButton.textContent = "Hide";
-        } else {
-            passwordField.innerHTML = "**********";
-            toggleButton.textContent = "Show";
-        }
-    }
-</script>
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            let input = $('#pass')
+            $('.pass-toggle').click(function(){
+                let type = $('#pass').attr('type') == 'password' ? 'text' : 'password';
+                input.attr('type', type)
+            })
+        });
+    </script>
+@endpush

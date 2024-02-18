@@ -30,7 +30,8 @@ class DeliveryController extends Controller
      */
     public function create()
     {
-        $users = User::get();
+        $users = Product::find(productId())->users;
+
         return view('features.delivery.partials.create', compact('users'));
     }
 
@@ -72,7 +73,8 @@ class DeliveryController extends Controller
      */
     public function edit(Delivery $delivery)
     {
-        $users = User::get();
+        $users = Product::find(productId())->users;
+
         return view('features.delivery.partials.edit', compact('delivery', 'users'));
     }
 

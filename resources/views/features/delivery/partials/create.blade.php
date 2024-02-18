@@ -48,7 +48,7 @@
                                         {{ $user->name }}
                                     </option>
                                 @empty
-                                    <option disabled>No category available</option>
+                                    <option disabled>No user available</option>
                                 @endforelse
                             @endif
                         </x-select-input>

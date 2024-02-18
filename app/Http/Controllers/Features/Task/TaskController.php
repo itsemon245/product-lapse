@@ -41,7 +41,9 @@ class TaskController extends Controller
         $categories = Select::of('task')->type('category')->get();
         $statuses = Select::of('task')->type('status')->get();
 
-        return view('features.task.partials.create', compact('categories', 'statuses', 'task'));
+        $users = Product::find(productId())->users;
+
+        return view('features.task.partials.create', compact('categories', 'statuses', 'task', 'users'));
     }
 
     /**
@@ -102,10 +104,12 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-
         $categories = Select::of('task')->type('category')->get();
         $statuses = Select::of('task')->type('status')->get();
-        return view('features.task.partials.edit', compact('task', 'categories', 'statuses'));
+
+        $users = Product::find(productId())->users;
+
+        return view('features.task.partials.edit', compact('task', 'categories', 'statuses', 'users'));
 
     }
 

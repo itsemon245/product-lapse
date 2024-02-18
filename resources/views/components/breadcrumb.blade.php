@@ -6,7 +6,7 @@
                 <li class="breadcrumb-item {{ request()->routeIs('dashboard') ? 'active' : '' }} "><a
                         href="{{ route('dashboard') }}">@__('root.dashboard')</a>
                 </li>
-                @if (productId() != null)
+                @if (productId() != null && str(url()->current())->contains('dashboard'))
                     <li
                         class="breadcrumb-item {{ request()->routeIs('product.show', productId()) ? 'active' : '' }} ">
                         <a href="{{ route('product.show', productId()) }}">

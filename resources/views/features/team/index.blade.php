@@ -45,7 +45,7 @@
                                         <h4><a href="#" class="f_500 t_color3"></a>{{ $team->name ?? 'Name' }}</h4>
                                         <ul class="list-unstyled">
                                             <li class="text-capitalize">
-                                                {{ str($team?->getRole()->name)->title() ?? 'Guest' }}
+                                                {{ $team?->getRole()?->name ? str($team?->getRole()?->name)->title() : 'Guest'}}
                                             </li>
                                         </ul>
                                     </div>

@@ -6,7 +6,7 @@
                 <ul class="breadcrumb">
                     @forelse ($list as $item)
                         <li class="breadcrumb-item {{ request()->routeIs('dashboard') ? 'active' : '' }} "><a
-                                href="{{ productId() ? route('product.show', $product) : rotute('dashboard') }}">@__('root.dashboard')</a>
+                                href="{{ productId() ? route('product.show', productId()) : rotute('dashboard') }}">@__('root.dashboard')</a>
                         </li>
                         @if ($loop->last)
                             <li class="breadcrumb-item active">{{ $item['label'] }}</li>

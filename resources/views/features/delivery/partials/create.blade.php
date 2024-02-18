@@ -22,7 +22,9 @@
                             :value="old('link')" required autofocus />
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-6">
-                        <x-textarea placeholder="{{ __('feature/delivery.placeholder.items') }}" rows="5" cols="10" name="items" label="{{ __('feature/delivery.label.items') }}" :value="old('items')" required autofocus > 
+                        <x-textarea placeholder="{{ __('feature/delivery.placeholder.items') }}" rows="5"
+                            cols="10" name="items" label="{{ __('feature/delivery.label.items') }}" :value="old('items')"
+                            required autofocus>
                         </x-textarea>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
@@ -38,20 +40,22 @@
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-select-input label="{{ __('feature/delivery.label.administrator') }}" id="administrator"
-                        placeholder="{{ __('feature/delivery.placeholder.administrator') }}" name="administrator" required autofocus>
-                        @if ($users)
-                            @forelse ($users as $user)
-                                <option value="{{ $user->id }}">
-                                    {{ $user->name }}
-                                </option>
-                            @empty
-                                <option disabled>No category available</option>
-                            @endforelse
-                        @endif
-                    </x-select-input>
+                            placeholder="{{ __('feature/delivery.placeholder.administrator') }}" name="administrator"
+                            required autofocus>
+                            @if ($users)
+                                @forelse ($users as $user)
+                                    <option value="{{ $user->id }}">
+                                        {{ $user->name }}
+                                    </option>
+                                @empty
+                                    <option disabled>No user available</option>
+                                @endforelse
+                            @endif
+                        </x-select-input>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-attach label="{{ __('feature/delivery.attachments') }}" class="block mt-1 w-full" name="add_attachments[]" />
+                        <x-attach label="{{ __('feature/delivery.attachments') }}" class="block mt-1 w-full"
+                            name="add_attachments" />
                     </div>
                 </div>
                 <div class="d-flex align-items-center text-center">

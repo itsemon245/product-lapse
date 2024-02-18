@@ -84,10 +84,19 @@
                             type="date" name="ending_date" required autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-input-label for="name" value="{{ __('feature/task.label.administrator') }}" />
-                        <x-input id="administrator" class="block mt-1 w-full" type="text"
+                        <x-select-input label="{{ __('feature/task.label.administrator') }}" id="administrator"
                             placeholder="{{ __('feature/task.placeholder.administrator') }}" name="administrator"
-                            :value="old('administrator')" required autofocus />
+                            required autofocus>
+                            @if ($users)
+                                @forelse ($users as $user)
+                                    <option value="{{ $user->id }}">
+                                        {{ $user->name }}
+                                    </option>
+                                @empty
+                                    <option disabled>No user available</option>
+                                @endforelse
+                            @endif
+                        </x-select-input>
 
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Features\Support;
 use App\Models\User;
 use App\Models\Select;
 use App\Models\Product;
+use App\Models\ProductUser;
 use App\Models\Support;
 use Illuminate\Http\Request;
 use App\Services\SearchService;
@@ -34,7 +35,9 @@ class SupportController extends Controller
         $statuses = Select::of('support')->type('status')->get();
         $classifications = Select::of('support')->type('classification')->get();
 
-        return view('features.support.partials.create', compact('priorities', 'statuses', 'classifications'));
+        $users = Product::find(productId())->users;
+
+        return view('features.support.partials.create', compact('priorities', 'statuses', 'classifications', 'users'));
     }
 
     /**
@@ -72,7 +75,9 @@ class SupportController extends Controller
         $statuses = Select::of('support')->type('status')->get();
         $classifications = Select::of('support')->type('classification')->get();
 
-        return view('features.support.partials.edit', compact('support', 'priorities', 'statuses', 'classifications'));
+        $users = Product::find(productId())->users;
+
+        return view('features.support.partials.edit', compact('support', 'priorities', 'statuses', 'classifications', 'users'));
     }
 
     /**

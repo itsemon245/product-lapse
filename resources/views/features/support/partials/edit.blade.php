@@ -69,13 +69,20 @@
                             label="{{ __('feature/support.label.description') }}">{{ $support->description }}</x-textarea>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <label class=" text_c f_500">@__('feature/support.label.administrator')</label>
-                        <input type="text" name="administrator"
-                            placeholder="{{ __('feature/support.placeholder.administrator') }}"
-                            value="{{ $support->administrator }}">
-                        @error('administrator')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        <x-select-input label="{{ __('feature/support.label.administrator') }}" id="administrator"
+                            placeholder="{{ __('feature/support.placeholder.administrator') }}" name="administrator"
+                            required autofocus>
+                            @if ($users)
+                                @forelse ($users as $user)
+                                    <option value="{{ $user->id }}"
+                                        {{ $support->administrator == $user->id ? 'Selected' : '' }}>
+                                        {{ $user->name }}
+                                    </option>
+                                @empty
+                                    <option disabled>No user available</option>
+                                @endforelse
+                            @endif
+                        </x-select-input>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-input label="{{ __('feature/support.label.date') }}" id="completion_date"

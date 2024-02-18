@@ -67,18 +67,25 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
          ]);
 
+        Change::unsetEventDispatcher();
         Change::factory(10)->create();
 
+        Delivery::unsetEventDispatcher();
         Delivery::factory(10)->create();
 
+        Report::unsetEventDispatcher();
         Report::factory(10)->create();
 
+        Idea::unsetEventDispatcher();
         Idea::factory(10)->create();
 
+        Task::unsetEventDispatcher();
         Task::factory(10)->create();
 
+        Document::unsetEventDispatcher();
         Document::factory(10)->create();
 
+        Release::unsetEventDispatcher();
         Release::factory(10)->create();
 
         $this->call([

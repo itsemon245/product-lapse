@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Change;
 use App\Models\Select;
 use App\Models\Product;
+use App\Models\ProductUser;
 use Illuminate\Http\Request;
 use App\Services\SearchService;
 use App\Http\Controllers\Controller;
@@ -21,7 +22,7 @@ class ChangeController extends Controller
     public function index()
     {
         $changes = Product::find(productId())->changeManagements()->paginate(10);
-        $statuses  = Select::of('change')->type('status')->get();
+        $statuses = Select::of('change')->type('status')->get();
         return view('features.change.index', compact('changes', 'statuses'));
     }
 
@@ -34,7 +35,10 @@ class ChangeController extends Controller
         $priorities = Select::of('change')->type('priority')->get();
         $statuses = Select::of('change')->type('status')->get();
         $classifications = Select::of('change')->type('classification')->get();
-        return view('features.change.partials.create', compact('priorities', 'statuses', 'classifications', 'idea'));
+
+        $users = Product::find(productId())->users;
+
+        return view('features.change.partials.create', compact('priorities', 'statuses', 'classifications', 'idea', 'users'));
     }
 
     /**
@@ -64,7 +68,7 @@ class ChangeController extends Controller
         $user = User::with('image')->find($change->creator_id);
         $change->loadComments();
         $comments = $change->comments;
-        $statuses  = Select::of('change')->type('status')->get();
+        $statuses = Select::of('change')->type('status')->get();
         return view('features.change.partials.show', compact('change', 'user', 'comments', 'statuses'));
     }
 
@@ -77,7 +81,9 @@ class ChangeController extends Controller
         $statuses = Select::of('change')->type('status')->get();
         $classifications = Select::of('change')->type('classification')->get();
 
-        return view('features.change.partials.edit', compact('change', 'priorities', 'statuses', 'classifications'));
+        $users = Product::find(productId())->users;
+
+        return view('features.change.partials.edit', compact('change', 'priorities', 'statuses', 'classifications', 'users'));
     }
 
     /**
@@ -105,7 +111,7 @@ class ChangeController extends Controller
     public function search(SearchRequest $request)
     {
         $changes = SearchService::items($request);
-        $statuses  = Select::of('change')->type('status')->get();
+        $statuses = Select::of('change')->type('status')->get();
         return view('features.change.index', compact('changes', 'statuses'));
     }
 }

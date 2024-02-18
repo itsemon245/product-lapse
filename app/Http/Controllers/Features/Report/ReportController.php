@@ -112,14 +112,16 @@ class ReportController extends Controller
 
     public function download(string $id)
     {
-        $file = Report::with('file')->find($id);
-        if (!$file) {
+        $id = base64_decode($id);
+        $report = Report::with('file')->find($id);
+
+        if (!$report) {
             notify()->success(__('Something went wrong!'));
 
-            return redirect()->route('document.index');
+            return redirect()->route('report.index');
         }
 
-        $filePath = $file->file->path;
+        $filePath = $report->file->path;
         if (!Storage::disk('public')->exists($filePath)) {
             notify()->error(__('File not found!'));
 
@@ -127,6 +129,7 @@ class ReportController extends Controller
         }
 
         return Storage::download('public/' . $filePath);
+
     }
 
     public function search(SearchRequest $request)

@@ -28,7 +28,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-     ];
+    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -38,18 +38,23 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
-     ];
+    ];
 
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password'          => 'hashed',
-        'flag'              => JsonCast::class,
-     ];
+        'password' => 'hashed',
+        'flag' => JsonCast::class,
+    ];
 
     #---Relations---#
     public function packages()
     {
         return $this->hasMany(Package::class, 'owner_id', 'id');
+    }
+
+    public function productUsers()
+    {
+        return $this->hasMany(ProductUser::class, 'owner_id', 'id');
     }
 
     public function products()
@@ -149,7 +154,7 @@ class User extends Authenticatable
     #---Relations---#
 
 
-    
+
     #---Scopes---#
 
     public function scopeAdmin(Builder $q)

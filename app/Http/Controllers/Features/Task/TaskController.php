@@ -78,6 +78,8 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
+        $task = Task::with('file')->find($task->id);
+
         $user = User::with('image')->find($task->creator_id);
         $task->loadComments();
         $comments = $task->comments;

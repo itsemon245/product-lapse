@@ -29,7 +29,7 @@
             <h5>@__('feature/report.showing')</h5>
             <x-filter :route="route('report.search')" :columns="['type']" model="report" :options="$types" />
         </x-slot:filter>
-        
+
         <x-slot:list>
             @forelse ($reports as $report)
                 <div class="col-md-6">
@@ -40,7 +40,8 @@
                             <div class="joblisting_text">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell">
-                                        <h4><a href="{{ route('report.show', $report) }} class="f_500 t_color3">{{ $report->name }}</a></h4>
+                                        <h4><a href="{{ route('report.show', $report) }} class="f_500
+                                                t_color3">{{ $report->name }}</a></h4>
                                         <ul class="list-unstyled">
                                             <li>{{ $report->created_at->formatLocalized('%A %d %B %Y') }}</li>
                                         </ul>
@@ -61,6 +62,16 @@
                                                     <div class="like-btn">
                                                         <x-btn-icons type="anchor" value="<i class='ti-pencil'></i>"
                                                             href="{{ route('report.edit', $report) }}" />
+                                                    </div>
+                                                    <div class="like-btn">
+                                                        <form
+                                                            action="{{ route('report.download', ['id' => base64_encode($report->id)]) }}"
+                                                            method="post" enctype="multipart/form-data">
+                                                            @csrf
+                                                            <button type="submit" class="btn">
+                                                                <i class="ti-download"></i>
+                                                            </button>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>

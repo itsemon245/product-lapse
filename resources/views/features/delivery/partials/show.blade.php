@@ -20,7 +20,8 @@
             <div class="col-lg-8 blog_sidebar_left">
                 <div class="blog_single mb_50">
                     <div class="row">
-                        <h5 class="f_size_20 f_500 col-md-12">{{ $delivery->name }}<img class="deliver-img" src="{{ $delivery->is_agreed == !null ? asset('img/done.png') : asset('img/cancel.png') }}"
+                        <h5 class="f_size_20 f_500 col-md-12">{{ $delivery->name }}<img class="deliver-img"
+                                src="{{ $delivery->is_agreed == !null ? asset('img/done.png') : asset('img/cancel.png') }}"
                                 title="Approved"></h5>
                         <div class="col-md-6">
                             <h6 class="title2">@__('feature/delivery.link')</h6>
@@ -70,13 +71,17 @@
                             <div class="col-6">
                                 <form action="{{ route('delivery.agree', $delivery) }}" method="post">
                                     @csrf
-                                <button style="{{ $delivery->is_agreed == !null ? 'cursor: not-allowed' : '' }}" {{ $delivery->is_agreed == !null ? 'disabled' : '' }} class="button-1 btn-bg-1 {{ $delivery->is_agreed == !null ? 'opacity-50' : '' }} " >@__('feature/delivery.agree')</button>
+                                    <button style="{{ $delivery->is_agreed == !null ? 'cursor: not-allowed' : '' }}"
+                                        {{ $delivery->is_agreed == !null ? 'disabled' : '' }}
+                                        class="button-1 btn-bg-1 {{ $delivery->is_agreed == !null ? 'opacity-50' : '' }} ">@__('feature/delivery.agree')</button>
                                 </form>
                             </div>
                             <div class="col-6">
                                 <form action="{{ route('delivery.disagree', $delivery) }}" method="post">
                                     @csrf
-                                <button style="{{ $delivery->is_agreed == null ? 'cursor: not-allowed' : '' }}" {{ $delivery->is_agreed == null ? 'disabled' : '' }} class="button-1 btn-bg-2 {{ $delivery->is_agreed == null ? 'opacity-50' : '' }} " >@__('feature/delivery.disagree')</button>
+                                    <button style="{{ $delivery->is_agreed == null ? 'cursor: not-allowed' : '' }}"
+                                        {{ $delivery->is_agreed == null ? 'disabled' : '' }}
+                                        class="button-1 btn-bg-2 {{ $delivery->is_agreed == null ? 'opacity-50' : '' }} ">@__('feature/delivery.disagree')</button>
                                 </form>
                             </div>
                         </div>
@@ -86,28 +91,31 @@
             </div>
 
             {{-- Attachment part --}}
-            <div class="col-md-12">
-                <h6 class="title2">@__('feature/delivery.attachments')</h6>
-                <div class="table-responsive">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>@__('feature/delivery.title-2')</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>the file name</td>
-                                <td><button class="btn_hover agency_banner_btn btn-bg btn-table" type="submit">@__('feature/delivery.view')</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+            @if ($delivery->file)
+                <div class="col-md-12">
+                    <h6 class="title2">@__('feature/delivery.attachments')</h6>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>@__('feature/delivery.title-2')</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>the file name</td>
+                                    <td><button class="btn_hover agency_banner_btn btn-bg btn-table"
+                                            type="submit">@__('feature/delivery.view')</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
+            @endif
         </x-slot:profile>
         <x-comments :model="$delivery" :comments="$delivery->comments" />
     </x-feature.show>

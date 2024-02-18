@@ -42,7 +42,10 @@ class DeliveryController extends Controller
         $data = $request->except('_token', 'add_attachments');
         $data['creator_id'] = ownerId();
         try {
-            Delivery::create($data);
+            $delivery = Delivery::create($data);
+            if ($request->has('add_attachments')) {
+                $delivery->storeFile($request->add_attachments);
+            }
             notify()->success(__('Created successfully!'));
             return redirect()->route('delivery.index');
         } catch (Exception $e) {
@@ -56,7 +59,9 @@ class DeliveryController extends Controller
      */
     public function show(Delivery $delivery)
     {
-        $creator= User::with('image')->find($delivery->creator_id);
+        $delivery = Delivery::with('file')->find($delivery->id);
+
+        $creator = User::with('image')->find($delivery->creator_id);
         $delivery->loadComments();
         $comments = $delivery->comments;
         return view('features.delivery.partials.show', compact('delivery', 'creator', 'comments'));
@@ -81,6 +86,15 @@ class DeliveryController extends Controller
         $data['owner_id'] = ownerId();
 
         try {
+            $document = Delivery::with('file')->find($delivery->id);
+
+            if ($request->has('add_attachments')) {
+                if ($document->file) {
+                    $file = $document->updateFile($request->add_attachments);
+                } else {
+                    $file = $document->storeFile($request->add_attachments);
+                }
+            }
             $delivery->update($data);
             notify()->success(__('Updated successfully!'));
 
@@ -96,6 +110,10 @@ class DeliveryController extends Controller
      */
     public function destroy(Delivery $delivery)
     {
+        $delivery = Delivery::with('file')->find($delivery->id);
+        if ($delivery->file) {
+            $fileDeleted = $delivery->deleteFile($delivery->file);
+        }
         $delivery->delete();
         notify()->success(__('Deleted successfully!'));
         return redirect()->route('delivery.index');

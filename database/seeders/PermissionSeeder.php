@@ -66,7 +66,16 @@ class PermissionSeeder extends Seeder
             'guest', #only create comment
          ];
         foreach ($roles as $role => $permissions) {
-            $newRole = Role::firstOrCreate([ 'name' => $role ],[ 'name' => $role ]);
+            $newRole                 = Role::firstOrCreate([ 'name' => $role ], [ 'name' => $role ]);
+            $createCommentPermission = Permission::firstOrCreate(
+                [
+                    'name' => 'create comment',
+                 ],
+                [
+                    'name' => 'create comment',
+                 ]
+            );
+            $newRole->givePermissionTo($createCommentPermission);
             if ($permissions && is_array($permissions)) {
                 foreach ($permissions as $verb => $features) {
                     foreach ($features as $feature) {
@@ -82,7 +91,25 @@ class PermissionSeeder extends Seeder
                     }
                 }
             }
-
         }
+
+        $commentRoles = [
+            'account holder',
+            'product manager',
+            'assistant product manager',
+         ];
+        foreach ($commentRoles as $role) {
+            $deleteCommentPermission = Permission::firstOrCreate(
+                [
+                    'name' => 'delete comment',
+                 ],
+                [
+                    'name' => 'delete comment',
+                 ]
+            );
+            $newRole = Role::firstOrCreate([ 'name' => $role ], [ 'name' => $role ]);
+            $newRole->givePermissionTo($deleteCommentPermission);
+        }
+
     }
 }

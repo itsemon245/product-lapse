@@ -126,3 +126,8 @@ function getNotificationData($model)
 
     return [ $users, $initiator, $feature ];
 }
+
+function favicon($url = null)
+{
+    return asset('img/favicon.png');
+}

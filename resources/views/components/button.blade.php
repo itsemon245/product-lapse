@@ -11,6 +11,7 @@
     $action = $attributes->has('action') ? $attributes->get('action') : '';
     $class = $attributes->has('class') ? $attributes->has('class') : '';
     $enctype = $attributes->has('enctype') ? $attributes->has('enctype') : 'multipart/form-data';
+    $modalId = uniqid('delete-modal-');
 @endphp
 
 @switch(strtolower($type))
@@ -34,9 +35,27 @@
             @csrf
             @method('DELETE')
             <button class="{{ $hasIcon ? 'btn' : 'btn_hover agency_banner_btn btn-bg ' . $colorClass . ' ' . $class }}"
-                type="submit">
+                type="button" data-toggle="modal" data-target="#{{ $modalId }}">
                 {!! $slot ?? 'Form Submit' !!}
             </button>
+            <div class="modal fade" id="{{ $modalId }}" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+              
+                    <!-- Modal body -->
+                    <div class="modal-body modal-alert">
+                      <div class="modal-img"><img class="mx-auto" src="{{asset('img/bin.png')}}"></div>
+                      <div class="modal-text">Are sure of the deleting process ?</div>
+                    </div>
+                      <div class="modal-footer modal-btns">
+                          <div class="payment-btns text-center">
+                              <button type="submit" class="btn_hover agency_banner_btn btn-bg">Yes</button>
+                              <button type="button" class="btn_hover agency_banner_btn btn-bg btn-bg3" data-dismiss="modal"> Cancel</button>
+                          </div>
+                        </div>
+                  </div>
+                </div>
+              </div>
         </form>
     @break
 

@@ -19,7 +19,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products   = User::find(auth()->id())->myProducts()->paginate(10);
+        $products   = User::find(auth()->id())->myProducts()->latest()->paginate(10);
         $categories = Select::of('product')->type('category')->get();
         return view('features.product.index', compact('products', 'categories'));
     }
@@ -64,7 +64,7 @@ class ProductController extends Controller
         // Set Cookie for the selected product
         $cookie   = Cookie::forever('product_id', $id);
         $product  = Product::find($id);
-        $products = Product::get();
+        $products = User::find(auth()->id())->myProducts;
         $features = $this->getFeatureList($id);
         return response(view('features.product.home', compact('product', 'features', 'products')))->withCookie($cookie);
     }
@@ -76,7 +76,7 @@ class ProductController extends Controller
         // Set Cookie for the selected product
         $cookie   = Cookie::forever('product_id', $request->product_id);
         $product  = Product::find($request->product_id);
-        $products = Product::get();
+        $products = User::find(auth()->id())->myProducts()->paginate(10);
         $features = $this->getFeatureList($request->product_id);
         return response(view('features.product.home', compact('product', 'features', 'products')))->withCookie($cookie);
     }

@@ -15,19 +15,19 @@ trait CanSendNotifications
     protected static function bootCanSendNotifications(): void
     {
         static::created(function ($model) {
-            if (config('app.env') == 'production') {
+            if (!env('SEEDING', false)) {
                 [ $users, $initiator, $feature ] = getNotificationData($model);
                 Notification::send($users, new CreateNotification($initiator, $feature));
             }
         });
         static::updated(function ($model) {
-            if (config('app.env') == 'production') {
+            if (!env('SEEDING', false)) {
                 [ $users, $initiator, $feature ] = getNotificationData($model);
                 Notification::send($users, new UpdateNotification($initiator, $feature));
             }
         });
         static::deleting(function ($model) {
-            if (config('app.env') == 'production') {
+            if (!env('SEEDING', false)) {
                 [ $users, $initiator, $feature ] = getNotificationData($model);
                 Notification::send($users, new DeleteNotification($initiator, $feature));
             }

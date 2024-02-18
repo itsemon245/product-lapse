@@ -9,6 +9,7 @@ return [
         'privacy-policy' => 'Privacy Policy',
         'terms' =>'Terms & Conditions',
         'support' => 'Technical support',
+        'save' => 'Save',
     ],
 
 

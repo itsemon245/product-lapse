@@ -53,7 +53,7 @@
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <span class="button-1 btn-bg-1">@lang('support.' . $support->status)</span>
+                            <button type="button" class="button-1 btn-bg-1" data-toggle="modal" data-target="#myModal1">@lang('support.' . $support->status)</button>
                         </div>
                         <div class="col-6">
                             <a href="#" class="button-1 btn-bg-2"><i class="ti-reload"></i>@__('feature/support.update')</a>
@@ -66,4 +66,5 @@
     </x-slot:profile>
     <x-comments :model="$support" :comments="$support->comments" />
 </x-feature.show>
+<x-update-modal :options="$statuses" />
 @endsection

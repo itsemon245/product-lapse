@@ -64,7 +64,8 @@ class ChangeController extends Controller
         $user = User::with('image')->find($change->creator_id);
         $change->loadComments();
         $comments = $change->comments;
-        return view('features.change.partials.show', compact('change', 'user', 'comments'));
+        $statuses  = Select::of('change')->type('status')->get();
+        return view('features.change.partials.show', compact('change', 'user', 'comments', 'statuses'));
     }
 
     /**

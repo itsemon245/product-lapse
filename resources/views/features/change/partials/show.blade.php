@@ -45,7 +45,7 @@
                         </div>
                         <div class="row">
                             <div class="col-6">
-                                <span class="button-1 btn-bg-1">@__('feature/change.working')</span>
+                                <button type="button" class="button-1 btn-bg-1" data-toggle="modal" data-target="#myModal1">@__('feature/change.working')</button>
                             </div>
                             <div class="col-6">
                                 <a href="#" class="button-1 btn-bg-2"><i class="ti-reload"></i>@__('feature/change.update')</a>
@@ -58,4 +58,5 @@
         </x-slot:profile>
         <x-comments :model="$change" :comments="$change->comments" />
     </x-feature.show>
+    <x-update-modal :options="$statuses" />
 @endsection

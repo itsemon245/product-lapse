@@ -59,7 +59,8 @@ class SupportController extends Controller
         $user = User::with('image')->find($support->creator_id);
         $support->loadComments();
         $comments = $support->comments;
-        return view('features.support.partials.show', compact('user', 'support', 'comments'));
+        $statuses = Select::of('support')->type('ticket')->get();
+        return view('features.support.partials.show', compact('user', 'support', 'comments', 'statuses'));
     }
 
     /**

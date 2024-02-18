@@ -2,7 +2,7 @@
 @section('main')
     <x-feature.index>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => @__('feature/product.add'), 'route' => route('product.index')]]" />
+            <x-breadcrumb />
         </x-slot:breadcrumb>
         <x-slot:search>
             <form method="GET" hx-get="{{ route('product.search') }}" hx-trigger="submit" hx-target="#search-results"

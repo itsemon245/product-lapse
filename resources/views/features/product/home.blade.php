@@ -1,6 +1,6 @@
 @extends('layouts.subscriber.app', ['title' => @__('productHome.title')])
 @section('main')
-    <x-breadcrumb :list="[['label' => @__('productHome.title'), 'route' => route('product.show', $product)]]" />
+    <x-breadcrumb />
     <section class="sign_in_area bg_color sec_pad" style="padding-top: 20px">
         <div class="container">
             <div class="row align-items-center mb_20">

@@ -15,7 +15,7 @@ class PermissionSeeder extends Seeder
     public function run(): void
     {
         $roles = [
-            'super admin'                => 'empty',
+            'admin'                      => 'empty',
             'account holder'             => [
                 'create' => Feature::cases(),
                 'update' => Feature::cases(),
@@ -93,22 +93,18 @@ class PermissionSeeder extends Seeder
             }
         }
 
-        $commentRoles = [
-            'account holder',
-            'product manager',
-            'assistant product manager',
+        $rolesForOtherPermission = [
+            'account holder'            => [ 'delete comment', 'add member', 'delete member', 'send invitation' ],
+            'product manager'           => [ 'delete comment', 'add member', 'delete member', 'send invitation' ],
+            'assistant product manager' => [ 'delete comment', 'add member', 'delete member', 'send invitation' ],
          ];
-        foreach ($commentRoles as $role) {
-            $deleteCommentPermission = Permission::firstOrCreate(
-                [
-                    'name' => 'delete comment',
-                 ],
-                [
-                    'name' => 'delete comment',
-                 ]
-            );
+        foreach ($rolesForOtherPermission as $role => $permissions) {
+
             $newRole = Role::firstOrCreate([ 'name' => $role ], [ 'name' => $role ]);
-            $newRole->givePermissionTo($deleteCommentPermission);
+            foreach ($permissions as $permission) {
+                $permission = Permission::firstOrCreate(['name' => $permission],['name' => $permission]);
+                $newRole->givePermissionTo($permission);
+            }
         }
 
     }

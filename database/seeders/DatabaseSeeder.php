@@ -46,6 +46,18 @@ class DatabaseSeeder extends Seeder
             'type'             => 'subscriber',
             'owner_id'         => $admin[ 0 ]->id,
          ]);
+        $member = \App\Models\User::factory(1)->create([
+            'first_name'       => 'Member',
+            'last_name'        => 'User',
+            'email'            => 'member@gmail.com',
+            'password'         => Hash::make('password'),
+            'phone'            => '123456789',
+            'workplace'        => 'hello',
+            'promotional_code' => 'subscriber',
+            'position'         => 'manager',
+            'type'             => 'member',
+            'owner_id'         => $subscriber[ 0 ]->id,
+         ]);
 
         // Remove Dispatcher
         // Package::unsetEventDispatcher();
@@ -77,5 +89,9 @@ class DatabaseSeeder extends Seeder
             FaqSeeder::class,
             FeatureSeeder::class,
          ]);
+
+         $admin[0]->assignRole('admin');
+         $subscriber[0]->assignRole('account holder');
+         $member[0]->assignRole('product manager');
     }
 }

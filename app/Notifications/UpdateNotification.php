@@ -8,7 +8,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class CreateNotification extends Notification
+class UpdateNotification extends Notification
 {
     use Queueable;
 
@@ -50,7 +50,7 @@ class CreateNotification extends Notification
     {
         return [
             'initiator_id' => $this->initiator->id,
-            'message'      => trans("has created a new {$this->feature}"),
+            'message'      => trans("has updated a {$this->feature}"),
          ];
     }
 }

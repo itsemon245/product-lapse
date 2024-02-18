@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\CanSendNotifications;
 use App\Traits\HasFile;
 use App\Traits\HasOwner;
 use App\Traits\HasCreator;
@@ -12,6 +13,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Document extends Model
 {
-    use HasFactory, HasFile, HasProducts, HasComments, HasCreator, HasOwner;
+    use HasFactory, HasFile, HasProducts, HasComments, HasCreator, HasOwner, CanSendNotifications;
     protected $guarded = [];
 }

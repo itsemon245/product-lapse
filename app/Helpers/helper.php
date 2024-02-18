@@ -103,7 +103,26 @@ function productId()
     return request()->cookie('product_id');
 }
 
-function demoSub(){
+function demoSub()
+{
     $sub = User::where('type', 'subscriber')->first();
     return $sub;
+}
+
+/**
+ * Use this only in CanSendNotification Trait
+ *
+ * @param mixed $model
+ * @return array
+ */
+function getNotificationData($model)
+{
+    $initiator = auth()->user();
+    $users     = Product::find(productId())->users->filter(function (User $user) use ($initiator) {
+        return $user->id != auth()->id();
+    });
+    $feature = explode('\\', get_class($model));
+    $feature = array_pop($feature);
+
+    return [ $users, $initiator, $feature ];
 }

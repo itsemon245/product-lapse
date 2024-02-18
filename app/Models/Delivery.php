@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\CanSendNotifications;
 use App\Traits\HasFile;
 use App\Traits\HasOwner;
 use App\Traits\HasCreator;
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Delivery extends Model
 {
-    use HasFactory, HasFile, HasProducts, HasCreator, HasComments, HasOwner;
+    use HasFactory, HasFile, HasProducts, HasCreator, HasComments, HasOwner, CanSendNotifications;
     protected $guarded = [];
 
 

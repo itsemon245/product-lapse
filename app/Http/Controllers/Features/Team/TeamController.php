@@ -52,37 +52,13 @@ class TeamController extends Controller
         }
 
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Invitation $invitation)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Invitation $invitation)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(TeamInvitationRequest $request, Invitation $invitation)
-    {
-        notify()->success(__('notify/success.update'));
-    }
-
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Invitation $invitation)
+    public function destroy(User $team)
     {
-        $delete = $invitation->delete();
+        $team->deleteImage();
+        $delete = $team->delete();
         if ($delete) {
             notify()->success(__('notify/success.delete'));
             return redirect()->route('team.index');

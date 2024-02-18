@@ -45,7 +45,6 @@ class InvitationMail extends Mailable
             with: [
                 'first_name' => $this->invitation->first_name,
                 'role' => $this->invitation->role,
-                'position' => $this->invitation->position,
                 'token' => $this->invitation->token, 
                 'productNames' => $this->invitation->products->pluck('name'),
             ],

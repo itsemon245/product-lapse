@@ -15,7 +15,7 @@
 
         <p>Dear {{ $first_name }},</p>
 
-        <p>You are invited for the position of {{ $position }}. Here are the product details:</p>
+        <p>You are invited for the position of <b>{{ str($role)->title() }}</b>. Here are the product details:</p>
 
         <ul>
             @foreach ($productNames as $productName)

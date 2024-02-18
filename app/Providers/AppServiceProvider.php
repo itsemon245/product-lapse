@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
         Blueprint::macro('hasCreator', function () {
             $table = $this;
             $table->unsignedBigInteger('creator_id')->nullable();
-            $table->foreign('creator_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('creator_id')->references('id')->on('users');
         });
         Blueprint::macro('hasOwner', function () {
             $table = $this;

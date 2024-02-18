@@ -6,12 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\TeamInvitationRequest;
 use App\Models\Invitation;
 use App\Models\Product;
-use App\Models\ProductUser;
 use App\Models\User;
 use App\Services\InvitationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
@@ -67,15 +65,14 @@ class InvitationController extends Controller
             request()->session()->invalidate();
             request()->session()->regenerateToken();
             Auth::login($user);
+            $this->assignToUser($invitation, $user);
             notify()->success('You have already accepted the invitation!');
             return redirect(route('home'));
         }
         if ($invitation == null) {
-            return redirect()->back();
+            notify()->error('Invitation expired or invalid token!');
+            return redirect()->route('home');
         }
-
-        $invitation->accepted_at = now();
-        $invitation->save();
 
         $id = base64_encode($invitation->id);
 
@@ -96,39 +93,22 @@ class InvitationController extends Controller
         $invitation = Invitation::find($id);
         // dd($invitation);
         if ($invitation == null) {
-            return redirect()->route('login')->with('success', 'Something went wrong');
+            notify()->error('Invitation expired or invalid token!');
+            return redirect()->route('home');
         }
-
-        $existingUser = User::where('email', $invitation->email)->first();
-
-        if ($existingUser) {
-            return redirect()->route('login')->with('success', 'User with this email already exists');
-        } else {
-
-            $user = User::create([
-                'name'              => $invitation->first_name,
-                'email'             => $invitation->email,
-                'email_verified_at' => now(),
-                'password'          => Hash::make($request->password),
-                'first_name'        => $invitation->first_name,
-                'last_name'         => $invitation->last_name,
-                'phone'             => $invitation->phone,
-                'position'          => $invitation->position,
-                'owner_id'          => auth()->id(),
-             ]);
-
-            foreach ($invitation->products as $product) {
-                if ($product->is_accepted == false) {
-                    DB::table('invitation_products')->where('product_id', $product->id)->update([ 'is_accepted' => true ]);
-
-                    ProductUser::create([
-                        'product_id' => $product->id,
-                        'user_id'    => $user->id,
-                     ]);
-                }
-
-            }
-        }
+        $user = User::create([
+            'name'              => $invitation->first_name,
+            'email'             => $invitation->email,
+            'email_verified_at' => now(),
+            'password'          => Hash::make($request->password),
+            'first_name'        => $invitation->first_name,
+            'last_name'         => $invitation->last_name,
+            'phone'             => $invitation->phone,
+            'position'          => $invitation->role,
+            'owner_id'          => $invitation->owner_id,
+            'type'              => 'member',
+         ]);
+        $this->assignToUser($invitation, $user);
 
         return redirect()->route('login')->with('success', 'Password created successfully');
     }
@@ -155,5 +135,17 @@ class InvitationController extends Controller
         $invitation->delete();
 
         return redirect()->route('invitation.index')->with('success', 'Invitation deleted successfully');
+    }
+
+    public function assignToUser(Invitation $invitation, User $user): void
+    {
+        foreach ($invitation->products as $product) {
+            $product->users()->attach($user->id);
+            $invitation->products()->updateExistingPivot($product->id, [ 'is_accepted' => true ]);
+        }
+        $user->owner_id = $invitation->owner_id;
+        $user->type     = 'member';
+        $user->saveQuietly();
+
     }
 }

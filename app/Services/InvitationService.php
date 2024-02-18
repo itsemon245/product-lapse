@@ -1,20 +1,18 @@
 <?php
 namespace App\Services;
 
-use App\Models\Invitation;
-use Illuminate\Support\Str;
+use App\Http\Requests\TeamInvitationRequest;
 use App\Mail\InvitationMail;
-use App\Models\InvitationProduct;
+use App\Models\Invitation;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
-use App\Http\Requests\TeamInvitationRequest;
-
+use Illuminate\Support\Str;
 
 class InvitationService
 {
     public function __construct(protected TeamInvitationRequest $request, protected $extraData)
     {
-        $this->extraData = $extraData; 
+        $this->extraData = $extraData;
     }
 
     /**
@@ -37,7 +35,7 @@ class InvitationService
             'first_name' => $request->first_name,
             'last_name'  => $request->last_name,
             'phone'      => $request->phone,
-            'role'   => $request->role,
+            'role'       => $request->role,
             'token'      => $token,
          ]);
         // Create invitation products for every product

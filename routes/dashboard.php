@@ -17,7 +17,6 @@ require __DIR__ . '/support.php';
 require __DIR__ . '/report.php';
 require __DIR__ . '/release.php';
 require __DIR__ . '/product.php';
-require __DIR__ . '/invitation.php';
 require __DIR__ . '/productHistory.php';
 require __DIR__ . '/document.php';
 require __DIR__ . '/idea.php';

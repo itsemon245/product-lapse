@@ -54,7 +54,7 @@
                                                     <form action="{{ route('team.destroy', $team) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <x-btn-icons type="submit" value="<i class='ti-trash'></i>" />
+                                                        <x-button :hasIcon="true" type="submit"><i class='ti-trash'></i></x-button>
                                                     </form>
                                                 </div>
                                             </div>

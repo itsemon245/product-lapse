@@ -32,6 +32,7 @@ class DeliveryFactory extends Factory
             'administrator' => function(){
                 return User::inRandomOrder()->first()->id;
             },
+            'is_agreed' => fake()->randomElement([1,null])
         ];
     }
 }

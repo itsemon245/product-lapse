@@ -20,7 +20,7 @@
             <div class="col-lg-8 blog_sidebar_left">
                 <div class="blog_single mb_50">
                     <div class="row">
-                        <h5 class="f_size_20 f_500 col-md-12">{{ $delivery->name }}<img class="deliver-img" src="img/done.png"
+                        <h5 class="f_size_20 f_500 col-md-12">{{ $delivery->name }}<img class="deliver-img" src="{{ $delivery->is_agreed == !null ? asset('img/done.png') : asset('img/cancel.png') }}"
                                 title="Approved"></h5>
                         <div class="col-md-6">
                             <h6 class="title2">@__('feature/delivery.link')</h6>
@@ -68,10 +68,16 @@
                         </div>
                         <div class="row">
                             <div class="col-6">
-                                <a href="#" class="button-1 btn-bg-1">@__('feature/delivery.agree')</a>
+                                <form action="{{ route('delivery.agree', $delivery) }}" method="post">
+                                    @csrf
+                                <button style="{{ $delivery->is_agreed == !null ? 'cursor: not-allowed' : '' }}" {{ $delivery->is_agreed == !null ? 'disabled' : '' }} class="button-1 btn-bg-1 {{ $delivery->is_agreed == !null ? 'opacity-50' : '' }} " >@__('feature/delivery.agree')</button>
+                                </form>
                             </div>
                             <div class="col-6">
-                                <a href="#" class="button-1 btn-bg-2">@__('feature/delivery.disagree')</a>
+                                <form action="{{ route('delivery.disagree', $delivery) }}" method="post">
+                                    @csrf
+                                <button style="{{ $delivery->is_agreed == null ? 'cursor: not-allowed' : '' }}" {{ $delivery->is_agreed == null ? 'disabled' : '' }} class="button-1 btn-bg-2 {{ $delivery->is_agreed == null ? 'opacity-50' : '' }} " >@__('feature/delivery.disagree')</button>
+                                </form>
                             </div>
                         </div>
                     </div>

@@ -101,6 +101,24 @@ class DeliveryController extends Controller
         return redirect()->route('delivery.index');
     }
 
+    public function agree(string $id)
+    {
+        $find = Delivery::find($id);
+        $find->update([
+            'is_agreed' => 1,
+        ]);
+        return back();
+    }
+
+    public function disagree(string $id)
+    {
+        $find = Delivery::find($id);
+        $find->update([
+            'is_agreed' => null,
+        ]);
+        return back();
+    }
+
     public function search(SearchRequest $request)
     {
         $deliveries = SearchService::items($request);

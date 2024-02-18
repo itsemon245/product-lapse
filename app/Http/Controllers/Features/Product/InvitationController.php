@@ -145,6 +145,7 @@ class InvitationController extends Controller
         }
         $user->owner_id = $invitation->owner_id;
         $user->type     = 'member';
+        $user->assignRole($invitation->role);
         $user->saveQuietly();
 
     }

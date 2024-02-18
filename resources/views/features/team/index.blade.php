@@ -44,7 +44,9 @@
                                     <div class="jobsearch-table-cell">
                                         <h4><a href="#" class="f_500 t_color3"></a>{{ $team->name ?? 'Name' }}</h4>
                                         <ul class="list-unstyled">
-                                            <li>{{ $team?->role?->name ?? 'Guest' }}</li>
+                                            <li class="text-capitalize">
+                                                {{ str($team?->getRole()->name)->title() ?? 'Guest' }}
+                                            </li>
                                         </ul>
                                     </div>
                                     @if (auth()->id() != $team->id)
@@ -54,7 +56,8 @@
                                                     <form action="{{ route('team.destroy', $team) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <x-button :hasIcon="true" type="submit"><i class='ti-trash'></i></x-button>
+                                                        <x-button :hasIcon="true" type="submit"><i
+                                                                class='ti-trash'></i></x-button>
                                                     </form>
                                                 </div>
                                             </div>

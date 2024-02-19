@@ -35,40 +35,40 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         $admin = \App\Models\User::factory(1)->create([
-            'first_name'       => 'Admin',
-            'last_name'        => 'Admin',
-            'email'            => 'admin@gmail.com',
-            'password'         => Hash::make('password'),
-            'phone'            => '123456789',
-            'workplace'        => 'Admin',
+            'first_name' => 'Admin',
+            'last_name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('password'),
+            'phone' => '123456789',
+            'workplace' => 'Admin',
             'promotional_code' => 'Admin',
-            'position'         => 'manager',
-            'type'             => 'admin',
-         ]);
+            'position' => 'manager',
+            'type' => 'admin',
+        ]);
         $subscriber = \App\Models\User::factory(1)->create([
-            'first_name'       => 'Subscriber',
-            'last_name'        => 'User',
-            'email'            => 'subscriber@gmail.com',
-            'password'         => Hash::make('password'),
-            'phone'            => '123456789',
-            'workplace'        => 'hello',
+            'first_name' => 'Subscriber',
+            'last_name' => 'User',
+            'email' => 'subscriber@gmail.com',
+            'password' => Hash::make('password'),
+            'phone' => '123456789',
+            'workplace' => 'hello',
             'promotional_code' => 'Admin',
-            'position'         => 'manager',
-            'type'             => 'subscriber',
-            'owner_id'         => $admin[ 0 ]->id,
-         ]);
+            'position' => 'manager',
+            'type' => 'subscriber',
+            'owner_id' => $admin[0]->id,
+        ]);
         $member = \App\Models\User::factory(1)->create([
-            'first_name'       => 'Member',
-            'last_name'        => 'User',
-            'email'            => 'member@gmail.com',
-            'password'         => Hash::make('password'),
-            'phone'            => '123456789',
-            'workplace'        => 'hello',
+            'first_name' => 'Member',
+            'last_name' => 'User',
+            'email' => 'member@gmail.com',
+            'password' => Hash::make('password'),
+            'phone' => '123456789',
+            'workplace' => 'hello',
             'promotional_code' => 'subscriber',
-            'position'         => 'manager',
-            'type'             => 'member',
-            'owner_id'         => $subscriber[ 0 ]->id,
-         ]);
+            'position' => 'manager',
+            'type' => 'member',
+            'owner_id' => $subscriber[0]->id,
+        ]);
 
         // Remove Dispatcher
         // Package::unsetEventDispatcher();
@@ -76,7 +76,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             SelectSeeder::class,
             ProductSeeder::class,
-         ]);
+        ]);
 
         Change::factory(10)->create();
 
@@ -95,14 +95,14 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PermissionSeeder::class,
             LandingPageSeeder::class,
-            // PackageSeeder::class,
+                // PackageSeeder::class,
             ContactSeeder::class,
             FaqSeeder::class,
             FeatureSeeder::class,
-         ]);
+        ]);
 
-         $admin[0]->assignRole('admin');
-         $subscriber[0]->assignRole('account holder');
-         $member[0]->assignRole('product manager');
+        $admin[0]->assignRole('admin');
+        $subscriber[0]->assignRole('account holder');
+        $member[0]->assignRole('product manager');
     }
 }

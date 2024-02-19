@@ -20,10 +20,12 @@
 
 
         <x-slot:actions>
-            <x-button type="link" href="{{ route('team.create') }}">
-                <i class="ti-plus"></i>
-                @__('feature/team.add')
-            </x-button>
+            @can('add member')
+                <x-button type="link" href="{{ route('team.create') }}">
+                    <i class="ti-plus"></i>
+                    @__('feature/team.add')
+                </x-button>
+            @endcan
         </x-slot:actions>
 
         <x-slot:filter>
@@ -45,24 +47,27 @@
                                         <h4><a href="#" class="f_500 t_color3"></a>{{ $team->name ?? 'Name' }}</h4>
                                         <ul class="list-unstyled">
                                             <li class="text-capitalize">
-                                                {{ $team?->getRole()?->name ? str($team?->getRole()?->name)->title() : 'Guest'}}
+                                                {{ $team?->getRole()?->name ? str($team?->getRole()?->name)->title() : 'Guest' }}
                                             </li>
                                         </ul>
                                     </div>
-                                    @if (auth()->id() != $team->id)
-                                        <div class="jobsearch-table-cell">
-                                            <div class="jobsearch-job-userlist">
-                                                <div class="like-btn">
-                                                    <form action="{{ route('team.destroy', $team) }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <x-button :hasIcon="true" type="submit"><i
-                                                                class='ti-trash'></i></x-button>
-                                                    </form>
+
+                                    @can('delete member')
+                                        @if (auth()->id() != $team->id)
+                                            <div class="jobsearch-table-cell">
+                                                <div class="jobsearch-job-userlist">
+                                                    <div class="like-btn">
+                                                        <form action="{{ route('team.destroy', $team) }}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <x-button :hasIcon="true" type="submit"><i
+                                                                    class='ti-trash'></i></x-button>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    @endif
+                                        @endif
+                                    @endcan
                                 </div>
                             </div>
                         </div>

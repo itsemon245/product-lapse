@@ -18,11 +18,13 @@
         </x-slot:search>
 
         <x-slot:actions>
-            <x-button type="link" href="{{ route('delivery.create') }}">
-                <x-button type="submit" action={{ route('delivery.create') }}>
-                    <i class="ti-plus"></i>
-                    @__('feature/delivery.add')
-                </x-button>
+            @can('create delivery')
+                <x-button type="link" href="{{ route('delivery.create') }}">
+                    <x-button type="submit" action={{ route('delivery.create') }}>
+                        <i class="ti-plus"></i>
+                        @__('feature/delivery.add')
+                    </x-button>
+                @endcan
         </x-slot:actions>
 
         <x-slot:filter>
@@ -47,18 +49,22 @@
                                     </div>
                                     <div class="jobsearch-table-cell">
                                         <div class="jobsearch-job-userlist">
-                                            <div class="like-btn">
-                                                <form action="{{ route('delivery.destroy', $delivery) }}" method="post">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <x-btn-icons type="submit" class="btn"
-                                                        value="<i class='ti-trash'></i>" />
-                                                </form>
-                                            </div>
-                                            <div class="like-btn">
-                                                <x-btn-icons type="anchor" value="<i class='ti-pencil'></i>"
-                                                    href="{{ route('delivery.edit', $delivery) }}" />
-                                            </div>
+                                            @can('delete delivery')
+                                                <div class="like-btn">
+                                                    <form action="{{ route('delivery.destroy', $delivery) }}" method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <x-btn-icons type="submit" class="btn"
+                                                            value="<i class='ti-trash'></i>" />
+                                                    </form>
+                                                </div>
+                                            @endcan
+                                            @can('update delivery')
+                                                <div class="like-btn">
+                                                    <x-btn-icons type="anchor" value="<i class='ti-pencil'></i>"
+                                                        href="{{ route('delivery.edit', $delivery) }}" />
+                                                </div>
+                                            @endcan
                                         </div>
                                     </div>
                                 </div>

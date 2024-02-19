@@ -17,10 +17,12 @@
             </form>
         </x-slot:search>
         <x-slot:actions>
-            <x-button type="link" href="{{ route('support.create') }}">
-                <i class="ti-plus"></i>
-                @__('feature/support.add')
-            </x-button>
+            @can('create support')
+                <x-button type="link" href="{{ route('support.create') }}">
+                    <i class="ti-plus"></i>
+                    @__('feature/support.add')
+                </x-button>
+            @endcan
         </x-slot:actions>
         <x-slot:filter>
             <h5>@__('feature/support.showing')</h5>
@@ -32,7 +34,7 @@
                 <div class="col-md-6">
                     <div class="item lon new">
                         <div class="list_item">
-                            <figure><a href="#"><img src="{{favicon()}}" alt=""></a></figure>
+                            <figure><a href="#"><img src="{{ favicon() }}" alt=""></a></figure>
                             <div class="joblisting_text">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell">
@@ -48,23 +50,27 @@
                                     </div>
                                     <div class="jobsearch-table-cell">
                                         <div class="jobsearch-job-userlist">
-                                            <div class="like-btn">
-                                                <form action="{{ route('support.destroy', $support) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
+                                            @can('delete support')
+                                                <div class="like-btn">
+                                                    <form action="{{ route('support.destroy', $support) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
 
-                                                    <button type="submit" class="shortlist" title="Delete">
-                                                        <i class="ti-trash"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                            <div class="like-btn">
-                                                <a href="{{ route('support.edit', $support) }}" class="shortlist"
-                                                    title="Edit">
-                                                    <i class="ti-pencil"></i>
-                                                </a>
+                                                        <button type="submit" class="shortlist" title="Delete">
+                                                            <i class="ti-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            @endcan
 
-                                            </div>
+                                            @can('update support')
+                                                <div class="like-btn">
+                                                    <a href="{{ route('support.edit', $support) }}" class="shortlist"
+                                                        title="Edit">
+                                                        <i class="ti-pencil"></i>
+                                                    </a>
+                                                </div>
+                                            @endcan
                                         </div>
                                     </div>
                                 </div>

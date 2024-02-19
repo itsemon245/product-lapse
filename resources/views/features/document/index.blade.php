@@ -19,10 +19,12 @@
 
 
         <x-slot:actions>
-            <x-button type="link" href="{{ route('document.create') }}">
-                <i class="ti-plus"></i>
-                @__('feature/document.add')
-            </x-button>
+            @can('create document')
+                <x-button type="link" href="{{ route('document.create') }}">
+                    <i class="ti-plus"></i>
+                    @__('feature/document.add')
+                </x-button>
+            @endcan
         </x-slot:actions>
 
         <x-slot:filter>
@@ -53,18 +55,24 @@
                                     </div>
                                     <div class="jobsearch-table-cell">
                                         <div class="jobsearch-job-userlist">
-                                            <div class="like-btn">
-                                                <form action="{{ route('document.destroy', $document) }}" method="post">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <x-btn-icons type="submit" class="btn"
-                                                        value="<i class='ti-trash'></i>" />
-                                                </form>
-                                            </div>
-                                            <div class="like-btn">
-                                                <x-btn-icons type="anchor" value="<i class='ti-pencil'></i>"
-                                                    href="{{ route('document.edit', $document) }}" />
-                                            </div>
+                                            @can('delete document')
+                                                <div class="like-btn">
+                                                    <form action="{{ route('document.destroy', $document) }}" method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <x-btn-icons type="submit" class="btn"
+                                                            value="<i class='ti-trash'></i>" />
+                                                    </form>
+                                                </div>
+                                            @endcan
+
+                                            @can('update document')
+                                                <div class="like-btn">
+                                                    <x-btn-icons type="anchor" value="<i class='ti-pencil'></i>"
+                                                        href="{{ route('document.edit', $document) }}" />
+                                                </div>
+                                            @endcan
+
                                             <div class="like-btn">
                                                 <form
                                                     action="{{ route('document.download', ['id' => base64_encode($document->id)]) }}"

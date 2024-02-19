@@ -1,28 +1,48 @@
+@props(['title'=> null, 'label'=> 'Toggle Modal'])
+
+@php
+    $modalID = uniqid('modal-');
+@endphp
+
 <div>
-    <x-slot:trigger>
-        <button type="submit" class="btn_hover agency_banner_btn btn-bg" data-toggle="modal"
-            data-target="#myModal2">Delete</button>
-    </x-slot:trigger>
+    <button type="button" class="button-1 btn-bg-1" data-toggle="modal" data-target="#{{ $modalID }}">
+        {!! $label !!}
+    </button>
 
-    <x-slot:target>
-        <div class="modal fade" id="myModal2">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
+    <div class="modal fade" id="{{ $modalID }}" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
-                    <!-- Modal body -->
-                    <div class="modal-body modal-alert">
-                        <div class="modal-img"><img src="img/bin.png"></div>
-                        <div class="modal-text">Are sure of the deleting process ?</div>
+                @empty($header)
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">{{ $title }}</h4>
+                        <button type="button" class="close" data-dismiss="modal">×</button>
                     </div>
-                    <div class="modal-footer modal-btns">
-                        <div class="payment-btns text-center">
-                            <button type="submit" class="btn_hover agency_banner_btn btn-bg">Yes</button>
-                            <button type="button" class="btn_hover agency_banner_btn btn-bg btn-bg3"
-                                data-dismiss="modal"> Cancel</button>
-                        </div>
+                @else
+                    {!! $header !!}
+                @endempty
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        {!! $slot !!}
                     </div>
                 </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    @empty($footer)
+                        <!-- Modal Header -->
+                        <button type="button" class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">Save</button>
+                        <button type="button" class="btn_hover agency_banner_btn btn-bg btn-bg-grey"
+                            data-dismiss="modal">Cancel</button>
+                    @else
+                        {!! $footer !!}
+                    @endempty
+                </div>
+
             </div>
         </div>
-    </x-slot:target>
+    </div>
 </div>

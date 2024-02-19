@@ -8,6 +8,9 @@ use App\Http\Controllers\Features\Certificate\CertificateController;
 
 Route::prefix('admin')
     ->group(function () {
+        Route::get('/', function() {
+            return view('dashboard.admin');
+        });
         Route::resource('faqs', FaqController::class)->except('show');
         Route::resource('package', PackageController::class);
         Route::get('/edit-about-us', [LandingPageController::class, 'editAboutUs'])->name('edit.about_us');

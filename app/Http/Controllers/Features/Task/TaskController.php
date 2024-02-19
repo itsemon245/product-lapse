@@ -96,7 +96,6 @@ class TaskController extends Controller
         ]);
         notify()->success(__('Updated Successfully!'));
         return redirect()->route('task.show', $task);
-
     }
 
     /**

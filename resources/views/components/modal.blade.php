@@ -6,7 +6,7 @@
 
 <div>
     <button type="button" class="button-1 btn-bg-1" data-toggle="modal" data-target="#{{ $modalID }}">
-        {!! $label !!}
+        @__($label)
     </button>
 
     <div class="modal fade" id="{{ $modalID }}" style="display: none;" aria-hidden="true">
@@ -34,7 +34,7 @@
                 <div class="modal-footer">
                     @empty($footer)
                         <!-- Modal Header -->
-                        <button type="button" class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">Save</button>
+                        <button type="button" class="btn_hover agency_banner_btn btn-bg agency_banner_btn2" data-dismiss="modal">Save</button>
                         <button type="button" class="btn_hover agency_banner_btn btn-bg btn-bg-grey"
                             data-dismiss="modal">Cancel</button>
                     @else

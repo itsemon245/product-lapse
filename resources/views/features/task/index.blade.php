@@ -19,10 +19,12 @@
         </x-slot:search>
 
         <x-slot:actions>
-            <x-button href="{{ route('task.create') }}" type="link">
-                <i class="ti-plus"></i>
-                @__('feature/task.add')
-            </x-button>
+            @can('create task')
+                <x-button href="{{ route('task.create') }}" type="link">
+                    <i class="ti-plus"></i>
+                    @__('feature/task.add')
+                </x-button>
+            @endcan
         </x-slot:actions>
 
         <x-slot:filter>
@@ -35,7 +37,7 @@
                 <div class="col-md-6">
                     <div class="item lon new">
                         <div class="list_item">
-                            <figure><a href="#"><img src="{{favicon()}}" alt=""></a></figure>
+                            <figure><a href="#"><img src="{{ favicon() }}" alt=""></a></figure>
                             <div class="joblisting_text">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell">
@@ -51,21 +53,25 @@
                                     </div>
                                     <div class="jobsearch-table-cell">
                                         <div class="jobsearch-job-userlist">
-                                            <div class="like-btn">
-                                                <form action="{{ route('task.destroy', $task) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
+                                            @can('delete task')
+                                                <div class="like-btn">
+                                                    <form action="{{ route('task.destroy', $task) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
 
-                                                    <button type="submit" class="shortlist" title="Delete">
-                                                        <i class="ti-trash"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                            <div class="like-btn">
-                                                <a href="{{ route('task.edit', $task) }}" class="shortlist" title="Edit">
-                                                    <i class="ti-pencil"></i>
-                                                </a>
-                                            </div>
+                                                        <button type="submit" class="shortlist" title="Delete">
+                                                            <i class="ti-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            @endcan
+                                            @can('update task')
+                                                <div class="like-btn">
+                                                    <a href="{{ route('task.edit', $task) }}" class="shortlist" title="Edit">
+                                                        <i class="ti-pencil"></i>
+                                                    </a>
+                                                </div>
+                                            @endcan
                                         </div>
                                     </div>
                                 </div>

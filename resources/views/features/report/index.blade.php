@@ -19,10 +19,12 @@
 
 
         <x-slot:actions>
-            <x-button type="link" href="{{ route('report.create') }}">
-                <i class="ti-plus"></i>
-                @__('feature/report.add')
-            </x-button>
+            @can('create report')
+                <x-button type="link" href="{{ route('report.create') }}">
+                    <i class="ti-plus"></i>
+                    @__('feature/report.add')
+                </x-button>
+            @endcan
         </x-slot:actions>
 
         <x-slot:filter>
@@ -50,19 +52,25 @@
                                         <div class="jobsearch-job-userlist">
                                             <div class="jobsearch-table-cell">
                                                 <div class="jobsearch-job-userlist">
-                                                    <div class="like-btn">
-                                                        <form action="{{ route('report.destroy', $report) }}"
-                                                            method="post">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <x-btn-icons type="submit" class="btn"
-                                                                value="<i class='ti-trash'></i>" />
-                                                        </form>
-                                                    </div>
-                                                    <div class="like-btn">
-                                                        <x-btn-icons type="anchor" value="<i class='ti-pencil'></i>"
-                                                            href="{{ route('report.edit', $report) }}" />
-                                                    </div>
+                                                    @can('delete report')
+                                                        <div class="like-btn">
+                                                            <form action="{{ route('report.destroy', $report) }}"
+                                                                method="post">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <x-btn-icons type="submit" class="btn"
+                                                                    value="<i class='ti-trash'></i>" />
+                                                            </form>
+                                                        </div>
+                                                    @endcan
+
+                                                    @can('update report')
+                                                        <div class="like-btn">
+                                                            <x-btn-icons type="anchor" value="<i class='ti-pencil'></i>"
+                                                                href="{{ route('report.edit', $report) }}" />
+                                                        </div>
+                                                    @endcan
+
                                                     <div class="like-btn">
                                                         <form
                                                             action="{{ route('report.download', ['id' => base64_encode($report->id)]) }}"

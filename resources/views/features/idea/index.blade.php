@@ -18,10 +18,12 @@
         </x-slot:search>
 
         <x-slot:actions>
-            <x-button type="link" href="{{ route('idea.create') }}">
-                <i class="ti-plus"></i>
-                @__('feature/idea.add')
-            </x-button>
+            @can('create idea')
+                <x-button type="link" href="{{ route('idea.create') }}">
+                    <i class="ti-plus"></i>
+                    @__('feature/idea.add')
+                </x-button>
+            @endcan
         </x-slot:actions>
 
 
@@ -50,23 +52,25 @@
                                     </div>
                                     <div class="jobsearch-table-cell">
                                         <div class="jobsearch-job-userlist">
-                                            <div class="like-btn">
-                                                <form action="{{ route('idea.destroy', $idea) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="shortlist" title="Delete">
-                                                        <i class="ti-trash"></i>
-                                                    </button>
-                                                </form>
+                                            @can('delete idea')
+                                                <div class="like-btn">
+                                                    <form action="{{ route('idea.destroy', $idea) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="shortlist" title="Delete">
+                                                            <i class="ti-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            @endcan
 
-                                            </div>
-                                            <div class="like-btn">
-                                                <a href="{{ route('idea.edit', $idea) }}" class="shortlist" title="Edit">
-                                                    <i class="ti-pencil"></i>
-                                                </a>
-
-                                            </div>
-
+                                            @can('update idea')
+                                                <div class="like-btn">
+                                                    <a href="{{ route('idea.edit', $idea) }}" class="shortlist" title="Edit">
+                                                        <i class="ti-pencil"></i>
+                                                    </a>
+                                                </div>
+                                            @endcan
                                         </div>
                                     </div>
                                 </div>
@@ -74,8 +78,8 @@
                         </div>
                     </div>
                 </div>
-                @empty
-                    <x-feature.not-found />
+            @empty
+                <x-feature.not-found />
             @endforelse
         </x-slot:list>
         <x-slot:pagination>

@@ -17,10 +17,12 @@
         </x-slot:search>
 
         <x-slot:actions>
-            <x-button type="link" href="{{ route('release.create') }}">
-                <i class="ti-plus"></i>
-                @__('feature/release.add')
-            </x-button>
+            @can('create release')
+                <x-button type="link" href="{{ route('release.create') }}">
+                    <i class="ti-plus"></i>
+                    @__('feature/release.add')
+                </x-button>
+            @endcan
         </x-slot:actions>
 
         <x-slot:filter>
@@ -46,18 +48,25 @@
                                     </div>
                                     <div class="jobsearch-table-cell">
                                         <div class="jobsearch-job-userlist">
-                                            <div class="like-btn">
-                                                <form action="{{ route('release.destroy', $release) }}" method="post">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <x-btn-icons type="submit" class="btn"
-                                                        value="<i class='ti-trash'></i>" />
-                                                </form>
-                                            </div>
-                                            <div class="like-btn">
-                                                <x-btn-icons type="anchor" value="<i class='ti-pencil'></i>"
-                                                    href="{{ route('release.edit', $release) }}" />
-                                            </div>
+
+                                            @can('delete release')
+                                                <div class="like-btn">
+                                                    <form action="{{ route('release.destroy', $release) }}" method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <x-btn-icons type="submit" class="btn"
+                                                            value="<i class='ti-trash'></i>" />
+                                                    </form>
+                                                </div>
+                                            @endcan
+
+                                            @can('update release')
+                                                <div class="like-btn">
+                                                    <x-btn-icons type="anchor" value="<i class='ti-pencil'></i>"
+                                                        href="{{ route('release.edit', $release) }}" />
+                                                </div>
+                                            @endcan
+
                                         </div>
                                     </div>
                                 </div>

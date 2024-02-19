@@ -16,19 +16,19 @@ trait CanSendNotifications
     {
         static::created(function ($model) {
             if (!env('SEEDING', false)) {
-                [ $users, $initiator, $feature ] = getNotificationData($model);
+                [$users, $initiator, $feature] = getNotificationData($model);
                 Notification::send($users, new CreateNotification($initiator, $feature));
             }
         });
         static::updated(function ($model) {
             if (!env('SEEDING', false)) {
-                [ $users, $initiator, $feature ] = getNotificationData($model);
+                [$users, $initiator, $feature] = getNotificationData($model);
                 Notification::send($users, new UpdateNotification($initiator, $feature));
             }
         });
         static::deleting(function ($model) {
             if (!env('SEEDING', false)) {
-                [ $users, $initiator, $feature ] = getNotificationData($model);
+                [$users, $initiator, $feature] = getNotificationData($model);
                 Notification::send($users, new DeleteNotification($initiator, $feature));
             }
         });

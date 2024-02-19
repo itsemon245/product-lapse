@@ -17,10 +17,12 @@
         </x-slot:search>
 
         <x-slot:actions>
-            <x-button type="link" href="{{ route('product.create') }}">
-                <i class="ti-plus"></i>
-                @__('feature/product.add')
-            </x-button>
+            @can('create product')
+                <x-button type="link" href="{{ route('product.create') }}">
+                    <i class="ti-plus"></i>
+                    @__('feature/product.add')
+                </x-button>
+            @endcan
         </x-slot:actions>
         <x-slot:filter>
             <h5>@__('feature/product.showing')</h5>
@@ -50,12 +52,19 @@
                                     <div class="jobsearch-table-cell">
                                         <div class="jobsearch-job-userlist">
                                             <div class="like-btn flex items-center">
-                                                <x-button type="link" class="mt-1" :href="route('product.edit', $product)" :has-icon="true">
-                                                    <span class="ti-pencil"></span>
-                                                </x-button>
-                                                <x-button type="delete" :action="route('product.destroy', $product)" :has-icon="true">
-                                                    <span class="ti-trash"></span>
-                                                </x-button>
+
+                                                @can('update product')
+                                                    <x-button type="link" class="mt-1" :href="route('product.edit', $product)" :has-icon="true">
+                                                        <span class="ti-pencil"></span>
+                                                    </x-button>
+                                                @endcan
+
+                                                @can('delete product')
+                                                    <x-button type="delete" :action="route('product.destroy', $product)" :has-icon="true">
+                                                        <span class="ti-trash"></span>
+                                                    </x-button>
+                                                @endcan
+
                                             </div>
                                         </div>
                                     </div>

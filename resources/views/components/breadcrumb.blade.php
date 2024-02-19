@@ -1,10 +1,13 @@
 @props(['list' => []])
-<section class="breadcrumb_area">
+@php
+    $class = $attributes->has('class') ? $attributes->get('class') : 'breadcrumb_area';
+@endphp
+<section class="{{$class}}">
     <div class="container d-flex">
         <div class="breadcrumb_content text-center ml-auto">
             <ul class="breadcrumb">
                 <li class="breadcrumb-item {{ request()->routeIs('dashboard') ? 'active' : '' }} "><a
-                        href="{{ route('dashboard') }}">@__('root.dashboard')</a>
+                        href="{{ str(url()->current())->contains('dashboard') ? route('dashboard') : route('admin') }}">@__('root.dashboard')</a>
                 </li>
                 @if (productId() != null && str(url()->current())->contains('dashboard'))
                     <li

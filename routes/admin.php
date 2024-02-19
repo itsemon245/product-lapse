@@ -5,14 +5,17 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\Frontend\LandingPageController;
 use App\Http\Controllers\Features\Certificate\CertificateController;
+use App\Http\Controllers\Package\PackageFeatureController;
 
 Route::prefix('admin')
     ->group(function () {
         Route::get('/', function() {
             return view('dashboard.admin');
-        });
+        })->name('admin');
         Route::resource('faqs', FaqController::class)->except('show');
         Route::resource('package', PackageController::class);
+        Route::resource('package-feature', PackageFeatureController::class)->only(['index', 'store', 'update', 'destroy']);
+        Route::get('product-feature/search', [PackageFeatureController::class, 'search'])->name('package-feature.search');
         Route::get('/edit-about-us', [LandingPageController::class, 'editAboutUs'])->name('edit.about_us');
         Route::put('/update-about-us/{id}', [LandingPageController::class, 'updateAboutUs'])->name('about_us.update');
         

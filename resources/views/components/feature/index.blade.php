@@ -1,4 +1,3 @@
-<div>
     {{ $breadcrumb }}
     <section class="sign_in_area bg_color sec_pad">
         <div class="container">
@@ -17,7 +16,7 @@
                 </div>
                 <div class="col-lg-4 col-md-5 products-order2">
                     <div class="shop_menu_left d-flex align-items-center justify-content-end">
-                        {{ $filter }}
+                        {{ $filter ?? '' }}
                     </div>
                 </div>
             </div>
@@ -36,8 +35,7 @@
                         {{ $list }}
                     </div>
                 </div>
-                {{$pagination ?? ''}}
+                {{ $pagination ?? '' }}
             </div>
         </div>
     </section>
-</div>

@@ -11,6 +11,7 @@ use App\Models\Product;
 use App\Models\Release;
 use App\Models\Delivery;
 use App\Models\Document;
+use App\Models\PackageFeature;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Database\Seeders\PermissionSeeder;
@@ -91,6 +92,8 @@ class DatabaseSeeder extends Seeder
         Document::factory(10)->create();
 
         Release::factory(10)->create();
+
+        PackageFeature::factory(10)->create();
 
         $this->call([
             PermissionSeeder::class,

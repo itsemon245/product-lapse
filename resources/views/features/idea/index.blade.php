@@ -36,7 +36,8 @@
             @forelse ($ideas as $idea)
                 <div class="col-md-6">
                     <div class="item lon new">
-                        <div class="list_item">
+                        <div class="list_item ">
+                            <figure class="align-middle"><a href="#"><img src="{{favicon()}}" alt=""></a></figure>
                             <div class="joblisting_text">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell">
@@ -46,7 +47,7 @@
                                         <ul class="list-unstyled">
                                             <li class="p_color4">{{ $idea->owner }}</li>
                                             <li class="p_color4"> {{ $idea->priority }} </li>
-                                            <li class="p_color4">
+                                            <li class="">
                                                 {{ \Carbon\Carbon::parse($idea->created_at)->format('l, j F Y') }}</li>
                                         </ul>
                                     </div>

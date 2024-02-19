@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\Colors;
 use App\Enums\Feature;
 use App\Models\Select;
 use App\Enums\SelectType;
@@ -17,7 +18,7 @@ class SelectSeeder extends Seeder
         Select::create([
             'model_type' => Feature::PRODUCT->value,
             'type' => SelectType::CATEGORY->value,
-            'color' => "#fff",
+            'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
                 'en' => 'Men',
                 'ar' => 'رجال'
@@ -26,7 +27,7 @@ class SelectSeeder extends Seeder
         Select::create([
             'model_type' => Feature::PRODUCT->value,
             'type' => SelectType::STAGE->value,
-            'color' => "#fff",
+            'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
                 'en'=> 'Not Started',
                 'ar'=> 'لم يبدأ'
@@ -35,7 +36,7 @@ class SelectSeeder extends Seeder
         Select::create([
             'model_type' => Feature::IDEA->value,
             'type' => SelectType::PRIORITY->value,
-            'color' => "#fff",
+            'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
                 'en' => 'High',
                 'ar' => 'يعمل على',
@@ -44,7 +45,7 @@ class SelectSeeder extends Seeder
         Select::create([
             'model_type' => Feature::IDEA->value,
             'type' => SelectType::PRIORITY->value,
-            'color' => "#fff",
+            'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
                 'en' => 'Low',
                 'ar' => 'قيد الانتظار',
@@ -53,7 +54,7 @@ class SelectSeeder extends Seeder
         Select::create([
             'model_type' => Feature::IDEA->value,
             'type' => SelectType::PRIORITY->value,
-            'color' => "#fff",
+            'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
                 'en' => 'Medium',
                 'ar' => 'توقفت',
@@ -62,7 +63,7 @@ class SelectSeeder extends Seeder
         Select::create([
             'model_type' => Feature::TASK->value,
             'type' => SelectType::STATUS->value,
-            'color' => "#fff",
+            'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
                 'en' => 'Working on',
                 'ar' => 'يعمل على',
@@ -71,7 +72,7 @@ class SelectSeeder extends Seeder
         Select::create([
             'model_type' => Feature::TASK->value,
             'type' => SelectType::STATUS->value,
-            'color' => "#fff",
+            'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
                 'en' => 'Pending',
                 'ar' => 'قيد الانتظار',
@@ -80,7 +81,7 @@ class SelectSeeder extends Seeder
         Select::create([
             'model_type' => Feature::TASK->value,
             'type' => SelectType::STATUS->value,
-            'color' => "#fff",
+            'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
                 'en' => 'Stopped',
                 'ar' => 'توقفت',
@@ -89,7 +90,7 @@ class SelectSeeder extends Seeder
         Select::create([
             'model_type' => Feature::TASK->value,
             'type' => SelectType::CATEGORY->value,
-            'color' => "#fff",
+            'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
                 'en' => 'Men',
                 'ar' => 'يعمل على',
@@ -98,7 +99,7 @@ class SelectSeeder extends Seeder
         Select::create([
             'model_type' => Feature::TASK->value,
             'type' => SelectType::CATEGORY->value,
-            'color' => "#fff",
+            'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
                 'en' => 'Women',
                 'ar' => 'قيد الانتظار',
@@ -107,7 +108,7 @@ class SelectSeeder extends Seeder
         Select::create([
             'model_type' => Feature::TASK->value,
             'type' => SelectType::CATEGORY->value,
-            'color' => "#fff",
+            'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
                 'en' => 'Child',
                 'ar' => 'توقفت',
@@ -116,7 +117,7 @@ class SelectSeeder extends Seeder
         Select::create([
             'model_type' => Feature::CHANGE->value,
             'type' => SelectType::STATUS->value,
-            'color' => "#fff",
+            'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
                 'en' => 'Working on',
                 'ar' => 'يعمل على',
@@ -125,7 +126,7 @@ class SelectSeeder extends Seeder
         Select::create([
             'model_type' => Feature::CHANGE->value,
             'type' => SelectType::STATUS->value,
-            'color' => "#fff",
+            'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
                 'en' => 'Pending',
                 'ar' => 'قيد الانتظار',
@@ -134,7 +135,7 @@ class SelectSeeder extends Seeder
         Select::create([
             'model_type' => Feature::CHANGE->value,
             'type' => SelectType::STATUS->value,
-            'color' => "#fff",
+            'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
                 'en' => 'Stopped',
                 'ar' => 'توقفت',
@@ -143,7 +144,7 @@ class SelectSeeder extends Seeder
         Select::create([
             'model_type' => Feature::DOCUMENT->value,
             'type' => SelectType::TYPE->value,
-            'color' => "#fff",
+            'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
                 'en' => 'PDF',
                 'ar' => 'بي دي إف',
@@ -152,7 +153,7 @@ class SelectSeeder extends Seeder
         Select::create([
             'model_type' => Feature::DOCUMENT->value,
             'type' => SelectType::TYPE->value,
-            'color' => "#fff",
+            'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
                 'en' => 'Image',
                 'ar' => 'صورة',
@@ -161,7 +162,7 @@ class SelectSeeder extends Seeder
         Select::create([
             'model_type' => Feature::REPORT->value,
             'type' => SelectType::TYPE->value,
-            'color' => "#fff",
+            'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
                 'en' => 'PDF',
                 'ar' => 'بي دي إف',
@@ -170,34 +171,34 @@ class SelectSeeder extends Seeder
         Select::create([
             'model_type' => Feature::REPORT->value,
             'type' => SelectType::TYPE->value,
-            'color' => "#fff",
+            'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
                 'en' => 'Image',
                 'ar' => 'صورة',
             ],
         ]);
-        Select::create([
-            'model_type' => Feature::CERTIFICATE->value,
-            'type' => SelectType::SUBMISSION->value,
-            'color' => "#fff",
-            'value' => [
-                'en' => 'Approved',
-                'ar' => 'موافقة',
-            ],
-        ]);
-        Select::create([
-            'model_type' => Feature::CERTIFICATE->value,
-            'type' => SelectType::SUBMISSION->value,
-            'color' => "#fff",
-            'value' => [
-                'en' => 'Cancel',
-                'ar' => 'يلغي',
-            ],
-        ]);
+        // Select::create([
+        //     'model_type' => Feature::CERTIFICATE->value,
+        //     'type' => SelectType::SUBMISSION->value,
+        //     'color' => Colors::cases()[random_int(0,2)]->value,
+        //     'value' => [
+        //         'en' => 'Approved',
+        //         'ar' => 'موافقة',
+        //     ],
+        // ]);
+        // Select::create([
+        //     'model_type' => Feature::CERTIFICATE->value,
+        //     'type' => SelectType::SUBMISSION->value,
+        //     'color' => Colors::cases()[random_int(0,2)]->value,
+        //     'value' => [
+        //         'en' => 'Cancel',
+        //         'ar' => 'يلغي',
+        //     ],
+        // ]);
         Select::create([
             'model_type' => Feature::SUPPORT->value,
             'type' => SelectType::PRIORITY->value,
-            'color' => "#fff",
+            'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
                 'en' => 'Low',
                 'ar' => 'قليل',
@@ -206,7 +207,7 @@ class SelectSeeder extends Seeder
         Select::create([
             'model_type' => Feature::SUPPORT->value,
             'type' => SelectType::PRIORITY->value,
-            'color' => "#fff",
+            'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
                 'en' => 'Medium',
                 'ar' => 'واسطة',
@@ -215,7 +216,7 @@ class SelectSeeder extends Seeder
         Select::create([
             'model_type' => Feature::SUPPORT->value,
             'type' => SelectType::PRIORITY->value,
-            'color' => "#fff",
+            'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
                 'en' => 'High',
                 'ar' => 'عالي',
@@ -224,7 +225,7 @@ class SelectSeeder extends Seeder
         Select::create([
             'model_type' => Feature::SUPPORT->value,
             'type' => SelectType::STATUS->value,
-            'color' => "#fff",
+            'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
                 'en' => 'Start',
                 'ar' => 'يبدأ',
@@ -233,7 +234,7 @@ class SelectSeeder extends Seeder
         Select::create([
             'model_type' => Feature::SUPPORT->value,
             'type' => SelectType::STATUS->value,
-            'color' => "#fff",
+            'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
                 'en' => 'Not start',
                 'ar' => 'لا تبدأ',
@@ -242,7 +243,7 @@ class SelectSeeder extends Seeder
         Select::create([
             'model_type' => Feature::SUPPORT->value,
             'type' => SelectType::CLASSIFICATION->value,
-            'color' => "#fff",
+            'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
                 'en' => 'Good',
                 'ar' => 'جيد',
@@ -251,7 +252,7 @@ class SelectSeeder extends Seeder
         Select::create([
             'model_type' => Feature::SUPPORT->value,
             'type' => SelectType::CLASSIFICATION->value,
-            'color' => "#fff",
+            'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
                 'en' => 'Not bad',
                 'ar' => 'ليس سيئًا',
@@ -260,7 +261,7 @@ class SelectSeeder extends Seeder
         Select::create([
             'model_type' => Feature::SUPPORT->value,
             'type' => SelectType::CLASSIFICATION->value,
-            'color' => "#fff",
+            'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
                 'en' => 'Best',
                 'ar' => 'أفضل',
@@ -269,7 +270,7 @@ class SelectSeeder extends Seeder
         Select::create([
             'model_type' => Feature::CHANGE->value,
             'type' => SelectType::CLASSIFICATION->value,
-            'color' => "#fff",
+            'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
                 'en' => 'Good',
                 'ar' => 'يعمل على',
@@ -278,7 +279,7 @@ class SelectSeeder extends Seeder
         Select::create([
             'model_type' => Feature::CHANGE->value,
             'type' => SelectType::CLASSIFICATION->value,
-            'color' => "#fff",
+            'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
                 'en' => 'Not bad',
                 'ar' => 'قيد الانتظار',
@@ -287,7 +288,7 @@ class SelectSeeder extends Seeder
         Select::create([
             'model_type' => Feature::CHANGE->value,
             'type' => SelectType::CLASSIFICATION->value,
-            'color' => "#fff",
+            'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
                 'en' => 'Best',
                 'ar' => 'توقفت',
@@ -296,7 +297,7 @@ class SelectSeeder extends Seeder
         Select::create([
             'model_type' => Feature::CHANGE->value,
             'type' => SelectType::PRIORITY->value,
-            'color' => "#fff",
+            'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
                 'en' => 'Low',
                 'ar' => 'قليل',
@@ -305,7 +306,7 @@ class SelectSeeder extends Seeder
         Select::create([
             'model_type' => Feature::CHANGE->value,
             'type' => SelectType::PRIORITY->value,
-            'color' => "#fff",
+            'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
                 'en' => 'High',
                 'ar' => 'عالي',
@@ -314,7 +315,7 @@ class SelectSeeder extends Seeder
         Select::create([
             'model_type' => Feature::CHANGE->value,
             'type' => SelectType::PRIORITY->value,
-            'color' => "#fff",
+            'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
                 'en' => 'Medium',
                 'ar' => 'واسطة',
@@ -323,7 +324,7 @@ class SelectSeeder extends Seeder
         // Select::create([
         //     'model_type' => Feature::USER->value,
         //     'type' => SelectType::TASK->value,
-        //     'color' => "#fff",
+        //     'color' => Colors::cases()[random_int(0,2)]->value,
         //     'value' => [
         //         'en' => 'Low',
         //         'ar' => 'قليل',
@@ -332,7 +333,7 @@ class SelectSeeder extends Seeder
         // Select::create([
         //     'model_type' => Feature::USER->value,
         //     'type' => SelectType::TASK->value,
-        //     'color' => "#fff",
+        //     'color' => Colors::cases()[random_int(0,2)]->value,
         //     'value' => [
         //         'en' => 'High',
         //         'ar' => 'عالي',
@@ -341,7 +342,7 @@ class SelectSeeder extends Seeder
         // Select::create([
         //     'model_type' => Feature::USER->value,
         //     'type' => SelectType::TASK->value,
-        //     'color' => "#fff",
+        //     'color' => Colors::cases()[random_int(0,2)]->value,
         //     'value' => [
         //         'en' => 'Medium',
         //         'ar' => 'واسطة',
@@ -350,7 +351,7 @@ class SelectSeeder extends Seeder
         // Select::create([
         //     'model_type' => Feature::PACKAGE->value,
         //     'type' => SelectType::TYPE->value,
-        //     'color' => "#fff",
+        //     'color' => Colors::cases()[random_int(0,2)]->value,
         //     'value' => [
         //         'en' => 'Free package',
         //         'ar' => 'الباقة المجانية',
@@ -359,7 +360,7 @@ class SelectSeeder extends Seeder
         // Select::create([
         //     'model_type' => Feature::PACKAGE->value,
         //     'type' => SelectType::TYPE->value,
-        //     'color' => "#fff",
+        //     'color' => Colors::cases()[random_int(0,2)]->value,
         //     'value' => [
         //         'en' => 'Basic Package',
         //         'ar' => 'الباقة الأساسية',
@@ -368,7 +369,7 @@ class SelectSeeder extends Seeder
         // Select::create([
         //     'model_type' => Feature::PACKAGE->value,
         //     'type' => SelectType::TYPE->value,
-        //     'color' => "#fff",
+        //     'color' => Colors::cases()[random_int(0,2)]->value,
         //     'value' => [
         //         'en' => 'Golden Package',
         //         'ar' => 'الباقة الذهبية',
@@ -377,7 +378,7 @@ class SelectSeeder extends Seeder
         // Select::create([
         //     'model_type' => Feature::PACKAGE->value,
         //     'type' => SelectType::TYPE->value,
-        //     'color' => "#fff",
+        //     'color' => Colors::cases()[random_int(0,2)]->value,
         //     'value' => [
         //         'en' => 'Diamond Package',
         //         'ar' => 'الباقة الماسية',

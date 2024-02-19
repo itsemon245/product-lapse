@@ -75,7 +75,6 @@
                                                 @if ($task->choose_mvp) checked @endif>
                                         </label>
                                     </div>
-
                                     <div class="media-body">
                                         <h5 class="t_color3 f_size_17 f_600">MVP</h5>
                                     </div>

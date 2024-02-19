@@ -19,15 +19,17 @@
                             <x-select-input label="Feature Name" id="model-type" placeholder="Choose Feature Name"
                                 name="model_type" autofocus>
                                 @foreach ($features as $feature)
-                                    <option value="{{ $feature->value }}" @selected($feature->value == $select->model_type)>{{ str($feature->value)->headline() }}</option>
+                                    <option value="{{ $feature->value }}" @selected($feature->value == $select->model_type)>
+                                        {{ str($feature->value)->headline() }}</option>
                                 @endforeach
                             </x-select-input>
-                        </div>  
+                        </div>
                         <div class="form-group text_box col-lg-6 col-md-6">
-                            <x-select-input label="Type Of Item" id="type" placeholder="Choose Type"
-                                name="type" autofocus>
+                            <x-select-input label="Type Of Item" id="type" placeholder="Choose Type" name="type"
+                                autofocus>
                                 @foreach ($types as $type)
-                                    <option value="{{ $type->value }}" @selected($type->value == $select->type)>{{ str($type->value)->headline() }}</option>
+                                    <option value="{{ $type->value }}" @selected($type->value == $select->type)>
+                                        {{ str($type->value)->headline() }}</option>
                                 @endforeach
                             </x-select-input>
                         </div>
@@ -41,9 +43,14 @@
                                 name="name_ar" :value="$select->value->ar" required autofocus />
                         </div>
                         <div class="form-group text_box col-lg-12 col-md-6">
-                            <x-input label="Text Color" id="text-color" type="color" placeholder="Enter text color"
-                                name="text_color" :value="$select->color" required autofocus />
-                            <x-input-error :messages="$errors->get('text_color')" class="mt-2" />
+                            <x-select-input label="Select Text Color" id="color" placeholder="Choose Color"
+                                name="text_color" autofocus>
+                                @foreach ($colors as $color)
+                                    <option class="text-capitalize" style="color: {{ $color->value }}"
+                                        value="{{ $color->value }}" @selected($color->value == $select->color)>
+                                        {{ str($color->name)->title() }}</option>
+                                @endforeach
+                            </x-select-input>
                         </div>
                     </div>
                 </div>

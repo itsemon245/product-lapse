@@ -27,18 +27,17 @@
                 <div class="col-md-6">
                     <div class="item lon new">
                         <div class="list_item">
+                            <figure><a href="#"><img src="{{favicon()}}" alt=""></a></figure>
                             <div class="joblisting_text">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell">
                                         <h4 class="d-flex ">
-                                            <span class="mr-2">(En)
-                                                {{ $select->value->en }}</span> | 
-                                            <span class="ml-2">(Ar) {{ $select->value->ar }}</span>
+                                            <span class="mr-2" style="color: {{$select->color}}">{{ $select->value->en }}</span> | 
+                                            <span class="ml-2" style="color: {{$select->color}}">{{ $select->value->ar }}</span>
                                         </h4>
                                         <ul class="list-unstyled">
-                                            <li class="p_color4">{{ $select->model_type }}</li>
-                                            <li class="p_color4">{{ $select->type }}</li>
-                                            <li > <input type="color" value="{{ $select->color }}" disabled /> </li>
+                                            <li class="text-capitalize">{{ trans($select->model_type) }}</li>
+                                            <li class="text-capitalize">{{ trans($select->type) }}</li>
                                         </ul>
                                     </div>
                                     <div class="jobsearch-table-cell">

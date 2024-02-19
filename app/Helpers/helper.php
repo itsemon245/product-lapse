@@ -129,5 +129,5 @@ function getNotificationData($model)
 
 function favicon($url = null)
 {
-    return asset('img/favicon.png');
+    return asset('img/p6.png');
 }

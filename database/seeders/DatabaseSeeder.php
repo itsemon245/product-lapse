@@ -23,14 +23,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Release::unsetEventDispatcher();
-        Change::unsetEventDispatcher();
-        Delivery::unsetEventDispatcher();
-        Idea::unsetEventDispatcher();
-        Report::unsetEventDispatcher();
-        Task::unsetEventDispatcher();
-        Document::unsetEventDispatcher();
-        Product::unsetEventDispatcher();
+        // Release::unsetEventDispatcher();
+        // Change::unsetEventDispatcher();
+        // Delivery::unsetEventDispatcher();
+        // Idea::unsetEventDispatcher();
+        // Report::unsetEventDispatcher();
+        // Task::unsetEventDispatcher();
+        // Document::unsetEventDispatcher();
+        // Product::unsetEventDispatcher();
 
 
         // \App\Models\User::factory(10)->create();
@@ -76,6 +76,8 @@ class DatabaseSeeder extends Seeder
         // Package::factory(10)->create();
         $this->call([
             SelectSeeder::class,
+        ]);
+        $this->call([
             ProductSeeder::class,
         ]);
 

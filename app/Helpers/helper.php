@@ -97,7 +97,7 @@ function ownerId()
 function productId()
 {
     // Only in development and local server
-    if (config('app.env') == 'local' && config('app.debug') == true) {
+    if (env('SEEDING')) {
         return Product::first()->id;
     }
     return request()->cookie('product_id');

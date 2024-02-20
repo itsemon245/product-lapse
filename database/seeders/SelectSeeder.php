@@ -29,8 +29,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::STAGE->value,
             'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
-                'en'=> 'Not Started',
-                'ar'=> 'لم يبدأ'
+                'en' => 'Not Started',
+                'ar' => 'لم يبدأ'
             ],
         ]);
         Select::create([

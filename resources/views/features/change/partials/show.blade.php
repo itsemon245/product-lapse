@@ -38,19 +38,63 @@
                 <div class="blog-sidebar box-sidebar">
                     <div class="widget sidebar_widget widget_recent_post mt_60">
                         <div class="media post_author mt_60">
-                            <img class="rounded-circle" src="{{ $user->image->url ?? asset('img/profile1.png')}}" alt="">
+                            <img class="rounded-circle" src="{{ $user->image->url ?? asset('img/profile1.png') }}"
+                                alt="">
                             <div class="media-body">
                                 <h5 class=" t_color3 f_size_18 f_500">{{ $user->name }}</h5>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <button type="button" class="button-1 btn-bg-1" data-toggle="modal" data-target="#myModal1">@__('feature/change.working')</button>
+                        @can('update change')
+                            <div class="row">
+                                <div class="col-12">
+                                    <h6 class="title2 the-priority">Status : <span>{{ $change->status }}</span></h6>
+                                </div>
+                                <div class="col-6">
+                                    <form action="{{ route('change.update.status', $change) }}" method="post"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        @method('put')
+                                        <x-modal title="Update Change Status" label="feature/change.working">
+                                            <div>
+                                                <div class="row">
+                                                    @forelse ($statuses as $status)
+                                                        <div class="col-12">
+                                                            <div class="extra extra2 extra3">
+                                                                <div class="media post_author state-select">
+                                                                    <div class="checkbox remember">
+                                                                        <label>
+                                                                            <input type="radio" name="status"
+                                                                                value="{{ $status->value->{app()->getLocale()} }}"
+                                                                                @if ($change->status == $status->value->{app()->getLocale()}) checked @endif>
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="media-body">
+                                                                        <h5 class="t_color3 f_size_16 f_500">
+                                                                            {{ $status->value->{app()->getLocale()} }}</h5>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @empty
+                                                        <!-- Handle case where there are no statuses -->
+                                                    @endforelse
+
+                                                </div>
+                                            </div>
+                                        </x-modal>
+                                </div>
+                                <div class="col-6">
+                                    <button type="submit" class="button-1 btn-bg-2"><i
+                                            class="ti-reload"></i>@__('feature/change.update')</button>
+                                    </form>
+                                </div>
                             </div>
-                            <div class="col-6">
-                                <a href="#" class="button-1 btn-bg-2"><i class="ti-reload"></i>@__('feature/change.update')</a>
+                        @else
+                            <div class="row text-center">
+                                <h6 class="title2 the-priority">Status : <span>{{ $change->status }}</span></h6>
                             </div>
-                        </div>
+                        @endcan
+
                     </div>
 
                 </div>
@@ -58,5 +102,5 @@
         </x-slot:profile>
         <x-comments :model="$change" :comments="$change->comments" />
     </x-feature.show>
-    <x-update-modal :options="$statuses" />
+    {{-- <x-update-modal :options="$statuses" /> --}}
 @endsection

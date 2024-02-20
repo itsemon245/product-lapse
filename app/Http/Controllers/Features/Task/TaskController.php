@@ -85,15 +85,25 @@ class TaskController extends Controller
         $user = User::with('image')->find($task->creator_id);
         $task->loadComments();
         $comments = $task->comments;
-        return view('features.task.partials.show', compact('task', 'user', 'comments'));
+
+        $statuses = Select::of('task')->type('status')->get();
+
+        return view('features.task.partials.show', compact('task', 'user', 'comments', 'statuses'));
 
     }
 
     public function changeStatus(TaskRequest $request, Task $task)
     {
-        $task->update([
-            'status' => $request->status,
-        ]);
+        $data = [
+            'choose_mvp' => $request->has('choose_mvp') ? true : false,
+        ];
+
+        if ($request->has('status')) {
+            $data['status'] = $request->status;
+        }
+
+        $task->update($data);
+
         notify()->success(__('Updated Successfully!'));
         return redirect()->route('task.show', $task);
     }

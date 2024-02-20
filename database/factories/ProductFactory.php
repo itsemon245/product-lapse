@@ -22,12 +22,12 @@ class ProductFactory extends Factory
         $stage = Select::of('product')->type('stage')->first();
         $cat = Select::of('product')->type('category')->first();
         return [
-            'owner_id'    => $sub->id,
-            'name'        => fake()->name,
-            'stage'       => $stage->value->en,
-            'url'         => fake()->name,
-            'category'    => $cat->value->en,
+            'owner_id' => $sub->id,
+            'name' => fake()->name,
+            'stage' => $stage->value->en,
+            'url' => fake()->name,
+            'category' => $cat->value->en,
             'description' => fake()->paragraph,
-         ];
+        ];
     }
 }

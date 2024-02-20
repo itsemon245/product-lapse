@@ -67,84 +67,63 @@
                             <span>{{ str($task->administrator)->title() }}</span>
                         </h6>
                         @can('update task')
-                            <div class="extra extra2 extra3">
-                                <div class="media post_author" style="padding-top: 0">
-                                    <div class="checkbox remember">
-                                        <label>
-                                            <input type="checkbox" name="choose_mvp"
-                                                @if ($task->choose_mvp) checked @endif>
-                                        </label>
-                                    </div>
-
-                                    <div class="media-body">
-                                        <h5 class="t_color3 f_size_17 f_600">MVP</h5>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <x-modal title="Update Task Status" label="feature/task.working">
-                                        <div>
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div class="extra extra2 extra3">
-                                                        <div class="media post_author state-select">
-                                                            <div class="checkbox remember">
-                                                                <label>
-                                                                    <input type="radio" name="optradio">
-                                                                </label>
-                                                            </div>
-
-                                                            <div class="media-body">
-                                                                <h5 class=" t_color3 f_size_16 f_500">Working on</h5>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="extra extra2 extra3">
-                                                        <div class="media post_author state-select">
-                                                            <div class="checkbox remember">
-                                                                <label>
-                                                                    <input type="radio" name="optradio">
-                                                                </label>
-                                                            </div>
-
-                                                            <div class="media-body">
-                                                                <h5 class=" t_color3 f_size_16 f_500">Pending</h5>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="extra extra2 extra3">
-                                                        <div class="media post_author state-select">
-                                                            <div class="checkbox remember">
-                                                                <label>
-                                                                    <input type="radio" name="optradio">
-                                                                </label>
-                                                            </div>
-
-                                                            <div class="media-body">
-                                                                <h5 class=" t_color3 f_size_16 f_500">Stopped</h5>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
+                            <form action="{{ route('task.change.status', $task) }}" method="post"
+                                enctype="multipart/form-data">
+                                @csrf
+                                @method('put')
+                                <div class="extra extra2 extra3">
+                                    <div class="media post_author" style="padding-top: 0">
+                                        <div class="checkbox remember">
+                                            <label>
+                                                <input type="checkbox" name="choose_mvp"
+                                                    @if ($task->choose_mvp) checked @endif>
+                                            </label>
                                         </div>
-                                    </x-modal>
+
+                                        <div class="media-body">
+                                            <h5 class="t_color3 f_size_17 f_600">MVP</h5>
+                                        </div>
+
+                                    </div>
                                 </div>
-                                <div class="col-6">
-                                    <button type="submit" class="button-1 btn-bg-2"><i class="ti-reload"></i>@__('feature/task.update')
-                                        </>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <x-modal title="Update Task Status" label="feature/task.working">
+                                            <div>
+                                                <div class="row">
+                                                    @forelse ($statuses as $status)
+                                                        <div class="col-12">
+                                                            <div class="extra extra2 extra3">
+                                                                <div class="media post_author state-select">
+                                                                    <div class="checkbox remember">
+                                                                        <label>
+                                                                            <input type="radio" name="status"
+                                                                                value="{{ $status->value->{app()->getLocale()} }}"
+                                                                                @if ($task->status == $status->value->{app()->getLocale()}) checked @endif>
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="media-body">
+                                                                        <h5 class="t_color3 f_size_16 f_500">
+                                                                            {{ $status->value->{app()->getLocale()} }}</h5>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @empty
+                                                        <!-- Handle case where there are no statuses -->
+                                                    @endforelse
+
+                                                </div>
+                                            </div>
+                                        </x-modal>
+                                    </div>
+                                    <div class="col-6">
+                                        <button type="submit" class="button-1 btn-bg-2"><i
+                                                class="ti-reload"></i>@__('feature/task.update')
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         @endcan
                     </div>
 

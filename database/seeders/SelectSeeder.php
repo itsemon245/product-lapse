@@ -28,8 +28,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::STAGE->value,
             'color' => "#fff",
             'value' => [
-                'en'=> 'Not Started',
-                'ar'=> 'لم يبدأ'
+                'en' => 'Not Started',
+                'ar' => 'لم يبدأ'
             ],
         ]);
         Select::create([
@@ -176,24 +176,24 @@ class SelectSeeder extends Seeder
                 'ar' => 'صورة',
             ],
         ]);
-        Select::create([
-            'model_type' => Feature::CERTIFICATE->value,
-            'type' => SelectType::SUBMISSION->value,
-            'color' => "#fff",
-            'value' => [
-                'en' => 'Approved',
-                'ar' => 'موافقة',
-            ],
-        ]);
-        Select::create([
-            'model_type' => Feature::CERTIFICATE->value,
-            'type' => SelectType::SUBMISSION->value,
-            'color' => "#fff",
-            'value' => [
-                'en' => 'Cancel',
-                'ar' => 'يلغي',
-            ],
-        ]);
+        // Select::create([
+        //     'model_type' => Feature::CERTIFICATE->value,
+        //     'type' => SelectType::SUBMISSION->value,
+        //     'color' => "#fff",
+        //     'value' => [
+        //         'en' => 'Approved',
+        //         'ar' => 'موافقة',
+        //     ],
+        // ]);
+        // Select::create([
+        //     'model_type' => Feature::CERTIFICATE->value,
+        //     'type' => SelectType::SUBMISSION->value,
+        //     'color' => "#fff",
+        //     'value' => [
+        //         'en' => 'Cancel',
+        //         'ar' => 'يلغي',
+        //     ],
+        // ]);
         Select::create([
             'model_type' => Feature::SUPPORT->value,
             'type' => SelectType::PRIORITY->value,

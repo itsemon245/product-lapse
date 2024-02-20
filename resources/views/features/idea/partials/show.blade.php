@@ -50,23 +50,31 @@
                             <div class="col-12">
                                 <a href="#" class="button-1 btn-bg-2"><i class="ti-reload"></i>@__('feature/idea.update')</a>
                             </div>
-                            <div class="col-12">
-                                <a href="{{ route('change.create', ['idea' => $idea->id]) }}"
-                                    class="button-1">@__('feature/idea.change-request')</a>
-                            </div>
-                            <div class="col-12">
-                                <a href="{{ route('task.create', ['idea' => $idea->id]) }}" class="button-1"
-                                    style="background: #6c84ee">@__('feature/idea.task')</a>
-                            </div>
+
+                            @can('create change')
+                                <div class="col-12">
+                                    <a href="{{ route('change.create', ['idea' => $idea->id]) }}"
+                                        class="button-1">@__('feature/idea.change-request')</a>
+                                </div>
+                            @endcan
+
+                            @can('create task')
+                                <div class="col-12">
+                                    <a href="{{ route('task.create', ['idea' => $idea->id]) }}" class="button-1"
+                                        style="background: #6c84ee">@__('feature/idea.task')</a>
+                                </div>
+                            @endcan
                         </div>
-                        <h6 class="title2 the-priority">Idea owner : <span>Ahmed Shalaby</span></h6>
+                        <h6 class="title2 the-priority">Idea owner : <span>{{ $idea->owner }}</span></h6>
                     </div>
 
                 </div>
                 <div class="d-flex justify-content-between align-items-center text-center mt_15 mb_20">
-                    <a href="{{ route('idea.edit', $idea) }}" class="icon-square" title="Edit">
-                        <i class="ti-pencil"></i>
-                    </a>
+                    @can('update idea')
+                        <a href="{{ route('idea.edit', $idea) }}" class="icon-square" title="Edit">
+                            <i class="ti-pencil"></i>
+                        </a>
+                    @endcan
                     <a href="#" class="icon-square icon-square2" title="share" data-toggle="modal"
                         data-target="#myModal1"><i class="ti-sharethis"></i></a>
                     <a href="{{ route('pdf.generate', $idea) }}" target="_blank" class="icon-square icon-square3"

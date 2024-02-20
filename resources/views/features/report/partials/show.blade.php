@@ -40,14 +40,14 @@
                                 <h5 class=" t_color3 f_size_18 f_500">{{ $user->name }}</h5>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="button-1 btn-bg-1">@__('feature/report.working')</span>
+                        @can('update report')
+                            <div class="row">
+                                <div class="col-12">
+                                    <a href="{{ route('report.edit', $report) }}" class="button-1 btn-bg-2"><i
+                                            class="ti-reload"></i>@__('feature/report.update')</a>
+                                </div>
                             </div>
-                            <div class="col-6">
-                                <a href="#" class="button-1 btn-bg-2"><i class="ti-reload"></i>@__('feature/report.update')</a>
-                            </div>
-                        </div>
+                        @endcan
                     </div>
 
                 </div>

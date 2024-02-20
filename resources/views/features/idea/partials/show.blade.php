@@ -45,30 +45,65 @@
                                 <h5 class=" t_color3 f_size_18 f_500">{{ $idea->creator->name }}</h5>
                             </div>
                         </div>
-                        <h6 class="title2 the-priority">Priority : <span>{{ $idea->priority }}</span></h6>
                         <div class="row">
-                            <div class="col-12">
-                                <a href="#" class="button-1 btn-bg-2"><i class="ti-reload"></i>@__('feature/idea.update')</a>
-                            </div>
-                            <div class="col-12">
-                                <a href="{{ route('change.create', ['idea' => $idea->id]) }}"
-                                    class="button-1">@__('feature/idea.change-request')</a>
-                            </div>
-                            <div class="col-12">
-                                <a href="{{ route('task.create', ['idea' => $idea->id]) }}" class="button-1"
-                                    style="background: #6c84ee">@__('feature/idea.task')</a>
-                            </div>
+                            @can('update idea')
+                                <div class="col-12">
+                                    <form action="{{ route('idea.priority.update', $idea) }}" method="POST"
+                                        class="login-form sign-in-form" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="form-group">
+                                            <x-select-input label="{{ __('feature/idea.label.priority') }}" id="priority"
+                                                placeholder="{{ __('feature/idea.label.priority') }}" name="priority" required
+                                                autofocus>
+
+                                                @forelse ($priorities as $priority)
+                                                    <option value="{{ $priority->value->{app()->getLocale()} }}"
+                                                        @if ($idea->priority == $priority->value->{app()->getLocale()}) selected @endif>
+                                                        {{ $priority->value->{app()->getLocale()} }}
+                                                    </option>
+                                                @empty
+                                                    <option disabled>No Priority available</option>
+                                                @endforelse
+
+                                            </x-select-input>
+                                            <br>
+                                            <button type="submit" class="button-1 btn-bg-2"><i
+                                                    class="ti-pencil"></i>@__('feature/idea.update')</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            @else
+                                <h6 class="title2 the-priority">Priority : <span>{{ $idea->priority }}</span></h6>
+                            @endcan
+
+                            @can('create change')
+                                <div class="col-12">
+                                    <a href="{{ route('change.create', ['idea' => $idea->id]) }}"
+                                        class="button-1">@__('feature/idea.change-request')</a>
+                                </div>
+                            @endcan
+
+                            @can('create task')
+                                <div class="col-12">
+                                    <a href="{{ route('task.create', ['idea' => $idea->id]) }}" class="button-1"
+                                        style="background: #6c84ee">@__('feature/idea.task')</a>
+                                </div>
+                            @endcan
                         </div>
-                        <h6 class="title2 the-priority">Idea owner : <span>Ahmed Shalaby</span></h6>
+                        <h6 class="title2 the-priority">Idea owner : <span>{{ $idea->owner }}</span></h6>
                     </div>
 
                 </div>
                 <div class="d-flex justify-content-between align-items-center text-center mt_15 mb_20">
-                    <a href="{{ route('idea.edit', $idea) }}" class="icon-square" title="Edit">
-                        <i class="ti-pencil"></i>
-                    </a>
+                    @can('update idea')
+                        <a href="{{ route('idea.edit', $idea) }}" class="icon-square" title="Edit">
+                            <i class="ti-pencil"></i>
+                        </a>
+                    @endcan
                     <a href="#" class="icon-square icon-square2" title="share" data-toggle="modal"
                         data-target="#myModal1"><i class="ti-sharethis"></i></a>
+
                     <a href="{{ route('pdf.generate', $idea) }}" target="_blank" class="icon-square icon-square3"
                         title="save">
                         <i class="ti-save"></i>
@@ -79,6 +114,45 @@
         </x-slot:profile>
         <x-comments :model="$idea" :comments="$idea->comments" />
     </x-feature.show>
+
+    <div class="modal fade" id="myModal1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">@__('feature/idea.clipboard')</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="extra extra2 extra3">
+                                    <div class="media post_author state-select">
+                                        <div class="checkbox remember">
+                                            <p id="link"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" id="copyButton"
+                        class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">@__('feature/idea.copy')</button>
+                    <button type="button" class="btn_hover agency_banner_btn btn-bg btn-bg-grey"
+                        data-dismiss="modal">@__('feature/idea.cancel')</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('scripts')
@@ -87,6 +161,9 @@
         $(document).ready(function() {
             var currentUrl = window.location.href;
             $('#currentUrl').text(currentUrl);
+
+            const link = document.getElementById('link');
+            link.innerHTML = currentUrl;
 
             var clipboard = new ClipboardJS('#copyButton', {
                 text: function() {

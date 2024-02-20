@@ -45,4 +45,9 @@ return [
         'icon'       => '<span class="ti-package"></span>',
         'hasSubMenu' => false,
      ],
+     'Users Management'     => (object) [
+        "name"       => 'users.index',
+        'icon'       => '<span class="ti-user"></span>',
+        'hasSubMenu' => false,
+     ],
  ];

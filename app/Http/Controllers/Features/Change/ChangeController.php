@@ -72,6 +72,14 @@ class ChangeController extends Controller
         return view('features.change.partials.show', compact('change', 'user', 'comments', 'statuses'));
     }
 
+    public function updateStatus(Request $request, Change $change)
+    {
+        $change->update(['status' => request('status')]);
+
+        notify()->success(__('Updated successfully!'));
+        return redirect()->route('change.show', $change);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

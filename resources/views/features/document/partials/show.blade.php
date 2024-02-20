@@ -41,18 +41,46 @@
                 <div class="blog-sidebar box-sidebar">
                     <div class="widget sidebar_widget widget_recent_post mt_60">
                         <div class="media post_author mt_60">
-                            <img class="rounded-circle" src="{{ $user->image->url ?? asset('img/profile1.png') }}" alt="">
+                            <img class="rounded-circle" src="{{ $user->image->url ?? asset('img/profile1.png') }}"
+                                alt="">
                             <div class="media-body">
                                 <h5 class=" t_color3 f_size_18 f_500">@__('feature/document.classification')</h5>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-6">
-                                <span class="button-1 btn-bg-1">@__('feature/document.working')</span>
-                            </div>
-                            <div class="col-6">
-                                <a href="#" class="button-1 btn-bg-2"><i class="ti-reload"></i>@__('feature/document.classification')</a>
-                            </div>
+                            @can('update document')
+                                <div class="col-6">
+                                    <form method="POST" action="{{ route('document.update.version', $document) }}"
+                                        enctype="multipart/form-data" class="login-form">
+                                        @csrf
+                                        @method('PUT')
+                                        <x-modal title="Update Version" label="feature/document.placeholder.version">
+                                            <div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="extra extra2 extra3">
+                                                            <div class="media post_author state-select">
+                                                                <div class="media-body">
+                                                                    <h5 class="t_color3 f_size_16 f_500">@__('feature/document.label.version')</h5>
+                                                                </div>
+                                                                <div class="checkbox remember">
+                                                                    <input type="text" name="version" class="form-control"
+                                                                        placeholder="{{ __('feature/document.placeholder.version') }}"
+                                                                        required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </x-modal>
+                                </div>
+                                <div class="col-6">
+                                    <button type="submit" class="button-1 btn-bg-2"><i
+                                            class="ti-reload"></i>@__('feature/document.update')</button>
+                                    </form>
+                                </div>
+                            @endcan
                             <div class="col-12">
                                 <form action="{{ route('document.download', ['id' => base64_encode($document->id)]) }}"
                                     method="post" enctype="multipart/form-data">

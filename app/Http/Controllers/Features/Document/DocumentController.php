@@ -87,6 +87,15 @@ class DocumentController extends Controller
         return view('features.document.partials.show', compact('document', 'user', 'comments'));
     }
 
+    public function updateVersion(Request $request, Document $document)
+    {
+        $document->update(['version' => $request->version]);
+
+        notify()->success(__('Updated successfully!'));
+
+        return redirect()->route('document.show', $document);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

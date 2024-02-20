@@ -10,16 +10,16 @@ return [
     //add page + edit page
     'label' => [
         'name' => 'Report name',
-        'classification' => 'Classification', 
-        'priority' => 'Priority', 
-        'ticket' => 'Ticket status', 
-        'description' => 'Ticket description', 
+        'classification' => 'Classification',
+        'priority' => 'Priority',
+        'ticket' => 'Ticket status',
+        'description' => 'Ticket description',
         'administrator' => 'Administrator',
         'date' => 'Required completion date',
     ],
     'placeholder' => [
         'name' => 'Report name',
-        'description' => 'Ticket description', 
+        'description' => 'Ticket description',
         'administrator' => 'Administrator',
     ],
     'cancel' => 'Cancel',
@@ -39,4 +39,5 @@ return [
 
     //show page
     'show' => 'Ticket details',
+    'update-status' => 'Change',
 ];

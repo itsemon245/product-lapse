@@ -39,4 +39,5 @@ return [
 
     //show page
     'show' => 'Ticket details',
+    'update-status' => 'Change',
 ];

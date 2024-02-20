@@ -62,7 +62,8 @@ class SupportController extends Controller
         $user = User::with('image')->find($support->creator_id);
         $support->loadComments();
         $comments = $support->comments;
-        $statuses = Select::of('support')->type('ticket')->get();
+        $statuses = Select::of('support')->type('status')->get();
+
         return view('features.support.partials.show', compact('user', 'support', 'comments', 'statuses'));
     }
 
@@ -92,6 +93,14 @@ class SupportController extends Controller
 
         notify()->success(__('Updated successfully!'));
         return redirect()->route('support.index');
+    }
+
+    public function updateStatus(Request $request, Support $support)
+    {
+        $support->update(['status' => $request->status]);
+
+        notify()->success(__('Updated successfully!'));
+        return redirect()->route('support.show', $support);
     }
 
     /**

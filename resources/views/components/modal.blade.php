@@ -1,13 +1,19 @@
-@props(['title'=> null, 'label'=> 'Toggle Modal'])
+@props(['title' => null, 'label' => 'Toggle Modal'])
 
 @php
-    $modalID = uniqid('modal-');
+    $modalID = $attributes->has('id') ? $attributes->get('id') : uniqid('modal-');
 @endphp
 
 <div>
-    <button type="button" class="button-1 btn-bg-1" data-toggle="modal" data-target="#{{ $modalID }}">
-        @__($label)
-    </button>
+    @empty($trigger)
+        <!-- Modal trigger -->
+        <button type="button" class="button-1 btn-bg-1" data-toggle="modal" data-target="#{{ $modalID }}">
+            @__($label)
+        </button>
+    @else
+        {!! $trigger !!}
+    @endempty
+
 
     <div class="modal fade" id="{{ $modalID }}" style="display: none;" aria-hidden="true">
         <div class="modal-dialog">
@@ -34,7 +40,8 @@
                 <div class="modal-footer">
                     @empty($footer)
                         <!-- Modal Header -->
-                        <button type="button" class="btn_hover agency_banner_btn btn-bg agency_banner_btn2" data-dismiss="modal">Save</button>
+                        <button type="button" class="btn_hover agency_banner_btn btn-bg agency_banner_btn2"
+                            data-dismiss="modal">Save</button>
                         <button type="button" class="btn_hover agency_banner_btn btn-bg btn-bg-grey"
                             data-dismiss="modal">Cancel</button>
                     @else

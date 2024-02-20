@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Features;
 
+use App\Enums\Colors;
 use App\Enums\Feature;
 use App\Enums\SelectType;
 use App\Http\Controllers\Controller;
@@ -21,7 +22,8 @@ class SelectController extends Controller
     {
         $features = Feature::cases();
         $types = SelectType::cases();
-        return view('features.select.create', compact('features', 'types'));
+        $colors = Colors::cases();
+        return view('features.select.create', compact('features', 'types', 'colors'));
     }
 
     public function store(SelectRequest $request)
@@ -51,8 +53,8 @@ class SelectController extends Controller
     {
         $features = Feature::cases();
         $types = SelectType::cases();
-
-        return view('features.select.edit', compact('select', 'features', 'types'));
+        $colors = Colors::cases();
+        return view('features.select.edit', compact('select', 'features', 'types', 'colors'));
     }
 
     public function update(SelectRequest $request, Select $select)

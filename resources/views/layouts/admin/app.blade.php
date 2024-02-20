@@ -9,8 +9,16 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @yield('meta')
     <title>{{ isset($title) ? $title : 'dashboard' }}</title>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer=""></script>
+    <script src="{{ asset('js/init-alpine.js') }}"></script>
 
     @include('layouts.global.styles')
+
+    <style>
+        .breadcrumb_area {
+            padding: 1rem !important;
+        }
+    </style>
 
 
 </head>

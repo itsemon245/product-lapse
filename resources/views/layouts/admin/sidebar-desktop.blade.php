@@ -6,10 +6,10 @@
         <ul class="mt-6">
             @foreach (config('sidebar') as $item => $route)
                 @if ($route->hasSubMenu)
-                    <li class="relative px-6 py-3">
+                    <li class="relative px-6 py-3" x-data="{ open: false }">
                         <button
                             class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                            @click="togglePagesMenu" aria-haspopup="true">
+                            @click="open = !open" aria-haspopup="true">
                             <span class="inline-flex items-center">
                                 {!! $route->icon !!}
                                 <span class="ml-4">{{ $item }}</span>
@@ -20,7 +20,16 @@
                                     clip-rule="evenodd"></path>
                             </svg>
                         </button>
-                  
+                        <ul x-show="open"
+                            class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
+                            aria-label="submenu">
+                            @foreach ($route->submenu as $name => $route)
+                                <li
+                                    class="pl-10 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+                                    <a class="w-full" href="{{ route($route) }}">{{ $name }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
                     </li>
                 @else
                     <li class="relative px-6 py-3">

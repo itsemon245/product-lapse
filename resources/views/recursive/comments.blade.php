@@ -3,7 +3,7 @@
         <div x-data="{ show: false }">
             <div class="media post_author mt_60 pb-2">
                 <div class="media-left">
-                    <img class="rounded-circle" src="{{ $comment->user->avatar }}" alt="">
+                    <img class="rounded-circle" src="{{ $comment->user->image->url ?? favicon() }}" style="object-fit: cover;" alt="">
                     <button class="replay" @click="show=!show"><i class="ti-share"></i></button>
                 </div>
 

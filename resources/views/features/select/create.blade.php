@@ -43,9 +43,12 @@
                         </div>
 
                         <div class="form-group text_box col-lg-12 col-md-6">
-                            <x-input label="Text Color" id="text-color" type="color" placeholder="Enter text color"
-                                name="text_color" :value="old('text_color')" required autofocus />
-                            <x-input-error :messages="$errors->get('text_color')" class="mt-2" />
+                            <x-select-input label="Select Text Color" id="color" placeholder="Choose Color" name="text_color"
+                                autofocus>
+                                @foreach ($colors as $color)
+                                    <option class="text-capitalize" style="color: {{$color->value}}" value="{{ $color->value }}">{{ str($color->name)->title() }}</option>
+                                @endforeach
+                            </x-select-input>
                         </div>
 
 

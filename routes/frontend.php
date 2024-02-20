@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Frontend\LandingPageController;
+use App\Http\Controllers\PackageController;
 
 Route::prefix('frontend')
     ->group(function () {
@@ -22,3 +23,5 @@ Route::prefix('/')
             return view('pages.notifications', compact('notifications'));
         })->name('notifications');
     });
+
+Route::get('compare-packages', [PackageController::class, 'compare'])->name('package.compare');

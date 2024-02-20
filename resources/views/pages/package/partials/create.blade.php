@@ -11,84 +11,84 @@
                     <form action="{{ route('package.store') }}" method="POST">
                         @csrf
                         <div class="row">
-                            <div class="form-group text_box col-lg-6 col-md-6">
-                                <x-input-label for="info_en" value="Package Info(English)" />
-                                <x-input id="info_en" class="block mt-1 w-full" type="text"
-                                    placeholder="Enter package info (english)" name="info_en" :value="old('info_en')" autofocus />
+                            <div class="form-group mb-2 text_box col-md-6">
+                                <div class="flex justify-between">
+                                    <x-input-label class="flex-shrink" for="name" value="Name (en)" />
+
+                                </div>
+                                <x-input id="name" class="block mt-1 w-full" type="text" placeholder="Name"
+                                    name="name[en]" :value="old('name')" autofocus />
                             </div>
-                            <div class="form-group text_box col-lg-6 col-md-6">
-                                <x-input-label for="info_ar" value="Package Info(Arabic)" />
-                                <x-input id="info_ar" class="block mt-1 w-full" type="text"
-                                    placeholder="Enter package info (Arabic)" name="info_ar" :value="old('info_ar')" autofocus />
+                            <div class="form-group mb-2 text_box col-md-6">
+                                <x-input-label class="flex-shrink" for="name" value="Name (ar)" />
+                                <x-input id="name" class="block mt-1 w-full" type="text" placeholder="Name"
+                                    name="name[ar]" :value="old('name')" autofocus />
                             </div>
-                            <div class="form-group text_box col-lg-8 col-md-6">
-                                <x-select-input label="Package" id="package" placeholder="Choose one"
-                                    name="package" autofocus>
-                                    @if ($types)
-                                        @forelse ($types as $category)
-                                            <option value="<?= $category->value->{app()->getLocale()} ?>">
-                                                <?= $category->value->{app()->getLocale()} ?>
-                                            </option>
-                                        @empty
-                                            <option disabled>No subscription type available</option>
-                                        @endforelse
-                                    @endif
-                                </x-select-input>
-                            </div>
-                            <div class="form-group text_box col-lg-4 col-md-6">
+                            <div class="form-group mb-2 text_box col-md-6">
                                 <x-input-label for="price" value="Price" />
-                                <x-input id="price" class="block mt-1 w-full" type="text"
-                                    placeholder="Price" name="price" :value="old('price')" autofocus />
+                                <x-input id="price" class="block mt-1 w-full" type="text" placeholder="Price"
+                                    name="price" :value="old('price')" autofocus />
                             </div>
-                            <div class="form-group text_box col-lg-6 col-md-6">
-                                <x-input-label for="money_en" value="Money(English)" />
-                                <x-input id="money_en" class="block mt-1 w-full" type="text"
-                                    placeholder="Enter money (english)" name="money_en" :value="old('money_en')" autofocus />
+                            <div class="form-group mb-2 text_box col-md-6">
+                                <x-input-label for="product_limit" value="Product limit" />
+                                <x-input id="product_limit" class="block mt-1 w-full" type="text"
+                                    placeholder="Product limit" name="product_limit" :value="old('product_limit')" autofocus />
                             </div>
-                            <div class="form-group text_box col-lg-6 col-md-6">
-                                <x-input-label for="money_ar" value="Money(Arabic)" />
-                                <x-input id="money_ar" class="block mt-1 w-full" type="text"
-                                    placeholder="Enter money (Arabic)" name="money_ar" :value="old('money_ar')" autofocus />
+                            <div class="form-group mb-2 text_box col-md-6">
+                                <div class="flex items-end">
+                                    <div>
+                                        <x-input-label for="validity" value="Validity" />
+                                        <x-input id="validity" class="block mt-1 w-full" type="text"
+                                            placeholder="Validity" name="validity" :value="old('validity')" autofocus />
+                                    </div>
+                                    <x-select-input name="unit" class="!mb-[30px] !w-[120px]">
+                                        <option value="day" selected>Day</option>
+                                        <option value="month">Month</option>
+                                        <option value="year">Year</option>
+                                    </x-select-input>
+                                </div>
                             </div>
-                            <div class="form-group text_box col-lg-6 col-md-6">
-                                <x-input-label for="feature_one_en" value="Feature one(English)" />
-                                <x-input id="feature_one_en" class="block mt-1 w-full" type="text"
-                                    placeholder="Feature one (english)" name="feature_one_en" :value="old('feature_one_en')" autofocus />
+                            <div class="form-group mb-2 text_box col-md-6 ">
+                                <div class="flex items-center justify-start gap-[1rem] px-[1rem] h-full">
+
+                                    <div class="form-group text_box mb-0 mr-2">
+                                        <x-checkbox-input class="" name="is_popular" checked label="Set as Popular" />
+                                    </div>
+                                    <div class="form-group text_box mb-0 mr-2 ">
+                                        <x-checkbox-input class="" name="limited_feature" checked
+                                            label="Limited Features" />
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group text_box col-lg-6 col-md-6">
-                                <x-input-label for="feature_one_ar" value="Feature one(Arabic)" />
-                                <x-input id="feature_one_ar" class="block mt-1 w-full" type="text"
-                                    placeholder="Feature one(Arabic)" name="feature_one_ar" :value="old('feature_one_ar')" autofocus />
+                        </div>
+                        {{-- list features --}}
+                        <div class="form-group text_box col-lg-12 col-md-12">
+                            <div class="flex justify-start gap-8 flex-wrap">
+                                <label class=" text_c f_500">@__('Choose Package Features')</label>
+
                             </div>
-                            <div class="form-group text_box col-lg-6 col-md-6">
-                                <x-input-label for="feature_two_en" value="Feature two(English)" />
-                                <x-input id="feature_two_en" class="block mt-1 w-full" type="text"
-                                    placeholder="Feature two (english)" name="feature_two_en" :value="old('feature_two_en')" autofocus />
+                            <div class="row">
+                                @foreach ($features as $feature)
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="checkbox remember">
+                                            <label>
+                                                <input type="checkbox" class="mr-3 p-2" value="{{ $feature->id }}"
+                                                    name="features[]">
+                                                {{ $feature->name->{app()->getLocale()} }}
+                                            </label>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
-                            <div class="form-group text_box col-lg-6 col-md-6">
-                                <x-input-label for="feature_two_ar" value="Feature two(Arabic)" />
-                                <x-input id="feature_two_ar" class="block mt-1 w-full" type="text"
-                                    placeholder="Feature two(Arabic)" name="feature_two_ar" :value="old('feature_two_ar')" autofocus />
-                            </div>
-                            <div class="form-group text_box col-lg-6 col-md-6">
-                                <x-input-label for="feature_three_en" value="Feature three(English)" />
-                                <x-input id="feature_three_en" class="block mt-1 w-full" type="text"
-                                    placeholder="Feature three (english)" name="feature_three_en" :value="old('feature_three_en')" autofocus />
-                            </div>
-                            <div class="form-group text_box col-lg-6 col-md-6">
-                                <x-input-label for="feature_three_ar" value="Feature three(Arabic)" />
-                                <x-input id="feature_three_ar" class="block mt-1 w-full" type="text"
-                                    placeholder="Feature three(Arabic)" name="feature_three_ar" :value="old('feature_three_ar')" autofocus />
-                            </div>
-                            <div class="form-group text_box col-lg-4 col-md-6">
-                                <x-checkbox-input class="ml-4" name="is_popular" checked label="Set propular tag." />
-                            </div>
+                            @error('products')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="d-flex align-items-center text-center">
                             <button type="submit" class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">Add
                                 Package</button>
                             <a href="{{ route('package.index') }}"
-                                class="btn_hover agency_banner_btn btn-bg btn-bg-grey">@lang('task.cancel')</a>
+                                class="btn_hover agency_banner_btn btn-bg btn-bg-grey">@lang('package.cancel')</a>
                         </div>
                     </form>
                 </x-slot:from>
@@ -96,5 +96,3 @@
         </div>
     </x-feature.create>
 @endsection
-
-

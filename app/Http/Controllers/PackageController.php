@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Select;
-use App\Models\Package;
 use App\Http\Requests\PackageRequest;
-use App\Http\Requests\StorePackageRequest;
+use App\Models\Package;
+use App\Models\PackageFeature;
+use App\Models\Select;
 
 class PackageController extends Controller
 {
@@ -15,7 +15,7 @@ class PackageController extends Controller
      */
     public function index()
     {
-        $packages = Package::get();
+        $packages = Package::with('activeFeatures')->get();
         return view('pages.package.index', compact('packages'));
     }
 
@@ -24,8 +24,8 @@ class PackageController extends Controller
      */
     public function create()
     {
-        $types = Select::of('package')->type('type')->get();
-        return view('pages.package.partials.create', compact('types'));
+        $features = PackageFeature::latest()->paginate();
+        return view('pages.package.partials.create', compact('features'));
     }
 
     /**
@@ -33,46 +33,28 @@ class PackageController extends Controller
      */
     public function store(PackageRequest $request)
     {
-        $olddata = Package::first();
-        if($olddata == !null){
-            $delete = Package::destroy($olddata);
-            if($delete){
-                $info = ['en' => $request->info_en, 'ar' => $request->info_ar];
-                $money = ['en' => $request->money_en, 'ar' => $request->money_ar];
-                $featureOne = ['en' => $request->feature_one_en, 'ar' => $request->feature_one_ar];
-                $featureTwo = ['en' => $request->feature_two_en, 'ar' => $request->feature_two_ar];
-                $featureThree = ['en' => $request->feature_three_en, 'ar' => $request->feature_three_ar];
-                Package::insert([
-                    'creator_id' => auth()->id(),
-                    'info' => json_encode($info),
-                    'package' => $request->package,
-                    'price' => $request->price,
-                    'money' => json_encode($money),
-                    'feature_one' => json_encode($featureOne),
-                    'feature_two' => json_encode($featureTwo),
-                    'feature_three' => json_encode($featureThree),
-                    // 'is_popular' => $request->is_popular,
-                ]);
-            }
-        }else{
-            $info = ['en' => $request->info_en, 'ar' => $request->info_ar];
-            $money = ['en' => $request->money_en, 'ar' => $request->money_ar];
-            $featureOne = ['en' => $request->feature_one_en, 'ar' => $request->feature_one_ar];
-            $featureTwo = ['en' => $request->feature_two_en, 'ar' => $request->feature_two_ar];
-            $featureThree = ['en' => $request->feature_three_en, 'ar' => $request->feature_three_ar];
-            Package::insert([
-                'creator_id' => auth()->id(),
-                'info' => json_encode($info),
-                'package' => $request->package,
-                'price' => $request->price,
-                'money' => json_encode($money),
-                'feature_one' => json_encode($featureOne),
-                'feature_two' => json_encode($featureTwo),
-                'feature_three' => json_encode($featureThree),
-                // 'is_popular' => $request->is_popular,
-            ]);
+        $package = Package::create([
+            'name'            => $request->validated('name'),
+            'price'           => $request->validated('price'),
+            'product_limit'   => $request->validated('product_limit'),
+            'validity'   => $request->validated('validity'),
+            'unit'   => $request->validated('unit'),
+            'is_popular'      => $request->boolean('is_popular'),
+            'limited_feature' => $request->boolean('limited_feature'),
+         ]);
+        $packageFeatures = PackageFeature::latest()->get();
+        foreach ($packageFeatures as $feature) {
+            $package->features()->attach($feature->id);
         }
-        return redirect()->back();
+
+        foreach ($request->features as $feature) {
+            # code...
+            if ($feature) {
+                $package->features()->updateExistingPivot($feature, [ 'is_on' => true ]);
+            }
+        }
+        notify()->success('New Package Added Successfully!');
+        return redirect()->route('package.index');
     }
 
     /**
@@ -132,11 +114,18 @@ class PackageController extends Controller
     public function destroy(string $id)
     {
         $data = Package::destroy($id);
-        return back()->with(['success', 'Delete Success!']);
+        return back()->with([ 'success', 'Delete Success!' ]);
     }
 
     public function createInput()
     {
         return view('pages.package.partials.input');
+    }
+
+    public function compare()
+    {
+        $packages = Package::get();
+        $packageFeatures = PackageFeature::get();
+        return view('packages.compare', compact('packages', 'packageFeatures'));
     }
 }

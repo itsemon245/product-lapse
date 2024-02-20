@@ -22,8 +22,8 @@
                         </div>
                     </div>
                     <div class="col-md-6 text-right">
-                        <img class="protype_img wow fadeInRight" data-wow-delay="0.3s" src="{{ asset($info?->home?->image) }}"
-                            alt="home">
+                        <img class="protype_img wow fadeInRight" data-wow-delay="0.3s"
+                            src="{{ asset($info?->home?->image) }}" alt="home">
                     </div>
                 </div>
             </div>
@@ -88,17 +88,29 @@
                                             class="f_size_16 f_400"> @lang('welcome.price')</sub>
                                     </div>
                                     <ul class="list-unstyled p_list">
-                                        <li><i class="ti-check"></i>{{ $package?->product_limit?->{app()->getLocale()} }}
+                                        <li><i class="ti-check"></i>{{ $package?->product_limit }}
+                                            @if ($package->product_limit == 1)
+                                                @__('Product')
+                                            @else
+                                                @__('Product')
+                                            @endif
                                         </li>
                                         @if ($package?->validity)
-                                            <li><i class="ti-check"></i>{{ $package?->validity?->{app()->getLocale()} }}</li>
+                                            <li><i
+                                                    class="ti-check"></i>{{ $package?->validity . ' ' . trans($package?->unit) }}
+                                            </li>
                                         @endif
-                                        <li><i class="ti-check"></i>{{ $package?->features?->{app()->getLocale()} }}</li>
+                                        <li><i
+                                                class="ti-check"></i>{{ $package?->limited_features ? trans('Limited Features') : trans('All Features') }}
+                                        </li>
                                     </ul>
                                     <a href="#" class="price_btn btn_hover">@lang('welcome.subscribe')</a>
                                 </div>
                             </div>
                         @endforeach
+                        <div class="col-lg-12 col-12 text-center mt_30">
+                            <a href="{{route('package.compare')}}" class="btn_hover agency_banner_btn btn-bg">Compare Packages</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -120,8 +132,8 @@
                                                     <button class="btn btn-link collapsed" data-toggle="collapse"
                                                         data-target="#collapse{{ $faq?->id }}" aria-expanded="false"
                                                         aria-controls="collapse{{ $faq?->id }}">
-                                                        <?= $faq?->question?->{app()->getLocale()} ?><i class="ti-plus"></i><i
-                                                            class="ti-minus"></i>
+                                                        <?= $faq?->question?->{app()->getLocale()} ?><i
+                                                            class="ti-plus"></i><i class="ti-minus"></i>
                                                     </button>
                                                 </h5>
                                             </div>

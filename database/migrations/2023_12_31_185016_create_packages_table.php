@@ -12,18 +12,13 @@ return new class extends Migration {
     {
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('owner_id')->nullable();
-            $table->foreign('owner_id')->references('id')->on('users')->cascadeOnDelete();
-            $table->unsignedBigInteger('creator_id')->nullable();
-            $table->foreign('creator_id')->references('id')->on('users')->cascadeOnDelete();
-            $table->json('info');
-            $table->string('package')->nullable();
+            $table->json('name');
             $table->integer('price');
-            $table->json('money');
-            $table->json('feature_one');
-            $table->json('feature_two');
-            $table->json('feature_three');
-            $table->boolean('is_popular')->default(0);
+            $table->integer('validity')->nullable();
+            $table->enum('unit', ['month', 'year', 'day'])->nullable();
+            $table->integer('product_limit')->nullable();
+            $table->boolean('is_popular')->default(1);
+            $table->boolean('limited_feature')->default(1);
             $table->timestamps();
         });
     }

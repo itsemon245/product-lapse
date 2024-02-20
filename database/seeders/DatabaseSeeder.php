@@ -23,14 +23,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Release::unsetEventDispatcher();
-        // Change::unsetEventDispatcher();
-        // Delivery::unsetEventDispatcher();
-        // Idea::unsetEventDispatcher();
-        // Report::unsetEventDispatcher();
-        // Task::unsetEventDispatcher();
-        // Document::unsetEventDispatcher();
-        // Product::unsetEventDispatcher();
+        Release::unsetEventDispatcher();
+        Change::unsetEventDispatcher();
+        Delivery::unsetEventDispatcher();
+        Idea::unsetEventDispatcher();
+        Report::unsetEventDispatcher();
+        Task::unsetEventDispatcher();
+        Document::unsetEventDispatcher();
+        Product::unsetEventDispatcher();
 
 
         // \App\Models\User::factory(10)->create();
@@ -93,12 +93,12 @@ class DatabaseSeeder extends Seeder
 
         Release::factory(10)->create();
 
-        PackageFeature::factory(10)->create();
 
         $this->call([
             PermissionSeeder::class,
             LandingPageSeeder::class,
-                // PackageSeeder::class,
+            PackageFeatureSeeder::class,
+            PackageSeeder::class,
             ContactSeeder::class,
             FaqSeeder::class,
             FeatureSeeder::class,

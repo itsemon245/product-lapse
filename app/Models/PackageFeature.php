@@ -9,9 +9,19 @@ use Illuminate\Database\Eloquent\Model;
 class PackageFeature extends Model
 {
     use HasFactory;
-    protected $guarded = [];
+    protected $guarded = [  ];
 
     protected $casts = [
-        'name'=> JsonCast::class
-    ];
+        'name' => JsonCast::class,
+     ];
+
+    public function packages()
+    {
+        return $this->belongsToMany(Package::class, 'feature_package');
+    }
+
+    public function isActiveFor(int $packageId): bool
+    {
+        return $this->packages()->withPivot('is_on')->find($packageId)->getOriginal('pivot_is_on');
+    }
 }

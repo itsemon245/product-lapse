@@ -10,12 +10,16 @@ class Package extends Model
     protected $guarded = [];
 
 
-    protected $casts = [];
+    protected $casts = [
+        'name'=> JsonCast::class
+    ];
 
-
-    public function user()
+    public function features()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(PackageFeature::class, 'feature_package');
+    }
+    public function activeFeatures(){
+        return $this->features()->wherePivot('is_on', true);
     }
 
 }

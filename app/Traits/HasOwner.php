@@ -30,7 +30,7 @@ trait HasOwner
                 $ownerId = auth()->user()?->id;   
             }
             // Only in development and local server
-            if (config('app.env') == 'local' && config('app.debug') == true) {
+            if (env('SEEDING')) {
                 $ownerId = demoSub()->id;
             }
             $model->owner_id = $ownerId;

@@ -19,7 +19,7 @@ class OwnerScope implements Scope
             $ownerId = auth()->user()?->id;   
         }
         // Only in development and local server
-        if (config('app.env') == 'local' && config('app.debug') == true) {
+        if (env('SEEDING')) {
             $ownerId = demoSub()->id;
         }
         return $builder->where('owner_id', $ownerId);

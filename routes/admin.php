@@ -3,9 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\PackageController;
+use App\Http\Controllers\UsersManagmentController;
 use App\Http\Controllers\Frontend\LandingPageController;
-use App\Http\Controllers\Features\Certificate\CertificateController;
+use App\Http\Controllers\Admin\UsersManagementController;
 use App\Http\Controllers\Package\PackageFeatureController;
+use App\Http\Controllers\Features\Certificate\CertificateController;
 
 Route::prefix('admin')
     ->group(function () {
@@ -30,4 +32,7 @@ Route::prefix('admin')
         Route::get('certificate', [CertificateController::class, 'getAllCertificate'])->name('admin.certificate');
         Route::get('certificate-search', [CertificateController::class, 'search'])->name('search.certificate');
         Route::get('input-create', [LandingPageController::class, 'createInput'])->name('input.create');
+        Route::resource('users', UsersManagementController::class);
+        Route::get('user-search', [UsersManagementController::class, 'search'])->name('user.search');
+
     });

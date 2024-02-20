@@ -33,15 +33,17 @@
                                                 class="f_500 t_color3">{{ $product->name }}</a>
                                             {{-- <a href="{{ route('product.edit', $product->id) }}" class="btn_hover agency_banner_btn btn-bg"><i
                                                 class="ti-pencil"></i> @__('productHome.edit')</a> --}}
-                                            <form action="{{ route('product.edit', $product) }}" method="get">
-                                                <button type="submit" class="btn_hover agency_banner_btn btn-bg"><i
-                                                        class="ti-pencil"></i> Edit product</button>
-                                            </form>
+                                            @can('update product')
+                                                <form action="{{ route('product.edit', $product) }}" method="get">
+                                                    <button type="submit" class="btn_hover agency_banner_btn btn-bg"><i
+                                                            class="ti-pencil"></i> Edit product</button>
+                                                </form>
+                                            @endcan
                                         </h4>
                                         <ul class="list-unstyled">
                                             <li class="p_color1">{{ $product->stage }}</li>
                                             <li>{{ $product->description }}</li>
-                                            <li> <a href="{{ route('product.edit', $product->id) }}"
+                                            <li><a href="{{ route('product.edit', $product->id) }}"
                                                     class="btn_hover agency_banner_btn btn-bg"><i class="ti-pencil"></i>
                                                     @__('productHome.edit')</a></li>
                                         </ul>

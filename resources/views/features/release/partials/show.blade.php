@@ -38,16 +38,15 @@
                                 <h5 class=" t_color3 f_size_18 f_500">{{ $user->name }}</h5>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <span class="button-1 btn-bg-1">@__('feature/release.working')</span>
+                        @can('update release')
+                            <div class="row">
+                                <div class="col-12">
+                                    <a href="{{ route('release.edit', $release) }}" class="button-1 btn-bg-2"><i
+                                            class="ti-reload"></i>@__('feature/release.update')</a>
+                                </div>
                             </div>
-                            <div class="col-6">
-                                <a href="#" class="button-1 btn-bg-2"><i class="ti-reload"></i>@__('feature/release.update')</a>
-                            </div>
-                        </div>
+                        @endcan
                     </div>
-
                 </div>
             </div>
         </x-slot:profile>

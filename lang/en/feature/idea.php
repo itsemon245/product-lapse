@@ -34,6 +34,9 @@ return [
 
     //Edit page
     'edit' => 'Edit Idea',
+    'clipboard' => 'Share Link',
+    'copy' => 'Copy',
+
 ];
 
 

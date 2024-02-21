@@ -1,34 +1,13 @@
 @props(['comments' => []])
 <x-slot:comments>
-    @if (str(get_class($model))->contains('Delivery'))
-        @if ($comments->count() > 0)
-            <div class="table-responsive">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th style="min-width: 150px">Comments</th>
-                            <th style="width: 260px"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if ($comments)
-                            @include('recursive.comments', ['comments' => $comments, 'model' => $model])
-                        @else
-                            <li>@__('comment.comment-not-found')</li>
-                        @endif
-                    </tbody>
-                </table>
-            </div>
+    <ul class="comment-box list-unstyled mb-0">
+        @if ($comments)
+            @include('recursive.comments', ['comments' => $comments, 'model' => $model])
+        @else
+            <li>@__('comment.comment-not-found')</li>
         @endif
-    @else
-        <ul class="comment-box list-unstyled mb-0">
-            @if ($comments)
-                @include('recursive.comments', ['comments' => $comments, 'model' => $model])
-            @else
-                <li>@__('comment.comment-not-found')</li>
-            @endif
-        </ul>
-    @endif
+    </ul>
+    {{-- @endif --}}
 </x-slot:comments>
 @can('create comment')
     <x-slot:writeComment>

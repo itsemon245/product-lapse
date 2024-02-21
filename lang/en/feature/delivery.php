@@ -38,6 +38,7 @@ return [
     'administrator' => 'Delivery administrator',
     'agree' => 'Agree',
     'disagree' => 'Disagree',
+    'pending' => 'Pending',
     'show-btn' => 'Show',
 
     //Edit page

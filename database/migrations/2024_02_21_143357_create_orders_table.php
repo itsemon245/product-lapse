@@ -15,14 +15,15 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid');
-            $table->unsignedBigInteger('subscriber_id')->nullable();
-            $table->foreign('subscriber_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('package_id')->constrained()->cascadeOnDelete();
             $table->string('payment_method')->nullable();
             $table->decimal('amount')->nullable();
             $table->bigInteger('discount')->default(0);
             $table->longText('token')->nullable();
             $table->enum('status', array_column(OrderStatusEnum::cases(), 'value'))->default('draft');
+            $table->timestamp('completed_at')->nullable();
+            $table->timestamp('failed_at')->nullable();
             $table->timestamps();
         });
     }

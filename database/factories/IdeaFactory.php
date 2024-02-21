@@ -21,7 +21,7 @@ class IdeaFactory extends Factory
         $priority = Select::of('idea')->type('priority')->first();
         return [
             'name' => fake()->name,
-            'owner' => fake()->text,
+            'owner' => fake()->text(12),
             'priority' => $priority->value->en,
             'details' => fake()->paragraph,
             'requirements' => fake()->paragraph,

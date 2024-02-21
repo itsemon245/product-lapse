@@ -58,4 +58,9 @@ return [
 
     'region' => env('PAYTABS_REGION', 'SAU'),
 
+
+
+    'callback_url'=> env('PAYTABS_CALLBACK_URL', ''),
+    'ipn_url'=> env('PAYTABS_IPN_URL', ''),
+
 ];

@@ -7,6 +7,7 @@ use App\Models\Idea;
 use App\Models\Task;
 use App\Models\Change;
 use App\Models\Report;
+use App\Models\Address;
 use App\Models\Product;
 use App\Models\Release;
 use App\Models\Delivery;
@@ -57,6 +58,34 @@ class DatabaseSeeder extends Seeder
             'position' => 'manager',
             'type' => 'subscriber',
             'owner_id' => $admin[0]->id,
+        ]);
+        Address::create([
+            'name'=> $subscriber[0]->name,
+            'user_id'=> $subscriber[0]->id,
+            'email'=> $subscriber[0]->email,
+            'phone'=> $subscriber[0]->phone,
+            'type'=> 'billing',
+            'street'=> fake()->streetAddress(),
+            'city'=> fake()->city(),
+            'country'=> fake()->country(),
+            'state'=> fake()->city(),
+            'ip'=> fake()->ipv4(),
+            'use_as_shipping'=> false,
+            'zip'=> '1234',
+        ]);
+        Address::create([
+            'name'=> 'Shipping Address Name',
+            'user_id'=> $subscriber[0]->id,
+            'email'=> $subscriber[0]->email,
+            'phone'=> $subscriber[0]->phone,
+            'type'=> 'shipping',
+            'street'=> fake()->streetAddress(),
+            'city'=> fake()->city(),
+            'country'=> fake()->country(),
+            'state'=> fake()->city(),
+            'ip'=> fake()->ipv4(),
+            'use_as_shipping'=> false,
+            'zip'=> '1234',
         ]);
         $member = \App\Models\User::factory(1)->create([
             'first_name' => 'Member',

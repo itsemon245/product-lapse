@@ -6,9 +6,10 @@ use App\Enums\PaymentMethodEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Package;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Paytabscom\Laravel_paytabs\Facades\paypage;
 
 class OrderController extends Controller
 {
@@ -16,6 +17,7 @@ class OrderController extends Controller
     {
         $order = Order::create([
             'package_id' => $package->id,
+            'user_id' => auth()->id(),
             'uuid'       => uniqid('order-'),
             'amount'     => round($package->price, 2),
          ]);
@@ -30,24 +32,31 @@ class OrderController extends Controller
     }
     public function store(Request $request, Order $order)
     {
-        $paymentMethods = array_column(PaymentMethodEnum::cases(), 'value');
-        if (!str($request->payment_method)->contains($paymentMethods)) {
-            notify()->error('Invalid Payment Method!');
-            return back();
-        }
-        $order = tap($order)->update([
-            'payment_method' => $request->payment_method,
-         ]);
-        $method = Str::replace(" ", "", $order->payment_method);
-        $pay    = paypage::sendPaymentCode($method)
-            ->sendTransaction('sale', 'ecom')
-            ->sendCart($order->uuid, $order->amount, 'Test Order')
-            ->sendCustomerDetails($name, $email, $phone, $street1, $city, $state, $country, $zip, $ip)
-            ->sendShippingDetails($same_as_billing, $name = null, $email = null, $phone = null, $street1 = null, $city = null, $state = null, $country = null, $zip = null, $ip = null)
-            ->sendHideShipping($on = false)
-            ->sendURLs($return, $callback)
-            ->sendLanguage(app()->getLocale())
-            ->create_pay_page(); // to initiate payment page
-        return view('order.create', compact('order', 'paymentMethods'));
+        DB::transaction(function () use ($order, $request) {
+
+            $address        = User::find(auth()->id())->shippingAddress();
+            $paymentMethods = array_column(PaymentMethodEnum::cases(), 'value');
+            if (!str($request->payment_method)->contains($paymentMethods)) {
+                notify()->error('Invalid Payment Method!');
+                return back();
+            }
+            $order = tap($order)->update([
+                'payment_method' => $request->payment_method,
+             ]);
+            $method = Str::replace(" ", "", $order->payment_method);
+            // $pay    = paypage::sendPaymentCode($method)
+            //     ->sendTransaction('sale', 'ecom')
+            //     ->sendCart($order->uuid, $order->amount, 'Test Order')
+            //     ->sendCustomerDetails($address->name, $address->email, $address->phone, $address->street, $address->city, $address->state, $address->country, $address->zip, $address->ip)
+            //     ->sendHideShipping($on = false)
+            //     ->sendURLs(config('paytabs.callback_url'), config('paytabs.ipn_url'))
+            //     ->sendLanguage(app()->getLocale())
+            //     ->create_pay_page(); // to initiate payment page
+            
+        });
+        $param = "?status=success&order_id=$order->uuid";
+        $url   = config('paytabs.callback_url') . $param;
+        return redirect($url);
+
     }
 }

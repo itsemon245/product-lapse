@@ -44,17 +44,16 @@ trait HasFile
 
     public function storeFile(UploadedFile $file, ?string $name = null): File
     {
-        //!Validate inside the controller or request not here
-        // $this->validateUploadedFile($file);
         $type = $this->fileableType ?? get_class($this);
         $id = $this->id;
         $ext = $file->getClientOriginalExtension();
-        $name = $name ?? Str::slug($file->getClientOriginalName()) . '-' . uniqid() . '.' . $ext;
+        $name = $name ?? $file->getClientOriginalName();
         $path = $file->storeAs($this->baseDir . $this->dir, $name, $this->disk);
         $fileRecord = File::create([
             'fileable_id' => $id,
             'fileable_type' => $type,
             'path' => $path,
+            'name' => pathinfo($name, PATHINFO_FILENAME),
             'url' => asset('storage/' . $path),
             'mime_type' => $ext
         ]);
@@ -76,13 +75,13 @@ trait HasFile
         $id = $this->id;
         $ext = $file->getClientOriginalExtension();
         $name = $name ?? $file->getClientOriginalName();
-        $name = str($name)->slug() . uniqid() . $ext;
         $path = $file->storeAs($this->baseDir . "/" . $this->dir, $name, $this->disk);
         $this->deleteFile($oldFile, true);
         $file = tap($oldFile)->update([
             'fileable_id' => $id,
             'fileable_type' => $type,
             'path' => $path,
+            'name' => pathinfo($name, PATHINFO_FILENAME),
             'url' => asset('storage/' . $path),
             'mime_type' => $ext
         ]);

@@ -102,11 +102,8 @@
                         </x-select-input>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <label class=" text_c f_500">{{ __('feature/task.label.attach') }}</label>
-                        <input type="file" class="input-file" name="add_attachments">
-                        @error('add_attachments')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        <x-attach label="{{ __('feature/task.label.attach') }}" class="block mt-1 w-full"
+                            name="add_attachments[]" />
                     </div>
                 </div>
 

@@ -39,4 +39,20 @@ class CommentController extends Controller
     {
 
     }
+
+
+    public function toggleStatus(Comment $comment, string $status)
+    {
+        if (!str($status)->contains(['pending', 'agreed', 'disagreed'])) {
+            notify()->warning('Invalid Status!');
+            return back();
+        }
+        $comment->update([
+            'status'=> $status
+        ]);
+        $status = str($status)->title();
+        notify()->success(__("$status to this comment!"));
+        return back();
+
+    }
 }

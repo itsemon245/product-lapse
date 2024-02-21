@@ -104,7 +104,7 @@
                                                 class="ti-check"></i>{{ $package?->limited_features ? trans('Limited Features') : trans('All Features') }}
                                         </li>
                                     </ul>
-                                    <a href="#" class="price_btn btn_hover">@lang('welcome.subscribe')</a>
+                                    <a href="{{route('order.create', ['package'=> $package])}}" class="price_btn btn_hover">@lang('welcome.subscribe')</a>
                                 </div>
                             </div>
                         @endforeach

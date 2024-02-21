@@ -50,6 +50,10 @@ class User extends Authenticatable
 
     #---Relations---#
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'subscriber_id');
+    }
     public function getRole()
     {
         return $this->roles->first();

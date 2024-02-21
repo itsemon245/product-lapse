@@ -4,6 +4,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\ContactMessageController;
 use App\Http\Controllers\Frontend\LandingPageController;
 use App\Http\Controllers\PackageController;
 
@@ -25,3 +26,4 @@ Route::prefix('/')
     });
 
 Route::get('compare-packages', [PackageController::class, 'compare'])->name('package.compare');
+Route::post('contact-message/', [ContactMessageController::class, 'send'])->name('message.send');

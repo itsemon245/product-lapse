@@ -104,12 +104,14 @@
                                                 class="ti-check"></i>{{ $package?->limited_features ? trans('Limited Features') : trans('All Features') }}
                                         </li>
                                     </ul>
-                                    <a href="{{route('order.create', ['package'=> $package])}}" class="price_btn btn_hover">@lang('welcome.subscribe')</a>
+                                    <a href="{{ route('order.create', ['package' => $package]) }}"
+                                        class="price_btn btn_hover">@lang('welcome.subscribe')</a>
                                 </div>
                             </div>
                         @endforeach
                         <div class="col-lg-12 col-12 text-center mt_30">
-                            <a href="{{route('package.compare')}}" class="btn_hover agency_banner_btn btn-bg">Compare Packages</a>
+                            <a href="{{ route('package.compare') }}" class="btn_hover agency_banner_btn btn-bg">Compare
+                                Packages</a>
                         </div>
                     </div>
                 </div>
@@ -197,28 +199,45 @@
                         </div>
 
                     </div>
-                    <div class="col-xl-7 offset-xl-1 col-lg-8 offset-lg-0">
+                    <form class="col-xl-7 offset-xl-1 col-lg-8 offset-lg-0">
                         <div class="contact_form wow fadeInRight" data-wow-delay="0.2s">
-                            <form class="contact_form_box">
+                            <form action="{{ route('message.send') }}"  method="POST" id="hx-contact-form"
+                                class="contact_form_box">
+                                @csrf
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group text_box">
-                                            <input type="text" placeholder="@lang('welcome.name')">
+                                            <input name="name" type="text"
+                                                placeholder="@lang('welcome.name')">
+                                            @error('name')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group text_box">
-                                            <input type="text" placeholder="@lang('welcome.phone')">
+                                            <input name="phone" required type="text"
+                                                placeholder="@lang('welcome.phone')">
+                                            @error('phone')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group text_box">
-                                            <input type="text" placeholder="@lang('welcome.email')">
+                                            <input name="email" type="email" required
+                                                placeholder="@lang('welcome.email')">
+                                            @error('email')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group text_box">
-                                            <textarea placeholder="@lang('welcome.message')"></textarea>
+                                            <textarea name="body" required placeholder="@lang('welcome.message')"></textarea>
+                                            @error('body')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -226,7 +245,7 @@
                                     class="app_btn btn_hover cus_mb-10 btn_hover agency_banner_btn btn-bg">@lang('welcome.send')</button>
                             </form>
                         </div>
-                    </div>
+                        </>
                 </div>
             </div>
         </section>

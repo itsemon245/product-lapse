@@ -34,7 +34,6 @@ return [
 
     //Edit page
     'edit' => 'تحرير الفكرة',
-
-    'clipboard' => 'Share Link',
-    'copy' => 'Copy',
-]
+    'clipboard' => 'مشاركة الرابط',
+    'copy' => 'ينسخ',
+];

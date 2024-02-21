@@ -85,8 +85,8 @@
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-select-input label="{{ __('feature/task.label.administrator') }}" id="administrator"
-                            placeholder="{{ __('feature/task.placeholder.administrator') }}" name="administrator"
-                            required autofocus>
+                            placeholder="{{ __('feature/task.placeholder.administrator') }}" name="administrator" required
+                            autofocus>
                             @if ($users)
                                 @forelse ($users as $user)
                                     <option value="{{ $user->id }}">
@@ -100,9 +100,8 @@
 
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-input class="input-file" type='file' placeholder="Choose File" :label="__('feature/task.label.attach')"
-                            name='add_attachments' />
-
+                        <x-attach label="{{ __('feature/task.label.attach') }}" class="block mt-1 w-full"
+                            name="add_attachments[]" />
                     </div>
                 </div>
 

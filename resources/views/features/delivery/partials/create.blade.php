@@ -55,7 +55,7 @@
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-attach label="{{ __('feature/delivery.attachments') }}" class="block mt-1 w-full"
-                            name="add_attachments" />
+                            name="add_attachments[]" />
                     </div>
                 </div>
                 <div class="d-flex align-items-center text-center">

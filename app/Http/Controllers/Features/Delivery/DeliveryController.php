@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Features\Delivery;
 
+use App\Models\File;
 use Exception;
 
 use App\Models\User;
@@ -13,6 +14,8 @@ use App\Services\SearchService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SearchRequest;
 use App\Http\Requests\DeliveryRequest;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class DeliveryController extends Controller
 {
@@ -45,7 +48,9 @@ class DeliveryController extends Controller
         try {
             $delivery = Delivery::create($data);
             if ($request->has('add_attachments')) {
-                $delivery->storeFile($request->add_attachments);
+                foreach ($request->add_attachments as $file) {
+                    $delivery->storeFile($file);
+                }
             }
             notify()->success(__('Created successfully!'));
             return redirect()->route('delivery.index');
@@ -60,8 +65,7 @@ class DeliveryController extends Controller
      */
     public function show(Delivery $delivery)
     {
-        $delivery = Delivery::with('file')->find($delivery->id);
-
+        $delivery = Delivery::with('files')->find($delivery->id);
         $creator = User::with('image')->find($delivery->creator_id);
         $delivery->loadComments();
         $comments = $delivery->comments;
@@ -81,40 +85,53 @@ class DeliveryController extends Controller
     /**
      * Update the specified resource in storage.
      */
+
+
     public function update(DeliveryRequest $request, Delivery $delivery)
     {
-
         $data = $request->except('_token', '_method', 'add_attachments');
-        $data['owner_id'] = ownerId();
 
         try {
-            $document = Delivery::with('file')->find($delivery->id);
+            DB::beginTransaction();
 
-            if ($request->has('add_attachments')) {
-                if ($document->file) {
-                    $file = $document->updateFile($request->add_attachments);
-                } else {
-                    $file = $document->storeFile($request->add_attachments);
+            $delivery = Delivery::with('files')->find($delivery->id);
+
+            if ($request->hasFile('add_attachments')) {
+                foreach ($delivery->files as $file) {
+                    $delivery->deleteFile($file);
+                }
+                foreach ($request->file('add_attachments') as $uploadedFile) {
+                    $delivery->storeFile($uploadedFile);
+                }
+            } elseif (!$request->hasFile('add_attachments') && !$delivery->files->isEmpty()) {
+                foreach ($delivery->files as $file) {
+                    $delivery->deleteFile($file);
                 }
             }
             $delivery->update($data);
+
+            DB::commit();
             notify()->success(__('Updated successfully!'));
 
             return redirect()->route('delivery.index');
         } catch (Exception $e) {
+            DB::rollBack();
             notify()->error(__('Update failed!'));
             return redirect()->route('delivery.index');
         }
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Delivery $delivery)
     {
-        $delivery = Delivery::with('file')->find($delivery->id);
-        if ($delivery->file) {
-            $fileDeleted = $delivery->deleteFile($delivery->file);
+        $delivery = Delivery::with('files')->find($delivery->id);
+        if ($delivery->files) {
+            foreach ($delivery->files as $file) {
+                $delivery->deleteFile($file);
+            }
         }
         $delivery->delete();
         notify()->success(__('Deleted successfully!'));
@@ -137,6 +154,18 @@ class DeliveryController extends Controller
             'is_agreed' => null,
         ]);
         return back();
+    }
+
+    public function downloadFIle(Delivery $delivery, File $file)
+    {
+        $filePath = $file->path;
+        if (!Storage::disk('public')->exists($filePath)) {
+            notify()->error(__('File not found!'));
+
+            return redirect()->route('delivery.show', $delivery);
+        }
+
+        return Storage::download('public/' . $filePath);
     }
 
     public function search(SearchRequest $request)

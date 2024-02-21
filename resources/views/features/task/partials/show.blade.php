@@ -22,8 +22,9 @@
                         <ul class="list-unstyled f_400 mb-30 text-font list-details">
                             {{ $task->steps }}
                         </ul>
-                        @if ($task->file)
-                            <div>
+                        {{-- Attachment part --}}
+                        @if ($task->files)
+                            <div class="col-md-12">
                                 <h6 class="title2">@__('feature/task.attach')</h6>
                                 <div class="table-responsive">
                                     <table class="table table-bordered">
@@ -31,16 +32,20 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>@__('feature/task.name')</th>
-                                                <th></th>
+                                                <th>@__('feature/task.action')</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>@__('feature/task.t-name')</td>
-                                                <td><button class="btn_hover agency_banner_btn btn-bg btn-table"
-                                                        type="submit">@__('feature/task.view')</button></td>
-                                            </tr>
+                                            @foreach ($task->files as $file)
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>{{ $file->name }}</td>
+                                                    <td><a class="btn_hover agency_banner_btn btn-bg btn-table"
+                                                            href="{{ route('task.file.download', ['task' => $task, 'file' => $file]) }}">@__('feature/task.view')</a>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>

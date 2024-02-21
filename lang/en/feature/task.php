@@ -49,5 +49,6 @@ return [
 
     //show page
     'show' => 'Show Task',
-    'steps' => "Task Steps"
+    'steps' => "Task Steps",
+    'mvp' => 'MVP'
 ];

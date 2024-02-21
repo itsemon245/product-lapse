@@ -31,12 +31,10 @@
                                         <h4 class="justify-between items-center">
                                             <a href="{{ route('product.info', $product->id) }}"
                                                 class="f_500 t_color3">{{ $product->name }}</a>
-                                            {{-- <a href="{{ route('product.edit', $product->id) }}" class="btn_hover agency_banner_btn btn-bg"><i
-                                                class="ti-pencil"></i> @__('productHome.edit')</a> --}}
                                             @can('update product')
                                                 <form action="{{ route('product.edit', $product) }}" method="get">
                                                     <button type="submit" class="btn_hover agency_banner_btn btn-bg"><i
-                                                            class="ti-pencil"></i> Edit product</button>
+                                                            class="ti-pencil"></i>@__('productHome.edit')</button>
                                                 </form>
                                             @endcan
                                         </h4>

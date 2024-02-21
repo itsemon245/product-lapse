@@ -9,13 +9,13 @@
 @notifyCss
  <!-- Scripts -->
  @vite(['resources/css/app.css', 'resources/js/app.js'])
- @if (app()->getLocale() == 'ar')
-     <link rel="stylesheet" href="{{ asset('css/bootstrap-reboot.min.css') }}">
- @endif
-
+ 
  <!-- Bootstrap CSS -->
  <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
  <link rel="stylesheet" href="{{ asset('vendors/bootstrap-selector/css/bootstrap-select.min.css') }}">
+ @if (app()->getLocale() == 'ar')
+     <link rel="stylesheet" href="{{ asset('css/bootstrap-reboot.min.css') }}">
+ @endif
  <!--icon font css-->
  <link rel="stylesheet" href="{{ asset('vendors/themify-icon/themify-icons.css') }}">
  <link rel="stylesheet" href="{{ asset('vendors/elagent/style.css') }}">

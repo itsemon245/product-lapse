@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Order;
 
-use App\Enums\PaymentMethodEnum;
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Models\Order;
 use App\Models\Package;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Enums\PaymentMethodEnum;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Paytabscom\Laravel_paytabs\Facades\paypage;
 
 class OrderController extends Controller
 {
@@ -44,17 +45,16 @@ class OrderController extends Controller
                 'payment_method' => $request->payment_method,
              ]);
             $method = Str::replace(" ", "", $order->payment_method);
-            // $pay    = paypage::sendPaymentCode($method)
-            //     ->sendTransaction('sale', 'ecom')
-            //     ->sendCart($order->uuid, $order->amount, 'Test Order')
-            //     ->sendCustomerDetails($address->name, $address->email, $address->phone, $address->street, $address->city, $address->state, $address->country, $address->zip, $address->ip)
-            //     ->sendHideShipping($on = false)
-            //     ->sendURLs(config('paytabs.callback_url'), config('paytabs.ipn_url'))
-            //     ->sendLanguage(app()->getLocale())
-            //     ->create_pay_page(); // to initiate payment page
-            
+            $pay    = paypage::sendPaymentCode($method)
+                ->sendTransaction('sale', 'ecom')
+                ->sendCart($order->uuid, $order->amount, 'Test Order')
+                ->sendCustomerDetails($address->name, $address->email, $address->phone, $address->street, $address->city, $address->state, $address->country, $address->zip, $address->ip)
+                ->sendHideShipping($on = false)
+                ->sendURLs(config('paytabs.callback_url'), config('paytabs.ipn_url'))
+                ->sendLanguage(app()->getLocale())
+                ->create_pay_page(); // to initiate payment page 
         });
-        $param = "?status=success&order_id=$order->uuid";
+        $param = "?status=failed&order_id=$order->uuid";
         $url   = config('paytabs.callback_url') . $param;
         return redirect($url);
 

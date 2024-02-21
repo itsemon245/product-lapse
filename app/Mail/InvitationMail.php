@@ -20,7 +20,6 @@ class InvitationMail extends Mailable
      */
     public function __construct(
         public Invitation $invitation,
-        public $extraData
     ){
 
     }
@@ -30,7 +29,7 @@ class InvitationMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address($this->invitation->email, config('app.name')),
+            from: new Address(config('mail.from.address'), config('app.name')),
             subject: 'Invitation',
         );
     }

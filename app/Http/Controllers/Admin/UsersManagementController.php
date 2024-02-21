@@ -57,7 +57,7 @@ class UsersManagementController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        dd($user);
+        dd($request);
     }
 
     /**

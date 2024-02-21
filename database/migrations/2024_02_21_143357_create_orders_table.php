@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('subscriber_id')->references('id')->on('users')->cascadeOnDelete();
             $table->foreignId('package_id')->constrained()->cascadeOnDelete();
             $table->string('payment_method')->nullable();
-            $table->bigInteger('amount')->nullable();
+            $table->decimal('amount')->nullable();
             $table->bigInteger('discount')->default(0);
             $table->longText('token')->nullable();
             $table->enum('status', array_column(OrderStatusEnum::cases(), 'value'))->default('draft');

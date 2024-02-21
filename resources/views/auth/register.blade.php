@@ -62,16 +62,16 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="form-group text_box col-md-6">
+                            {{-- <div class="form-group text_box col-md-6">
                                 <label class=" text_c f_500">@__('singup.label.position')</label>
                                 <input type="text" placeholder="{{ __('singup.placeholder.position') }}" name="position">
                                 @error('position')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
-                            </div>
+                            </div> --}}
                             <div class="form-group text_box col-md-6">
                                 <label class=" text_c f_500">@__('singup.label.promo-code')</label>
-                                <input type="text" placeholder="{{ __('singup.placeholder.poeition') }}" name="promotional_code">
+                                <input type="text" placeholder="{{ __('singup.placeholder.promo-code') }}" name="promotional_code">
                                 @error('promotional_code')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror

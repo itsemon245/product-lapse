@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreign('parent_id')->references('id')->on('comments')->cascadeOnDelete();
             $table->longText('body');
             $table->morphs('commentable');
+            $table->enum('status', ['pending', 'agreed', 'disagreed'])->default('agreed');
             $table->timestamps();
         });
     }

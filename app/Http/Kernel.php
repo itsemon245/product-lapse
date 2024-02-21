@@ -2,6 +2,9 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CheckAdmin;
+use App\Http\Middleware\CheckUserType;
+use App\Http\Middleware\CheckSubscriber;
 use App\Http\Middleware\AddProductQueryString;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -66,5 +69,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'append.param.product' => AddProductQueryString::class,
+        'check.subscriber' => CheckSubscriber::class,
+        'check.admin' => CheckAdmin::class,
     ];
 }

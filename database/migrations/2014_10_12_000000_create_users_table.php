@@ -25,7 +25,7 @@ return new class extends Migration {
             $table->text('promotional_code')->nullable();
             $table->json('flag')->nullable()->comment('application feature flags for the dedicated user');
             $table->hasOwner();
-            $table->enum('type', ['admin', 'subscriber', 'member'])->default('member');
+            $table->enum('type', ['admin', 'subscriber', 'member'])->nullable();
             $table->timestamp('is_banned')->nullable(); 
             $table->timestamps();
         });

@@ -41,7 +41,7 @@
                             <div class="flex items-center gap-4">
                                 <input disabled id="pass" type="password" class="border-none w-max"
                                     value="{{ $delivery->password }}">
-                                <div class="p-2 pass-toggle" >
+                                <div class="p-2 pass-toggle">
                                     <span class="ti-eye"></span>
                                 </div>
                             </div>
@@ -92,7 +92,7 @@
             </div>
 
             {{-- Attachment part --}}
-            @if ($delivery->file)
+            @if ($delivery->files)
                 <div class="col-md-12">
                     <h6 class="title2">@__('feature/delivery.attachments')</h6>
                     <div class="table-responsive">
@@ -101,17 +101,20 @@
                                 <tr>
                                     <th>#</th>
                                     <th>@__('feature/delivery.title-2')</th>
-                                    <th></th>
+                                    <th>@__('feature/delivery.action')</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>the file name</td>
-                                    <td><button class="btn_hover agency_banner_btn btn-bg btn-table"
-                                            type="submit">@__('feature/delivery.view')</button>
-                                    </td>
-                                </tr>
+                                @foreach ($delivery->files as $file)
+                                    <tr>
+                                        <td>1</td>
+                                        <td>{{ $file->name }}</td>
+                                        <td><a class="btn_hover agency_banner_btn btn-bg btn-table"
+                                                href="{{ route('delivery.file.download', ['delivery' => $delivery, 'file' => $file]) }}">@__('feature/delivery.view')</a>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -125,7 +128,7 @@
     <script>
         $(document).ready(function() {
             let input = $('#pass')
-            $('.pass-toggle').click(function(){
+            $('.pass-toggle').click(function() {
                 let type = $('#pass').attr('type') == 'password' ? 'text' : 'password';
                 input.attr('type', type)
             })

@@ -46,6 +46,7 @@ return [
 
     //show page
     'show' => 'Show Delivery',
-    
+    'action' => 'Action',
+
 
 ];

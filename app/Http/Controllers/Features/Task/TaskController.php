@@ -7,11 +7,14 @@ use App\Models\Task;
 use App\Models\User;
 use App\Models\Select;
 use App\Models\Product;
+use App\Models\File;
 use App\Services\SearchService;
 use App\Http\Requests\TaskRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SearchRequest;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class TaskController extends Controller
 {
@@ -67,7 +70,9 @@ class TaskController extends Controller
         ]);
 
         if ($request->has('add_attachments')) {
-            $task->storeFile($request->add_attachments);
+            foreach ($request->add_attachments as $file) {
+                $task->storeFile($file);
+            }
         }
 
         notify()->success(__('Created Successfully!'));
@@ -80,7 +85,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        $task = Task::with('file')->find($task->id);
+        $task = Task::with('files')->find($task->id);
 
         $user = User::with('image')->find($task->creator_id);
         $task->loadComments();
@@ -90,6 +95,18 @@ class TaskController extends Controller
 
         return view('features.task.partials.show', compact('task', 'user', 'comments', 'statuses'));
 
+    }
+
+    public function downloadFIle(Task $task, File $file)
+    {
+        $filePath = $file->path;
+        if (!Storage::disk('public')->exists($filePath)) {
+            notify()->error(__('File not found!'));
+
+            return redirect()->route('$task.show', $task);
+        }
+
+        return Storage::download('public/' . $filePath);
     }
 
     public function changeStatus(TaskRequest $request, Task $task)
@@ -127,22 +144,26 @@ class TaskController extends Controller
      */
     public function update(TaskRequest $request, Task $task)
     {
-        $task = Task::with('file')->find($task->id);
+        $task = Task::with('files')->find($task->id);
 
         if ($request->has('add_attachments')) {
-            if ($task->file) {
-                $file = $task->updateFile($request->add_attachments);
+            if ($task->files) {
+                foreach ($task->files as $file) {
+                    $task->deleteFile($file);
+                }
+                foreach ($request->add_attachments as $file) {
+                    $task->storeFile($file);
+                }
             } else {
-                $task->storeFile($request->add_attachments);
+                foreach ($request->add_attachments as $file) {
+                    $task->storeFile($file);
+                }
             }
-
         }
 
         $data = $request->except('_token', 'add_attachments');
-        $data['owner_id'] = ownerId();
 
         $task->update([
-            'owner_id' => ownerId(),
             'name' => $request->name,
             'category' => $request->category,
             'status' => $request->status,
@@ -164,10 +185,12 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
 
-        $taskk = Task::with('file')->find($task->id);
+        $taskk = Task::with('files')->find($task->id);
 
-        if ($taskk->file) {
-            $fileDeleted = $taskk->deleteFile($task->file);
+        if ($taskk->files) {
+            foreach ($taskk->files as $file) {
+                $taskk->deleteFile($file);
+            }
         }
         $taskk->delete();
 

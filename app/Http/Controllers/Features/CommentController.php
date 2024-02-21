@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Features;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
+use App\Models\Delivery;
 use Illuminate\Support\Str;
 
 class CommentController extends Controller
@@ -19,6 +20,7 @@ class CommentController extends Controller
             $modelName       = array_pop($modelName);
             $commentableType = "App\\Models\\" . Str::studly($modelName);
         }
+
         $comment = Comment::create([
             'user_id'          => auth()->id(),
             'parent_id'        => $request->parent_id,
@@ -26,6 +28,10 @@ class CommentController extends Controller
             'commentable_type' => $commentableType,
             'commentable_id'   => $request->commentable_id,
          ]);
+         if ($commentableType == Delivery::class) {
+            $comment->status = 'pending';
+            $comment->update();
+         }
         notify()->success(__('notify/success.create'));
         return back();
     }

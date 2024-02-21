@@ -8,7 +8,7 @@
     </x-slot:breadcrumb>
 
     <x-slot:search>
-        <form method="GET" hx-get="{{ route('user.search') }}" hx-trigger="submit" hx-target="#search-results" hx-select="#search-results" class="search-form input-group">
+        <form method="GET" hx-get="{{ route('users.search') }}" hx-trigger="submit" hx-target="#search-results" hx-select="#search-results" class="search-form input-group">
             <input type="hidden" name="columns[]" value="name">
             <input type="hidden" name="model" value="user">
             <input type="search" name="search" class="form-control widget_input" placeholder="Search user" hx-vals="#search-results">
@@ -51,7 +51,9 @@
                                                 <form action="{{ route('users.update', $subscriber) }}" method="POST">
                                                     @csrf
                                                     @method('patch')
-                                                    <button type="submit" class="shortlist" title="Delete">
+                                                    <input type="hidden" name="banned">
+                                                    <button>Submit</button>
+                                                    <button type="submit" class="shortlist" >
                                                         <i class="ti-lock"></i>
                                                     </button>
                                                 </form>

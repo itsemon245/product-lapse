@@ -33,6 +33,6 @@ Route::prefix('admin')
         Route::get('certificate-search', [ CertificateController::class, 'search' ])->name('search.certificate');
         Route::get('input-create', [ LandingPageController::class, 'createInput' ])->name('input.create');
         Route::resource('users', UsersManagementController::class);
-        Route::get('user-search', [ UsersManagementController::class, 'search' ])->name('user.search');
+        Route::get('users-search', [UsersManagementController::class, 'search'])->name('users.search');
 
     });

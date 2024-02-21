@@ -56,7 +56,7 @@
                                     <div class="social_text d-flex ">
                                         <div class="lead-text">@lang('login.login_within')</div>
                                         <ul class="list-unstyled social_tag mb-0">
-                                            <li><a href="#"><i class="ti-linkedin"></i></a></li>
+                                            <li><a href="{{ route('linkedin.login') }}"><i class="ti-linkedin"></i></a></li>
                                             <li><a href="#"><i class="ti-google"></i></a></li>
                                         </ul>
                                     </div>

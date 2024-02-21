@@ -112,6 +112,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Certificate::class, 'owner_id', 'id');
     }
+    public function addresses()
+    {
+        return $this->hasMany(Address::class, 'user_id', 'id');
+    }
     public function comments()
     {
         return $this->hasMany(Comment::class);

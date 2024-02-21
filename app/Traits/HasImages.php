@@ -29,9 +29,9 @@ trait HasImages
     /**
      * Define other required attributes
      */
-    protected string $disk           = 'public';
-    protected string $baseDir        = 'uploads';
-    protected string $dir            = '';
+    protected string $disk = 'public';
+    protected string $baseDir = 'uploads';
+    protected string $dir = '';
     protected ?string $imageableType = null;
 
     /**
@@ -45,19 +45,19 @@ trait HasImages
         if ($image == null) {
             return true;
         }
-        $type  = $this->imageableType ?? get_class($this);
-        $id    = $this->id;
-        $ext   = $image->getClientOriginalExtension();
-        $name  = $name ?? $image->getClientOriginalName();
-        $name  = str($name)->slug() . uniqid() . '.' . $ext;
-        $path  = $image->storeAs($this->baseDir . $this->dir, $name, $this->disk);
+        $type = $this->imageableType ?? get_class($this);
+        $id = $this->id;
+        $ext = $image->getClientOriginalExtension();
+        $name = $name ?? $image->getClientOriginalName();
+        $path = $image->storeAs($this->baseDir . $this->dir, $name, $this->disk);
         $image = Image::create([
-            'imageable_id'   => $id,
+            'imageable_id' => $id,
             'imageable_type' => $type,
-            'path'           => $path,
-            'url'            => asset('storage/' . $path),
-            'mime_type'      => $ext,
-         ]);
+            'path' => $path,
+            'name' => pathinfo($name, PATHINFO_FILENAME),
+            'url' => asset('storage/' . $path),
+            'mime_type' => $ext,
+        ]);
 
         return $image;
     }
@@ -74,20 +74,20 @@ trait HasImages
             return true;
         }
         $oldImage = $oldImage ?? $this->image;
-        $type     = $this->imageableType ?? get_class($this);
-        $id       = $this->id;
-        $ext      = $image->getClientOriginalExtension();
-        $name     = $name ?? $image->getClientOriginalName();
-        $name     = str($name)->slug() . uniqid() . '.' . $ext;
-        $path     = $image->storeAs($this->baseDir . $this->dir, $name, $this->disk);
+        $type = $this->imageableType ?? get_class($this);
+        $id = $this->id;
+        $ext = $image->getClientOriginalExtension();
+        $name = $name ?? $image->getClientOriginalName();
+        $path = $image->storeAs($this->baseDir . $this->dir, $name, $this->disk);
         $this->deleteImage($oldImage, true);
         $image = tap($oldImage)->update([
-            'imageable_id'   => $id,
+            'imageable_id' => $id,
             'imageable_type' => $type,
-            'path'           => $path,
-            'url'            => asset('storage/' . $path),
-            'mime_type'      => $ext,
-         ]);
+            'path' => $path,
+            'name' => pathinfo($name, PATHINFO_FILENAME),
+            'url' => asset('storage/' . $path),
+            'mime_type' => $ext,
+        ]);
         return $image;
     }
 

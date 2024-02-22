@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddressRequest;
+use App\Models\Address;
 use App\Models\User;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
@@ -45,6 +47,41 @@ class ProfileController extends Controller
         notify()->success(__('Updated successfully!'));
         return back();
     }
+    public function address(AddressRequest $request)
+    {
+        $user = Address::where('user_id', auth()->id())->first();
+        if($user == null){
+            Address::create([
+                'name' => $request->name,
+                'user_id' => auth()->id(),
+                'type' => $request->type,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'street' => $request->street,
+                'city' => $request->city,
+                'state' => $request->state,
+                'country' => $request->country,
+                'zip' => $request->zip,
+                'use_as_shipping' => $request->use_as_shipping,
+                'ip' => $request->ip,
+            ]);
+        }else{
+            $user->update([
+                'name' => $request->name,
+                'type' => $request->type,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'street' => $request->street,
+                'city' => $request->city,
+                'state' => $request->state,
+                'country' => $request->country,
+                'zip' => $request->zip,
+                'use_as_shipping' => $request->use_as_shipping,
+                'ip' => $request->ip,
+            ]);
+        }
+    }
+
 
     /**
      * Delete the user's account.

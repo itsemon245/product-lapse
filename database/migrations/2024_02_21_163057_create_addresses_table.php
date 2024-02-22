@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('state');
             $table->string('country');
             $table->string('zip');
-            $table->boolean('use_as_shipping');
+            $table->boolean('use_as_shipping')->nullable();
             $table->string('ip');
             $table->timestamps();
         });

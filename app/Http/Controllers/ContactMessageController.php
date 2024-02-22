@@ -21,6 +21,24 @@ class ContactMessageController extends Controller
         return view('contact-message-view', compact('contactMessage'));
     }
 
+    public function reply(Request $request, ContactMessage $contactMessage)
+    {
+        $request->validate([
+            'reply' => 'required|string',
+        ]);
+
+        $contactMessage->update([
+            'reply' => [
+                'body' => $request->reply,
+            ],
+        ]);
+
+        Mail::to($contactMessage->email)->send(new ContactMessageMail($contactMessage));
+
+        notify()->success(__('Your reply has been sent!'));
+        return redirect()->route('contact.messages.view', $contactMessage);
+    }
+
     public function send(Request $request)
     {
         $request->validate([

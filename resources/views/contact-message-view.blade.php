@@ -20,9 +20,29 @@
                         <p class="f_400 mb-30 text-font">
                             {{ $contactMessage->body }}
                         </p>
+
+                        @if ($contactMessage->reply)
+                            <h6 class="title2">@__('message.reply')</h6>
+                            <p class="f_400 mb-30 text-font">
+                                {{ $contactMessage->reply->body }}
+                            </p>
+                        @endif
                     </div>
                 </div>
+                <div class="blog_single mb_50">
+                    <form action="{{ route('message.reply.send', $contactMessage) }}" method="POST"
+                        enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group">
+                            <x-textarea name="reply" label="Reply" required="required" />
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">@__('message.send')</button>
+                        </div>
+                    </form>
+                </div>
             </div>
+
         </x-slot:details>
 
     </x-feature.show>

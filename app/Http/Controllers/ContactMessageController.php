@@ -9,22 +9,34 @@ use Illuminate\Support\Facades\Mail;
 
 class ContactMessageController extends Controller
 {
+
+    public function index()
+    {
+        $messages = ContactMessage::latest()->get();
+        return view('contact-messages', compact('messages'));
+    }
+
+    public function view(ContactMessage $contactMessage)
+    {
+        return view('contact-message-view', compact('contactMessage'));
+    }
+
     public function send(Request $request)
     {
         $request->validate([
-            'name'  => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
             'email' => 'required|email:rfc,dns',
-            'body'  => 'required|string',
-         ]);
+            'body' => 'required|string',
+        ]);
 
         $contactMessage = ContactMessage::create([
             ...$request->except('_token', '_method'),
-         ]);
+        ]);
 
         Mail::to(config('mail.from.address'))->send(new ContactMessageMail($contactMessage));
 
         notify()->success(__('Your message has been sent!'));
-        return back();
+        return redirect()->route('home');
     }
 }

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bank;
-use Illuminate\Http\Request;
+use App\Enums\PaymentMethodEnum;
 use App\Http\Requests\BankRequest;
+use App\Models\Bank;
+use App\Models\Order;
 
 class BankController extends Controller
 {
@@ -13,41 +14,54 @@ class BankController extends Controller
      */
     public function index()
     {
-        $bank = Bank::where('user_id', auth()->id())->first();
-        return view('bank.create', compact('bank'));
+
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Order $order)
     {
-        //
+        $bank = Bank::where('user_id', auth()->id())->first();
+        return view('bank.create', compact('bank', 'order'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(BankRequest $request)
+    public function store(BankRequest $request, Order $order)
     {
-        $user = Bank::where('user_id', auth()->id())->first();
-        if($user == null){
-            Bank::create([
-            'user_id' => auth()->id(),
-            'bank_id' => $request->id,
-            'name' => $request->name,
-            'iban' => $request->iban,
-            'payment_receipt' => $request->payment_receipt,
-            ]);
-        }else{
-            $user->update([
-            'bank_id' => $request->id,
-            'name' => $request->name,
-            'iban' => $request->iban,
-            'payment_receipt' => $request->payment_receipt,
-            ]);
+        $bank = Bank::where('user_id', auth()->id())->first();
+        if ($bank == null) {
+            $bank = Bank::create([
+                'user_id'         => auth()->id(),
+                'account_id'      => $request->id,
+                'name'            => $request->name,
+                'iban'            => $request->iban,
+                'payment_receipt' => $request->boolean('payment_receipt'),
+             ]);
+        } else {
+            $bank = tap($bank)->update([
+                'account_id'      => $request->id,
+                'name'            => $request->name,
+                'iban'            => $request->iban,
+                'payment_receipt' => $request->boolean('payment_receipt'),
+             ]);
         }
-        return back();
+
+        $order->update([
+            'bank_details' => [
+                'account_id'      => $request->id,
+                'name'            => $request->name,
+                'iban'            => $request->iban,
+                'payment_receipt' => $request->boolean('payment_receipt'),
+             ],
+             'payment_method'=> PaymentMethodEnum::BANK_ACCOUNT->value
+         ]);
+        $param = "?status=success&order_id=$order->uuid";
+        $url   = config('paytabs.callback_url') . $param;
+        // dd($url);
+        return redirect($url);
     }
 
     /**

@@ -21,25 +21,25 @@
                 <div class="sign_info">
                     <div class="login_info">
                         <h2 class=" f_600 f_size_24 t_color3 mb_40">Bank account</h2>
-                        <form action="{{ route('bank.store') }}" method="POST" class="login-form sign-in-form">
+                        <form action="{{ route('bank.store', $order) }}" method="POST" class="login-form sign-in-form">
                             @csrf
                             <div class="row">
                                 <div class="form-group text_box col-lg-4 col-md-12">
                                     <x-input-label for="id" value="Bank account ID" />
                                     <x-input id="id" class="block mt-1 w-full" type="text"
-                                        placeholder="996587432156"  name="id" value="{{ $bank->bank_id ?? old('id')}}" required
+                                        placeholder="996587432156"  name="id" value="{{ $bank?->account_id ?? old('id')}}" required
                                         autofocus />
                                 </div>
                                 <div class="form-group text_box col-lg-4 col-md-12">
                                     <x-input-label for="name" value="Name" />
                                     <x-input id="name" class="block mt-1 w-full" type="text"
-                                        placeholder="name" name="name" value="{{ $bank->name ?? old('name')}}" required
+                                        placeholder="name" name="name" value="{{ $bank?->name ?? old('name')}}" required
                                         autofocus />
                                 </div>
                                 <div class="form-group text_box col-lg-4 col-md-12">
                                     <x-input-label for="iban" value="iban" />
                                     <x-input id="iban" class="block mt-1 w-full" type="text"
-                                        placeholder="996587432156" name="iban" value="{{ $bank->iban ?? old('iban')}}" required
+                                        placeholder="996587432156" name="iban" value="{{ $bank?->iban ?? old('iban')}}" required
                                         autofocus />
                                 </div>
                                 <div class="form-group text_box col-lg-12 col-md-12">
@@ -47,7 +47,7 @@
                                         <div class="media post_author post_author2">
                                             <div class="checkbox remember">
                                                 <label class="d-flex">
-                                                    <input type="checkbox"{{ $bank->payment_receipt == null ? '' : 'checked'}}  name="payment_receipt">
+                                                    <input type="checkbox"{{ $bank?->payment_receipt == null ? '' : 'checked'}}  name="payment_receipt">
                                                     <h5 class=" t_color3 f_size_18 f_500">Payment receipt</h5>
                                                 </label>
                                             </div>
@@ -56,7 +56,7 @@
                                 </div>
                             </div>
 
-                            <div class="payment-btns text-center">
+                            <div class="payment-btns text-center flex items-center justify-center gap-3">
                                 <button type="submit" class="btn_hover agency_banner_btn btn-bg">Continue </button>
                                 <x-button type="link" href="{{ route('product.index') }}" class="btn_hover agency_banner_btn btn-bg btn-bg3"> Cancel</x-button>
                             </div>
@@ -66,7 +66,7 @@
             </div>
         </x-slot:list>
         {{-- <x-slot:pagination>
-            {!! $changes->links() !!}
+            {!! $changes?->links() !!}
         </x-slot:pagination> --}}
 
     </x-feature.index>

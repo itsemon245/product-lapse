@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
-            $table->string('bank_id');
+            $table->string('account_id');
             $table->string('name');
             $table->string('iban');
-            $table->boolean('payment_receipt')->nullable();
+            $table->boolean('payment_receipt')->default(0);
             $table->timestamps();
         });
     }

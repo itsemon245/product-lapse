@@ -33,6 +33,9 @@ class OrderController extends Controller
     }
     public function store(Request $request, Order $order)
     {
+        if ($request->payment_method == PaymentMethodEnum::BANK_ACCOUNT->value) {
+            return redirect(route('bank.create', ['order'=> $order]));
+        }
         DB::transaction(function () use ($order, $request) {
 
             $address        = User::find(auth()->id())->shippingAddress();
@@ -54,7 +57,7 @@ class OrderController extends Controller
                 ->sendLanguage(app()->getLocale())
                 ->create_pay_page(); // to initiate payment page 
         });
-        $param = "?status=failed&order_id=$order->uuid";
+        $param = "?status=success&order_id=$order->uuid";
         $url   = config('paytabs.callback_url') . $param;
         return redirect($url);
 

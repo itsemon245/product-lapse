@@ -17,6 +17,8 @@ return new class extends Migration
             $table->uuid('uuid');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('package_id')->constrained()->cascadeOnDelete();
+            $table->json('bank_details')->nullable();
+            $table->json('card_details')->nullable();
             $table->string('payment_method')->nullable();
             $table->decimal('amount')->nullable();
             $table->bigInteger('discount')->default(0);

@@ -1,8 +1,8 @@
-@extends('layouts.subscriber.app', ['title' => @__('feature/change.title')])
+@extends('layouts.subscriber.app', ['title' => 'Bank Transfer'])
 @section('main')
     <x-feature.index>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => @__('feature/change.title'), 'route' => route('change.index')]]" />
+            <x-breadcrumb :list="[['label' => 'Bank Transfer', 'route' => route('change.index')]]" />
         </x-slot:breadcrumb>
         <x-slot:search>
             {{--  --}}
@@ -21,30 +21,35 @@
                 <div class="sign_info">
                     <div class="login_info">
                         <h2 class=" f_600 f_size_24 t_color3 mb_40">Bank account</h2>
-                        <form action="#" class="login-form sign-in-form">
+                        <form action="{{ route('bank.store') }}" method="POST" class="login-form sign-in-form">
+                            @csrf
                             <div class="row">
                                 <div class="form-group text_box col-lg-4 col-md-12">
-                                    <label class=" text_c f_500">Bank account ID</label>
-                                    <input type="text" placeholder="996587432156">
+                                    <x-input-label for="id" value="Bank account ID" />
+                                    <x-input id="id" class="block mt-1 w-full" type="text"
+                                        placeholder="996587432156"  name="id" value="{{ $bank->bank_id ?? old('id')}}" required
+                                        autofocus />
                                 </div>
                                 <div class="form-group text_box col-lg-4 col-md-12">
-                                    <label class=" text_c f_500">Name</label>
-                                    <input type="text" placeholder="name">
+                                    <x-input-label for="name" value="Name" />
+                                    <x-input id="name" class="block mt-1 w-full" type="text"
+                                        placeholder="name" name="name" value="{{ $bank->name ?? old('name')}}" required
+                                        autofocus />
                                 </div>
                                 <div class="form-group text_box col-lg-4 col-md-12">
-                                    <label class=" text_c f_500">IBAN</label>
-                                    <input type="text" placeholder="5644984">
+                                    <x-input-label for="iban" value="iban" />
+                                    <x-input id="iban" class="block mt-1 w-full" type="text"
+                                        placeholder="996587432156" name="iban" value="{{ $bank->iban ?? old('iban')}}" required
+                                        autofocus />
                                 </div>
                                 <div class="form-group text_box col-lg-12 col-md-12">
                                     <div class="extra extra2 extra3">
                                         <div class="media post_author post_author2">
                                             <div class="checkbox remember">
-                                                <label>
-                                                    <input type="checkbox">
+                                                <label class="d-flex">
+                                                    <input type="checkbox"{{ $bank->payment_receipt == null ? '' : 'checked'}}  name="payment_receipt">
+                                                    <h5 class=" t_color3 f_size_18 f_500">Payment receipt</h5>
                                                 </label>
-                                            </div>
-                                            <div class="media-body">
-                                                <h5 class=" t_color3 f_size_18 f_500">Payment receipt</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -53,7 +58,7 @@
 
                             <div class="payment-btns text-center">
                                 <button type="submit" class="btn_hover agency_banner_btn btn-bg">Continue </button>
-                                <button type="submit" class="btn_hover agency_banner_btn btn-bg btn-bg3"> Cancel</button>
+                                <x-button type="link" href="{{ route('product.index') }}" class="btn_hover agency_banner_btn btn-bg btn-bg3"> Cancel</x-button>
                             </div>
                         </form>
                     </div>

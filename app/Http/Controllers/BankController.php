@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bank;
 use Illuminate\Http\Request;
+use App\Http\Requests\BankRequest;
 
 class BankController extends Controller
 {
@@ -11,7 +13,8 @@ class BankController extends Controller
      */
     public function index()
     {
-        return view('bank.index');
+        $bank = Bank::where('user_id', auth()->id())->first();
+        return view('bank.create', compact('bank'));
     }
 
     /**
@@ -25,9 +28,26 @@ class BankController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BankRequest $request)
     {
-        //
+        $user = Bank::where('user_id', auth()->id())->first();
+        if($user == null){
+            Bank::create([
+            'user_id' => auth()->id(),
+            'bank_id' => $request->id,
+            'name' => $request->name,
+            'iban' => $request->iban,
+            'payment_receipt' => $request->payment_receipt,
+            ]);
+        }else{
+            $user->update([
+            'bank_id' => $request->id,
+            'name' => $request->name,
+            'iban' => $request->iban,
+            'payment_receipt' => $request->payment_receipt,
+            ]);
+        }
+        return back();
     }
 
     /**
@@ -49,7 +69,7 @@ class BankController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(BankRequest $request, string $id)
     {
         //
     }

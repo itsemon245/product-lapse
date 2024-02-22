@@ -139,6 +139,11 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
+    public function banks()
+    {
+        return $this->hasMany(Bank::class, 'user_id', 'id');
+    }
+
     /**
      * Parent of any user doesn't matter the type
      *

@@ -19,6 +19,9 @@ class BankRequest extends FormRequest
             'id' => 'sometimes|required',
             'name' => 'sometimes|required',
             'iban' => 'sometimes|required',
+            'number' => 'sometimes|required',
+            'expiry_date' => 'sometimes|required',
+            'cvv' => 'sometimes|required',
         ];
     }
 }

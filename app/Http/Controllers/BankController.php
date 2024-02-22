@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bank;
+use App\Models\CreditCard;
 use Illuminate\Http\Request;
 use App\Http\Requests\BankRequest;
 
@@ -89,6 +90,23 @@ class BankController extends Controller
 
     public function creditCardStore(BankRequest $request)
     {
-
+        $user = CreditCard::where('user_id', auth()->id())->first();
+        if($user == null){
+            CreditCard::create([
+            'user_id' => auth()->id(),
+            'number' => $request->number,
+            'name' => $request->name,
+            'expiry_date' => $request->expiry_date,
+            'cvv' => $request->cvv,
+            ]);
+        }else{
+            $user->update([
+                'number' => $request->number,
+                'name' => $request->name,
+                'expiry_date' => $request->expiry_date,
+                'cvv' => $request->cvv,
+            ]);
+        }
+        return back();
     }
 }

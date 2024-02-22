@@ -144,6 +144,11 @@ class User extends Authenticatable
         return $this->hasMany(Bank::class, 'user_id', 'id');
     }
 
+    public function creditCards()
+    {
+        return $this->hasMany(CreditCard::class, 'user_id', 'id');
+    }
+
     /**
      * Parent of any user doesn't matter the type
      *

@@ -36,9 +36,7 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request, string $id): RedirectResponse
     {
-        // dd($request);
         $user = User::find($id);
-        // $image = $user->updateImage($request->avatar, $user->image);
         $user->update([
             'name' => $request->name,
             'phone' => $request->phone,

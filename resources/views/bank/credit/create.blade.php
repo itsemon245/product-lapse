@@ -27,25 +27,25 @@
                                 <div class="form-group text_box col-lg-6 col-md-12">
                                     <x-input-label for="number" value="Credit card number" />
                                     <x-input id="number" class="block mt-1 w-full" type="text"
-                                        placeholder="ex: 8547 3621 5984" name="number" :value="old('number')" required
+                                        placeholder="ex: 8547 3621 5984" name="number" value="{{ $data->number ?? old('number') }}" required
                                         autofocus />
                                 </div>
                                 <div class="form-group text_box col-lg-6 col-md-12">
                                     <x-input-label for="name" value="Name" />
                                     <x-input id="name" class="block mt-1 w-full" type="text"
-                                        placeholder="name" name="name" :value="old('name')" required
+                                        placeholder="name" name="name" value="{{ $data->name ?? old('name') }}" required
                                         autofocus />
                                 </div>
                                 <div class="form-group text_box col-lg-6 col-md-12">
                                     <x-input-label for="date" value="Expiry date" />
                                     <x-input id="date" class="block mt-1 w-full" type="date"
-                                        name="expiry_date" :value="old('expiry_date')" required
+                                        name="expiry_date" value="{{ $data->expiry_data ?? old('expiry_date') }}" required
                                         autofocus />
                                 </div>
                                 <div class="form-group text_box col-lg-6 col-md-12">
                                     <x-input-label for="cvv" value="CVV" />
                                     <x-input id="cvv" class="block mt-1 w-full" type="text"
-                                        name="cvv" placeholder="---" :value="old('cvv')" required
+                                        name="cvv" placeholder="---" value="{{ $data->cvv ?? old('cvv') }}" required
                                         autofocus />
                                 </div>
                             </div>

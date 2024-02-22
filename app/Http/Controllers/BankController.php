@@ -104,7 +104,8 @@ class BankController extends Controller
 
     public function creditCard()
     {
-        return view('bank.credit.create');
+        $data = CreditCard::where('user_id', auth()->id())->first();
+        return view('bank.credit.create', compact('data'));
     }
 
     public function creditCardStore(BankRequest $request)

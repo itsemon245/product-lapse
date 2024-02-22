@@ -6,9 +6,11 @@ use App\Models\Plan;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\Package;
+use App\Mail\InvoiceMail;
 use Illuminate\Http\Request;
 use App\Enums\PaymentMethodEnum;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class PaymentController extends Controller
 {
@@ -36,7 +38,7 @@ class PaymentController extends Controller
         }
 
         if ($status == 'success') {
-            $order->update([
+            $order = tap($order)->update([
                 'status'       => $orderStatus,
                 'completed_at' => $completedAt,
              ]);
@@ -54,6 +56,8 @@ class PaymentController extends Controller
                 'expired_at'    => $expireDate,
                 'product_limit' => $order->package->product_limit,
              ]);
+            Mail::to($order->user->billingAddress->email)->send(new InvoiceMail($order));
+
             return redirect(route('payment.success'));
         } else {
 

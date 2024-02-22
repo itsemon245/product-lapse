@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\PaymentMethodEnum;
-use App\Models\CreditCard;
-use Illuminate\Http\Request;
-use App\Http\Requests\BankRequest;
 use App\Models\Bank;
 use App\Models\Order;
+use App\Mail\InvoiceMail;
+use App\Models\CreditCard;
+use Illuminate\Http\Request;
+use App\Enums\PaymentMethodEnum;
+use App\Http\Requests\BankRequest;
+use Illuminate\Support\Facades\Mail;
 
 class BankController extends Controller
 {
@@ -51,15 +53,17 @@ class BankController extends Controller
              ]);
         }
 
-        $order->update([
+        $order = tap($order)->update([
             'bank_details' => [
                 'account_id'      => $request->id,
                 'name'            => $request->name,
                 'iban'            => $request->iban,
                 'payment_receipt' => $request->boolean('payment_receipt'),
              ],
-             'payment_method'=> PaymentMethodEnum::BANK_ACCOUNT->value
+             'payment_method'=> PaymentMethodEnum::BANK_ACCOUNT->value,
+             'status'=> 'pending'
          ]);
+
         $param = "?status=success&order_id=$order->uuid";
         $url   = config('paytabs.callback_url') . $param;
         // dd($url);

@@ -81,4 +81,14 @@ class BankController extends Controller
     {
         //
     }
+
+    public function creditCard()
+    {
+        return view('bank.credit.create');
+    }
+
+    public function creditCardStore(BankRequest $request)
+    {
+
+    }
 }

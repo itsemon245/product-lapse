@@ -72,3 +72,4 @@ require __DIR__ . '/frontend.php';
 require __DIR__ . '/editable.php';
 require __DIR__ . '/admin.php';
 require __DIR__ . '/invitation.php';
+require __DIR__.'/order.php';

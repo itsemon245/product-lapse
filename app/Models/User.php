@@ -50,6 +50,28 @@ class User extends Authenticatable
 
     #---Relations---#
 
+    public function plans()
+    {
+        return $this->hasMany(Plan::class);
+    }
+
+    public function activePlan()
+    {
+        return $this->plans()->where('expired_at', '<', now())->where('active', true)->limit(1);
+    }
+
+    public function billingAddress()
+    {
+        return $this->hasMany(Address::class)->where('type', 'billing')->first();
+    }
+    public function shippingAddress()
+    {
+        return $this->hasMany(Address::class)->where('type', 'shipping')->first();
+    }
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
     public function getRole()
     {
         return $this->roles->first();

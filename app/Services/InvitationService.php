@@ -3,6 +3,7 @@ namespace App\Services;
 
 use App\Http\Requests\TeamInvitationRequest;
 use App\Mail\InvitationMail;
+use App\Mail\Test;
 use App\Models\Invitation;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -47,7 +48,7 @@ class InvitationService
                  ]);
             }
         }
-        $status = Mail::to($request->email)->send(new InvitationMail($invitation, $extraData));
+        $status = Mail::to($request->email)->send(new InvitationMail($invitation));
         return $invitation;
     }
 

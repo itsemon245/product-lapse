@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
-            $table->enum('type', ['billing', 'shipping']);
+            $table->enum('type', [ 'billing', 'shipping' ]);
             $table->string('email');
             $table->string('phone');
             $table->longText('street');
@@ -24,8 +24,8 @@ return new class extends Migration
             $table->string('state');
             $table->string('country');
             $table->string('zip');
-            $table->boolean('use_as_shipping')->nullable();
-            $table->string('ip');
+            $table->boolean('use_as_shipping')->default(0);
+            $table->ipAddress('ip');
             $table->timestamps();
         });
     }

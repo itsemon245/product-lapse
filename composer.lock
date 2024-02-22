@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0a7a67038eb7c775d0f4d3c345dcac39",
+    "content-hash": "bc8a4589e62ad18232ba27d338a8c8a9",
     "packages": [
         {
             "name": "amphp/amp",
@@ -4048,6 +4048,53 @@
                 }
             ],
             "time": "2024-01-28T10:04:15+00:00"
+        },
+        {
+            "name": "paytabscom/laravel_paytabs",
+            "version": "1.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paytabscom/paytabs-php-laravel-package.git",
+                "reference": "7cc3b7ed01c4fd64413f94a42e4cdc187da07574"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paytabscom/paytabs-php-laravel-package/zipball/7cc3b7ed01c4fd64413f94a42e4cdc187da07574",
+                "reference": "7cc3b7ed01c4fd64413f94a42e4cdc187da07574",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0|^8.0"
+            },
+            "type": "composer-package",
+            "autoload": {
+                "psr-4": {
+                    "Paytabscom\\Laravel_paytabs\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Walaa Elsaeed",
+                    "email": "w.elsaeed@paytabs.com"
+                }
+            ],
+            "description": "Official laravel package to implement PayTabs integration with laravel apps",
+            "homepage": "https://site.paytabs.com/en/",
+            "keywords": [
+                "E-comerce",
+                "laravel",
+                "payments",
+                "paytabs"
+            ],
+            "support": {
+                "issues": "https://github.com/paytabscom/paytabs-php-laravel-package/issues",
+                "source": "https://github.com/paytabscom/paytabs-php-laravel-package/tree/V1.4.2"
+            },
+            "time": "2023-09-05T17:43:47+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -11146,5 +11193,5 @@
         "php": "^8.1|^8.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.6.0"
 }

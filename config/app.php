@@ -174,7 +174,12 @@ return [
          */
         App\Providers\BladeServiceProvider::class,
         App\Providers\ViewServiceProvider::class,
-
+        
+        /*
+         * Package Service Providers...
+         */
+        Paytabscom\Laravel_paytabs\PaypageServiceProvider::class,
+        
     ])->toArray(),
 
     /*

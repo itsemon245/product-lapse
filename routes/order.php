@@ -11,8 +11,8 @@ Route::post('order/{order}', [OrderController::class, 'store'])->name('order.sto
 
 
 // Payment
-Route::get('payment-ipn', [PaymentController::class, 'ipn'])->name('payment.ipn');
-Route::get('payment-callback', [PaymentController::class, 'callback'])->name('payment.callback');
+Route::any('payment-ipn', [PaymentController::class, 'ipn'])->name('payment.ipn');
+Route::any('payment-callback', [PaymentController::class, 'callback'])->name('payment.callback');
 Route::get('payment-success', [PaymentController::class, 'success'])->name('payment.success');
 Route::get('payment-failed', [PaymentController::class, 'failed'])->name('payment.failed');
 

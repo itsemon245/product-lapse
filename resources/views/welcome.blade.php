@@ -199,16 +199,15 @@
                         </div>
 
                     </div>
-                    <form class="col-xl-7 offset-xl-1 col-lg-8 offset-lg-0">
+                    <div class="col-xl-7 offset-xl-1 col-lg-8 offset-lg-0">
                         <div class="contact_form wow fadeInRight" data-wow-delay="0.2s">
-                            <form action="{{ route('message.send') }}"  method="POST" id="hx-contact-form"
+                            <form action="{{ route('message.send') }}" method="POST" id="hx-contact-form"
                                 class="contact_form_box">
                                 @csrf
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group text_box">
-                                            <input name="name" type="text"
-                                                placeholder="@lang('welcome.name')">
+                                            <input name="name" type="text" placeholder="@lang('welcome.name')">
                                             @error('name')
                                                 <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
@@ -245,7 +244,7 @@
                                     class="app_btn btn_hover cus_mb-10 btn_hover agency_banner_btn btn-bg">@lang('welcome.send')</button>
                             </form>
                         </div>
-                        </>
+                    </div>
                 </div>
             </div>
         </section>

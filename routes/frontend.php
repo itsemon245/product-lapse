@@ -10,15 +10,15 @@ use App\Http\Controllers\PackageController;
 
 Route::prefix('frontend')
     ->group(function () {
-        Route::post('landing-page', [ LandingPageController::class, 'update' ])->name('landing.page.update');
-        Route::post('landing-page-about', [ LandingPageController::class, 'updateAbout' ])->name('landing.page.update.about');
-        Route::post('landing-page-contact', [ LandingPageController::class, 'updateContact' ])->name('landing.page.update.contact');
+        Route::post('landing-page', [LandingPageController::class, 'update'])->name('landing.page.update');
+        Route::post('landing-page-about', [LandingPageController::class, 'updateAbout'])->name('landing.page.update.about');
+        Route::post('landing-page-contact', [LandingPageController::class, 'updateContact'])->name('landing.page.update.contact');
     });
 
 Route::prefix('/')
-    ->middleware([ 'auth' ])
+    ->middleware(['auth'])
     ->group(function () {
-        Route::get('notifications', function(){
+        Route::get('notifications', function () {
             $user = User::find(auth()->id());
             $notifications = $user->notifications;
             return view('pages.notifications', compact('notifications'));
@@ -27,3 +27,7 @@ Route::prefix('/')
 
 Route::get('compare-packages', [PackageController::class, 'compare'])->name('package.compare');
 Route::post('contact-message/', [ContactMessageController::class, 'send'])->name('message.send');
+
+Route::get('contact-messages', [ContactMessageController::class, 'index'])->name('contact.messages');
+Route::get('contact-messages/{contactMessage}', [ContactMessageController::class, 'view'])->name('contact.messages.view');
+Route::post('contact-message-reply/{contactMessage}', [ContactMessageController::class, 'reply'])->name('message.reply.send');

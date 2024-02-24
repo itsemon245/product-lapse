@@ -18,7 +18,13 @@ class ProfileController extends Controller
     public function index()
     {
         $user = User::with('image')->find(auth()->id());
-        return view('profile.index', compact('user'));
+        if (request()->path() == "admin/profile"){
+            return view('admin.profile.index', compact('user'));
+        }else{
+            return view('profile.index', compact('user'));
+        }
+
+     
     }
 
     /**
@@ -26,9 +32,17 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+        // dd(request()->path());
+        if(request()->path() == "admin/profile/edit"){
+            return view('admin.profile.edit', [
+                'user' => $request->user(),
+            ]);
+        }else{
+            return view('profile.edit', [
+                'user' => $request->user(),
+            ]);
+        }
+      
     }
 
     /**

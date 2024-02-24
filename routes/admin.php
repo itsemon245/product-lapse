@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\Admin\UsersManagementController;
-use App\Http\Controllers\FaqController;
-use App\Http\Controllers\Features\Certificate\CertificateController;
-use App\Http\Controllers\Frontend\LandingPageController;
-use App\Http\Controllers\PackageController;
-use App\Http\Controllers\Package\PackageFeatureController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FaqController;
+use App\Http\Controllers\PackageController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Frontend\LandingPageController;
+use App\Http\Controllers\Admin\UsersManagementController;
+use App\Http\Controllers\Package\PackageFeatureController;
+use App\Http\Controllers\Features\Certificate\CertificateController;
 
 Route::prefix('admin')
     ->middleware('check.admin')
@@ -34,5 +35,7 @@ Route::prefix('admin')
         Route::get('input-create', [ LandingPageController::class, 'createInput' ])->name('input.create');
         Route::resource('users', UsersManagementController::class);
         Route::get('users-search', [UsersManagementController::class, 'search'])->name('users.search');
-
+        Route::get('/profile', [ProfileController::class, 'index'])->name('admin.profile.index');
+        Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('admin.profile.edit');
+        Route::patch('/profile/update/{id}', [ProfileController::class, 'update'])->name('admin.profile.update');
     });

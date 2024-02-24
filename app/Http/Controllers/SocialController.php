@@ -6,13 +6,22 @@ use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 class SocialController extends Controller
 {
-    public function provider()
+    public function loginWithLinkedin()
     {
         return Socialite::driver('linkedin')->redirect();
     }
-    public function providerCallback()
+    public function callbackLinkedin()
     {
         $user = Socialite::driver('linkedin')->user();
-        dd($user);
+    }
+
+    //google
+    public function loginWithGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+    public function callbackGoogle()
+    {
+        $user = Socialite::driver('google')->user();
     }
 }

@@ -18,8 +18,10 @@ Route::middleware('guest')->group(function () {
 
     Route::post('register', [RegisteredUserController::class, 'store']);
 
-    Route::get('linkedin/login', [SocialController::class, 'provider'])->name('linkedin.login');
-    Route::get('linkedin/callback', [SocialController::class, 'providerCallback'])->name('linkedin.user');
+    Route::get('linkedin/login', [SocialController::class, 'loginWithLinkedin'])->name('linkedin.login');
+    Route::get('linkedin/callback', [SocialController::class, 'callbackLinkedin'])->name('linkedin.user');
+    Route::get('google/login', [SocialController::class, 'loginWithGoogle'])->name('google.login');
+    Route::get('google/callback', [SocialController::class, 'callbackGoogle'])->name('google.user');
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
                 ->name('login');

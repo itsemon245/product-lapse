@@ -48,15 +48,24 @@
                                 <div class="jobsearch-table-cell">
                                     <div class="jobsearch-job-userlist">
                                             <div class="like-btn">
-                                                <form action="{{ route('users.update', $subscriber) }}" method="POST">
+                                                <form action="{{ route('users.store') }}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="name">
+                                                    <x-button>
+                                                        <i class="ti-lock"></i>
+                                                    </x-button>
+                                                    {{-- <button type="submit" >
+                                                        
+                                                    </button> --}}
+                                                </form>
+                                                {{-- <form method="POST" action="{{ route('users.update', $subscriber) }}" >
                                                     @csrf
                                                     @method('patch')
                                                     <input type="hidden" name="banned">
-                                                    <button>Submit</button>
-                                                    <button type="submit" class="shortlist" >
+                                                    <button type="submit" >
                                                         <i class="ti-lock"></i>
                                                     </button>
-                                                </form>
+                                                </form> --}}
                                             </div>                          
                                     </div>
                                 </div>

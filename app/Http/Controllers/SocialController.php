@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\User;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\TryCatch;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
+
 class SocialController extends Controller
 {
     public function loginWithLinkedin()
@@ -22,6 +28,32 @@ class SocialController extends Controller
     }
     public function callbackGoogle()
     {
-        $user = Socialite::driver('google')->user();
+
+        try {
+            $user = Socialite::driver('google')->user();
+            $is_user = User::where('email', $user->getEmail())->first();
+            if (!$is_user) {
+                $saveUser = User::updateOrCreate([
+                    'google_id' => $user->getId(),
+                ], 
+                [
+                    'name' => $user->user['name'],
+                    'email' => $user->getEmail(),
+                    'email_verified_at' => Carbon::now(),
+                    'password' => Hash::make('product-lapse'. $user->getEmail()),
+                    'first_name' => $user->user['given_name'],
+                ]);
+            }else{
+                $saveUser = User::where('email', $user->getEmail())->update([
+                    'google_id' => $user->getId(),
+                ]);
+                $saveUser = User::where('email', $user->getEmail())->first();
+            }
+            Auth::loginUsingId($saveUser->id);
+            return back();
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+
     }
 }

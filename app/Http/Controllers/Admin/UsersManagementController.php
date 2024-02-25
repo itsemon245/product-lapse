@@ -55,7 +55,7 @@ class UsersManagementController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, string $id)
     {
         dd($request);
     }

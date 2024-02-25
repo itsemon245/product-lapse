@@ -32,7 +32,6 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        // dd(request()->path());
         if(request()->path() == "admin/profile/edit"){
             return view('admin.profile.edit', [
                 'user' => $request->user(),

@@ -5,7 +5,6 @@
     <li class="nav-item"><a href="#" class="nav-link">@__('navigation.profile.report')</a></li>
     <li class="nav-item"><a href="{{ route('select.index') }}" class="nav-link">@__('navigation.profile.select')</a></li>
     <li class="nav-item"><a href="{{ route('get.certificate') }}" class="nav-link">@__('navigation.profile.certificate')</a></li>
-    <li class="nav-item"><a href="#" class="nav-link">@__('navigation.profile.settings')</a></li>
     <form  action="{{ route('logout') }}" method="post">
         @csrf
     <li class="nav-item" style="margin-top: 0px; margin-bottom: 0px;" >

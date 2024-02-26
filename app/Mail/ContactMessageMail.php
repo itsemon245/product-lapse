@@ -28,7 +28,7 @@ class ContactMessageMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: $this->contactMessage->email,
+            from: config('mail.from.address'),
             subject: 'New Message from '.$this->contactMessage->name ." via ". config('app.name'),
         );
     }

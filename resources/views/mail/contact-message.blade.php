@@ -10,6 +10,7 @@
 
 <body>
     <h6>Name: {{ $contactMessage->name }}</h6>
+    <h6>email: {{ $contactMessage->email }}</h6>
     <h6>Phone: {{ $contactMessage->Phone }}</h6>
     <h6>Message:</h6>
     <p>{!! $contactMessage->body !!}</p>

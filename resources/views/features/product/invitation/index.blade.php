@@ -25,7 +25,7 @@
             {{-- Empty --}}
         </x-slot:filter>
         <x-slot:list>
-            @foreach ($invitations as $invitation)
+            @forelse ($invitations as $invitation)
                 <div class="col-md-6">
                     <div class="item lon new">
                         <div class="list_item">
@@ -76,7 +76,9 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+            <x-feature.not-found />
+            @endforelse
         </x-slot:list>
     </x-feature.index>
 @endsection

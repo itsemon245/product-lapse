@@ -25,11 +25,28 @@ return [
         'confirmpassf' => 'Enter confirm password',
         'save' => 'Save'
     ],
+    'address' => [
+        'update-address' => 'Update Address',
+        'description' => 'Set your billing and shipping address.',
+        'name' => 'Name',
+        'type' => 'Type',
+        'email' => 'Email',
+        'phone' => 'Phone',
+        'city' => 'City',
+        'street' => 'Street',
+        'country' => 'Country',
+        'zip' => 'ZIP',
+        'state' => 'State',
+        'ip' => 'IP',
+        'ip-placeholder' => 'enter ip address',
+        'use_as_shipping' => 'Use as shipping',
+    ],
     'delete' => [
         'account' => 'Delete Account',
         'description' => 'Once your account is deleted, all of its resources and data will be permanently deleted.Before deleting your account, please download any data or information that you wish to retain',
         'primary' => 'Primary',
     ],
+
 ];
 
 

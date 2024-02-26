@@ -15,7 +15,7 @@
             <div class="price_info_two price_info_three">
                 <div class="price_head">
                     <div class="p_head time">
-                        <h4>Packages</h4>
+                        <h4>@__('Packages')</h4>
                     </div>
                     @foreach ($packages as $package)
                         <div class="p_head">

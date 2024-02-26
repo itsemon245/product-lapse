@@ -11,6 +11,7 @@ return [
         'support' => 'الدعم الفنى',
         'save' => 'حفظ',
     ],
+    'compare-package' => 'قارن الحزمة',
 
 
 ];

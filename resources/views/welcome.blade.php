@@ -110,8 +110,7 @@
                             </div>
                         @endforeach
                         <div class="col-lg-12 col-12 text-center mt_30">
-                            <a href="{{ route('package.compare') }}" class="btn_hover agency_banner_btn btn-bg">Compare
-                                Packages</a>
+                            <a href="{{ route('package.compare') }}" class="btn_hover agency_banner_btn btn-bg"> @__('root.compare-package')</a>
                         </div>
                     </div>
                 </div>

@@ -5,7 +5,7 @@
         </h2>
 
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __('profile.password.desctiption') }}
+            @__('profile.password.description')
         </p>
     </header>
 

@@ -11,6 +11,6 @@ return [
         'support' => 'Technical support',
         'save' => 'Save',
     ],
-
+    'compare-package' => 'Compare Package',
 
 ];

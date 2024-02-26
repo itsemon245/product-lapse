@@ -26,7 +26,7 @@ return new class extends Migration {
             $table->json('flag')->nullable()->comment('application feature flags for the dedicated user');
             $table->hasOwner();
             $table->enum('type', ['admin', 'subscriber', 'member'])->nullable();
-            $table->timestamp('is_banned')->nullable(); 
+            $table->timestamp('banned_at')->nullable(); 
             $table->timestamps();
         });
     }

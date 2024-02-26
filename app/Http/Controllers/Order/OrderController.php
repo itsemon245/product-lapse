@@ -9,6 +9,8 @@ use App\Models\Package;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+// use Paytabscom\Laravel_paytabs\paypage;
+
 use Paytabscom\Laravel_paytabs\Facades\paypage;
 
 class OrderController extends Controller
@@ -50,7 +52,7 @@ class OrderController extends Controller
             ->sendTransaction('sale', 'ecom')
             ->sendCart($order->uuid, $order->amount, 'Test Order')
             ->sendCustomerDetails($address->name, $address->email, $address->phone, $address->street, $address->city, $address->state, $address->country, $address->zip, $address->ip)
-            // ->sendShippingDetails(true, null, null, null, null, null, null, null, null)
+            ->shipping_same_billing(true)
             // ->sendHideShipping(false)
             ->sendURLs(config('paytabs.callback_url'), config('paytabs.ipn_url'))
             ->sendLanguage(app()->getLocale())

@@ -20,44 +20,22 @@ class UsersManagementController extends Controller
         return view('pages.users.management', compact('subscribers'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
+   
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function ban(Request $request, User $user)
     {
-        dd($request);
+        $user = tap($user)->update([
+            'banned_at' => $user->banned_at == null ? now() : null
+        ]);
+        if ($user->banned_at == null) {
+            $message = __('User has been unbanned!');
+        }{
+            $message = __('User has been banned!');
+        }
+        notify()->success($message);
+        return back();
     }
 
     /**

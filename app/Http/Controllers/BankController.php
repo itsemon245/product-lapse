@@ -64,7 +64,8 @@ class BankController extends Controller
              'status'=> 'pending'
          ]);
 
-        $param = "?status=success&order_id=$order->uuid";
+        $param = "?cart_id=$order->uuid";
+        
         $url   = config('paytabs.callback_url') . $param;
         // dd($url);
         return redirect($url);

@@ -1,6 +1,4 @@
 @extends('layouts.frontend.app')
-@php
-@endphp
 @section('main')
     <div>
         <section class="agency_banner_area bg_color">
@@ -104,8 +102,16 @@
                                                 class="ti-check"></i>{{ $package?->limited_features ? trans('Limited Features') : trans('All Features') }}
                                         </li>
                                     </ul>
+                                    @if (auth()->user()?->activePlan()->first()?->id == $package->id)
+                                    <a href="#"
+                                        class="price_btn btn_hover">
+                                        <i
+                                        class="ti-check"></i>
+                                    </a>
+                                    @else
                                     <a href="{{ route('order.create', ['package' => $package]) }}"
                                         class="price_btn btn_hover">@lang('welcome.subscribe')</a>
+                                    @endif
                                 </div>
                             </div>
                         @endforeach

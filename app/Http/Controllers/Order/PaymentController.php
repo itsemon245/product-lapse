@@ -59,21 +59,32 @@ class PaymentController extends Controller
 
     public function callback(Request $request)
     {
-        $status    = $request->payment_result->response_status;
         $orderUuid = $request->cart_id;
-
         $order       = Order::where('uuid', $orderUuid)->with('package')->first();
-        $orderStatus = 'completed';
-        $completedAt = now();
-        $expireDate  = now()->add($order->package->unit, $order->package->validity);
-        $active      = true;
         if ($order->payment_method == PaymentMethodEnum::BANK_ACCOUNT->value) {
             $expireDate  = null;
             $active      = false;
             $orderStatus = 'pending';
             $completedAt = null;
             session()->put('payment-message', __('Waiting for approval'));
+            $plan = Plan::create([
+                'order_id'      => $order->id,
+                'user_id'       => $order->user_id,
+                'name'          => $order->package->name,
+                'price'         => $order->amount,
+                'active'        => $active,
+                'expired_at'    => $expireDate,
+                'product_limit' => $order->package->product_limit,
+             ]);
+            Mail::to($order->user->billingAddress()->email)->send(new InvoiceMail($order));
+
+            return redirect(route('payment.success'));
         }
+        $status    = $request->payment_result->response_status;
+        $orderStatus = 'completed';
+        $completedAt = now();
+        $expireDate  = now()->add($order->package->unit, $order->package->validity);
+        $active      = true;
 
         if ($status == 'A') {
             $order = tap($order)->update([
@@ -94,7 +105,7 @@ class PaymentController extends Controller
                 'expired_at'    => $expireDate,
                 'product_limit' => $order->package->product_limit,
              ]);
-            Mail::to($order->user->billingAddress->email)->send(new InvoiceMail($order));
+            Mail::to($order->user->billingAddress()->email)->send(new InvoiceMail($order));
 
             return redirect(route('payment.success'));
         } else {

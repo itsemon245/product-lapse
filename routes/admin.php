@@ -34,6 +34,7 @@ Route::prefix('admin')
         Route::get('certificate-search', [ CertificateController::class, 'search' ])->name('search.certificate');
         Route::get('input-create', [ LandingPageController::class, 'createInput' ])->name('input.create');
         Route::resource('users', UsersManagementController::class);
+        Route::post('ban-user/{user}', [UsersManagementController::class, 'ban'])->name('user.ban');
         Route::get('users-search', [UsersManagementController::class, 'search'])->name('users.search');
         Route::get('/profile', [ProfileController::class, 'index'])->name('admin.profile.index');
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('admin.profile.edit');

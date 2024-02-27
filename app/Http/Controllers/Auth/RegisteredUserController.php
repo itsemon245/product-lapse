@@ -4,11 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
@@ -46,6 +43,7 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'email'            => $request->email,
             'password'         => Hash::make($request->password),
+            'name'             => $request->first_name . " " . $request->last_name,
             'first_name'       => $request->first_name,
             'last_name'        => $request->last_name,
             'phone'            => $request->phone,

@@ -50,7 +50,7 @@
                             </div>
                             <div class="form-group text_box col-md-6">
                                 <label class=" text_c f_500">@__('singup.label.phone')</label>
-                                <input type="text" placeholder="{{ __('singup.placeholder.phone') }}">
+                                <input type="text" placeholder="{{ __('singup.placeholder.phone') }}" name="phone">
                                 @error('phone')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror

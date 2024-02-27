@@ -188,12 +188,12 @@
                     <div class="col-xl-4 col-lg-4 pr-0">
                         <div class="contact_info_item wow fadeInLeft" data-wow-delay="0.2s">
                             <h6 class=" f_size_20 t_color3 f_500 mb_20">@lang('welcome.contact_details')</h6>
-                            <p class=""><span class="f_400 t_color3">@lang('welcome.phone')</span> <a href="#"
+                            <p class=""><span class="f_400 t_color3">@lang('welcome.phone')</span> <a href="tel:{{$contact?->phone}}"
                                     class="phone-num">{{ $contact?->phone }}</a></p>
-                            <p class=""><span class="f_400 t_color3">@lang('welcome.fax')</span> <a href="#"
+                            <p class=""><span class="f_400 t_color3">@lang('welcome.fax')</span> <a href="fax:{{$contact?->fax}}"
                                     class="phone-num">{{ $contact?->fax }}</a></p>
                             <p class=""><span class="f_400 t_color3">@lang('welcome.email'):</span> <a
-                                    href="#">{{ $contact?->email }}</a></p>
+                                    href="mailto:{{$contact?->email}}">{{ $contact?->email }}</a></p>
                             <div class="f_social_icon">
                                 <a href="{{ $contact?->facebook }}" class="ti-facebook"></a>
                                 <a href="{{ $contact?->twitter }}" class="ti-twitter-alt"></a>
@@ -205,7 +205,7 @@
                     </div>
                     <div class="col-xl-7 offset-xl-1 col-lg-8 offset-lg-0">
                         <div class="contact_form wow fadeInRight" data-wow-delay="0.2s">
-                            <form action="{{ route('message.send') }}" method="POST" id="hx-contact-form"
+                            <form hx-post="{{ route('message.send') }}" method="POST" id="hx-contact-form"
                                 class="contact_form_box">
                                 @csrf
                                 <div class="row">

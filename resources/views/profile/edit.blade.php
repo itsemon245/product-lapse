@@ -24,7 +24,7 @@
                 </p>
             </header>
         
-            <form action="{{ route('address.update') }}" method="POST">
+            <form action="{{ route('address.update') }}" method="POST" id="#address">
                 @csrf
                 <div class="row">
                     <div class="form-group mb-2 text_box col-md-6">
@@ -34,13 +34,13 @@
                         <x-input id="name" class="block mt-1 w-full" type="text" placeholder="{{ __('profile.address.name') }}"
                             name="name" :value="old('name')" autofocus />
                     </div>
-                    <div class="form-group text_box col-lg-6 col-md-6">
+                    {{-- <div class="form-group text_box col-lg-6 col-md-6">
                         <x-select-input label="{{ __('profile.address.type') }}" id="type"
                             placeholder="Choose one" name="type" required autofocus>
                             <option value="billing">Billing</option>
                             <option value="shipping">Shipping</option>
                         </x-select-input>
-                    </div>
+                    </div> --}}
                     <div class="form-group mb-2 text_box col-md-6">
                         <div class="flex justify-between">
                             <x-input-label class="flex-shrink" for="email" value="{{ __('profile.address.email') }}" />

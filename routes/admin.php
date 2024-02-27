@@ -42,6 +42,8 @@ Route::prefix('admin')
         Route::patch('/profile/update/{id}', [ProfileController::class, 'update'])->name('admin.profile.update');
         Route::get('order', [OrderController::class, 'index'])->name('admin.order.index');
         Route::patch('order/approve/{id}', [OrderController::class, 'approve'])->name('admin.order.approve');
+        Route::get('order/show/{id}', [OrderController::class, 'show'])->name('admin.order.show');
+
        
 
     });

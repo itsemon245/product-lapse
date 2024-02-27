@@ -35,12 +35,12 @@
                 <div class="col-md-6">
                     <div class="item lon new">
                         <div class="list_item ">
-                            <figure class="align-middle"><a href="#"><img src="{{ $user->image->url ?? favicon() }}"
+                            <figure class="align-middle"><a href="{{ route('admin.order.show', $order) }}"><img src="{{ $user->image->url ?? favicon() }}"
                                         alt=""></a></figure>
                             <div class="joblisting_text">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell !w-full">
-                                        <h4><a href="{{ route('users.show', $order) }}"
+                                        <h4><a href="{{ route('admin.order.show', $order) }}"
                                                 class="f_500 t_color3">{{ $order->package->name->{app()->getLocale()} }}</a>
                                         </h4>
                                         <ul class="list-unstyled">

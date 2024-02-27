@@ -75,4 +75,11 @@ class OrderController extends Controller
             'status' => 'completed',
         ]);
     }
+
+    public function show(String $id)
+    {
+        $findOrder = Order::with('user')->with('package')->find($id);
+        $user = User::with('image')->where('id', $findOrder->user->id)->first();
+        return view('pages.order.show', compact('findOrder', 'user'));
+    }
 }

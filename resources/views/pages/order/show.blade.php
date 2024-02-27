@@ -25,7 +25,6 @@
                                 </div>
                                 <div class="col-md-12">
                                     <h6 class="title2">Payment Details</h6>
-                                
 
                                     @if ($findOrder->bank_details == !null)
                                     <div class="row">

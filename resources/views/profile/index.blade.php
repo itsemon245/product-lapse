@@ -20,12 +20,14 @@
                                 <div class="details_info details_info2">
                                     <h2>{{ $user->name }}</h2>
                                     <ul class="list-unstyled profile-details">
-                                        <li class="!flex items-center gap-2">
-                                            <img src="{{ asset('img/check.png') }}" />
-                                            <div class="capitalize">{{ $user->roles->first()?->name }}</div>
-                                        </li>
+                                        @if ($user->getRole() != null)
+                                            <li class="!flex items-center gap-2">
+                                                <img src="{{ asset('img/check.png') }}" />
+                                                <div class="capitalize">{{ $user->roles->first()?->name }}</div>
+                                            </li>
+                                        @endif
                                         @if ($user->activePlan()->first() != null)
-                                            <li><span>{{$user->activePlanName() }}</span></li>
+                                            <li><span>{{ $user->activePlanName() }}</span></li>
                                             <li><a href="#"><img
                                                         src="{{ asset('img/crown.png') }}">@__('profile.profile.upgrade')</a>
                                         @endif

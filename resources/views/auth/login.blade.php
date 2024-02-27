@@ -21,6 +21,9 @@
                                 {{ session('success') }}
                             </div>
                         @endif
+                        @if (session('verification-error'))
+                            <div class="bg-yellow-200 text-yellow-500 p-4 mb-4">{{ session('verification-error') }}</div>
+                        @endif
                         <div class="login_info">
                             <h2 class=" f_600 f_size_24 t_color3 mb_40">@lang('login.login')</h2>
                             <form action="{{ route('login') }}" method="POST" enctype="multipart/form-data"
@@ -34,7 +37,7 @@
                                 </div>
                                 <div class="form-group text_box">
                                     <label class=" text_c f_500">@lang('login.password')</label>
-                                    <input type="password" name="password" placeholder="@lang('login.enter-pass')" >
+                                    <input type="password" name="password" placeholder="@lang('login.enter-pass')">
                                     @error('password')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror

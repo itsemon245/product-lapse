@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [ DashboardController::class, 'index' ])->name('dashboard');
 
 require __DIR__ . '/support.php';
+require __DIR__ . '/invitation.php';
 require __DIR__ . '/report.php';
 require __DIR__ . '/release.php';
 require __DIR__ . '/product.php';

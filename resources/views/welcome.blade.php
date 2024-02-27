@@ -102,11 +102,10 @@
                                                 class="ti-check"></i>{{ $package?->limited_features ? trans('Limited Features') : trans('All Features') }}
                                         </li>
                                     </ul>
-                                    @if (auth()->user()?->activePlan()->first()?->id == $package->id)
+                                    @if (auth()->user()?->activePlan()->first()?->order?->package_id == $package->id)
                                     <a href="#"
                                         class="price_btn btn_hover">
-                                        <i
-                                        class="ti-check"></i>
+                                        <i class="ti-check"></i>
                                     </a>
                                     @else
                                     <a href="{{ route('order.create', ['package' => $package]) }}"

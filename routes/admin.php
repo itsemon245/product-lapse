@@ -40,7 +40,7 @@ Route::prefix('admin')
         Route::get('/profile', [ProfileController::class, 'index'])->name('admin.profile.index');
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('admin.profile.edit');
         Route::patch('/profile/update/{id}', [ProfileController::class, 'update'])->name('admin.profile.update');
-        Route::get('order', [OrderController::class, 'show'])->name('admin.order.show');
+        Route::get('order', [OrderController::class, 'index'])->name('admin.order.index');
         Route::patch('order/approve/{id}', [OrderController::class, 'approve'])->name('admin.order.approve');
        
 

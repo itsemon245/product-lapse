@@ -61,7 +61,7 @@ class OrderController extends Controller
         return $pay;
 
     }
-    public function show()
+    public function index()
     {
         $orders = Order::with('user')->with('package')->paginate(15);
         return view('pages.order.management', compact('orders'));

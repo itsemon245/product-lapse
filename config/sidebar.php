@@ -56,7 +56,7 @@ return [
         'hasSubMenu' => false,
     ],
     'Order Manage' => (object) [
-        "name" => 'admin.order.show',
+        "name" => 'admin.order.index',
         'icon' => '<span class="ti-user"></span>',
         'hasSubMenu' => false,
     ],

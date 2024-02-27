@@ -27,6 +27,7 @@
         <ul class="flex items-center flex-shrink-0 space-x-6 ms-auto">
             <!-- Notifications menu -->
             <li class="relative">
+                @include('layouts.global.profile-menu')
                 <button class="relative align-middle rounded-md focus:outline-none focus:shadow-outline-purple"
                     @click="toggleNotificationsMenu" @keydown.escape="closeNotificationsMenu" aria-label="Notifications"
                     aria-haspopup="true">

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Frontend\LandingPageController;
 use App\Http\Controllers\Admin\UsersManagementController;
 use App\Http\Controllers\Package\PackageFeatureController;
@@ -39,4 +40,8 @@ Route::prefix('admin')
         Route::get('/profile', [ProfileController::class, 'index'])->name('admin.profile.index');
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('admin.profile.edit');
         Route::patch('/profile/update/{id}', [ProfileController::class, 'update'])->name('admin.profile.update');
+        Route::get('order', [OrderController::class, 'show'])->name('admin.order.show');
+        Route::patch('order/approve/{id}', [OrderController::class, 'approve'])->name('admin.order.approve');
+       
+
     });

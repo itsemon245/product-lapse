@@ -61,4 +61,18 @@ class OrderController extends Controller
         return $pay;
 
     }
+    public function show()
+    {
+        $orders = Order::with('user')->with('package')->paginate(15);
+        return view('pages.order.management', compact('orders'));
+    }
+
+    public function approve(string $id)
+    {
+        
+        $findOrder = Order::find($id);
+        $findOrder->update([
+            'status' => 'completed',
+        ]);
+    }
 }

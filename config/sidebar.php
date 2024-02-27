@@ -55,4 +55,9 @@ return [
         'icon' => '<span class="ti-user"></span>',
         'hasSubMenu' => false,
     ],
+    'Order Manage' => (object) [
+        "name" => 'admin.order.show',
+        'icon' => '<span class="ti-user"></span>',
+        'hasSubMenu' => false,
+    ],
 ];

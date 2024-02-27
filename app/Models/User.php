@@ -56,6 +56,11 @@ class User extends Authenticatable
         return $this->plans()->where('expired_at', '<', now())->where('active', true)->limit(1);
     }
 
+    public function activePlanName()
+    {
+        $this->activePlan()->first()?->order?->package?->name->{app()->getLocale()};
+    }
+
     public function billingAddress()
     {
         return $this->hasMany(Address::class)->where('type', 'billing')->first();

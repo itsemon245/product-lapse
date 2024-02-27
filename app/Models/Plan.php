@@ -14,4 +14,9 @@ class Plan extends Model
     protected $casts = [
         'name'=> JsonCast::class
     ];
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
 }

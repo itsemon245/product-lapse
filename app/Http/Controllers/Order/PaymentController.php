@@ -60,7 +60,7 @@ class PaymentController extends Controller
     public function callback(Request $request)
     {
         $orderUuid = $request->cart_id;
-        $order       = Order::where('uuid', $orderUuid)->with('package')->first();
+        $order     = Order::where('uuid', $orderUuid)->with('package')->first();
         if ($order->payment_method == PaymentMethodEnum::BANK_ACCOUNT->value) {
             $expireDate  = null;
             $active      = false;
@@ -80,7 +80,7 @@ class PaymentController extends Controller
 
             return redirect(route('payment.success'));
         }
-        $status    = $request->payment_result->response_status;
+        $status      = $request->payment_result->response_status;
         $orderStatus = 'completed';
         $completedAt = now();
         $expireDate  = now()->add($order->package->unit, $order->package->validity);
@@ -91,11 +91,13 @@ class PaymentController extends Controller
                 'status'       => $orderStatus,
                 'completed_at' => $completedAt,
              ]);
-            $activePlan = User::find(auth()->id())->activePlan();
-            $activePlan->update([
-                'active'     => 0,
-                'expired_at' => null,
-             ]);
+            $activePlan = User::find($order->user_id)->activePlan()->first();
+            if ($activePlan) {
+                $activePlan->update([
+                    'active'     => 0,
+                    'expired_at' => null,
+                 ]);
+            }
             $plan = Plan::create([
                 'order_id'      => $order->id,
                 'user_id'       => $order->user_id,

@@ -28,11 +28,6 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
         $user = User::where('email', $request->email)->first();
-        if ($user->email_verified_at == null) {
-            session()->flash('verification-error', __('Your email is not verified. Check your email for the verification link'));
-            $user->sendEmailVerificationNotification();
-            return back();
-        }
         $request->authenticate();
 
         $request->session()->regenerate();

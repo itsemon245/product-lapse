@@ -53,7 +53,7 @@
                                     </div>
                                     <!--//check-box-->
                                     <div class="forgotten-password">
-                                        <a href="{{route('password.reset', str()->random(60))}}">@lang('login.forgot_password')</a>
+                                        <a href="{{route('password.request', str()->random(60))}}">@lang('login.forgot_password')</a>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">

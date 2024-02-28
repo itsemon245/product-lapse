@@ -13,7 +13,7 @@ use App\Http\Controllers\Package\PackageFeatureController;
 use App\Http\Controllers\Features\Certificate\CertificateController;
 
 Route::prefix('admin')
-    ->middleware('check.admin')
+    ->middleware('auth','verified', 'check.admin',)
     ->group(function () {
         Route::get('/', function () {
             return view('dashboard.admin');

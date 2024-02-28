@@ -145,7 +145,6 @@ class LandingPageController extends Controller
     public function editContact()
     {
         $contact = Contact::first();
-
         return view('edit-contact', compact('contact'));
     }
 

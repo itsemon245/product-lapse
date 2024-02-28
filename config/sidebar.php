@@ -45,13 +45,13 @@ return [
         'icon' => '<span class="ti-package"></span>',
         'hasSubMenu' => false,
     ],
-    'Users Management' => (object) [
-        "name" => 'users.index',
+    'Contact Messages' => (object) [
+        "name" => 'contact.messages',
         'icon' => '<span class="ti-user"></span>',
         'hasSubMenu' => false,
     ],
-    'Contact Messages' => (object) [
-        "name" => 'contact.messages',
+    'Users Management' => (object) [
+        "name" => 'users.index',
         'icon' => '<span class="ti-user"></span>',
         'hasSubMenu' => false,
     ],

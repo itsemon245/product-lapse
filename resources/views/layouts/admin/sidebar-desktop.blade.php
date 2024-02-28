@@ -26,7 +26,12 @@
                             @foreach ($route->submenu as $name => $route)
                                 <li
                                     class="pl-10 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-                                    <a class="w-full" href="{{ route($route) }}">{{ $name }}</a>
+                                    <a class="w-full text-gray-500 transition-colors duration-150 hover:text-gray-800 font-bold" href="{{ route($route->name) }}">
+                                        <span class="inline-flex items-center">
+                                            {!! $route->icon !!}
+                                            <span class="ml-4">{{ $name }}</span>
+                                        </span>
+                                    </a>
                                 </li>
                             @endforeach
                         </ul>

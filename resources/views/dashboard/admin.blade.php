@@ -1,5 +1,7 @@
 @extends('layouts.admin.app', ['title' => 'Deshboard'])
 @section('main')
+    <x-breadcrumb :list="[['label' => 'Dashboard', 'route' => '']]" />
+
     <section class="sign_in_area bg_color sec_pad">
         <div class="container">
             <div class="mb-3">
@@ -15,7 +17,7 @@
                                         <div class="job_list_table">
                                             <div class="jobsearch-table-cell">
                                                 <h4 class="mt-2">Subscribers</h4>
-                                                <h3 class="text-center">{{ count($subscribers) ?? '0' }}</h3>
+                                                <h3 class="text-center">{{ $subscribers ?? '0' }}</h3>
                                             </div>
                                         </div>
                                     </div>
@@ -33,7 +35,7 @@
                                         <div class="job_list_table">
                                             <div class="jobsearch-table-cell">
                                                 <h4 class="mt-2">Verified Subscriber </h4>
-                                                <h3 class="text-center">{{ count($verifySubscriber) ?? '0' }}</h3>
+                                                <h3 class="text-center">{{ $verifySubscriber ?? '0' }}</h3>
                                             </div>
                                         </div>
                                     </div>
@@ -52,7 +54,7 @@
                                             <div class="jobsearch-table-cell">
                                                 <h4 class="mt-2">Not Verify Subscriber</h4>
                                                 <h3 class="text-center">
-                                                   {{ count($notVerifySubScriber) ?? '0' }}
+                                                    {{ $notVerifySubScriber ?? '0' }}
                                                 </h3>
                                             </div>
                                         </div>
@@ -76,7 +78,7 @@
                                         <div class="job_list_table">
                                             <div class="jobsearch-table-cell">
                                                 <h4 class="mt-2">Total Orders</h4>
-                                                <h3 class="text-center">{{ count($orders) ?? '0' }}</h3>
+                                                <h3 class="text-center">{{ $orders ?? '0' }}</h3>
                                             </div>
                                         </div>
                                     </div>
@@ -95,8 +97,8 @@
                                             <div class="jobsearch-table-cell">
                                                 <h4 class="mt-2">Order Summary</h4>
                                                 <div class="d-flex text-muted">
-                                                    <p>Completed: <span>{{ count($completedOrder) }}</span></p> 
-                                                    <p>Pending: <span>{{ count($pendingOrder) }}</span> </p>
+                                                    <p>Completed: <span>{{ $completedOrder }}</span></p>
+                                                    <p>Pending: <span>{{ $pendingOrder }}</span> </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -115,7 +117,7 @@
                                         <div class="job_list_table">
                                             <div class="jobsearch-table-cell">
                                                 <h4 class="mt-2">Failed order</h4>
-                                                <h3 class="text-center">{{ count($failedOrder) ?? '0' }}</h3>
+                                                <h3 class="text-center">{{ $failedOrder ?? '0' }}</h3>
                                             </div>
                                         </div>
                                     </div>

@@ -59,12 +59,12 @@ class SupportController extends Controller
      */
     public function show(Support $support)
     {
-        $user = User::with('image')->find($support->creator_id);
+        $creator = User::where('id', $support->creator_id)->with('image')->first();
         $support->loadComments();
         $comments = $support->comments;
         $statuses = Select::of('support')->type('status')->get();
 
-        return view('features.support.partials.show', compact('user', 'support', 'comments', 'statuses'));
+        return view('features.support.partials.show', compact('creator', 'support', 'comments', 'statuses'));
     }
 
     /**

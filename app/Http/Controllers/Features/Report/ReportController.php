@@ -59,10 +59,10 @@ class ReportController extends Controller
      */
     public function show(Report $report)
     {
-        $user = User::with('image')->find($report->creator_id);
+        $creator = User::where('id', $report->creator_id)->with('image')->first();
         $report->loadComments();
         $comments = $report->comments;
-        return view('features.report.partials.show', compact('report', 'user', 'comments'));
+        return view('features.report.partials.show', compact('report', 'creator', 'comments'));
     }
 
     /**

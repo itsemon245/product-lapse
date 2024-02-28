@@ -65,11 +65,11 @@ class ChangeController extends Controller
      */
     public function show(Change $change)
     {
-        $user = User::with('image')->find($change->creator_id);
+        $creator = User::where('id', $change->creator_id)->with('image')->first();
         $change->loadComments();
         $comments = $change->comments;
         $statuses = Select::of('change')->type('status')->get();
-        return view('features.change.partials.show', compact('change', 'user', 'comments', 'statuses'));
+        return view('features.change.partials.show', compact('change', 'creator', 'comments', 'statuses'));
     }
 
     public function updateStatus(Request $request, Change $change)

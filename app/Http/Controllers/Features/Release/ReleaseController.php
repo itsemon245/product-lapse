@@ -51,10 +51,10 @@ class ReleaseController extends Controller
      */
     public function show(Release $release)
     {
-        $user = User::with('image')->find($release->creator_id);
+        $creator = User::where('id', $release->creator_id)->with('image')->first();
         $release->loadComments();
         $comments = $release->comments;
-        return view('features.release.partials.show', compact('release', 'user', 'comments'));
+        return view('features.release.partials.show', compact('release', 'creator', 'comments'));
     }
 
     /**

@@ -38,10 +38,10 @@
                 <div class="blog-sidebar box-sidebar">
                     <div class="widget sidebar_widget widget_recent_post mt_60">
                         <div class="media post_author mt_60">
-                            <img class="rounded-circle" src="{{ $user->image->url ?? asset('img/profile1.png') }}"
+                            <img class="rounded-circle" src="{{ favicon($creator->image) }}"
                                 alt="">
                             <div class="media-body">
-                                <h5 class=" t_color3 f_size_18 f_500">{{ $user->name }}</h5>
+                                <h5 class=" t_color3 f_size_18 f_500">{{ $creator->name }}</h5>
                             </div>
                         </div>
                         @can('update change')

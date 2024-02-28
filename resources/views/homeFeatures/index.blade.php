@@ -33,15 +33,11 @@
                                         <img src="{{ asset($feature->image) }}" alt="">
                                     </figure>
                                     <div class="jobsearch-table-cell">
-                                        <h4>
+                                        <h5>
                                             (En)
                                             -{{ $feature->title->en }} <br>
                                             (Ar)-{{ $feature->title->ar }}
-                                        </h4>
-                                        <h6>
-                                            (En)-{{ $feature->caption->en }} <br>
-                                            (Ar)-{{ $feature->caption->ar }}
-                                        </h6>
+                                        </h5>
                                     </div>
                                     <div class="jobsearch-table-cell">
                                         <div class="jobsearch-job-userlist">

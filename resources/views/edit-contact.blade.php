@@ -51,7 +51,7 @@
                 </div>
 
                 <div class="d-flex align-items-center text-center gap-2">
-                    <x-button>Submit</x-button>
+                    <x-button>@__('Submit')</x-button>
                     <x-button type="link" :href="route('features.index')" color="secondary">Cancel</x-button>
                 </div>
             </form>

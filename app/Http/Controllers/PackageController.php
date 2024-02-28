@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PackageRequest;
+use App\Models\Feature;
 use App\Models\Package;
 use App\Models\PackageFeature;
 use App\Models\Select;
@@ -37,8 +38,8 @@ class PackageController extends Controller
             'name'            => $request->validated('name'),
             'price'           => $request->validated('price'),
             'product_limit'   => $request->validated('product_limit'),
-            'validity'   => $request->validated('validity'),
-            'unit'   => $request->validated('unit'),
+            'validity'        => $request->validated('validity'),
+            'unit'            => $request->validated('unit'),
             'is_popular'      => $request->boolean('is_popular'),
             'limited_feature' => $request->boolean('limited_feature'),
          ]);
@@ -79,34 +80,39 @@ class PackageController extends Controller
             return redirect()->back();
         }
         $type = Select::of('package')->type('type')->get();
-        return view('pages.package.partials.edit', compact('package', 'type'));
+        $features = PackageFeature::latest()->get();
+        return view('pages.package.partials.edit', compact('package', 'type', 'features'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    // public function update(PackageRequest $request, string $id)
-    // {
-    //     $oldData = Package::find($id);
-    //     if($oldData){
-    //         $info = ['en' => $request->info_en, 'ar' => $request->info_ar];
-    //         $money = ['en' => $request->money_en, 'ar' => $request->money_ar];
-    //         $featureOne = ['en' => $request->feature_one_en, 'ar' => $request->feature_one_ar];
-    //         $featureTwo = ['en' => $request->feature_two_en, 'ar' => $request->feature_two_ar];
-    //         $featureThree = ['en' => $request->feature_three_en, 'ar' => $request->feature_three_ar];
-    //         Package::update([
-    //             'creator_id' => auth()->id(),
-    //             'info' => json_encode($info),
-    //             'package' => $request->package,
-    //             'price' => $request->price,
-    //             'money' => json_encode($money),
-    //             'feature_one' => json_encode($featureOne),
-    //             'feature_two' => json_encode($featureTwo),
-    //             'feature_three' => json_encode($featureThree),
-    //             // 'is_popular' => $request->is_popular,
-    //         ]);
-    //     }
-    // }
+    public function update(PackageRequest $request, Package $package)
+    {
+
+        $package = tap($package)->update([
+            'name'            => $request->validated('name'),
+            'price'           => $request->validated('price'),
+            'product_limit'   => $request->validated('product_limit'),
+            'validity'        => $request->validated('validity'),
+            'unit'            => $request->validated('unit'),
+            'is_popular'      => $request->boolean('is_popular'),
+            'limited_feature' => $request->boolean('limited_feature'),
+         ]);
+        $packageFeatures = PackageFeature::latest()->get();
+        foreach ($packageFeatures as $feature) {
+            $package->features()->attach($feature->id);
+        }
+        $package->features()->delete();
+        foreach ($request->features as $feature) {
+            # code...
+            if ($feature) {
+                $package->features()->updateExistingPivot($feature, [ 'is_on' => true ]);
+            }
+        }
+        notify()->success(__('Updated successfully!'));
+        return redirect(route('package.index'));
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -124,7 +130,7 @@ class PackageController extends Controller
 
     public function compare()
     {
-        $packages = Package::get();
+        $packages        = Package::get();
         $packageFeatures = PackageFeature::get();
         return view('packages.compare', compact('packages', 'packageFeatures'));
     }

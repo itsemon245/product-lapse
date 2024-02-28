@@ -30,12 +30,12 @@
                 <div class="col-md-6">
                     <div class="item lon new">
                         <div class="list_item">
-                            <figure><a href="{{ route('package.show', $package) }}"><img src="{{ favicon() }}"
+                            <figure><a href="#"><img src="{{ favicon() }}"
                                         alt=""></a></figure>
                             <div class="joblisting_text">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell">
-                                        <h4><a href="{{ route('package.show', $package) }}" class="f_500 t_color3">
+                                        <h4><a href="#" class="f_500 t_color3">
                                                 {{ $package->name->en }} <span>|</span> {{ $package->name->ar }}
                                             </a></h4>
                                         <ul class="list-unstyled">

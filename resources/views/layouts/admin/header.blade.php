@@ -33,39 +33,28 @@
                     aria-haspopup="true">
                     <i class="ti-bell" style="font-size: 24px;"></i>
                     <!-- Notification badge -->
-                    <span class="notifi-num">25</span>
+                    <span class="notifi-num px-2 py-0.5 text-sm">{{auth()->user()->unreadNotifications->count()}}</span>
                 </button>
                 <template x-if="isNotificationsMenuOpen">
                     <ul x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100"
                         x-transition:leave-end="opacity-0" @click.away="closeNotificationsMenu"
                         @keydown.escape="closeNotificationsMenu"
                         class="absolute right-0 w-56 p-2 mt-2 space-y-2 text-gray-600 bg-white border border-gray-100 rounded-md shadow-md dark:text-gray-300 dark:border-gray-700 dark:bg-gray-700">
+                        @forelse (auth()->user()->notifications as $notification)
                         <li class="flex">
                             <a class="inline-flex items-center justify-between w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
                                 href="#">
-                                <span>Messages</span>
-                                <span
-                                    class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-600 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-600">
-                                    13
-                                </span>
+                                <span>{{$notification?->data?->message}}</span>
                             </a>
                         </li>
+                        @empty
                         <li class="flex">
-                            <a class="inline-flex items-center justify-between w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                                href="#">
-                                <span>Sales</span>
-                                <span
-                                    class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-600 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-600">
-                                    2
-                                </span>
-                            </a>
+                            <span class="inline-flex items-center justify-between w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
+                                >
+                                No notifications found
+                            </span>
                         </li>
-                        <li class="flex">
-                            <a class="inline-flex items-center justify-between w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                                href="#">
-                                <span>Alerts</span>
-                            </a>
-                        </li>
+                        @endforelse
                     </ul>
                 </template>
             </li>
@@ -107,11 +96,11 @@
                             </a>
                         </li> --}}
                         <li class="flex">
-                            <form method="POST" action="{{ route('logout') }}">
+                            <form class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200" method="POST" action="{{ route('logout') }}">
                                 @csrf
 
                                 <button type="submit"
-                                    class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200">
+                                    class="flex items-center">
 
                                     <svg class="w-4 h-4 mr-3" aria-hidden="true" fill="none" stroke-linecap="round"
                                         stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"

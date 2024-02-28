@@ -150,6 +150,12 @@ class LandingPageController extends Controller
 
     public function updateContactUs(Request $request, int $id)
     {
+        $request->validate([
+            'facebook' => 'url:https,http',
+            'twitter' => 'url:https,http',
+            'vimeo' => 'url:https,http',
+            'pinterest' => 'url:https,http',
+        ]);
         $contact = Contact::find($id);
 
         $contact->update(request()->except('_method', '_token'));

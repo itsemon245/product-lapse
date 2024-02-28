@@ -54,7 +54,9 @@ class ContactMessageController extends Controller
 
         Mail::to(config('mail.from.address'))->send(new ContactMessageMail($contactMessage));
 
-        notify()->success(__('Your message has been sent!'));
-        return redirect()->route('home');
+        return response()->json([
+            'success'=> true,
+            'message' => __('Your message has been sent!')
+        ]);
     }
 }

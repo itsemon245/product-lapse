@@ -103,19 +103,19 @@
                                         </li>
                                     </ul>
                                     @if (auth()->user()?->activePlan()->first()?->order?->package_id == $package->id)
-                                    <a href="#"
-                                        class="price_btn btn_hover">
-                                        <i class="ti-check"></i>
-                                    </a>
+                                        <a href="#" class="price_btn btn_hover">
+                                            <i class="ti-check"></i>
+                                        </a>
                                     @else
-                                    <a href="{{ route('order.create', ['package' => $package]) }}"
-                                        class="price_btn btn_hover">@lang('welcome.subscribe')</a>
+                                        <a href="{{ route('order.create', ['package' => $package]) }}"
+                                            class="price_btn btn_hover">@lang('welcome.subscribe')</a>
                                     @endif
                                 </div>
                             </div>
                         @endforeach
                         <div class="col-lg-12 col-12 text-center mt_30">
-                            <a href="{{ route('package.compare') }}" class="btn_hover agency_banner_btn btn-bg"> @__('root.compare-package')</a>
+                            <a href="{{ route('package.compare') }}" class="btn_hover agency_banner_btn btn-bg">
+                                @__('root.compare-package')</a>
                         </div>
                     </div>
                 </div>
@@ -188,24 +188,33 @@
                     <div class="col-xl-4 col-lg-4 pr-0">
                         <div class="contact_info_item wow fadeInLeft" data-wow-delay="0.2s">
                             <h6 class=" f_size_20 t_color3 f_500 mb_20">@lang('welcome.contact_details')</h6>
-                            <p class=""><span class="f_400 t_color3">@lang('welcome.phone')</span> <a href="tel:{{$contact?->phone}}"
-                                    class="phone-num">{{ $contact?->phone }}</a></p>
-                            <p class=""><span class="f_400 t_color3">@lang('welcome.fax')</span> <a href="fax:{{$contact?->fax}}"
-                                    class="phone-num">{{ $contact?->fax }}</a></p>
+                            <p class=""><span class="f_400 t_color3">@lang('welcome.phone')</span> <a
+                                    href="tel:{{ $contact?->phone }}" class="phone-num">{{ $contact?->phone }}</a></p>
+                            <p class=""><span class="f_400 t_color3">@lang('welcome.fax')</span> <a
+                                    href="fax:{{ $contact?->fax }}" class="phone-num">{{ $contact?->fax }}</a></p>
                             <p class=""><span class="f_400 t_color3">@lang('welcome.email'):</span> <a
-                                    href="mailto:{{$contact?->email}}">{{ $contact?->email }}</a></p>
+                                    href="mailto:{{ $contact?->email }}">{{ $contact?->email }}</a></p>
                             <div class="f_social_icon">
+                                @if ($contact?->facebook)
                                 <a href="{{ $contact?->facebook }}" class="ti-facebook"></a>
+                                @endif
+                                @if ($contact?->twitter)
                                 <a href="{{ $contact?->twitter }}" class="ti-twitter-alt"></a>
+                                @endif
+                                @if ($contact?->vimeo)
                                 <a href="{{ $contact?->vimeo }}" class="ti-vimeo-alt"></a>
+                                @endif
+                                @if ($contact?->pinterest)
                                 <a href="{{ $contact?->pinterest }}" class="ti-pinterest"></a>
+                                @endif
+
                             </div>
                         </div>
 
                     </div>
                     <div class="col-xl-7 offset-xl-1 col-lg-8 offset-lg-0">
                         <div class="contact_form wow fadeInRight" data-wow-delay="0.2s">
-                            <form hx-post="{{ route('message.send') }}" method="POST" id="hx-contact-form"
+                            <form action="{{ route('message.send') }}" method="POST" id="ajax-contact-form"
                                 class="contact_form_box">
                                 @csrf
                                 <div class="row">
@@ -244,7 +253,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button type="submit"
+                                <button id="submit-btn" type="submit"
                                     class="app_btn btn_hover cus_mb-10 btn_hover agency_banner_btn btn-bg">@lang('welcome.send')</button>
                             </form>
                         </div>
@@ -257,6 +266,30 @@
 @endsection
 @pushOnce('customJs')
     <script>
+        $(document).ready(function() {
+            let form  = $('#ajax-contact-form')
+            form.submit(function(e){
+                $('#submit-btn').html(`
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25"/><path fill="currentColor" d="M10.72,19.9a8,8,0,0,1-6.5-9.79A7.77,7.77,0,0,1,10.4,4.16a8,8,0,0,1,9.49,6.52A1.54,1.54,0,0,0,21.38,12h.13a1.37,1.37,0,0,0,1.38-1.54,11,11,0,1,0-12.7,12.39A1.54,1.54,0,0,0,12,21.34h0A1.47,1.47,0,0,0,10.72,19.9Z"><animateTransform attributeName="transform" dur="0.75s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></svg>
+                `)
+                e.preventDefault()
+                $.ajax({
+                    type: "post",
+                    url: form.attr('action'),
+                    data: form.serialize(),
+                    success: function (response) {
+                        if (response.success) {
+                            $('#submit-btn').html(response.message).attr('disabled', true)
+                            form.find('input').val('')
+                            form.find('textarea').val('')
+                            form.find('textarea').html('')
+                            form.find('textarea').text('')
+                        }
+                    }
+                });
+            })
+        });
+
         $('a.nav-link').on('click', function(e) {
             var target = this.hash,
                 $target = $(target);

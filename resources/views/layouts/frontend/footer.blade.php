@@ -1,4 +1,4 @@
-<footer class="w-full">
+<footer class="w-full !mt-auto">
     <div class="footer_area footer_area_four f_bg w-full">
 
         <div class="footer_bottom">

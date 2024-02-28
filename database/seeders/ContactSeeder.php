@@ -17,6 +17,10 @@ class ContactSeeder extends Seeder
             'phone' => '123-456-7890',
             'fax' => '987-654-3210',
             'email' => 'info@example.com',
+            'facebook' => 'https://facebook.com/',
+            'twitter' => 'https://twitter.com/',
+            'vimeo' => 'https://vimeo.com/',
+            'pinterest' => 'https://pinterest.com/',
         ];
 
         Contact::create($contactData);

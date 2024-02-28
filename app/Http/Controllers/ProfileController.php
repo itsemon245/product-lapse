@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AddressRequest;
+use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Address;
 use App\Models\User;
-use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
-use App\Http\Requests\ProfileUpdateRequest;
+use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
@@ -18,13 +18,9 @@ class ProfileController extends Controller
     public function index()
     {
         $user = User::with('image')->find(auth()->id());
-        if (request()->path() == "admin/profile"){
-            return view('admin.profile.index', compact('user'));
-        }else{
-            return view('profile.index', compact('user'));
-        }
 
-     
+        return view('profile.index', compact('user'));
+
     }
 
     /**
@@ -32,16 +28,11 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        if(request()->path() == "admin/profile/edit"){
-            return view('admin.profile.edit', [
-                'user' => $request->user(),
-            ]);
-        }else{
-            return view('profile.edit', [
-                'user' => $request->user(),
-            ]);
-        }
-      
+
+        return view('profile.edit', [
+            'user' => $request->user(),
+         ]);
+
     }
 
     /**
@@ -51,9 +42,9 @@ class ProfileController extends Controller
     {
         $user = User::find($id);
         $user->update([
-            'name' => $request->name,
-            'phone' => $request->phone,
-        ]);
+            'name' => $request->first_name . " " .$request->last_name,
+            ...$request->only('first_name', 'last_name', 'email', 'phone', 'workplace'),
+         ]);
         $image = $user->storeImage($request->avatar);
         notify()->success(__('Updated successfully!'));
         return back();
@@ -61,38 +52,37 @@ class ProfileController extends Controller
     public function address(AddressRequest $request)
     {
         $user = Address::where('user_id', auth()->id())->first();
-        if($user == null){
+        if ($user == null) {
             Address::create([
-                'name' => $request->name,
-                'user_id' => auth()->id(),
-                'type' => $request->type,
-                'email' => $request->email,
-                'phone' => $request->phone,
-                'street' => $request->street,
-                'city' => $request->city,
-                'state' => $request->state,
-                'country' => $request->country,
-                'zip' => $request->zip,
+                'name'            => $request->name,
+                'user_id'         => auth()->id(),
+                'type'            => $request->type,
+                'email'           => $request->email,
+                'phone'           => $request->phone,
+                'street'          => $request->street,
+                'city'            => $request->city,
+                'state'           => $request->state,
+                'country'         => $request->country,
+                'zip'             => $request->zip,
                 'use_as_shipping' => $request->use_as_shipping,
-                'ip' => $request->ip,
-            ]);
-        }else{
+                'ip'              => $request->ip,
+             ]);
+        } else {
             $user->update([
-                'name' => $request->name,
-                'type' => $request->type,
-                'email' => $request->email,
-                'phone' => $request->phone,
-                'street' => $request->street,
-                'city' => $request->city,
-                'state' => $request->state,
-                'country' => $request->country,
-                'zip' => $request->zip,
+                'name'            => $request->name,
+                'type'            => $request->type,
+                'email'           => $request->email,
+                'phone'           => $request->phone,
+                'street'          => $request->street,
+                'city'            => $request->city,
+                'state'           => $request->state,
+                'country'         => $request->country,
+                'zip'             => $request->zip,
                 'use_as_shipping' => $request->use_as_shipping,
-                'ip' => $request->ip,
-            ]);
+                'ip'              => $request->ip,
+             ]);
         }
     }
-
 
     /**
      * Delete the user's account.
@@ -100,8 +90,8 @@ class ProfileController extends Controller
     public function destroy(Request $request): RedirectResponse
     {
         $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
-        ]);
+            'password' => [ 'required', 'current_password' ],
+         ]);
 
         $user = $request->user();
 

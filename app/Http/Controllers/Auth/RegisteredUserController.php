@@ -54,7 +54,8 @@ class RegisteredUserController extends Controller
             'owner_id'         => $admin?->id,
          ]);
 
-        event(new Registered($user));
+         $user->notify(new WelcomeNotification($user));
+        // event(new Registered($user));
 
         return view('auth.registration-success');
     }

@@ -85,10 +85,9 @@
                             @enderror
                         </div>
                         <div class="d-flex align-items-center text-center">
-                            <button type="submit" class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">Add
-                                Package</button>
+                            <button type="submit" class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">@__('Add')</button>
                             <a href="{{ route('package.index') }}"
-                                class="btn_hover agency_banner_btn btn-bg btn-bg-grey">@lang('package.cancel')</a>
+                                class="btn_hover agency_banner_btn btn-bg btn-bg-grey">@lang('Cancel')</a>
                         </div>
                     </form>
                 </x-slot:from>

@@ -74,7 +74,7 @@
                                         <div class="checkbox remember">
                                             <label>
                                                 <input type="checkbox" class="mr-3 p-2" value="{{ $feature->id }}"
-                                                    name="features[]" @checked($package?->features()?->find($feature->id) != null)>
+                                                    name="features[]" @checked($package?->activeFeatures()?->find($feature->id) != null)>
                                                 {{ $feature->name->{app()->getLocale()} }}
                                             </label>
                                         </div>
@@ -86,10 +86,9 @@
                             @enderror
                         </div>
                         <div class="d-flex align-items-center text-center">
-                            <button type="submit" class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">Add
-                                Package</button>
+                            <button type="submit" class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">@__('Update')</button>
                             <a href="{{ route('package.index') }}"
-                                class="btn_hover agency_banner_btn btn-bg btn-bg-grey">@lang('package.cancel')</a>
+                                class="btn_hover agency_banner_btn btn-bg btn-bg-grey">@lang('Cancel')</a>
                         </div>
                     </form>
                 </x-slot:from>

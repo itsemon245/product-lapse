@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PackageRequest;
+use App\Models\Select;
 use App\Models\Feature;
 use App\Models\Package;
 use App\Models\PackageFeature;
-use App\Models\Select;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\PackageRequest;
 
 class PackageController extends Controller
 {
@@ -100,10 +101,13 @@ class PackageController extends Controller
             'limited_feature' => $request->boolean('limited_feature'),
          ]);
         $packageFeatures = PackageFeature::latest()->get();
+        DB::table('feature_package')
+        ->where('package_id', $package->id)
+        ->delete();
         foreach ($packageFeatures as $feature) {
             $package->features()->attach($feature->id);
         }
-        $package->features()->delete();
+        
         foreach ($request->features as $feature) {
             # code...
             if ($feature) {

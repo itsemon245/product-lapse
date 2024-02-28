@@ -7,5 +7,20 @@
     "FAQ": "أسئلة شائعة",
     "Contact Us": "تواصل معنا",
     "Save": "حفظ",
-    "Compare Packages" : "قارن الحزمة"
+    "Compare Packages" : "قارن الحزمة",
+    "Status" : "حالة",
+    "Payment Method" : "طريقة الدفع او السداد",
+    "Payment Details" : "بيانات الدفع",
+    "Bank Name:" : "اسم البنك:",
+    "Bank IBAN:" : "رقم الحساب المصرفي الدولي:",
+    "Card Name:" : "اسم البطاقة:",
+    "Card Number:" : "رقم البطاقة:",
+    "Expiry Date:" : "تاريخ الانتهاء:",
+    "Order Details" : "تفاصيل الطلب",
+    "Order Manage" : "إدارة المستخدمين",
+    "Search order" : "ترتيب البحث"
+
+
+
+
 }

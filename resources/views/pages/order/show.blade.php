@@ -1,8 +1,8 @@
-@extends('layouts.admin.app', ['title' => 'Order Details'])
+@extends('layouts.admin.app', ['title' => __('Order Details')])
 @section('main')
     <x-feature.show>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => 'Order Details', 'route' => route('admin.order.show', $findOrder)]]" />
+            <x-breadcrumb :list="[['label' => __('Order Details'), 'route' => route('admin.order.show', $findOrder)]]" />
         </x-slot:breadcrumb>
             <x-slot:details>
         <section class="sign_in_area bg_color sec_pad">
@@ -16,36 +16,36 @@
                                     {{ \Carbon\Carbon::parse($findOrder->date)->format('l, j F Y') }}
                                 </div>
                                 <div class="col-md-6">
-                                    <h6 class="title2">Status</h6>
+                                    <h6 class="title2">{{ __('Status') }}</h6>
                                     <p class="f_400 mb-30 text-font">{{ ucfirst($findOrder->status) }}</p>
                                 </div>
                                 <div class="col-md-6">
-                                    <h6 class="title2">Payment Method</h6>
+                                    <h6 class="title2">{{ __('Payment Method') }}</h6>
                                     <p class="f_400 mb-30 text-font">{{ ucfirst($findOrder->payment_method) }}</p>
                                 </div>
                                 <div class="col-md-12">
-                                    <h6 class="title2">Payment Details</h6>
-
                                     @if ($findOrder->bank_details == !null)
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <p class="f_400 mb-30 text-font">Bank Name:{{ $findOrder->bank_details->name }}</p> 
+                                            <h6 class="title2">{{ __('Bank Name:') }}</h6>
+                                            <p class="f_400 mb-30 text-font">{{ $findOrder->bank_details->name }}</p> 
                                         </div>
                                         <div class="col-md-6">
-                                            <p class="f_400 mb-30 text-font">Bank IBAN:{{ $findOrder->bank_details->iban }}</p> 
+                                            <h6 class="title2">{{ __('Bank IBAN:') }}</h6>
+                                            <p class="f_400 mb-30 text-font">{{ $findOrder->bank_details->iban }}</p> 
                                         </div>  
                                     </div>
                                     
                                     @else
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <p class="f_400 mb-30 text-font">Card Name:{{ $findOrder->card_details->name }}</p> 
+                                            <p class="f_400 mb-30 text-font">@__('Card Name:'){{ $findOrder->card_details->name }}</p> 
                                         </div>
                                         <div class="col-md-6">
-                                            <p class="f_400 mb-30 text-font">Card Number:{{ $findOrder->card_details->number }}</p> 
+                                            <p class="f_400 mb-30 text-font">@__('Card Number:'){{ $findOrder->card_details->number }}</p> 
                                         </div>  
                                         <div class="col-md-6">
-                                            <p class="f_400 mb-30 text-font">Expiry Date:{{ $findOrder->card_details->expiry_date }}</p> 
+                                            <p class="f_400 mb-30 text-font">@__('Expiry Date:'){{ $findOrder->card_details->expiry_date }}</p> 
                                         </div>
                                         <div class="col-md-6">
                                             <p class="f_400 mb-30 text-font">CVV:{{ $findOrder->card_details->cvv }}</p> 
@@ -63,7 +63,7 @@
                         <div class="blog-sidebar box-sidebar">
                             <div class="widget sidebar_widget widget_recent_post mt_60">
                                 <div class="media post_author mt_60">
-                                    <img class="rounded-circle" src="{{ $user->image->url ?? asset('img/profile1.png') }}" alt="">
+                                    <img class="rounded-circle" src="{{ favicon($user->image) }}" alt="">
                                     <div class="media-body">
                                         <h5 class=" t_color3 f_size_18 f_500">{{ $findOrder->user->name }}</h5>
                                     </div>

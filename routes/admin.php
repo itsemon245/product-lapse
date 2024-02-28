@@ -48,5 +48,5 @@ Route::prefix('admin')
         Route::get('contact-messages', [ContactMessageController::class, 'index'])->name('contact.messages');
         Route::get('contact-messages/{contactMessage}', [ContactMessageController::class, 'view'])->name('contact.messages.view');
         Route::post('contact-message-reply/{contactMessage}', [ContactMessageController::class, 'reply'])->name('message.reply.send');
-
+        Route::delete('contact-massage-delete/{id}', [ContactMessageController::class, 'destroy'])->name('admin.contact.message.delete');
     });

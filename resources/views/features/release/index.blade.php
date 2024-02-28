@@ -54,12 +54,9 @@
 
                                             @can('delete release')
                                                 <div class="like-btn">
-                                                    <form action="{{ route('release.destroy', $release) }}" method="post">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <x-btn-icons type="submit" class="btn"
-                                                            value="<i class='ti-trash'></i>" />
-                                                    </form>
+                                                    <x-button type="delete" :action="route('release.destroy', $release)" :has-icon="true">
+                                                        <span class="ti-trash"></span>
+                                                    </x-button>
                                                 </div>
                                             @endcan
 

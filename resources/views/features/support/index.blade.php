@@ -55,17 +55,11 @@
                                         <div class="jobsearch-job-userlist">
                                             @can('delete support')
                                                 <div class="like-btn">
-                                                    <form action="{{ route('support.destroy', $support) }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-
-                                                        <button type="submit" class="shortlist" title="Delete">
-                                                            <i class="ti-trash"></i>
-                                                        </button>
-                                                    </form>
+                                                    <x-button type="delete" :action="route('support.destroy', $support)" :has-icon="true">
+                                                        <span class="ti-trash"></span>
+                                                    </x-button>
                                                 </div>
                                             @endcan
-
                                             @can('update support')
                                                 <div class="like-btn">
                                                     <a href="{{ route('support.edit', $support) }}" class="shortlist"

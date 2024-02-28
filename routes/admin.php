@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\FeatureController;
@@ -15,9 +16,7 @@ use App\Http\Controllers\Features\Certificate\CertificateController;
 Route::prefix('admin')
     ->middleware('auth','verified', 'check.admin',)
     ->group(function () {
-        Route::get('/', function () {
-            return view('dashboard.admin');
-        })->name('admin');
+        Route::get('/', [AdminController::class, 'admin'])->name('admin');
         Route::resource('faqs', FaqController::class)->except('show');
         Route::resource('package', PackageController::class);
         Route::resource('package-feature', PackageFeatureController::class)->only([ 'index', 'store', 'update', 'destroy' ]);

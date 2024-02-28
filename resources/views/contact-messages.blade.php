@@ -26,6 +26,15 @@
                                             </li>
                                         </ul>
                                     </div>
+                                    <div class="jobsearch-table-cell">
+                                        <div class="jobsearch-job-userlist">
+                                            <div class="like-btn">
+                                                <x-button type="delete" :action="route('admin.contact.message.delete', $message)" :has-icon="true">
+                                                    <span class="ti-trash"></span>
+                                                </x-button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

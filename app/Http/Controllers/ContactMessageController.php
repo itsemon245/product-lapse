@@ -59,4 +59,12 @@ class ContactMessageController extends Controller
             'message' => __('Your message has been sent!')
         ]);
     }
+
+    public function destroy(string $id)
+    {
+        $find = ContactMessage::find($id);
+        $find->delete();
+        notify()->success(__('Deleted Success!'));
+        return back();
+    }
 }

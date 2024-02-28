@@ -1,6 +1,9 @@
 @extends('layouts.admin.app', ['title' => @__('message.show')])
 @section('main')
     <x-feature.show>
+        <x-slot:breadcrumb>
+            <x-breadcrumb :list="[['label' => @__('message.show'), 'route' => route('contact.messages.view', $contactMessage)]]" />
+        </x-slot:breadcrumb>
         <x-slot:details>
             <div class="col-lg-8 blog_sidebar_left">
                 <div class="blog_single mb_50">

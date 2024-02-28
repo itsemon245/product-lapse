@@ -12,6 +12,7 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer=""></script>
     <script src="{{ asset('js/init-alpine.js') }}"></script>
 
+    <link rel="stylesheet" href="{{asset('css/windmil.output.css')}}">
     @include('layouts.global.styles')
 
     <style>

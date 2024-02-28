@@ -49,15 +49,17 @@
                                         </ul>
                                     </div>
                                     <div class="jobsearch-table-cell">
-                                        <div class="jobsearch-job-userlist">
+                                        <div class="jobsearch-job-userlist flex items-center flex-row-reverse">
                                             <div class="like-btn">
                                                 <x-button type="delete" :action="route('package.destroy', $package)" :has-icon="true">
                                                     <span class="ti-trash"></span>
                                                 </x-button>
                                             </div>
                                             <div class="like-btn">
-                                                <x-btn-icons type="anchor" value="<i class='ti-pencil'></i>"
-                                                    href="{{ route('package.edit', $package) }}" />
+                                                <x-button type="link" :has-icon="true"
+                                                    href="{{ route('package.edit', $package) }}">
+                                                    <i class='ti-pencil'></i>
+                                                </x-button>
                                             </div>
                                         </div>
                                     </div>

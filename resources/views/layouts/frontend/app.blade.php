@@ -11,10 +11,10 @@
     @include('layouts.global.styles')
 </head>
 
-<body class="relative overflow-x-hidden" x-data>
+<body class="relative overflow-x-hidden min-h-screen" x-data>
     {{-- Preloader --}}
     @include('layouts.frontend.preloader')
-    <div class="" id="tolink-1">
+    <div class="" id="tolink-1 mb-auto">
         <div class="top-link"><a href="#tolink-1"><i class="ti-angle-up"></i></a></div>
 
         @include('layouts.frontend.header')

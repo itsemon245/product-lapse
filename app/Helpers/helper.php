@@ -136,3 +136,12 @@ function favicon($url = null)
     }
     
 }
+
+function avatar(string $seed = null) {
+    if ($seed == null) {
+        $seed = str()->random(10);
+        return "https://api.dicebear.com/7.x/bottts-neutral/svg?seed=$seed&radius=50";
+    }
+    $seed = str($seed)->slug();
+    return "https://api.dicebear.com/7.x/initials/svg?seed=$seed&radius=50";
+}

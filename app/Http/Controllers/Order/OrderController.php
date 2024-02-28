@@ -26,6 +26,9 @@ class OrderController extends Controller
             'uuid'       => uniqid('order-'),
             'amount'     => round($package->price, 2),
          ]);
+        if ($package->price < 1) {
+            return redirect()->route('order.free', $order);
+        }
 
         return redirect()->route('order.selectMethod', [ 'order' => $order ]);
     }
@@ -106,5 +109,34 @@ class OrderController extends Controller
         $findOrder = Order::with('user')->with('package')->find($id);
         $user = User::with('image')->where('id', $findOrder->user->id)->first();
         return view('pages.order.show', compact('findOrder', 'user'));
+    }
+
+
+    public function freePackage(Order $order)
+    {
+        $order = tap($order)->update([
+            'status'       => 'completed',
+            'completed_at' => now(),
+         ]);
+        $expireDate  = now()->add($order->package->unit, $order->package->validity);
+        $activePlan = User::find($order->user_id)->activePlan()->first();
+        if ($activePlan) {
+            $activePlan->update([
+                'active'     => 0,
+                'expired_at' => null,
+             ]);
+        }
+        $plan = Plan::create([
+            'order_id'      => $order->id,
+            'user_id'       => $order->user_id,
+            'name'          => $order->package->name,
+            'price'         => $order->amount,
+            'active'        => true,
+            'expired_at'    => $expireDate,
+            'product_limit' => $order->package->product_limit,
+         ]);
+        Mail::to($order->user->billingAddress()->email)->send(new InvoiceMail($order));
+
+        return redirect(route('payment.success'));
     }
 }

@@ -14,7 +14,7 @@ use App\Http\Controllers\Package\PackageFeatureController;
 use App\Http\Controllers\Features\Certificate\CertificateController;
 
 Route::prefix('admin')
-    ->middleware('check.admin')
+    ->middleware('auth','verified', 'check.admin',)
     ->group(function () {
         Route::get('/', [AdminController::class, 'admin'])->name('admin');
         Route::resource('faqs', FaqController::class)->except('show');

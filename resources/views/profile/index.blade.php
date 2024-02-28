@@ -13,7 +13,7 @@
                             <div class="col-md-5 col-sm-3">
                                 <div class="details_img">
                                     <img class="rounded-circle" style="height: 20rem; width:20rem;"
-                                        src="{{ $user->image->url ?? asset('img/avatar-1577909_1280.webp') }}" alt="">
+                                        src="{{ $user->image->url ?? avatar($user->name) }}" alt="">
                                 </div>
                             </div>
                             <div class="col-md-7 col-sm-9">

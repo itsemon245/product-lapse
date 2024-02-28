@@ -6,8 +6,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')
     ->group(function () {
-        Route::get('order/{package}/create', [ OrderController::class, 'create' ])->name('order.create');
+        Route::get('order/{package}/create', [ OrderController::class, 'create' ])->name('order.create')->middleware('check.address');
         Route::get('order/{order}/select-method', [ OrderController::class, 'selectMethod' ])->name('order.selectMethod');
+        Route::get('order-free/{order}/', [ OrderController::class, 'freePackage' ])->name('order.free');
         Route::post('order/{order}', [ OrderController::class, 'store' ])->name('order.store');
 
         // Payment

@@ -14,7 +14,7 @@ class FeatureController extends Controller
      */
     public function index()
     {
-        $features = Feature::paginate(10);
+        $features = Feature::latest()->paginate();
 
         return view('homeFeatures.index', compact('features'));
     }

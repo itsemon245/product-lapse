@@ -24,6 +24,9 @@
                         @if (session('verification-error'))
                             <div class="bg-yellow-200 text-yellow-500 p-4 mb-4">{{ session('verification-error') }}</div>
                         @endif
+                        @if (session('verified'))
+                            <div class="bg-success-200 text-success-500 p-4 mb-4">{{ session('verified') }}</div>
+                        @endif
                         <div class="login_info">
                             <h2 class=" f_600 f_size_24 t_color3 mb_40">@lang('login.login')</h2>
                             <form action="{{ route('login') }}" method="POST" enctype="multipart/form-data"
@@ -50,7 +53,7 @@
                                     </div>
                                     <!--//check-box-->
                                     <div class="forgotten-password">
-                                        <a href="#">@lang('login.forgot_password')</a>
+                                        <a href="{{route('password.request', str()->random(60))}}">@lang('login.forgot_password')</a>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">

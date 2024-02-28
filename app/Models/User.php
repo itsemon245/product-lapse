@@ -8,7 +8,6 @@ use App\Models\Comment;
 use App\Traits\HasImages;
 use App\Casts\Utils\JsonCast;
 use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Builder;

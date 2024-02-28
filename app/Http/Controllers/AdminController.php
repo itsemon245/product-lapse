@@ -11,16 +11,16 @@ class AdminController extends Controller
 {
     public function admin()
     {
-        $subscribers = User::where('type', 'subscriber')->get();
+        $subscribers = User::where('type', 'subscriber')->count();
         $verifySubscriber = User::where([
             'email_verified_at' => !null,
             'type' => 'subscriber',
-        ])->get();
-        $notVerifySubScriber = User::where('email_verified_at', null)->get();
-        $orders = Order::get();
-        $completedOrder = Order::where('status', 'completed')->get();
-        $pendingOrder = Order::where('status', 'pending')->get();
-        $failedOrder = Order::where('failed_at', !null)->get();
+        ])->count();
+        $notVerifySubScriber = User::where('email_verified_at', null)->count();
+        $orders = Order::whereNot('status', 'draft')->count();
+        $completedOrder = Order::where('status', 'completed')->count();
+        $pendingOrder = Order::where('status', 'pending')->count();
+        $failedOrder = Order::where('status', 'failed')->count();
         return view('dashboard.admin', compact('subscribers', 'verifySubscriber', 'notVerifySubScriber', 'orders', 'completedOrder', 'pendingOrder', 'failedOrder'));
     }
 }

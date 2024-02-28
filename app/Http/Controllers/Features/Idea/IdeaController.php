@@ -64,10 +64,10 @@ class IdeaController extends Controller
         $idea->loadComments();
         $comments = $idea->comments;
         $stages = Stage::cases();
-
+        $creator = User::where('id', $idea->creator_id)->with('image')->first();
         $priorities = Select::of('idea')->type('priority')->get();
 
-        return view('features.idea.partials.show', compact('idea', 'comments', 'stages', 'priorities'));
+        return view('features.idea.partials.show', compact('idea', 'comments', 'stages', 'priorities', 'creator'));
     }
 
     public function upadatePriority(Request $request, Idea $idea)

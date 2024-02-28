@@ -129,5 +129,10 @@ function getNotificationData($model)
 
 function favicon($url = null)
 {
-    return asset('img/p6.png');
+    if($url == !null){
+        return $url->url;
+    }else{
+        return asset('img/p6.png');
+    }
+    
 }

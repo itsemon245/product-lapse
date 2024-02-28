@@ -36,6 +36,10 @@
                 <div class="col-md-6">
                     <div class="item lon new">
                         <div class="list_item">
+                            @php
+                                $creator = App\Models\User::where('id', $delivery->creator_id)->with('image')->first();
+                            @endphp
+                            <figure><a href="#"><img src="{{ favicon($creator->image) }}" alt=""></a></figure>
                             <div class="joblisting_text document-list">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell">
@@ -51,12 +55,9 @@
                                         <div class="jobsearch-job-userlist">
                                             @can('delete delivery')
                                                 <div class="like-btn">
-                                                    <form action="{{ route('delivery.destroy', $delivery) }}" method="post">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <x-btn-icons type="submit" class="btn"
-                                                            value="<i class='ti-trash'></i>" />
-                                                    </form>
+                                                    <x-button type="delete" :action="route('delivery.destroy', $delivery)" :has-icon="true">
+                                                        <span class="ti-trash"></span>
+                                                    </x-button>
                                                 </div>
                                             @endcan
                                             @can('update delivery')

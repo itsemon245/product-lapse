@@ -32,26 +32,17 @@
                                     <div class="jobsearch-table-cell">
                                         <h5>
                                             (En)
-                                            -{{ $faq->question->en }} <br>
-                                            (Ar)-{{ $faq->question->ar }}
+                                            -{{ $faq->question->en }}
+                                            <span><p class="text-muted">(Ar)-{{ $faq->question->ar }}</p></span>
                                         </h5>
-                                        <h6>
-                                            (En)-{{ $faq->answer->en }} <br>
-                                            (Ar)-{{ $faq->answer->ar }}
-                                        </h6>
+                                        
                                     </div>
                                     <div class="jobsearch-table-cell">
                                         <div class="jobsearch-job-userlist">
                                             <div class="like-btn">
-                                                <form action="{{ route('faqs.destroy', $faq) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-
-                                                    <button type="submit" class="shortlist" title="Delete">
-                                                        <i class="ti-trash"></i>
-                                                    </button>
-                                                </form>
-
+                                                <x-button type="delete" :action="route('faqs.destroy', $faq)" :has-icon="true">
+                                                    <span class="ti-trash"></span>
+                                                </x-button>
                                             </div>
                                             <div class="like-btn">
                                                 <a href="{{ route('faqs.edit', $faq) }}" class="shortlist" title="Edit">

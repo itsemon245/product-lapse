@@ -49,11 +49,9 @@
                             <div class="jobsearch-table-cell">
                                 <div class="jobsearch-job-userlist">
                                     <div class="like-btn">
-                                        <form action="{{ route('certificate.destroy', $certificate) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <x-btn-icons type="submit" class="btn" value="<i class='ti-trash'></i>" />
-                                        </form>
+                                        <x-button type="delete" :action="route('certificate.destroy', $certificate)" :has-icon="true">
+                                            <span class="ti-trash"></span>
+                                        </x-button>
                                     </div>
                                     <div class="like-btn">
                                         <form action="{{ route('certificate.approval', $certificate) }}" method="POST">

@@ -35,7 +35,10 @@
                 <div class="col-md-6">
                     <div class="item lon new">
                         <div class="list_item">
-                            <figure><a href="#"><img src="img/p6.png" alt=""></a></figure>
+                            @php
+                                $creator = App\Models\User::where('id', $change->creator_id)->with('image')->first();
+                            @endphp
+                            <figure><a href="#"><img src="{{ favicon($creator->image) }}" alt=""></a></figure>
                             <div class="joblisting_text">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell">
@@ -51,12 +54,9 @@
                                         <div class="jobsearch-job-userlist">
                                             @can('delete change')
                                                 <div class="like-btn">
-                                                    <form action="{{ route('change.destroy', $change) }}" method="post">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <x-btn-icons type="submit" class="btn"
-                                                            value="<i class='ti-trash'></i>" />
-                                                    </form>
+                                                    <x-button type="delete" :action="route('change.destroy', $change)" :has-icon="true">
+                                                        <span class="ti-trash"></span>
+                                                    </x-button>
                                                 </div>
                                             @endcan
 

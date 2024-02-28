@@ -63,7 +63,7 @@
                     <h6 class="title2" style="padding-top: 20px">@__('feature/delivery.administrator')</h6>
                     <div class="widget sidebar_widget widget_recent_post">
                         <div class="media post_author author-title">
-                            <img class="rounded-circle" src="{{ $creator->image->url ?? favicon() }}" alt="">
+                            <img class="rounded-circle" src="{{ favicon($creator->image) }}" alt="">
                             <div class="media-body">
                                 <h5 class=" t_color3 f_size_18 f_500">{{ $creator->name }}</h5>
                             </div>

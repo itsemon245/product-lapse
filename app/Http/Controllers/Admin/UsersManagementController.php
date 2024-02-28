@@ -46,6 +46,11 @@ class UsersManagementController extends Controller
         //
     }
 
+    public function show(User $user)
+    {
+        return view('pages.users.show', compact('user'));
+    }
+
     public function search(SearchRequest $request)
     {
         $subscribers = SearchService::items($request);

@@ -86,14 +86,13 @@ class TaskController extends Controller
     public function show(Task $task)
     {
         $task = Task::with('files')->find($task->id);
-
-        $user = User::with('image')->find($task->creator_id);
+        $creator = User::where('id', $task->creator_id)->with('image')->first();
         $task->loadComments();
         $comments = $task->comments;
 
         $statuses = Select::of('task')->type('status')->get();
 
-        return view('features.task.partials.show', compact('task', 'user', 'comments', 'statuses'));
+        return view('features.task.partials.show', compact('task', 'creator', 'comments', 'statuses'));
 
     }
 

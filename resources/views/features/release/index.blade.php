@@ -35,7 +35,10 @@
                 <div class="col-md-6">
                     <div class="item lon new">
                         <div class="list_item">
-
+                            @php
+                            $creator = App\Models\User::where('id', $release->creator_id)->with('image')->first();
+                        @endphp
+                         <figure><a href="#"><img src="{{ favicon($creator->image) }}" alt=""></a></figure>
                             <div class="joblisting_text">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell">
@@ -51,12 +54,9 @@
 
                                             @can('delete release')
                                                 <div class="like-btn">
-                                                    <form action="{{ route('release.destroy', $release) }}" method="post">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <x-btn-icons type="submit" class="btn"
-                                                            value="<i class='ti-trash'></i>" />
-                                                    </form>
+                                                    <x-button type="delete" :action="route('release.destroy', $release)" :has-icon="true">
+                                                        <span class="ti-trash"></span>
+                                                    </x-button>
                                                 </div>
                                             @endcan
 

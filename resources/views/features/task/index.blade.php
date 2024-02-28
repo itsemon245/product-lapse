@@ -37,7 +37,10 @@
                 <div class="col-md-6">
                     <div class="item lon new">
                         <div class="list_item">
-                            <figure><a href="#"><img src="{{ favicon() }}" alt=""></a></figure>
+                            @php
+                                $creator = App\Models\User::where('id', $task->creator_id)->with('image')->first();
+                            @endphp
+                             <figure><a href="#"><img src="{{ favicon($creator->image) }}" alt=""></a></figure>
                             <div class="joblisting_text">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell">
@@ -55,14 +58,9 @@
                                         <div class="jobsearch-job-userlist">
                                             @can('delete task')
                                                 <div class="like-btn">
-                                                    <form action="{{ route('task.destroy', $task) }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-
-                                                        <button type="submit" class="shortlist" title="Delete">
-                                                            <i class="ti-trash"></i>
-                                                        </button>
-                                                    </form>
+                                                    <x-button type="delete" :action="route('task.destroy', $task)" :has-icon="true">
+                                                        <span class="ti-trash"></span>
+                                                    </x-button>
                                                 </div>
                                             @endcan
                                             @can('update task')

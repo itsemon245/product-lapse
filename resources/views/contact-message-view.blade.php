@@ -1,6 +1,9 @@
 @extends('layouts.admin.app', ['title' => @__('message.show')])
 @section('main')
     <x-feature.show>
+        <x-slot:breadcrumb>
+            <x-breadcrumb :list="[['label' => @__('feature/report.show'), 'route' => route('contact.messages.view', $contactMessage)]]" />
+        </x-slot:breadcrumb>
         <x-slot:details>
             <div class="col-lg-8 blog_sidebar_left">
                 <div class="blog_single mb_50">
@@ -21,12 +24,12 @@
                             {{ $contactMessage->body }}
                         </p>
 
-                        @if ($contactMessage->reply)
+                        {{-- @if (isset($contactMessage->reply))
                             <h6 class="title2">@__('message.reply')</h6>
                             <p class="f_400 mb-30 text-font">
                                 {{ $contactMessage->reply->body }}
                             </p>
-                        @endif
+                        @endif --}}
                     </div>
                 </div>
                 <div class="blog_single mb_50">
@@ -34,7 +37,7 @@
                         enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
-                            <x-textarea name="reply" label="Reply" required="required" />
+                            <x-textarea name="reply" label="Reply" rows="10" required="required" />
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">@__('message.send')</button>

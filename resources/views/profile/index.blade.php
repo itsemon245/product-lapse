@@ -18,7 +18,21 @@
                             </div>
                             <div class="col-md-7 col-sm-9">
                                 <div class="details_info details_info2">
-                                    <h2>{{ $user->name }}</h2>
+                                    <div class="flex gap-2 items-center mb-2">
+                                        <h2 class="m-0">{{ $user->name }}</h2>
+                                        @if ($user->email_verified_at != null)
+                                            <div
+                                                class="bg-emerald-200 text-green-500 font-bold px-2 py-1 rounded-full text-sm flex items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                    viewBox="0 0 20 20">
+                                                    <path fill="currentColor" fill-rule="evenodd"
+                                                        d="M16.403 12.652a3 3 0 0 0 0-5.304a3 3 0 0 0-3.75-3.751a3 3 0 0 0-5.305 0a3 3 0 0 0-3.751 3.75a3 3 0 0 0 0 5.305a3 3 0 0 0 3.75 3.751a3 3 0 0 0 5.305 0a3 3 0 0 0 3.751-3.75m-2.546-4.46a.75.75 0 0 0-1.214-.883L9.16 12.1l-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                                Email Verified
+                                            </div>
+                                        @endif
+                                    </div>
                                     <ul class="list-unstyled profile-details">
                                         @if ($user->getRole() != null)
                                             <li class="!flex items-center gap-2">

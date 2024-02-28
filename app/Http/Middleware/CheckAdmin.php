@@ -20,7 +20,7 @@ class CheckAdmin
             return redirect(route('login'));
         }
         if ($user->type == null) {
-            notify()->warning(__('You are not allowed to visit this part!'));
+            // notify()->warning(__('You are not allowed to visit this part!'));
             return redirect()->route('home');
         }
 

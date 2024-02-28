@@ -15,7 +15,7 @@
             <li class="nav-item dropdown submenu hidden-md visible-sm">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    @__('navigation.navbar.login')
+                    @__('navigation.profile.profile')
                 </a>
                 @include('layouts.global.profile-menu')
             </li>
@@ -59,7 +59,11 @@
                 @endif
             </form>
         </li>
-        <li class="nav-item"><a class="btn_get btn_hover hidden-md visible-sm" href="{{route('login')}}">@__('navigation.navbar.login')</a>
-        </li>
+        @auth
+        @else
+            <li class="nav-item"><a class="btn_get btn_hover hidden-md visible-sm"
+                    href="{{ route('login') }}">@__('navigation.navbar.login')</a>
+            </li>
+        @endauth
     </ul>
 </div>

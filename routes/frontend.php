@@ -28,6 +28,3 @@ Route::prefix('/')
 Route::get('compare-packages', [PackageController::class, 'compare'])->name('package.compare');
 Route::post('contact-message/', [ContactMessageController::class, 'send'])->name('message.send');
 
-Route::get('contact-messages', [ContactMessageController::class, 'index'])->name('contact.messages');
-Route::get('contact-messages/{contactMessage}', [ContactMessageController::class, 'view'])->name('contact.messages.view');
-Route::post('contact-message-reply/{contactMessage}', [ContactMessageController::class, 'reply'])->name('message.reply.send');

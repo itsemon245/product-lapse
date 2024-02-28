@@ -58,13 +58,9 @@
                                         <div class="jobsearch-job-userlist">
                                             @can('delete idea')
                                                 <div class="like-btn">
-                                                    <form action="{{ route('idea.destroy', $idea) }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="shortlist" title="Delete">
-                                                            <i class="ti-trash"></i>
-                                                        </button>
-                                                    </form>
+                                                    <x-button type="delete" :action="route('idea.destroy', $idea)" :has-icon="true">
+                                                        <span class="ti-trash"></span>
+                                                    </x-button>
                                                 </div>
                                             @endcan
 

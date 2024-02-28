@@ -2,9 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Order\OrderController;
+use App\Http\Controllers\ContactMessageController;
 use App\Http\Controllers\Frontend\LandingPageController;
 use App\Http\Controllers\Admin\UsersManagementController;
 use App\Http\Controllers\Package\PackageFeatureController;
@@ -43,7 +45,9 @@ Route::prefix('admin')
         Route::get('order', [OrderController::class, 'index'])->name('admin.order.index');
         Route::patch('order/approve/{id}', [OrderController::class, 'approve'])->name('admin.order.approve');
         Route::get('order/show/{id}', [OrderController::class, 'show'])->name('admin.order.show');
-
-       
+        Route::resource('features', FeatureController::class)->except('show');
+        Route::get('contact-messages', [ContactMessageController::class, 'index'])->name('contact.messages');
+        Route::get('contact-messages/{contactMessage}', [ContactMessageController::class, 'view'])->name('contact.messages.view');
+        Route::post('contact-message-reply/{contactMessage}', [ContactMessageController::class, 'reply'])->name('message.reply.send');
 
     });

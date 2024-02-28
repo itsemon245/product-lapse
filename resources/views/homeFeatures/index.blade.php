@@ -46,15 +46,9 @@
                                     <div class="jobsearch-table-cell">
                                         <div class="jobsearch-job-userlist">
                                             <div class="like-btn">
-                                                <form action="{{ route('features.destroy', $feature) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-
-                                                    <button type="submit" class="shortlist" title="Delete">
-                                                        <i class="ti-trash"></i>
-                                                    </button>
-                                                </form>
-
+                                                <x-button type="delete" :action="route('features.destroy', $feature)" :has-icon="true">
+                                                    <span class="ti-trash"></span>
+                                                </x-button>
                                             </div>
                                             <div class="like-btn">
                                                 <a href="{{ route('features.edit', $feature) }}" class="shortlist"

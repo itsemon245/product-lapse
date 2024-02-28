@@ -21,15 +21,7 @@
         </x-slot:actions>
 
         <x-slot:filter>
-            {{-- <h5>Showing packages</h5>
-        <form method="get" action="#">
-            <select class="selectpickers selectpickers2" style="display: none;">
-                <option value="">All</option>
-                <option value="">Durable product</option>
-                <option value="">Initial idea</option>
-                <option value="">Stopped</option>
-            </select><div class="nice-select selectpickers selectpickers2" tabindex="0"><span class="current">All</span><ul class="list"><li data-value="" class="option selected focus">All</li><li data-value="" class="option">Durable product</li><li data-value="" class="option">Initial idea</li><li data-value="" class="option">Stopped</li></ul></div>
-        </form> --}}
+            {{--  --}}
         </x-slot:filter>
 
 
@@ -59,12 +51,9 @@
                                     <div class="jobsearch-table-cell">
                                         <div class="jobsearch-job-userlist">
                                             <div class="like-btn">
-                                                <form action="{{ route('package.destroy', $package) }}" method="post">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <x-btn-icons type="submit" class="btn"
-                                                        value="<i class='ti-trash'></i>" />
-                                                </form>
+                                                <x-button type="delete" :action="route('package.destroy', $package)" :has-icon="true">
+                                                    <span class="ti-trash"></span>
+                                                </x-button>
                                             </div>
                                             <div class="like-btn">
                                                 <x-btn-icons type="anchor" value="<i class='ti-pencil'></i>"

@@ -26,21 +26,6 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    {{-- <div class="jobsearch-table-cell">
-                                        <div class="jobsearch-job-userlist">
-                                            <div class="like-btn">
-                                                <form action="{{ route('users.update', $subscriber) }}" method="POST">
-                                                    @csrf
-                                                    @method('patch')
-                                                    <input type="hidden" name="banned">
-                                                    <button>Submit</button>
-                                                    <button type="submit" class="shortlist">
-                                                        <i class="ti-lock"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div> --}}
                                 </div>
                             </div>
                         </div>

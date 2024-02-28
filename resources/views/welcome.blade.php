@@ -173,9 +173,9 @@
                         <div class="action_content text-center">
                             <h2 class="f_600 f_size_30 l_height45 mb_40 wow fadeInUp" data-wow-delay="0.2s">
                                 <?= $info?->join?->{app()->getLocale()} ?></h2>
-                            <a href="{{ route('login') }}" class="about_btn white_btn wow fadeInRight btn_get"
+                            <a href="{{ auth()->user() ? '/' : route('login') }}" class="about_btn white_btn wow fadeInRight btn_get"
                                 data-wow-delay="0.3s">@lang('welcome.login')</a>
-                            <a href="{{ route('register') }}" class="about_btn wow fadeInLeft btn_get"
+                            <a href="{{ auth()->user() ? '/' : route('register') }}" class="about_btn wow fadeInLeft btn_get"
                                 data-wow-delay="0.4s">@lang('welcome.sign_up')</a>
                         </div>
                     </div>

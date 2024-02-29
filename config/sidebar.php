@@ -58,6 +58,24 @@ return [
                 'icon' => '<span class="ti-package"></span>',
                 'hasSubMenu' => false,
             ],
+            'Privacy Policy' => (object) [
+                "name" => 'page.edit',
+                'params' => ['key'=> 'page', 'value'=> 1],
+                'icon' => '<span class="ti-package"></span>',
+                'hasSubMenu' => false,
+            ],
+            'Terms & Conditions' => (object) [
+                "name" => 'page.edit',
+                'params' => ['key'=> 'page', 'value'=> 2],
+                'icon' => '<span class="ti-package"></span>',
+                'hasSubMenu' => false,
+            ],
+            'Technical Support' => (object) [
+                "name" => 'page.edit',
+                'params' => ['key'=> 'page', 'value'=> 3],
+                'icon' => '<span class="ti-package"></span>',
+                'hasSubMenu' => false,
+            ],
         ]
     ],
     'Contact Messages' => (object) [

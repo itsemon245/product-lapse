@@ -28,8 +28,8 @@ class PackageRequest extends FormRequest
             'is_limited'=> 'string|nullable',
             'is_popular'=> 'string|nullable',
             'features'=> 'array|required',
-            'validity'=> 'integer|required',
-            'unit' => 'required|in:day,month,year'
+            'validity'=> 'integer|nullable',
+            'unit' => 'nullable|in:day,month,year'
         ];
     }
 }

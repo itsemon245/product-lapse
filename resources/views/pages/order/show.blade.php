@@ -33,6 +33,29 @@
                                         <div class="col-md-6">
                                             <h6 class="title2">{{ __('Bank IBAN:') }}</h6>
                                             <p class="f_400 mb-30 text-font">{{ $findOrder->bank_details->iban }}</p> 
+                                        </div> 
+                                        <h5 class="mt-3">{{ $shippingAddress->name }}</h5>
+                                        <div class="col-md-12 d-flex">
+                                        <div class="p-2">
+                                            <h6 class="title2">Street</h6>
+                                            <p class="f_400 mb-30 text-font">{{ $shippingAddress->street }}</p> 
+                                        </div>
+                                        <div class="p-2">
+                                            <h6 class="title2">City</h6>
+                                            <p class="f_400 mb-30 text-font">{{ $shippingAddress->city }}</p> 
+                                        </div>
+                                        <div class="p-2">
+                                            <h6 class="title2">State</h6>
+                                            <p class="f_400 mb-30 text-font">{{ $shippingAddress->state }}</p> 
+                                        </div>
+                                        <div class="p-2">
+                                            <h6 class="title2">Country</h6>
+                                            <p class="f_400 mb-30 text-font">{{ $shippingAddress->country }}</p> 
+                                        </div>
+                                        <div class="p-2">
+                                            <h6 class="title2">ZIP</h6>
+                                            <p class="f_400 mb-30 text-font">{{ $shippingAddress->zip }}</p> 
+                                        </div>
                                         </div>  
                                     </div>
                                     
@@ -66,6 +89,8 @@
                                     <img class="rounded-circle" src="{{ favicon($findOrder->user->image) }}" alt="">
                                     <div class="media-body">
                                         <h5 class=" t_color3 f_size_18 f_500">{{ $findOrder->user->name }}</h5>
+                                        <p class="text-muted">Email: {{ $findOrder->user->email }}</p>
+                                        <p class="text-muted">Phone: {{ $findOrder->user->phone }}</p>
                                     </div>
                                 </div>
                             </div>

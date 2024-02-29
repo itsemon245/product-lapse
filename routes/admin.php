@@ -44,6 +44,7 @@ Route::prefix('admin')
         Route::get('order', [OrderController::class, 'index'])->name('admin.order.index');
         Route::patch('order/approve/{id}', [OrderController::class, 'approve'])->name('admin.order.approve');
         Route::get('order/show/{id}', [OrderController::class, 'show'])->name('admin.order.show');
+        Route::post('order/search', [OrderController::class, 'search'])->name('admin.order.search');
         Route::resource('features', FeatureController::class)->except('show');
         Route::get('contact-messages', [ContactMessageController::class, 'index'])->name('contact.messages');
         Route::get('contact-messages/{contactMessage}', [ContactMessageController::class, 'view'])->name('contact.messages.view');

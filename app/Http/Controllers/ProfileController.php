@@ -56,7 +56,7 @@ class ProfileController extends Controller
             Address::create([
                 'name'            => $request->name,
                 'user_id'         => auth()->id(),
-                'type'            => $request->type,
+                'type'            => $request->type ?? 'billing',
                 'email'           => $request->email,
                 'phone'           => $request->phone,
                 'street'          => $request->street,
@@ -69,7 +69,7 @@ class ProfileController extends Controller
         } else {
             $user->update([
                 'name'            => $request->name,
-                'type'            => $request->type,
+                'type'            => $request->type ?? 'billing',
                 'email'           => $request->email,
                 'phone'           => $request->phone,
                 'street'          => $request->street,

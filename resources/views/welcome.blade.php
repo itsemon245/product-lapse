@@ -15,11 +15,11 @@
                                 <?= $info?->home?->caption?->{app()->getLocale()} ?></p>
                             <div class="action_btn d-flex align-items-center mt_60">
                                 @auth
-                                <a href="#tolink-4" class="btn_hover agency_banner_btn wow fadeInLeft btn-bg"
-                                data-wow-delay="0.5s">@__('Browse Packages')</a>
+                                    <a href="#tolink-4" class="btn_hover agency_banner_btn wow fadeInLeft btn-bg"
+                                        data-wow-delay="0.5s">@__('Browse Packages')</a>
                                 @else
-                                <a href="{{ route('register') }}" class="btn_hover agency_banner_btn wow fadeInLeft btn-bg"
-                                    data-wow-delay="0.5s"> <?= $info?->home?->button?->{app()->getLocale()} ?></a>
+                                    <a href="{{ route('register') }}" class="btn_hover agency_banner_btn wow fadeInLeft btn-bg"
+                                        data-wow-delay="0.5s"> <?= $info?->home?->button?->{app()->getLocale()} ?></a>
                                 @endauth
                             </div>
                         </div>
@@ -107,13 +107,20 @@
                                                 class="ti-check"></i>{{ $package?->limited_feature ? trans('Limited Features') : trans('All Features') }}
                                         </li>
                                     </ul>
-                                    @if (auth()->user()?->activePlan()->first()?->order?->package_id == $package->id && auth()->user()?->type == 'subscriber')
+                                    @if (auth()->user()?->activePlan()->first()?->order?->package_id == $package->id &&
+                                    auth()->user()?->type == 'subscriber')
                                         <a href="#" class="price_btn btn_hover">
                                             <i class="ti-check"></i>
                                         </a>
                                     @else
-                                        <a href="{{ route('order.create', ['package' => $package]) }}"
-                                            class="price_btn btn_hover">@lang('welcome.subscribe')</a>
+                                        @if (auth()->user()?->type == 'admin')
+                                            <a href="#" class="price_btn btn_hover">@__('You are admin')</a>
+                                        @elseif(auth()->user()?->type == 'member')
+                                            <a href="#" class="price_btn btn_hover">@__('You are member')</a>
+                                        @else
+                                            <a href="{{ route('order.create', ['package' => $package]) }}"
+                                                class="price_btn btn_hover">@lang('welcome.subscribe')</a>
+                                        @endif
                                     @endif
                                 </div>
                             </div>
@@ -173,10 +180,11 @@
                         <div class="action_content text-center">
                             <h2 class="f_600 f_size_30 l_height45 mb_40 wow fadeInUp" data-wow-delay="0.2s">
                                 <?= $info?->join?->{app()->getLocale()} ?></h2>
-                            <a href="{{ auth()->user() ? '/' : route('login') }}" class="about_btn white_btn wow fadeInRight btn_get"
+                            <a href="{{ auth()->user() ? '/' : route('login') }}"
+                                class="about_btn white_btn wow fadeInRight btn_get"
                                 data-wow-delay="0.3s">@lang('welcome.login')</a>
-                            <a href="{{ auth()->user() ? '/' : route('register') }}" class="about_btn wow fadeInLeft btn_get"
-                                data-wow-delay="0.4s">@lang('welcome.sign_up')</a>
+                            <a href="{{ auth()->user() ? '/' : route('register') }}"
+                                class="about_btn wow fadeInLeft btn_get" data-wow-delay="0.4s">@lang('welcome.sign_up')</a>
                         </div>
                     </div>
                 </div>
@@ -201,16 +209,16 @@
                                     href="mailto:{{ $contact?->email }}">{{ $contact?->email }}</a></p>
                             <div class="f_social_icon">
                                 @if ($contact?->facebook)
-                                <a href="{{ $contact?->facebook }}" class="ti-facebook"></a>
+                                    <a href="{{ $contact?->facebook }}" class="ti-facebook"></a>
                                 @endif
                                 @if ($contact?->twitter)
-                                <a href="{{ $contact?->twitter }}" class="ti-twitter-alt"></a>
+                                    <a href="{{ $contact?->twitter }}" class="ti-twitter-alt"></a>
                                 @endif
                                 @if ($contact?->vimeo)
-                                <a href="{{ $contact?->vimeo }}" class="ti-vimeo-alt"></a>
+                                    <a href="{{ $contact?->vimeo }}" class="ti-vimeo-alt"></a>
                                 @endif
                                 @if ($contact?->pinterest)
-                                <a href="{{ $contact?->pinterest }}" class="ti-pinterest"></a>
+                                    <a href="{{ $contact?->pinterest }}" class="ti-pinterest"></a>
                                 @endif
 
                             </div>
@@ -272,8 +280,8 @@
 @pushOnce('customJs')
     <script>
         $(document).ready(function() {
-            let form  = $('#ajax-contact-form')
-            form.submit(function(e){
+            let form = $('#ajax-contact-form')
+            form.submit(function(e) {
                 $('#submit-btn').html(`
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25"/><path fill="currentColor" d="M10.72,19.9a8,8,0,0,1-6.5-9.79A7.77,7.77,0,0,1,10.4,4.16a8,8,0,0,1,9.49,6.52A1.54,1.54,0,0,0,21.38,12h.13a1.37,1.37,0,0,0,1.38-1.54,11,11,0,1,0-12.7,12.39A1.54,1.54,0,0,0,12,21.34h0A1.47,1.47,0,0,0,10.72,19.9Z"><animateTransform attributeName="transform" dur="0.75s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></svg>
                 `)
@@ -282,7 +290,7 @@
                     type: "post",
                     url: form.attr('action'),
                     data: form.serialize(),
-                    success: function (response) {
+                    success: function(response) {
                         if (response.success) {
                             $('#submit-btn').html(response.message).attr('disabled', true)
                             form.find('input').val('')

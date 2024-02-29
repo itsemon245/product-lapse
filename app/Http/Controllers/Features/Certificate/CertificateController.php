@@ -19,8 +19,8 @@ class CertificateController extends Controller
      */
     public function index()
     {
-
         return view('features.certificate.index');
+
     }
 
     /**
@@ -99,8 +99,9 @@ class CertificateController extends Controller
 
     //super admin method
     public function getAllCertificate(){
-        $certificates = Certificate::with('user')->get();
+        $certificates = Certificate::with('user')->latest()->paginate();
         $statuses  = Select::of('certificate')->type('status')->get();
+        // dd($statuses);
         return view('pages.certificate.index', compact('certificates', 'statuses'));
     }
 
@@ -128,7 +129,8 @@ class CertificateController extends Controller
 
     public function search(CertificateRequest $request)
     {
-        $certificates = SearchService::items($request);
+        $certificates = Certificate::with('user')->where('status', $request->status)->latest()->paginate();
+        // $certificates = SearchService::items($request->status);
         $statuses  = Select::of('certificate')->type('status')->get();
         return view('pages.certificate.index', compact('certificates', 'statuses'));
     }

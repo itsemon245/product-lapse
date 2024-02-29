@@ -112,8 +112,8 @@ class OrderController extends Controller
     public function show(String $id)
     {
         $findOrder = Order::with('user', 'package',)->find($id);
-        $shippingAddress = User::find($findOrder->user->id)->shippingAddress();
-        return view('pages.order.show', compact('findOrder', 'shippingAddress'));
+        // $billingaddress = User::find($findOrder->user->id)->billingaddress();
+        return view('pages.order.show', compact('findOrder'));
     }
 
 

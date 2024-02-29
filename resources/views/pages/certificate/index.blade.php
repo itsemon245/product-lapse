@@ -39,7 +39,7 @@
                     <div class="joblisting_text">
                         <div class="job_list_table">
                             <div class="jobsearch-table-cell">
-                                <h4><a href="{{ route('certificate.show', $certificate) }}" class="f_500 t_color3">{{ $certificate->name }}</a></h4>
+                                <h4><a href="#" class="f_500 t_color3">{{ $certificate->name }}</a></h4>
                                 <ul class="list-unstyled">
                                     <li class="{{ $certificate->status == 2 ? 'text-danger' : 'text-success' }}">{{ $certificate->status == 2 ? 'Not Approved' : 'Approved'}}</li>
                                     {{-- <li>{{ $certificate->created_at->formatLocalized('%A %d %B %Y') }}</li> --}}

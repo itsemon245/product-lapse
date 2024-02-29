@@ -80,6 +80,8 @@ class ProfileController extends Controller
                 'ip'              => $request->ip(),
              ]);
         }
+        notify()->success(__('Updated Successfully!'));
+        return back();
     }
 
     /**

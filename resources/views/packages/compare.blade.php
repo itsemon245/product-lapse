@@ -42,25 +42,25 @@
                                 </div>
                             @endforeach
                         </div>
-                    @endforeach
-                    {{-- <div class="pr_list">
-                        <div class="price_item">
-                            <h5 class="pr_title">Technical support</h5>
+                        @endforeach
+                        <div class="pr_list">
+                            
+                            <div class="price_item">
+                                
+                            </div>
+                            @foreach ($packages as $p)
+                                <div class="price_item" data-title="{{ $package->name->{app()->getLocale()} }}">
+                                    @if (auth()->user()?->activePlan()->first()?->order?->package_id == $package->id)
+                                        <a href="#" class="price_btn btn_hover">
+                                            <i class="ti-check"></i>
+                                        </a>
+                                    @else
+                                        <a href="{{ route('order.create', ['package' => $p]) }}"
+                                            class="price_btn btn_hover">@lang('welcome.subscribe')</a>
+                                    @endif
+                                </div>
+                            @endforeach
                         </div>
-                        <div class="price_item" data-title="Free package">
-                            <h5 class="check"><i class="icon_check_alt2"></i></h5>
-                        </div>
-                        <div class="price_item" data-title="Basic Package">
-                            <h5 class="cros"><i class="icon_close"></i></h5>
-                        </div>
-                        <div class="price_item" data-title="Golden Package">
-                            <h5 class="check"><i class="icon_check_alt2"></i></h5>
-                        </div>
-                        <div class="price_item" data-title="Diamond Package">
-                            <h5 class="check"><i class="icon_check_alt2"></i></h5>
-                        </div>
-                    </div> --}}
-
                 </div>
             </div>
         </div>

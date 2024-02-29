@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
-            $table->enum('type', [ 'billing', 'shipping' ])->nullable();
+            $table->enum('type', [ 'billing', 'shipping' ])->default('billing');
             $table->string('email');
             $table->string('phone');
             $table->longText('street');

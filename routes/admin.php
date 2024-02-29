@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\ContactMessageController;
 use App\Http\Controllers\Frontend\LandingPageController;
@@ -49,4 +50,6 @@ Route::prefix('admin')
         Route::get('contact-messages/{contactMessage}', [ContactMessageController::class, 'view'])->name('contact.messages.view');
         Route::post('contact-message-reply/{contactMessage}', [ContactMessageController::class, 'reply'])->name('message.reply.send');
         Route::delete('contact-massage-delete/{id}', [ContactMessageController::class, 'destroy'])->name('admin.contact.message.delete');
+
+        Route::resource('page', PageController::class);
     });

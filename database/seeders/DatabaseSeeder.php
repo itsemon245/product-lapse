@@ -133,6 +133,7 @@ class DatabaseSeeder extends Seeder
             ContactSeeder::class,
             FaqSeeder::class,
             FeatureSeeder::class,
+            PageSeeder::class
         ]);
 
         $admin[0]->assignRole('admin');

@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\LandingPage;
+use App\Models\Page;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -27,5 +27,12 @@ class ViewServiceProvider extends ServiceProvider
                 app()->setLocale(request()->cookie('locale'));
             }
         });
+        View::composer("layouts.frontend.footer", function ($view) {
+            $extraPages = Page::where('type', 'footer')->get([ 'id', 'slug', 'title' ]);
+            $view->with([
+                'extraPages' => $extraPages,
+             ]);
+        });
+
     }
 }

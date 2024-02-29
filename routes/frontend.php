@@ -1,14 +1,15 @@
 <?php
 
+use App\Models\Page;
 use App\Models\User;
+use App\Models\Package;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\ContactMessageController;
-use App\Http\Controllers\Frontend\LandingPageController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ProfileController;
-use App\Models\Package;
+use App\Http\Controllers\ContactMessageController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Frontend\LandingPageController;
 
 Route::prefix('frontend')
     ->group(function () {
@@ -32,6 +33,10 @@ Route::prefix('/')
             return view('packages.index', compact('packages'));
         })->name('package.upgrade');
     });
+Route::get('page/{page}', function(Page $page){
+
+    return view('pages.extra', compact('page'));
+})->name('page.extra');
 
 Route::get('compare-packages', [PackageController::class, 'compare'])->name('package.compare');
 Route::post('contact-message/', [ContactMessageController::class, 'send'])->name('message.send');

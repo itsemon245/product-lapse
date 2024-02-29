@@ -39,7 +39,7 @@
                             <div class="row">
                                 <div class="col-md-4"></div>
                                 <div class="col-md-4">
-                                    <img style="height: 400px;" class="rounded-circle" src="{{ $user->image->url ?? asset('img/p6.png') }}" alt="">
+                                    <img class="h-auto w-auto" src="{{ $user->image->url ?? asset('img/p6.png') }}" alt="">
                                 </div>
                                 <div class="col-md-4"></div>
                             </div>

@@ -11,7 +11,9 @@ trait HasSubscription {
     protected static function bootHasSubscription(): void
     {
         static::created(function ($model) {
-            User::find($model->user_id)->update(['type' => 'subscriber']);
+            $user = User::find($model->user_id);
+            $user->update(['type' => 'subscriber']);
+            $user->assignRole('account holder');
         });
 
     }

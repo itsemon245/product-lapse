@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ContactMessageController;
 use App\Http\Controllers\Frontend\LandingPageController;
 use App\Http\Controllers\PackageController;
+use App\Http\Controllers\ProfileController;
+use App\Models\Package;
 
 Route::prefix('frontend')
     ->group(function () {
@@ -23,6 +25,12 @@ Route::prefix('/')
             $notifications = $user->notifications;
             return view('pages.notifications', compact('notifications'));
         })->name('notifications');
+
+        Route::get('update-address', [ProfileController::class, 'editAddress'])->name('address.edit');
+        Route::get('upgrade-package', function(){
+            $packages = Package::get();
+            return view('packages.index', compact('packages'));
+        })->name('package.upgrade');
     });
 
 Route::get('compare-packages', [PackageController::class, 'compare'])->name('package.compare');

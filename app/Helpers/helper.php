@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Image;
 use App\Models\Product;
 use App\Models\User;
 use Carbon\Carbon;
@@ -126,10 +127,15 @@ function getNotificationData($model)
 
     return [ $users, $initiator, $feature ];
 }
-
-function favicon($url = null)
+/**
+ * Image or favicon default
+ *
+ * @param Image|null $url
+ * @return string
+ */
+function favicon(?Image $url = null)
 {
-    if($url == !null){
+    if($url != null){
         return $url->url;
     }else{
         return asset('img/p6.png');

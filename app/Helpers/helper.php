@@ -114,14 +114,21 @@ function demoSub()
  * Use this only in CanSendNotification Trait
  *
  * @param mixed $model
+ * @param int $productId
  * @return array
  */
-function getNotificationData($model)
+function getNotificationData($model, $productId = null)
 {
+    $productId = $productId ?? productId();
     $initiator = auth()->user();
-    $users     = Product::find(productId())->users->filter(function (User $user) use ($initiator) {
-        return $user->id != auth()->id();
-    });
+    $users = Product::find($productId)?->users;
+    if ($users) {
+        $users = $users->filter(function (User $user) use ($initiator) {
+            return $user->id != auth()->id();
+        });
+    }else{
+        $users = [];
+    }
     $feature = explode('\\', get_class($model));
     $feature = array_pop($feature);
 

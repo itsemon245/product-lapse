@@ -44,21 +44,21 @@
                 <div class="col-md-6">
                     <x-input-label for="name" :value="__('profile.profile.first_name')" />
                     <x-input placeholder="{{ __('profile.profile.namef') }}" id="name" name="first_name"
-                        type="text" class="mt-1 block w-full" :value="old('first_name', $user->first_name)" required autofocus
+                        type="text" class="mt-1 block w-full" :value="old('first_name', $user->first_name)" required
                         autocomplete="name" />
                     <x-input-error class="mt-2" :messages="$errors->get('first_name')" />
                 </div>
                 <div class="col-md-6">
                     <x-input-label for="name" :value="__('profile.profile.last_name')" />
                     <x-input placeholder="{{ __('profile.profile.namef') }}" id="name" name="last_name"
-                        type="text" class="mt-1 block w-full" :value="old('last_name', $user->last_name)" required autofocus
+                        type="text" class="mt-1 block w-full" :value="old('last_name', $user->last_name)" required
                         autocomplete="name" />
                     <x-input-error class="mt-2" :messages="$errors->get('last_name')" />
                 </div>
                 <div class="col-md-6">
                     <x-input-label for="email" :value="__('profile.profile.email')" />
                     <x-input placeholder="{{ __('profile.profile.email') }}" id="email" name="email"
-                        type="text" class="mt-1 block w-full" :value="old('email', $user->email)" required autofocus
+                        type="text" class="mt-1 block w-full" :value="old('email', $user->email)" required
                         autocomplete="email" />
                     <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
@@ -84,7 +84,7 @@
                 <div class="col-md-6">
                     <x-input-label for="phone" :value="__('profile.profile.phone')" />
                     <x-input placeholder="{{ __('profile.profile.phone') }}" id="phone" name="phone"
-                        type="text" class="mt-1 block w-full" :value="old('phone', $user->phone)" required autofocus
+                        type="text" class="mt-1 block w-full" :value="old('phone', $user->phone)" required
                         autocomplete="phone" />
                     <x-input-error class="mt-2" :messages="$errors->get('phone')" />
                 </div>
@@ -92,7 +92,7 @@
                     <div class="col-md-6">
                         <x-input-label for="workplace" :value="__('profile.profile.workplace')" />
                         <x-input placeholder="{{ __('profile.profile.workplace') }}" id="workplace" name="workplace"
-                            type="text" class="mt-1 block w-full" :value="old('workplace', $user->workplace)" required autofocus
+                            type="text" class="mt-1 block w-full" :value="old('workplace', $user->workplace)" required
                             autocomplete="workplace" />
                         <x-input-error class="mt-2" :messages="$errors->get('workplace')" />
                     </div>

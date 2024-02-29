@@ -38,10 +38,8 @@
                     </li>
                     @include('layouts.global.notification-list')
                 @else
-                    <li class="nav-item dropdown submenu m-0">
                         <a class="btn_get btn_hover hidden-sm hidden-xs btn-bg"
                             href="{{ route('login') }}">@__('navigation.navbar.login')</a>
-                    <li>
                     @endauth
 
             </ul>

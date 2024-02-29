@@ -19,8 +19,9 @@ class CheckBillingAddress
         if (auth()->user()) {
             $user = User::find(auth()->id());
             if ($user->billingAddress() == null) {
+                session()->put('package-url', url()->current());
                 notify()->warning(__('Please update your billing address first!'));
-                return redirect(route('profile.edit')."#address");
+                return redirect(route('address.edit'));
             }
         }
         return $next($request);

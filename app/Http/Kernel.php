@@ -7,6 +7,7 @@ use App\Http\Middleware\CheckUserType;
 use App\Http\Middleware\CheckSubscriber;
 use App\Http\Middleware\AddProductQueryString;
 use App\Http\Middleware\CheckBillingAddress;
+use App\Http\Middleware\CheckProductLimit;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -73,5 +74,6 @@ class Kernel extends HttpKernel
         'check.subscriber' => CheckSubscriber::class,
         'check.admin' => CheckAdmin::class,
         'check.address' => CheckBillingAddress::class,
+        'check.limit' => CheckProductLimit::class,
     ];
 }

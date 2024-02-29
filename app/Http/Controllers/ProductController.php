@@ -14,6 +14,13 @@ use Illuminate\Support\Facades\Cookie;
 class ProductController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware([ 'check.limit' ], [ 'only' => [
+            'create',
+            'store',
+         ] ]);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -41,7 +48,7 @@ class ProductController extends Controller
     {
         // dd($request->logo);
         $product = Product::create([
-            'creator_id'    => auth()->id(),
+            'creator_id'  => auth()->id(),
             'name'        => $request->name,
             'url'         => $request->url,
             'category'    => $request->category,
@@ -122,7 +129,7 @@ class ProductController extends Controller
         return redirect()->route('product.index');
     }
 
-    protected function getFeatureList(int|null $id = null): array
+    protected function getFeatureList(int | null $id = null): array
     {
         $product = Product::withCount([
             'ideas',
@@ -133,8 +140,8 @@ class ProductController extends Controller
             'users',
             'reports',
             'releases',
-            'deliveries'
-        ])->find($id);
+            'deliveries',
+         ])->find($id);
         return [
             'innovate'              => [
                 'name'    => @__('productHome.innovate'),
@@ -221,7 +228,7 @@ class ProductController extends Controller
     public function info(Product $product)
     {
 
-        $data = Product::with('owner')->find(productId());
+        $data  = Product::with('owner')->find(productId());
         $owner = $data->owner;
         $product->loadComments();
         $comments = $product->comments;

@@ -49,6 +49,13 @@ class ProfileController extends Controller
         notify()->success(__('Updated successfully!'));
         return back();
     }
+
+    public function editAddress() {
+        return view('profile.update-address', [
+            'user' => request()->user(),
+         ]);
+    }
+
     public function address(AddressRequest $request)
     {
         $user = Address::where('user_id', auth()->id())->first();
@@ -81,6 +88,11 @@ class ProfileController extends Controller
              ]);
         }
         notify()->success(__('Updated Successfully!'));
+        if (session()->has('package-url')) {
+            $url = session('package-url');
+            session()->forget('package-url');
+            return redirect($url);
+        }
         return back();
     }
 

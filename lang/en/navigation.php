@@ -15,6 +15,7 @@ return [
     ],
     'profile' => [
         'profile' => 'Profile',
+        'dashboard' => 'Dashboard',
         'invitation' => 'Send Invitation',
         'products' => 'My Products',
         'report' => 'Reports',

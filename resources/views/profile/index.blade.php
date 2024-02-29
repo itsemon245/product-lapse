@@ -37,12 +37,12 @@
                                         @if ($user->getRole() != null)
                                             <li class="!flex items-center gap-2">
                                                 <img src="{{ asset('img/check.png') }}" />
-                                                <div class="capitalize">{{ $user->roles->first()?->name }}</div>
+                                                <div class="capitalize">{{ $user->getRole()->name }}</div>
                                             </li>
                                         @endif
                                         @if ($user->activePlan()->first() != null)
                                             <li><span>{{ $user->activePlanName() }}</span></li>
-                                            <li><a href="#"><img
+                                            <li><a href="{{route('package.upgrade')}}"><img
                                                         src="{{ asset('img/crown.png') }}">@__('profile.profile.upgrade')</a>
                                         @endif
                                         </li>

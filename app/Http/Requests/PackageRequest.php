@@ -26,7 +26,10 @@ class PackageRequest extends FormRequest
             'price'=> 'integer|required',
             'product_limit'=> 'nullable',
             'is_limited'=> 'string|nullable',
-            'features'=> 'array|required'
+            'is_popular'=> 'string|nullable',
+            'features'=> 'array|required',
+            'validity'=> 'integer|required',
+            'unit' => 'required|in:day,month,year'
         ];
     }
 }

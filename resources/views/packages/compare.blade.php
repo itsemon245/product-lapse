@@ -32,9 +32,9 @@
                                 <h5 class="pr_title">{{ $feature->name->{app()->getLocale()} }}</h5>
                             </div>
 
-                            @foreach ($feature->packages as $pacakge)
+                            @foreach ($packages as $p)
                                 <div class="price_item" data-title="{{ $package->name->{app()->getLocale()} }}">
-                                    @if ($feature->isActiveFor($package->id))
+                                    @if ($p->activeFeatures()->find($feature->id))
                                         <h5 class="check"><i class="icon_check_alt2"></i></h5>
                                     @else
                                         <h5 class="cros"><i class="icon_close"></i></h5>

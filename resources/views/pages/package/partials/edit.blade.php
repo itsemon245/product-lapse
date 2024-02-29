@@ -23,7 +23,7 @@
                             <div class="form-group mb-2 text_box col-md-6">
                                 <x-input-label class="flex-shrink" for="name" value="Name (ar)" />
                                 <x-input id="name" class="block mt-1 w-full" type="text" placeholder="Name"
-                                    name="name[ar]" :value="$package->name->ar ??  old('name[ar]')" autofocus />
+                                    name="name[ar]" :value="$package->name->ar ?? old('name[ar]')" autofocus />
                             </div>
                             <div class="form-group mb-2 text_box col-md-6">
                                 <x-input-label for="price" value="Price" />
@@ -40,7 +40,7 @@
                                     <div>
                                         <x-input-label for="validity" value="Validity" />
                                         <x-input id="validity" class="block mt-1 w-full" type="text"
-                                            placeholder="Validity" name="validity" :value="$package->validity ??  old('validity')" autofocus />
+                                            placeholder="Validity" name="validity" :value="$package->validity ?? old('validity')" autofocus />
                                     </div>
                                     <x-select-input name="unit" class="!mb-[30px] !w-[120px]">
                                         <option value="day" @selected($package->unit == 'day')>Day</option>
@@ -50,14 +50,22 @@
                                 </div>
                             </div>
                             <div class="form-group mb-2 text_box col-md-6 ">
-                                <div class="flex items-center justify-start gap-[1rem] px-[1rem] h-full">
+                                <div class="flex items-center justify-start gap-4 px-2 md:gap-[3rem] md:px-[1rem] h-full">
 
-                                    <div class="form-group text_box mb-0 mr-2">
-                                        <x-checkbox-input class="" name="is_popular" @checked($package->is_package) label="Set as Popular" />
+                                    <div class="form-group text_box mb-0">
+                                        <label class="flex items-center gap-2 md:gap-4">
+                                            <input type="checkbox" name="is_popular"
+                                            @if ($package->is_popular) checked @endif />
+                                            <span>@__('Set as Popular')</span>
+                                        </label>
+                                        
                                     </div>
-                                    <div class="form-group text_box mb-0 mr-2 ">
-                                        <x-checkbox-input class="" name="limited_feature" @checked($package->limited_feature)
-                                            label="Limited Features" />
+                                    <div class="form-group text_box mb-0">
+                                        <label class="flex items-center gap-2 md:gap-4">
+                                            <input type="checkbox" name="limited_feature"
+                                                @if ($package->limited_feature) checked @endif />
+                                            <span>@__('Limited Features')</span>
+                                        </label>
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +94,8 @@
                             @enderror
                         </div>
                         <div class="d-flex align-items-center text-center">
-                            <button type="submit" class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">@__('Update')</button>
+                            <button type="submit"
+                                class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">@__('Update')</button>
                             <a href="{{ route('package.index') }}"
                                 class="btn_hover agency_banner_btn btn-bg btn-bg-grey">@lang('Cancel')</a>
                         </div>

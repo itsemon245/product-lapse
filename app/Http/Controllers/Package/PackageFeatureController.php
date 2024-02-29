@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Package;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SearchRequest;
+use App\Models\Package;
 use App\Models\PackageFeature;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -24,9 +25,13 @@ class PackageFeatureController extends Controller
      */
     public function store(Request $request)
     {
-        PackageFeature::create([
+        $feature = PackageFeature::create([
             'name' => $request->name,
          ]);
+        $packages = Package::pluck('id');
+        foreach ($packages as $packageId) {
+            $feature->packages()->attach($packageId);
+        }
         notify()->success(__('notify/success.create'));
         return back();
     }

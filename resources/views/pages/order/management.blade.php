@@ -22,8 +22,22 @@
         </x-slot:actions>
 
         <x-slot:filter>
-            {{-- <h5>Status</h5>
-        <x-filter :route="route('search.certificate')" :columns="['status']" model="certificate" :options="$statuses" /> --}}
+            <h5>Status</h5>
+            <form method="post" action="{{ route('admin.order.search') }}">
+                @csrf
+                <select onchange="this.form.submit()" name="search" class="selectpickers selectpickers2">
+                    <option selected value="">@__('filter.all')</option>
+                    @forelse ($options as $opt)
+                    {{-- {{ dd($opt->value) }} --}}
+                        <option value="{{ $opt->name }}">
+                            {{ $opt->value }}
+                            </option>
+                    @empty
+                        <option>@__('filter.no-items')</option>
+                    @endforelse
+                </select>
+            
+            </form>
         </x-slot:filter>
 
 

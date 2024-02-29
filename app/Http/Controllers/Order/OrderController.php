@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers\Order;
 
-use App\Enums\PaymentMethodEnum;
-use App\Http\Controllers\Controller;
-use App\Mail\InvoiceMail;
-use App\Models\Order;
-use App\Models\Package;
 use App\Models\Plan;
 use App\Models\User;
+use App\Models\Order;
+use App\Models\Select;
+use App\Models\Package;
+use App\Mail\InvoiceMail;
+use Illuminate\Support\Str;
 // use Paytabscom\Laravel_paytabs\paypage;
 
 use Illuminate\Http\Request;
+use App\Enums\OrderStatusEnum;
+use App\Services\SearchService;
+use App\Enums\PaymentMethodEnum;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\SearchRequest;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
 use Paytabscom\Laravel_paytabs\Facades\paypage;
 
 class OrderController extends Controller
@@ -69,8 +73,9 @@ class OrderController extends Controller
     }
     public function index()
     {
+        $options = OrderStatusEnum::cases();
         $orders = Order::whereNot('status', 'draft')->with('package', 'user')->latest()->paginate();
-        return view('pages.order.management', compact('orders'));
+        return view('pages.order.management', compact('orders', 'options'));
     }
 
     public function approve(int $id)
@@ -106,7 +111,8 @@ class OrderController extends Controller
 
     public function show(String $id)
     {
-        $findOrder = Order::with('user', 'package')->find($id);
+        $findOrder = Order::with('user', 'package',)->find($id);
+        // $billingaddress = User::find($findOrder->user->id)->billingaddress();
         return view('pages.order.show', compact('findOrder'));
     }
 
@@ -137,5 +143,16 @@ class OrderController extends Controller
         Mail::to($order->user->billingAddress()->email)->send(new InvoiceMail($order));
 
         return redirect(route('payment.success'));
+    }
+    public function search(Request $request)
+    {
+        
+        $options = OrderStatusEnum::cases();
+        $orders = Order::where(function($q) use ($request) {
+            if($request->search){
+                $q->where('status', strtolower($request->search));
+            }
+        })->with('package', 'user')->latest()->paginate();
+        return view('pages.order.management', compact('options', 'orders'));
     }
 }

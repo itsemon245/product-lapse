@@ -95,7 +95,7 @@
                                             @if ($package->product_limit == 1)
                                                 @__('Product')
                                             @else
-                                                @__('Product')
+                                                @__('Products')
                                             @endif
                                         </li>
                                         @if ($package?->validity)
@@ -104,7 +104,7 @@
                                             </li>
                                         @endif
                                         <li><i
-                                                class="ti-check"></i>{{ $package?->limited_features ? trans('Limited Features') : trans('All Features') }}
+                                                class="ti-check"></i>{{ $package?->limited_feature ? trans('Limited Features') : trans('All Features') }}
                                         </li>
                                     </ul>
                                     @if (auth()->user()?->activePlan()->first()?->order?->package_id == $package->id)

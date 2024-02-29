@@ -14,10 +14,10 @@
                     <div class="form-group text_box col-lg-4 col-md-6">
                         <x-input-label for="name" :value="__('feature/product.label.name')" />
                         <x-input id="name" class="" type="text" :placeholder="__('feature/product.placeholder.name')" name="name"
-                            :value="old('name')" autofocus />
+                            :value="old('name')" required autofocus />
                     </div>
                     <div class="form-group text_box col-lg-4 col-md-6">
-                        <x-select-input :label="__('feature/product.label.stage')" id="stage" placeholder="Choose one" name="stage" autofocus>
+                        <x-select-input required :label="__('feature/product.label.stage')" id="stage" placeholder="Choose one" name="stage" autofocus>
                             @if ($stages)
                                 @forelse ($stages as $category)
                                     <option value="<?= $category->value->{app()->getLocale()} ?>" 
@@ -32,11 +32,11 @@
                     </div>
                     <div class="form-group text_box col-lg-4 col-md-6">
                         <x-input-label for="url" :value="__('feature/product.label.url')" />
-                        <x-input id="url" class="" type="text" :placeholder="__('feature/product.placeholder.url')" name="url"
+                        <x-input id="url" required class="" type="text" :placeholder="__('feature/product.placeholder.url')" name="url"
                             :value="old('url')" autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-select-input :label="__('feature/product.label.category')" id="category" placeholder="Choose one" name="category" autofocus>
+                        <x-select-input required :label="__('feature/product.label.category')" id="category" placeholder="Choose one" name="category" autofocus>
                             @if ($categories)
                                 @forelse ($categories as $category)
                                     <option value="<?= $category->value->{app()->getLocale()} ?>" 
@@ -50,11 +50,11 @@
                         </x-select-input>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-input class="input-file" type='file' placeholder="Choose Logo" :label="__('feature/product.label.logo')"
+                        <x-input required class="input-file" type='file' placeholder="Choose Logo" :label="__('feature/product.label.logo')"
                             name='logo' />
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-6">
-                        <x-textarea placeholder="{{ __('feature/product.label.description') }}" rows="5" cols="10" name="description"
+                        <x-textarea required placeholder="{{ __('feature/product.label.description') }}" rows="5" cols="10" name="description"
                             label="{{  __('feature/product.placeholder.description') }}">{{old('description')}}</x-textarea>
                     </div>
 

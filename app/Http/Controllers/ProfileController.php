@@ -64,8 +64,7 @@ class ProfileController extends Controller
                 'state'           => $request->state,
                 'country'         => $request->country,
                 'zip'             => $request->zip,
-                'use_as_shipping' => $request->use_as_shipping,
-                'ip'              => $request->ip,
+                'ip'              => $request->ip(),
              ]);
         } else {
             $user->update([
@@ -78,8 +77,7 @@ class ProfileController extends Controller
                 'state'           => $request->state,
                 'country'         => $request->country,
                 'zip'             => $request->zip,
-                'use_as_shipping' => $request->use_as_shipping,
-                'ip'              => $request->ip,
+                'ip'              => $request->ip(),
              ]);
         }
     }

@@ -21,7 +21,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <h6 class="title2">{{ __('Payment Method') }}</h6>
-                                    <p class="f_400 mb-30 text-font">{{ ucfirst($findOrder->payment_method) }}</p>
+                                    <p class="f_400 mb-30 text-font">{{ $findOrder->payment_method == null ? 'Free Payment' : ucfirst($findOrder->payment_method) }}</p>
                                 </div>
                                 <div class="col-md-12">
                                     @if ($findOrder->bank_details == !null)

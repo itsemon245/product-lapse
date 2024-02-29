@@ -47,23 +47,23 @@
                                 </ul>
                             </div>
                             <div class="jobsearch-table-cell">
-                                <div class="jobsearch-job-userlist">
-                                    <div class="like-btn">
-                                        <x-button type="delete" :action="route('certificate.destroy', $certificate)" :has-icon="true">
-                                            <span class="ti-trash"></span>
-                                        </x-button>
-                                    </div>
+                                <div class="jobsearch-job-userlist d-flex">
                                     <div class="like-btn">
                                         <form action="{{ route('certificate.approval', $certificate) }}" method="POST">
                                             @csrf
-                                            <x-btn-icons type="submit" class="btn" value="<i class='ti-check-box'></i>" />
+                                            <x-btn-icons type="submit" class="btn" value="<i title='Approve' class='ti-check-box'></i>" />
                                         </form>
                                     </div>
                                     <div class="like-btn">
                                         <form action="{{ route('certificate.cancel', $certificate) }}" method="POST">
                                             @csrf
-                                            <x-btn-icons type="submit" class="btn {{ $certificate->status == 1 ? 'd-none' : '' }}" value="<i class='ti-close'></i>" />
+                                            <x-btn-icons type="submit" class="btn {{ $certificate->status == 1 ? 'd-none' : '' }}" value="<i title='Reject' class='ti-close'></i>" />
                                         </form>
+                                    </div>
+                                    <div class="like-btn">
+                                        <x-button type="delete" :action="route('certificate.destroy', $certificate)" title="Delete" :has-icon="true">
+                                            <span title="Delete" class="ti-trash"></span>
+                                        </x-button>
                                     </div>
                                 </div>
                             </div>

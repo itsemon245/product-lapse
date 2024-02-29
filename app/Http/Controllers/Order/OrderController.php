@@ -69,7 +69,7 @@ class OrderController extends Controller
     }
     public function index()
     {
-        $orders = Order::with('user')->with('package')->paginate(15);
+        $orders = Order::whereNot('status', 'draft')->with('package', 'user')->latest()->paginate();
         return view('pages.order.management', compact('orders'));
     }
 
@@ -106,18 +106,13 @@ class OrderController extends Controller
 
     public function show(String $id)
     {
-        $findOrder = Order::with('user')->with('package')->find($id);
-        $user = User::with('image')->where('id', $findOrder->user->id)->first();
-        return view('pages.order.show', compact('findOrder', 'user'));
+        $findOrder = Order::with('user', 'package')->find($id);
+        return view('pages.order.show', compact('findOrder'));
     }
 
 
     public function freePackage(Order $order)
     {
-        $order = tap($order)->update([
-            'status'       => 'completed',
-            'completed_at' => now(),
-         ]);
         $expireDate  = now()->add($order->package->unit, $order->package->validity);
         $activePlan = User::find($order->user_id)->activePlan()->first();
         if ($activePlan) {
@@ -134,6 +129,10 @@ class OrderController extends Controller
             'active'        => true,
             'expired_at'    => $expireDate,
             'product_limit' => $order->package->product_limit,
+         ]);
+         $order = tap($order)->update([
+            'status'       => 'completed',
+            'completed_at' => now(),
          ]);
         Mail::to($order->user->billingAddress()->email)->send(new InvoiceMail($order));
 

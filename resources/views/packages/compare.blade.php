@@ -42,25 +42,31 @@
                                 </div>
                             @endforeach
                         </div>
-                        @endforeach
-                        <div class="pr_list">
-                            
-                            <div class="price_item">
-                                
-                            </div>
-                            @foreach ($packages as $p)
-                                <div class="price_item" data-title="{{ $package->name->{app()->getLocale()} }}">
-                                    @if (auth()->user()?->activePlan()->first()?->order?->package_id == $package->id)
-                                        <a href="#" class="price_btn btn_hover">
-                                            <i class="ti-check"></i>
-                                        </a>
+                    @endforeach
+                    <div class="pr_list">
+
+                        <div class="price_item">
+
+                        </div>
+                        @foreach ($packages as $p)
+                            <div class="price_item" data-title="{{ $package->name->{app()->getLocale()} }}">
+                                @if (auth()->user()?->activePlan()->first()?->order?->package_id == $package->id &&
+                                        auth()->user()?->type == 'subscriber')
+                                    <a href="#" class="price_btn btn_hover">
+                                        <i class="ti-check"></i>
+                                    </a>
+                                @else
+                                    @if (auth()->user()?->type == 'admin')
+                                        <a href="#"
+                                            class="price_btn btn_hover">@__('You are admin')</a>
                                     @else
                                         <a href="{{ route('order.create', ['package' => $p]) }}"
                                             class="price_btn btn_hover">@lang('welcome.subscribe')</a>
                                     @endif
-                                </div>
-                            @endforeach
-                        </div>
+                                @endif
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>

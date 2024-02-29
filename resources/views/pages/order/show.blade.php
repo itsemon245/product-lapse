@@ -11,7 +11,7 @@
                     <div class="col-lg-8 blog_sidebar_left">
                         <div class="blog_single mb_50">
                             <div class="row">
-                                <h5 class="f_size_20 f_500 col-md-12">{{ $findOrder->package->name->{app()->getLocale()} }} <span class="text-success">{{ $findOrder->amount }}</span></h5>
+                                <h5 class="f_size_20 f_500 col-md-12">{{ $findOrder->package?->name->{app()->getLocale()} }} <span class="text-success">{{ $findOrder->amount }}</span></h5>
                                 <div class="entry_post_info col-md-12">
                                     {{ \Carbon\Carbon::parse($findOrder->date)->format('l, j F Y') }}
                                 </div>
@@ -36,7 +36,7 @@
                                         </div>  
                                     </div>
                                     
-                                    @else
+                                    {{-- @else
                                     <div class="row">
                                         <div class="col-md-6">
                                             <p class="f_400 mb-30 text-font">@__('Card Name:'){{ $findOrder->card_details->name }}</p> 
@@ -50,7 +50,7 @@
                                         <div class="col-md-6">
                                             <p class="f_400 mb-30 text-font">CVV:{{ $findOrder->card_details->cvv }}</p> 
                                         </div> 
-                                    </div>
+                                    </div> --}}
                                     @endif
                                 </div>
                                
@@ -63,13 +63,12 @@
                         <div class="blog-sidebar box-sidebar">
                             <div class="widget sidebar_widget widget_recent_post mt_60">
                                 <div class="media post_author mt_60">
-                                    <img class="rounded-circle" src="{{ favicon($user->image) }}" alt="">
+                                    <img class="rounded-circle" src="{{ $findOrder->user->image?->url ?? favicon() }}" alt="">
                                     <div class="media-body">
                                         <h5 class=" t_color3 f_size_18 f_500">{{ $findOrder->user->name }}</h5>
                                     </div>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>                   
                 </div>

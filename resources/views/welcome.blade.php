@@ -107,7 +107,7 @@
                                                 class="ti-check"></i>{{ $package?->limited_feature ? trans('Limited Features') : trans('All Features') }}
                                         </li>
                                     </ul>
-                                    @if (auth()->user()?->activePlan()->first()?->order?->package_id == $package->id)
+                                    @if (auth()->user()?->activePlan()->first()?->order?->package_id == $package->id && auth()->user()?->type == 'subscriber')
                                         <a href="#" class="price_btn btn_hover">
                                             <i class="ti-check"></i>
                                         </a>

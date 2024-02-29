@@ -182,6 +182,15 @@ class SelectSeeder extends Seeder
             'type' => SelectType::STATUS->value,
             'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
+                'en' => 'Pending',
+                'ar' => 'قيد الانتظار',
+            ],
+        ]);
+        Select::create([
+            'model_type' => Feature::CERTIFICATE->value,
+            'type' => SelectType::STATUS->value,
+            'color' => Colors::cases()[random_int(0,2)]->value,
+            'value' => [
                 'en' => 'Approved',
                 'ar' => 'موافقة',
             ],
@@ -191,8 +200,8 @@ class SelectSeeder extends Seeder
             'type' => SelectType::STATUS->value,
             'color' => Colors::cases()[random_int(0,2)]->value,
             'value' => [
-                'en' => 'Cancel',
-                'ar' => 'يلغي',
+                'en' => 'Rejected',
+                'ar' => 'مرفوض',
             ],
         ]);
         Select::create([

@@ -23,12 +23,12 @@ class CheckSubscriber
             notify()->warning(__('You are not allowed to visit this part yet!'));
             return redirect()->route('home');
         }
+        if ($user->type == 'admin') {
+            return redirect()->route('admin');
+        }
         if ($user->activePlan()->first() == null) {
             notify()->warning(__('Your plan has been expired!'));
             return redirect()->route('home');
-        }
-        if ($user->type == 'admin') {
-            return redirect()->route('admin');
         }
         return $next($request);
     }

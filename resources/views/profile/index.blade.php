@@ -42,22 +42,27 @@
                                         @endif
                                         @if ($user->activePlan()->first() != null)
                                             <li><span>{{ $user->activePlanName() }}</span></li>
-                                            <li><a href="{{route('package.upgrade')}}"><img
+                                            <li><a href="{{ route('package.upgrade') }}"
+                                                    class="flex items-center gap-2"><img
                                                         src="{{ asset('img/crown.png') }}">@__('profile.profile.upgrade')</a>
                                         @endif
                                         </li>
                                     </ul>
                                     <ul class="list-unstyled">
-                                        <li><span>@__('profile.profile.email') :</span>{{ $user->email }}</li>
+                                        <li><span>@__('profile.profile.email') :</span> {{ $user->email }}</li>
                                         <li><span>@__('profile.profile.phone') :</span> <span
                                                 class="profile-num">{{ $user->phone }}</span></li>
                                         @if ($user->type == 'member')
                                             <li><span>@__('profile.profile.employer') :</span> {{ $user->owner?->name }}</li>
                                         @endif
                                     </ul>
-                                    <div class="btn_info d-flex">
+                                    <div class="btn_info d-flex gap-2 items-center">
                                         <x-button type="link" href="{{ route('profile.edit') }}"
                                             class="btn_hover agency_banner_btn btn-bg">@__('profile.profile.edit')</x-button>
+                                        @if (auth()->user()?->type != 'admin' || auth()->user()?->type != 'member')
+                                            <x-button type="link" href="{{ route('address.edit') }}"
+                                                class="btn_hover agency_banner_btn btn-bg">@__('Edit Billing Address')</x-button>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

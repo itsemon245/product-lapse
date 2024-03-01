@@ -42,12 +42,12 @@
                 <div class="blog-sidebar box-sidebar">
                     <div class="widget sidebar_widget widget_recent_post mt_60">
                         <div class="media post_author mt_60">
-                            <img class="rounded-circle" src="{{ $owner->image == null ? asset('img/p2.jpg') : $owner->image->url }}" alt="">
+                            <img class="rounded-circle" src="{{ favicon($data->creator->image) }}" alt="">
                             <div class="media-body">
-                                <h5 class=" t_color3 f_size_18 f_500">{{ $owner->name }}</h5>
+                                <h5 class=" t_color3 f_size_18 f_500">{{ $data->creator->name }}</h5>
                             </div>
                         </div>
-                        <h6 class="title2">@__('feature/product.info.created'): <span class="f_400 mb-30 text-font">{{ $owner->name }}</span></h6>
+                        {{-- <h6 class="title2">@__('feature/product.info.created'): <span class="f_400 mb-30 text-font">{{ $owner->name }}</span></h6> --}}
                     </div>
 
                 </div>
@@ -60,6 +60,6 @@
 
             </div>
         </x-slot:profile>
-        <x-comments :model="$product" :comments="$product->comments" />
+        {{-- <x-comments :model="$product" :comments="$product->comments" /> --}}
     </x-feature.show>
 @endsection

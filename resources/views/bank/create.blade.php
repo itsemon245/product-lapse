@@ -58,7 +58,7 @@
 
                             <div class="payment-btns text-center flex items-center justify-center gap-3">
                                 <button type="submit" class="btn_hover agency_banner_btn btn-bg">Continue </button>
-                                <x-button type="link" href="{{ route('product.index') }}" class="btn_hover agency_banner_btn btn-bg btn-bg3"> Cancel</x-button>
+                                <x-button type="link" href="{{ route('home') }}" class="btn_hover agency_banner_btn btn-bg btn-bg3"> Cancel</x-button>
                             </div>
                         </form>
                     </div>

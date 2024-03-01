@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pages', function (Blueprint $table) {
             $table->id();
-            $table->json('title')->unique();
+            $table->json('title');
             $table->json('body');
             $table->string('slug');
             $table->string('type')->default('footer');

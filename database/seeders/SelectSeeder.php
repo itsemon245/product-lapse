@@ -177,24 +177,33 @@ class SelectSeeder extends Seeder
                 'ar' => 'صورة',
             ],
         ]);
-        // Select::create([
-        //     'model_type' => Feature::CERTIFICATE->value,
-        //     'type' => SelectType::SUBMISSION->value,
-        //     'color' => Colors::cases()[random_int(0,2)]->value,
-        //     'value' => [
-        //         'en' => 'Approved',
-        //         'ar' => 'موافقة',
-        //     ],
-        // ]);
-        // Select::create([
-        //     'model_type' => Feature::CERTIFICATE->value,
-        //     'type' => SelectType::SUBMISSION->value,
-        //     'color' => Colors::cases()[random_int(0,2)]->value,
-        //     'value' => [
-        //         'en' => 'Cancel',
-        //         'ar' => 'يلغي',
-        //     ],
-        // ]);
+        Select::create([
+            'model_type' => Feature::CERTIFICATE->value,
+            'type' => SelectType::STATUS->value,
+            'color' => Colors::cases()[random_int(0,2)]->value,
+            'value' => [
+                'en' => 'Pending',
+                'ar' => 'قيد الانتظار',
+            ],
+        ]);
+        Select::create([
+            'model_type' => Feature::CERTIFICATE->value,
+            'type' => SelectType::STATUS->value,
+            'color' => Colors::cases()[random_int(0,2)]->value,
+            'value' => [
+                'en' => 'Approved',
+                'ar' => 'موافقة',
+            ],
+        ]);
+        Select::create([
+            'model_type' => Feature::CERTIFICATE->value,
+            'type' => SelectType::STATUS->value,
+            'color' => Colors::cases()[random_int(0,2)]->value,
+            'value' => [
+                'en' => 'Rejected',
+                'ar' => 'مرفوض',
+            ],
+        ]);
         Select::create([
             'model_type' => Feature::SUPPORT->value,
             'type' => SelectType::PRIORITY->value,

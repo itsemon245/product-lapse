@@ -12,6 +12,7 @@ enum Feature: string
     case REPORT = 'report';
     case PRODUCT = 'product';
     case RELEASE = 'release';
+    case CERTIFICATE = 'certificate';
     
     //Packages and user should not be in the feature
     // case PACKAGE = 'package';

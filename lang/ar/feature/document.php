@@ -14,7 +14,7 @@ return [
         'version' => 'الاصدار', 
         'description' => 'وصف الوثيقة',
         'date' => 'تاريخ الوثيقة', 
-        'attach' => 'Attach file',
+        'attach' => 'أرفق ملف',
     ],
     'placeholder' => [
         'name' => 'اسم الوثيقة',

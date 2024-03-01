@@ -82,12 +82,12 @@
                     <div class="modal-body">
                         <div class="container-fluid">
                             <div class="form-group text_box col-lg-12 col-md-12">
-                                <x-input label="{{ __('feature/cproductHistory.date') }}" id="required_completion_date"
+                                <x-input label="{{ __('feature/productHistory.date') }}" id="required_completion_date"
                                     class="block mt-1 w-full" type="date" name="date" required autofocus />
                             </div>
                             <div class="form-group text_box col-lg-12 col-md-12">
                                 <x-textarea label="{{ __('feature/productHistory.label.description') }}" name="description"
-                                    placeholder="{{ __('feature/productHistory.placeholder.description') }}">{{ $productHistory->description }}</x-textarea>
+                                    placeholder="{{ __('feature/productHistory.placeholder.description') }}">{{ $productHistory->description ?? '' }}</x-textarea>
 
                             </div>
                             <div class="form-group text_box col-lg-12 col-md-12">

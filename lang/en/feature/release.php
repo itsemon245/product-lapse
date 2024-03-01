@@ -21,6 +21,7 @@ return [
         'details' => 'Release Details',
     ],
     'submit' => 'Add release',
+    'cancel' => 'Cancel',
 
     //details page
     'version' => 'Release version',

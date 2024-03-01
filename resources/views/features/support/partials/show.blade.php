@@ -25,10 +25,6 @@
                             <p class="f_400 mb-30 text-font">
                                 {{ \Carbon\Carbon::parse($support->completion_date)->format('l, j F Y') }}</p>
                         </div>
-                        <div class="col-md-6">
-                            <h6 class="title2">@__('feature/support.realy-date')</h6>
-                            <p class="f_400 mb-30 text-font">Sunday, 16 June 2023</p>
-                        </div>
                         <div class="col-md-12">
                             <h6 class="title2">@__('feature/support.details')</h6>
                             <p class="f_400 mb-30 text-font">
@@ -54,7 +50,7 @@
                         </div>
                         @can('update support')
                             <div class="row text-center">
-                                <h6 class="title2 the-priority">Status : <span>{{ $support->status }}</span></h6>
+                                <h6 class="title2 the-priority"> @__('Status :')<span>{{ $support->status }}</span></h6>
                             </div>
                             <form action="{{ route('support.update.status', $support) }}" method="post"
                                 enctype="multipart/form-data">
@@ -99,7 +95,7 @@
                             </form>
                         @else
                             <div class="row text-center">
-                                <h6 class="title2 the-priority">Status : <span>{{ $support->status }}</span></h6>
+                                <h6 class="title2 the-priority">@__('Status :') <span>{{ $support->status }}</span></h6>
                             </div>
                         @endcan
                     </div>

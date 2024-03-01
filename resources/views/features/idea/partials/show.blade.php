@@ -11,7 +11,7 @@
                 <ul class="step d-flex flex-nowrap">
                     @foreach ($stages as $stage)
                         <li class="step-item {{ $idea->stage == $stage->value ? 'active' : '' }}">
-                            <a href="#!" class="">@lang('Idea ' . $stage->value)</a>
+                            <a href="#" class="">@lang('Idea ' . $stage->value)</a>
                         </li>
                     @endforeach
                 </ul>
@@ -92,7 +92,7 @@
                                 </div>
                             @endcan
                         </div>
-                        <h6 class="title2 the-priority">Idea owner : <span>{{ $idea->owner }}</span></h6>
+                        <h6 class="title2 the-priority"> @__('Idea owner :') <span>{{ $idea->owner }}</span></h6>
                     </div>
 
                 </div>
@@ -155,7 +155,6 @@
         </div>
     </div>
 @endsection
-
 @push('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
     <script>

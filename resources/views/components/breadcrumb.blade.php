@@ -2,28 +2,23 @@
 @php
     $class = $attributes->has('class') ? $attributes->get('class') : 'breadcrumb_area';
 @endphp
-<section class="{{$class}}">
+<section class="{{ $class }}">
     <div class="container d-flex">
         <div class="breadcrumb_content text-center ml-auto">
             <ul class="breadcrumb">
                 @if (str(url()->current())->contains('dashboard'))
-                    
-                <li class="breadcrumb-item {{ request()->routeIs('dashboard') ? 'active' : '' }} ">
-                    <a
-                        href="{{  route('dashboard') }}">@__('root.dashboard')</a>
-                </li>
+                    <li class="breadcrumb-item {{ request()->routeIs('dashboard') ? 'active' : '' }} ">
+                        <a href="{{ route('dashboard') }}">@__('root.dashboard')</a>
+                    </li>
                 @elseif (str(url()->current())->contains('admin'))
-                <li class="breadcrumb-item {{ request()->routeIs('admin') ? 'active' : '' }} ">
-                    <a
-                        href="{{  route('admin') }}">@__('Admin')</a>
-                </li>
+                    <li class="breadcrumb-item {{ request()->routeIs('admin') ? 'active' : '' }} ">
+                        <a href="{{ route('admin') }}">@__('Admin')</a>
+                    </li>
                 @else
-                <li class="breadcrumb-item {{ request()->routeIs('home') ? 'active' : '' }} ">
-                    <a
-                        href="{{  route('home') }}">@__('Home')</a>
-                </li>
-                    
-                @endif  
+                    <li class="breadcrumb-item {{ request()->routeIs('home') ? 'active' : '' }} ">
+                        <a href="{{ route('home') }}">@__('Home')</a>
+                    </li>
+                @endif
                 @if (productId() != null && str(url()->current())->contains('dashboard'))
                     <li
                         class="breadcrumb-item {{ request()->routeIs('product.show', productId()) ? 'active' : '' }} ">

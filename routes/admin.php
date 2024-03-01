@@ -44,6 +44,7 @@ Route::prefix('admin')
         Route::resource('users', UsersManagementController::class);
         Route::post('ban-user/{user}', [UsersManagementController::class, 'ban'])->name('user.ban');
         Route::get('users-search', [UsersManagementController::class, 'search'])->name('users.search');
+        Route::get('users-filter', [UsersManagementController::class, 'filter'])->name('users.filter');
         Route::get('/profile', [ProfileController::class, 'index'])->name('admin.profile.index');
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('admin.profile.edit');
         Route::patch('/profile/update/{id}', [ProfileController::class, 'update'])->name('admin.profile.update');

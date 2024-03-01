@@ -54,7 +54,7 @@
                                         enctype="multipart/form-data" class="login-form">
                                         @csrf
                                         @method('PUT')
-                                        <x-modal title="Update Version" label="feature/document.placeholder.version">
+                                        <x-modal title="{{ __('Update Version') }}" label="feature/document.placeholder.version">
                                             <div>
                                                 <div class="row">
                                                     <div class="col-12">

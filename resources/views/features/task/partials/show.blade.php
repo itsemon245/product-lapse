@@ -32,7 +32,7 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>@__('feature/task.name')</th>
-                                                <th>@__('feature/task.action')</th>
+                                                <th>@__('Actions')</th>
                                             </tr>
                                         </thead>
                                         <tbody>

@@ -11,4 +11,3 @@ return [
     'edit' => 'Edit',
     'cancel' => 'Cancel',
 ];
-

@@ -21,6 +21,7 @@ return [
         'details' => 'تفاصيل الاصدار', 
     ],
     'submit' => 'اضف اصدار',
+    'cancel' => 'يلغي',
 
     //details page
     'version' => 'رقم الاصدار',

@@ -18,7 +18,7 @@
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-select-input label="{{ __('feature/change.label.classification') }}" id="type"
-                            placeholder="Choose one" name="classification" required autofocus>
+                             name="classification" required autofocus>
 
                             @forelse ($classifications as $classification)
                                 <option value="{{ $classification->value->{app()->getLocale()} }}">
@@ -32,29 +32,25 @@
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-select-input label="{{ __('feature/change.label.priority') }}" id="type"
-                            placeholder="Choose one" name="priority" required autofocus>
+                             name="priority" required autofocus>
 
-                            @forelse ($priorities as $priority)
+                            @foreach ($priorities as $priority)
                                 <option value="{{ $priority->value->{app()->getLocale()} }}" @selected($idea?->priority == $priority->value->en || $idea?->priority == $priority->value->ar)>
                                     {{ $priority->value->{app()->getLocale()} }}
                                 </option>
-                            @empty
-                                <option disabled>No priority available</option>
-                            @endforelse
+                            @endforeach
 
                         </x-select-input>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-select-input label="{{ __('feature/change.label.status') }}" id="type"
-                            placeholder="Choose one" name="status" required autofocus>
+                             name="status" required autofocus>
 
-                            @forelse ($statuses as $status)
+                            @foreach ($statuses as $status)
                                 <option value="{{ $status->value->{app()->getLocale()} }}">
                                     {{ $status->value->{app()->getLocale()} }}
                                 </option>
-                            @empty
-                                <option disabled>No status available</option>
-                            @endforelse
+                            @endforeach
 
                         </x-select-input>
                     </div>
@@ -68,13 +64,11 @@
                             placeholder="{{ __('feature/change.placeholder.administrator') }}" name="administrator"
                             required autofocus>
                             @if ($users)
-                                @forelse ($users as $user)
+                                @foreach ($users as $user)
                                     <option value="{{ $user->id }}">
                                         {{ $user->name }}
                                     </option>
-                                @empty
-                                    <option disabled>No user available</option>
-                                @endforelse
+                                @endforeach
                             @endif
                         </x-select-input>
                     </div>

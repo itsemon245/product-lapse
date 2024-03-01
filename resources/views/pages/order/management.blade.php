@@ -43,6 +43,7 @@
 
         <x-slot:list>
             @forelse ($orders as $order)
+            {{-- {{ dd($order->user) }} --}}
             @php
                 $user = App\Models\User::with('image')->where('id', $order->user->id)->first();
             @endphp
@@ -55,7 +56,7 @@
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell !w-full">
                                         <h4><a href="{{ route('admin.order.show', $order) }}"
-                                                class="f_500 t_color3">{{ $order->package->name->{app()->getLocale()} }}</a>
+                                                class="f_500 t_color3">{{ $order->package->name->{app()->getLocale()} . ' ' . __('Order by') . ' ' . $user->name }}</a>
                                         </h4>
                                         <ul class="list-unstyled">
                                             <li> Status: <span class="p_color4">{{ $order->status }}</span> </li>

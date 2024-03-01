@@ -5,7 +5,6 @@
             <x-breadcrumb :list="[['label' => @__('feature/support.title'), 'route' => route('support.index')]]" />
         </x-slot:breadcrumb>
         <x-slot:search>
-
             <form method="GET" hx-get="{{ route('support.search') }}" hx-trigger="submit" hx-target="#search-results"
                 hx-select="#search-results" class="search-form input-group">
                 <input type="hidden" name="columns[]" value="name">

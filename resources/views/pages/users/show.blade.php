@@ -34,6 +34,10 @@
                                 <h6 class="title2">Status:</h6>
                                 <p class="f_400 mb-30 text-font {{ $user->banned_at == null ? 'text-success' : 'text-danger' }} ">{{ $user->banned_at == null ? 'Active' : 'Ban' }}</p>
                             </div> 
+                            <div class="col-md-6">
+                                <h6 class="title2">Email:</h6>
+                                <p class="f_400 mb-30 text-font">{{ ucfirst($user->email) }}</p>
+                            </div> 
                         </div> 
                         <div class="col-md-6 border border-primary">
                             <div class="row">

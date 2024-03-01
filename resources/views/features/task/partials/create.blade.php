@@ -1,6 +1,6 @@
 @extends('layouts.subscriber.app', ['title' => @__('feature/task.add')])
 
-@section('main')
+@section('main') 
     <x-feature.create>
         <x-slot:breadcrumb>
             <x-breadcrumb :list="[['label' => @__('feature/task.add'), 'route' => route('task.create')]]" />
@@ -65,13 +65,13 @@
                         <x-input-label for="details" value="{{ __('feature/task.label.details') }}" />
                         <x-textarea id="details" class="block mt-1 w-full" name="details"
                             placeholder="{{ __('feature/task.placeholder.details') }}" required
-                            autofocus>{!! $task->details ?? '' !!}</x-textarea>
+                            autofocus>{!! $task->details ?? old('details') !!}</x-textarea>
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-12">
                         <x-input-label for="steps" value="{{ __('feature/task.label.steps') }}" />
                         <x-textarea id="steps" class="block mt-1 w-full" name="steps"
                             placeholder="{{ __('feature/task.placeholder.steps') }}" required
-                            autofocus>{!! $idea->steps ?? '' !!}</x-textarea>
+                            autofocus>{!! $idea->steps ?? old('steps') !!}</x-textarea>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-input label="{{ __('feature/task.label.str-date') }}" id="starting_date"
@@ -98,7 +98,7 @@
 
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-attach label="{{ __('feature/task.label.attach') }}" class="block mt-1 w-full"
+                        <x-attach label="{{ __('feature/task.label.attach') }}" required class="block mt-1 w-full"
                             name="add_attachments[]" />
                     </div>
                 </div>
@@ -106,10 +106,11 @@
                 <div class="d-flex align-items-center text-center">
                     <button type="submit"
                         class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">@__('feature/task.submit')</button>
+            </form>
                     <a href="{{ route('task.index') }}"
                         class="btn_hover agency_banner_btn btn-bg btn-bg-grey">@__('feature/task.cancel')</a>
                 </div>
-            </form>
+           
         </x-slot:from>
     </x-feature.create>
 @endsection

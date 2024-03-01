@@ -23,8 +23,8 @@ class DocumentRequest extends FormRequest
     {
         return [
             'name' => 'sometimes|required|string|max:255',
-            'type' => 'sometimes|required',
-            'version' => 'sometimes|required',
+            'type' => 'required',
+            'version' => 'required',
             'description' => 'sometimes|required|string|max:255',
             'date' => 'sometimes|required',
             'attach_file' => 'sometimes|required',

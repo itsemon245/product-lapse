@@ -16,13 +16,14 @@ class TaskRequest extends FormRequest
     {
         return [
             'name' => 'sometimes|required|string|max:255',
-            'status' => 'sometimes|required',
-            'category' => 'sometimes|required',
+            'status' => 'required',
+            'category' => 'required',
             'details' => 'sometimes|required|string',
             'steps' => 'sometimes|required|string',
             'starting_date' => 'sometimes|required|date',
             'ending_date' => 'sometimes|required|date|after_or_equal:starting_date',
             'administrator' => 'sometimes|required|string|max:255',
+            'add_attachments' => 'sometimes|required',
         ];
     }
 }

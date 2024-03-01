@@ -1,35 +1,31 @@
-@extends('layouts.admin.app', ['title' => @__('message.show')])
+@extends('layouts.admin.app', ['title' => @__('Contact massage show')])
 @section('main')
     <x-feature.show>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => @__('feature/report.show'), 'route' => route('contact.messages.view', $contactMessage)]]" />
+            <x-breadcrumb :list="[['label' => @__('Contact massage show'), 'route' => route('contact.messages.view', $contactMessage)]]" />
         </x-slot:breadcrumb>
         <x-slot:details>
-            <div class="col-lg-8 blog_sidebar_left">
-                <div class="blog_single mb_50">
-                    <div class="">
-                        <h5 class="f_size_20 f_500">{{ $contactMessage->name }}</h5>
-                        <div class="entry_post_info">
-                            {{ \Carbon\Carbon::parse($contactMessage->created_at)->format('l, j F Y') }}
+            <div class="col-md-12 blog_sidebar_left">
+                <div class=" blog_single mb_20">
+                    <h5 class="f_size_20 f_500">{{ $contactMessage->name }}</h5>
+                    <div class="entry_post_info">
+                        {{ \Carbon\Carbon::parse($contactMessage->created_at)->format('l, j F Y') }}
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="title2">@__('message.email')</h6>
+                            <p class="f_400 mb-30 text-font">{{ $contactMessage->email }}</p>
                         </div>
-
-                        <h6 class="title2">@__('message.email')</h6>
-                        <p class="f_400 mb-30 text-font">{{ $contactMessage->email }}</p>
-
-                        <h6 class="title2">@__('message.phone')</h6>
-                        <p class="f_400 mb-30 text-font">{{ $contactMessage->phone }}</p>
-
-                        <h6 class="title2">@__('message.body')</h6>
-                        <p class="f_400 mb-30 text-font">
-                            {{ $contactMessage->body }}
-                        </p>
-
-                        {{-- @if (isset($contactMessage->reply))
-                            <h6 class="title2">@__('message.reply')</h6>
+                        <div class="col-md-6">
+                            <h6 class="title2">@__('message.phone')</h6>
+                            <p class="f_400 mb-30 text-font">{{ $contactMessage->phone }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="title2">@__('message.body')</h6>
                             <p class="f_400 mb-30 text-font">
-                                {{ $contactMessage->reply->body }}
+                                {{ $contactMessage->body }}
                             </p>
-                        @endif --}}
+                        </div>
                     </div>
                 </div>
                 <div class="blog_single mb_50">
@@ -37,10 +33,10 @@
                         enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
-                            <x-textarea name="reply" label="Reply" rows="10" required="required" />
+                            <x-textarea name="reply" label="Reply" placeholder="Write somethings...." rows="10" required="required" />
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">@__('message.send')</button>
+                            <x-button type="submit" class="btn btn-primary">@__('message.send')</x-button>
                         </div>
                     </form>
                 </div>

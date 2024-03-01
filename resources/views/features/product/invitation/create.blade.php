@@ -56,15 +56,12 @@
                                 <div class="col-lg-4 col-md-6">
                                     <div class="checkbox remember">
                                         <label>
-                                            <input type="checkbox" value="{{ $product->id }}" name="products[]">
+                                            <input type="checkbox" value="{{ $product->id }}" name="products[]" />
                                             {{ $product->name }}
                                         </label>
                                     </div>
                                 </div>
                             @endforeach
-                            @error('products')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
                         </div>
                         @error('products')
                             <div class="alert alert-danger">{{ $message }}</div>

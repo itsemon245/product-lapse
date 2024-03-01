@@ -34,8 +34,8 @@ class IdeaController extends Controller
         $stages = Stage::cases();
         return view('features.idea.partials.create', compact('priorities', 'stages'));
     }
-
-    /**
+ 
+    /** 
      * Store a newly created resource in storage.
      */
     public function store(IdeaRequest $request)

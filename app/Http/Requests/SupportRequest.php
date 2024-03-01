@@ -23,9 +23,9 @@ class SupportRequest extends FormRequest
     {
         return [
             'name' => 'sometimes|required|string|max:255',
-            'classification' => 'sometimes|required',
-            'priority' => 'sometimes|required',
-            'status' => 'sometimes|required',
+            'classification' => 'required',
+            'priority' => 'required',
+            'status' => 'required',
             'description' => 'sometimes|required|string |max:255',
             'administrator' => 'sometimes|required|string|max:40',
             'completion_date' => 'sometimes|required|date',

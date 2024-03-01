@@ -30,7 +30,9 @@ class InvitationController extends Controller
     public function create()
     {
         $products = Product::get();
-        $roles    = Role::get();
+        $roles    = Role::where('name', '!=', 'admin')
+        ->where('name', '!=', 'account holder')
+        ->get();
         return view('features.product.invitation.create', compact('products', 'roles'));
     }
 
@@ -79,7 +81,7 @@ class InvitationController extends Controller
         return view('features.product.invitation.create-password', compact('id'));
     }
 
-    public function passwordStore(Request $request)
+    public function passwordStore(Request $request, $id)
     {
 
         $request->validate([
@@ -88,7 +90,7 @@ class InvitationController extends Controller
         Auth::guard('web')->logout();
         request()->session()->invalidate();
         request()->session()->regenerateToken();
-        $id = base64_decode($request->id);
+        $id = base64_decode($id);
 
         $invitation = Invitation::find($id);
         // dd($invitation);
@@ -145,7 +147,9 @@ class InvitationController extends Controller
         }
         $user->owner_id = $invitation->owner_id;
         $user->type     = 'member';
-        $user->assignRole($invitation->role);
+        if ($invitation->role) {
+            $user->assignRole($invitation->role);
+        }
         $user->saveQuietly();
 
     }

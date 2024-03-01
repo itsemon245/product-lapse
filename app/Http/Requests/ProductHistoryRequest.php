@@ -22,9 +22,9 @@ class ProductHistoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'date' => ['required'],
-            'description' => ['required'],
-            'image' => ['sometimes', 'required'],
+            'date' => 'sometimes|required',
+            'description' => 'sometimes|required',
+            'image' => 'sometimes|required',
         ];
     }
 }

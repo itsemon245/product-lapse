@@ -37,11 +37,7 @@
                 <div class="col-md-6">
                     <div class="item lon new">
                         <div class="list_item">
-                            @php
-                                $creator = App\Models\User::where('id', $report->creator_id)->with('image')->first();
-
-                            @endphp
-                            <figure><a href="{{ route('report.show', $report) }}"><img src="{{ favicon($creator->image) }}" alt=""></a>
+                            <figure><a href="{{ route('report.show', $report) }}"><img src="{{ favicon($report->image) }}" alt=""></a>
                             </figure>
                             <div class="joblisting_text">
                                 <div class="job_list_table">

@@ -36,10 +36,7 @@
                 <div class="col-md-6">
                     <div class="item lon new">
                         <div class="list_item">
-                            @php
-                                $creator = App\Models\User::where('id', $delivery->creator_id)->with('image')->first();
-                            @endphp
-                            <figure><a href="#"><img src="{{ favicon($creator->image) }}" alt=""></a></figure>
+                            <figure><a href="#"><img src="{{ favicon($delivery->image) }}" alt=""></a></figure>
                             <div class="joblisting_text document-list">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell">

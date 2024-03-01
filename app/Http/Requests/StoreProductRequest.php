@@ -23,7 +23,7 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'url' => 'required|url',
+            'url' => 'required',
             'stage' => 'required',
             'description' => 'required',
             'category' => 'required',

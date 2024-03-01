@@ -61,13 +61,10 @@
                                                     <div class="col-12">
                                                         <div class="extra extra2 extra3">
                                                             <div class="media post_author state-select">
-                                                                <div class="media-body">
-                                                                    <h5 class="t_color3 f_size_16 f_500">@__('feature/document.label.version')</h5>
-                                                                </div>
-                                                                <div class="checkbox remember">
-                                                                    <input type="text" name="version" class="form-control"
-                                                                        placeholder="{{ __('feature/document.placeholder.version') }}"
-                                                                        required>
+                                                                <div class="media-body form-group text_box col-lg-12 col-md-12">
+                                                                    <x-input type="text" :label="__('feature/document.label.version')" name="version" class="form-control"
+                                                                            placeholder="{{ __('feature/document.placeholder.version') }}" :value="$document->version"
+                                                                            required>
                                                                 </div>
                                                             </div>
                                                         </div>

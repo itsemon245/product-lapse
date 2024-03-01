@@ -31,6 +31,7 @@ return [
         'title' => 'معلومات المنتج',
         'category' => 'فئة',
         'stage' => 'منصة',
+        'url' => 'URL',
         'description' => 'وصف',
         'created' => 'انشأ من قبل',
     ],

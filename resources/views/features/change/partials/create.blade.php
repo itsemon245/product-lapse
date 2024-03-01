@@ -21,7 +21,7 @@
                              name="classification" required autofocus>
 
                             @forelse ($classifications as $classification)
-                                <option value="{{ $classification->value->{app()->getLocale()} }}">
+                                <option value="{{ $classification->value->{app()->getLocale()} }}" @selected($classification->value->{app()->getLocale()} == old('classification'))>
                                     {{ $classification->value->{app()->getLocale()} }}
                                 </option>
                             @empty
@@ -35,7 +35,7 @@
                              name="priority" required autofocus>
 
                             @foreach ($priorities as $priority)
-                                <option value="{{ $priority->value->{app()->getLocale()} }}" @selected($idea?->priority == $priority->value->en || $idea?->priority == $priority->value->ar)>
+                                <option value="{{ $priority->value->{app()->getLocale()} }}" @selected($idea?->priority == $priority->value->en || $idea?->priority == $priority->value->ar || $priority->value->{app()->getLocale()} == old('priority'))>
                                     {{ $priority->value->{app()->getLocale()} }}
                                 </option>
                             @endforeach
@@ -47,7 +47,7 @@
                              name="status" required autofocus>
 
                             @foreach ($statuses as $status)
-                                <option value="{{ $status->value->{app()->getLocale()} }}">
+                                <option value="{{ $status->value->{app()->getLocale()} }}" @selected($status->value->{app()->getLocale()} == old('status'))>
                                     {{ $status->value->{app()->getLocale()} }}
                                 </option>
                             @endforeach
@@ -65,7 +65,7 @@
                             required autofocus>
                             @if ($users)
                                 @foreach ($users as $user)
-                                    <option value="{{ $user->id }}">
+                                    <option value="{{ $user->id }}" @selected($user->id == old('classification') || $user->id == auth()->id())>
                                         {{ $user->name }}
                                     </option>
                                 @endforeach

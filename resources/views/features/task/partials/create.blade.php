@@ -87,7 +87,7 @@
                             autofocus>
                             @if ($users)
                                 @forelse ($users as $user)
-                                    <option value="{{ $user->id }}">
+                                    <option value="{{ $user->id }}" @selected($user->id == old('classification') || $user->id == auth()->id()) > 
                                         {{ $user->name }}
                                     </option>
                                 @empty

@@ -17,20 +17,22 @@
                 @method('PUT')
                 <div class="row">
                     <div class="form-group text_box col-lg-12 col-md-12">
-                        <label class=" text_c f_500">@__('feature/productHistory.date')</label>
-                        <input type="date" placeholder="date" name="date" required
-                            value="{{ $productHistory->date }}">
+                        <x-input label="{{ __('feature/cproductHistory.date') }}" id="required_completion_date"
+                            class="block mt-1 w-full" type="date" name="date"
+                            value="{{ \Carbon\Carbon::parse($productHistory->date)->format('Y-m-d') }}" required
+                            autofocus />
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-12">
-                        <label class=" text_c f_500">Description</label>
-                        <textarea name="description" id="message" cols="30" rows="10" placeholder="Description" required>{{ $productHistory->description }}</textarea>
+                        <x-textarea label="{{ __('feature/productHistory.label.description') }}" name="description"
+                            placeholder="{{ __('feature/productHistory.placeholder.description') }}">{{ $productHistory->description }}</x-textarea>
                     </div>
                     <div class="form-group text_box col-lg-12">
-                        <label class=" text_c f_500">@__('feature/productHistory.images')</label>
+
+                        <label class=" text_c f_500">@__('feature/')</label>
                         <div class="verify-sub-box">
                             <div class="file-loading">
-                                <input id="multiplefileupload" name="image[]" type="file" accept=".jpg,.gif,.png"
-                                    multiple />
+                                <x-attach id="multiplefileupload" label="{{ __('feature/productHistory.images') }}"
+                                    name="image[]" />
                             </div>
                         </div>
                     </div>

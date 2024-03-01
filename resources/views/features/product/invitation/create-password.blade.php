@@ -10,19 +10,18 @@
                         class="login-form sign-in-form" enctype="multipart/form-data" autocomplete="off"> @csrf
                         <div class="row">
                             <div class="form-group text_box col-lg-4 col-md-6">
-                                <label class=" text_c f_500">@lang('createPassword.password')</label>
-                                <input type="password" placeholder="Enter Password" name="password">
-                                @error('password')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
+                                <x-input id="password" label="{{ __('feature/createPassword.password') }}"
+                                    class="block mt-1 w-full" type="text"
+                                    placeholder="{{ __('feature/delivery.placeholder.password') }}" name="password"
+                                    :value="old('password')" required autofocus />
 
                             </div>
                             <div class="form-group text_box col-lg-4 col-md-6">
-                                <label class=" text_c f_500">@lang('createPassword.password_confirmation')</label>
-                                <input type="password" placeholder="Confirm Password" name="password_confirmation">
-                                @error('password_confirmation')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
+                                <x-input id="password_confirmation"
+                                    label="{{ __('feature/createPassword.password_confirmation') }}"
+                                    class="block mt-1 w-full" type="text"
+                                    placeholder="{{ __('feature/delivery.placeholder.password') }}" name="password"
+                                    :value="old('password')" required autofocus />
                             </div>
                         </div>
                         <div class="d-flex align-items-center text-center">

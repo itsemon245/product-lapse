@@ -48,7 +48,7 @@ class OrderController extends Controller
             return redirect(route('bank.create', [ 'order' => $order ]));
         }
 
-        $address        = User::find(auth()->id())->shippingAddress();
+        $address        = User::find(auth()->id())->billingAddress();
         $paymentMethods = array_column(PaymentMethodEnum::cases(), 'value');
         if (!str($request->payment_method)->contains($paymentMethods)) {
             notify()->error('Invalid Payment Method!');

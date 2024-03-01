@@ -13,33 +13,21 @@
                 <div class="row">
                     <div class="form-group text_box col-lg-4 col-md-6">
                         <label class=" text_c f_500">@__('feature/invitation.label.fname')</label>
-                        <input type="text" placeholder="{{ __('feature/invitation.placeholder.fname') }}" name="first_name">
-                        @error('first_name')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        <x-input type="text" required placeholder="{{ __('feature/invitation.placeholder.fname') }}" name="first_name"/>
 
                     </div>
                     <div class="form-group text_box col-lg-4 col-md-6">
                         <label class=" text_c f_500">@__('feature/invitation.label.lname')</label>
-                        <input type="text" placeholder="{{ __('feature/invitation.placeholder.lname') }}" name="last_name">
-                        @error('last_name')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        <x-input type="text" required placeholder="{{ __('feature/invitation.placeholder.lname') }}" name="last_name"/>
                     </div>
                     <div class="form-group text_box col-lg-4 col-md-6">
                         <label class=" text_c f_500">@__('feature/invitation.label.email')</label>
-                        <input type="text" placeholder="{{ __('feature/invitation.placeholder.email') }}" name="email">
-                        @error('email')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        <x-input type="text" required placeholder="{{ __('feature/invitation.placeholder.email') }}" name="email"/>
                     </div>
 
                     <div class="form-group text_box col-lg-4 col-md-6">
                         <label class=" text_c f_500">@__('feature/invitation.label.phone')</label>
-                        <input type="text" placeholder="{{ __('feature/invitation.placeholder.phone') }}" name="phone">
-                        @error('phone')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        <x-input type="text" required placeholder="{{ __('feature/invitation.placeholder.phone') }}" name="phone"/>
                     </div>
                     <div class="form-group text_box col-lg-4 col-md-6">
                         <x-select-input :label="__('feature/invitation.label.role')" id="role" placeholder="Choose one" name="role" autofocus>
@@ -64,15 +52,12 @@
                                 <div class="col-lg-4 col-md-6">
                                     <div class="checkbox remember">
                                         <label>
-                                            <input type="checkbox" value="{{ $product->id }}" name="products[]">
+                                            <input type="checkbox" value="{{ $product->id }}" name="products[]" />
                                             {{ $product->name }}
                                         </label>
                                     </div>
                                 </div>
                             @endforeach
-                            @error('products')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
                         </div>
                         @error('products')
                             <div class="alert alert-danger">{{ $message }}</div>

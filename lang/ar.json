@@ -28,7 +28,9 @@
     "Attach file" : "Attach file",
     "Update Version" : "تحديث الإصدار",
     "Cancel" : "يلغي",
-    "Order by" : "ترتيب حسب"
+    "Order by" : "ترتيب حسب",
+    "Email Verified" : "تم التحقق من البريد الإلكتروني",
+    "Edit Billing Address" : "تحرير عنوان الفواتير"
 
 
 }

@@ -9,7 +9,6 @@
         </a></li>
     @if (auth()->user()->type == 'subscriber' || auth()->user()->type == 'member')
         <li class="nav-item"><a href="{{ route('invitation.index') }}" class="nav-link">@__('navigation.profile.invitation')</a></li>
-        <li class="nav-item"><a href="{{ route('report.index') }}" class="nav-link">@__('navigation.profile.report')</a></li>
         @hasanyrole('account holder|product manager|assistant product manager')
         <li class="nav-item"><a href="{{ route('select.index') }}" class="nav-link">@__('navigation.profile.select')</a></li>
         @endhasanyrole

@@ -18,6 +18,7 @@ Route::prefix('admin')
     ->middleware('auth','verified', 'check.admin',)
     ->group(function () {
         Route::get('/', [AdminController::class, 'admin'])->name('admin');
+        Route::match(['get', 'patch'],'/settings', [AdminController::class, 'settings'])->name('admin.settings');
         Route::resource('faqs', FaqController::class)->except('show');
         Route::resource('package', PackageController::class);
         Route::resource('package-feature', PackageFeatureController::class)->only([ 'index', 'store', 'update', 'destroy' ]);

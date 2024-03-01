@@ -47,7 +47,7 @@ class ChangeController extends Controller
     public function store(ChangeRequest $request)
     {
         $data = $request->except('_token');
-        $data['creator_id'] = ownerId();
+        
 
         $change = Change::create($data);
 

@@ -43,7 +43,7 @@ class DocumentController extends Controller
     {
 
         $data = $request->except('_token', 'attach_file');
-        $data['creator_id'] = ownerId();
+        
 
         $document = Document::create($data);
         if ($request->has('attach_file')) {

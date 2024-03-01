@@ -5,6 +5,7 @@ use App\Models\Product;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -121,13 +122,13 @@ function getNotificationData($model, $productId = null)
 {
     $productId = $productId ?? productId();
     $initiator = auth()->user();
-    $users = Product::find($productId)?->users;
+    $users     = Product::find($productId)?->users;
     if ($users) {
         $users = $users->filter(function (User $user) use ($initiator) {
             return $user->id != auth()->id();
         });
-    }else{
-        $users = [];
+    } else {
+        $users = [  ];
     }
     $feature = explode('\\', get_class($model));
     $feature = array_pop($feature);
@@ -142,19 +143,37 @@ function getNotificationData($model, $productId = null)
  */
 function favicon(?Image $url = null)
 {
-    if($url != null){
+    if ($url != null) {
         return $url->url;
-    }else{
+    } else {
         return asset('img/p6.png');
     }
-    
+
 }
 
-function avatar(string $seed = null) {
+function avatar(string $seed = null)
+{
     if ($seed == null) {
         $seed = str()->random(10);
         return "https://api.dicebear.com/7.x/bottts-neutral/svg?seed=$seed&radius=50";
     }
     $seed = str($seed)->slug();
     return "https://api.dicebear.com/7.x/initials/svg?seed=$seed&radius=50";
+}
+
+/**
+ * Set env variables
+ *
+ * @param array<string,string> $values
+ * @return void
+ */
+function setEnv($values)
+{
+    $envFile = base_path('.env');
+    foreach ($values as $key => $value) {
+        $envContent = File::get($envFile);
+        $pattern           = "/^({$key}=)(.*)$/m";
+        $updatedEnvContent = preg_replace($pattern, "$1\"{$value}\"", $envContent);
+        File::put($envFile, $updatedEnvContent);
+    }
 }

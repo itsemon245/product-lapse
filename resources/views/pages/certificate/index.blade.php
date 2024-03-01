@@ -8,7 +8,6 @@
     </x-slot:breadcrumb>
 
     <x-slot:search>
-        {{--   --}}
         <form hx-get="{{ route('search.certificate') }}" hx-vals="#search-results" hx-push-url="{{ route('search.certificate') }}" hx-trigger="submit" hx-target="#search-results" hx-select="#search-results" class="search-form input-group">
             @csrf
             <input type="hidden" name="company" value="company">

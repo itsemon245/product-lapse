@@ -6,12 +6,10 @@
         </x-slot:breadcrumb>
 
         <x-slot:search>
-            <form method="GET" hx-get="{{ route('users.search') }}" hx-trigger="submit" hx-target="#search-results"
-                hx-select="#search-results" class="search-form input-group">
-                <input type="hidden" name="columns[]" value="name">
-                <input type="hidden" name="model" value="user">
-                <input type="search" name="search" class="form-control widget_input" placeholder="Search user"
-                    hx-vals="#search-results">
+            <form hx-get="{{ route('users.search') }}" hx-vals="#search-results" hx-push-url="{{ route('users.search') }}" hx-trigger="submit" hx-target="#search-results" hx-select="#search-results" class="search-form input-group">
+                @csrf
+                <input type="hidden" name="name" >
+                <input type="search" name="search" class="form-control widget_input" placeholder="Search user">
                 <button type="submit"><i class="ti-search"></i></button>
             </form>
         </x-slot:search>
@@ -22,11 +20,14 @@
         </x-slot:actions>
 
         <x-slot:filter>
-            {{-- <h5>Status</h5>
-        <x-filter :route="route('search.certificate')" :columns="['status']" model="certificate" :options="$statuses" /> --}}
+            <form method="get" action="{{ route('users.filter') }}">
+                <select onchange="this.form.submit()" name="search" class="selectpickers selectpickers2">
+                    <option @selected(true) value="all">@__('filter.all')</option>
+                    <option value="{{ null }}">Active</option>
+                    <option value="{{ !null }}">Banned</option>
+                </select>
+            </form>
         </x-slot:filter>
-
-
         <x-slot:list>
             @forelse ($subscribers as $subscriber)
                 <div class="col-md-6">
@@ -41,6 +42,7 @@
                                                 class="f_500 t_color3">{{ $subscriber->name }}</a>
                                         </h4>
                                         <ul class="list-unstyled">
+                                            <li class="{{ $subscriber->banned_at == null ? 'text-success' : 'text-danger' }}"> {{ $subscriber->banned_at == null ? 'Active' : 'Banned' }} </li>
                                             <li class="p_color4">{{ $subscriber->phone }}</li>
                                             <li class="p_color4"> {{ $subscriber->workplace }} </li>
                                             <li class="">

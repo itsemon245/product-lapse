@@ -15,7 +15,7 @@
                     <div class="certificate-2" style="display: flex; justify-content: center; align-items: center;"><img
                             src="{{ asset('img/certificate.jpg') }}"></div>
                     <div class="d-flex justify-content-center align-items-center text-center">
-                        <button type="submit" class="btn_hover agency_banner_btn btn-bg">Share</button>
+                        <button type="submit" class="btn_hover agency_banner_btn btn-bg">@__('feature/certificate.share')</button>
 
                     </div>
                 @elseif ($certificate->status == 'rejected')

@@ -10,6 +10,7 @@ return [
     'modal-btn' => 'اضافة',
     'edit' => 'تعديل',
     'cancel' => 'الغاء',
+    'attach' => 'يربط',
 ];
 
 

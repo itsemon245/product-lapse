@@ -65,13 +65,13 @@
                         <x-input-label for="details" value="{{ __('feature/task.label.details') }}" />
                         <x-textarea id="details" class="block mt-1 w-full" name="details"
                             placeholder="{{ __('feature/task.placeholder.details') }}" required
-                            autofocus>{!! $task->details ?? old('details') !!}</x-textarea>
+                            autofocus>{!! old('details') !!}</x-textarea>
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-12">
                         <x-input-label for="steps" value="{{ __('feature/task.label.steps') }}" />
                         <x-textarea id="steps" class="block mt-1 w-full" name="steps"
                             placeholder="{{ __('feature/task.placeholder.steps') }}" required
-                            autofocus>{!! $idea->steps ?? old('steps') !!}</x-textarea>
+                            autofocus>{!! old('steps') !!}</x-textarea>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-input label="{{ __('feature/task.label.str-date') }}" id="starting_date"

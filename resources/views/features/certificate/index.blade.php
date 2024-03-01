@@ -26,14 +26,14 @@
                 <div class="login_info form-layout">
                     <div class="certificate-1" style="display: flex; justify-content: center; align-items: center;" ><img src="{{ asset('img/logo.png') }}"></div> 
                     <div class="certificate-text">
-                        <p>Get certified <br> Product management professional using <br> <span>Productlapse</span></p>
+                        <p>@__('feature/certificate.get-certificate') <br> @__('feature/certificate.details') <br> <span>Productlapse</span></p>
                     </div>
                     <div class="d-flex justify-content-center align-items-center text-center certificate-btns">
-                        <x-button type="link" href="{{ route('certificate.status') }}" class="btn_hover agency_banner_btn btn-bg">Get certified</x-button>
+                        <x-button type="link" href="{{ route('certificate.status') }}" class="btn_hover agency_banner_btn btn-bg">@__('feature/certificate.get-certificate')</x-button>
                         
                     </div>
                     <div class="certificate-terms">
-                        <a href="#" data-toggle="modal" data-target="#myModal1">Conditions for obtaining the certificate</a>
+                        <a href="#" data-toggle="modal" data-target="#myModal1">@__('feature/certificate.condition')</a>
                     </div>
                 </div>
             </div>
@@ -47,17 +47,17 @@
       
             <!-- Modal Header -->
             <div class="modal-header">
-              <h4 class="modal-title">Conditions for obtaining the certificate</h4>
+              <h4 class="modal-title">@__('feature/certificate.condition')</h4>
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
       
             <!-- Modal body -->
             <div class="modal-body">
               <ul class="certificate-conditions">
-                  <li>Subscription to a one-year package (basic, gold, or diamond)</li>
-                  <li>Add data for at least one product with all other data: product information, product versions, view product reports</li>
-                  <li>Attend the recorded training session</li>
-                  <li>Filming a video of the added data with explanation</li>
+                  <li>@__('feature/certificate.list1')</li>
+                  <li>@__('feature/certificate.list2')</li>
+                  <li>@__('feature/certificate.list3')</li>
+                  <li>@__('feature/certificate.list4')</li>
                 </ul>
             </div>
       

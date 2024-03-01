@@ -12,34 +12,26 @@
                 @csrf
                 <div class="row">
                     <div class="form-group text_box col-lg-4 col-md-6">
-                        <label class=" text_c f_500">@__('feature/invitation.label.fname')</label>
-                        <input type="text" placeholder="{{ __('feature/invitation.placeholder.fname') }}" name="first_name">
-                        @error('first_name')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        <x-input id="first_name" label="{{ __('feature/invitation.label.fname') }}" class="block mt-1 w-full"
+                            type="text" placeholder="{{ __('feature/invitation.placeholder.fname') }}" name="first_name"
+                            :value="old('first_name')" required autofocus />
 
                     </div>
                     <div class="form-group text_box col-lg-4 col-md-6">
-                        <label class=" text_c f_500">@__('feature/invitation.label.lname')</label>
-                        <input type="text" placeholder="{{ __('feature/invitation.placeholder.lname') }}" name="last_name">
-                        @error('last_name')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        <x-input id="last_name" label="{{ __('feature/invitation.label.lname') }}" class="block mt-1 w-full"
+                            type="text" placeholder="{{ __('feature/invitation.placeholder.lname') }}" name="last_name"
+                            :value="old('last_name')" required autofocus />
                     </div>
                     <div class="form-group text_box col-lg-4 col-md-6">
-                        <label class=" text_c f_500">@__('feature/invitation.label.email')</label>
-                        <input type="text" placeholder="{{ __('feature/invitation.placeholder.email') }}" name="email">
-                        @error('email')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        <x-input id="email" label="{{ __('feature/invitation.label.email') }}" class="block mt-1 w-full"
+                            type="text" placeholder="{{ __('feature/invitation.placeholder.email') }}" name="email"
+                            :value="old('email')" required autofocus />
                     </div>
 
                     <div class="form-group text_box col-lg-4 col-md-6">
-                        <label class=" text_c f_500">@__('feature/invitation.label.phone')</label>
-                        <input type="text" placeholder="{{ __('feature/invitation.placeholder.phone') }}" name="phone">
-                        @error('phone')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        <x-input id="phone" label="{{ __('feature/invitation.label.phone') }}" class="block mt-1 w-full"
+                            type="text" placeholder="{{ __('feature/invitation.placeholder.phone') }}" name="phone"
+                            :value="old('phone')" required autofocus />
                     </div>
                     <div class="form-group text_box col-lg-4 col-md-6">
                         <x-select-input :label="__('feature/invitation.label.role')" id="role" placeholder="Choose one" name="role" autofocus>

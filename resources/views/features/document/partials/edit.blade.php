@@ -21,7 +21,6 @@
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-select-input label="{{ __('feature/document.label.type') }}" id="type"
                             placeholder="Choose one" name="type" required autofocus>
-
                             @forelse ($type as $category)
                                 <option value="{{ $category->value->{app()->getLocale()} }}"
                                     @if ($document->type == $category->value->{app()->getLocale()}) selected @endif>
@@ -30,7 +29,6 @@
                             @empty
                                 <option disabled>No type available</option>
                             @endforelse
-
                         </x-select-input>
 
                     </div>
@@ -57,7 +55,6 @@
 
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-attach label="{{ __('feature/document.label.attach') }}" name="attach_file" />
-                        <x-input-error :messages="$errors->get('attach_file')" class="mt-2" />
                     </div>
                 </div>
 

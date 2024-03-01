@@ -12,8 +12,6 @@
                 @csrf
                 @method('put')
                 <div class="login_info">
-
-
                     <div class="row">
                         <div class="form-group text_box col-lg-6 col-md-6">
                             <x-select-input label="Feature Name" id="model-type" placeholder="Choose Feature Name"

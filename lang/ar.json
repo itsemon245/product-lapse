@@ -20,7 +20,15 @@
     "Order Manage" : "إدارة المستخدمين",
     "Search order" : "ترتيب البحث",
     "Submit" : "يُقدِّم",
-    "Contact massage show" : "عرض تدليك الاتصال"
+    "Contact massage show" : "عرض تدليك الاتصال",
+    "Idea owner :" : "Idea البحث :",
+    "Actions" : "Actions",
+    "Status :" : "البحث :",
+    "Choose one..." : "Choose one...",
+    "Attach file" : "Attach file",
+    "Update Version" : "تحديث الإصدار",
+    "Cancel" : "يلغي",
+    "Order by" : "ترتيب حسب"
 
 
 }

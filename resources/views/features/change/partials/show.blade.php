@@ -13,13 +13,13 @@
                         <div class="entry_post_info col-md-12">
                             {{ \Carbon\Carbon::parse($change->required_completion_date)->format('l, j F Y') }}
                         </div>
-                        <div class="col-lg-6 col-md-6"">
+                        <div class="col-lg-6 col-md-6">
                             <h6 class="title2">@__('feature/change.priority')</h6>
                             <p class="f_400 mb-30 text-font">{{ $change->priority }}</p>
                         </div>
-                        <div class="col-lg-6 col-md-6"">
+                        <div class="col-lg-6 col-md-6">
                             <h6 class="title2">@__('feature/change.classification')</h6>
-                            <p class="f_400 mb-30 text-font">Web design</p>
+                            <p class="f_400 mb-30 text-font">{{ $change->classification }}</p>
                         </div>
                         <div class="col-md-12">
                             <h6 class="title2">@__('feature/change.details')</h6>
@@ -47,7 +47,7 @@
                         @can('update change')
                             <div class="row">
                                 <div class="col-12">
-                                    <h6 class="title2 the-priority">Status : <span>{{ $change->status }}</span></h6>
+                                    <h6 class="title2 the-priority">@__('Status :')<span>{{ $change->status }}</span></h6>
                                 </div>
                                 <div class="col-6">
                                     <form action="{{ route('change.update.status', $change) }}" method="post"
@@ -91,7 +91,7 @@
                             </div>
                         @else
                             <div class="row text-center">
-                                <h6 class="title2 the-priority">Status : <span>{{ $change->status }}</span></h6>
+                                <h6 class="title2 the-priority">@__('Status :') <span>{{ $change->status }}</span></h6>
                             </div>
                         @endcan
 

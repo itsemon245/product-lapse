@@ -12,7 +12,7 @@ return [
         'fname' => 'الاسم الأول',
         'lname' => 'اسم العائلة',
         'email' => 'بريد إلكتروني', 
-        'task' => 'Select task', 
+        'task' => 'حدد المهمة', 
         'phone' => 'هاتف',
         'position' => 'موضع',
     ],

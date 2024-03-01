@@ -16,6 +16,7 @@ class ProductHistoryController extends Controller
     public function index()
     {
         $histories = ProductHistory::with('images')->where('product_id', productId())->get();
+        // dd($histories);
         return view('features.product.history.index', compact('histories'));
     }
 

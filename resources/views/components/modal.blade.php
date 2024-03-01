@@ -41,9 +41,9 @@
                     @empty($footer)
                         <!-- Modal Header -->
                         <button type="button" class="btn_hover agency_banner_btn btn-bg agency_banner_btn2"
-                            data-dismiss="modal">Save</button>
+                            data-dismiss="modal">@__('Save')</button>
                         <button type="button" class="btn_hover agency_banner_btn btn-bg btn-bg-grey"
-                            data-dismiss="modal">Cancel</button>
+                            data-dismiss="modal">@__('Cancel')</button>
                     @else
                         {!! $footer !!}
                     @endempty

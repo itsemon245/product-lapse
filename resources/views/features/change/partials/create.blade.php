@@ -83,7 +83,6 @@
                         <x-input id="required_completion_date" class="block mt-1 w-full" type="date"
                             placeholder="dd/mm/yyyy (Exp:13/03/2024)" name="required_completion_date" :value="old('required_completion_date')"
                             required autofocus />
-                        <x-input-error :messages="$errors->get('required_completion_date')" class="mt-2" />
                     </div>
                 </div>
                 <div class="d-flex align-items-center text-center">

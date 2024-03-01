@@ -133,7 +133,6 @@ class CertificateController extends Controller
     }
     public function filter(Request $request)
     {
-        // dd($request->search);
         if($request->search == 'all'){
             $certificates = Certificate::latest()->paginate();
             $statuses  = Select::of('certificate')->type('status')->get();

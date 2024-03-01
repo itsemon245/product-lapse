@@ -51,9 +51,34 @@ class UsersManagementController extends Controller
         return view('pages.users.show', compact('user'));
     }
 
-    public function search(SearchRequest $request)
+    public function filter(Request $request)
     {
-        $subscribers = SearchService::items($request);
+        // dd($request->search);
+        if($request->search == null){//active
+            $subscribers = User::where('banned_at', null)
+            ->where('type', '=', 'subscriber')->latest()->paginate(10);
         return view('pages.users.management', compact('subscribers'));
+        }elseif($request->search == 'all'){
+            $subscribers = User::where('type', 'subscriber')->paginate(10);
+            return view('pages.users.management', compact('subscribers'));
+        }else{
+            $subscribers = User::where('banned_at', !null)
+            ->where('type', '=', 'subscriber')->latest()->paginate(10);
+            return view('pages.users.management', compact('subscribers'));
+        }
+
+    }
+
+    public function search(Request $request)
+    {   
+        if($request->search ==  null){
+            $subscribers = User::where('type', 'subscriber')->paginate(10);
+            return view('pages.users.management', compact('subscribers'));
+        }else{;
+            $subscribers = User::where('name', 'like', '%' . $request->search . '%')
+                                  ->where('type', '=', 'subscriber')->latest()->paginate(10);
+            return view('pages.users.management', compact('subscribers'));
+        }
+
     }
 }

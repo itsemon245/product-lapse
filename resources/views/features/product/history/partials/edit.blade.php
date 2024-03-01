@@ -17,18 +17,18 @@
                 @method('PUT')
                 <div class="row">
                     <div class="form-group text_box col-lg-12 col-md-12">
-                        <x-input label="{{ __('feature/cproductHistory.date') }}" id="required_completion_date"
+                        <x-input label="{{ __('feature/productHistory.date') }}" id="required_completion_date"
                             class="block mt-1 w-full" type="date" name="date"
                             value="{{ \Carbon\Carbon::parse($productHistory->date)->format('Y-m-d') }}" required
                             autofocus />
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-12">
-                        <x-textarea label="{{ __('feature/productHistory.label.description') }}" name="description"
-                            placeholder="{{ __('feature/productHistory.placeholder.description') }}">{{ $productHistory->description }}</x-textarea>
+                        <x-textarea label="{{ __('feature/productHistory.description') }}" name="description"
+                            placeholder="{{ __('feature/productHistory.description') }}">{{ $productHistory->description }}</x-textarea>
                     </div>
                     <div class="form-group text_box col-lg-12">
 
-                        <label class=" text_c f_500">@__('feature/')</label>
+                        <label class=" text_c f_500">@__('feature/productHistory.attach')</label>
                         <div class="verify-sub-box">
                             <div class="file-loading">
                                 <x-attach id="multiplefileupload" label="{{ __('feature/productHistory.images') }}"

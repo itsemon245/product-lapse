@@ -2,48 +2,48 @@
 return [
 
     //list page
-    'title' => 'Make certificate',
-    'add' => 'Make certificate',
-    'search' => 'Search certificate',
+    'title' => 'اصنع شهادة',
+    'add' => 'اصنع شهادة',
+    'search' => 'شهادة البحث',
 
     //add page + edit page
     'label' => [
-        'name' => 'Holder name',
-        'company' => 'Company name', 
+        'name' => 'اسم حامل',
+        'company' => 'اسم الشركة', 
  
     ],
     'placeholder' => [
-        'name' => 'Holder name',
-        'company' => 'Company name', 
+        'name' => 'اسم حامل',
+        'company' => 'اسم الشركة', 
     ],
-    'submit' => 'Submit',
+    'submit' => 'يُقدِّم',
 
     // get certificate page
-    'get-certificate' => 'Get certified',
-    'details' => 'Product management professional using',
+    'get-certificate' => 'الحصول على شهادة',
+    'details' => 'إدارة المنتجات المهنية باستخدام',
     'name' => 'Productlapse',
-    'condition' => 'Conditions for obtaining the certificate',
+    'condition' => 'شروط الحصول على الشهادة',
 
 
     //mine page
-    'certificate' => 'Certificate',
-    'share' => 'Share',
-    'detil' => 'Waiting for Admin Approval!',
-    'return' => 'Return back',
-    'submission' => 'Submission Status',
+    'certificate' => 'شهادة',
+    'share' => 'يشارك',
+    'detil' => 'في انتظار موافقة المشرف!',
+    'return' => 'رجوع',
+    'submission' => 'حالة تقديم',
 
     'modal' => [
-        'get' => 'Get Certificate status:',
-        'status' => 'Your Submission was successful!',
-        'msg' => 'Please contract System Administrator.',
-        'condition' => 'Conditions for obtaining the certificate',
-        'list1' => 'Subscription to a one-year package (basic, gold, or diamond)',
-        'list2' => 'Add data for at least one product with all other data: product, information',
-        'list3' => 'product versions, view product reports', 
-        'list4' => 'Attend the recorded training session',
-        'list5' => 'Filming a video of the added data with explanation',
+        'get' => 'الحصول على حالة الشهادة:',
+        'status' => 'لقد كان التقديم الخاص بك ناجحًا!',
+        'msg' => 'يرجى التعاقد مع مسؤول النظام.',
+        'condition' => 'شروط الحصول على الشهادة',
+        'list1' => 'الاشتراك في باقة لمدة عام (الأساسية أو الذهبية أو الماسية)',
+        'list2' => 'أضف بيانات لمنتج واحد على الأقل مع كافة البيانات الأخرى: المنتج، المعلومات',
+        'list3' => 'إصدارات المنتج، عرض تقارير المنتج', 
+        'list4' => 'حضور الدورة التدريبية المسجلة',
+        'list5' => '- تصوير فيديو للبيانات المضافة مع الشرح',
     ],
 
     //show page
-    'show' => 'Show Certificate',
+    'show' => 'إظهار الشهادة',
 ];

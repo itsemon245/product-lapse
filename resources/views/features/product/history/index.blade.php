@@ -40,7 +40,7 @@
                                                                 class="ti-pencil"></i>@__('feature/productHistory.edit')</a>
                                                     </div>
                                                     <div class="col-12">
-                                                        <h6 class="title2">Description</h6>
+                                                        <h6 class="title2">@__('feature/productHistory.description')</h6>
                                                         <p class="f_400 mb-30 text-font">
                                                             {{ $history->description }}
                                                         </p>
@@ -86,8 +86,8 @@
                                     class="block mt-1 w-full" type="date" name="date" required autofocus />
                             </div>
                             <div class="form-group text_box col-lg-12 col-md-12">
-                                <x-textarea label="{{ __('feature/productHistory.label.description') }}" name="description"
-                                    placeholder="{{ __('feature/productHistory.placeholder.description') }}">{{ $productHistory->description ?? '' }}</x-textarea>
+                                <x-textarea label="{{ __('feature/productHistory.description') }}" name="description"
+                                    placeholder="{{ __('feature/productHistory.description') }}">{{ $productHistory->description ?? '' }}</x-textarea>
 
                             </div>
                             <div class="form-group text_box col-lg-12 col-md-12">

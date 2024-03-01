@@ -10,4 +10,5 @@ return [
     'modal-btn' => 'Add',
     'edit' => 'Edit',
     'cancel' => 'Cancel',
+    'attach' => 'Attach',
 ];

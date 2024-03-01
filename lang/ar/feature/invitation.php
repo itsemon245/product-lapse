@@ -2,28 +2,28 @@
 return [
 
     //list page
-    'title' => 'Invitations',
-    'add' => 'Send invitation',
-    'search' => 'Search invitation',
+    'title' => 'الدعوات',
+    'add' => 'إرسال دعوة',
+    'search' => 'دعوة بحث',
 
     //add page + edit page
     'label' => [
-        'title' => 'Send invitation',
-        'fname' => 'First name', 
-        'lname' => 'Last name', 
-        'email' => 'Email',
-        'phone' => 'Phone', 
-        'role' => 'Role',
+        'title' => 'إرسال دعوة',
+        'fname' => 'الاسم الأول', 
+        'lname' => 'اسم العائلة', 
+        'email' => 'بريد إلكتروني',
+        'phone' => 'هاتف', 
+        'role' => 'دور',
     ],
     'placeholder' => [
-        'title' => 'Send invitation',
-        'fname' => 'First name', 
-        'lname' => 'Last name', 
-        'email' => 'email',
-        'phone' => 'Phone', 
+        'title' => 'إرسال دعوة',
+        'fname' => 'الاسم الأول', 
+        'lname' => 'اسم العائلة', 
+        'email' => 'بريد إلكتروني',
+        'phone' => 'هاتف', 
     ],
-    'choose' => 'Choose Products',
-    'submit' => 'Send invitation',
+    'choose' => 'اختر المنتجات',
+    'submit' => 'إرسال دعوة',
 
     // //details page
     // 'priority' => 'Priority',

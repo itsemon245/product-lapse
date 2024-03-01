@@ -8,7 +8,7 @@
         <x-slot:from>
 
             @if ($certificate == !null)
-                @if ($certificate->status == 1 && $certificate->achieved_id == auth()->id())
+                @if ($certificate->status == 'approved' && $certificate->achieved_id == auth()->id())
                     <div class="certificate-1 mx-auto my-auto"
                         style="display: flex; justify-content: center; align-items: center;"><img
                             src="{{ asset('img/logo.png') }}"></div>
@@ -18,7 +18,7 @@
                         <button type="submit" class="btn_hover agency_banner_btn btn-bg">Share</button>
 
                     </div>
-                @elseif ($certificate->status == 2)
+                @elseif ($certificate->status == 'rejected')
                     <div class="certificate-1" style="display: flex; justify-content: center; align-items: center;"><img
                             src="{{ asset('img/logo.png') }}"></div>
                     <div class="certificate-text">
@@ -33,7 +33,7 @@
                     <div class="certificate-terms" style="display: flex; justify-content: center; align-items: center;">
                         <a href="#" data-toggle="modal" data-target="#cancleSubmission">Submission Status</a>
                     </div>
-                @elseif($certificate->status == null)
+                @elseif($certificate->status == 'pending')
                     <div class="certificate-1" style="display: flex; justify-content: center; align-items: center;"><img
                             src="{{ asset('img/logo.png') }}"></div>
                     <div class="certificate-text">

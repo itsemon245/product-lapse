@@ -8,22 +8,34 @@
     </x-slot:breadcrumb>
 
     <x-slot:search>
-        <form method="GET" hx-get="{{ route('search.certificate') }}" hx-trigger="submit" hx-target="#search-results" hx-select="#search-results" class="search-form input-group">
-            <input type="hidden" name="columns[]" value="name">
-            <input type="hidden" name="columns[]" value="status">
-            <input type="hidden" name="model" value="certificate">
-            <input type="search" name="search" class="form-control widget_input" placeholder="Search certificate" hx-vals="#search-results">
+        {{--   --}}
+        <form hx-get="{{ route('search.certificate') }}" hx-vals="#search-results" hx-push-url="{{ route('search.certificate') }}" hx-trigger="submit" hx-target="#search-results" hx-select="#search-results" class="search-form input-group">
+            @csrf
+            <input type="hidden" name="company" value="company">
+            <input type="search" name="search" class="form-control widget_input" placeholder="Search certificate" >
             <button type="submit"><i class="ti-search"></i></button>
+        </form>
     </x-slot:search>
 
 
     <x-slot:actions>
         {{--  --}}
     </x-slot:actions>
-
     <x-slot:filter>
-        <h5>Status</h5>
-        <x-filter :route="route('search.certificate')" :columns="['status']" model="certificate" :options="$statuses" />
+        <form method="get" action="{{ route('filter.certificate') }}">
+            <select onchange="this.form.submit()" name="search" class="selectpickers selectpickers2">
+                <option selected value="">@__('filter.all')</option>
+             
+                @forelse ($statuses as $opt)
+                
+                    <option value="{{ $opt->value }}">
+                        {{ ucwords($opt->name) }}
+                     </option>
+                @empty
+                    <option>@__('filter.no-items')</option>
+                @endforelse
+            </select>
+        </form>
     </x-slot:filter>
 
 
@@ -41,8 +53,8 @@
                             <div class="jobsearch-table-cell">
                                 <h4><a href="#" class="f_500 t_color3">{{ $certificate->name }}</a></h4>
                                 <ul class="list-unstyled">
-                                    <li class="{{ $certificate->status == 2 ? 'text-danger' : 'text-success' }}">{{ $certificate->status == 2 ? 'Not Approved' : 'Approved'}}</li>
-                                    {{-- <li>{{ $certificate->created_at->formatLocalized('%A %d %B %Y') }}</li> --}}
+                                    <li class="{{ $certificate->status == 'rejected' ? 'text-danger' : 'text-success' }}">{{ ucfirst($certificate->status)}}</li>
+                                    <li>{{ $certificate->created_at->formatLocalized('%A %d %B %Y') }}</li>
                                     <li>{{ $certificate->company }}</li>
                                 </ul>
                             </div>
@@ -61,7 +73,7 @@
                                         </form>
                                     </div>
                                     <div class="like-btn">
-                                        <x-button type="delete" :action="route('certificate.destroy', $certificate)" title="Delete" :has-icon="true">
+                                        <x-button type="delete" :action="route('admin.certificate.destroy', $certificate)" title="Delete" :has-icon="true">
                                             <span title="Delete" class="ti-trash"></span>
                                         </x-button>
                                     </div>

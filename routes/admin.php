@@ -33,8 +33,12 @@ Route::prefix('admin')
 
         Route::get('/edit-package/{id}', [ LandingPageController::class, 'editPackage' ])->name('edit.package');
         // Route::put('/update-package/{id}', [LandingPageController::class, 'updatePackage'])->name('package.update');
-        Route::get('certificate', [ CertificateController::class, 'getAllCertificate' ])->name('admin.certificate');
-        Route::get('certificate-search', [ CertificateController::class, 'search' ])->name('search.certificate');
+        Route::get('certificates', [ CertificateController::class, 'getAllCertificate' ])->name('admin.certificate');
+        Route::get('certificate-search', [ CertificateController::class, 'search'])->name('search.certificate');
+        Route::get('certificate-filter', [ CertificateController::class, 'filter'])->name('filter.certificate');
+        Route::delete('certificate-delete/{id}', [CertificateController::class, 'delete'])->name('admin.certificate.destroy');
+        Route::post('certificate-approval/{id}', [CertificateController::class, 'approval'])->name('certificate.approval');
+        Route::post('certificate-cancel/{id}', [CertificateController::class, 'cancel'])->name('certificate.cancel');
         Route::get('input-create', [ LandingPageController::class, 'createInput' ])->name('input.create');
         Route::resource('users', UsersManagementController::class);
         Route::post('ban-user/{user}', [UsersManagementController::class, 'ban'])->name('user.ban');

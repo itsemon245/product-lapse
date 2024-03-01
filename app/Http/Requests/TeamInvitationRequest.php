@@ -21,7 +21,7 @@ class TeamInvitationRequest extends FormRequest
             'phone'      => 'sometimes|string|max:20',
             'role'   => 'nullable|string|max:255|exists:roles,name',
             'task'       => 'sometimes|string|max:255',
-            'products'   => 'sometimes|required',
+            'products'   => 'required',
          ];
     }
 }

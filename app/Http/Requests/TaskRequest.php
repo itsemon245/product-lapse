@@ -22,7 +22,7 @@ class TaskRequest extends FormRequest
             'steps' => 'sometimes|required|string',
             'starting_date' => 'sometimes|required|date',
             'ending_date' => 'sometimes|required|date|after_or_equal:starting_date',
-            'administrator' => 'sometimes|required|string|max:255',
+            'administrator' => 'required|string|max:255',
             'add_attachments' => 'sometimes|required',
         ];
     }

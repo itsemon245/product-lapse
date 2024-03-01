@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 
 class IdeaRequest extends FormRequest
-{
+{ 
 
     /**
      * Get the validation rules that apply to the request.
@@ -17,7 +17,7 @@ class IdeaRequest extends FormRequest
         return [
             'name'         => 'sometimes|required|max:200',
             'owner'        => 'sometimes|required|max:200',
-            'stage'     => 'required',
+            'stage'        => 'required',
             'priority'     => 'required',
             'details'      => 'sometimes|required',
             'requirements' => 'sometimes|required',

@@ -31,7 +31,7 @@
                     <div class="form-group text_box col-lg-12 col-md-6">
                         <x-textarea label="{{ __('feature/release.label.details') }}" name="description"
                             placeholder="{{ __('feature/release.label.details') }}" required autfocus />
-                        <x-input-error :messages="$errors->get('details')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('description')" class="mt-2" />
                     </div>
                 </div>
                 <div class="d-flex align-items-center text-center">

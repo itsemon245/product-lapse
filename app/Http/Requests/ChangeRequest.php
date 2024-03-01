@@ -23,9 +23,9 @@ class ChangeRequest extends FormRequest
     {
         return [
             'title' => 'sometimes|required|string',
-            'classification' => 'sometimes|required',
-            'priority' => 'sometimes|required',
-            'status' => 'sometimes|required',
+            'classification' => 'required',
+            'priority' => 'required',
+            'status' => 'required',
             'details' => 'sometimes|required',
             'administrator' => 'sometimes|required',
             'required_completion_date' => 'sometimes|required|date',

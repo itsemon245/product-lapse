@@ -43,6 +43,7 @@
                     <div class="form-group text_box col-lg-12 col-md-12">
                         <x-textarea placeholder="{{ __('feature/document.placeholder.description') }}" rows="5"
                             cols="10" name="description" label="{{ __('feature/document.label.description') }}">
+                            {!! old('description') !!}
                         </x-textarea>
                     </div>
 

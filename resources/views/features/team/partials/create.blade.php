@@ -1,6 +1,6 @@
 @extends('layouts.subscriber.app', ['title' => @__('feature/team.add')])
 @section('main')
-    <x-feature.create>
+    <x-feature.create> 
         <x-slot:breadcrumb>
             <x-breadcrumb :list="[['label' => @__('feature/team.add'), 'route' => route('team.create')]]" />
         </x-slot:breadcrumb>

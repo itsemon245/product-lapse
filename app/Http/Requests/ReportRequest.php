@@ -23,7 +23,7 @@ class ReportRequest extends FormRequest
     {
         return [
             'name' => 'sometimes|required',
-            'type' => 'sometimes|required',
+            'type' => 'required',
             'report_date' => 'sometimes|required',
             'file' => 'sometimes|required',
             'description' =>  'sometimes|required',

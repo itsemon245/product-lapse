@@ -37,7 +37,8 @@
                 <div class="col-md-6">
                     <div class="item lon new">
                         <div class="list_item">
-                            <figure><a href="{{ route('report.show', $report) }}"><img src="{{ favicon($report->image) }}" alt=""></a>
+                            <figure><a href="{{ route('report.show', $report) }}"><img src="{{ favicon($report->image) }}"
+                                        alt=""></a>
                             </figure>
                             <div class="joblisting_text">
                                 <div class="job_list_table">
@@ -67,16 +68,18 @@
                                                         </div>
                                                     @endcan
 
-                                                    <div class="like-btn">
-                                                        <form
-                                                            action="{{ route('report.download', ['id' => base64_encode($report->id)]) }}"
-                                                            method="post" enctype="multipart/form-data">
-                                                            @csrf
-                                                            <button type="submit" class="btn">
-                                                                <i class="ti-download"></i>
-                                                            </button>
-                                                        </form>
-                                                    </div>
+                                                    @if ($report->file)
+                                                        <div class="like-btn">
+                                                            <form
+                                                                action="{{ route('report.download', ['id' => base64_encode($report->id)]) }}"
+                                                                method="post" enctype="multipart/form-data">
+                                                                @csrf
+                                                                <button type="submit" class="btn">
+                                                                    <i class="ti-download"></i>
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>

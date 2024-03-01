@@ -70,16 +70,18 @@
                                                 </div>
                                             @endcan
 
-                                            <div class="like-btn">
-                                                <form
-                                                    action="{{ route('document.download', ['id' => base64_encode($document->id)]) }}"
-                                                    method="post" enctype="multipart/form-data">
-                                                    @csrf
-                                                    <button type="submit" class="btn">
-                                                        <i class="ti-download"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
+                                            @if ($document->file)
+                                                <div class="like-btn">
+                                                    <form
+                                                        action="{{ route('document.download', ['id' => base64_encode($document->id)]) }}"
+                                                        method="post" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <button type="submit" class="btn">
+                                                            <i class="ti-download"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

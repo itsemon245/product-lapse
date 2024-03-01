@@ -81,7 +81,9 @@ trait HasImages
         $name = $name ?? $image->getClientOriginalName();
         $name = str($name)->slug();
         $path = $image->storeAs($this->baseDir . $this->dir, $name, $this->disk);
-        $this->deleteImage($oldImage, true);
+        if ($oldImage) {
+            $this->deleteImage($oldImage, true);
+        }
         $image = tap($oldImage)->update([
             'imageable_id' => $id,
             'imageable_type' => $type,

@@ -1,11 +1,12 @@
 <?php
 
+use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Image;
 use App\Models\Product;
-use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -176,4 +177,6 @@ function setEnv($values)
         $updatedEnvContent = preg_replace($pattern, "$1\"{$value}\"", $envContent);
         File::put($envFile, $updatedEnvContent);
     }
+    Artisan::call('config:clear');
+
 }

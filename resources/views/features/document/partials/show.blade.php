@@ -54,7 +54,8 @@
                                         enctype="multipart/form-data" class="login-form">
                                         @csrf
                                         @method('PUT')
-                                        <x-modal title="{{ __('Update Version') }}" label="feature/document.placeholder.version">
+                                        <x-modal title="{{ __('Update Version') }}"
+                                            label="feature/document.placeholder.version">
                                             <div>
                                                 <div class="row">
                                                     <div class="col-12">
@@ -81,14 +82,16 @@
                                     </form>
                                 </div>
                             @endcan
-                            <div class="col-12">
-                                <form action="{{ route('document.download', ['id' => base64_encode($document->id)]) }}"
-                                    method="post" enctype="multipart/form-data">
-                                    @csrf
-                                    <button type="submit" class="button-1">
-                                        <i class="ti-download"></i>@__('feature/document.download')</button>
-                                </form>
-                            </div>
+                            @if ($document->file)
+                                <div class="col-12">
+                                    <form action="{{ route('document.download', ['id' => base64_encode($document->id)]) }}"
+                                        method="post" enctype="multipart/form-data">
+                                        @csrf
+                                        <button type="submit" class="button-1">
+                                            <i class="ti-download"></i>@__('feature/document.download')</button>
+                                    </form>
+                                </div>
+                            @endif
                         </div>
                     </div>
 

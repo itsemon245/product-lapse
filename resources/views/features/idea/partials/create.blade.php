@@ -48,7 +48,6 @@
                                 @endforelse
                             @endif
                         </x-select-input>
-                        <x-input-error :messages="$errors->get('priority')" class="mt-2" />
                     </div>
                     <div class="form-group text_box col-lg-12">
                         <x-input-label for="details" value="{{ __('feature/idea.label.details') }}" />

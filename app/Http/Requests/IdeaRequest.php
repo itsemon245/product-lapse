@@ -17,7 +17,8 @@ class IdeaRequest extends FormRequest
         return [
             'name'         => 'sometimes|required|max:200',
             'owner'        => 'sometimes|required|max:200',
-            'priority'     => 'sometimes|required',
+            'stage'     => 'required',
+            'priority'     => 'required',
             'details'      => 'sometimes|required',
             'requirements' => 'sometimes|required',
          ];

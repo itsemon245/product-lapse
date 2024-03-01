@@ -31,7 +31,6 @@
                                 @endforelse
                             @endif
                         </x-select-input>
-                        <x-input-error :messages="$errors->get('category')" class="mt-2" />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-select-input label="{{ __('feature/task.label.status') }}" id="status"
@@ -46,7 +45,6 @@
                                 @endforelse
                             @endif
                         </x-select-input>
-                        <x-input-error :messages="$errors->get('status')" class="mt-2" />
                     </div>
                     <div class="form-group text_box col-12">
                         <div class="extra extra2 extra3">

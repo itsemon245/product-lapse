@@ -29,7 +29,7 @@ class SearchService
 
         if ($model == "App\\Models\\Product") {
             $items = $model::whereHas('users', function(Builder $q){
-                $q->where('id', auth()->id());
+                $q->where('user_id', auth()->id());
             })
             ->where(function (Builder $q) use ($columns, $search) {
                 foreach ($columns as $column) {

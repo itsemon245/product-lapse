@@ -37,7 +37,7 @@ class ReleaseController extends Controller
     public function store(ReleaseRequest $request)
     {
         $data = $request->except('_token');
-        $data['creator_id'] = ownerId();
+        
         Release::create($data);
 
         notify()->success(__('Created successfully!'));

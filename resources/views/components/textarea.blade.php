@@ -6,7 +6,7 @@
     @if ($label)
         <label class="text_c f_500">{{ $label }}</label>
     @endif
-    <textarea {{ $attributes->merge(['class' => 'form-control message !leading-[normal]']) }}>{{ empty($slot) ? old($name) : $slot }}</textarea>
+    <textarea {{ $attributes->merge(['class' => 'form-control message !leading-[normal]']) }}>{{ $slot->isNotEmpty() ? $slot :  old($name) }}</textarea>
     <span title="@__('This field is required')"
     class="absolute cursor-help text-red-500 {{ $attributes->has('label') ? 'top-0' : '-top-10' }} right-2 font-bold">*</span>
     @error($name)

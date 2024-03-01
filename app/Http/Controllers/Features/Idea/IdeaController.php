@@ -2,16 +2,16 @@
 namespace App\Http\Controllers\Features\Idea;
 
 use App\Enums\Stage;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\IdeaRequest;
-use App\Http\Requests\SearchRequest;
 use App\Models\Idea;
-use App\Models\Product;
-use App\Models\Select;
 use App\Models\User;
-use App\Notifications\NotificationSystem;
+use App\Models\Select;
+use App\Models\Product;
+use Illuminate\Http\Request;
 use App\Services\SearchService;
-use Request;
+use App\Http\Requests\IdeaRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\SearchRequest;
+use App\Notifications\NotificationSystem;
 
 class IdeaController extends Controller
 {
@@ -41,17 +41,7 @@ class IdeaController extends Controller
     public function store(IdeaRequest $request)
     {
         $data = $request->except('_token');
-        $data['creator_id'] = ownerId();
         $idea = Idea::create($data);
-        // $initiator            = $idea->creator ?? $idea->user;
-        // $users                = Product::find(productId())->users->reject(function (User $user) use ($initiator) {
-        //     return $user->id == $initiator->id;
-        // });
-        $request->session()->flash(
-            'massage',
-            'Store success'
-        );
-        // auth()->user()->notify(new NotificationSystem($request));
         notify()->success(__('Created successfully!'));
         return redirect()->route('idea.index');
     }
@@ -72,7 +62,7 @@ class IdeaController extends Controller
 
     public function upadatePriority(Request $request, Idea $idea)
     {
-        $idea->update(['priority' => request('priority')]);
+        $idea->update(['priority' => $request->priority]);
 
         notify()->success(__('Updated successfully!'));
         return redirect()->route('idea.show', $idea);
@@ -106,7 +96,6 @@ class IdeaController extends Controller
     public function update(IdeaRequest $request, Idea $idea)
     {
         $data = $request->except('_token', '_method');
-        $data['owner_id'] = ownerId();
         $idea->update($data);
 
         notify()->success(__('Updated successfully!'));

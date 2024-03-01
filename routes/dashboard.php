@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Features\Change\ChangeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::get('/', [ DashboardController::class, 'index' ])->name('dashboard');
+Route::resource('change', ChangeController::class);
 
 require __DIR__ . '/support.php';
 require __DIR__ . '/invitation.php';

@@ -44,7 +44,7 @@ class DeliveryController extends Controller
     public function store(DeliveryRequest $request)
     {
         $data = $request->except('_token', 'add_attachments');
-        $data['creator_id'] = ownerId();
+        
         try {
             $delivery = Delivery::create($data);
             if ($request->has('add_attachments')) {

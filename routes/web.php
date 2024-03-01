@@ -49,7 +49,6 @@ Route::middleware('auth')->group(function () {
 
 
 
-Route::resource('change', ChangeController::class);
 Route::put('change/status/{change}', [ChangeController::class, 'updateStatus'])->name('change.update.status');
 Route::get('change-search', [ChangeController::class, 'search'])->name('change.search');
 // Route::resource('delivery', DeliveryController::class);

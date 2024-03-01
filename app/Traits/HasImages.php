@@ -49,6 +49,7 @@ trait HasImages
         $id = $this->id;
         $ext = $image->getClientOriginalExtension();
         $name = $name ?? $image->getClientOriginalName();
+        $name = str($name)->slug();
         $path = $image->storeAs($this->baseDir . $this->dir, $name, $this->disk);
         $image = Image::create([
             'imageable_id' => $id,
@@ -78,6 +79,7 @@ trait HasImages
         $id = $this->id;
         $ext = $image->getClientOriginalExtension();
         $name = $name ?? $image->getClientOriginalName();
+        $name = str($name)->slug();
         $path = $image->storeAs($this->baseDir . $this->dir, $name, $this->disk);
         $this->deleteImage($oldImage, true);
         $image = tap($oldImage)->update([

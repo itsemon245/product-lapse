@@ -34,12 +34,9 @@
                 <div class="col-md-6">
                     <div class="item lon new">
                         <div class="list_item">
-                            @php
-                                $creator = App\Models\User::find($product->owner_id)->with('image')->first();
-                            @endphp
                             <figure>
                                 <a href="{{ route('product.show', $product) }}">
-                                    <img src="{{ favicon($creator->image) }}" alt="">
+                                    <img src="{{ favicon($product->image) }}" alt="">
                                 </a>
                             </figure>
                             <div class="joblisting_text">

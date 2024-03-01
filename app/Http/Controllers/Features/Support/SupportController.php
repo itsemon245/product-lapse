@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Features\Support;
 use App\Models\User;
 use App\Models\Select;
 use App\Models\Product;
-use App\Models\ProductUser;
 use App\Models\Support;
 use Illuminate\Http\Request;
 use App\Services\SearchService;
@@ -46,7 +45,7 @@ class SupportController extends Controller
     public function store(SupportRequest $request)
     {
         $data = $request->except('_token');
-        $data['creator_id'] = auth()->id();
+        
 
         Support::create($data);
 
@@ -87,7 +86,7 @@ class SupportController extends Controller
     public function update(SupportRequest $request, Support $support)
     {
         $data = $request->except('_token');
-        $data['owner_id'] = ownerId();
+        
 
         $support->update($data);
 

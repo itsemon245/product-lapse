@@ -83,18 +83,18 @@
                         <div class="container-fluid">
                             <div class="form-group text_box col-lg-12 col-md-12">
                                 <x-input label="{{ __('feature/productHistory.date') }}" id="required_completion_date"
-                                    class="block mt-1 w-full" type="date" name="date" required autofocus />
+                                    class="block mt-1 w-full" type="date" name="date" :value="old('date')" required autofocus />
                             </div>
                             <div class="form-group text_box col-lg-12 col-md-12">
-                                <x-textarea label="{{ __('feature/productHistory.description') }}" name="description"
-                                    placeholder="{{ __('feature/productHistory.description') }}">{{ $productHistory->description ?? '' }}</x-textarea>
+                                <x-textarea label="{{ __('feature/productHistory.description') }}" required name="description"
+                                    placeholder="{{ __('feature/productHistory.description') }}">{{ $productHistory->description ?? old('description') }}</x-textarea>
 
                             </div>
                             <div class="form-group text_box col-lg-12 col-md-12">
                                 <label class=" text_c f_500">@__('feature/productHistory.images')</label>
                                 <div class="verify-sub-box">
                                     <div class="file-loading">
-                                        <x-attach id="multiplefileupload" label="{{ __('feature/productHistory.images') }}"
+                                        <x-attach id="multiplefileupload" required autofocus label="{{ __('feature/productHistory.images') }}"
                                             name="image[]" />
                                     </div>
                                 </div>

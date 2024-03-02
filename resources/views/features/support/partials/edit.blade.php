@@ -24,7 +24,7 @@
 
                             @forelse ($classifications as $classification)
                                 <option value="{{ $classification->value->{app()->getLocale()} }}"
-                                    @if ($support->classification == $classification->value->{app()->getLocale()}) selected @endif>
+                                    @if ($support->classification == $classification->value->{app()->getLocale()} || $classification->value->{app()->getLocale()} == old('classification')) selected @endif>
                                     {{ $classification->value->{app()->getLocale()} }}
                                 </option>
                             @empty
@@ -39,7 +39,7 @@
 
                             @forelse ($priorities as $priority)
                                 <option value="{{ $priority->value->{app()->getLocale()} }}"
-                                    @if ($support->priority == $priority->value->{app()->getLocale()}) selected @endif>
+                                    @if ($support->priority == $priority->value->{app()->getLocale()} || $priority->value->{app()->getLocale()} == old('priority')) selected @endif>
                                     {{ $priority->value->{app()->getLocale()} }}
                                 </option>
                             @empty
@@ -54,7 +54,7 @@
 
                             @forelse ($statuses as $status)
                                 <option value="{{ $status->value->{app()->getLocale()} }}"
-                                    @if ($support->status == $status->value->{app()->getLocale()}) selected @endif>
+                                    @if ($support->status == $status->value->{app()->getLocale()} || $status->value->{app()->getLocale()} == old('status')) selected @endif>
                                     {{ $status->value->{app()->getLocale()} }}
                                 </option>
                             @empty
@@ -75,7 +75,7 @@
                             @if ($users)
                                 @forelse ($users as $user)
                                     <option value="{{ $user->id }}"
-                                        {{ $support->administrator == $user->id ? 'Selected' : '' }}>
+                                        {{ $support->administrator == $user->id ? 'Selected' : '' || $user->id == old('administrator') }}>
                                         {{ $user->name }}
                                     </option>
                                 @empty

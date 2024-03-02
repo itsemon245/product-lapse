@@ -30,7 +30,7 @@
                         <x-select-input label="Idea Stage" id="stage" placeholder="Choose Stage" name="stage" required
                             autofocus>
                             @foreach ($stages as $stage)
-                                <option value="{{ $stage->value }}">{{ str($stage->value)->headline() }}</option>
+                                <option value="{{ $stage->value }}" @selected($stage->value == old('stage')) >{{ str($stage->value)->headline() }}</option>
                             @endforeach
                         </x-select-input>
                     </div>
@@ -40,7 +40,7 @@
                             placeholder="Choose one" name="priority" required autofocus>
                             @if ($priorities)
                                 @forelse ($priorities as $priority)
-                                    <option value="<?= $priority->value->{app()->getLocale()} ?>">
+                                    <option value="<?= $priority->value->{app()->getLocale()} ?> " @selected($priority->value->{app()->getLocale()} == old('priority')) >
                                         <?= $priority->value->{app()->getLocale()} ?>
                                     </option>
                                 @empty

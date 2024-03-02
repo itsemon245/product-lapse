@@ -57,7 +57,7 @@
                     <div class="form-group text_box col-lg-12 col-md-6">
                         <x-textarea label="{{ __('feature/change.label.details') }}" name="details"
                             placeholder="{{ __('feature/change.placeholder.details') }}" required
-                            autfocus>{!! $idea->details ?? '' !!}</x-textarea>
+                            autfocus>{!! $idea->details ?? old('details') !!}</x-textarea>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-select-input label="{{ __('feature/change.label.administrator') }}" id="administrator"
@@ -65,7 +65,7 @@
                             required autofocus>
                             @if ($users)
                                 @foreach ($users as $user)
-                                    <option value="{{ $user->id }}" @selected($user->id == old('classification') || $user->id == auth()->id())>
+                                    <option value="{{ $user->id }}" @selected($user->id == old('administrator') || $user->id == auth()->id())>
                                         {{ $user->name }}
                                     </option>
                                 @endforeach

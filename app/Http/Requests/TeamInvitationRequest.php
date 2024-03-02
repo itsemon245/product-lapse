@@ -18,9 +18,9 @@ class TeamInvitationRequest extends FormRequest
             'email'      => [ 'sometimes', 'required', 'email', 'unique:users,email'],
             'first_name' => 'sometimes|required|string|max:255',
             'last_name'  => 'sometimes|required|string|max:255',
-            'phone'      => 'sometimes|string|max:20',
-            'role'   => 'nullable|string|max:255|exists:roles,name',
-            'task'       => 'sometimes|string|max:255',
+            'phone'      => 'sometimes|required|string|max:20',
+            'role'   => 'required|string|max:255|exists:roles,name',
+            'task'       => 'sometimes|required|string|max:255',
             'products'   => 'required',
          ];
     }

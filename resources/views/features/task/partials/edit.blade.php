@@ -25,7 +25,7 @@
 
                             @forelse ($categories as $category)
                                 <option value="{{ $category->value->{app()->getLocale()} }}"
-                                    @if ($task->category == $category->value->{app()->getLocale()}) selected @endif>
+                                    @if ($task->category == $category->value->{app()->getLocale()} || $category->value->{app()->getLocale()} == old('category') ) selected @endif>
                                     {{ $category->value->{app()->getLocale()} }}
                                 </option>
                             @empty
@@ -39,7 +39,7 @@
 
                             @forelse ($statuses as $status)
                                 <option value="{{ $status->value->{app()->getLocale()} }}"
-                                    @if ($task->status == $status->value->{app()->getLocale()}) selected @endif>
+                                    @if ($task->status == $status->value->{app()->getLocale()} || $status->value->{app()->getLocale()} == old('status')) selected @endif>
                                     {{ $status->value->{app()->getLocale()} }}
                                 </option>
                             @empty
@@ -64,8 +64,8 @@
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-12">
                         <x-input-label for="details" value="{{ __('feature/task.label.details') }}" />
-                        <x-textarea id="details" class="block mt-1 w-full" name="details"
-                            placeholder="{{ __('feature/task.placeholder.details') }}" required
+                        <x-textarea id="details" class="block mt-1 w-full" name="details" required
+                            placeholder="{{ __('feature/task.placeholder.details') }}" 
                             autofocus>{!! $task->details !!}</x-textarea>
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-12">

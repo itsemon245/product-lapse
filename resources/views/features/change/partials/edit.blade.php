@@ -14,7 +14,7 @@
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-input id="title" label="{{ __('feature/change.label.title') }}" class="block mt-1 w-full"
                             type="text" placeholder="{{ __('feature/change.placeholder.title') }}" name="title"
-                            value="{{ $change->title }}" required autofocus />
+                            value="{{ $change->title ?? old('title') }}" required autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-select-input label="{{ __('feature/change.label.classification') }}" id="type"
@@ -22,7 +22,7 @@
 
                             @forelse ($classifications as $classification)
                                 <option value="{{ $classification->value->{app()->getLocale()} }}"
-                                    @if ($change->classification == $classification->value->{app()->getLocale()}) selected @endif>
+                                    @if ($change->classification == $classification->value->{app()->getLocale()} || $classification->value->{app()->getLocale()} == old('classification')) selected @endif>
                                     {{ $classification->value->{app()->getLocale()} }}
                                 </option>
                             @empty
@@ -37,7 +37,7 @@
 
                             @forelse ($priorities as $priority)
                                 <option value="{{ $priority->value->{app()->getLocale()} }}"
-                                    @if ($change->priority == $priority->value->{app()->getLocale()}) selected @endif>
+                                    @if ($change->priority == $priority->value->{app()->getLocale()} || $priority->value->{app()->getLocale()} == old('priority')) selected @endif>
                                     {{ $priority->value->{app()->getLocale()} }}
                                 </option>
                             @empty
@@ -52,7 +52,7 @@
 
                             @forelse ($statuses as $status)
                                 <option value="{{ $status->value->{app()->getLocale()} }}"
-                                    @if ($change->status == $status->value->{app()->getLocale()}) selected @endif>
+                                    @if ($change->status == $status->value->{app()->getLocale()} || $status->value->{app()->getLocale()} == old('status')) selected @endif>
                                     {{ $status->value->{app()->getLocale()} }}
                                 </option>
                             @empty
@@ -63,7 +63,7 @@
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-6">
                         <x-textarea label="{{ __('feature/change.label.details') }}" name="details"
-                            placeholder="{{ __('feature/change.placeholder.details') }}">{{ $change->details }}</x-textarea>
+                            placeholder="{{ __('feature/change.placeholder.details') }}">{{ $change->details ?? old('details') }}</x-textarea>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-select-input label="{{ __('feature/change.label.administrator') }}" id="administrator"

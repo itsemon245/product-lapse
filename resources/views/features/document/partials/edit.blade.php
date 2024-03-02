@@ -15,7 +15,7 @@
                         <x-input-label for="name" value="{{ __('feature/document.label.name') }}" />
                         <x-input id="name" class="block mt-1 w-full" type="text"
                             placeholder="{{ __('feature/document.placeholder.name') }}" name="name"
-                            value="{{ $document->name }}" required autofocus />
+                            value="{{ $document->name ?? old('name') }}" required autofocus />
                     </div>
 
                     <div class="form-group text_box col-lg-6 col-md-6">
@@ -23,7 +23,7 @@
                             placeholder="Choose one" name="type" required autofocus>
                             @forelse ($type as $category)
                                 <option value="{{ $category->value->{app()->getLocale()} }}"
-                                    @if ($document->type == $category->value->{app()->getLocale()}) selected @endif>
+                                    @if ($document->type == $category->value->{app()->getLocale()} || $category->value->{app()->getLocale()} == old('type')) selected @endif>
                                     {{ $category->value->{app()->getLocale()} }}
                                 </option>
                             @empty
@@ -37,20 +37,20 @@
                         <x-input-label for="version" value="{{ __('feature/document.label.version') }}" />
                         <x-input id="version" class="block mt-1 w-full" type="text"
                             placeholder="{{ __('feature/document.placeholder.version') }}" name="version"
-                            value="{{ $document->version }}" required autofocus />
+                            value="{{ $document->version ?? old('version') }}" required autofocus />
                     </div>
 
                     <div class="form-group text_box col-lg-12 col-md-12">
                         <x-textarea placeholder="{{ __('feature/document.placeholder.description') }}" rows="5"
                             cols="10" name="description" label="{{ __('feature/document.label.description') }}">
-                            {!! $document->description !!}
+                            {!! $document->description ?? old('description') !!}
                         </x-textarea>
                     </div>
 
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-input-label for="date" value="{{ __('feature/document.label.date') }}" />
                         <x-input id="date" class="block mt-1 w-full" type="date" name="date"
-                            value="{{ \Carbon\Carbon::parse($document->date)->format('Y-m-d') }}" required autofocus />
+                            value="{{ \Carbon\Carbon::parse($document->date)->format('Y-m-d') ?? old('date') }}" required autofocus />
                     </div>
 
                     <div class="form-group text_box col-lg-6 col-md-6">

@@ -16,7 +16,7 @@
                             <x-select-input label="Feature Name" id="model-type" placeholder="Choose Feature Name"
                                 name="model_type" autofocus>
                                 @foreach ($features as $feature)
-                                    <option value="{{ $feature->value }}">{{ str($feature->value)->headline() }}</option>
+                                    <option value="{{ $feature->value }}" @selected($feature->value == old('model_type')) >{{ str($feature->value)->headline() }}</option>
                                 @endforeach
                             </x-select-input>
                         </div>
@@ -24,29 +24,27 @@
                             <x-select-input label="Type Of Item" id="type" placeholder="Choose Type" name="type"
                                 autofocus>
                                 @foreach ($types as $type)
-                                    <option value="{{ $type->value }}">{{ str($type->value)->headline() }}</option>
+                                    <option value="{{ $type->value }}" @selected($type->value == old('type')) >{{ str($type->value)->headline() }}</option>
                                 @endforeach
                             </x-select-input>
                         </div>
 
                         <div class="form-group text_box col-lg-6 col-md-6">
                             <x-input label="Name (English)" id="name_en" type="text" placeholder="Enter category name"
-                                name="name_en" :value="old('name_en')" required autofocus />
-                            <x-input-error :messages="$errors->get('name_en')" class="mt-2" />
+                                name="name_en" :value="old('name_en')"  autofocus />
                         </div>
 
                         <div class="form-group text_box col-lg-6 col-md-6">
 
                             <x-input label="Name (Arabic)" id="name_ar" type="text" placeholder="Enter category name"
-                                name="name_ar" :value="old('name_ar')" required autofocus />
-                            <x-input-error :messages="$errors->get('name_ar')" class="mt-2" />
+                                name="name_ar" :value="old('name_ar')"  autofocus />
                         </div>
 
                         <div class="form-group text_box col-lg-12 col-md-6">
                             <x-select-input label="Select Text Color" id="color" placeholder="Choose Color" name="text_color"
                                 autofocus>
                                 @foreach ($colors as $color)
-                                    <option class="text-capitalize" style="color: {{$color->value}}" value="{{ $color->value }}">{{ str($color->name)->title() }}</option>
+                                    <option class="text-capitalize" style="color: {{$color->value}}" value="{{ $color->value }}" @selected($color->value == old('text_color')) >{{ str($color->name)->title() }}</option>
                                 @endforeach
                             </x-select-input>
                         </div>

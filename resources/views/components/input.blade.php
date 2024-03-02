@@ -1,5 +1,7 @@
 @php
     $name = $attributes->get('name');
+    $id = $attributes->get('id');
+    // dd($name);
 @endphp
 
 <div class="form-group text_box relative">
@@ -14,5 +16,4 @@
     @error($name)
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
-
 </div>

@@ -31,33 +31,36 @@
                                             <p class="f_400 mb-30 text-font">{{ $findOrder->bank_details->name }}</p> 
                                         </div>
                                         <div class="col-md-6">
+                                            <h6 class="title2">{{ __('Bank Account ID:') }}</h6>
+                                            <p class="f_400 mb-30 text-font">{{ $findOrder->bank_details->account_id }}</p> 
+                                        </div>
+                                        <div class="col-md-6">
                                             <h6 class="title2">{{ __('Bank IBAN:') }}</h6>
                                             <p class="f_400 mb-30 text-font">{{ $findOrder->bank_details->iban }}</p> 
                                         </div> 
-                                    </div>
                                     @endif
-                                    <div class="row">
-                                    <div class="p-2 col-md-6">
+                                    <div class="col-md-6">
                                         <h6 class="title2">Street</h6>
                                         <p class="f_400 mb-30 text-font">{{ $findOrder->user->billingAddress()->first()?->street }}</p> 
                                     </div>
-                                    <div class="p-2 col-md-6">
+                                    <div class="col-md-6">
                                         <h6 class="title2">City</h6>
                                         <p class="f_400 mb-30 text-font">{{ $findOrder->user->billingAddress()->first()?->city }}</p> 
                                     </div>
-                                    <div class="p-2 col-md-6">
+                                    <div class="col-md-6">
                                         <h6 class="title2">State</h6>
                                         <p class="f_400 mb-30 text-font">{{ $findOrder->user->billingAddress()->first()?->state }}</p> 
                                     </div>
-                                    <div class="p-2 col-md-6">
+                                    <div class="col-md-6">
                                         <h6 class="title2">Country</h6>
                                         <p class="f_400 mb-30 text-font">{{ $findOrder->user->billingAddress()->first()?->country }}</p> 
                                     </div>
-                                    <div class="p-2 col-md-6">
+                                    <div class="col-md-6">
                                         <h6 class="title2">ZIP</h6>
                                         <p class="f_400 mb-30 text-font">{{ $findOrder->user->billingAddress()->first()?->zip }}</p> 
                                     </div>
                                     </div> 
+                              
                                 </div>
                                
                                

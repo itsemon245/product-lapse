@@ -17,12 +17,12 @@
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-input-label for="version" value="{{ __('feature/release.label.version') }}" />
-                        <x-input id="version" class="block mt-1 w-full" type="number"
+                        <x-input id="inputField" class="block mt-1 w-full" type="number"
                             placeholder="{{ __('feature/release.placeholder.version') }}" name="version" :value="old('version') ?? 0"
                             required autofocus />
                             <div class="input-group-append">
                                 <span class="btn btn-success" id="incrementButton">+</span>
-                                <span class="btn btn-success" id="drecementButton">-</span>
+                                <span class="btn btn-success" id="decrimentButton">-</span>
                             </div> 
                     </div>
 
@@ -49,20 +49,27 @@
     </x-feature.create>
 @endsection
 @push('customJs')
-<script>
-    document.getElementById('incrementButton').addEventListener('click', function() {
-           
-            var inputField = document.getElementById('version').value;//input field 
-                if(inputField){
-                    var inputPreviousValue = inputField
-                    var hello = inputField.innerHTML = inputPreviousValue + inputField
 
-                    console.log(hello);
-                }else{
-                    console.log('hwllo');
-                }
-           
-    
+
+    <script>
+      var incrementBTN = document.getElementById("incrementButton")
+        .addEventListener("click", function () {
+          var inputValue = document.getElementById("inputField").value;
+            if(inputValue => 0){
+                inputValue++;
+                document.getElementById("inputField").value = inputValue;
+
+            }
+        });
+var decrimentBTN = document.getElementById("decrimentButton")
+        .addEventListener("click", function () {
+          var inputValue = document.getElementById("inputField").value;
+            if(inputValue > 0){
+                inputValue--;
+                document.getElementById("inputField").value = inputValue;
+                decrimentBTN.style.display = "none";
+            }
+
         });
     </script>
 @endpush

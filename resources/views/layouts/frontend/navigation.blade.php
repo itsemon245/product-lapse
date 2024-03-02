@@ -7,9 +7,9 @@
         </li>
         @auth
             <li class="nav-item hidden-md visible-sm">
-                <a class="nav-link" href="/#tolink-6">
+                <a class="nav-link" href="{{route('notifications')}}">
                     @__('navigation.navbar.notifications')
-                    <span class="notifi-num notifi-num2">25</span>
+                    <span class="notifi-num notifi-num2">{{ count(auth()->user()->notifications) }}</span>
                 </a>
             </li>
             <li class="nav-item dropdown submenu hidden-md visible-sm">

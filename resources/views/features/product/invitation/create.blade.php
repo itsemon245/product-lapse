@@ -37,7 +37,7 @@
                         <x-select-input :label="__('feature/invitation.label.role')" id="role" placeholder="Choose one" name="role" autofocus>
                             @if ($roles)
                                 @forelse ($roles as $role)
-                                    <option value="{{ $role->name }}" class="capitalize">
+                                    <option value="{{ $role->name }}" @selected($role->name == old('role')) class="capitalize">
                                         @lang($role->name)
                                     </option>
                                 @empty
@@ -56,7 +56,7 @@
                                 <div class="col-lg-4 col-md-6">
                                     <div class="checkbox remember">
                                         <label>
-                                            <input type="checkbox" value="{{ $product->id }}" name="products[]" />
+                                            <input type="checkbox" @checked($product->name == old('products')) value="{{ $product->id }}" name="products[]" />
                                             {{ $product->name }}
                                         </label>
                                     </div>

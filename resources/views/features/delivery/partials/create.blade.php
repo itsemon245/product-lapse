@@ -14,34 +14,34 @@
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-input id="name" label="{{ __('feature/delivery.label.name') }}" class="block mt-1 w-full"
                             type="text" placeholder="{{ __('feature/delivery.placeholder.name') }}" name="name"
-                            :value="old('name')" required autofocus />
+                            :value="old('name')"  autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-input id="link" label="{{ __('feature/delivery.label.link') }}" class="block mt-1 w-full"
                             type="text" placeholder="{{ __('feature/delivery.placeholder.link') }}" name="link"
-                            :value="old('link')" required autofocus />
+                            :value="old('link')"  autofocus />
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-6">
                         <x-textarea placeholder="{{ __('feature/delivery.placeholder.items') }}" rows="5"
                             cols="10" name="items" label="{{ __('feature/delivery.label.items') }}" :value="old('items')"
-                            required autofocus>
+                             autofocus>
                         </x-textarea>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-input id="username" label="{{ __('feature/delivery.label.user') }}" class="block mt-1 w-full"
                             type="text" placeholder="{{ __('feature/delivery.placeholder.user') }}" name="username"
-                            :value="old('username')" required autofocus />
+                            :value="old('username')"  autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-input id="password" label="{{ __('feature/delivery.label.password') }}"
                             class="block mt-1 w-full" type="text"
                             placeholder="{{ __('feature/delivery.placeholder.password') }}" name="password"
-                            :value="old('password')" required autofocus />
+                            :value="old('password')"  autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-select-input label="{{ __('feature/delivery.label.administrator') }}" id="administrator"
                             placeholder="{{ __('feature/delivery.placeholder.administrator') }}" name="administrator"
-                            required autofocus>
+                             autofocus>
                             @if ($users)
                                 @forelse ($users as $user)
                                     <option value="{{ $user->id }}" @selected($user->id == old('classification') || $user->id == auth()->id()) > 
@@ -54,7 +54,7 @@
                         </x-select-input>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-attach label="{{ __('feature/delivery.attachments') }}" class="block mt-1 w-full"
+                        <x-attach label="{{ __('feature/delivery.attachments') }}"  autofocus class="block mt-1 w-full"
                             name="add_attachments[]" />
                     </div>
                 </div>

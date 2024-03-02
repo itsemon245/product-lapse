@@ -30,7 +30,7 @@
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-6">
                         <x-textarea label="{{ __('feature/release.label.details') }}" name="description"
-                            placeholder="{{ __('feature/release.label.details') }}" required autfocus />
+                            placeholder="{{ __('feature/release.label.details') }}" required autfocus > {!! old('description') !!} </x-textarea>
                     </div>
                 </div>
                 <div class="d-flex align-items-center text-center">

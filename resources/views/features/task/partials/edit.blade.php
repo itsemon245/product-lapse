@@ -17,7 +17,7 @@
                         <x-input-label for="name" value="{{ __('feature/task.label.name') }}" />
                         <x-input id="name" class="block mt-1 w-full" type="text"
                             placeholder="{{ __('feature/task.placeholder.name') }}" name="name"
-                            value="{{ $task->name }}" required autofocus />
+                            value="{{ $task->name ?? old('name') }}" required autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-select-input label="{{ __('feature/task.label.category') }}" id="category"

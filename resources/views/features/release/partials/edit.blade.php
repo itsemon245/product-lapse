@@ -12,25 +12,25 @@
                 <div class="row">
                     <div class="form-group text_box col-lg-12 col-md-6">
                         <x-input-label for="name" value="{{ __('feature/release.label.name') }}" />
-                        <x-input id="name" value="{{ $release->name }}" class="block mt-1 w-full" type="text"
+                        <x-input id="name" value="{{ $release->name ?? old('name') }}" class="block mt-1 w-full" type="text"
                             placeholder="{{ __('feature/release.placeholder.name') }}" name="name" required autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-input-label for="version" value="{{ __('feature/release.label.version') }}" />
-                        <x-input id="version" value="{{ $release->version }}" class="block mt-1 w-full" type="text"
+                        <x-input id="version" value="{{ $release->version ?? old('version') }}" class="block mt-1 w-full" type="text"
                             placeholder="{{ __('feature/release.placeholder.version') }}" name="version" required
                             autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-input-label for="release_date" value="{{ __('feature/release.label.date') }}" />
-                        <x-input id="release_date" value="{{ $release->release_date }}" class="block mt-1 w-full"
+                        <x-input id="release_date" value="{{ \Carbon\Carbon::parse($release->release_date)->format('Y-m-d') ?? old('release_date') }}" class="block mt-1 w-full"
                             type="date" placeholder="{{ __('feature/release.placeholder.date') }}" name="release_date"
                             required autofocus />
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-6">
                         <x-textarea value="{{ $release->description }}" label="{{ __('feature/release.label.details') }}"
                             name="description" placeholder="{{ __('feature/release.label.details') }}" required
-                            autfocus>{{ $release->description }}</x-textarea>
+                            autfocus>{{ $release->description ?? old('description') }}</x-textarea>
 
                     </div>
                 </div>

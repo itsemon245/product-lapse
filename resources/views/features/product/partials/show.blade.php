@@ -22,6 +22,12 @@
                                 </p>
                             </div>
                             <div class="col-md-6">
+                                <h6 class="title2">@__('feature/product.info.url')</h6>
+                                <p class="f_400 mb-30 text-font">
+                                    {{ $data->url }}
+                                </p>
+                            </div>
+                            <div class="col-md-6">
                                 <h6 class="title2">@__('feature/product.info.stage')</h6>
                                 <p class="f_400 mb-30 text-font">
                                     {{ $data->stage }}

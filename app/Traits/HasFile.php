@@ -78,7 +78,9 @@ trait HasFile
         $name = $name ?? $file->getClientOriginalName();
         $name = str($name)->slug();
         $path = $file->storeAs($this->baseDir . "/" . $this->dir, $name, $this->disk);
-        $this->deleteFile($oldFile, true);
+        if ($oldFile) {
+            $this->deleteFile($oldFile, true);
+        }
         $file = tap($oldFile)->update([
             'fileable_id' => $id,
             'fileable_type' => $type,

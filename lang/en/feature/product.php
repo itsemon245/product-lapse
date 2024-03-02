@@ -31,6 +31,7 @@ return [
         'title' => 'Product info',
         'category' => 'Category',
         'stage' => 'Stage',
+        'url' => 'URL', 
         'description' => 'Description',
         'created' => 'Created by',
     ],

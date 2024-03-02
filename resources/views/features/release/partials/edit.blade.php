@@ -17,9 +17,13 @@
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-input-label for="version" value="{{ __('feature/release.label.version') }}" />
-                        <x-input id="version" value="{{ $release->version ?? old('version') }}" class="block mt-1 w-full" type="text"
+                        <x-input id="inputField" value="{{ $release->version ?? old('version') }}" class="block mt-1 w-full" type="text"
                             placeholder="{{ __('feature/release.placeholder.version') }}" name="version" required
                             autofocus />
+                            <div class="input-group-append">
+                                <span class="btn btn-success" id="incrementButton">+</span>
+                                <span class="btn btn-warning" style="margin-left: 1rem;" id="decrimentButton">-</span>
+                            </div> 
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-input-label for="release_date" value="{{ __('feature/release.label.date') }}" />
@@ -47,3 +51,28 @@
         </x-slot:from>
     </x-feature.edit>
 @endsection
+@push('customJs')
+
+
+    <script>
+      var incrementBTN = document.getElementById("incrementButton")
+        .addEventListener("click", function () {
+          var inputValue = document.getElementById("inputField").value;
+            if(inputValue => 1){
+                inputValue++;
+                document.getElementById("inputField").value = inputValue;
+
+            }
+        });
+        var decrimentBTN = document.getElementById("decrimentButton")
+                .addEventListener("click", function () {
+                var inputValue = document.getElementById("inputField").value;
+                    if(inputValue > 0){
+                        inputValue--;
+                        document.getElementById("inputField").value = inputValue;
+                        decrimentBTN.style.display = "none";
+                    }
+
+                });
+    </script>
+@endpush

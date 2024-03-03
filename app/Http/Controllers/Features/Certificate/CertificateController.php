@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Select;
 use App\Models\Invitation;
 use App\Models\Certificate;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Services\SearchService;
 use Illuminate\Support\Facades\DB;
@@ -113,10 +114,12 @@ class CertificateController extends Controller
     public function approval(string $id)
     {
         $certificate = Certificate::find($id);
+        // dd($certificate);
         $certificate->update([
             'approved_id' => auth()->id(),
             'status' => 'approved',
             'issue_date' => now(),
+            'link' => 'certificate' . '/' . Str::slug($certificate->company) . '/' . uniqid(),
         ]);
         notify()->success(__('notify/success.update'));
         return back();

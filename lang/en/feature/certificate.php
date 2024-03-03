@@ -42,8 +42,16 @@ return [
         'list3' => 'product versions, view product reports', 
         'list4' => 'Attend the recorded training session',
         'list5' => 'Filming a video of the added data with explanation',
+        'but' => 'But Your Submission was cancel!',
+        'fullfill' => 'Please fulfill get certificate requirements.',
     ],
+    'others' => [
+        'cancel' => 'Your Submission Cancel From Administrator.',
+        'back' => 'Return back',
+        'status' => 'Submission Status',
+        'waiting' => 'Waiting for Admin Approval!',
 
+    ],
     //show page
     'show' => 'Show Certificate',
 ];

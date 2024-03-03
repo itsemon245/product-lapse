@@ -22,31 +22,29 @@
                     <div class="certificate-1" style="display: flex; justify-content: center; align-items: center;"><img
                             src="{{ asset('img/logo.png') }}"></div>
                     <div class="certificate-text">
-                        <p style="display: flex; justify-content: center; align-items: center;"> <span>Your Sumission Cancle
-                                From Adminstrator.</span> </p>
+                        <p style="display: flex; justify-content: center; align-items: center;"> <span>@__('feature/certificate.others.cancel')</span> </p>
                     </div>
                     <div class="d-flex justify-content-center align-items-center text-center certificate-btns">
                         <x-button type="link" href="{{ route('product.index') }}"
-                            class="btn_hover agency_banner_btn btn-bg">Return back</x-button>
+                            class="btn_hover agency_banner_btn btn-bg">@__('feature/certificate.others.back')</x-button>
 
                     </div>
                     <div class="certificate-terms" style="display: flex; justify-content: center; align-items: center;">
-                        <a href="#" data-toggle="modal" data-target="#cancleSubmission">Submission Status</a>
+                        <a href="#" data-toggle="modal" data-target="#cancleSubmission">@__('feature/certificate.others.status')</a>
                     </div>
                 @elseif($certificate->status == 'pending')
                     <div class="certificate-1" style="display: flex; justify-content: center; align-items: center;"><img
                             src="{{ asset('img/logo.png') }}"></div>
                     <div class="certificate-text">
-                        <p style="display: flex; justify-content: center; align-items: center;"> <span>Waiting for Admin
-                                Approval!</span> </p>
+                        <p style="display: flex; justify-content: center; align-items: center;"> <span>@__('feature/certificate.others.waiting')</span> </p>
                     </div>
                     <div class="d-flex justify-content-center align-items-center text-center certificate-btns">
                         <x-button type="link" href="{{ route('product.index') }}"
-                            class="btn_hover agency_banner_btn btn-bg">Return back</x-button>
+                            class="btn_hover agency_banner_btn btn-bg">@__('feature/certificate.others.back')</x-button>
 
                     </div>
                     <div class="certificate-terms" style="display: flex; justify-content: center; align-items: center;">
-                        <a href="#" data-toggle="modal" data-target="#subMission">Submission Status</a>
+                        <a href="#" data-toggle="modal" data-target="#subMission">@__('feature/certificate.others.status')</a>
                     </div>
                 @endif
             @else
@@ -59,13 +57,13 @@
                             <x-input-label for="name" value="{{ __('feature/certificate.label.name') }}" />
                             <x-input id="name" class="block mt-1 w-full" type="text"
                                 placeholder="{{ __('feature/certificate.label.name') }}" name="name" :value="old('name')"
-                                autofocus />
+                                required autofocus />
                         </div>
                         <div class="form-group text_box col-lg-6 col-md-6">
                             <x-input-label for="company" value="{{ @__('feature/certificate.label.company') }}" />
                             <x-input id="company" class="block mt-1 w-full" type="text"
                                 placeholder="{{ __('feature/certificate.placeholder.company') }}" name="company"
-                                :value="old('company_name')" autofocus />
+                                :value="old('company_name')" required autofocus />
                         </div>
                     </div>
                     <div class="d-flex align-items-center text-center">
@@ -85,15 +83,15 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Get Certificate status:</h4>
+                    <h4 class="modal-title">@__('feature/certificate.modal.get')</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
                 <!-- Modal body -->
                 <div class="modal-body">
                     <ul class="certificate-conditions">
-                        <li class="text-success">Your Submission was successfull! </li>
-                        <li>Please contract System Administrator. </li>
+                        <li class="text-success">@__('feature/certificate.modal.status')</li>
+                        <li>@__('feature/certificate.modal.msg')</li>
                     </ul>
                 </div>
 
@@ -109,17 +107,17 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Get Certificate status:</h4>
+                    <h4 class="modal-title">@__('feature/certificate.modal.get')</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
                 <!-- Modal body -->
                 <div class="modal-body">
                     <ul class="certificate-conditions">
-                        <li class="text-success">Your Submission was successfull! </li>
-                        <li class="text-danger">But Your Sumission was cancle! </li>
-                        <li>Please Fullfill certificate requirement. </li>
-                        <li>Please contract System Administrator. </li>
+                        <li class="text-success">@__('feature/certificate.modal.status')</li>
+                        <li class="text-danger">@__('feature/certificate.modal.but')</li>
+                        <li>@__('feature/certificate.modal.fullfill')</li>
+                        <li>@__('feature/certificate.modal.msg')</li>
                     </ul>
                 </div>
 

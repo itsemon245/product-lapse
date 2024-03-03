@@ -47,17 +47,17 @@
       
             <!-- Modal Header -->
             <div class="modal-header">
-              <h4 class="modal-title">@__('feature/certificate.condition')</h4>
+              <h4 class="modal-title">@__('feature/certificate.modal.condition')</h4>
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
       
             <!-- Modal body -->
             <div class="modal-body">
               <ul class="certificate-conditions">
-                  <li>@__('feature/certificate.list1')</li>
-                  <li>@__('feature/certificate.list2')</li>
-                  <li>@__('feature/certificate.list3')</li>
-                  <li>@__('feature/certificate.list4')</li>
+                  <li>@__('feature/certificate.modal.list1')</li>
+                  <li>@__('feature/certificate.modal.list2')</li>
+                  <li>@__('feature/certificate.modal.list3')</li>
+                  <li>@__('feature/certificate.modal.list4')</li>
                 </ul>
             </div>
       

@@ -1,7 +1,7 @@
 @extends('layouts.frontend.app')
 @section('main')
     <div>
-        <section class="agency_banner_area bg_color">
+        <section class="agency_banner_area bg_color" id="tolink-1">
             <img class="banner_shap banner_shap_ar" src="img/banner_bg-ar.png" alt="">
             <img class="banner_shap banner_shap_en" src="img/banner_bg-en.png" alt="">
             <div class="container custom_container">

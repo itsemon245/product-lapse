@@ -17,6 +17,10 @@ class ValidateRequestForCertificate
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if ($request->user()->type != 'subscriber') {
+            notify()->warning(__('You are not authorized!'), __('Restricted Area'));
+            return back();
+        }
         $package = $request->user()->activePlan()->first()->order->package;
         $isMoreThanAYear = $package->validity >= 1 && $package->unit == 'year';
         if (!$isMoreThanAYear) {

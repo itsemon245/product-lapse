@@ -24,6 +24,10 @@
                             name="MAIL_FROM_NAME" :value="env('MAIL_FROM_NAME')" autofocus />
                     </div>
                     <div class="form-group text_box col-md-6">
+                        <x-input class="block mt-1 w-full" type="text" label="To Address" placeholder="To Address"
+                            name="MAIL_TO_ADDRESS" :value="env('MAIL_TO_ADDRESS')" autofocus />
+                    </div>
+                    <div class="form-group text_box col-md-6">
                         <x-input class="block mt-1 w-full" type="text" label="SendGrid API Key"
                             placeholder="SendGrid API Key" name="MAIL_PASSWORD" :value="env('MAIL_PASSWORD')" autofocus />
                     </div>

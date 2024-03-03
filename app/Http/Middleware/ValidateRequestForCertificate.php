@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\Models\Product;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -16,11 +18,23 @@ class ValidateRequestForCertificate
     public function handle(Request $request, Closure $next): Response
     {
         $package = $request->user()->activePlan()->first()->order->package;
-        $isNotMoreThanYear = $package->validity >= 1 && $package->unit == 'year';
-        if ($isNotMoreThanYear) {
-            notify()->warning(__('Please read the conditions for obtaining the certificate to learn more'),__('You need at least a one-year package to obtain certificate!'));
-            return back();
+        $isMoreThanAYear = $package->validity >= 1 && $package->unit == 'year';
+        if (!$isMoreThanAYear) {
+            return redirect(route('certificate.index'))->with('certificate', [
+                'title'=> __('You need to purchase at least a one-year package to obtain the certificate!'),
+                'hint' => __('Please read the conditions for obtaining the certificate to learn more')
+            ]);
         }
+        $products = Product::ofOwner()->where(function(Builder $q){
+            $q->has('ideas');
+        })->count();
+        if ($products < 1) {
+            return redirect(route('certificate.index'))->with('certificate', [
+                'title'=> __('You need to add data for at least one product with all other data to obtain the certificate!'),
+                'hint' => __('Please read the conditions for obtaining the certificate to learn more')
+            ]);
+        }
+
         return $next($request);
     }
 }

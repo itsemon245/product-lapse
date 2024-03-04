@@ -17,6 +17,13 @@ use Illuminate\Database\Eloquent\Builder;
 
 class CertificateController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['certificate.validate'], ['only' => [
+            'create',
+            'store',
+         ]]);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -99,7 +106,7 @@ class CertificateController extends Controller
         //clint side method
     public function certificateStatus()
     {
-        return $this->create();
+        return redirect(route('certificate.create'));
     }
 
 

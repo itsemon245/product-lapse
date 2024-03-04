@@ -114,12 +114,11 @@ class CertificateController extends Controller
     public function approval(string $id)
     {
         $certificate = Certificate::find($id);
-        // dd($certificate);
         $certificate->update([
             'approved_id' => auth()->id(),
             'status' => 'approved',
             'issue_date' => now(),
-            'link' => 'certificate' . '/' . Str::slug($certificate->company) . '/' . uniqid(),
+            'link' => Str::slug($certificate->company) . '/' . uniqid(),
         ]);
         notify()->success(__('notify/success.update'));
         return back();
@@ -162,6 +161,11 @@ class CertificateController extends Controller
             return view('pages.certificate.index', compact('certificates', 'statuses'));
         }
 
+    }
+
+    public function share(string $id)
+    {
+        
     }
 
 }

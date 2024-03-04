@@ -9,11 +9,15 @@
 
             @if ($certificate == !null)
                 @if ($certificate->status == 'approved' && $certificate->achieved_id == auth()->id())
-                    <div class="certificate-1 mx-auto my-auto"
-                        style="display: flex; justify-content: center; align-items: center;"><img
-                            src="{{ asset('img/logo.png') }}"></div>
-                    <div class="certificate-2" style="display: flex; justify-content: center; align-items: center;"><img
-                            src="{{ asset('img/certificate.jpg') }}"></div>
+                    <div class="certificate-1 mx-auto my-auto p-3"
+                    style="display: flex; justify-content: center; align-items: center;"><img
+                        src="{{ asset('img/logo.png') }}"></div>
+                    <div id="p1" style="overflow: hidden; position: relative; background-color: white;">
+                        <h1 class="text-center p-2">{{ $certificate->company }}</h1>
+                        <h6 class="text-center p-2"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit facere, earum odit ut laudantium doloremque similique id provident voluptatem minima doloribus at vel ducimus culpa labore. Aliquid, dolorem. Corrupti, libero. </h6>
+                        <h4 class="text-center p-2">{{ $certificate->name }}</h4>
+
+                    </div>
                     <div class="d-flex justify-content-center align-items-center text-center">
                         <button type="submit" class="btn_hover agency_banner_btn btn-bg">@__('feature/certificate.share')</button>
 
@@ -22,7 +26,9 @@
                     <div class="certificate-1" style="display: flex; justify-content: center; align-items: center;"><img
                             src="{{ asset('img/logo.png') }}"></div>
                     <div class="certificate-text">
-                        <p style="display: flex; justify-content: center; align-items: center;"> <span>@__('feature/certificate.others.cancel')</span> </p>
+                        <p style="display: flex; justify-content: center; align-items: center;">
+                            <span>@__('feature/certificate.others.cancel')</span>
+                        </p>
                     </div>
                     <div class="d-flex justify-content-center align-items-center text-center certificate-btns">
                         <x-button type="link" href="{{ route('product.index') }}"
@@ -36,7 +42,9 @@
                     <div class="certificate-1" style="display: flex; justify-content: center; align-items: center;"><img
                             src="{{ asset('img/logo.png') }}"></div>
                     <div class="certificate-text">
-                        <p style="display: flex; justify-content: center; align-items: center;"> <span>@__('feature/certificate.others.waiting')</span> </p>
+                        <p style="display: flex; justify-content: center; align-items: center;">
+                            <span>@__('feature/certificate.others.waiting')</span>
+                        </p>
                     </div>
                     <div class="d-flex justify-content-center align-items-center text-center certificate-btns">
                         <x-button type="link" href="{{ route('product.index') }}"
@@ -100,7 +108,7 @@
     </div>
 
 
-        <!-- The Modal -->
+    <!-- The Modal -->
     <div class="modal fade " id="cancleSubmission">
         <div class="modal-dialog">
             <div class="modal-content">

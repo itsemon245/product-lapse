@@ -53,7 +53,6 @@ class RegisteredUserController extends Controller
             'promotional_code' => $request->promotional_code,
             'owner_id'         => $admin?->id,
          ]);
-
          $user->notify(new WelcomeNotification($user));
         // event(new Registered($user));
 

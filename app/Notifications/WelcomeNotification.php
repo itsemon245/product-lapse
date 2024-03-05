@@ -36,7 +36,7 @@ class WelcomeNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->greeting(__('Welcome Dear ').$this->user->name. ',')
+                    ->greeting(__('Welcome Dear '). ',')
                     ->line(__('Thank you for choosing us'))
                     ->line(__('We are glad to have you'));
     }

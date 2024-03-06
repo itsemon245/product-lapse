@@ -2,7 +2,7 @@
 @section('main')
     <x-feature.show>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => 'User Details', 'route' => route('users.show', $user)]]" />
+            <x-breadcrumb :list="[['label' => 'User Management', 'route' => route('users.index')], ['label' => 'User Details', 'route' => '']]" />
         </x-slot:breadcrumb>
             <x-slot:details>
                 <div class="container">

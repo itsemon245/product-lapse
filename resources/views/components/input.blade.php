@@ -11,7 +11,7 @@
     <input {{ $attributes->class(['block w-full'])->merge(['value' => old($name)]) }} />
     @if ($attributes->has('required'))
         <span title="@__('This field is required')"
-            class="absolute cursor-help text-red-500 {{ $attributes->has('label') ? 'top-0' : '-top-10' }} right-2 font-bold">*</span>
+            class="absolute cursor-help text-red-500 {{ $attributes->has('label') ? 'top-0' : '-top-10' }} {{ app()->getLocale() == 'en' ? 'right-2' : 'left-2' }}   font-bold">*</span>
     @endif
     @error($name)
         <div class="alert alert-danger">{{ $message }}</div>

@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Features\Product;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductHistoryRequest;
-use App\Models\Product;
+use App\Models\Image;
 use App\Models\ProductHistory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductHistoryController extends Controller
 {
@@ -16,7 +17,6 @@ class ProductHistoryController extends Controller
     public function index()
     {
         $histories = ProductHistory::with('images')->where('product_id', productId())->get();
-        // dd($histories);
         return view('features.product.history.index', compact('histories'));
     }
 
@@ -34,9 +34,9 @@ class ProductHistoryController extends Controller
     public function store(ProductHistoryRequest $request)
     {
         try {
-            $data = $request->except('_token', 'image');
-            $data['product_id'] = productId();
-            $product = ProductHistory::create($data);
+            $data                 = $request->except('_token', 'image');
+            $data[ 'product_id' ] = productId();
+            $product              = ProductHistory::create($data);
             if ($request->hasFile('image')) {
                 foreach ($request->file('image') as $image) {
                     $product->storeImage($image);
@@ -79,17 +79,12 @@ class ProductHistoryController extends Controller
         $history = ProductHistory::with('images')->find($productHistory->id);
 
         if ($request->hasFile('image')) {
-            if ($history->images->count() > 0) {
-                foreach ($history->images as $image) {
-                    $fileDeleted = $history->deleteImage($image);
-                }
-            }
             foreach ($request->file('image') as $image) {
                 $history->storeImage($image);
             }
         }
 
-        $history->date = $request->date;
+        $history->date        = $request->date;
         $history->description = $request->description;
         $history->save();
 
@@ -97,7 +92,6 @@ class ProductHistoryController extends Controller
 
         return redirect()->route('product-history.index');
     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -114,5 +108,18 @@ class ProductHistoryController extends Controller
         notify()->success(__('notify/success.delete'));
 
         return redirect()->back();
+    }
+
+    public function deleteImage(Request $request)
+    {
+        $image = Image::find($request->key);
+        if ($image) {
+            $exists = Storage::exists('public/' . $image->path);
+            if ($exists) {
+                Storage::delete('public/' . $image->path);
+            }
+            $image->delete();
+        }
+        return response()->json([]);
     }
 }

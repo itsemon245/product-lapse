@@ -17,6 +17,60 @@
                     <div class="tab-content faq_content" id="myTabContent">
                         <div class="tab-pane fade show active" id="purchas" role="tabpanel" aria-labelledby="purchas-tab">
                             @foreach ($histories as $history)
+                                <!-- The Edit Modal -->
+                                <div class="modal fade" id="myEditModal{{ $history->id }}">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <form method="POST" action="{{ route('product-history.update', $history) }}"
+                                                enctype="multipart/form-data">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">@__('feature/productHistory.modal-title')</h4>
+                                                    <button type="button" class="close"
+                                                        data-dismiss="modal">&times;</button>
+                                                </div>
+
+                                                <!-- Modal body -->
+                                                <div class="modal-body">
+                                                    <div class="container-fluid">
+                                                        <div class="form-group text_box col-lg-12 col-md-12">
+                                                            <x-input label="{{ __('feature/productHistory.date') }}"
+                                                                id="required_completion_date" class="block mt-1 w-full"
+                                                                type="date" name="date" :value="$history->date" required
+                                                                autofocus />
+                                                        </div>
+                                                        <div class="form-group text_box col-lg-12 col-md-12">
+                                                            <x-textarea
+                                                                label="{{ __('feature/productHistory.description') }}"
+                                                                required name="description"
+                                                                placeholder="{{ __('feature/productHistory.description') }}">{{ $history->description ?? old('description') }}</x-textarea>
+
+                                                        </div>
+                                                        <div class="form-group text_box col-lg-12 col-md-12">
+                                                            <label class=" text_c f_500">@__('feature/productHistory.images')</label>
+                                                            <div class="verify-sub-box">
+                                                                <div class="file-loading">
+                                                                    <x-attach id="fileinput-{{ $history->id }}" data-images="{{$history->images}}"
+                                                                        class="old-fileinput" required autofocus
+                                                                        label="{{ __('feature/productHistory.images') }}"
+                                                                        name="image[]" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Modal footer -->
+                                                <div class="modal-footer">
+                                                    <button type="submit"
+                                                        class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">@__('feature/productHistory.modal-btn')</button>
+                                                </div>
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
                                 <div id="accordion-{{ $history->id }}">
                                     <div class="card">
                                         <div class="card-header" id="headingTwo">
@@ -35,9 +89,11 @@
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="col-12 history-notes">
-                                                        <a href="{{ route('product-history.edit', $history) }}"
-                                                            class="btn_hover agency_banner_btn btn-bg"><i
-                                                                class="ti-pencil"></i>@__('feature/productHistory.edit')</a>
+
+                                                        <button type="submit" class="btn_hover agency_banner_btn btn-bg"
+                                                            style="margin: 0" data-toggle="modal"
+                                                            data-target="#myEditModal{{ $history->id }}"><i
+                                                                class="ti-pencil"></i>@__('feature/productHistory.edit')</button>
                                                     </div>
                                                     <div class="col-12">
                                                         <h6 class="title2">@__('feature/productHistory.description')</h6>
@@ -83,19 +139,20 @@
                         <div class="container-fluid">
                             <div class="form-group text_box col-lg-12 col-md-12">
                                 <x-input label="{{ __('feature/productHistory.date') }}" id="required_completion_date"
-                                    class="block mt-1 w-full" type="date" name="date" :value="old('date')" required autofocus />
+                                    class="block mt-1 w-full" type="date" name="date" :value="old('date')" required
+                                    autofocus />
                             </div>
                             <div class="form-group text_box col-lg-12 col-md-12">
-                                <x-textarea label="{{ __('feature/productHistory.description') }}" required name="description"
-                                    placeholder="{{ __('feature/productHistory.description') }}">{{ $productHistory->description ?? old('description') }}</x-textarea>
-
+                                <x-textarea label="{{ __('feature/productHistory.description') }}" required
+                                    name="description"
+                                    placeholder="{{ __('feature/productHistory.description') }}">{{ old('description') }}</x-textarea>
                             </div>
                             <div class="form-group text_box col-lg-12 col-md-12">
                                 <label class=" text_c f_500">@__('feature/productHistory.images')</label>
                                 <div class="verify-sub-box">
                                     <div class="file-loading">
-                                        <x-attach id="multiplefileupload" required autofocus label="{{ __('feature/productHistory.images') }}"
-                                            name="image[]" />
+                                        <x-attach id="multiplefileupload" required autofocus
+                                            label="{{ __('feature/productHistory.images') }}" name="image[]" />
                                     </div>
                                 </div>
                             </div>
@@ -112,29 +169,66 @@
         </div>
     </div>
 
+
     @push('scripts')
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.8/js/fileinput.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.8/js/plugins/sortable.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.8/themes/fas/theme.min.js"></script>
         <script>
             // ----------multiplefile-upload---------
-            $("#multiplefileupload").fileinput({
-                'theme': 'fa',
-                'uploadUrl': '#',
-                showRemove: false,
-                showUpload: false,
-                showZoom: false,
-                showCaption: false,
-                browseClass: "btn btn-danger",
-                browseLabel: "",
-                browseIcon: "<i class='ti ti-plus'></i>",
-                overwriteInitial: false,
-                initialPreviewAsData: true,
-                fileActionSettings: {
+            $(document).ready(function() {
+                $('#multiplefileupload').fileinput({
+                    'theme': 'fa',
+                    'uploadUrl': '#',
+                    showRemove: false,
                     showUpload: false,
                     showZoom: false,
-                    removeIcon: "<i class='ti ti-close'></i>",
-                }
+                    showCaption: false,
+                    browseClass: "btn btn-danger",
+                    browseLabel: "",
+                    browseIcon: "<i class='ti ti-plus'></i>",
+                    overwriteInitial: false,
+                    initialPreviewAsData: true,
+                    fileActionSettings: {
+                        showUpload: false,
+                        showZoom: false,
+                        removeIcon: "<i class='ti ti-close'></i>",
+                    }
+                });
+                $(".old-fileinput").each((i, input) => {
+                    let preview = JSON.parse(input.dataset.images).map(image=>{
+                        
+                        return `<img src='${image.url}' class='file-preview-image' alt='${image.name}' title='${image.name}'>`
+                    })
+                    let previewConfig = JSON.parse(input.dataset.images).map(image=>{
+                        
+                        return {
+                            caption: image.name,
+                            width: '120px',
+                            url: "{{route('image.delete')}}",
+                            key: image.id,
+                        }
+                    })
+                    $(input).fileinput({
+                        'theme': 'fa',
+                        'uploadUrl': '#',
+                        showRemove: false,
+                        showUpload: false,
+                        showZoom: false,
+                        showCaption: false,
+                        browseClass: "btn btn-danger",
+                        browseLabel: "",
+                        browseIcon: "<i class='ti ti-plus'></i>",
+                        overwriteInitial: false,
+                        initialPreview: preview,
+                        initialPreviewConfig: previewConfig,
+                        fileActionSettings: {
+                            showUpload: false,
+                            showZoom: false,
+                            removeIcon: "<i class='ti ti-close'></i>",
+                        }
+                    });
+                })
             });
         </script>
     @endpush

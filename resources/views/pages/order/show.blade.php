@@ -25,8 +25,7 @@
                                 </div>
                                 <div class="col-md-12">
                                 <div class="row">
-                                    {{ dd($findOrder) }}
-                                    @if ($findOrder->bank_details == null)
+                                    @if ($findOrder->payment_method == 'bank account')
                                     <div class="col-md-6">
                                         <h6 class="title2">{{ __('Bank Name:') }}</h6>
                                         <p class="f_400 mb-30 text-font">{{ $findOrder->bank_details->name }}</p> 

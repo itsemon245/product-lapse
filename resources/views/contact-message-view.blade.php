@@ -2,7 +2,7 @@
 @section('main')
     <x-feature.show>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => @__('Contact massage show'), 'route' => route('contact.messages.view', $contactMessage)]]" />
+            <x-breadcrumb :list="[['label' => @__('Contact Messages'), 'route' => route('contact.messages')] ,['label' => @__('Contact massage show'), 'route' => '']]" />
         </x-slot:breadcrumb>
         <x-slot:details>
             <div class="col-md-12 blog_sidebar_left">

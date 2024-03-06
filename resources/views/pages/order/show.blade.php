@@ -2,7 +2,7 @@
 @section('main')
     <x-feature.show>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => __('Order Details'), 'route' => route('admin.order.show', $findOrder)]]" />
+            <x-breadcrumb :list="[['label' => __('Order Manage'), 'route' => route('admin.order.index')], ['label' => __('Order Details'), 'route' => '']]" />
         </x-slot:breadcrumb>
             <x-slot:details>
         <section class="sign_in_area bg_color sec_pad">
@@ -22,6 +22,10 @@
                                 <div class="col-md-6">
                                     <h6 class="title2">{{ __('Payment Method') }}</h6>
                                     <p class="f_400 mb-30 text-font">{{ $findOrder->payment_method == null ? 'Free Payment' : ucfirst($findOrder->payment_method) }}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="title2">{{ __('Transaction ID') }}</h6>
+                                    <p class="f_400 mb-30 text-font">{{ $findOrder->transaction_id == null ? 'Free Payment' : $findOrder->transaction_id }}</p>
                                 </div>
                                 <div class="col-md-12">
                                 <div class="row">

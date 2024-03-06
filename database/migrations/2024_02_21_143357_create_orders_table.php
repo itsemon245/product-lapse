@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('package_id')->constrained()->cascadeOnDelete();
             $table->json('bank_details')->nullable();
             $table->json('card_details')->nullable();
+            $table->string(('transaction_id'))->nullable();
             $table->string('payment_method')->nullable();
             $table->decimal('amount')->nullable();
             $table->bigInteger('discount')->default(0);

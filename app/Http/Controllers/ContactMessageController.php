@@ -52,7 +52,7 @@ class ContactMessageController extends Controller
             ...$request->except('_token', '_method'),
         ]);
 
-        Mail::to(config('mail.to.address'))->send(new ContactMessageMail($contactMessage));
+        Mail::to(config('mail.global_to.address'))->send(new ContactMessageMail($contactMessage));
 
         return response()->json([
             'success'=> true,

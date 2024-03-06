@@ -10,16 +10,12 @@
                     <li class="breadcrumb-item {{ request()->routeIs('dashboard') ? 'active' : '' }} ">
                         <a href="{{ route('dashboard') }}">@__('root.dashboard')</a>
                     </li>
-                @elseif (request()->path() == 'admin')
-                    <li class="breadcrumb-item {{ request()->routeIs('admin') ? 'active' : '' }} ">
-                        <a href="{{ route('admin') }}">@__('Admin')</a>
-                    </li>
                 @elseif (str(url()->current())->contains('admin'))
                 {{-- {{ dd() }} --}}
                     <li class="breadcrumb-item {{ request()->routeIs('admin') ? 'active' : '' }} ">
                         <a href="{{ route('admin') }}">@__('Admin')</a>
                         <span class="text-light"> / </span>
-                        <a href="{{ route('admin') }}">@__('Dashboard')</a>
+                        <a href="{{ route('admin') }}">{{ url()->previous() }}</a>
                     </li>
                 @else
                     <li class="breadcrumb-item {{ request()->routeIs('home') ? 'active' : '' }} ">

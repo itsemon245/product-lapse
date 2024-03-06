@@ -3,9 +3,11 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\Enums\Feature;
 use App\Models\Product;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 use Symfony\Component\HttpFoundation\Response;
 
 class ValidateRequestForCertificate
@@ -30,7 +32,15 @@ class ValidateRequestForCertificate
             ]);
         }
         $products = Product::ofOwner()->where(function(Builder $q){
-            $q->has('ideas');
+            $features = array_column(Feature::cases(), 'value');
+            
+            // Remove product and certificate from feature list
+            $features = collect($features)->except(array_search('product', $features))->toArray();
+            $features = collect($features)->except(array_search('certificate', $features));
+            foreach ($features as $feature) {
+                $relation = Str::plural($feature);
+                $q->has($relation);
+            }
         })->count();
         if ($products < 1) {
             return redirect(route('certificate.index'))->with('certificate', [

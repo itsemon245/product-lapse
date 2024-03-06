@@ -8,7 +8,7 @@
     @endif
     <textarea {{ $attributes->merge(['class' => 'form-control message !leading-[normal]']) }}>{{ $slot->isNotEmpty() ? $slot :  old($name) }}</textarea>
     <span title="@__('This field is required')"
-    class="absolute cursor-help text-red-500 {{ $attributes->has('label') ? 'top-0' : '-top-10' }} right-2 font-bold">*</span>
+    class="absolute cursor-help text-red-500 {{ $attributes->has('label') ? 'top-0' : '-top-10' }} {{ app()->getLocale() == 'en' ? 'right-2' : 'left-2' }}   font-bold">*</span>
     @error($name)
         <span class="text-danger">{{ $message }}</span>
     @enderror

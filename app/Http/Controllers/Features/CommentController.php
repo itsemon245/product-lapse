@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Features;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
 use App\Models\Delivery;
 use Illuminate\Support\Str;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\CommentRequest;
+use App\Notifications\CommentNotification;
+use Illuminate\Support\Facades\Notification;
 
 class CommentController extends Controller
 {
@@ -32,6 +34,8 @@ class CommentController extends Controller
             $comment->status = 'pending';
             $comment->update();
          }
+        [$users, $initiator, $feature] = getNotificationData(Comment::class, productId());
+        Notification::send($users, new CommentNotification($initiator, $feature));
         notify()->success(__('notify/success.create'));
         return back();
     }

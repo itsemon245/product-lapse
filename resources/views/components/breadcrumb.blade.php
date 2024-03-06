@@ -19,7 +19,7 @@
                         <a href="{{ route('home') }}">@__('Home')</a>
                     </li>
                 @endif
-                @if (productId() != null && str(url()->current())->contains('dashboard'))
+                @if (productId() != null && str(url()->current())->contains('dashboard') && !str(url()->current())->contains(['certificate', 'select']))
                     <li
                         class="breadcrumb-item {{ request()->routeIs('product.show', productId()) ? 'active' : '' }} ">
                         <a href="{{ request()->routeIs('product.index') ? '#' : route('product.show', productId()) }}">

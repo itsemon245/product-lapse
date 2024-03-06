@@ -53,7 +53,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function activePlan()
     {
-        return $this->plans()->whereDate('expired_at', '>=', now()->format('Y-m-d'))->where('active', true)->limit(1);
+        return $this->plans()->whereDate('expired_at', '>=', now()->format('Y-m-d'))->orWhere('expired_at', null)->where('active', true)->limit(1);
     }
 
     public function activePlanName()

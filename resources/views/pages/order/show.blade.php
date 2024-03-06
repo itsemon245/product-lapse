@@ -23,7 +23,7 @@
                                     <h6 class="title2">{{ __('Payment Method') }}</h6>
                                     <p class="f_400 mb-30 text-font">{{ $findOrder->payment_method == null ? 'Free Payment' : ucfirst($findOrder->payment_method) }}</p>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 {{ $findOrder->transaction_id == null ? 'd-none' : '' }} ">
                                     <h6 class="title2">{{ __('Transaction ID') }}</h6>
                                     <p class="f_400 mb-30 text-font">{{ $findOrder->transaction_id == null ? 'Free Payment' : $findOrder->transaction_id }}</p>
                                 </div>

@@ -20,3 +20,10 @@
 @stack('customJs')
 <x-notify::notify />
 @notifyJs
+
+
+<script>
+    $(document).ready(function () {
+        $('#laravel-notify').find('button').attr('type', 'button')
+    });
+</script>

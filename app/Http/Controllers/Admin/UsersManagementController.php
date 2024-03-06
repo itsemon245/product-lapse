@@ -16,7 +16,7 @@ class UsersManagementController extends Controller
      */
     public function index()
     {
-        $subscribers = User::where('type', 'subscriber')->paginate(10);
+        $subscribers = User::where('type', 'subscriber')->latest()->paginate(10);
         return view('pages.users.management', compact('subscribers'));
     }
 
@@ -72,9 +72,9 @@ class UsersManagementController extends Controller
     public function search(Request $request)
     {   
         if($request->search ==  null){
-            $subscribers = User::where('type', 'subscriber')->paginate(10);
+            $subscribers = User::where('type', 'subscriber')->latest()->paginate(10);
             return view('pages.users.management', compact('subscribers'));
-        }else{;
+        }else{
             $subscribers = User::where('name', 'like', '%' . $request->search . '%')
                                   ->where('type', '=', 'subscriber')->latest()->paginate(10);
             return view('pages.users.management', compact('subscribers'));

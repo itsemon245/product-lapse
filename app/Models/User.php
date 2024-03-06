@@ -4,29 +4,29 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Casts\Utils\JsonCast;
 use App\Models\Comment;
 use App\Traits\HasImages;
-use App\Casts\Utils\JsonCast;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable,HasRoles, HasImages;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, HasImages;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-    protected $guarded = [];
+    protected $guarded = [  ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -36,13 +36,13 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = [
         'password',
         'remember_token',
-    ];
+     ];
 
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-        'flag' => JsonCast::class,
-    ];
+        'password'          => 'hashed',
+        'flag'              => JsonCast::class,
+     ];
 
     #---Relations---#
 
@@ -53,7 +53,14 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function activePlan()
     {
-        return $this->plans()->whereDate('expired_at', '>=', now()->format('Y-m-d'))->orWhere('expired_at', null)->where('active', true)->limit(1);
+        return $this->plans()
+            ->whereDate('expired_at', '>=', now()->format('Y-m-d'))
+            ->orWhere(function (Builder $b) {
+                $b->where('expired_at', null);
+                $b->where('price', '<', 1);
+            })
+            ->where('active', true)
+            ->limit(1);
     }
 
     public function activePlanName()
@@ -194,10 +201,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(User::class, 'owner_id');
     }
 
-
     #---Relations---#
-
-
 
     #---Scopes---#
 

@@ -24,10 +24,8 @@
         <form method="get" action="{{ route('filter.certificate') }}">
             <select onchange="this.form.submit()" name="search" class="selectpickers selectpickers2">
                 <option selected value="">@__('filter.all')</option>
-             
                 @forelse ($statuses as $opt)
-                
-                    <option value="{{ $opt->value }}">
+                    <option value="{{ $opt->value }}" @selected(old('search') == $opt->value) >
                         {{ ucwords($opt->name) }}
                      </option>
                 @empty

@@ -30,7 +30,7 @@ return [
     ],
     'address' => [
         'update-address' => 'Update Address',
-        'description' => 'Set your billing and shipping address.',
+        'description' => 'Set your billing address.',
         'name' => 'Name',
         'type' => 'Type',
         'email' => 'Email',

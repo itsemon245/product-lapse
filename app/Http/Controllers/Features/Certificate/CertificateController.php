@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Select;
 use App\Models\Invitation;
 use App\Models\Certificate;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Services\SearchService;
 use Illuminate\Support\Facades\DB;
@@ -124,6 +125,7 @@ class CertificateController extends Controller
             'approved_id' => auth()->id(),
             'status' => 'approved',
             'issue_date' => now(),
+            'link' => Str::slug($certificate->company) . '/' . uniqid(),
         ]);
         notify()->success(__('notify/success.update'));
         return back();
@@ -166,6 +168,11 @@ class CertificateController extends Controller
             return view('pages.certificate.index', compact('certificates', 'statuses'));
         }
 
+    }
+
+    public function share(string $id)
+    {
+        
     }
 
 }

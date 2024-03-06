@@ -20,11 +20,12 @@
         </x-slot:actions>
 
         <x-slot:filter>
+            {{-- {{ dd() }} --}}
             <form method="get" action="{{ route('users.filter') }}">
                 <select onchange="this.form.submit()" name="search" class="selectpickers selectpickers2">
                     <option @selected(true) value="all">@__('filter.all')</option>
-                    <option value="{{ null }}">Active</option>
-                    <option value="{{ !null }}">Banned</option>
+                    <option value="{{ null }}" @selected(request()->query('search') == null) >Active</option>
+                    <option value="{{ !null }} @selected(request()->query('search') == !null) ">Banned</option>
                 </select>
             </form>
         </x-slot:filter>

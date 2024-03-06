@@ -25,7 +25,20 @@
                                 </div>
                                 <div class="col-md-12">
                                 <div class="row">
-                                    @if ($findOrder->bank_details == null)
+                                    @if ($findOrder->bank_details == !null)
+                                    <div class="col-md-6">
+                                        <h6 class="title2">{{ __('Bank Name:') }}</h6>
+                                        <p class="f_400 mb-30 text-font">{{ $findOrder->bank_details->name }}</p> 
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6 class="title2">{{ __('Bank Account ID:') }}</h6>
+                                        <p class="f_400 mb-30 text-font">{{ $findOrder->bank_details->account_id }}</p> 
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6 class="title2">{{ __('Bank IBAN:') }}</h6>
+                                        <p class="f_400 mb-30 text-font">{{ $findOrder->bank_details->iban }}</p> 
+                                    </div>
+                                    @endif  
                                     <div class="col-md-6">
                                         <h6 class="title2">Street</h6>
                                         <p class="f_400 mb-30 text-font">{{ $findOrder->user->billingAddress()->first()?->street }}</p> 
@@ -46,20 +59,7 @@
                                         <h6 class="title2">ZIP</h6>
                                         <p class="f_400 mb-30 text-font">{{ $findOrder->user->billingAddress()->first()?->zip }}</p> 
                                     </div>
-                                    @else
-                                    <div class="col-md-6">
-                                        <h6 class="title2">{{ __('Bank Name:') }}</h6>
-                                        <p class="f_400 mb-30 text-font">{{ $findOrder->bank_details->name }}</p> 
-                                    </div>
-                                    <div class="col-md-6">
-                                        <h6 class="title2">{{ __('Bank Account ID:') }}</h6>
-                                        <p class="f_400 mb-30 text-font">{{ $findOrder->bank_details->account_id }}</p> 
-                                    </div>
-                                    <div class="col-md-6">
-                                        <h6 class="title2">{{ __('Bank IBAN:') }}</h6>
-                                        <p class="f_400 mb-30 text-font">{{ $findOrder->bank_details->iban }}</p> 
-                                    </div>
-                                    @endif                           
+                                                           
                                 </div> 
                                 </div>
                             </div>

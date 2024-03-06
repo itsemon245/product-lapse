@@ -24,8 +24,8 @@
                                     <p class="f_400 mb-30 text-font">{{ $findOrder->payment_method == null ? 'Free Payment' : ucfirst($findOrder->payment_method) }}</p>
                                 </div>
                                 <div class="col-md-12">
+                                <div class="row">
                                     @if ($findOrder->bank_details == !null)
-                                    <div class="row">
                                         <div class="col-md-6">
                                             <h6 class="title2">{{ __('Bank Name:') }}</h6>
                                             <p class="f_400 mb-30 text-font">{{ $findOrder->bank_details->name }}</p> 
@@ -59,11 +59,9 @@
                                         <h6 class="title2">ZIP</h6>
                                         <p class="f_400 mb-30 text-font">{{ $findOrder->user->billingAddress()->first()?->zip }}</p> 
                                     </div>
-                                    </div> 
+                                </div> 
                               
                                 </div>
-                               
-                               
                             </div>
                         </div>
                         

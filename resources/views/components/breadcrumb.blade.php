@@ -11,11 +11,8 @@
                         <a href="{{ route('dashboard') }}">@__('root.dashboard')</a>
                     </li>
                 @elseif (str(url()->current())->contains('admin'))
-                {{-- {{ dd() }} --}}
                     <li class="breadcrumb-item {{ request()->routeIs('admin') ? 'active' : '' }} ">
                         <a href="{{ route('admin') }}">@__('Admin')</a>
-                        <span class="text-light"> / </span>
-                        <a href="{{ route('admin') }}">{{ url()->previous() }}</a>
                     </li>
                 @else
                     <li class="breadcrumb-item {{ request()->routeIs('home') ? 'active' : '' }} ">

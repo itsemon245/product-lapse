@@ -23,14 +23,13 @@
 
         <x-slot:filter>
             <h5>Status</h5>
-            <form method="post" action="{{ route('admin.order.search') }}">
+            <form method="get" action="{{ route('admin.order.search') }}">
                 @csrf
                 <select onchange="this.form.submit()" name="search" class="selectpickers selectpickers2">
-                    <option selected value="">@__('filter.all')</option>
+                    <option value="">@__('filter.all')</option>
                     @forelse ($options as $opt)
-                    {{-- {{ dd($opt->value) }} --}}
-                        <option value="{{ $opt->name }}">
-                            {{ $opt->value }}
+                        <option value="{{ $opt->value }}" @selected(request()->query('search') == $opt->value) >
+                            {{ $opt->name }}
                             </option>
                     @empty
                         <option>@__('filter.no-items')</option>

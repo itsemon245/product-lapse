@@ -25,7 +25,7 @@
             <select onchange="this.form.submit()" name="search" class="selectpickers selectpickers2">
                 <option selected value="">@__('filter.all')</option>
                 @forelse ($statuses as $opt)
-                    <option value="{{ $opt->value }}" @selected(old('search') == $opt->value) >
+                    <option value="{{ $opt->value }}" @selected(request()->query('search') == $opt->value) >
                         {{ ucwords($opt->name) }}
                      </option>
                 @empty
@@ -52,7 +52,7 @@
                                 <ul class="list-unstyled">
                                     <li class="{{ $certificate->status == 'rejected' ? 'text-danger' : 'text-success' }}">{{ ucfirst($certificate->status)}}</li>
                                     <li>{{ $certificate->created_at->formatLocalized('%A %d %B %Y') }}</li>
-                                    <li>{{ $certificate->company }}</li>
+                                    <li>@__('Company Name : '){{ $certificate->company }}</li>
                                 </ul>
                             </div>
                             <div class="jobsearch-table-cell">

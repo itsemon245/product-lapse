@@ -12,7 +12,7 @@
                         <div class="row">
                             <div class="col-md-5 col-sm-3">
                                 <div class="details_img">
-                                    <img class="rounded-circle" style="height: 20rem; width:20rem;"
+                                    <img class="rounded-circle border border-primary" style="height: 20rem; width:20rem;"
                                         src="{{ $user->image->url ?? avatar($user->name) }}" alt="">
                                 </div>
                             </div>

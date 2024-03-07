@@ -36,7 +36,17 @@
     "Search invitations" : "بحث عن الدعوات",
     "Bank Account ID:" : "معرف الحساب البنكي:",
     "Browse Packages" : "تصفح الحزم",
-    "Company Name : " : "اسم الشركة:"
+    "Company Name : " : "اسم الشركة:",
+    "Products" : "منتجات",
+    "Product" : "منتجات",
+    "Innovate" : "ابتكر",
+    "Payments" : "المدفوعات",
+    "Chooce payment type" : "اختر نوع الدفع",
+    "Bank account" : "حساب البنك",
+    "Payment receipt" : "إيصال الدفع",
+    "Continue" : "يكمل",
+    "Bank Transfer" : "التحويل المصرفي"
+
 
 
 

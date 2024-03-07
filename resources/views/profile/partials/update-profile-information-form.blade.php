@@ -23,7 +23,7 @@
                         @enderror"
                             type="file" id="imagefile" name="avatar" hidden>
                         <div class="relative">
-                            <img loading="lazy" class="rounded-circle" style="height: 18rem; width:18rem;"
+                            <img loading="lazy" class="rounded-circle border border-primary" style="height: 18rem; width:18rem;"
                                 class="border border-5 border-primary" id="liveImage"
                                 src="{{ $user->image->url ?? avatar($user->name) }}" alt="{{ auth()->user()->name }}">
                             <div class="d-flex justify-content-center">
@@ -46,14 +46,12 @@
                     <x-input placeholder="{{ __('profile.profile.namef') }}" id="name" name="first_name"
                         type="text" class="mt-1 block w-full" :value="old('first_name', $user->first_name)" required
                         autocomplete="name" />
-                    <x-input-error class="mt-2" :messages="$errors->get('first_name')" />
                 </div>
                 <div class="col-md-6">
                     <x-input-label for="name" :value="__('profile.profile.last_name')" />
                     <x-input placeholder="{{ __('profile.profile.namef') }}" id="name" name="last_name"
                         type="text" class="mt-1 block w-full" :value="old('last_name', $user->last_name)" required
                         autocomplete="name" />
-                    <x-input-error class="mt-2" :messages="$errors->get('last_name')" />
                 </div>
                 <div class="col-md-6">
                     <x-input-label for="email" :value="__('profile.profile.email')" />

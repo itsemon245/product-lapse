@@ -1,13 +1,12 @@
-@extends('layouts.subscriber.app', ['title' => @__('productHome.title')])
+@extends('layouts.subscriber.app', ['title' => @__('Product')])
 @section('main')
     <x-breadcrumb />
     <section class="sign_in_area bg_color sec_pad" style="padding-top: 20px">
         <div class="container">
             <div class="row align-items-center mb_20">
-
                 <div class="col-lg-12 col-md-12 products-order2">
                     <div class="shop_menu_left d-flex align-items-center justify-content-end">
-                        <h5>@__('productHome.title')</h5>
+                        <h5>@__('Product')</h5>
                         <form method="get" action="{{ route('product.home.filter') }}">
                             <select onchange="this.form.submit()" name="product_id" class="selectpickers selectpickers2">
                                 @forelse ($products as $item)
@@ -24,7 +23,6 @@
                 <div class="listing_tab">
                     <div class="item lon new">
                         <div class="list_item">
-
                             <div class="joblisting_text">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell">
@@ -55,6 +53,7 @@
             </div>
             <div class="row">
                 @foreach ($features as $feature)
+                {{-- {{ dd($feature) }} --}}
                     <div class="col-lg-3 col-md-4 col-6">
                         <div class="box-item">
                             <span

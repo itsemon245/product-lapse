@@ -1,16 +1,17 @@
 @extends('layouts.frontend.app')
 
 @section('main')
-    <x-breadcrumb :list="[['label' => 'Payments', 'route' => url()->current()]]">
+    <x-breadcrumb :list="[['label' => @__('Payments'), 'route' => url()->current()]]">
 
     </x-breadcrumb>
     <section class="sign_in_area bg_color sec_pad">
         <div class="container">
             <div class="sign_info sign_info2">
                 <div class="login_info">
-                    <h2 class=" f_600 f_size_24 t_color3 mb_40">Chooce payment type</h2>
+                    <h2 class=" f_600 f_size_24 t_color3 mb_40">@__('Chooce payment type')</h2>
                     <div class="">
                         @foreach ($paymentMethods as $i => $method)
+                        {{-- {{ dd($method) }} --}}
                             <form action="{{ route('order.store', ['order' => $order]) }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="payment_method" value="{{$method}}">

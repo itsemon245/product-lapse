@@ -144,7 +144,7 @@ class ProductController extends Controller
          ])->find($id);
         return [
             'innovate'              => [
-                'name'    => @__('productHome.innovate'),
+                'name'    => 'Innovate',
                 'counter' => $product ? $product->ideas_count : 0,
                 'icon'    => 'img/solution.png',
                 'route'   => route('idea.index'),

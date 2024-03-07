@@ -45,7 +45,17 @@
     "Bank account" : "حساب البنك",
     "Payment receipt" : "إيصال الدفع",
     "Continue" : "يكمل",
-    "Bank Transfer" : "التحويل المصرفي"
+    "Bank Transfer" : "التحويل المصرفي",
+    "Product Planning" : "تخطيط المنتج",
+    "Product Support" : "دعم المنتج",
+    "Change Management" : "إدارة التغيير",
+    "Product Documentation" : "توثيق المنتج",
+    "Product Team" : "فريق المنتج",
+    "Product Reporting" : "الإبلاغ عن المنتج",
+    "Product Info" : "معلومات المنتج",
+    "Product Release" : "إطلاق المنتج",
+    "Historical Images" : "الصور التاريخية",
+    "Product Delivery" : "ايصال المنتج"
 
 
 

@@ -11,7 +11,7 @@
         <form hx-get="{{ route('search.certificate') }}" hx-vals="#search-results" hx-push-url="{{ route('search.certificate') }}" hx-trigger="submit" hx-target="#search-results" hx-select="#search-results" class="search-form input-group">
             @csrf
             <input type="hidden" name="company" value="company">
-            <input type="search" name="search" class="form-control widget_input" placeholder="Search certificate" >
+            <input type="search" name="search" class="form-control widget_input" placeholder="{{ __('Search certificate') }}" >
             <button type="submit"><i class="ti-search"></i></button>
         </form>
     </x-slot:search>

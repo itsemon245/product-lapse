@@ -1,6 +1,6 @@
-@extends('layouts.admin.app', ['title' => 'Deshboard'])
+@extends('layouts.admin.app', ['title' => __('Dashboard')])
 @section('main')
-    <x-breadcrumb :list="[['label' => 'Dashboard', 'route' => '']]" />
+    <x-breadcrumb :list="[['label' => __('Dashboard'), 'route' => '']]" />
 
     <div class="container p-4">
         <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
@@ -15,7 +15,7 @@
                 </div>
                 <div>
                     <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                        Total Subscribers
+                        @__('Total Subscribers')
                     </p>
                     <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
                         {{ $subscribers }}
@@ -33,7 +33,7 @@
                 </div>
                 <div>
                     <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                        Total Revenue
+                        @__('Total Revenue')
                     </p>
                     <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
                         SR {{ $revenue }}
@@ -51,7 +51,7 @@
                 </div>
                 <div>
                     <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                        Sales Today
+                        @__('Sales Today')
                     </p>
                     <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
                         {{ $todaysSales }}
@@ -70,7 +70,7 @@
                 </div>
                 <div>
                     <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                        Pending Orders
+                        @__('Pending Orders')
                     </p>
                     <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
                         {{ $pendingOrders }}

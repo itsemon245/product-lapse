@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Socialite\SocialiteServiceProvider;
+use Illuminate\Translation\TranslationServiceProvider;
 
 return [
 

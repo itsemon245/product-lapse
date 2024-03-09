@@ -1,8 +1,8 @@
-@extends('layouts.admin.app', ['title' => 'About Us'])
+@extends('layouts.admin.app', ['title' => __('Edit About Us')])
 @section('main')
     <x-feature.create>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => 'About Us', 'route' => route('edit.about_us')]]" />
+            <x-breadcrumb :list="[['label' => __('Edit About Us'), 'route' => route('edit.about_us')]]" />
         </x-slot:breadcrumb>
 
         <x-slot:from>

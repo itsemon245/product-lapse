@@ -58,7 +58,31 @@
     "Product Delivery" : "ايصال المنتج",
     "High" : "يعمل على",
     "Low" : "قيد الانتظار", 
-    "Medium" : "توقفت"
+    "Medium" : "توقفت",
+    "Dashboard" : "لوحة القيادة",
+    "Admin" : "مسؤل",
+    "Pending Orders" : "الأوامر المعلقة",
+    "Total Subscribers" : "إجمالي المشتركين",
+    "Total Revenue" : "إجمالي الإيرادات",
+    "Sales Today" : "المبيعات اليوم",
+    "Search packages" : "حزم البحث",
+    "Add package" : "أضف الحزمة",
+    "Name (en)" : "(en)الاسم",
+    "Name (ar)" : "(ar)الاسم",
+    "Price" : "سعر",
+    "Product limit" : "حد المنتج",
+    "Day" : "يوم",
+    "Month" : "شهر",
+    "Year" : "سنة",
+    "Validity" : "صلاحية",
+    "Set as Popular" : "تعيين كشعبية",
+    "Limited feature" : "ميزة محدودة",
+    "Choose Package Features" : "اختر ميزات الحزمة",
+    "Add" : "يضيف",
+    "Edit Package" : "تحرير الحزمة",
+    "Update" : "تحديث",
+    "Search certificate" : "شهادة البحث",
+    "Edit Intro" : "تحرير المقدمة"
 
 
 

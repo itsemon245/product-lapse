@@ -1,13 +1,13 @@
-@extends('layouts.admin.app', ['title' => 'Package'])
+@extends('layouts.admin.app', ['title' => __('Packages')])
 @section('main')
     <x-feature.index>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => 'Package', 'route' => route('package.index')]]" />
+            <x-breadcrumb :list="[['label' => __('Packages'), 'route' => route('package.index')]]" />
         </x-slot:breadcrumb>
 
         <x-slot:search>
             <form action="#" class="search-form input-group">
-                <input type="searproductch" class="form-control widget_input" placeholder="Search packages">
+                <input type="searproductch" class="form-control widget_input" placeholder="@__('Search packages')">
                 <button type="submit"><i class="ti-search"></i></button>
             </form>
         </x-slot:search>
@@ -16,7 +16,7 @@
         <x-slot:actions>
             <x-button type="link" href="{{ route('package.create') }}">
                 <i class="ti-plus"></i>
-                Add package
+                @__('Add package')
             </x-button>
         </x-slot:actions>
 

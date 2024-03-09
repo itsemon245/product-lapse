@@ -55,7 +55,10 @@
     "Product Info" : "معلومات المنتج",
     "Product Release" : "إطلاق المنتج",
     "Historical Images" : "الصور التاريخية",
-    "Product Delivery" : "ايصال المنتج"
+    "Product Delivery" : "ايصال المنتج",
+    "High" : "يعمل على",
+    "Low" : "قيد الانتظار", 
+    "Medium" : "توقفت"
 
 
 

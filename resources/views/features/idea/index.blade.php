@@ -31,7 +31,6 @@
             <h5>@__('feature/idea.showing')</h5>
             <x-filter :route="route('idea.search')" :columns="['priority']" model="idea" :options="$priorities" />
         </x-slot:filter>
-
         <x-slot:list>
             @forelse ($ideas as $idea)
                 <div class="col-md-6">
@@ -46,7 +45,7 @@
                                         </h4>
                                         <ul class="list-unstyled">
                                             <li class="p_color4">{{ $idea->owner }}</li>
-                                            <li class="p_color4"> {{ $idea->priority }} </li>
+                                            <li class="p_color4"> @__($idea->priority) </li>
                                             <li class="">
                                                 {{ \Carbon\Carbon::parse($idea->created_at)->format('l, j F Y') }}</li>
                                         </ul>

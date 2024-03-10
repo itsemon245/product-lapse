@@ -100,7 +100,21 @@
     "Twitter" : "تويتر",
     "Facebook" : "فيسبوك",
     "Vimeo" : "فيميو",
-    "Pinterest" : "بينتريست"
+    "Pinterest" : "بينتريست",
+    "FAQs" : "الأسئلة الشائعة",
+    "Add FAQ" : "أضف الأسئلة الشائعة",
+    "Search Faq" : "البحث في الأسئلة الشائعة",
+    "Question (English)" : "السؤال (باللغة الإنجليزية)",
+    "Question (Arabic)" : "سؤال (عربي)",
+    "Answer (English)" : "الإجابة (الإنجليزية)",
+    "Answer (Arabic)" : "الإجابة (العربية)",
+    "Edit FAQ" : "تحرير الأسئلة الشائعة",
+    "Add Feature" : "إضافة ميزة",
+    "Feature Edit" : "تحرير الميزة",
+    "Contact Messages" : "رسائل الاتصال",
+    "Users Management" : "إدارة المستخدمين",
+    "Search user" : "مستخدم البحث",
+    "Privacy Policy" : "سياسة الخصوصية"
 
 
 

@@ -1,27 +1,24 @@
-@extends('layouts.admin.app', ['title' => 'Feature'])
+@extends('layouts.admin.app', ['title' => __('Features')])
 @section('main')
     <x-feature.index>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => 'Features', 'route' => route('features.index')]]" />
+            <x-breadcrumb :list="[['label' => __('Features'), 'route' => route('features.index')]]" />
         </x-slot:breadcrumb>
         <x-slot:search>
             <form action="#" class="search-form input-group">
-                <input type="searproductch" class="form-control widget_input" placeholder="Search Feature">
+                <input type="searproductch" class="form-control widget_input" placeholder="{{ __('Search Feature') }}">
                 <button type="submit"><i class="ti-search"></i></button>
             </form>
-
         </x-slot:search>
 
         <x-slot:actions>
             <x-button type="link" href="{{ route('features.create') }}">
                 <i class="ti-plus"></i>
-                Add Feature
+                {{ __('Add Feature') }}
             </x-button>
         </x-slot:actions>
         <x-slot:filter>
-
         </x-slot:filter>
-
         <x-slot:list>
             @foreach ($features as $feature)
                 <div class="col-md-6">

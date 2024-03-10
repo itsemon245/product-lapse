@@ -1,8 +1,8 @@
-@extends('layouts.admin.app', ['title' => 'Contact Messages'])
+@extends('layouts.admin.app', ['title' => __('Contact Messages')])
 @section('main')
     <x-feature.index>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => 'Contact Messages', 'route' => route('contact.messages')]]" />
+            <x-breadcrumb :list="[['label' => __('Contact Messages'), 'route' => route('contact.messages')]]" />
         </x-slot:breadcrumb>
 
         <x-slot:list>

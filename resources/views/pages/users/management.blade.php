@@ -1,15 +1,15 @@
-@extends('layouts.admin.app', ['title' => 'Users Management'])
+@extends('layouts.admin.app', ['title' => __('Users Management')])
 @section('main')
     <x-feature.index>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => 'Users Management', 'route' => route('users.index')]]" />
+            <x-breadcrumb :list="[['label' => __('Users Management'), 'route' => route('users.index')]]" />
         </x-slot:breadcrumb>
 
         <x-slot:search>
             <form hx-get="{{ route('users.search') }}" hx-vals="#search-results" hx-push-url="{{ route('users.search') }}" hx-trigger="submit" hx-target="#search-results" hx-select="#search-results" class="search-form input-group">
                 @csrf
                 <input type="hidden" name="name" >
-                <input type="search" name="search" class="form-control widget_input" placeholder="Search user">
+                <input type="search" name="search" class="form-control widget_input" placeholder="{{ __('Search user') }}">
                 <button type="submit"><i class="ti-search"></i></button>
             </form>
         </x-slot:search>

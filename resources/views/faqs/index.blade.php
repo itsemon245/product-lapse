@@ -1,12 +1,12 @@
-@extends('layouts.admin.app', ['title' => 'FAQs'])
+@extends('layouts.admin.app', ['title' => __('FAQs')])
 @section('main')
     <x-feature.index>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => 'FAQs', 'route' => route('faqs.index')]]" />
+            <x-breadcrumb :list="[['label' => __('FAQs'), 'route' => route('faqs.index')]]" />
         </x-slot:breadcrumb>
         <x-slot:search>
             <form action="#" class="search-form input-group">
-                <input type="searproductch" class="form-control widget_input" placeholder="Search Faq">
+                <input type="searproductch" class="form-control widget_input" placeholder="{{ __('Search Faq') }}">
                 <button type="submit"><i class="ti-search"></i></button>
             </form>
 
@@ -15,7 +15,7 @@
         <x-slot:actions>
             <x-button type="link" href="{{ route('faqs.create') }}">
                 <i class="ti-plus"></i>
-                Add FAQ
+                {{ __('Add FAQ') }}
             </x-button>
         </x-slot:actions>
         <x-slot:filter>

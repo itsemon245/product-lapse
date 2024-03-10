@@ -1,9 +1,8 @@
 @extends('layouts.admin.app')
-
 @section('main')
     <x-feature.index>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => @trans('Package Feature'), 'route' => route('package-feature.index')]]" />
+            <x-breadcrumb :list="[['label' => __('Package Feature'), 'route' => route('package-feature.index')]]" />
         </x-slot:breadcrumb>
         <x-slot:search>
 
@@ -21,7 +20,7 @@
         <x-slot:actions>
             <form class="login-form sign-in-form" action="{{ route('package-feature.store') }}" method="post">
                 @csrf
-                <x-modal id="modal-create" title="Add Package Feature">
+                <x-modal id="modal-create" title="{{ __('Add Package Feature') }}">
                     <x-slot:trigger>
                         <x-button type="button" data-toggle="modal" data-target="#modal-create">
                             <i class="ti-plus"></i>
@@ -30,20 +29,20 @@
                     </x-slot:trigger>
 
                     <div class="form-group text_box col-lg-12">
-                        <x-input label="Name(en)" name="name[en]"
-                            placeholder="name">
+                        <x-input label="{{ __('Name (en)') }}" name="name[en]"
+                            placeholder="{{ __('Name (en)') }}">
                         </x-input>
                     </div>
                     <div class="form-group text_box col-lg-12">
-                        <x-input label="Name(ar)" name="name[ar]"
-                            placeholder="name">
+                        <x-input label="{{ __('Name (ar)') }}" name="name[ar]"
+                            placeholder="{{ __('Name (ar)') }}">
                         </x-input>
                     </div>
                     <x-slot:footer>
                         <!-- Modal Header -->
-                        <button type="submit" class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">Add</button>
+                        <button type="submit" class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">{{ __('Add') }}</button>
                         <button type="button" class="btn_hover agency_banner_btn btn-bg btn-bg-grey"
-                            data-dismiss="modal">Cancel</button>
+                            data-dismiss="modal">{{ __('Cancel') }}</button>
                     </x-slot:footer>
                 </x-modal>
             </form>

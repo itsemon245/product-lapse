@@ -11,14 +11,15 @@ return [
     'label' => [
         'name' => 'عنوان الفكرة',
         'owner' => 'صاحب الفكرة الأساسية', // + details page
-        'priority' => 'حالة الفكرة', // + details page
+        'priority' => 'الأولوية', // + details page
         'details' => 'تفاصيل الفكرة',
         'requirements' => 'متطلبات تنفيذ الفكرة', // + details page
+        'stage' => 'مرحلة الفكرة',
     ],
     'placeholder' => [
         'name' => 'عنوان الفكرة',
         'owner' => 'صاحب الفكرة الأساسية', // + details page
-        'priority' => 'حالة الفكرة', // + details page
+        'priority' => 'الأولوية', // + details page
         'details' => 'تفاصيل الفكرة',
         'requirements' => 'متطلبات تنفيذ الفكرة', // + details page
     ],

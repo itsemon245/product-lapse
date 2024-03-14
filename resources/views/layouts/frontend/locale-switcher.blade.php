@@ -1,8 +1,10 @@
 <form id="locale-switch-form" class="h-6" action="{{ route('lang.toggle') }}" method="post">
     @csrf
     <label class="inline-flex rtl:flex-row-reverse items-center cursor-pointer gap-2 m-0" id="locale-switch">
-        <span class="text-sm font-medium text-gray-900 dark:text-gray-300">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
+        <span class="text-primary">   {{ __('Language') }}</span>
+        <span class=" text-gray-900 dark:text-gray-300">
+            En
+            {{-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
                 <mask id="circleFlagsUk0">
                     <circle cx="256" cy="256" r="256" fill="#fff" />
                 </mask>
@@ -14,7 +16,7 @@
                     <path fill="#d80027"
                         d="M0 0v45l131 131h45zm208 0v208H0v96h208v208h96V304h208v-96H304V0zm259 0L336 131v45L512 0zM176 336L0 512h45l131-131zm160 0l176 176v-45L381 336z" />
                 </g>
-            </svg>
+            </svg> --}}
 
 
         </span>
@@ -22,8 +24,9 @@
         <div
             class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:end-5 rtl:after:start-6 rtl:peer-checked:after:end-0 peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
         </div>
-        <span class="text-sm font-medium text-gray-900 dark:text-gray-300">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
+        <span class=" text-gray-900 dark:text-gray-300">
+            Ar
+            {{-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
                 <mask id="circleFlagsSa0">
                     <circle cx="256" cy="256" r="256" fill="#fff" />
                 </mask>
@@ -37,7 +40,7 @@
                         <path d="M180.9 244.9h50v33.4h-50z" />
                     </g>
                 </g>
-            </svg>
+            </svg> --}}
         </span>
     </label>
 </form>

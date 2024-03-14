@@ -27,7 +27,7 @@
                     </div>
 
                     <div class="form-group text_box col-lg-12 col-md-12">
-                        <x-select-input label="Idea Stage" id="stage" placeholder="Choose Stage" name="stage" required
+                        <x-select-input label="{{ __('feature/idea.label.stage') }}" id="stage" placeholder="Choose one" name="stage" required
                             autofocus>
                             @foreach ($stages as $stage)
                                 <option value="{{ $stage->value }}" @selected($stage->value == old('stage')) >{{ str($stage->value)->headline() }}</option>

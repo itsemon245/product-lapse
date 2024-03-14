@@ -14,6 +14,7 @@ return [
         'priority' => 'Priority', // + details page
         'details' => 'Idea details',
         'requirements' => 'Idea requirements', // + details page
+        'stage' => 'Idea Stage',
     ],
     'placeholder' => [
         'name' => 'Idea name',

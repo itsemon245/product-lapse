@@ -49,7 +49,6 @@ trait HasImages
         $id = $this->id;
         $ext = $image->getClientOriginalExtension();
         $name = $name ?? $image->getClientOriginalName();
-        $name = str($name)->slug();
         $path = $image->storeAs($this->baseDir . $this->dir, $name, $this->disk);
         $image = Image::create([
             'imageable_id' => $id,

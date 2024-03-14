@@ -48,7 +48,6 @@ trait HasFile
         $id = $this->id;
         $ext = $file->getClientOriginalExtension();
         $name = $name ?? $file->getClientOriginalName();
-        $name = str($name)->slug();
         $path = $file->storeAs($this->baseDir . $this->dir, $name, $this->disk);
         $fileRecord = File::create([
             'fileable_id' => $id,

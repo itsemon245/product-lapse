@@ -20,8 +20,8 @@
             <div class="col-lg-8 blog_sidebar_left">
                 <div class="blog_single mb_50">
                     <div class="row">
-                        <h5 class="f_size_20 f_500 col-md-12 flex items-center">{{ $delivery->name }}<img class="deliver-img"
-                                src="{{ $delivery->is_agreed == !null ? asset('img/done.png') : asset('img/cancel.png') }}"
+                        <h5 class="f_size_20 f_500 col-md-12 flex items-center">{{ $delivery->name }}<img class=" {{ $delivery->is_agreed == null ? 'd-none' : '' }} deliver-img"
+                                src="{{ $delivery->is_agreed == 1 ? asset('img/done.png') : asset('img/cancel.png') }}"
                                 title="Approved"></h5>
                         <div class="col-md-6">
                             <h6 class="title2">@__('feature/delivery.link')</h6>
@@ -72,17 +72,17 @@
                             <div class="col-6">
                                 <form action="{{ route('delivery.agree', $delivery) }}" method="post">
                                     @csrf
-                                    <button style="{{ $delivery->is_agreed == !null ? 'cursor: not-allowed' : '' }}"
-                                        {{ $delivery->is_agreed == !null ? 'disabled' : '' }}
-                                        class="button-1 btn-bg-1 {{ $delivery->is_agreed == !null ? 'opacity-50' : '' }} ">@__('feature/delivery.agree')</button>
+                                    <button style="{{ $delivery->is_agreed == 1 ? 'cursor: not-allowed' : '' }}"
+                                        {{ $delivery->is_agreed == 1 ? 'disabled' : '' }}
+                                        class="button-1 btn-bg-1 {{ $delivery->is_agreed == 1 ? 'opacity-50' : '' }} ">@__('feature/delivery.agree')</button>
                                 </form>
                             </div>
                             <div class="col-6">
                                 <form action="{{ route('delivery.disagree', $delivery) }}" method="post">
                                     @csrf
-                                    <button style="{{ $delivery->is_agreed == null ? 'cursor: not-allowed' : '' }}"
-                                        {{ $delivery->is_agreed == null ? 'disabled' : '' }}
-                                        class="button-1 btn-bg-2 {{ $delivery->is_agreed == null ? 'opacity-50' : '' }} ">@__('feature/delivery.disagree')</button>
+                                    <button style="{{ $delivery->is_agreed == 2 ? 'cursor: not-allowed' : '' }}"
+                                        {{ $delivery->is_agreed == 2 ? 'disabled' : '' }}
+                                        class="button-1 btn-bg-2 {{ $delivery->is_agreed == 2 ? 'opacity-50' : '' }} ">@__('feature/delivery.disagree')</button>
                                 </form>
                             </div>
                         </div>

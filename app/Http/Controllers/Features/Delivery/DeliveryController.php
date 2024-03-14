@@ -151,7 +151,7 @@ class DeliveryController extends Controller
     {
         $find = Delivery::find($id);
         $find->update([
-            'is_agreed' => null,
+            'is_agreed' => 2,
         ]);
         return back();
     }

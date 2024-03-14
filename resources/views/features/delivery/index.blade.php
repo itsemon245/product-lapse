@@ -39,8 +39,8 @@
                             <figure><a href="#"><img src="{{ favicon($delivery->image) }}" alt=""></a></figure>
                             <div class="joblisting_text document-list">
                                 <div class="job_list_table">
-                                    <div class="jobsearch-table-cell">
-                                        <h4><a href="{{ route('delivery.show', $delivery) }}"
+                                      <div class="jobsearch-table-cell">
+                                        <h4><a href="{{ route('delivery.show', $delivery) }}" onclick="window.open('{{ route('delivery.show', $delivery) }}','name','width=600,height=600')" target="popup"
                                                 class="f_500 t_color3">{{ $delivery->name }}</a></h4>
                                         <ul class="list-unstyled">
                                             <li>

@@ -20,8 +20,8 @@ class CheckSubscriber
             return redirect(route('login'));
         }
         if ($user->type == null) {
-            notify()->warning(__('You are not allowed to visit this part yet!'));
-            return redirect()->route('home');
+            // notify()->warning(__('You are not allowed to visit this part yet!'));
+            return redirect()->route('package.upgrade');
         }
         if ($user->type == 'admin') {
             return redirect()->route('admin');

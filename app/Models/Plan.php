@@ -13,11 +13,11 @@ class Plan extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'name'=> JsonCast::class
+        'name' => JsonCast::class
     ];
 
     public function order()
     {
-        return $this->belongsTo(Order::class);
+        return $this->belongsTo(Order::class, 'order_id', 'id');
     }
 }

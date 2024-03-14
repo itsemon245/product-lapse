@@ -1,12 +1,11 @@
-@extends('layouts.frontend.app')
-
+@extends('layouts.admin.app', ['title' => __('Users Management')])
 @section('main')
     <section class="breadcrumb_area">
         <div class="container">
             <div class="breadcrumb_content text-center">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">@__('singup.home')</a></li>
-                    <li class="breadcrumb-item active">@__('singup.singup')</li>
+                    <li class="breadcrumb-item active"><a href="{{ route('users.index') }}">@__('Users Management')</a></li>
+                    <li class="breadcrumb-item active"><a href="{{ route('users.create') }}">@__('Create user')</a></li>
                 </ul>
             </div>
         </div>
@@ -15,8 +14,7 @@
         <div class="container">
             <div class="sign_info">
                 <div class="login_info">
-                    <h2 class=" f_600 f_size_24 t_color3 mb_40">@__('singup.singup')</h2>
-                    <form method="POST" action="{{ route('register') }}" class="login-form sign-in-form"
+                    <form method="POST" action="{{ route('users.store') }}" class="login-form sign-in-form"
                         enctype="multipart/form-data"> @csrf
                         <div class="row">
                             <div class="form-group text_box col-md-6">
@@ -84,19 +82,9 @@
                                 @enderror
                             </div>
                         </div>
-
-                        <div class="extra extra2 mb_20">
-                            <div class="checkbox remember">
-                                <label>
-                                    <input type="checkbox" required>
-                                    @__('singup.agree')</a>
-                                </label>
-                            </div>
-                        </div>
                         <div class="d-flex align-items-center text-center">
                             <button type="submit"
-                                class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">@__('singup.singup')</button>
-                            <button class="btn_hover agency_banner_btn btn-bg btn-bg-grey">@__('singup.cancel')</button>
+                                class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">@__('Create user')</button>
                         </div>
                     </form>
                 </div>

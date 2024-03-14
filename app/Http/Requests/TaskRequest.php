@@ -23,7 +23,6 @@ class TaskRequest extends FormRequest
             'starting_date' => 'sometimes|required|date',
             'ending_date' => 'sometimes|required|date|after_or_equal:starting_date',
             'administrator' => 'required|string|max:255',
-            'add_attachments' => 'sometimes|required',
         ];
     }
 }

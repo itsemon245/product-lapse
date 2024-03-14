@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->string('password');
             $table->unsignedBigInteger('administrator')->nullable();
             $table->foreign('administrator')->references('id')->on('users')->cascadeOnDelete();
-            $table->boolean('is_agreed')->nullable();
+            $table->integer('is_agreed')->nullable();
             $table->timestamps();
         });
     }

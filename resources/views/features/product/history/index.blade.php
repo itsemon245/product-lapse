@@ -55,7 +55,9 @@
                                                                         class="old-fileinput" required autofocus
                                                                         label="{{ __('feature/productHistory.images') }}"
                                                                         name="image[]" />
+                                                                        {{ dd($history->images) }}
                                                                 </div>
+                                                                
                                                             </div>
                                                         </div>
                                                     </div>
@@ -198,7 +200,9 @@
                 $(".old-fileinput").each((i, input) => {
                     let preview = JSON.parse(input.dataset.images).map(image=>{
                         
-                        return `<img src='${image.url}' class='file-preview-image' alt='${image.name}' title='${image.name}'>`
+                        return `<img src='${image.url}' class='file-preview-image' alt='${image.name}' title='${image.name}'>
+                        <p>${image.name}</p>
+                        `
                     })
                     let previewConfig = JSON.parse(input.dataset.images).map(image=>{
                         

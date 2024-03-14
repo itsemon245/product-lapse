@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Notifications\WelcomeNotification;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rules;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
+use App\Notifications\WelcomeNotification;
+use Illuminate\Support\Facades\Auth;
 
 class RegisteredUserController extends Controller
 {
@@ -54,6 +56,8 @@ class RegisteredUserController extends Controller
          ]);
          $user->notify(new WelcomeNotification($user));
         // event(new Registered($user));
+        $user->sendEmailVerificationNotification();
+        Auth::login($user, true);
 
         return view('auth.registration-success');
     }

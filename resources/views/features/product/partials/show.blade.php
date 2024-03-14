@@ -10,7 +10,14 @@
             <div class="col-lg-6 blog_sidebar_left">
                 <div class="blog_single mb_50">
                     <div class="">
-                        <h5 class="f_size_20 f_500">{{ $data->name }}</h5>
+                        <div class="flex items-center">
+                            <h5 class="f_size_20 f_500">{{ $data->name }}</h5>
+                            @can('update product')
+                                <x-button type="link" class="ml-4" :href="route('product.edit', $data)" :has-icon="true">
+                                    <span class="ti-pencil"></span>
+                                </x-button>
+                            @endcan
+                        </div>
                         <div class="entry_post_info">
                             {{ \Carbon\Carbon::parse($data->created_at)->format('l, j F Y') }}
                         </div>

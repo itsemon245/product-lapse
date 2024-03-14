@@ -12,8 +12,8 @@ class Order extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'bank_details'=> JsonCast::class,
-        'card_details'=> JsonCast::class,
+        'bank_details' => JsonCast::class,
+        'card_details' => JsonCast::class,
     ];
 
 
@@ -25,5 +25,10 @@ class Order extends Model
     public function package()
     {
         return $this->belongsTo(Package::class);
+    }
+
+    public function plan()
+    {
+        return $this->hasOne(Plan::class, 'order_id', 'id');
     }
 }

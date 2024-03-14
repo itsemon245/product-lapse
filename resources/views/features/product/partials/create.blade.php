@@ -17,11 +17,12 @@
                             :value="old('name')" required autofocus />
                     </div>
                     <div class="form-group text_box col-lg-4 col-md-6">
-                        <x-select-input required :label="__('feature/product.label.stage')" id="stage" placeholder="Choose one" name="stage" autofocus>
+                        <x-select-input required :label="__('feature/product.label.stage')" id="stage" placeholder="Choose one" name="stage"
+                            autofocus>
                             @if ($stages)
                                 @forelse ($stages as $category)
-                                    <option value="<?= $category->value->{app()->getLocale()} ?>" 
-                                        @selected(old('stage')== $category->value->{app()->getLocale()})>
+                                    <option value="<?= $category->value->{app()->getLocale()} ?>"
+                                        @selected(old('stage') == $category->value->{app()->getLocale()})>
                                         <?= $category->value->{app()->getLocale()} ?>
                                     </option>
                                 @empty
@@ -32,15 +33,16 @@
                     </div>
                     <div class="form-group text_box col-lg-4 col-md-6">
                         <x-input-label for="url" :value="__('feature/product.label.url')" />
-                        <x-input id="url" required class="" type="text" :placeholder="__('feature/product.placeholder.url')" name="url"
-                            :value="old('url')" autofocus />
+                        <x-input id="url" class="" type="text" :placeholder="__('feature/product.placeholder.url')" name="url"
+                            :value="old('url')" />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-select-input required :label="__('feature/product.label.category')" id="category" placeholder="Choose one" name="category" autofocus>
+                        <x-select-input required :label="__('feature/product.label.category')" id="category" placeholder="Choose one" name="category"
+                            autofocus>
                             @if ($categories)
                                 @forelse ($categories as $category)
-                                    <option value="<?= $category->value->{app()->getLocale()} ?>" 
-                                        @selected(old('category')== $category->value->{app()->getLocale()})>
+                                    <option value="<?= $category->value->{app()->getLocale()} ?>"
+                                        @selected(old('category') == $category->value->{app()->getLocale()})>
                                         <?= $category->value->{app()->getLocale()} ?>
                                     </option>
                                 @empty
@@ -54,8 +56,9 @@
                             name='logo' />
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-6">
-                        <x-textarea required placeholder="{{ __('feature/product.label.description') }}" rows="5" cols="10" name="description"
-                            label="{{  __('feature/product.placeholder.description') }}">{{old('description')}}</x-textarea>
+                        <x-textarea required placeholder="{{ __('feature/product.label.description') }}" rows="5"
+                            cols="10" name="description"
+                            label="{{ __('feature/product.placeholder.description') }}">{{ old('description') }}</x-textarea>
                     </div>
 
 
@@ -64,7 +67,8 @@
 
                 <div class="d-flex align-items-center text-center">
                     <x-button> @__('feature/product.submit')</x-button>
-                    <x-button type="link" href="{{route('product.index')}}" color="secondary">{{  __('feature/product.cancel') }}</x-button>
+                    <x-button type="link" href="{{ route('product.index') }}"
+                        color="secondary">{{ __('feature/product.cancel') }}</x-button>
                 </div>
             </form>
         </x-slot:from>

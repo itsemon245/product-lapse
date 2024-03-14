@@ -38,10 +38,10 @@ class AuthenticatedSessionController extends Controller
         if ($request->user()?->type == 'admin') {
             return redirect(route('admin'));
         }
-        if ($request->user()?->type == 'subscriber' ||$request->user()?->type == 'member' ) {
+        if ($request->user()?->type == 'subscriber' || $request->user()?->type == 'member') {
             return redirect(route('dashboard'));
         }
-         
+
     }
 
     /**
@@ -55,6 +55,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/dashboard/product');
     }
 }

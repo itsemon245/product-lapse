@@ -28,29 +28,31 @@
                 <select onchange="this.form.submit()" name="search" class="selectpickers selectpickers2">
                     <option value="">@__('filter.all')</option>
                     @forelse ($options as $opt)
-                        <option value="{{ $opt->value }}" @selected(request()->query('search') == $opt->value) >
+                        <option value="{{ $opt->value }}" @selected(request()->query('search') == $opt->value)>
                             {{ $opt->name }}
-                            </option>
+                        </option>
                     @empty
                         <option>@__('filter.no-items')</option>
                     @endforelse
                 </select>
-            
+
             </form>
         </x-slot:filter>
 
 
         <x-slot:list>
             @forelse ($orders as $order)
-            {{-- {{ dd($order->user) }} --}}
-            @php
-                $user = App\Models\User::with('image')->where('id', $order->user->id)->first();
-            @endphp
+                {{-- {{ dd($order->user) }} --}}
+                @php
+                    $user = App\Models\User::with('image')
+                        ->where('id', $order->user->id)
+                        ->first();
+                @endphp
                 <div class="col-md-6">
                     <div class="item lon new">
                         <div class="list_item ">
-                            <figure class="align-middle"><a href="{{ route('admin.order.show', $order) }}"><img src="{{ $user->image->url ?? favicon() }}"
-                                        alt=""></a></figure>
+                            <figure class="align-middle"><a href="{{ route('admin.order.show', $order) }}"><img
+                                        src="{{ $user->image->url ?? favicon() }}" alt=""></a></figure>
                             <div class="joblisting_text">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell !w-full">
@@ -60,8 +62,9 @@
                                         <ul class="list-unstyled">
                                             <li> Status: <span class="p_color4">{{ $order->status }}</span> </li>
                                             <li> Amount: <span class="p_color4">{{ $order->amount }}</span> </li>
-                                            <li class="">
-                                                {{ \Carbon\Carbon::parse($order->created_at)->format('l, j F Y') }}
+                                            <li>
+                                                Expiration date <span
+                                                    class="p_color4">{{ \Carbon\Carbon::parse($order->plan->expired_at)->format('l, j F Y') }}</span>
                                             </li>
                                         </ul>
                                     </div>
@@ -71,11 +74,13 @@
                                                 class="like-btn">
                                                 @csrf
                                                 @method('PATCH')
-                                                <button type="submit" class="{{ $order->status == 'pending' ? '' : 'd-none' }}" {{ $order->status == 'pending' ? '' : 'disabled' }} >
+                                                <button type="submit"
+                                                    class="{{ $order->status == 'pending' ? '' : 'd-none' }}"
+                                                    {{ $order->status == 'pending' ? '' : 'disabled' }}>
                                                     <i class="ti-check" title="@__('Ban')"></i>
 
                                                 </button>
-                                            </fo>
+                                                </fo>
                                         </div>
                                     </div>
                                 </div>

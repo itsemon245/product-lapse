@@ -28,9 +28,11 @@
                 <select onchange="this.form.submit()" name="search" class="selectpickers selectpickers2">
                     <option value="">@__('filter.all')</option>
                     @forelse ($options as $opt)
-                        <option value="{{ $opt->value }}" @selected(request()->query('search') == $opt->value)>
-                            {{ $opt->name }}
-                        </option>
+                        @if ($opt->value != 'draft')
+                            <option value="{{ $opt->value }}" @selected(request()->query('search') == $opt->value)>
+                                {{ $opt->name }}
+                            </option>
+                        @endif
                     @empty
                         <option>@__('filter.no-items')</option>
                     @endforelse
@@ -62,10 +64,12 @@
                                         <ul class="list-unstyled">
                                             <li> Status: <span class="p_color4">{{ $order->status }}</span> </li>
                                             <li> Amount: <span class="p_color4">{{ $order->amount }}</span> </li>
-                                            <li>
-                                                Expiration date <span
-                                                    class="p_color4">{{ \Carbon\Carbon::parse($order->plan->expired_at)->format('l, j F Y') }}</span>
-                                            </li>
+                                            @if ($order->plan)
+                                                <li>
+                                                    Expiration date <span
+                                                        class="p_color4">{{ \Carbon\Carbon::parse($order->plan->expired_at)->format('l, j F Y') }}</span>
+                                                </li>
+                                            @endif
                                         </ul>
                                     </div>
                                     <div class="jobsearch-table-cell !w-full">

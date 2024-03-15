@@ -28,7 +28,7 @@
                 <select onchange="this.form.submit()" name="search" class="selectpickers selectpickers2">
                     <option value="">@__('filter.all')</option>
                     @forelse ($options as $opt)
-                        @if ($opt->value == 'draft')
+                        @if ($opt->value != 'draft')
                             <option value="{{ $opt->value }}" @selected(request()->query('search') == $opt->value)>
                                 {{ $opt->name }}
                             </option>

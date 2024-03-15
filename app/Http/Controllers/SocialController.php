@@ -18,7 +18,15 @@ class SocialController extends Controller
     }
     public function callbackLinkedin()
     {
-        $user = Socialite::driver('linkedin')->user();
+        if (!empty(Socialite::driver('linkedin')->stateless()->user()))
+        {
+            $linkedinuser = Socialite::driver('linkedin')->stateless()->user();
+            dd($linkedinuser);
+        }
+
+        // return redirect('/profile/');
+        // $user = Socialite::driver('linkedin')->user();
+        // dd($user);
     }
 
     //google
@@ -28,7 +36,6 @@ class SocialController extends Controller
     }
     public function callbackGoogle()
     {
-
         try {
             $user = Socialite::driver('google')->user();
             $is_user = User::where('email', $user->getEmail())->first();

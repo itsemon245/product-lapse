@@ -31,14 +31,14 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
     'linkedin' => [
-    'client_id' => env('LINKEDIN_CLIENT_ID'),
-    'client_secret' => env('LINKEDIN_CLIENT_SECRET'),
-    'redirect' => env('LINKEDIN_CALLBACK_URL'),
+    'client_id' => '86cexej5pd73tz',
+    'client_secret' => 'XRR1dX9GJSpgfrZh',
+    'redirect' => 'https://productlapse.websiteinnovate.com/linkedin/callback',
     ],
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
         'redirect' => env('GOOGLE_CALLBACK_URL'),
-        ],
+    ],
 
 ];

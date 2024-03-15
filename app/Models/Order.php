@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Casts\Utils\JsonCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Order extends Model
 {
@@ -27,8 +28,8 @@ class Order extends Model
         return $this->belongsTo(Package::class);
     }
 
-    public function plan()
+    public function plan(): HasOne
     {
-        return $this->hasOne(Plan::class, 'order_id', 'id');
+        return $this->hasOne(Plan::class, 'order_id', 'id')->latest();
     }
 }

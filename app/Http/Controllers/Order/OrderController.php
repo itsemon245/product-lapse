@@ -13,10 +13,8 @@ use Illuminate\Support\Str;
 
 use Illuminate\Http\Request;
 use App\Enums\OrderStatusEnum;
-use App\Services\SearchService;
 use App\Enums\PaymentMethodEnum;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\SearchRequest;
 use Illuminate\Support\Facades\Mail;
 use Paytabscom\Laravel_paytabs\Facades\paypage;
 
@@ -74,8 +72,10 @@ class OrderController extends Controller
     public function index()
     {
         $options = OrderStatusEnum::cases();
-        $orders = Order::whereNot('status', 'draft')->with('package', 'user')->latest()->paginate();
-        return view('pages.order.management', compact('orders', 'options'));
+        $orders = Order::whereNot('status', 'draft')->with('package', 'user', 'plan')->latest()->paginate();
+        $packages = Package::with('activeFeatures')->get();
+
+        return view('pages.order.management', compact('orders', 'options', 'packages'));
     }
 
     public function approve(int $id)
@@ -154,5 +154,32 @@ class OrderController extends Controller
             }
         })->with('package', 'user')->latest()->paginate();
         return view('pages.order.management', compact('options', 'orders'));
+    }
+
+    public function updatePlan(Request $request, $id)
+    {
+        $package = Package::find($request->package);
+
+        $old = Plan::find($id);
+        $old->update([
+            'active' => false,
+            'expired_at' => now(),
+        ]);
+
+
+
+        Plan::create([
+            'order_id' => $old->order_id,
+            'user_id' => $old->user_id,
+            'name' => $package->name,
+            'price' => $package->price,
+            'active' => true,
+            'expired_at' => $request->expiration_date,
+            'product_limit' => $package->product_limit,
+        ]);
+
+        notify()->success(__('Plan updated!'));
+        return back();
+
     }
 }

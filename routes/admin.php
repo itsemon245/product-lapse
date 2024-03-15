@@ -52,6 +52,7 @@ Route::prefix('admin')
         Route::patch('/profile/update/{id}', [ProfileController::class, 'update'])->name('admin.profile.update');
         Route::get('order', [OrderController::class, 'index'])->name('admin.order.index');
         Route::patch('order/approve/{id}', [OrderController::class, 'approve'])->name('admin.order.approve');
+        Route::post('order/plan/update/{id}', [OrderController::class, 'updatePlan'])->name('admin.order.plan.update');
         Route::get('order/show/{id}', [OrderController::class, 'show'])->name('admin.order.show');
         Route::get('order/search', [OrderController::class, 'search'])->name('admin.order.search');
         Route::resource('features', FeatureController::class)->except('show');

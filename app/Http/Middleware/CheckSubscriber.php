@@ -20,6 +20,9 @@ class CheckSubscriber
             return redirect(route('login'));
         }
         if ($user->type == null) {
+            if (url()->previous() == route('login')) {
+                return redirect('/');
+            }
             // notify()->warning(__('You are not allowed to visit this part yet!'));
             return redirect()->route('package.upgrade');
         }

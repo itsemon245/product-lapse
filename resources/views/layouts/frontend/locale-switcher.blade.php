@@ -1,7 +1,6 @@
 <form id="locale-switch-form" class="h-6" action="{{ route('lang.toggle') }}" method="post">
     @csrf
     <label class="inline-flex rtl:flex-row-reverse items-center cursor-pointer gap-2 m-0" id="locale-switch">
-        <span class="text-primary">   {{ __('Language') }}</span>
         <span class=" text-gray-900 dark:text-gray-300">
             En
             {{-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">

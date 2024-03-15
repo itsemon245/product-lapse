@@ -19,7 +19,7 @@ Route::middleware('guest')->group(function () {
     Route::post('register', [RegisteredUserController::class, 'store']);
 
     Route::get('linkedin/login', [SocialController::class, 'loginWithLinkedin'])->name('linkedin.login');
-    Route::get('linkedin/callback', [SocialController::class, 'callbackLinkedin'])->name('linkedin.login.callback');
+    Route::any('linkedin/callback', [SocialController::class, 'callbackLinkedin'])->name('linkedin.login.callback');
     Route::get('google/login', [SocialController::class, 'loginWithGoogle'])->name('google.login');
     Route::any('google/callback', [SocialController::class, 'callbackGoogle'])->name('google.login.callback');
 
@@ -49,6 +49,10 @@ Route::middleware('auth')->group(function () {
     Route::post('email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
                 ->middleware('throttle:6,1')
                 ->name('verification.send');
+    
+    Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
+                ->middleware(['signed', 'throttle:6,1'])
+                ->name('verification.verify');
 
     Route::get('confirm-password', [ConfirmablePasswordController::class, 'show'])
                 ->name('password.confirm');

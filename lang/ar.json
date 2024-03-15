@@ -123,5 +123,8 @@
     "You have been registered successfully": "لقد تم تسجيلك بنجاح",
     "Login": "تسجيل الدخول",
     "Back to Dashboard": "العودة إلى لوحة القيادة",
-    "Create user": "إنشاء مستخدم"
+    "Create user": "إنشاء مستخدم",
+    "Update plan": "تحديث الخطة",
+    "Select Package": "حدد الحزمة",
+    "Expiration Date": "تاريخ الانتهاء"
 }

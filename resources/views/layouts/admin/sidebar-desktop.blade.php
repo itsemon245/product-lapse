@@ -12,7 +12,7 @@
                             @click="open = !open" aria-haspopup="true">
                             <span class="inline-flex items-center">
                                 {!! $route->icon !!}
-                                <span class="ml-4">{{ $item }}</span>
+                                <span class="ml-4">@__($item)</span>
                             </span>
                             <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd"
@@ -37,7 +37,7 @@
                                         ">
                                         <span class="inline-flex items-center">
                                             {!! $route->icon !!}
-                                            <span class="ml-4">{{ $name }}</span>
+                                            <span class="ml-4">@__($name)</span>
                                         </span>
                                     </a>
                                 </li>

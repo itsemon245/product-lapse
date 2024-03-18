@@ -21,8 +21,9 @@ class IdeaController extends Controller
     public function index()
     {
         $ideas = Product::find(productId())->ideas()->paginate(10);
-        $priorities = Select::of('idea')->type('priority')->get();
-        return view('features.idea.index', compact('ideas', 'priorities'));
+        $stages = Select::of('idea')->type('stage')->get();
+
+        return view('features.idea.index', compact('ideas', 'stages'));
     }
 
     /**
@@ -115,8 +116,8 @@ class IdeaController extends Controller
     public function search(SearchRequest $request)
     {
         $ideas = SearchService::items($request);
-        $priorities = Select::of('idea')->type('priority')->get();
-        return view('features.idea.index', compact('ideas', 'priorities'));
+        $stages = Select::of('idea')->type('stage')->get();
+        return view('features.idea.index', compact('ideas', 'stages'));
     }
 
     // public function notify()

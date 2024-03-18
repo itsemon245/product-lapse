@@ -36,7 +36,7 @@ class SocialController extends Controller
     }
     public function callbackGoogle()
     {
-        try {
+            try {
             $user = Socialite::driver('google')->user();
             $is_user = User::where('email', $user->getEmail())->first();
             if (!$is_user) {

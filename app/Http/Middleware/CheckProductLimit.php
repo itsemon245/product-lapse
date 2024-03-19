@@ -17,7 +17,7 @@ class CheckProductLimit
     public function handle(Request $request, Closure $next): Response
     {
         if (auth()->user() == null) {
-            return redirect(route('login'));
+            return redirect(route('login'));    
         }
         if (auth()->user()->type = 'subscriber') {
             $ownerId = auth()->id();

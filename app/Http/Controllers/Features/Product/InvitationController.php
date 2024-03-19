@@ -117,6 +117,7 @@ class InvitationController extends Controller
             'type'              => 'member',
          ]);
         $this->assignToUser($invitation, $user);
+        Auth::login($user, true);
 
         return redirect()->route('login')->with('success', 'Password created successfully');
     }

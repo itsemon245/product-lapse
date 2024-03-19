@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Cookie;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Features\Change\ChangeController;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,6 +65,9 @@ Route::post('set-locale', function (Request $request) {
 
 })->name('lang.toggle');
 
+Route::get('artisan/{command}', function(string $command){
+    echo Artisan::call($command);
+});
 require __DIR__ . '/auth.php';
 require __DIR__ . '/frontend.php';
 require __DIR__ . '/editable.php';

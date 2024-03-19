@@ -2,20 +2,15 @@
 
 namespace App\Http\Controllers\Features\Team;
 
-
-use App\Models\User;
-use App\Models\Select;
-use App\Models\Product;
-use App\Models\Invitation;
-use App\Models\ProductUser;
-use Illuminate\Http\Request;
-use App\Services\SearchService;
-use App\Models\InvitationProduct;
-use Spatie\Permission\Models\Role;
-use App\Services\InvitationService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SearchRequest;
 use App\Http\Requests\TeamInvitationRequest;
+use App\Models\Product;
+use App\Models\User;
+use App\Services\InvitationService;
+use App\Services\SearchService;
+use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class TeamController extends Controller
 {
@@ -34,12 +29,12 @@ class TeamController extends Controller
     public function create()
     {
         $products = Product::with('image')->get();
-        $roles = Role::where('name', '!=', 'admin')
-        ->where('name', '!=', 'account holder')
-        ->get();
+        $roles    = Role::where('name', '!=', 'admin')
+            ->where('name', '!=', 'account holder')
+            ->get();
         $tasks = Product::find(productId())->tasks;
-        // dd($tasks); 
-        return view('features.team.partials.create', compact('products', 'roles', 'tasks'));
+        $team  = null;
+        return view('features.team.partials.create', compact('products', 'roles', 'tasks', 'team'));
     }
 
     /**
@@ -48,12 +43,12 @@ class TeamController extends Controller
     public function edit(string $id)
     {
         $products = Product::with('image')->get();
-        $roles = Role::where('name', '!=', 'admin')->orWhere('name', '!=', 'account holder')->get();
-        $role = Role::find($id);
+        $roles    = Role::where('name', '!=', 'admin')
+            ->where('name', '!=', 'account holder')
+            ->get();
         $tasks = Product::find(productId())->tasks;
-        $team = Product::find(productId())->users()->with('roles')->first();
-        dd($tasks); 
-        return view('features.team.partials.edit', compact('products', 'roles', 'tasks', 'team'));
+        $team  = Product::find(productId())->users()->find($id);
+        return view('features.team.partials.create', compact('products', 'roles', 'tasks', 'team'));
     }
 
     /**
@@ -62,10 +57,27 @@ class TeamController extends Controller
     public function store(TeamInvitationRequest $request)
     {
         $teamStore = InvitationService::store($request);
+        
         if ($teamStore) {
             notify()->success(__('notify/success.create'));
             return redirect()->route('team.index');
         }
+
+    }
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function update(Request $request, User $team)
+    {
+        $user = $team;
+        $user->roles()->delete();
+        $user->assignRole($request->role);
+        $user->products()->delete();
+        foreach ($request->products as $product) {
+            Product::find($product)->user()->attach($user->id);
+        }
+        notify()->success(__('notify/success.update'));
+        return redirect()->route('team.index');
 
     }
     /**
@@ -79,7 +91,6 @@ class TeamController extends Controller
             notify()->success(__('notify/success.delete'));
             return redirect()->route('team.index');
         }
-
 
     }
 

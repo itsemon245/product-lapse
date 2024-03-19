@@ -98,7 +98,7 @@ class InvitationController extends Controller
         request()->session()->regenerateToken();
         $id = base64_decode($id);
 
-        $invitation = Invitation::find($id);
+        $invitation = Invitation::withoutGlobalScope(OwnerScope::class)->find($id);
         // dd($invitation);
         if ($invitation == null) {
             notify()->error('Invitation expired or invalid token!');

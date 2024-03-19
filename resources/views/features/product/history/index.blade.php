@@ -52,10 +52,9 @@
                                                             <div class="verify-sub-box">
                                                                 <div class="file-loading">
                                                                     <x-attach id="fileinput-{{ $history->id }}" data-images="{{$history->images}}"
-                                                                        class="old-fileinput" required autofocus
+                                                                        class="old-fileinput" autofocus
                                                                         label="{{ __('feature/productHistory.images') }}"
                                                                         name="image[]" />
-                                                                        {{ dd($history->images) }}
                                                                 </div>
                                                                 
                                                             </div>
@@ -200,9 +199,7 @@
                 $(".old-fileinput").each((i, input) => {
                     let preview = JSON.parse(input.dataset.images).map(image=>{
                         
-                        return `<img src='${image.url}' class='file-preview-image' alt='${image.name}' title='${image.name}'>
-                        <p>${image.name}</p>
-                        `
+                        return `<img src='${image.url}' class='file-preview-image w-100' alt='${image.name}' title='${image.name}'>`
                     })
                     let previewConfig = JSON.parse(input.dataset.images).map(image=>{
                         

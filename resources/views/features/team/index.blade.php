@@ -35,7 +35,6 @@
 
         <x-slot:list>
             @forelse ($teams as $team)
-                {{-- {{ dd($team) }} --}}
                 <div class="col-md-6">
                     <div class="item lon new">
                         <div class="list_item">
@@ -52,10 +51,10 @@
                                         </ul>
                                     </div>
 
-                                    @can('delete member')
-                                        @if (auth()->id() != $team->id)
-                                            <div class="jobsearch-table-cell">
-                                                <div class="jobsearch-job-userlist">
+                                    <div class="jobsearch-table-cell">
+                                        <div class="jobsearch-job-userlist">
+                                                @if (auth()->id() != $team->id)
+                                                @can('delete member')
                                                     <div class="like-btn">
                                                         <form action="{{ route('team.destroy', $team) }}" method="POST">
                                                             @csrf
@@ -64,10 +63,15 @@
                                                                     class='ti-trash'></i></x-button>
                                                         </form>
                                                     </div>
+                                                @endcan
+                                                @endif
+                                                <div class="like-btn">
+                                                    <a href="{{ route('team.edit', $team) }}" class="shortlist" title="Edit">
+                                                        <i class="ti-pencil"></i>
+                                                    </a>
                                                 </div>
                                             </div>
-                                        @endif
-                                    @endcan
+                                        </div>
                                 </div>
                             </div>
                         </div>

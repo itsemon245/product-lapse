@@ -25,7 +25,8 @@ return [
     ],
     'choose' => 'Choose products',
     'submit' => 'Add user',
-
+    //Edit page
+    'edit' => 'Edit invitation',
     // //details page
     // 'version' => 'Release version',
     // 'date' => 'Release date',
@@ -33,8 +34,7 @@ return [
     // 'working' => 'Working on',
     // 'update' => 'Update',
 
-    // //Edit page
-    // 'edit' => 'Edit release info',
+
 
     // //show page
     // 'show' => 'Show release info',

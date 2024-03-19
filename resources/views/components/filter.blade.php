@@ -5,7 +5,7 @@
     <input type="hidden" name="model" value="{{ $model }}">
     @isset($options)
         <select onchange="this.form.submit()" name="search" class="selectpickers selectpickers2">
-            <option selected value="">@__('filter.all')</option>
+            <option selected value="">@__('All')</option>
             @forelse ($options as $opt)
                 <option @selected(request()->query('search') == $opt->value->{app()->getLocale()}) value="<?= $opt->value->{app()->getLocale()} ?>">
                     <?= $opt->value->{app()->getLocale()} ?></option>

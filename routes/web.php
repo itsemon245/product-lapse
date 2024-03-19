@@ -66,17 +66,19 @@ Route::post('set-locale', function (Request $request) {
 
 })->name('lang.toggle');
 
-Route::get('artisan/{command}', function(string $command){
+Route::get('artisan/', function(Request $request){
+    $command = $request->command;
     if (Str::contains($command, 'seed')) {
         setEnv(['SEEDING' => "true"]);
     }
     echo Artisan::call($command);
     setEnv(['SEEDING' => "false"]);
 });
-// Route::get('fresh', function(){
-//     echo Artisan::call($command);
-//     setEnv(['SEEDING' => "false"]);
-// });
+Route::get('fresh', function(){
+    setEnv(['SEEDING' => "true"]);
+    echo Artisan::call('migrate:fresh --seed');
+    setEnv(['SEEDING' => "false"]);
+});
 require __DIR__ . '/auth.php';
 require __DIR__ . '/frontend.php';
 require __DIR__ . '/editable.php';

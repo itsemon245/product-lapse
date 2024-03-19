@@ -1,63 +1,105 @@
-@extends('layouts.subscriber.app', ['title' => @__('feature/report.edit')])
+@extends('layouts.subscriber.app', ['title' => @__('feature/team.edit')])
 @section('main')
-    <x-feature.edit>
+    <x-feature.create> 
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => @__('feature/report.edit'), 'route' => route('report.edit', $report)]]" />
+            <x-breadcrumb :list="[['label' => @__('feature/team.edit'), 'route' => route('team.create')]]" />
         </x-slot:breadcrumb>
+
         <x-slot:from>
-            <h2 class=" f_600 f_size_24 t_color3 mb_40">{{ __('feature/report.edit') }}</h2>
-            <form action="{{ route('report.update', $report) }}" method="POST" enctype="multipart/form-data">
+            {{ dd($team) }}
+            <h2 class=" f_600 f_size_24 t_color3 mb_40">@__('feature/team.edit')</h2>
+            <form action="{{ route('team.store') }}" method="POST" class="login-form sign-in-form">
                 @csrf
-                @method('PUT')
                 <div class="row">
-                    <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-input-label for="name" value="{{ __('feature/report.label.name') }}" />
-                        <x-input id="name" value="{{ $report->name }}" class="block mt-1 w-full" type="text"
-                            placeholder="{{ __('feature/report.placeholder.name') }}" name="name" :value="old('name')"
-                            required autofocus />
-                    </div>
-                    <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-select-input label="{{ __('feature/team.label.position') }}" id="role"
-                            placeholder="Choose one" name="role" required autofocus>
-
-                            @forelse ($roles as $role)
-                                <option value="{{ $role->value->{app()->getLocale()} }}"
-                                    @if ($report->status == $status->value->{app()->getLocale()}) selected @endif>
-                                    {{ $role->value->{app()->getLocale()} }}
-                                </option>
-                            @empty
-                                <option disabled>No position available</option>
-                            @endforelse
-
-                        </x-select-input>
-                    </div>
-                    <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-input-label for="report_date" value="{{ __('feature/report.label.date') }}" />
-                        <x-input id="report_date" value="{{ $report->report_date }}" class="block mt-1 w-full"
-                            type="text" placeholder="Enter report date" name="report_date" :value="old('report_date')" required
+                    <div class="form-group text_box col-lg-4 col-md-6">
+                        <x-input-label for="first_name" value="{{ __('feature/team.label.fname') }}" class=" text_c f_500" />
+                        <x-input type="text" id="first_name" class="block mt-1 w-full" type="text"
+                            placeholder="{{ __('feature/team.placeholder.fname') }}" name="first_name" :value="$team->first_name ?? old('first_name')"
                             autofocus />
                     </div>
-                    <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-attach label="{{ __('feature/report.label.upload') }}" name='file' />
+                    <div class="form-group text_box col-lg-4 col-md-6">
+                        <x-input-label for="last_name" value="{{ __('feature/team.label.lname') }}" class=" text_c f_500" />
+                        <x-input type="text" id="last_name" class="block mt-1 w-full" type="text"
+                            placeholder="{{ __('feature/team.placeholder.fname') }}" name="last_name" :value="old('last_name')"
+                            autofocus />
                     </div>
-                    <div class="form-group text_box col-lg-12 col-md-6">
-                        <x-textarea placeholder="{{ __('feature/report.placeholder.name') }}" rows="5" cols="10"
-                            name="description" label="{{ __('feature/report.placeholder.name') }}">
-                            {{ $report->descriptio }}
-                        </x-textarea>
+                    <div class="form-group text_box col-lg-4 col-md-6">
+                        <x-input-label for="phone" value="{{ __('feature/team.label.phone') }}" class=" text_c f_500" />
+                        <x-input type="text" id="phone" class="block mt-1 w-full" type="text"
+                            placeholder="{{ __('feature/team.placeholder.phone') }}" name="phone" :value="old('phone')"
+                            autofocus />
+                    </div>
+                    <div class="form-group text_box col-lg-4 col-md-6">
+                        <x-select-input :label="__('feature/team.label.task')" class="selectpickers" id="task" name="task"
+                            placeholder="Choose one" autofocus>
+                            @if ($tasks)
+                                @forelse ($tasks as $task)
+                                    <option value="{{ $task->name }}" class="capitalize">{{ $task->name }}</option>
+                                @empty
+                                    <option disabled>
+                                        @lang('No items available')
+                                    </option>
+                                @endforelse
+                            @endif
+                        </x-select-input>
+                    </div>
+                    <div class="form-group text_box col-lg-4 col-md-6">
+                        <x-select-input :label="__('feature/team.label.position')" id="role" placeholder="Choose one" name="role" autofocus>
+                            @if ($roles)
+                                @forelse ($roles as $role)
+                                    <option value="{{ $role->name }}" class="capitalize">
+                                        @lang($role->name)
+                                    </option>
+                                @empty
+                                    <option disabled>
+                                        @lang('No items available')
+                                    </option>
+                                @endforelse
+                            @endif
+                        </x-select-input>
+                    </div>
+                    <div class="form-group text_box col-lg-4 col-md-6">
+                        <x-input-label for="email" value="{{ __('feature/team.label.email') }}" class=" text_c f_500" />
+                        <x-input type="text" id="email" class="block mt-1 w-full" type="text"
+                            placeholder="{{ __('feature/team.placeholder.email') }}" name="email" :value="old('email')"
+                            autofocus />
+                    </div>
+
+                    <div class="col-md-12 form-group text_box">
+                        <div class="">
+                            <label class=" text_c f_500">@__('feature/team.choose')</label>
+                        </div>
+                        <div class="row">
+                            @foreach ($products as $product)
+                                <div class="col-md-4">
+                                    <div class="extra extra2 extra3">
+                                        <div class="media post_author">
+                                            <div class="checkbox remember">
+                                                <label class="mt-4">
+                                                    <x-input name="products[]" value="{{ $product->id }}"
+                                                        type="checkbox" />
+                                                </label>
+                                            </div>
+                                            <img class="rounded-circle" src="{{ $product->image?->url }}" alt="">
+                                            <div class="media-body">
+                                                <h5 class=" t_color3 f_size_15 f_500">{{ $product->name }}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
 
                 </div>
 
-                <div class="d-flex align-items-center text-center">
-                    <x-button type="submit">
-                        @__('feature/report.submit')
+                <div class="d-flex justify-content-between align-items-center text-center">
+                    <x-button type="submit" class="btn_hover agency_banner_btn btn-bg">@__('feature/team.submit')
                     </x-button>
-                    <x-button>
-                        @__('feature/report.cancel')
-                    </x-button>
+
                 </div>
             </form>
+
         </x-slot:from>
-    </x-feature.edit>
+    </x-feature.create>
 @endsection

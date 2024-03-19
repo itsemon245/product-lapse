@@ -43,6 +43,20 @@ class TeamController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     */
+    public function edit(string $id)
+    {
+        $products = Product::with('image')->get();
+        $roles = Role::where('name', '!=', 'admin')->orWhere('name', '!=', 'account holder')->get();
+        $role = Role::find($id);
+        $tasks = Product::find(productId())->tasks;
+        $team = Product::find(productId())->users()->with('roles')->first();
+        dd($tasks); 
+        return view('features.team.partials.edit', compact('products', 'roles', 'tasks', 'team'));
+    }
+
+    /**
      * Store a newly created resource in storage.
      */
     public function store(TeamInvitationRequest $request)

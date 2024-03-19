@@ -22,7 +22,7 @@
                 @if (productId() != null && str(url()->current())->contains('dashboard') && !str(url()->current())->contains(['certificate', 'select']))
                     <li
                         class="breadcrumb-item {{ request()->routeIs('product.show', productId()) ? 'active' : '' }} ">
-                        <a href="{{ request()->routeIs('product.index') ? '#' : route('product.show', productId()) }}">
+                        <a href="{{ request()->routeIs('product.index') ? '#' : url()->current() }}">
                         {{request()->routeIs('product.index') ? __('Products') : __('Product')}}
                         </a>
                     </li>

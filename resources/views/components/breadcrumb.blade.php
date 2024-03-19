@@ -20,6 +20,8 @@
                     </li>
                 @endif
                 @if (productId() != null &&
+                        !request()->routeIs('product.create') &&
+                        !request()->routeIs('product.edit') &&
                         str(url()->current())->contains('dashboard') &&
                         !str(url()->current())->contains(['certificate', 'select']))
                     <li class="breadcrumb-item {{ request()->routeIs('product.show') ? 'active' : '' }} ">

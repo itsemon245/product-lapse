@@ -6,12 +6,13 @@ use App\Models\Contact;
 use App\Models\Feature;
 use App\Models\Package;
 use App\Models\LandingPage;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Features\Change\ChangeController;
-use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,8 +67,16 @@ Route::post('set-locale', function (Request $request) {
 })->name('lang.toggle');
 
 Route::get('artisan/{command}', function(string $command){
+    if (Str::contains($command, 'seed')) {
+        setEnv(['SEEDING' => "true"]);
+    }
     echo Artisan::call($command);
+    setEnv(['SEEDING' => "false"]);
 });
+// Route::get('fresh', function(){
+//     echo Artisan::call($command);
+//     setEnv(['SEEDING' => "false"]);
+// });
 require __DIR__ . '/auth.php';
 require __DIR__ . '/frontend.php';
 require __DIR__ . '/editable.php';

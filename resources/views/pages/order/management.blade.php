@@ -86,11 +86,11 @@
                                         </div>
                                     </div>
                                     <div class="jobsearch-table-cell">
-                                        <div class="jobsearch-job-userlist">
+                                        {{-- <div class="jobsearch-job-userlist">
                                             <a href="#" title="edit" data-toggle="modal" data-target="#myModal1"
                                                 data-id="{{ $order->plan->id }}"><i class="ti-pencil"></i></a>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>

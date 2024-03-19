@@ -134,5 +134,11 @@
     "Resend Invitation": "Resend Invitation ar",
     "Update Token": "Update Token ar",
     "Options": "Options ar",
-    "All": "All ar"
+    "All": "All ar",
+    "Confirm Registration" : "تأكيد التسجيل",
+    "Verify Email" : "التحقق من البريد الإلكتروني",
+    "Resend Verification Email" : "إعادة ارسال بريد التحقق",
+    "Log Out" : "تسجيل خروج"
+
+
 }

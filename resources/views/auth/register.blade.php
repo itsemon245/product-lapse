@@ -46,7 +46,7 @@
                             </div>
                             <div class="form-group text_box col-md-6">
                                 <label class=" text_c f_500">@__('singup.label.password')</label>
-                                <input type="password" placeholder="{{ __('singup.placeholder.email') }}" name="password"
+                                <input type="password" placeholder="{{ __('singup.label.password') }}" name="password"
                                     value="{{ old('password') }}">
                                 @error('password')
                                     <div class="alert alert-danger">{{ $message }}</div>

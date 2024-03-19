@@ -34,7 +34,9 @@ class TeamController extends Controller
     public function create()
     {
         $products = Product::with('image')->get();
-        $roles = Role::where('name', '!=', 'admin')->orWhere('name', '!=', 'account holder')->get();
+        $roles = Role::where('name', '!=', 'admin')
+        ->where('name', '!=', 'account holder')
+        ->get();
         $tasks = Product::find(productId())->tasks;
         // dd($tasks); 
         return view('features.team.partials.create', compact('products', 'roles', 'tasks'));

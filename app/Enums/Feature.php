@@ -1,6 +1,8 @@
 <?php
 namespace App\Enums;
 
+use Illuminate\Support\Str;
+
 enum Feature: string
 {
     case IDEA = 'idea';
@@ -8,14 +10,22 @@ enum Feature: string
     case CHANGE = 'change';
     case SUPPORT = 'support';
     case DOCUMENT = 'document';
-    case DELIVERY = 'delivery';
+    case DELIVERY = 'delivery'; //Should be hidden in select
     case REPORT = 'report';
     case PRODUCT = 'product';
-    case RELEASE = 'release';
-    case CERTIFICATE = 'certificate';
+    case RELEASE = 'release'; //Should be hidden in select
+    case CERTIFICATE = 'certificate'; //Should be hidden in select
     
-    //Packages and user should not be in the feature
-    // case PACKAGE = 'package';
-    // case USER = 'user';
+
+
+
+    public static function forSelect()
+    {
+        $items = collect(Feature::cases())->filter(function($f){
+            return !Str::contains($f->value, ['delivery', 'release', 'certificate']);
+        });
+
+        return $items;
+    }
 
 }

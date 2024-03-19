@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\TeamInvitationRequest;
 use App\Models\Invitation;
 use App\Models\Product;
+use App\Models\Scopes\OwnerScope;
 use App\Models\User;
 use App\Services\InvitationService;
 use Illuminate\Http\Request;
@@ -60,7 +61,7 @@ class InvitationController extends Controller
      */
     public function accept($token)
     {
-        $invitation = Invitation::where('token', $token)->first();
+        $invitation = Invitation::withoutGlobalScope(OwnerScope::class)->where('token', $token)->first();
         $user       = User::where('email', $invitation->email)->first();
         if ($user) {
             Auth::guard('web')->logout();
@@ -85,7 +86,7 @@ class InvitationController extends Controller
     {
 
         $request->validate([
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6|same:confirm_password',
          ]);
         Auth::guard('web')->logout();
         request()->session()->invalidate();

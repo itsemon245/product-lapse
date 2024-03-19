@@ -1,6 +1,17 @@
-@extends('layouts.frontend.app')
+@extends('layouts.subscriber.app', ['title'=> __('Create Password')])
 
 @section('main')
+<section class="breadcrumb_area mt-6">
+    <div class="container d-flex">
+        <div class="breadcrumb_content text-center ml-auto">
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active">@__('Create Password')</li>
+            </ul>
+        </div>
+
+    </div>
+</section>
     <section class="sign_in_area bg_color sec_pad">
         <div class="container">
             <div class="sign_info">
@@ -10,17 +21,18 @@
                         class="login-form sign-in-form" enctype="multipart/form-data" autocomplete="off"> @csrf
                         <div class="row">
                             <div class="form-group text_box col-lg-4 col-md-6">
-                                <x-input id="password" label="{{ __('feature/createPassword.password') }}"
+                                <label for="" class="text_c f_500">@__('Create Password')</label>
+
+                                <x-input id="password"
                                     class="block mt-1 w-full" type="text"
                                     placeholder="{{ __('feature/delivery.placeholder.password') }}" name="password"
                                     :value="old('password')" required autofocus />
-
                             </div>
                             <div class="form-group text_box col-lg-4 col-md-6">
+                                <label for="" class="text_c f_500">@__('Confirm Password')</label>
                                 <x-input id="password_confirmation"
-                                    label="{{ __('feature/createPassword.password_confirmation') }}"
                                     class="block mt-1 w-full" type="text"
-                                    placeholder="{{ __('feature/delivery.placeholder.password') }}" name="password"
+                                    placeholder="{{ __('feature/delivery.placeholder.password') }}" name="confirm_password"
                                     :value="old('password')" required autofocus />
                             </div>
                         </div>

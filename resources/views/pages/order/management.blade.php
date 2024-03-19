@@ -44,7 +44,6 @@
 
         <x-slot:list>
             @forelse ($orders as $order)
-                {{-- {{ dd($order->user) }} --}}
                 @php
                     $user = App\Models\User::with('image')
                         ->where('id', $order->user->id)
@@ -84,7 +83,13 @@
                                                     <i class="ti-check" title="@__('Ban')"></i>
 
                                                 </button>
-                                                </fo>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="jobsearch-table-cell">
+                                        <div class="jobsearch-job-userlist">
+                                            <a href="#" title="edit" data-toggle="modal" data-target="#myModal1"
+                                                data-id="{{ $order->plan->id }}"><i class="ti-pencil"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -97,4 +102,88 @@
             @endforelse
         </x-slot:list>
     </x-feature.index>
+    <div class="modal fade" id="myModal1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">@__('Update plan')</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form id="update_plan_form" action="{{ route('admin.order.plan.update', ['id' => '__DUMMY_ID__']) }}"
+                    method="POST">
+                    @csrf
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="form-group text_box col-lg-6 col-md-6">
+                                    <x-select-input label="{{ __('Select Package') }}" id="package" name="package"
+                                        required autofocus>
+                                        @foreach ($packages as $package)
+                                            <option value="{{ $package->id }}" data-validity="{{ $package->validity }}"
+                                                data-unit="{{ $package->unit }}">
+                                                {{ $package->name->{app()->getLocale()} }}
+                                            </option>
+                                        @endforeach
+                                    </x-select-input>
+                                </div>
+                                <div class="form-group text_box col-lg-6 col-md-6">
+                                    @php
+                                        use Carbon\Carbon;
+                                        $nextDay = Carbon::now()->addDay()->format('Y-m-d');
+                                    @endphp
+
+                                    <label for="expiration_date">@__('Expiration Date'):</label>
+                                    <input type="date" id="expiration_date" name="expiration_date"
+                                        min="{{ $nextDay }}">
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="submit"
+                            class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">{{ __('Update') }}</button>
+                        <button type="button" class="btn_hover agency_banner_btn btn-bg btn-bg-grey"
+                            data-dismiss="modal">@__('Cancel')</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#package').change(function() {
+                var selectedOption = $(this).find('option:selected');
+                var validity = parseInt(selectedOption.data('validity'));
+                var unit = selectedOption.data('unit');
+
+                if (!isNaN(validity)) {
+                    var expirationDate = new Date();
+                    if (unit === 'year') {
+                        expirationDate.setFullYear(expirationDate.getFullYear() + validity);
+                    } else if (unit === 'month') {
+                        expirationDate.setMonth(expirationDate.getMonth() + validity);
+                    }
+                    var formattedExpirationDate = expirationDate.toISOString().split('T')[0];
+                    $('#expiration_date').val(formattedExpirationDate);
+                }
+            });
+
+
+            $('#myModal1').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget);
+                var id = button.data('id');
+                var formAction = "{{ route('admin.order.plan.update', ['id' => '__DUMMY_ID__']) }}";
+                formAction = formAction.replace('__DUMMY_ID__', id);
+                $('#update_plan_form').attr('action', formAction);
+            });
+        });
+    </script>
+@endpush

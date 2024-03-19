@@ -23,8 +23,7 @@
 
         <x-slot:filter>
             <h5>Status</h5>
-            <form method="get" action="{{ route('admin.order.search') }}">
-                @csrf
+            <form method="get" action="{{ route('admin.order.index') }}">
                 <select onchange="this.form.submit()" name="search" class="selectpickers selectpickers2">
                     <option value="">@__('filter.all')</option>
                     @forelse ($options as $opt)

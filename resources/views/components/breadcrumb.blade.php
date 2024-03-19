@@ -19,11 +19,16 @@
                         <a href="{{ route('home') }}">@__('Home')</a>
                     </li>
                 @endif
-                @if (productId() != null && str(url()->current())->contains('dashboard') && !str(url()->current())->contains(['certificate', 'select']))
-                    <li
-                        class="breadcrumb-item {{ request()->routeIs('product.show', productId()) ? 'active' : '' }} ">
-                        <a href="{{ request()->routeIs('product.index') ? '#' : url()->current() }}">
-                        {{request()->routeIs('product.index') ? __('Products') : __('Product')}}
+                @if (productId() != null &&
+                        str(url()->current())->contains('dashboard') &&
+                        !str(url()->current())->contains(['certificate', 'select']))
+                    <li class="breadcrumb-item {{ request()->routeIs('product.show') ? 'active' : '' }} ">
+                        <a href="{{ request()->routeIs('product.index') ? '#' : (request()->routeIs('product.show') || request()->routeIs('product.home.filter') ? url()->current() : route('product.show', productId())) }}">
+                            @if (request()->routeIs('product.index'))
+                                @__('Products')
+                            @else
+                                @__('Product')
+                            @endif
                         </a>
                     </li>
                 @endif

@@ -16,6 +16,7 @@ return [
     'profile' => [
         'profile' => 'الملف الشخصى',
         'invitation' => 'ارسال دعوة',
+        'dashboard'=> "لوحة القيادة",
         'products' => 'منتجاتى',
         'report' => 'التقارير',
         'select' => 'يختار',

@@ -41,7 +41,7 @@
                                             <li class="p_color4">{{ $invitation->position }}</li>
                                             <li class="p_color4">{{ $invitation->role }}</li>
                                             <li class="p_color4">
-                                                {{ $invitation->accepted_at == null ? 'Not Accepted yet' : 'Accepted at: ' . $invitation->accepted_at }}
+                                                {{ $invitation->accepted_at == null ? __('Not Accepted yet') : __("Accepted at") . " : " . $invitation->accepted_at }}
                                             </li>
 
                                         </ul>
@@ -62,7 +62,7 @@
 
                                             </div>
                                             <div class="like-btn">
-                                                <a href="{{ route('invitation.edit', ['invitation' => base64_encode($invitation->id)]) }}"
+                                                <a href="{{ route('invitation.edit', ['invitation' => $invitation]) }}"
                                                     class="shortlist" title="Edit">
                                                     <i class="ti-pencil"></i>
                                                 </a>

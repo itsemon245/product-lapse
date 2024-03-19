@@ -34,7 +34,8 @@ class InvitationController extends Controller
         $roles    = Role::where('name', '!=', 'admin')
         ->where('name', '!=', 'account holder')
         ->get();
-        return view('features.product.invitation.create', compact('products', 'roles'));
+        $invitation = null;
+        return view('features.product.invitation.create', compact('products', 'roles', 'invitation'));
     }
 
     /**
@@ -51,9 +52,13 @@ class InvitationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Invitation $invitation)
+    public function edit(Invitation $invitation)
     {
-        //
+        $products = Product::get();
+        $roles    = Role::where('name', '!=', 'admin')
+        ->where('name', '!=', 'account holder')
+        ->get();
+        return view('features.product.invitation.create', compact('products', 'roles', 'invitation'));
     }
 
     /**
@@ -119,9 +124,11 @@ class InvitationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Invitation $invitation)
+    public function update(TeamInvitationRequest $request, Invitation $invitation)
     {
-        //
+        $invitation = InvitationService::update($request, $invitation);
+        notify()->success(__('notify/success.update'));
+        return redirect()->route('invitation.index');
     }
 
     /**

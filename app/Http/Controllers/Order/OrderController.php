@@ -69,10 +69,15 @@ class OrderController extends Controller
         return $pay;
 
     }
-    public function index()
+    public function index(Request $request)
     {
         $options = OrderStatusEnum::cases();
-        $orders = Order::whereNot('status', 'draft')->with('package', 'user', 'plan')->latest()->paginate();
+        $orders = Order::whereNot('status', 'draft')
+        ->where(function ($q) use ($request) {
+            if ($request->search) {
+                $q->where('status', strtolower($request->search));
+            }
+        })->with('package', 'user', 'plan')->latest()->paginate();
         $packages = Package::with('activeFeatures')->get();
 
         return view('pages.order.management', compact('orders', 'options', 'packages'));
@@ -144,17 +149,18 @@ class OrderController extends Controller
 
         return redirect(route('payment.success'));
     }
-    public function search(Request $request)
-    {
+    // public function search(Request $request)
+    // {
 
-        $options = OrderStatusEnum::cases();
-        $orders = Order::where(function ($q) use ($request) {
-            if ($request->search) {
-                $q->where('status', strtolower($request->search));
-            }
-        })->with('package', 'user')->latest()->paginate();
-        return view('pages.order.management', compact('options', 'orders'));
-    }
+    //     $options = OrderStatusEnum::cases();
+    //     $orders = Order::where(function ($q) use ($request) {
+    //         if ($request->search) {
+    //             $q->where('status', strtolower($request->search));
+    //         }
+    //     })->with('package', 'user')->latest()->paginate();
+    //     $packages = Package::with('activeFeatures')->get();
+    //     return view('pages.order.management', compact('options', 'orders', 'packages'));
+    // }
 
     public function updatePlan(Request $request, $id)
     {

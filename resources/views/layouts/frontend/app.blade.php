@@ -13,7 +13,7 @@
 
 <body class="relative overflow-x-hidden min-h-screen" x-data>
     {{-- Preloader --}}
-    {{-- @include('layouts.frontend.preloader') --}}
+    @include('layouts.frontend.preloader')
     <div class="" id="tolink-1 mb-auto">
         <div class="top-link"><a href="#tolink-1"><i class="ti-angle-up"></i></a></div>
 

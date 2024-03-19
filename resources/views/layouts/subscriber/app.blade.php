@@ -18,6 +18,8 @@
     <div class="" id="tolink-1">
         <div class="top-link"><a href="#tolink-1"><i class="ti-angle-up"></i></a></div>
 
+        @include('layouts.frontend.header')
+
         <header class="header_area header_area_inner">
             <nav class="navbar navbar-expand-lg menu_one menu_four">
                 <div class="container custom_container p0">

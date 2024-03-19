@@ -51,13 +51,14 @@
                                                             <label class=" text_c f_500">@__('feature/productHistory.images')</label>
                                                             <div class="verify-sub-box">
                                                                 <div class="file-loading">
-                                                                    <x-attach id="fileinput-{{ $history->id }}" data-images="{{$history->images}}"
+                                                                    <x-attach id="fileinput-{{ $history->id }}"
+                                                                        data-images="{{ $history->images }}"
                                                                         class="old-fileinput" required autofocus
                                                                         label="{{ __('feature/productHistory.images') }}"
                                                                         name="image[]" />
-                                                                        {{ dd($history->images) }}
+                                                                    {{-- {{ dd($history->images) }} --}}
                                                                 </div>
-                                                                
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -107,8 +108,6 @@
                                                         <div class="col-xl-2 col-lg-3 col-md-4 col-6">
                                                             <div class="product-history">
                                                                 <img src="{{ $image->url }}">
-                                                                <h6>{{ $image->name }}</h6>
-                                                                <a href="#"></a>
                                                             </div>
                                                         </div>
                                                     @endforeach
@@ -198,18 +197,18 @@
                     }
                 });
                 $(".old-fileinput").each((i, input) => {
-                    let preview = JSON.parse(input.dataset.images).map(image=>{
-                        
+                    let preview = JSON.parse(input.dataset.images).map(image => {
+
                         return `<img src='${image.url}' class='file-preview-image' alt='${image.name}' title='${image.name}'>
                         <p>${image.name}</p>
                         `
                     })
-                    let previewConfig = JSON.parse(input.dataset.images).map(image=>{
-                        
+                    let previewConfig = JSON.parse(input.dataset.images).map(image => {
+
                         return {
                             caption: image.name,
                             width: '120px',
-                            url: "{{route('image.delete')}}",
+                            url: "{{ route('image.delete') }}",
                             key: image.id,
                         }
                     })

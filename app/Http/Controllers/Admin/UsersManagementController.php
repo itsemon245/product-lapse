@@ -112,7 +112,7 @@ class UsersManagementController extends Controller
                 ->where('type', '=', 'subscriber')->latest()->paginate(10);
             return view('pages.users.management', compact('subscribers'));
         } elseif ($request->search == 'all') {
-            $subscribers = User::where('type', 'subscriber')->paginate(10);
+            $subscribers = User::where('type', 'subscriber')->orWhere('type', null)->paginate(10);
             return view('pages.users.management', compact('subscribers'));
         } else {
             $subscribers = User::where('banned_at', !null)
@@ -125,11 +125,23 @@ class UsersManagementController extends Controller
     public function search(Request $request)
     {
         if ($request->search == null) {
-            $subscribers = User::where('type', 'subscriber')->latest()->paginate(10);
+            $subscribers = User::where('type', 'subscriber')->orWhere('type', null)->latest()->paginate(10);
             return view('pages.users.management', compact('subscribers'));
         } else {
-            $subscribers = User::where('name', 'like', '%' . $request->search . '%')
-                ->where('type', '=', 'subscriber')->latest()->paginate(10);
+            $searchTerm = $request->input('search');
+
+            $subscribers = User::where(function ($query) use ($searchTerm) {
+                $query->where('type', 'subscriber')
+                    ->orWhereNull('type');
+            })->when($searchTerm, function ($query) use ($searchTerm) {
+                $query->where(function ($subQuery) use ($searchTerm) {
+                    $subQuery->where('name', 'like', '%' . $searchTerm . '%')
+                        ->orWhere('email', 'like', '%' . $searchTerm . '%')
+                        ->orWhere('phone', 'like', '%' . $searchTerm . '%');
+                });
+            })
+                ->latest()
+                ->paginate(10);
             return view('pages.users.management', compact('subscribers'));
         }
 

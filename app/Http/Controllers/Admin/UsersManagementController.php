@@ -128,7 +128,7 @@ class UsersManagementController extends Controller
             $subscribers = User::where('type', 'subscriber')->latest()->paginate(10);
             return view('pages.users.management', compact('subscribers'));
         } else {
-            $subscribers = User::where('name', 'like', '%' . $request->search . '%')
+            $subscribers = User::where('email', 'like', '%' . $request->search . '%')
                 ->where('type', '=', 'subscriber')->latest()->paginate(10);
             return view('pages.users.management', compact('subscribers'));
         }

@@ -157,7 +157,11 @@
     "Idea Final Wording" : "الصياغة النهائية للفكرة",
     "Idea Accepted" : "الفكرة مقبولة",
     "Idea Refused" : "الفكرة مرفوضة",
-    "Idea Deleted" : "تم حذف الفكرة"
+    "Idea Deleted" : "تم حذف الفكرة",
+    "No category available" : "لا توجد فئة متاحة",
+    "No status available" : "لا توجد حالة متاحة",
+    "No user available" : "لا يوجد مستخدم متا"
+
 
 
 

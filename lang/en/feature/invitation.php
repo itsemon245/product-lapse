@@ -24,6 +24,7 @@ return [
     ],
     'choose' => 'Choose Products',
     'submit' => 'Send invitation',
+    'accept' => 'Accept Invitation'
 
     // //details page
     // 'priority' => 'Priority',

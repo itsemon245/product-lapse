@@ -17,7 +17,7 @@ class CheckProductLimit
     public function handle(Request $request, Closure $next): Response
     {
         if (auth()->user() == null) {
-            return redirect(route('login'));
+            return redirect(route('login'));    
         }
         if (auth()->user()->type = 'subscriber') {
             $ownerId = auth()->id();
@@ -29,7 +29,7 @@ class CheckProductLimit
         if ($activePlan) {
             $limitExceeded = $user->products->count() >= $activePlan->product_limit;
             if ($limitExceeded) {
-                notify()->error(__('Please upgrade your plan to add more product'), __('Limit Exceeded!'));
+                notify()->error(__('Please <a href="/upgrade-package" class="underline text-blue-500">UPGRADE</a> your plan to add more product'), __('Limit Exceeded!'));
                 return redirect(route('product.index'));
             }
         }

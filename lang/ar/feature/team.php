@@ -25,7 +25,8 @@ return [
     ],
     'choose' => 'اختر المنتجات',
     'submit' => 'إضافة مستخدم',
-
+    //Edit page
+    'edit' => 'تعديل الدعوة',
     // //details page
     // 'version' => 'Release version',
     // 'date' => 'Release date',

@@ -61,6 +61,69 @@ class SelectSeeder extends Seeder
             ],
         ]);
         Select::create([
+            'model_type' => Feature::IDEA->value,
+            'type' => SelectType::STAGE->value,
+            'color' => Colors::cases()[random_int(0,2)]->value,
+            'value' => [
+                'en' => 'New',
+                'ar' => 'جديد',
+            ],
+        ]);
+        Select::create([
+            'model_type' => Feature::IDEA->value,
+            'type' => SelectType::STAGE->value,
+            'color' => Colors::cases()[random_int(0,2)]->value,
+            'value' => [
+                'en' => 'Evaluate',
+                'ar' => 'يقيم',
+            ],
+        ]);
+        Select::create([
+            'model_type' => Feature::IDEA->value,
+            'type' => SelectType::STAGE->value,
+            'color' => Colors::cases()[random_int(0,2)]->value,
+            'value' => [
+                'en' => 'Discuss',
+                'ar' => 'يناقش',
+            ],
+        ]);
+        Select::create([
+            'model_type' => Feature::IDEA->value,
+            'type' => SelectType::STAGE->value,
+            'color' => Colors::cases()[random_int(0,2)]->value,
+            'value' => [
+                'en' => 'Final working',
+                'ar' => 'العمل النهائي',
+            ],
+        ]);
+        Select::create([
+            'model_type' => Feature::IDEA->value,
+            'type' => SelectType::STAGE->value,
+            'color' => Colors::cases()[random_int(0,2)]->value,
+            'value' => [
+                'en' => 'Accepted',
+                'ar' => 'قبلت',
+            ],
+        ]);
+        Select::create([
+            'model_type' => Feature::IDEA->value,
+            'type' => SelectType::STAGE->value,
+            'color' => Colors::cases()[random_int(0,2)]->value,
+            'value' => [
+                'en' => 'Refused',
+                'ar' => 'رفض',
+            ],
+        ]);
+        Select::create([
+            'model_type' => Feature::IDEA->value,
+            'type' => SelectType::STAGE->value,
+            'color' => Colors::cases()[random_int(0,2)]->value,
+            'value' => [
+                'en' => 'Deleted',
+                'ar' => 'تم الحذف',
+            ],
+        ]);
+        Select::create([
             'model_type' => Feature::TASK->value,
             'type' => SelectType::STATUS->value,
             'color' => Colors::cases()[random_int(0,2)]->value,

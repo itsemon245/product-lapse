@@ -94,9 +94,9 @@ class PermissionSeeder extends Seeder
         }
 
         $rolesForOtherPermission = [
-            'account holder'            => [ 'delete comment', 'add member', 'delete member', 'send invitation' ],
-            'product manager'           => [ 'delete comment', 'add member', 'delete member', 'send invitation' ],
-            'assistant product manager' => [ 'delete comment', 'add member', 'delete member', 'send invitation' ],
+            'account holder'            => [ 'delete comment', 'add member', 'delete member', 'update member', 'send invitation' ],
+            'product manager'           => [ 'delete comment', 'add member', 'delete member', 'update member', 'send invitation' ],
+            'assistant product manager' => [ 'delete comment', 'add member', 'delete member', 'update member', 'send invitation' ],
          ];
         foreach ($rolesForOtherPermission as $role => $permissions) {
 

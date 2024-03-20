@@ -44,7 +44,7 @@ Route::middleware('guest')->group(function () {
     //Product Invitations
     Route::get('invitation/accept/{token}', [InvitationController::class, 'accept'])->name('invitation.accept');
 
-    Route::post('invitation/password-store', [InvitationController::class, 'passwordStore'])->name('invitation.password-store');
+    Route::post('invitation/password-store/{id}', [InvitationController::class, 'passwordStore'])->name('invitation.password-store');
 });
 
 

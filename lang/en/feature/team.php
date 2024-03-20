@@ -25,16 +25,16 @@ return [
     ],
     'choose' => 'Choose products',
     'submit' => 'Add user',
-
+    //Edit page
+    'edit' => 'Edit invitation',
     // //details page
     // 'version' => 'Release version',
     // 'date' => 'Release date',
     // 'details' => 'Release details',
     // 'working' => 'Working on',
-    // 'update' => 'Update',
+    'update' => 'Update User',
 
-    // //Edit page
-    // 'edit' => 'Edit release info',
+
 
     // //show page
     // 'show' => 'Show release info',

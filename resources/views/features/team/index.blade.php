@@ -35,7 +35,6 @@
 
         <x-slot:list>
             @forelse ($teams as $team)
-                {{-- {{ dd($team) }} --}}
                 <div class="col-md-6">
                     <div class="item lon new">
                         <div class="list_item">
@@ -44,7 +43,9 @@
                             <div class="joblisting_text">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell">
-                                        <h4><a href="#" class="f_500 t_color3"></a>{{ $team->name ?? 'Name' }}</h4>
+                                        <h4 class="mb-0"><a href="#"
+                                                class="f_500 t_color3"></a>{{ $team->name ?? 'Name' }}</h4>
+                                        <p class="mb-0 p-0 h-auto text-green-500">{{ $team->email }}</p>
                                         <ul class="list-unstyled">
                                             <li class="text-capitalize">
                                                 {{ $team?->getRole()?->name ? str($team?->getRole()?->name)->title() : 'Guest' }}
@@ -52,10 +53,10 @@
                                         </ul>
                                     </div>
 
-                                    @can('delete member')
-                                        @if (auth()->id() != $team->id)
-                                            <div class="jobsearch-table-cell">
-                                                <div class="jobsearch-job-userlist">
+                                    <div class="jobsearch-table-cell">
+                                        <div class="jobsearch-job-userlist">
+                                            @if (auth()->id() != $team->id)
+                                                @can('delete member')
                                                     <div class="like-btn">
                                                         <form action="{{ route('team.destroy', $team) }}" method="POST">
                                                             @csrf
@@ -64,10 +65,18 @@
                                                                     class='ti-trash'></i></x-button>
                                                         </form>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        @endif
-                                    @endcan
+                                                @endcan
+                                                @can('update member')
+                                                    <div class="like-btn">
+                                                        <a href="{{ route('team.edit', $team) }}" class="shortlist"
+                                                            title="Edit">
+                                                            <i class="ti-pencil"></i>
+                                                        </a>
+                                                    </div>
+                                                @endcan
+                                            @endif
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

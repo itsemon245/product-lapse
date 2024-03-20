@@ -23,8 +23,7 @@
 
         <x-slot:filter>
             <h5>Status</h5>
-            <form method="get" action="{{ route('admin.order.search') }}">
-                @csrf
+            <form method="get" action="{{ route('admin.order.index') }}">
                 <select onchange="this.form.submit()" name="search" class="selectpickers selectpickers2">
                     <option value="">@__('filter.all')</option>
                     @forelse ($options as $opt)
@@ -61,11 +60,11 @@
                                                 class="f_500 t_color3">{{ $order->package->name->{app()->getLocale()} . ' ' . __('Order by') . ' ' . $user->name }}</a>
                                         </h4>
                                         <ul class="list-unstyled">
-                                            <li> Status: <span class="p_color4">{{ $order->status }}</span> </li>
-                                            <li> Amount: <span class="p_color4">{{ $order->amount }}</span> </li>
+                                            <li> {{ __('Status:') }} <span class="p_color4">{{ $order->status }}</span> </li>
+                                            <li> {{ __('Amount:') }} <span class="p_color4">{{ $order->amount }}</span> </li>
                                             @if ($order->plan)
                                                 <li>
-                                                    Expiration date <span
+                                                    {{ __('Expiration date') }} <span
                                                         class="p_color4">{{ \Carbon\Carbon::parse($order->plan->expired_at)->format('l, j F Y') }}</span>
                                                 </li>
                                             @endif
@@ -86,12 +85,12 @@
                                             </form>
                                         </div>
                                     </div>
-                                    <div class="jobsearch-table-cell">
+                                    {{-- <div class="jobsearch-table-cell">
                                         <div class="jobsearch-job-userlist">
                                             <a href="#" title="edit" data-toggle="modal" data-target="#myModal1"
                                                 data-id="{{ $order->plan->id }}"><i class="ti-pencil"></i></a>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>

@@ -8,6 +8,7 @@ use App\Enums\SelectType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SelectRequest;
 use App\Models\Select;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class SelectController extends Controller
@@ -18,11 +19,17 @@ class SelectController extends Controller
         return view('features.select.index', compact('selects'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        $features = Feature::cases();
+        $features = Feature::forSelect();
         $types = SelectType::cases();
         $colors = Colors::cases();
+
+        if ($request->has('model_type')) {
+            
+            $types = SelectType::map($request->query('model_type'));
+
+        }
         return view('features.select.create', compact('features', 'types', 'colors'));
     }
 
@@ -51,7 +58,7 @@ class SelectController extends Controller
 
     public function edit(Select $select)
     {
-        $features = Feature::cases();
+        $features = Feature::forSelect();
         $types = SelectType::cases();
         $colors = Colors::cases();
         return view('features.select.edit', compact('select', 'features', 'types', 'colors'));

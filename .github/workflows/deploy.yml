@@ -20,7 +20,6 @@ jobs:
           export GIT_CURL_VERBOSE=1
           git stash -u
           git pull origin main
-          composer update
           php artisan optimize:clear
           php artisan event:cache
           php artisan route:cache

@@ -22,6 +22,8 @@ class TeamInvitationRequest extends FormRequest
             'role'   => 'required|string|max:255|exists:roles,name',
             'task'       => 'sometimes|required|string|max:255',
             'products'   => 'required',
+            'update_token' => 'sometimes',
+            'resend_invitation'=> 'sometimes'
          ];
     }
 }

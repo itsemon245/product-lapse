@@ -2,7 +2,7 @@
 @section('main')
     <x-feature.show>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => @__('feature/product.info.title'), 'route' => route('product.info')]]" />
+            <x-breadcrumb :list="[['label' => @__('feature/product.info.title'), 'route' => route('product.info', $data->id)]]" />
         </x-slot:breadcrumb>
 
 

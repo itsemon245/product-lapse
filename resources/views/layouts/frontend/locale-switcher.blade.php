@@ -19,7 +19,7 @@
 
 
         </span>
-        <input type="checkbox" name="toggle_locale" class="sr-only peer" @checked(app()->getLocale() == 'ar')>
+        <input onchange="this.form.submit()" type="checkbox" name="toggle_locale" class="sr-only peer" @checked(app()->getLocale() == 'ar')>
         <div
             class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:end-5 rtl:after:start-6 rtl:peer-checked:after:end-0 peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
         </div>
@@ -43,43 +43,3 @@
         </span>
     </label>
 </form>
-
-@push('scripts')
-    <script>
-        $(document).ready(function() {
-            let form = $('#locale-switch-form')
-            let toggle = $('#locale-switch')
-            let input = toggle.find('input[name="toggle_locale"]')
-            input.on('change', (e) => {
-                form.submit()
-                // let html = $('html')
-                // let input = $(e.target)
-                // let locale = input.val()
-                // let dir = input.data('dir')
-                // html.attr('lang', locale)
-                // html.attr('dir', dir)
-
-                // $.ajax({
-                //     type: "post",
-                //     url: "{{ route('lang.toggle') }}",
-                //     data: {
-                //         'locale': locale
-                //     },
-                //     headers: {
-                //         'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                //     },
-                //     success: function(response) {
-                //         console.log(response)
-                //     }
-                // });
-                // if (locale == 'en') {
-                //     input.val('ar')
-                //     input.data('dir', 'rtl')
-                // } else {
-                //     input.val('en')
-                //     input.data('dir', 'ltr')
-                // }
-            })
-        });
-    </script>
-@endpush

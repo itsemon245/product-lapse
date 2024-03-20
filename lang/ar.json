@@ -160,7 +160,28 @@
     "Idea Deleted" : "تم حذف الفكرة",
     "No category available" : "لا توجد فئة متاحة",
     "No status available" : "لا توجد حالة متاحة",
-    "No user available" : "لا يوجد مستخدم متا"
+    "No user available" : "لا يوجد مستخدم متا",
+    "Support ticket List" : "قائمة تذاكر الدعم",
+    "Add ticket" : "أضف تذكرة",
+    "Search for ticket" : "البحث عن تذكرة",
+    "Report name" : "تقرير اسم",
+    "Classification" : "تصنيف",
+    "No classification available" : "لا يوجد تصنيف متاح",
+    "Priority" : "أولوية",
+    "Ticket status" : "حالة التذكرة",
+    "Ticket description" : "وصف التذكرة",
+    "Administrator" : "مدير",
+    "Required completion date" : "تاريخ الانتهاء المطلوب",
+    "Ticket details" : "تفاصيل التذكرة",
+    "End date" : "تاريخ الانتهاء",
+    "Change request details" : "تغيير تفاصيل الطلب",
+    "Change" : "يتغير",
+    "Update Support Status" : "تحديث حالة الدعم",
+    "Edit ticket" : "تحرير التذكرة",
+    "No type available" : "لا يوجد نوع متاح",
+    "URL" : "عنوان",
+    "Choose Files" : "اختر الملفات"
+ 
 
 
 

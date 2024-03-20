@@ -1,8 +1,8 @@
-@extends('layouts.subscriber.app', ['title' => @__('feature/support.title')])
+@extends('layouts.subscriber.app', ['title' => @__('Support ticket List')])
 @section('main')
     <x-feature.index>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => @__('feature/support.title'), 'route' => route('support.index')]]" />
+            <x-breadcrumb :list="[['label' => @__('Support ticket List'), 'route' => route('support.index')]]" />
         </x-slot:breadcrumb>
         <x-slot:search>
             <form method="GET" hx-get="{{ route('support.search') }}" hx-trigger="submit" hx-target="#search-results"
@@ -11,7 +11,7 @@
                 <input type="hidden" name="columns[]" value="classification">
                 <input type="hidden" name="model" value="support">
                 <input type="search" name="search" class="form-control widget_input"
-                    placeholder="{{ __('feature/support.search') }}" hx-vals="#search-results">
+                    placeholder="{{ __('Search for ticket') }}" hx-vals="#search-results">
                 <button type="submit"><i class="ti-search"></i></button>
             </form>
         </x-slot:search>
@@ -19,12 +19,12 @@
             @can('create support')
                 <x-button type="link" href="{{ route('support.create') }}">
                     <i class="ti-plus"></i>
-                    @__('feature/support.add')
+                    @__('Add ticket')
                 </x-button>
             @endcan
         </x-slot:actions>
         <x-slot:filter>
-            <h5>@__('feature/support.showing')</h5>
+            <h5>@__('Status')</h5>
             <x-filter :route="route('support.search')" :columns="['status']" model="support" :options="$statuses" />
         </x-slot:filter>
 

@@ -1,5 +1,5 @@
 {
-    "Idea New": "ar",
+    "Idea New": "فكرة جديدة",
     "Home": "الرئيسية",
     "About us": "من نحن",
     "Features": "المميزات",
@@ -127,14 +127,14 @@
     "Update plan": "تحديث الخطة",
     "Select Package": "حدد الحزمة",
     "Expiration Date": "تاريخ الانتهاء",
-    "Create Password": "Create Password Ar",
-    "Cofirm Password": "Cofirm Password Ar",
-    "Not Accepted yet":"Not Accepted yet ar",
-    "Accepted at": "Accepted at ar",
-    "Resend Invitation": "Resend Invitation ar",
-    "Update Token": "Update Token ar",
-    "Options": "Options ar",
-    "All": "All ar",
+    "Create Password": "إنشاء كلمة المرور",
+    "Cofirm Password": "تأكيد كلمة المرور",
+    "Not Accepted yet":"لم يتم قبوله بعد",
+    "Accepted at": "مقبول في",
+    "Resend Invitation": "اعادة ارسال الدعوة",
+    "Update Token": "تحديث الرمز",
+    "Options": "خيارات",
+    "All": "الجميع",
     "Confirm Registration" : "تأكيد التسجيل",
     "Verify Email" : "التحقق من البريد الإلكتروني",
     "Resend Verification Email" : "إعادة ارسال بريد التحقق",
@@ -143,7 +143,22 @@
     "Amount:" : "كمية:",
     "Expiration date" : "تاريخ انتهاء الصلاحية",
     "No stage available" : "لا توجد مرحلة متاحة",
-    "No priority available" : "لا توجد أولوية متاحة"
+    "No priority available" : "لا توجد أولوية متاحة",
+    "Limited Features" : "ميزات محدودة",
+    "All Features" : "كل المميزات",
+    "year" : "سنة",
+    "No items to filter" : "لا توجد عناصر لتصفيتها",
+    "Choose one" : "اختر واحدة",
+    "No stages available" : "لا توجد مراحل متاحة",
+    "No categories available" : "لا توجد فئات متاحة",
+    "Priority :" : "أولوية :",
+    "Idea Evaluate" : "تقييم الفكرة",
+    "Idea Discuss" : "مناقشة الفكرة",
+    "Idea Final Wording" : "الصياغة النهائية للفكرة",
+    "Idea Accepted" : "الفكرة مقبولة",
+    "Idea Refused" : "الفكرة مرفوضة",
+    "Idea Deleted" : "تم حذف الفكرة"
+
 
 
 }

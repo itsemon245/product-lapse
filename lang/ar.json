@@ -137,7 +137,12 @@
     "Confirm Registration" : "تأكيد التسجيل",
     "Verify Email" : "التحقق من البريد الإلكتروني",
     "Resend Verification Email" : "إعادة ارسال بريد التحقق",
-    "Log Out" : "تسجيل خروج"
+    "Log Out" : "تسجيل خروج",
+    "Status:" : "حالة:",
+    "Amount:" : "كمية:",
+    "Expiration date" : "تاريخ انتهاء الصلاحية",
+    "No stage available" : "لا توجد مرحلة متاحة",
+    "No priority available" : "لا توجد أولوية متاحة"
 
 
 }

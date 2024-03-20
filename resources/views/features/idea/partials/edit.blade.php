@@ -43,14 +43,12 @@
                         <x-select-input label="{{ __('feature/idea.label.priority') }}" id="priority"
                             placeholder="{{ __('feature/idea.label.priority') }}" name="priority" required autofocus>
 
-                            @forelse ($priorities as $priority)
+                            @foreach ($priorities as $priority)
                                 <option value="{{ $priority->value->{app()->getLocale()} }}"
                                     @if ($idea->priority == $priority->value->{app()->getLocale()} || $priority->value->{app()->getLocale()} == old('priority')) selected @endif>
                                     {{ $priority->value->{app()->getLocale()} }}
                                 </option>
-                            @empty
-                                <option disabled>No Priority available</option>
-                            @endforelse
+                            @endforeach
 
                         </x-select-input>
                     </div>

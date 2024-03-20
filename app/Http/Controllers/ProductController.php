@@ -189,7 +189,7 @@ class ProductController extends Controller
                 'name'    => @__('productHome.product-info'),
                 'counter' => null,
                 'icon'    => 'img/website.png',
-                'route'   => route('product.info'),
+                'route'   => route('product.info', $product),
              ],
             'product-history'       => [
                 'name'    => @__('productHome.product-history'),

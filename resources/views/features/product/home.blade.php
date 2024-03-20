@@ -7,10 +7,10 @@
                 <div class="col-lg-12 col-md-12 products-order2">
                     <div class="shop_menu_left d-flex align-items-center justify-content-end">
                         <h5>@__('Product')</h5>
-                        <form method="get" action="{{ route('product.home.filter') }}">
-                            <select onchange="this.form.submit()" name="product_id" class="selectpickers selectpickers2">
+                        <form id="product-filter-form" method="get" action="{{ route('product.show',$product) }}">
+                            <select id="product-select" class="selectpickers selectpickers2">
                                 @forelse ($products as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    <option value="{{ $item->id }}" @selected(request()->product_id == $item->id || $product->id == $item->id)>{{ $item->name }}</option>
                                 @empty
                                     <option disabled>@__('productHome.choose')</option>
                                 @endforelse
@@ -68,3 +68,18 @@
         </div>
     </section>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function () {
+            $('#product-select').on('change', function(e){
+                console.log('changed')
+                let value = e.target.value
+                let url = "{{route('product.show', ':ID')}}";
+                url = url.replace(':ID', value)
+                $('#product-filter-form').attr('action', url)
+                $('#product-filter-form').submit()
+            })
+        });
+    </script>
+@endpush

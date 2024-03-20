@@ -32,7 +32,7 @@ return [
     // 'date' => 'Release date',
     // 'details' => 'Release details',
     // 'working' => 'Working on',
-    // 'update' => 'Update',
+    'update' => 'Update User',
 
 
 

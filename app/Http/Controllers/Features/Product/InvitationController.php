@@ -98,7 +98,7 @@ class InvitationController extends Controller
         request()->session()->regenerateToken();
         $id = base64_decode($id);
 
-        $invitation = Invitation::find($id);
+        $invitation = Invitation::withoutGlobalScope(OwnerScope::class)->find($id);
         // dd($invitation);
         if ($invitation == null) {
             notify()->error('Invitation expired or invalid token!');
@@ -117,6 +117,7 @@ class InvitationController extends Controller
             'type'              => 'member',
          ]);
         $this->assignToUser($invitation, $user);
+        Auth::login($user, true);
 
         return redirect()->route('login')->with('success', 'Password created successfully');
     }

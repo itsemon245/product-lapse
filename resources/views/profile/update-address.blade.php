@@ -2,7 +2,7 @@
 @section('main')
     <x-feature.create>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => @__('profile.address.update-address'), 'route' => route('product.info')]]" />
+            <x-breadcrumb :list="[['label' => @__('profile.address.update-address'), 'route' => '']]" />
         </x-slot:breadcrumb>
         <x-slot:from>
 

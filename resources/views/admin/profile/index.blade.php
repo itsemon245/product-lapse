@@ -3,7 +3,7 @@
 @section('main')
 <x-feature.create>
     <x-slot:breadcrumb>
-        <x-breadcrumb :list="[['label' => @__('profile.profile.info'), 'route' => route('product.info')]]" />
+        <x-breadcrumb :list="[['label' => @__('profile.profile.info'), 'route' => '']]" />
     </x-slot:breadcrumb>
     <x-slot:from>
         {{-- {{ dd($user) }} --}}

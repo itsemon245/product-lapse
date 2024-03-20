@@ -180,7 +180,17 @@
     "Edit ticket" : "تحرير التذكرة",
     "No type available" : "لا يوجد نوع متاح",
     "URL" : "عنوان",
-    "Choose Files" : "اختر الملفات"
+    "Choose Files" : "اختر الملفات",
+    "Are sure of the deleting process ?" : "هل أنت متأكد من عملية الحذف ؟",
+    "Yes" : "نعم",
+    "You are not allowed to visit this part!" : "غير مسموح لك بزيارة هذا الجزء!",
+    "Please update your billing address first!" : "يرجى تحديث عنوان إرسال الفواتير الخاص بك أولا!",
+    "Your plan has been expired!" : "لقد انتهت صلاحية خطتك!",
+    "You are not authorized!" : "أنك غير مخول!",
+    "Restricted Area" : "منطقة محظورة",
+    "You need to purchase at least a one-year package to obtain the certificate!" : "تحتاج إلى شراء حزمة مدتها عام واحد على الأقل للحصول على الشهادة!",
+    "Please read the conditions for obtaining the certificate to learn more" : "يرجى قراءة شروط الحصول على الشهادة لمعرفة المزيد",
+    "ou need to add data for at least one product with all other data to obtain the certificate!" : "يجب عليك إضافة بيانات منتج واحد على الأقل مع جميع البيانات الأخرى للحصول على الشهادة!"
  
 
 

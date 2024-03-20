@@ -17,8 +17,8 @@
                             value="{{ $report->name ?? old('name') }}" required autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-select-input label="{{ __('feature/report.label.type') }}" id="type"
-                            placeholder="Choose one" name="type" required autofocus>
+                        <x-select-input label="{{ __('feature/report.label.type') }}" id="type" :placeholder="__('feature/report.placeholder.select-type')"
+                            name="type" required autofocus>
                             @forelse ($types as $type)
                                 <option value="{{ $type->value->{app()->getLocale()} }}"
                                     @unless ($report->type != $type->value->{app()->getLocale()} || $type->value->{app()->getLocale()} == old('type')) selected @endunless>

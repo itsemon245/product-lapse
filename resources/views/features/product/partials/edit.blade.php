@@ -19,9 +19,8 @@
                                     :value="$product->name" autofocus />
                             </div>
                             <div class="form-group text_box col-lg-4 col-md-6">
-                                <x-select-input :label="__('feature/product.label.stage')" id="stage" placeholder="Choose one" name="stage"
-                                    autofocus>
-                                    @isset ($stages)
+                                <x-select-input :label="__('feature/product.label.stage')" id="stage" :placeholder="__('feature/product.placeholder.select-stage')" name="stage" autofocus>
+                                    @isset($stages)
                                         @forelse ($stages as $stage)
                                             <option value="<?= $stage->value->{app()->getLocale()} ?>"
                                                 @selected($stage->value->{app()->getLocale()} == $product->stage)>
@@ -39,9 +38,9 @@
                                     :value="$product->url" autofocus />
                             </div>
                             <div class="form-group text_box col-lg-6 col-md-6">
-                                <x-select-input :label="__('feature/product.label.category')" id="category" placeholder="Choose one" name="category"
+                                <x-select-input :label="__('feature/product.label.category')" id="category" :placeholder="__('feature/product.placeholder.select-category')" name="category"
                                     autofocus>
-                                    @isset ($categories)
+                                    @isset($categories)
                                         @forelse ($categories as $category)
                                             <option value="<?= $category->value->{app()->getLocale()} ?>"
                                                 @selected($category->value->{app()->getLocale()} == $product->category)>
@@ -70,8 +69,10 @@
                         </div>
 
                         <div class="d-flex align-items-center text-center">
-                            <x-button name="{{ __('feature/product.submit') }}" type="submit">{{  __('feature/product.edit') }}</x-button>
-                            <x-button type="link" href="{{route('product.index')}}" color="secondary">{{  __('feature/product.cancel') }}</x-button>
+                            <x-button name="{{ __('feature/product.submit') }}"
+                                type="submit">{{ __('feature/product.edit') }}</x-button>
+                            <x-button type="link" href="{{ route('product.index') }}"
+                                color="secondary">{{ __('feature/product.cancel') }}</x-button>
                         </div>
                     </form>
                 </x-slot:from>

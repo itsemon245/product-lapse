@@ -40,7 +40,7 @@
                             placeholder="Choose one" name="priority" required autofocus>
                             @if ($priorities)
                                 @forelse ($priorities as $priority)
-                                    <option value="<?= $priority->value->{app()->getLocale()} ?> " @selected($priority->value->{app()->getLocale()} == old('priority')) >
+                                    <option value="{{$priority->id}}" @selected($priority->id == old('priority')) >
                                         <?= $priority->value->{app()->getLocale()} ?>
                                     </option>
                                 @empty

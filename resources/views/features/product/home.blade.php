@@ -37,7 +37,7 @@
                                             @endcan
                                         </h4>
                                         <ul class="list-unstyled">
-                                            <li class="p_color1">{{ $product->stage }}</li>
+                                            <li style="color: {{$product->getSelect('stage')?->color}}">{{ $product->getSelect('stage')?->value->{app()->getLocale()} }}</li>
                                             <li>{{ $product->description }}</li>
                                             <li><a href="{{ route('product.edit', $product->id) }}"
                                                     class="btn_hover agency_banner_btn btn-bg"><i class="ti-pencil"></i>

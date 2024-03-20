@@ -7,6 +7,7 @@ use App\Traits\HasComments;
 use App\Traits\HasCreator;
 use App\Traits\HasImages;
 use App\Traits\HasOwner;
+use App\Traits\HasSelects;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Product extends Model
 {
-    use HasFactory, HasImages, HasComments, HasOwner, HasCreator, CanSendNotifications;
+    use HasFactory, HasImages, HasSelects, HasComments, HasOwner, HasCreator, CanSendNotifications;
 
     protected $guarded = [  ];
     public function user()

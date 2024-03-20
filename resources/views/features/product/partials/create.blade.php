@@ -21,7 +21,7 @@
                             autofocus>
                             @if ($stages)
                                 @forelse ($stages as $category)
-                                    <option value="<?= $category->value->{app()->getLocale()} ?>"
+                                    <option value="{{$category->id}}"
                                         @selected(old('stage') == $category->value->{app()->getLocale()})>
                                         <?= $category->value->{app()->getLocale()} ?>
                                     </option>
@@ -41,7 +41,7 @@
                             autofocus>
                             @if ($categories)
                                 @forelse ($categories as $category)
-                                    <option value="<?= $category->value->{app()->getLocale()} ?>"
+                                    <option value="{{$category->id}}"
                                         @selected(old('category') == $category->value->{app()->getLocale()})>
                                         <?= $category->value->{app()->getLocale()} ?>
                                     </option>

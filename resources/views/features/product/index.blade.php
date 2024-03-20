@@ -45,8 +45,7 @@
                                         <h4><a href="{{ route('product.show', $product) }}"
                                                 class="f_500 t_color3">{{ $product->name }}</a></h4>
                                         <ul class="list-unstyled">
-                                            <li class="p_color1">{{ $product->category }}</li>
-                                            <li>{{ str($product->stage) }}</li>
+                                            @include('components.feature-select-list', ['model'=> $product])
                                             <li class="">
                                                 {{ \Carbon\Carbon::parse($product->created_at)->format('l, j F Y') }}</li>
                                         </ul>

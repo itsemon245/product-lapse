@@ -44,8 +44,8 @@
                             placeholder="{{ __('feature/idea.label.priority') }}" name="priority" required autofocus>
 
                             @forelse ($priorities as $priority)
-                                <option value="{{ $priority->value->{app()->getLocale()} }}"
-                                    @if ($idea->priority == $priority->value->{app()->getLocale()} || $priority->value->{app()->getLocale()} == old('priority')) selected @endif>
+                                <option value="{{ $priority->id }}"
+                                    @if ($priority->id == old('priority') || $idea->priority == $priority->id) selected @endif>
                                     {{ $priority->value->{app()->getLocale()} }}
                                 </option>
                             @empty

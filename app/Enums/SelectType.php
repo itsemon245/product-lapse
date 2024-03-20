@@ -18,7 +18,6 @@ enum SelectType: string
     {
         $map = [
             Feature::IDEA->value => [
-                SelectType::STAGE,
                 SelectType::PRIORITY,
             ],
             Feature::TASK->value => [

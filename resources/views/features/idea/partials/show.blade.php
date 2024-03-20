@@ -8,7 +8,7 @@
 
         <x-slot:details>
             <div class="container mb_20">
-                <ul class="step d-flex flex-nowrap">
+            <ul class="step d-flex flex-nowrap">
                     @foreach ($stages as $stage)
                         <li class="step-item {{ $idea->stage == $stage->value ? 'active' : '' }}">
                             <a href="#" class="">@lang('Idea ' . $stage->value)</a>
@@ -59,12 +59,12 @@
                                                 autofocus>
 
                                                 @forelse ($priorities as $priority)
-                                                    <option value="{{ $priority->value->{app()->getLocale()} }}"
-                                                        @if ($idea->priority == $priority->value->{app()->getLocale()}) selected @endif>
+                                                    <option value="{{ $priority->id }}"
+                                                        @if ($idea->priority == $priority->id ) selected @endif>
                                                         {{ $priority->value->{app()->getLocale()} }}
                                                     </option>
                                                 @empty
-                                                    <option disabled>No Priority available</option>
+                                                    <option disabled>@__("No Priority available")</option>
                                                 @endforelse
 
                                             </x-select-input>
@@ -75,7 +75,7 @@
                                     </form>
                                 </div>
                             @else
-                                <h6 class="title2 the-priority">Priority : <span>{{ $idea->priority }}</span></h6>
+                                <h6 class="title2 the-priority">@lang("Priority") : <span>{{ $idea->priority }}</span></h6>
                             @endcan
 
                             @can('create change')

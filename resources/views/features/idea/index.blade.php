@@ -45,7 +45,7 @@
                                         </h4>
                                         <ul class="list-unstyled">
                                             <li class="p_color4">{{ $idea->owner }}</li>
-                                            <li class="p_color4"> @__($idea->priority) </li>
+                                            @include('components.feature-select-list', ['model'=> $idea])
                                             <li class="">
                                                 {{ \Carbon\Carbon::parse($idea->created_at)->format('l, j F Y') }}</li>
                                         </ul>

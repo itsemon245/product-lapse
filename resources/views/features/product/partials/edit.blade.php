@@ -23,8 +23,8 @@
                                     autofocus>
                                     @isset ($stages)
                                         @forelse ($stages as $stage)
-                                            <option value="<?= $stage->value->{app()->getLocale()} ?>"
-                                                @selected($stage->value->{app()->getLocale()} == $product->stage)>
+                                            <option value="{{$stage->id}}"
+                                                @selected($stage->id == $product->stage)>
                                                 <?= $stage->value->{app()->getLocale()} ?>
                                             </option>
                                         @empty
@@ -43,8 +43,8 @@
                                     autofocus>
                                     @isset ($categories)
                                         @forelse ($categories as $category)
-                                            <option value="<?= $category->value->{app()->getLocale()} ?>"
-                                                @selected($category->value->{app()->getLocale()} == $product->category)>
+                                            <option value="{{$category->id}}"
+                                                @selected($category->id == $product->category)>
                                                 <?= $category->value->{app()->getLocale()} ?>
                                             </option>
                                         @empty

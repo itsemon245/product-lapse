@@ -15,7 +15,7 @@ class SelectController extends Controller
 {
     public function index()
     {
-        $selects = Select::get();
+        $selects = Select::latest()->paginate();
         return view('features.select.index', compact('selects'));
     }
 

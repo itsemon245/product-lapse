@@ -70,5 +70,8 @@
                 </div>
             @endforeach
         </x-slot:list>
+        <x-slot:pagination>
+            {!! $selects->links() !!}
+        </x-slot:pagination>
     </x-feature.index>
 @endsection

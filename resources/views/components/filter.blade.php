@@ -7,7 +7,7 @@
         <select onchange="this.form.submit()" name="search" class="selectpickers selectpickers2">
             <option selected value="">@__('All')</option>
             @forelse ($options as $opt)
-                <option @selected(request()->query('search') == $opt->value->{app()->getLocale()}) value="<?= $opt->value->{app()->getLocale()} ?>">
+                <option @selected(request()->query('search') == $opt->id) value="<?= $opt->id ?>">
                     <?= $opt->value->{app()->getLocale()} ?></option>
             @empty
                 <option>@__('filter.no-items')</option>

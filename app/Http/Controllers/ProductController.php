@@ -26,7 +26,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products   = User::find(auth()->id())->myProducts()->latest()->paginate(10);
+        $products   = User::find(auth()->id())->myProducts()->latest()->paginate();
         $categories = Select::of('product')->type('category')->get();
         return view('features.product.index', compact('products', 'categories'));
     }

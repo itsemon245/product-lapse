@@ -8,13 +8,14 @@ use App\Traits\HasCreator;
 use App\Traits\HasFile;
 use App\Traits\HasOwner;
 use App\Traits\HasProducts;
+use App\Traits\HasSelects;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Task extends Model
 {
-    use HasFactory, HasFile, HasProducts, HasComments, HasCreator, HasOwner, CanSendNotifications;
+    use HasFactory, HasFile, HasSelects, HasProducts, HasComments, HasCreator, HasOwner, CanSendNotifications;
     protected $guarded = [];
 
     protected $casts = [

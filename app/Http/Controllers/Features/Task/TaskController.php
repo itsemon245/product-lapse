@@ -2,35 +2,30 @@
 
 namespace App\Http\Controllers\Features\Task;
 
+use App\Models\File;
 use App\Models\Idea;
 use App\Models\Task;
 use App\Models\User;
 use App\Models\Select;
 use App\Models\Product;
-use App\Models\File;
+use Illuminate\Http\Request;
 use App\Services\SearchService;
 use App\Http\Requests\TaskRequest;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SearchRequest;
 use Illuminate\Database\QueryException;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class TaskController extends Controller
 {
-
-    public function __construct()
-    {
-        app()->setLocale('en');
-    }
-
 
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $tasks = Product::find(productId())->tasks()->paginate(10);
+        $tasks = Product::find(productId())->tasks()->latest()->paginate(10);
         $priorities = Select::of('task')->type('status')->get();
         return view('features.task.index', compact('tasks', 'priorities'));
     }
@@ -108,7 +103,7 @@ class TaskController extends Controller
         return Storage::download('public/' . $filePath);
     }
 
-    public function changeStatus(TaskRequest $request, Task $task)
+    public function changeStatus(Request $request, Task $task)
     {
         $data = [
             'choose_mvp' => $request->has('choose_mvp') ? true : false,

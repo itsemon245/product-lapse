@@ -45,7 +45,7 @@
                                                 class="f_500 t_color3">{{ $task->name }}</a>
                                         </h4>
                                         <ul class="list-unstyled">
-                                            <li class="p_color3">{{ $task->status }}</li>
+                                            @include('components.feature-select-list', ['model' => $task])
                                             <li class="text-muted">
                                                 {{ \Carbon\Carbon::parse($task->created_at)->format('l, j F Y') }}
                                             </li>

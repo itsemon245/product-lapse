@@ -69,7 +69,7 @@
                             </div>
                         </div>
                         <h6 class="title2 the-priority">@__('feature/task.added') :
-                            <span>{{ str($task->administrator)->title() }}</span>
+                            <span>{{ \App\Models\User::find($task->administrator)->name }}</span>
                         </h6>
                         @can('update task')
                             <form action="{{ route('task.change.status', $task) }}" method="post"
@@ -93,7 +93,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-6">
-                                        <x-modal title="Update Task Status" label="feature/task.working">
+                                        <x-modal title="Update Task Status" :label="$task->getSelect('status')->value->{app()->getLocale()}">
                                             <div>
                                                 <div class="row">
                                                     @forelse ($statuses as $status)
@@ -103,8 +103,8 @@
                                                                     <div class="checkbox remember">
                                                                         <label>
                                                                             <input type="radio" name="status"
-                                                                                value="{{ $status->value->{app()->getLocale()} }}"
-                                                                                @if ($task->status == $status->value->{app()->getLocale()}) checked @endif>
+                                                                                value="{{ $status->id }}"
+                                                                                @if ($task->status == $status->id) checked @endif>
                                                                         </label>
                                                                     </div>
                                                                     <div class="media-body">

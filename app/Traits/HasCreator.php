@@ -25,7 +25,7 @@ trait HasCreator
                 $creatorId = demoSub()->id;
             }
             $model->creator_id = $creatorId;
-            $model->save();
+            $model->saveQuietly();
         });
     }
 }

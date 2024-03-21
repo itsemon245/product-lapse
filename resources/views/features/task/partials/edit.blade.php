@@ -24,8 +24,8 @@
                             placeholder="{{ __('feature/task.label.category') }}" name="category" required autofocus>
 
                             @forelse ($categories as $category)
-                                <option value="{{ $category->value->{app()->getLocale()} }}"
-                                    @if ($task->category == $category->value->{app()->getLocale()} || $category->value->{app()->getLocale()} == old('category') ) selected @endif>
+                                <option value="{{ $category->id }}"
+                                    @if ($task->category == $category->id || $category->id == old('category') ) selected @endif>
                                     {{ $category->value->{app()->getLocale()} }}
                                 </option>
                             @empty
@@ -38,8 +38,8 @@
                             placeholder="{{ __('feature/task.label.status') }}" name="status" required autofocus>
 
                             @forelse ($statuses as $status)
-                                <option value="{{ $status->value->{app()->getLocale()} }}"
-                                    @if ($task->status == $status->value->{app()->getLocale()} || $status->value->{app()->getLocale()} == old('status')) selected @endif>
+                                <option value="{{ $status->id }}"
+                                    @if ($task->status == $status->id || $status->id == old('status')) selected @endif>
                                     {{ $status->value->{app()->getLocale()} }}
                                 </option>
                             @empty

@@ -2,8 +2,8 @@
 
 return [
     'privacy' => 'سياسة الخصوصية',
-    'title-en' => 'العنوان (الإنجليزية)',
+    'title-en' => 'Title (English)',
     'title-ar' => 'العنوان (عربي)',
-    'body-en' => 'الجسم (الإنجليزية)',
+    'body-en' => 'Body (English)',
     'body-ar' => 'الجسم (عربي)',
 ];

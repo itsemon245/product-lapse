@@ -25,7 +25,7 @@
                                     {{ $classification->value->{app()->getLocale()} }}
                                 </option>
                             @empty
-                                <option disabled>No classification available</option>
+                                <option disabled>@__('No classification available')</option>
                             @endforelse
 
                         </x-select-input>

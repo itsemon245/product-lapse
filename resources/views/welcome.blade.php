@@ -100,7 +100,7 @@
                                         </li>
                                         @if ($package?->validity)
                                             <li><i
-                                                    class="ti-check"></i>{{ $package?->validity . ' ' . trans($package?->unit) }}
+                                                    class="ti-check"></i>{{ trans($package?->validity) . ' ' . trans($package?->unit) }}
                                             </li>
                                         @endif
                                         <li><i

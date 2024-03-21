@@ -25,7 +25,7 @@
                                     {{ $type->value->{app()->getLocale()} }}
                                 </option>
                             @empty
-                                <option disabled>No type available</option>
+                                <option disabled>@__('No type available')</option>
                             @endforelse
                         </x-select-input>
                     </div>

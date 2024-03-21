@@ -30,7 +30,7 @@
                         <x-select-input label="{{ __('feature/idea.label.stage') }}" id="stage" placeholder="Choose one" name="stage" required
                             autofocus>
                             @forelse ($stages as $stage)
-                                <option value="{{ $stage->value->{app()->getLocale()} }}" @selected($stage->value == old('stage')) >{{ $stage->value->{app()->getLocale()} }}</option>
+                                <option value="{{ $stage->value }}" @selected($stage->value == old('stage')) >@__($stage->value)</option>
                             @empty
                                 <option disabled>@__('No stage available')</option>
                             @endforelse

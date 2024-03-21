@@ -29,7 +29,7 @@ class CheckSubscriber
         if ($user->type == 'admin') {
             return redirect()->route('admin');
         }
-        if ($user->activePlan()->first() == null && $user->type == null) {
+        if ($user->activePlan()->first() == null && $user->type != 'member') {
             notify()->warning(__('Your plan has been expired!'));
             return redirect()->route('package.upgrade');
         }

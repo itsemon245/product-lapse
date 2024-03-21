@@ -8,7 +8,7 @@
         <label class="text_c f_500">{{ $label }}</label>
     @endif
     <select {{ $attributes->merge(['class' => 'selectpickers']) }}>
-        <option selected disabled>{{ $placeholder }}</option>
+        <option selected disabled>{{ __($placeholder) }}</option>
         {{ $slot }}
     </select>
     @if ($attributes->has('required'))

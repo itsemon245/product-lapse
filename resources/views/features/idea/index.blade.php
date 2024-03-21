@@ -29,7 +29,7 @@
 
         <x-slot:filter>
             <h5>@__('feature/idea.showing')</h5>
-            <x-filter :route="route('idea.search')" :columns="['stage']" model="idea" :options="$stages" />
+            <x-filter :route="route('idea.search')" :columns="['priority']" model="idea" :options="$priorities" />
         </x-slot:filter>
         <x-slot:list>
             @forelse ($ideas as $idea)

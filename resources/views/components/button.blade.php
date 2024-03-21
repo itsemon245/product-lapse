@@ -45,12 +45,12 @@
                     <!-- Modal body -->
                     <div class="modal-body modal-alert">
                       <div class="modal-img"><img class="mx-auto" src="{{asset('img/bin.png')}}"></div>
-                      <div class="modal-text">Are sure of the deleting process ?</div>
+                      <div class="modal-text">@__("Are sure of the deleting process ?")</div>
                     </div>
                       <div class="modal-footer modal-btns">
                           <div class="payment-btns text-center">
-                              <button type="submit" class="btn_hover agency_banner_btn btn-bg">Yes</button>
-                              <button type="button" class="btn_hover agency_banner_btn btn-bg btn-bg3" data-dismiss="modal"> Cancel</button>
+                              <button type="submit" class="btn_hover agency_banner_btn btn-bg">@__("Yes")</button>
+                              <button type="button" class="btn_hover agency_banner_btn btn-bg btn-bg3" data-dismiss="modal"> @__("Cancel")</button>
                           </div>
                         </div>
                   </div>

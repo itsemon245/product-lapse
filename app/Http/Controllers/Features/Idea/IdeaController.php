@@ -20,10 +20,10 @@ class IdeaController extends Controller
      */
     public function index()
     {
-        $ideas = Product::find(productId())->ideas()->paginate(10);
-        $stages = Select::of('idea')->type('stage')->get();
+        $ideas = Product::find(productId())->ideas()->latest()->paginate(10);
+        $priorities = Select::of('idea')->type('priority')->get();
 
-        return view('features.idea.index', compact('ideas', 'stages'));
+        return view('features.idea.index', compact('ideas', 'priorities'));
     }
 
     /**
@@ -32,8 +32,7 @@ class IdeaController extends Controller
     public function create()
     {
         $priorities = Select::of('idea')->type('priority')->get();
-        $stages     = Select::of('product')->type('stage')->get();
-        // dd($stages->value);
+        $stages     = Stage::cases();
         return view('features.idea.partials.create', compact('priorities', 'stages'));
     }
  
@@ -44,7 +43,7 @@ class IdeaController extends Controller
     {
         $data = $request->except('_token');
         $idea = Idea::create($data);
-        notify()->success(__('Created successfully!'));
+        notify()->success(trans('Created successfully!'));
         return redirect()->route('idea.index');
     }
 
@@ -66,7 +65,7 @@ class IdeaController extends Controller
     {
         $idea->update(['priority' => $request->priority]);
 
-        notify()->success(__('Updated successfully!'));
+        notify()->success(trans('Updated successfully!'));
         return redirect()->route('idea.show', $idea);
     }
 
@@ -100,7 +99,7 @@ class IdeaController extends Controller
         $data = $request->except('_token', '_method');
         $idea->update($data);
 
-        notify()->success(__('Updated successfully!'));
+        notify()->success(trans('Updated successfully!'));
         return redirect()->route('idea.index');
     }
 
@@ -110,7 +109,7 @@ class IdeaController extends Controller
     public function destroy(Idea $idea)
     {
         $idea->delete();
-        notify()->success(__('Deleted successfully!'));
+        notify()->success(trans('Deleted successfully!'));
         return redirect()->route('idea.index');
     }
 

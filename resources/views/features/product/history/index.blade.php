@@ -26,7 +26,7 @@
                                                 @csrf
                                                 @method('PUT')
                                                 <div class="modal-header">
-                                                    <h4 class="modal-title">@__('feature/productHistory.modal-title')</h4>
+                                                    <h4 class="modal-title">@__('feature/productHistory.edit-modal-title')</h4>
                                                     <button type="button" class="close"
                                                         data-dismiss="modal">&times;</button>
                                                 </div>
@@ -56,7 +56,7 @@
                                                                         label="{{ __('feature/productHistory.images') }}"
                                                                         name="image[]" />
                                                                 </div>
-                                                                
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -106,8 +106,6 @@
                                                         <div class="col-xl-2 col-lg-3 col-md-4 col-6">
                                                             <div class="product-history">
                                                                 <img src="{{ $image->url }}">
-                                                                <h6>{{ $image->name }}</h6>
-                                                                <a href="#"></a>
                                                             </div>
                                                         </div>
                                                     @endforeach
@@ -201,12 +199,12 @@
                         
                         return `<img src='${image.url}' class='file-preview-image w-100' alt='${image.name}' title='${image.name}'>`
                     })
-                    let previewConfig = JSON.parse(input.dataset.images).map(image=>{
-                        
+                    let previewConfig = JSON.parse(input.dataset.images).map(image => {
+
                         return {
                             caption: image.name,
                             width: '120px',
-                            url: "{{route('image.delete')}}",
+                            url: "{{ route('image.delete') }}",
                             key: image.id,
                         }
                     })

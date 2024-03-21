@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('selectables', function (Blueprint $table) {
             $table->id();
             $table->morphs('selectable');
-            $table->foreignId('select_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('select_id')->nullable()->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

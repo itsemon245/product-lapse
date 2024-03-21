@@ -1,12 +1,12 @@
-@extends('layouts.subscriber.app', ['title' => 'Select Items'])
+@extends('layouts.subscriber.app', ['title' => __('Select Items')])
 @section('main')
     <x-feature.index>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => 'Select Items', 'route' => route('select.index')]]" />
+            <x-breadcrumb :list="[['label' => __('Select Items'), 'route' => route('select.index')]]" />
         </x-slot:breadcrumb>
         <x-slot:search>
             <form action="#" class="search-form input-group">
-                <input type="searproductch" class="form-control widget_input" placeholder="Search Select Items">
+                <input type="searproductch" class="form-control widget_input" placeholder="{{ __('Search Select Items') }}">
                 <button type="submit"><i class="ti-search"></i></button>
             </form>
 
@@ -15,7 +15,7 @@
         <x-slot:actions>
             <x-button type="link" href="{{ route('select.create') }}">
                 <i class="ti-plus"></i>
-                Add Select Item
+                @__('Add Select Item')
             </x-button>
         </x-slot:actions>
         <x-slot:filter>

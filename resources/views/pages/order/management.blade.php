@@ -22,14 +22,13 @@
         </x-slot:actions>
 
         <x-slot:filter>
-            <h5>Status</h5>
             <form method="get" action="{{ route('admin.order.index') }}">
                 <select onchange="this.form.submit()" name="search" class="selectpickers selectpickers2">
-                    <option value="">@__('filter.all')</option>
+                    <option value="">@__('All')</option>
                     @forelse ($options as $opt)
                         @if ($opt->value != 'draft')
                             <option value="{{ $opt->value }}" @selected(request()->query('search') == $opt->value)>
-                                {{ $opt->name }}
+                                {{ __($opt->name) }}
                             </option>
                         @endif
                     @empty
@@ -79,7 +78,7 @@
                                                 <button type="submit"
                                                     class="{{ $order->status == 'pending' ? '' : 'd-none' }}"
                                                     {{ $order->status == 'pending' ? '' : 'disabled' }}>
-                                                    <i class="ti-check" title="@__('Ban')"></i>
+                                                    <i class="ti-check" ></i>
 
                                                 </button>
                                             </form>

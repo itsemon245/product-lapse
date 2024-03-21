@@ -26,11 +26,13 @@
 
         <x-slot:filter>
             {{-- {{ dd() }} --}}
-            <form method="get" action="{{ route('users.filter') }}">
+            <form method="get" action="{{ route('users.index') }}">
                 <select onchange="this.form.submit()" name="search" class="selectpickers selectpickers2">
-                    <option @selected(true) value="all">@__('filter.all')</option>
-                    <option value="{{ null }}" @selected(request()->query('search') == null)>Active</option>
-                    <option value="{{ !null }} @selected(request()->query('search') == !null) ">Banned</option>
+                    <option selected>@__('All')</option>
+                    <option value="active" @selected(request()->query('search') == 'active')>@__('Active')</option>
+                    <option value="banned" @selected(request()->query('search') == 'banned') ">@__('Banned')</option>
+                    <option value="verified" @selected(request()->query('search') == 'verified')>@__('Verified')</option>
+                    <option value="unverified" @selected(request()->query('search') == 'unverified') ">@__('Unverified')</option>
                 </select>
             </form>
         </x-slot:filter>
@@ -48,12 +50,12 @@
                                                 class="f_500 t_color3">{{ $subscriber->name }}</a>
                                         </h4>
                                         <ul class="list-unstyled">
-                                            @if ($subscriber->type == null)
-                                                <li class="text-danger">Not verified </li>
+                                            @if ($subscriber->email_verified_at == null)
+                                                <li class="text-danger">@__("Unverified") </li>
                                             @else
                                                 <li
                                                     class="{{ $subscriber->banned_at == null ? 'text-success' : 'text-danger' }}">
-                                                    {{ $subscriber->banned_at == null ? 'Active' : 'Banned' }} </li>
+                                                    {{ $subscriber->banned_at == null ? __('Active') : __('Banned') }} </li>
                                             @endif
 
                                             <li class="p_color4">{{ $subscriber->phone }}</li>
@@ -70,9 +72,9 @@
                                                 @csrf
                                                 <button type="submit">
                                                     @if ($subscriber->banned_at == null)
-                                                        <i class="ti-na" title="@__('Ban')"></i>
+                                                        <i class="ti-na" ></i>
                                                     @else
-                                                        <i class="ti-check" title="@__('Unban')"></i>
+                                                        <i class="ti-check" ></i>
                                                     @endif
                                                 </button>
                                             </form>
@@ -88,7 +90,7 @@
                                                         @if ($subscriber->banned_at == null)
                                                             <i class="ti-check" title="@__('Active')"></i>
                                                         @else
-                                                            <i class="ti-check" title="@__('Unactive')"></i>
+                                                            <i class="ti-check" title="@__('Inactive')"></i>
                                                         @endif
                                                     </button>
                                                 </form>

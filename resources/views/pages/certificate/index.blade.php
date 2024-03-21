@@ -23,10 +23,10 @@
     <x-slot:filter>
         <form method="get" action="{{ route('filter.certificate') }}">
             <select onchange="this.form.submit()" name="search" class="selectpickers selectpickers2">
-                <option selected value="">@__('filter.all')</option>
+                <option selected value="">@__('All')</option>
                 @forelse ($statuses as $opt)
-                    <option value="{{ $opt->value }}" @selected(request()->query('search') == $opt->value) >
-                        {{ ucwords($opt->name) }}
+                    <option class="uppercase" value="{{ $opt->value }}" @selected(request()->query('search') == $opt->value) >
+                        {{ trans($opt->name) }}
                      </option>
                 @empty
                     <option>@__('filter.no-items')</option>

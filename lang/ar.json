@@ -203,7 +203,23 @@
     "Deleted successfully!": "حذف بنجاح!",
     "!Created successfully": "تم الإنشاء بنجاح!",
     "!Updated successfully": "تم التحديث بنجاح!",
-    "!Deleted successfully": "حذف بنجاح!"
+    "!Deleted successfully": "حذف بنجاح!",
+    "Package": "حزمة",
+    "View Packages": "عرض الحزم",
+    "View Features": "عرض الميزات",
+    "Certificate": "شهادة",
+    "Intro": "مقدمة",
+    "About Us": "حول",
+    "Frontend": "واجهة الواجهة",
+    "APPROVED": "موافق عليه",
+    "REJECTED": "مرفوض",
+    "Active": "نشط",
+    "Banned": "محظور",
+    "Verified": "تم التحقق",
+    "Unverified": "غير متحقق",
+    "PENDING": "قيد الانتظار",
+    "COMPLETED": "مكتمل",
+    "FAILED": "فشل"
  
 
 

@@ -29,7 +29,7 @@
                                     {{ $category->value->{app()->getLocale()} }}
                                 </option>
                             @empty
-                                <option disabled>No category available</option>
+                                <option disabled>@__('No category available')</option>
                             @endforelse
                         </x-select-input>
                     </div>
@@ -43,7 +43,7 @@
                                     {{ $status->value->{app()->getLocale()} }}
                                 </option>
                             @empty
-                                <option disabled>No status available</option>
+                                <option disabled>@__('No status available')</option>
                             @endforelse
                         </x-select-input>
                     </div>
@@ -96,7 +96,7 @@
                                         {{ $user->name }}
                                     </option>
                                 @empty
-                                    <option disabled>No category available</option>
+                                    <option disabled>@__('No category available')</option>
                                 @endforelse
                             @endif
                         </x-select-input>

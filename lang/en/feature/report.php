@@ -10,15 +10,16 @@ return [
     //add page + edit page
     'label' => [
         'name' => 'Report name',
-        'type' => 'Report type', 
-        'date' => 'Report date', 
+        'type' => 'Report type',
+        'date' => 'Report date',
         'upload' => 'Upload file',
-        'description' => 'Report description', 
+        'description' => 'Report description',
     ],
     'placeholder' => [
         'name' => 'Report name',
-        'type' => 'Report type', 
-        'description' => 'Report description', 
+        'type' => 'Report type',
+        'description' => 'Report description',
+        'select-type' => 'Select report type',
     ],
     'cancel' => 'Cancel',
     'submit' => 'Add report',

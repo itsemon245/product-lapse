@@ -57,7 +57,7 @@
                                     </div>
                                 </div>
                                 <h6 class="title2 the-priority">@lang("Priority") : <span>{{ $idea->getSelect('priority')->value->{app()->getLocale()} }}</span></h6>
-                                <h6 class="title2 the-priority"> @__('Idea owner :') <span>{{ $idea?->creator?->name }}</span></h6>
+                                <h6 class="title2 the-priority"> @__('Idea owner :') <span>{{ $idea?->owner }}</span></h6>
                             </div>
 
                         </div>

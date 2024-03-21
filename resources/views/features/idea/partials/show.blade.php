@@ -64,7 +64,7 @@
                                                         {{ $priority->value->{app()->getLocale()} }}
                                                     </option>
                                                 @empty
-                                                    <option disabled>@__("No Priority available")</option>
+                                                    <option disabled>{{ __('No Priority available') }}</option>
                                                 @endforelse
 
                                             </x-select-input>
@@ -75,7 +75,7 @@
                                     </form>
                                 </div>
                             @else
-                                <h6 class="title2 the-priority">@lang("Priority") : <span>{{ $idea->priority }}</span></h6>
+                                <h6 class="title2 the-priority">@__('Priority :') <span>{{ $idea->priority }}</span></h6>
                             @endcan
 
                             @can('create change')
@@ -104,13 +104,11 @@
                     @endcan
                     <a href="#" class="icon-square icon-square2" title="share" data-toggle="modal"
                         data-target="#myModal1"><i class="ti-sharethis"></i></a>
-
                     <a href="{{ route('pdf.generate', $idea) }}" target="_blank" class="icon-square icon-square3"
                         title="save">
                         <i class="ti-save"></i>
                     </a>
                 </div>
-
             </div>
         </x-slot:profile>
         <x-comments :model="$idea" :comments="$idea->comments" />

@@ -29,9 +29,11 @@
                     <div class="form-group text_box col-lg-12 col-md-12">
                         <x-select-input label="{{ __('feature/idea.label.stage') }}" id="stage" placeholder="Choose one" name="stage" required
                             autofocus>
-                            @foreach ($stages as $stage)
-                                <option value="{{ $stage->value }}" @selected($stage->value == old('stage')) >{{ str($stage->value)->headline() }}</option>
-                            @endforeach
+                            @forelse ($stages as $stage)
+                                <option value="{{ $stage->value->{app()->getLocale()} }}" @selected($stage->value == old('stage')) >{{ $stage->value->{app()->getLocale()} }}</option>
+                            @empty
+                                <option disabled>@__('No stage available')</option>
+                            @endforelse
                         </x-select-input>
                     </div>
 
@@ -44,7 +46,7 @@
                                         <?= $priority->value->{app()->getLocale()} ?>
                                     </option>
                                 @empty
-                                    <option disabled>No priority available</option>
+                                    <option disabled>{{ __('No priority available') }}</option>
                                 @endforelse
                             @endif
                         </x-select-input>

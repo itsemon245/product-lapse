@@ -10,15 +10,16 @@ return [
     //add page + edit page
     'label' => [
         'name' => 'اسم التقرير',
-        'type' => 'نوع التقرير', 
-        'date' => 'تاريخ التقرير', 
+        'type' => 'نوع التقرير',
+        'date' => 'تاريخ التقرير',
         'upload' => 'ارفاق ملف',
-        'description' => 'وصف التقرير', 
+        'description' => 'وصف التقرير',
     ],
     'placeholder' => [
         'name' => 'اسم التقرير',
-        'type' => 'نوع التقرير', 
-        'description' => 'وصف التقرير', 
+        'type' => 'نوع التقرير',
+        'description' => 'وصف التقرير',
+        'select-type' => 'اختر نوع التقرير',
     ],
     'cancel' => 'الغاء',
     'submit' => 'اضف تقرير',

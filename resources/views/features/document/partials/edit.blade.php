@@ -21,14 +21,12 @@
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-select-input label="{{ __('feature/document.label.type') }}" id="type"
                             placeholder="Choose one" name="type" required autofocus>
-                            @forelse ($type as $category)
+                            @foreach ($type as $category)
                                 <option value="{{ $category->value->{app()->getLocale()} }}"
                                     @if ($document->type == $category->value->{app()->getLocale()} || $category->value->{app()->getLocale()} == old('type')) selected @endif>
                                     {{ $category->value->{app()->getLocale()} }}
                                 </option>
-                            @empty
-                                <option disabled>No type available</option>
-                            @endforelse
+                            @endforeach
                         </x-select-input>
 
                     </div>

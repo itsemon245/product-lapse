@@ -13,18 +13,18 @@
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-input-label for="name" value="{{ __('feature/report.label.name') }}" />
                         <x-input id="name" class="block mt-1 w-full" type="text"
-                            placeholder="{{ __('feature/report.placeholder.name') }}" name="name" :value="old('name')" required
-                            autofocus />
+                            placeholder="{{ __('feature/report.placeholder.name') }}" name="name" :value="old('name')"
+                            required autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-select-input label="{{ __('feature/report.label.type') }}" id="type"
-                            placeholder="Choose one" name="type" required autofocus>
+                        <x-select-input label="{{ __('feature/report.label.type') }}" id="type" :placeholder="__('feature/report.placeholder.select-type')"
+                            name="type" required autofocus>
                             @forelse ($types as $type)
                                 <option value="{{ $type->value->{app()->getLocale()} }}" @selected($type->value->{app()->getLocale()} == old('type'))>
                                     {{ $type->value->{app()->getLocale()} }}
                                 </option>
                             @empty
-                                <option disabled>No type available</option>
+                                <option disabled>@__('No type available')</option>
                             @endforelse
                         </x-select-input>
                     </div>
@@ -36,8 +36,8 @@
                         <x-attach label="{{ __('feature/report.label.upload') }}" required name='file' />
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-12">
-                        <x-textarea label="{{ __('feature/report.label.description') }}" required autofocus rows="5" cols="10"
-                            name="description">{{ old('description') }}</x-textarea>
+                        <x-textarea label="{{ __('feature/report.label.description') }}" required autofocus rows="5"
+                            cols="10" name="description">{{ old('description') }}</x-textarea>
                     </div>
 
                 </div>

@@ -26,7 +26,7 @@
                                         <?= $category->value->{app()->getLocale()} ?>
                                     </option>
                                 @empty
-                                    <option disabled>No stages available</option>
+                                    <option disabled>@__('No stages available')</option>
                                 @endforelse
                             @endif
                         </x-select-input>
@@ -46,7 +46,7 @@
                                         <?= $category->value->{app()->getLocale()} ?>
                                     </option>
                                 @empty
-                                    <option disabled>No categories available</option>
+                                    <option disabled>@__('No categories available')</option>
                                 @endforelse
                             @endif
                         </x-select-input>

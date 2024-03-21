@@ -32,7 +32,8 @@ class IdeaController extends Controller
     public function create()
     {
         $priorities = Select::of('idea')->type('priority')->get();
-        $stages = Stage::cases();
+        $stages     = Select::of('product')->type('stage')->get();
+        // dd($stages->value);
         return view('features.idea.partials.create', compact('priorities', 'stages'));
     }
  
@@ -87,7 +88,7 @@ class IdeaController extends Controller
     public function edit(Idea $idea)
     {
         $priorities = Select::of('idea')->type('priority')->get();
-        $stages = Stage::cases();
+        $stages     = Select::of('product')->type('stage')->get();
         return view('features.idea.partials.edit', compact('idea', 'priorities', 'stages'));
     }
 

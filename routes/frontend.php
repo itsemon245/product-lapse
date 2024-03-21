@@ -17,7 +17,6 @@ Route::prefix('frontend')
         Route::post('landing-page-about', [LandingPageController::class, 'updateAbout'])->name('landing.page.update.about');
         Route::post('landing-page-contact', [LandingPageController::class, 'updateContact'])->name('landing.page.update.contact');
     });
-
 Route::prefix('/')
     ->middleware(['auth'])
     ->group(function () {

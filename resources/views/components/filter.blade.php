@@ -10,7 +10,7 @@
                 <option @selected(request()->query('search') == $opt->id) value="<?= $opt->id ?>">
                     <?= $opt->value->{app()->getLocale()} ?></option>
             @empty
-                <option>@__('filter.no-items')</option>
+                <option>@__('No items to filter')</option>
             @endforelse
         </select>
     @else

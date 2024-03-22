@@ -10,8 +10,8 @@ enum Feature: string
     case TASK = 'task';//has select done
     case CHANGE = 'change';//has select done
     case SUPPORT = 'support'; //done
-    case DOCUMENT = 'document';
-    case REPORT = 'report';
+    case DOCUMENT = 'document'; //done
+    case REPORT = 'report'; //done
     case DELIVERY = 'delivery'; //Should be hidden in select
     case RELEASE = 'release'; //Should be hidden in select
     case CERTIFICATE = 'certificate'; //Should be hidden in select

@@ -93,12 +93,12 @@
                                                         </x-slot:trigger>
 
                                                         <div class="form-group text_box col-lg-12">
-                                                            <x-input :value="$packageFeature->name?->en" label="@__("Name(en)")" name="name[en]"
+                                                            <x-input :value="$packageFeature->name?->en" label="{{ __('Name (ar)') }}" name="name[en]"
                                                                 placeholder="name">
                                                             </x-input>
                                                         </div>
                                                         <div class="form-group text_box col-lg-12">
-                                                            <x-input :value="$packageFeature->name?->ar" label="@__("Name(ar)")" name="name[ar]"
+                                                            <x-input :value="$packageFeature->name?->ar" label="{{ __('Name (en)') }}" name="name[ar]"
                                                                 placeholder="name">
                                                             </x-input>
                                                         </div>

@@ -45,8 +45,9 @@
                                                 class="f_500 t_color3">{{ $document->name }}</a>
                                         </h4>
                                         <ul class="list-unstyled">
-                                            <li>
-                                                {{ $document->type }}
+                                            @include('components.feature-select-list', [
+                                                'model' => $document,
+                                            ])
                                             <li class="text-muted">
                                                 {{ \Carbon\Carbon::parse($document->date)->format('l, j F Y') }}
                                             </li>

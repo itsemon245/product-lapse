@@ -22,8 +22,7 @@
                         <x-select-input label="{{ __('feature/document.label.type') }}" id="type"
                             placeholder="Choose one" name="type" required autofocus>
                             @foreach ($type as $category)
-                                <option value="{{ $category->value->{app()->getLocale()} }}"
-                                    @if ($document->type == $category->value->{app()->getLocale()} || $category->value->{app()->getLocale()} == old('type')) selected @endif>
+                                <option value="{{ $category->id }}" @if ($document->type == $category->id || $category->id == old('type')) selected @endif>
                                     {{ $category->value->{app()->getLocale()} }}
                                 </option>
                             @endforeach
@@ -48,7 +47,8 @@
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-input-label for="date" value="{{ __('feature/document.label.date') }}" />
                         <x-input id="date" class="block mt-1 w-full" type="date" name="date"
-                            value="{{ \Carbon\Carbon::parse($document->date)->format('Y-m-d') ?? old('date') }}" required autofocus />
+                            value="{{ \Carbon\Carbon::parse($document->date)->format('Y-m-d') ?? old('date') }}" required
+                            autofocus />
                     </div>
 
                     <div class="form-group text_box col-lg-6 col-md-6">

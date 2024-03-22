@@ -9,7 +9,7 @@ enum Feature: string
     case IDEA = 'idea';//has select done
     case TASK = 'task';//has select done
     case CHANGE = 'change';//has select done
-    case SUPPORT = 'support';
+    case SUPPORT = 'support'; //done
     case DOCUMENT = 'document';
     case REPORT = 'report';
     case DELIVERY = 'delivery'; //Should be hidden in select

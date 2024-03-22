@@ -20,7 +20,7 @@
 
                     <div class="col-lg-6 col-md-6">
                         <h6 class="title2">@__('feature/document.type')</h6>
-                        <p class="f_400 mb-30 text-font">{{ $document->type }}</p>
+                        <p class="f_400 mb-30 text-font">{{ $document->getSelect('type')->value->{app()->getLocale()} }}</p>
                     </div>
                     <div class="col-md-12">
                         <h6 class="title2">@__('feature/document.placeholder.description')</h6>

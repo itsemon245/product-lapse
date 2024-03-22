@@ -5,14 +5,14 @@ use Illuminate\Support\Str;
 
 enum Feature: string
 {
-    case IDEA = 'idea';
-    case TASK = 'task';
-    case CHANGE = 'change';
+    case PRODUCT = 'product';//has select done
+    case IDEA = 'idea';//has select done
+    case TASK = 'task';//has select done
+    case CHANGE = 'change';//has select done
     case SUPPORT = 'support';
     case DOCUMENT = 'document';
-    case DELIVERY = 'delivery'; //Should be hidden in select
     case REPORT = 'report';
-    case PRODUCT = 'product';
+    case DELIVERY = 'delivery'; //Should be hidden in select
     case RELEASE = 'release'; //Should be hidden in select
     case CERTIFICATE = 'certificate'; //Should be hidden in select
     

@@ -41,7 +41,7 @@
                                                 class="f_500 t_color3">{{ $support->name }}</a>
                                         </h4>
                                         <ul class="list-unstyled">
-                                            <li class="p_color1">{{ $support->status }}</li>
+                                            @include('components.feature-select-list', ['model'=>$support])
                                             <li>
                                                 {{ \Carbon\Carbon::parse($support->created_at)->format('l, j F Y') }}
                                             </li>

@@ -15,16 +15,15 @@
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-input-label for="name" value="{{ __('Report name') }}" />
                         <x-input id="name" class="block mt-1 w-full" type="text"
-                            placeholder="{{ __('Report name') }}" name="name"
-                            value="{{ $support->name }}" required autofocus />
+                            placeholder="{{ __('Report name') }}" name="name" value="{{ $support->name }}" required
+                            autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-select-input label="{{ __('Classification') }}" id="type"
-                            placeholder="Choose one" name="classification" required autofocus>
+                        <x-select-input label="{{ __('Classification') }}" id="type" placeholder="Choose one"
+                            name="classification" required autofocus>
 
                             @forelse ($classifications as $classification)
-                                <option value="{{ $classification->value->{app()->getLocale()} }}"
-                                    @if ($support->classification == $classification->value->{app()->getLocale()} || $classification->value->{app()->getLocale()} == old('classification')) selected @endif>
+                                <option value="{{ $classification->id }}" @if ($support->classification == $classification->id || $classification->id == old('classification')) selected @endif>
                                     {{ $classification->value->{app()->getLocale()} }}
                                 </option>
                             @empty
@@ -34,12 +33,11 @@
                         </x-select-input>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-select-input label="{{ __('Priority') }}" id="type"
-                            placeholder="Choose one" name="priority" required autofocus>
+                        <x-select-input label="{{ __('Priority') }}" id="type" placeholder="Choose one" name="priority"
+                            required autofocus>
 
                             @forelse ($priorities as $priority)
-                                <option value="{{ $priority->value->{app()->getLocale()} }}"
-                                    @if ($support->priority == $priority->value->{app()->getLocale()} || $priority->value->{app()->getLocale()} == old('priority')) selected @endif>
+                                <option value="{{ $priority->id }}" @if ($support->priority == $priority->id || $priority->id == old('priority')) selected @endif>
                                     {{ $priority->value->{app()->getLocale()} }}
                                 </option>
                             @empty
@@ -49,12 +47,11 @@
                         </x-select-input>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-select-input label="{{ __('Ticket status') }}" id="type"
-                            placeholder="Choose one" name="status" required autofocus>
+                        <x-select-input label="{{ __('Ticket status') }}" id="type" placeholder="Choose one"
+                            name="status" required autofocus>
 
                             @forelse ($statuses as $status)
-                                <option value="{{ $status->value->{app()->getLocale()} }}"
-                                    @if ($support->status == $status->value->{app()->getLocale()} || $status->value->{app()->getLocale()} == old('status')) selected @endif>
+                                <option value="{{ $status->id }}" @if ($support->status == $status->id || $status->id == old('status')) selected @endif>
                                     {{ $status->value->{app()->getLocale()} }}
                                 </option>
                             @empty
@@ -64,14 +61,13 @@
                         </x-select-input>
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-12">
-                        <x-textarea placeholder="{{ __('fTicket description') }}" rows="5"
-                            cols="10" name="description"
+                        <x-textarea placeholder="{{ __('fTicket description') }}" rows="5" cols="10"
+                            name="description"
                             label="{{ __('Ticket description') }}">{{ $support->description }}</x-textarea>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-select-input label="{{ __('Administrator')}}" id="administrator"
-                            placeholder="{{ __('Administrator') }}" name="administrator"
-                            required autofocus>
+                        <x-select-input label="{{ __('Administrator') }}" id="administrator"
+                            placeholder="{{ __('Administrator') }}" name="administrator" required autofocus>
                             @if ($users)
                                 @forelse ($users as $user)
                                     <option value="{{ $user->id }}"

@@ -14,15 +14,14 @@
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-input-label for="name" value="{{ __('Report name') }}" />
                         <x-input id="name" class="block mt-1 w-full" type="text"
-                            placeholder="{{ __('Report name') }}" name="name" :value="old('name')"
-                            required autofocus />
+                            placeholder="{{ __('Report name') }}" name="name" :value="old('name')" required autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-select-input label="{{ __('Classification') }}" id="type"
-                            placeholder="Choose one" name="classification" required autofocus>
+                        <x-select-input label="{{ __('Classification') }}" id="type" placeholder="Choose one"
+                            name="classification" required autofocus>
 
                             @forelse ($classifications as $classification)
-                                <option value="{{ $classification->value->{app()->getLocale()} }}" @selected($classification->value->{app()->getLocale()} == old('classification'))>
+                                <option value="{{ $classification->id }}" @selected($classification->id == old('classification'))>
                                     {{ $classification->value->{app()->getLocale()} }}
                                 </option>
                             @empty
@@ -32,11 +31,11 @@
                         </x-select-input>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-select-input label="{{ __('Priority') }}" id="type"
-                            placeholder="Choose one" name="priority" required autofocus>
+                        <x-select-input label="{{ __('Priority') }}" id="type" placeholder="Choose one" name="priority"
+                            required autofocus>
 
                             @forelse ($priorities as $priority)
-                                <option value="{{ $priority->value->{app()->getLocale()} }}" @selected($priority->value->{app()->getLocale()} == old('priority'))>
+                                <option value="{{ $priority->id }}" @selected($priority->id == old('priority'))>
                                     {{ $priority->value->{app()->getLocale()} }}
                                 </option>
                             @empty
@@ -46,11 +45,11 @@
                         </x-select-input>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-select-input label="{{ __('Ticket status') }}" id="type"
-                            placeholder="Choose one" name="status" required autofocus>
+                        <x-select-input label="{{ __('Ticket status') }}" id="type" placeholder="Choose one"
+                            name="status" required autofocus>
 
                             @forelse ($statuses as $status)
-                                <option value="{{ $status->value->{app()->getLocale()} }}" @selected($status->value->{app()->getLocale()} == old('status'))>
+                                <option value="{{ $status->id }}" @selected($status->id == old('status'))>
                                     {{ $status->value->{app()->getLocale()} }}
                                 </option>
                             @empty
@@ -60,17 +59,15 @@
                         </x-select-input>
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-12">
-                        <x-textarea required placeholder="{{ __('Ticket description') }}" rows="5"
-                            cols="10" name="description"
-                            label="{{ __('Ticket description') }}"></x-textarea>
+                        <x-textarea required placeholder="{{ __('Ticket description') }}" rows="5" cols="10"
+                            name="description" label="{{ __('Ticket description') }}"></x-textarea>
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-select-input label="{{ __('Administrator') }}" id="administrator"
-                            placeholder="{{ __('Administrator') }}" name="administrator"
-                            required autofocus>
+                            placeholder="{{ __('Administrator') }}" name="administrator" required autofocus>
                             @if ($users)
                                 @forelse ($users as $user)
-                                    <option value="{{ $user->id }}" @selected($user->id == old('administrator') || $user->id == auth()->id()) > 
+                                    <option value="{{ $user->id }}" @selected($user->id == old('administrator') || $user->id == auth()->id())>
                                         {{ $user->name }}
                                     </option>
                                 @empty
@@ -81,7 +78,8 @@
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-input label="{{ __('Required completion date') }}" id="completion_date"
-                            class="block mt-1 w-full" type="date" :value="old('date')" name="completion_date" required autofocus />
+                            class="block mt-1 w-full" type="date" :value="old('date')" name="completion_date" required
+                            autofocus />
                     </div>
                 </div>
                 <div class="d-flex align-items-center text-center">

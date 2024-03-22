@@ -22,7 +22,7 @@
                         <x-select-input label="{{ __('feature/document.label.type') }}" id="type"
                             name="type" required autofocus>
                             @foreach ($type as $category)
-                                <option value="{{ $category->value->{app()->getLocale()} }}" @selected($category->value->{app()->getLocale()} == old('type')) >
+                                <option value="{{ $category->id }}" @selected($category->id == old('type')) >
                                     {{ $category->value->{app()->getLocale()} }}
                                 </option>
                             @endforeach

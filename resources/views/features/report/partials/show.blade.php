@@ -15,7 +15,7 @@
                         </div>
                         <div class="col-md-12">
                             <h6 class="title2">@__('feature/report.classification')</h6>
-                            <p class="f_400 mb-30 text-font">{{ $report->type }}</p>
+                            <p class="f_400 mb-30 text-font"> {{ $report->getSelect('type')->value->{app()->getLocale()} }} </p>
                         </div>
                         <div class="col-md-12">
                             <h6 class="title2">@__('feature/report.details')</h6>
@@ -34,8 +34,7 @@
                 <div class="blog-sidebar box-sidebar">
                     <div class="widget sidebar_widget widget_recent_post mt_60">
                         <div class="media post_author mt_60">
-                            <img class="rounded-circle" src="{{ favicon($creator->image) }}"
-                                alt="">
+                            <img class="rounded-circle" src="{{ favicon($creator->image) }}" alt="">
                             <div class="media-body">
                                 <h5 class=" t_color3 f_size_18 f_500">{{ $creator->name }}</h5>
                             </div>

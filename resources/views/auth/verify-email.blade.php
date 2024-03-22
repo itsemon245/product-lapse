@@ -12,7 +12,7 @@
     <section class="sign_in_area bg_color sec_pad" style="padding-top: 20px">
         <div class="container">
             <div class="bg-yellow-200 text-yellow-500 p-4 mb-4 font-bold">
-                {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
+                {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn"t receive the email, we will gladly send you another.') }}
             </div>
         
             @if (session('status') == 'verification-link-sent')

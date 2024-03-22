@@ -83,7 +83,7 @@
                                                     action="{{ route('package-feature.update', $packageFeature) }}" method="post">
                                                     @csrf
                                                     @method('put')
-                                                    <x-modal id="modal-edit" title="@__("Update Package Feature")">
+                                                    <x-modal id="modal-edit" title="{{__("Update Package Feature")}}">
                                                         <x-slot:trigger>
                                                             <button type="button" class="shortlist" title="Edit"
                                                                 data-toggle="modal" data-target="#modal-edit">
@@ -108,7 +108,7 @@
                                                                 class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">@__("Update")</button>
                                                             <button type="button"
                                                                 class="btn_hover agency_banner_btn btn-bg btn-bg-grey"
-                                                                data-dismiss="modal">@__('Cancel')</button>
+                                                                data-dismiss="modal">{{__('Cancel')}}</button>
                                                         </x-slot:footer>
                                                     </x-modal>
                                                 </form>

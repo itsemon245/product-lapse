@@ -264,6 +264,8 @@
     "Email Unverified": "لم يتم التحقق من البريد الإلكتروني",
     "Subscriber": "مشترك",
     "Popular": "شهير",
-    "Active Feature": "ميزة نشطة"
+    "Active Feature": "ميزة نشطة",
+    "Update Package Feature": "تحديث ميزة الحزمة",
+    "You have been banned!": "لقد تم حظرك!"
 
 }

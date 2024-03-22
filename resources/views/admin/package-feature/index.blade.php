@@ -83,7 +83,7 @@
                                                     action="{{ route('package-feature.update', $packageFeature) }}" method="post">
                                                     @csrf
                                                     @method('put')
-                                                    <x-modal id="modal-edit" title="Update Package Feature">
+                                                    <x-modal id="modal-edit" title="@__("Update Package Feature")">
                                                         <x-slot:trigger>
                                                             <button type="button" class="shortlist" title="Edit"
                                                                 data-toggle="modal" data-target="#modal-edit">
@@ -93,19 +93,19 @@
                                                         </x-slot:trigger>
 
                                                         <div class="form-group text_box col-lg-12">
-                                                            <x-input :value="$packageFeature->name?->en" label="Name(en)" name="name[en]"
+                                                            <x-input :value="$packageFeature->name?->en" label="@__("Name(en)")" name="name[en]"
                                                                 placeholder="name">
                                                             </x-input>
                                                         </div>
                                                         <div class="form-group text_box col-lg-12">
-                                                            <x-input :value="$packageFeature->name?->ar" label="Name(ar)" name="name[ar]"
+                                                            <x-input :value="$packageFeature->name?->ar" label="@__("Name(ar)")" name="name[ar]"
                                                                 placeholder="name">
                                                             </x-input>
                                                         </div>
                                                         <x-slot:footer>
                                                             <!-- Modal Header -->
                                                             <button type="submit"
-                                                                class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">Update</button>
+                                                                class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">@__("Update")</button>
                                                             <button type="button"
                                                                 class="btn_hover agency_banner_btn btn-bg btn-bg-grey"
                                                                 data-dismiss="modal">@__('Cancel')</button>

@@ -33,6 +33,10 @@ class CheckSubscriber
             notify()->warning(__('Your plan has been expired!'));
             return redirect()->route('package.upgrade');
         }
+        if ($user->banned_at != null) {
+            notify()->warning(__('You have been banned!'));
+            return redirect('/');
+        }
         return $next($request);
     }
 }

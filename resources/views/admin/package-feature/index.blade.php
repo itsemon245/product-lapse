@@ -80,12 +80,13 @@
                                             </div>
                                             <div class="like-btn">
                                                 <form class="login-form sign-in-form"
-                                                    action="{{ route('package-feature.store') }}" method="post">
+                                                    action="{{ route('package-feature.update', $packageFeature) }}" method="post">
                                                     @csrf
-                                                    <x-modal id="modal-create" title="Add Package Feature">
+                                                    @method('put')
+                                                    <x-modal id="modal-edit" title="Update Package Feature">
                                                         <x-slot:trigger>
                                                             <button type="button" class="shortlist" title="Edit"
-                                                                data-toggle="modal" data-target="#modal-create">
+                                                                data-toggle="modal" data-target="#modal-edit">
                                                                 <i class="ti-pencil"></i>
                                                             </button>
 
@@ -107,7 +108,7 @@
                                                                 class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">Update</button>
                                                             <button type="button"
                                                                 class="btn_hover agency_banner_btn btn-bg btn-bg-grey"
-                                                                data-dismiss="modal">Cancel</button>
+                                                                data-dismiss="modal">@__('Cancel')</button>
                                                         </x-slot:footer>
                                                     </x-modal>
                                                 </form>

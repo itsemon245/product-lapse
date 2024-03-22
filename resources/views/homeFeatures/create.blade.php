@@ -12,7 +12,7 @@
                 @csrf
                 <div class="login_info">
                     <div class="row">
-                        <x-attach label="Add Image" name='image' />
+                        <x-attach label="{{__('Add Image')}}" name='image' />
                     </div>
                     <div class="row">
                         <div class="form-group text_box col-lg-6 col-md-6">

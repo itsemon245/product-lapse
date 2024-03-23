@@ -13,15 +13,15 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <h6 class="title2">@__('message.email')</h6>
+                            <h6 class="title2">@__('Email')</h6>
                             <p class="f_400 mb-30 text-font">{{ $contactMessage->email }}</p>
                         </div>
                         <div class="col-md-6">
-                            <h6 class="title2">@__('message.phone')</h6>
+                            <h6 class="title2">@__('Phone')</h6>
                             <p class="f_400 mb-30 text-font">{{ $contactMessage->phone }}</p>
                         </div>
                         <div class="col-md-6">
-                            <h6 class="title2">@__('message.body')</h6>
+                            <h6 class="title2">@__('Body')</h6>
                             <p class="f_400 mb-30 text-font">
                                 {{ $contactMessage->body }}
                             </p>
@@ -33,10 +33,10 @@
                         enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
-                            <x-textarea name="reply" label="Reply" placeholder="Write somethings...." rows="10" required="required" />
+                            <x-textarea name="reply" label="{{ __('Reply') }}" placeholder="{{ __('Write somethings....') }}" rows="10" required="required" />
                         </div>
                         <div class="form-group">
-                            <x-button type="submit" class="btn btn-primary">@__('message.send')</x-button>
+                            <x-button type="submit" class="btn btn-primary">@__('Send')</x-button>
                         </div>
                     </form>
                 </div>

@@ -17,15 +17,15 @@
                                 </div>
                                 <div class="col-md-6">
                                     <h6 class="title2">{{ __('Status') }}</h6>
-                                    <p class="f_400 mb-30 text-font">{{ ucfirst($findOrder->status) }}</p>
+                                    <p class="f_400 mb-30 text-font">{{ __($findOrder->status) }}</p>
                                 </div>
                                 <div class="col-md-6">
                                     <h6 class="title2">{{ __('Payment Method') }}</h6>
-                                    <p class="f_400 mb-30 text-font">{{ $findOrder->payment_method == null ? 'Free Payment' : ucfirst($findOrder->payment_method) }}</p>
+                                    <p class="f_400 mb-30 text-font">{{ $findOrder->payment_method == null ? __('Free Payment') : ucfirst($findOrder->payment_method) }}</p>
                                 </div>
                                 <div class="col-md-6 {{ $findOrder->transaction_id == null ? 'd-none' : '' }} ">
                                     <h6 class="title2">{{ __('Transaction ID') }}</h6>
-                                    <p class="f_400 mb-30 text-font">{{ $findOrder->transaction_id == null ? 'Free Payment' : $findOrder->transaction_id }}</p>
+                                    <p class="f_400 mb-30 text-font">{{ $findOrder->transaction_id == null ? __('Free Payment') : $findOrder->transaction_id }}</p>
                                 </div>
                                 <div class="col-md-12">
                                 <div class="row">
@@ -44,23 +44,23 @@
                                     </div>
                                     @endif  
                                     <div class="col-md-6">
-                                        <h6 class="title2">Street</h6>
+                                        <h6 class="title2">@__('Street')</h6>
                                         <p class="f_400 mb-30 text-font">{{ $findOrder->user->billingAddress()->first()?->street }}</p> 
                                     </div>
                                     <div class="col-md-6">
-                                        <h6 class="title2">City</h6>
+                                        <h6 class="title2">@__('City')</h6>
                                         <p class="f_400 mb-30 text-font">{{ $findOrder->user->billingAddress()->first()?->city }}</p> 
                                     </div>
                                     <div class="col-md-6">
-                                        <h6 class="title2">State</h6>
+                                        <h6 class="title2">@__('State')</h6>
                                         <p class="f_400 mb-30 text-font">{{ $findOrder->user->billingAddress()->first()?->state }}</p> 
                                     </div>
                                     <div class="col-md-6">
-                                        <h6 class="title2">Country</h6>
+                                        <h6 class="title2">@__('Country')</h6>
                                         <p class="f_400 mb-30 text-font">{{ $findOrder->user->billingAddress()->first()?->country }}</p> 
                                     </div>
                                     <div class="col-md-6">
-                                        <h6 class="title2">ZIP</h6>
+                                        <h6 class="title2">@__('ZIP')</h6>
                                         <p class="f_400 mb-30 text-font">{{ $findOrder->user->billingAddress()->first()?->zip }}</p> 
                                     </div>
                                                            
@@ -77,8 +77,8 @@
                                     <img class="rounded-circle" src="{{ favicon($findOrder->user->image) }}" alt="">
                                     <div class="media-body">
                                         <h5 class=" t_color3 f_size_18 f_500">{{ $findOrder->user->name }}</h5>
-                                        <p class="text-muted">Email: {{ $findOrder->user->email }}</p>
-                                        <p class="text-muted">Phone: {{ $findOrder->user->phone }}</p>
+                                        <p class="text-muted">@__('Email:') {{ $findOrder->user->email }}</p>
+                                        <p class="text-muted">@__('Phone:') {{ $findOrder->user->phone }}</p>
                                     </div>
                                 </div>
                             </div>

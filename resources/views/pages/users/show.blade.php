@@ -1,10 +1,10 @@
-@extends('layouts.admin.app', ['title' => 'User Details'])
+@extends('layouts.admin.app', ['title' => @__('User Details')])
 @section('main')
     <x-feature.show>
         <x-slot:breadcrumb>
             <x-breadcrumb :list="[
-                ['label' => 'User Management', 'route' => route('users.index')],
-                ['label' => 'User Details', 'route' => ''],
+                ['label' => @__('User Management'), 'route' => route('users.index')],
+                ['label' => @__('User Details'), 'route' => ''],
             ]" />
         </x-slot:breadcrumb>
         <x-slot:details>
@@ -36,29 +36,29 @@
                     </div>
                     <div class="col-md-6 row">
                         <div class="col-md-6">
-                            <h6 class="title2">First Name:</h6>
+                            <h6 class="title2">@__('First Name:')</h6>
                             <p class="f_400 mb-30 text-font">{{ ucfirst($user->first_name) }}</p>
                         </div>
                         <div class="col-md-6">
-                            <h6 class="title2">Last Name:</h6>
+                            <h6 class="title2">@__('Last Name:')</h6>
                             <p class="f_400 mb-30 text-font">{{ ucfirst($user->last_name) }}</p>
                         </div>
                         <div class="col-md-6">
-                            <h6 class="title2">Phone Number:</h6>
+                            <h6 class="title2">@__('Phone Number:')</h6>
                             <p class="f_400 mb-30 text-font">{{ ucfirst($user->phone) }}</p>
                         </div>
                         <div class="col-md-6">
-                            <h6 class="title2">Status:</h6>
+                            <h6 class="title2">@__('Status:')</h6>
                             @if ($user->type == null)
-                                <p class="f_400 mb-30 text-font text-danger">Not verified</p>
+                                <p class="f_400 mb-30 text-font text-danger">@__('Not verified')</p>
                             @else
                                 <p
                                     class="f_400 mb-30 text-font {{ $user->banned_at == null ? 'text-success' : 'text-danger' }} ">
-                                    {{ $user->banned_at == null ? 'Active' : 'Ban' }}</p>
+                                    {{ $user->banned_at == null ? __('Active') : __('Ban') }}</p>
                             @endif
                         </div>
                         <div class="col-md-6">
-                            <h6 class="title2">Email:</h6>
+                            <h6 class="title2">@__('Email:')</h6>
                             <p class="f_400 mb-30 text-font">{{ ucfirst($user->email) }}</p>
                         </div>
                     </div>

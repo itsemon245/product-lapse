@@ -1,4 +1,4 @@
-@extends('layouts.frontend.app')
+@extends('layouts.frontend.app', ['title' => @__('Forgot Password')])
 
 @section('main')
     <x-breadcrumb :list="[
@@ -24,7 +24,7 @@
                 <!-- Email Address -->
                 <div>
                     <x-input-label for="email" :value="__('Email')" />
-                    <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required
+                    <x-input id="email" class="block mt-1 w-full" placeholder="{{ __('Email') }}" type="email" name="email" :value="old('email')" required
                         autofocus />
                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
                 </div>

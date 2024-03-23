@@ -18,8 +18,8 @@
                     </div>
                     <div class="row">
                         <div class="form-group text_box col-lg-6 col-md-6">
-                            <x-input label="Caption (English)" id="caption_en" type="text"
-                                placeholder="Enter Caption In English" name="caption_en" :value="$info->about_us->caption->en" required
+                            <x-input label="{{ __('Caption (English)') }}" id="caption_en" type="text"
+                                placeholder="{{ __('Caption (English)') }}" name="caption_en" :value="$info->about_us->caption->en" required
                                 autofocus />
                         </div>
                         <div class="form-group text_box col-lg-6 col-md-6">

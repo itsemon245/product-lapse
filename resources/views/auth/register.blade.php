@@ -96,7 +96,7 @@
                         <div class="d-flex align-items-center text-center">
                             <button type="submit"
                                 class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">@__('singup.singup')</button>
-                            <button class="btn_hover agency_banner_btn btn-bg btn-bg-grey">@__('singup.cancel')</button>
+                            <a href="/" class="btn_hover agency_banner_btn btn-bg btn-bg-grey">@__('singup.cancel')</a>
                         </div>
                     </form>
                 </div>
@@ -110,36 +110,17 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">@__('singup.conditions')</h4>
+                    <h4 class="modal-title">{!! $terms->title->{app()->getLocale()} !!}</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div class="text-wrap">
-                        <h5>Terms &amp; conditions</h5>
-                        <ul>
-                            <li>It is a long established fact that a reader will be distracted by the readable content of a
-                                page when looking at it has a more-or-less normal distribution</li>
-                            <li>It is a long established fact that a reader will be distracted by the readable content of a
-                                page when looking at it has a more-or-less normal distribution</li>
-                            <li>It is a long established fact that a reader will be distracted by the readable content of a
-                                page when looking at it has a more-or-less normal distribution</li>
-                            <li>It is a long established fact that a reader will be distracted by the readable content of a
-                                page when looking at it has a more-or-less normal distribution</li>
-                        </ul>
-
-                        <h5>Terms &amp; conditions</h5>
-                        <ul>
-                            <li>It is a long established fact that a reader will be distracted by the readable content of a
-                                page when looking at it has a more-or-less normal distribution</li>
-                            <li>It is a long established fact that a reader will be distracted by the readable content of a
-                                page when looking at it has a more-or-less normal distribution</li>
-                            <li>It is a long established fact that a reader will be distracted by the readable content of a
-                                page when looking at it has a more-or-less normal distribution</li>
-                            <li>It is a long established fact that a reader will be distracted by the readable content of a
-                                page when looking at it has a more-or-less normal distribution</li>
-                        </ul>
+                        <h5>{!! $terms->title->{app()->getLocale()} !!}</h5>
+                        <div>
+                            {!! $terms->body->{app()->getLocale()} !!}
+                        </div>
                     </div>
                 </div>
 

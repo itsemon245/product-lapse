@@ -21,8 +21,8 @@
                             placeholder="Choose one" name="classification" required autofocus>
 
                             @forelse ($classifications as $classification)
-                                <option value="{{ $classification->value->{app()->getLocale()} }}"
-                                    @if ($change->classification == $classification->value->{app()->getLocale()} || $classification->value->{app()->getLocale()} == old('classification')) selected @endif>
+                                <option value="{{ $classification->id }}"
+                                    @if ($change->classification == $classification->id || $classification->id == old('classification')) selected @endif>
                                     {{ $classification->value->{app()->getLocale()} }}
                                 </option>
                             @empty
@@ -36,8 +36,8 @@
                             placeholder="Choose one" name="priority" required autofocus>
 
                             @forelse ($priorities as $priority)
-                                <option value="{{ $priority->value->{app()->getLocale()} }}"
-                                    @if ($change->priority == $priority->value->{app()->getLocale()} || $priority->value->{app()->getLocale()} == old('priority')) selected @endif>
+                                <option value="{{ $priority->id }}"
+                                    @if ($change->priority == $priority->id || $priority->id == old('priority')) selected @endif>
                                     {{ $priority->value->{app()->getLocale()} }}
                                 </option>
                             @empty
@@ -51,8 +51,8 @@
                             placeholder="Choose one" name="status" required autofocus>
 
                             @forelse ($statuses as $status)
-                                <option value="{{ $status->value->{app()->getLocale()} }}"
-                                    @if ($change->status == $status->value->{app()->getLocale()} || $status->value->{app()->getLocale()} == old('status')) selected @endif>
+                                <option value="{{ $status->id }}"
+                                    @if ($change->status == $status->id || $status->id == old('status')) selected @endif>
                                     {{ $status->value->{app()->getLocale()} }}
                                 </option>
                             @empty

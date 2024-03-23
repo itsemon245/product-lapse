@@ -21,7 +21,7 @@
                              name="classification" required autofocus>
 
                             @forelse ($classifications as $classification)
-                                <option value="{{ $classification->value->{app()->getLocale()} }}" @selected($classification->value->{app()->getLocale()} == old('classification'))>
+                                <option value="{{ $classification->id }}" @selected($classification->id == old('classification'))>
                                     {{ $classification->value->{app()->getLocale()} }}
                                 </option>
                             @empty
@@ -35,7 +35,7 @@
                              name="priority" required autofocus>
 
                             @foreach ($priorities as $priority)
-                                <option value="{{ $priority->value->{app()->getLocale()} }}" @selected($idea?->priority == $priority->value->en || $idea?->priority == $priority->value->ar || $priority->value->{app()->getLocale()} == old('priority'))>
+                                <option value="{{ $priority->id }}" @selected($idea?->priority == $priority->id || $priority->id == old('priority'))>
                                     {{ $priority->value->{app()->getLocale()} }}
                                 </option>
                             @endforeach
@@ -47,7 +47,7 @@
                              name="status" required autofocus>
 
                             @foreach ($statuses as $status)
-                                <option value="{{ $status->value->{app()->getLocale()} }}" @selected($status->value->{app()->getLocale()} == old('status'))>
+                                <option value="{{ $status->id }}" @selected($status->id == old('status'))>
                                     {{ $status->value->{app()->getLocale()} }}
                                 </option>
                             @endforeach

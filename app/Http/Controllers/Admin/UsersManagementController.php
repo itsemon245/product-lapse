@@ -16,18 +16,17 @@ class UsersManagementController extends Controller
      */
     public function index()
     {
-        $subscribers = User::where('type', 'subscriber')->orWhere('type', null)
-            ->where(function ($q) {
-                if (request()->query('search') === 'banned') {
+        $subscribers = User::whereIn('type', ['subscriber', null])->where(function ($q) {
+                if (request()->query('search') == 'banned') {
                     $q->whereNotNull('banned_at');
                 }
-                if (request()->query('search') === 'active') {
+                if (request()->query('search') == 'active') {
                     $q->where('banned_at', null);
                 }
-                if (request()->query('search') === 'verified') {
+                if (request()->query('search') == 'verified') {
                     $q->whereNotNull('email_verified_at');
                 }
-                if (request()->query('search') === 'unverified') {
+                if (request()->query('search') == 'unverified') {
                     $q->where('email_verified_at', null);
                 }
             })
@@ -65,6 +64,7 @@ class UsersManagementController extends Controller
             'position'         => $request->position,
             'promotional_code' => $request->promotional_code,
             'owner_id'         => $admin?->id,
+            "email_verified_at"=> now()
          ]);
         $user->notify(new WelcomeNotification($user));
         notify()->success(__('Created successfully!'));

@@ -34,7 +34,7 @@ trait HasOwner
                 $ownerId = demoSub()->id;
             }
             $model->owner_id = $ownerId;
-            $model->save();
+            $model->saveQuietly();
         });
 
         static::addGlobalScope(new OwnerScope);

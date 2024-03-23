@@ -20,7 +20,7 @@
                         <x-select-input label="{{ __('feature/report.label.type') }}" id="type" :placeholder="__('feature/report.placeholder.select-type')"
                             name="type" required autofocus>
                             @forelse ($types as $type)
-                                <option value="{{ $type->value->{app()->getLocale()} }}" @selected($type->value->{app()->getLocale()} == old('type'))>
+                                <option value="{{ $type->id }}" @selected($type->id == old('type'))>
                                     {{ $type->value->{app()->getLocale()} }}
                                 </option>
                             @empty

@@ -10,7 +10,7 @@
                     <div class="col-lg-6 col-md-7 col-sm-12">
                         <ul class="list-unstyled f_menu text-right">
                             @foreach ($extraPages as $page)
-                            <li><a href="{{route('page.extra', $page)}}">{{$page->title->{app()->getLocale()} }}</a></li>
+                            <li><a href="{{route('page.'.$page->slug)}}">{{$page->title->{app()->getLocale()} }}</a></li>
                             @endforeach
                         </ul>
                     </div>

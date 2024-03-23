@@ -80,34 +80,35 @@
                                             </div>
                                             <div class="like-btn">
                                                 <form class="login-form sign-in-form"
-                                                    action="{{ route('package-feature.store') }}" method="post">
+                                                    action="{{ route('package-feature.update', $packageFeature) }}" method="post">
                                                     @csrf
-                                                    <x-modal id="modal-create" title="Add Package Feature">
+                                                    @method('put')
+                                                    <x-modal id="modal-edit" title="{{__("Update Package Feature")}}">
                                                         <x-slot:trigger>
                                                             <button type="button" class="shortlist" title="Edit"
-                                                                data-toggle="modal" data-target="#modal-create">
+                                                                data-toggle="modal" data-target="#modal-edit">
                                                                 <i class="ti-pencil"></i>
                                                             </button>
 
                                                         </x-slot:trigger>
 
                                                         <div class="form-group text_box col-lg-12">
-                                                            <x-input :value="$packageFeature->name?->en" label="Name(en)" name="name[en]"
+                                                            <x-input :value="$packageFeature->name?->en" label="{{ __('Name (ar)') }}" name="name[en]"
                                                                 placeholder="name">
                                                             </x-input>
                                                         </div>
                                                         <div class="form-group text_box col-lg-12">
-                                                            <x-input :value="$packageFeature->name?->ar" label="Name(ar)" name="name[ar]"
+                                                            <x-input :value="$packageFeature->name?->ar" label="{{ __('Name (en)') }}" name="name[ar]"
                                                                 placeholder="name">
                                                             </x-input>
                                                         </div>
                                                         <x-slot:footer>
                                                             <!-- Modal Header -->
                                                             <button type="submit"
-                                                                class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">Update</button>
+                                                                class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">@__("Update")</button>
                                                             <button type="button"
                                                                 class="btn_hover agency_banner_btn btn-bg btn-bg-grey"
-                                                                data-dismiss="modal">Cancel</button>
+                                                                data-dismiss="modal">{{__('Cancel')}}</button>
                                                         </x-slot:footer>
                                                     </x-modal>
                                                 </form>

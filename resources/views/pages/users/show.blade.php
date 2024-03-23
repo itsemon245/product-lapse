@@ -18,6 +18,20 @@
                                         {{ \Carbon\Carbon::parse($user->date)->format('l, j F Y') }}
                                     </div>
                             </div>
+                            @php
+                                $activePlan = $user->activePlan()->first();
+                            @endphp
+                            @if ($activePlan)
+                                <div
+                                    class="bg-emerald-200 text-blue-500 font-bold px-2 py-1 rounded-full text-sm inline-flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                                        <path fill="currentColor" fill-rule="evenodd"
+                                            d="M16.403 12.652a3 3 0 0 0 0-5.304a3 3 0 0 0-3.75-3.751a3 3 0 0 0-5.305 0a3 3 0 0 0-3.751 3.75a3 3 0 0 0 0 5.305a3 3 0 0 0 3.75 3.751a3 3 0 0 0 5.305 0a3 3 0 0 0 3.751-3.75m-2.546-4.46a.75.75 0 0 0-1.214-.883L9.16 12.1l-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    {{ $activePlan->name->{app()->getLocale()} }}
+                                </div>
+                            @endif
                         </div>
                     </div>
                     <div class="col-md-6 row">

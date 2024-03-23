@@ -42,7 +42,7 @@
                                         <h4><a href="{{ route('change.show', $change) }}"
                                                 class="f_500 t_color3">{{ $change->title }}</a></h4>
                                         <ul class="list-unstyled">
-                                            <li class="p_color1">{{ $change->status }}</li>
+                                            @include('components.feature-select-list', ['model'=>$change])
                                             <li class="text-muted">
                                                 {{ \Carbon\Carbon::parse($change->created_at)->format('l, j F Y') }}</li>
                                         </ul>

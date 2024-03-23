@@ -14,11 +14,13 @@
                         </div>
                         <div class="col-md-6">
                             <h6 class="title2">@__('Priority')</h6>
-                            <p class="f_400 mb-30 text-font">{{ $support->priority }}</p>
+                            <p class="f_400 mb-30 text-font">
+                                {{ $support->getSelect('priority')->value->{app()->getLocale()} }}</p>
                         </div>
                         <div class="col-md-6">
                             <h6 class="title2">@__('Classification')</h6>
-                            <p class="f_400 mb-30 text-font">{{ $support->classification }}</p>
+                            <p class="f_400 mb-30 text-font">
+                                {{ $support->getSelect('classification')->value->{app()->getLocale()} }}</p>
                         </div>
                         <div class="col-md-6">
                             <h6 class="title2">@__('End date')</h6>
@@ -42,15 +44,16 @@
                 <div class="blog-sidebar box-sidebar">
                     <div class="widget sidebar_widget widget_recent_post mt_60">
                         <div class="media post_author mt_60">
-                            <img class="rounded-circle" src="{{ favicon($creator->image) }}"
-                                alt="">
+                            <img class="rounded-circle" src="{{ favicon($creator->image) }}" alt="">
                             <div class="media-body">
                                 <h5 class=" t_color3 f_size_18 f_500">{{ $creator->name }}</h5>
                             </div>
                         </div>
                         @can('update support')
                             <div class="row text-center">
-                                <h6 class="title2 the-priority"> @__('Status :')<span>{{ $support->status }}</span></h6>
+                                <h6 class="title2 the-priority">
+                                    @__('Status :')<span>{{ $support->getSelect('status')->value->{app()->getLocale()} }}</span>
+                                </h6>
                             </div>
                             <form action="{{ route('support.update.status', $support) }}" method="post"
                                 enctype="multipart/form-data">
@@ -68,8 +71,8 @@
                                                                     <div class="checkbox remember">
                                                                         <label>
                                                                             <input type="radio" name="status"
-                                                                                value="{{ $status->value->{app()->getLocale()} }}"
-                                                                                @if ($support->status == $status->value->{app()->getLocale()}) checked @endif>
+                                                                                value="{{ $status->id }}"
+                                                                                @if ($support->status == $status->id) checked @endif>
                                                                         </label>
                                                                     </div>
                                                                     <div class="media-body">

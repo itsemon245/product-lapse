@@ -23,7 +23,7 @@
                             placeholder="Select Category" name="category" required autofocus>
                             @if ($categories)
                                 @forelse ($categories as $category)
-                                    <option value="<?= $category->value->{app()->getLocale()} ?>" @selected($category->value->{app()->getLocale()} == old('category'))>
+                                    <option value="<?= $category->id ?>" @selected($category->id == old('category'))>
                                         <?= $category->value->{app()->getLocale()} ?>
                                     </option>
                                 @empty
@@ -37,7 +37,7 @@
                             placeholder="Select status" name="status" required autofocus>
                             @if ($statuses)
                                 @forelse ($statuses as $status)
-                                    <option value="<?= $status->value->{app()->getLocale()} ?>" @selected($status->value->{app()->getLocale()} == old('status')) >
+                                    <option value="<?= $status->id ?>" @selected($status->id == old('status')) >
                                         <?= $status->value->{app()->getLocale()} ?>
                                     </option>
                                 @empty

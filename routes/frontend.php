@@ -32,10 +32,21 @@ Route::prefix('/')
             return view('packages.index', compact('packages'));
         })->name('package.upgrade');
     });
-Route::get('page/{page}', function(Page $page){
 
+// Extra pages
+
+Route::get('technical-support', function(Page $page){
+    $page = Page::where('slug', 'technical-support')->first();
     return view('pages.extra', compact('page'));
-})->name('page.extra');
+})->name('page.technical-support');
+Route::get('terms-conditions', function(Page $page){
+    $page = Page::where('slug', 'terms-conditions')->first();
+    return view('pages.extra', compact('page'));
+})->name('page.terms-conditions');
+Route::get('privacy-policy', function(Page $page){
+    $page = Page::where('slug', 'privacy-policy')->first();
+    return view('pages.extra', compact('page'));
+})->name('page.privacy-policy');
 
 Route::get('compare-packages', [PackageController::class, 'compare'])->name('package.compare');
 Route::post('contact-message/', [ContactMessageController::class, 'send'])->name('message.send');

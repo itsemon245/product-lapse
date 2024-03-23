@@ -258,12 +258,14 @@
     "VIOLATE" : "انتهاك",
     "RED" : "أحمر",
     "GREEN" : "أخضر",
-    "Select Menus" : "حدد القوائم"
- 
-
- 
-
-
-
+    "Select Menus" : "حدد القوائم",
+    "Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\"t receive the email, we will gladly send you another.": "شكرًا لتسجيلك! قبل البدء، هل يمكنك التحقق من عنوان بريدك الإلكتروني عن طريق النقر على الرابط الذي أرسلناه لك للتو عبر البريد الإلكتروني؟ إذا لم تستلم البريد الإلكتروني، فسنرسل لك واحدًا آخر بكل سرور.",
+    "A new verification link has been sent to the email address you provided during registration.": "تم إرسال رابط التحقق الجديد إلى عنوان البريد الإلكتروني الذي قدمته أثناء التسجيل.",
+    "Email Unverified": "لم يتم التحقق من البريد الإلكتروني",
+    "Subscriber": "مشترك",
+    "Popular": "شهير",
+    "Active Feature": "ميزة نشطة",
+    "Update Package Feature": "تحديث ميزة الحزمة",
+    "You have been banned!": "لقد تم حظرك!"
 
 }

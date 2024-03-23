@@ -21,8 +21,8 @@
         <x-slot:list>
             @if (session('certificate'))
                 <div class="alert alert-warning w-100 text-center">
-                    <div class="font-bold">{{ session('certificate')['title'] }}</div>
-                    <div class="text-sm">{{ session('certificate')['hint'] }}</div>
+                    <div class="font-bold">@__(session('certificate')['title'])</div>
+                    <div class="text-sm">@__(session('certificate')['hint'])</div>
                 </div>
             @endif
             <div class="container">

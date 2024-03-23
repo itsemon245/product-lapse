@@ -27,10 +27,12 @@ enum SelectType: string
             Feature::CHANGE->value => [
                 SelectType::STATUS,
                 SelectType::PRIORITY,
+                SelectType::CLASSIFICATION,
             ],
             Feature::SUPPORT->value => [
                 SelectType::STATUS,
                 SelectType::PRIORITY,
+                SelectType::CLASSIFICATION,
             ],
             Feature::DOCUMENT->value => [
                 SelectType::TYPE,

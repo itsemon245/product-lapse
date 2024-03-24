@@ -29,18 +29,17 @@
                     </x-slot:trigger>
 
                     <div class="form-group text_box col-lg-12">
-                        <x-input label="{{ __('Name (en)') }}" name="name[en]"
-                            placeholder="{{ __('Name (en)') }}">
+                        <x-input label="{{ __('Name (en)') }}" name="name[en]" placeholder="{{ __('Name (en)') }}">
                         </x-input>
                     </div>
                     <div class="form-group text_box col-lg-12">
-                        <x-input label="{{ __('Name (ar)') }}" name="name[ar]"
-                            placeholder="{{ __('Name (ar)') }}">
+                        <x-input label="{{ __('Name (ar)') }}" name="name[ar]" placeholder="{{ __('Name (ar)') }}">
                         </x-input>
                     </div>
                     <x-slot:footer>
                         <!-- Modal Header -->
-                        <button type="submit" class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">{{ __('Add') }}</button>
+                        <button type="submit"
+                            class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">{{ __('Add') }}</button>
                         <button type="button" class="btn_hover agency_banner_btn btn-bg btn-bg-grey"
                             data-dismiss="modal">{{ __('Cancel') }}</button>
                     </x-slot:footer>
@@ -63,7 +62,8 @@
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell">
                                         <h4>
-                                            <span>{{ $packageFeature->name->en }}</span> | <span>{{ $packageFeature->name->ar }}</span>
+                                            <span>{{ $packageFeature->name->en }}</span> |
+                                            <span>{{ $packageFeature->name->ar }}</span>
                                         </h4>
                                         <ul class="list-unstyled">
                                             <li class="text-muted">
@@ -80,42 +80,40 @@
                                             </div>
                                             <div class="like-btn">
                                                 <form class="login-form sign-in-form"
-                                                    action="{{ route('package-feature.update', $packageFeature) }}" method="post">
+                                                    action="{{ route('package-feature.update', $packageFeature) }}"
+                                                    method="post">
                                                     @csrf
                                                     @method('put')
-                                                    <x-modal id="modal-edit" title="{{__("Update Package Feature")}}">
-                                                        <x-slot:trigger>
+                                                    <x-modal id="modal-edit" title="{{ __('Update Package Feature') }}">
+                                                        <x-slot name="trigger">
                                                             <button type="button" class="shortlist" title="Edit"
                                                                 data-toggle="modal" data-target="#modal-edit">
                                                                 <i class="ti-pencil"></i>
                                                             </button>
-
-                                                        </x-slot:trigger>
-
+                                                        </x-slot>
                                                         <div class="form-group text_box col-lg-12">
-                                                            <x-input :value="$packageFeature->name?->en" label="{{ __('Name (ar)') }}" name="name[en]"
-                                                                placeholder="name">
+                                                            <x-input :value="$packageFeature->name?->en" label="{{ __('Name (ar)') }}"
+                                                                name="name[en]" placeholder="name">
                                                             </x-input>
                                                         </div>
                                                         <div class="form-group text_box col-lg-12">
-                                                            <x-input :value="$packageFeature->name?->ar" label="{{ __('Name (en)') }}" name="name[ar]"
-                                                                placeholder="name">
+                                                            <x-input :value="$packageFeature->name?->ar" label="{{ __('Name (en)') }}"
+                                                                name="name[ar]" placeholder="name">
                                                             </x-input>
                                                         </div>
-                                                        <x-slot:footer>
-                                                            <!-- Modal Header -->
+                                                        <x-slot name="footer">
                                                             <button type="submit"
-                                                                class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">@__("Update")</button>
+                                                                class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">{{ __('Update') }}</button>
                                                             <button type="button"
                                                                 class="btn_hover agency_banner_btn btn-bg btn-bg-grey"
-                                                                data-dismiss="modal">{{__('Cancel')}}</button>
-                                                        </x-slot:footer>
+                                                                data-dismiss="modal">{{ __('Cancel') }}</button>
+                                                        </x-slot>
                                                     </x-modal>
                                                 </form>
-
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>

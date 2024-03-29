@@ -16,7 +16,9 @@ class UsersManagementController extends Controller
      */
     public function index()
     {
-        $subscribers = User::where('type', 'subscriber')->orWhere('type', null)->where(function ($q) {
+        $subscribers = User::where('type', 'subscriber')->orWhere('type', null)->latest()->paginate();
+        if(!empty(request()->query('search'))){
+            $subscribers = User::where(function ($q){
                 if (request()->query('search') == 'banned') {
                     $q->whereNotNull('banned_at');
                 }
@@ -29,8 +31,8 @@ class UsersManagementController extends Controller
                 if (request()->query('search') == 'unverified') {
                     $q->where('email_verified_at', null);
                 }
-            })
-            ->latest()->paginate(10);
+            })->latest()->paginate();
+        }
         return view('pages.users.management', compact('subscribers'));
     }
 

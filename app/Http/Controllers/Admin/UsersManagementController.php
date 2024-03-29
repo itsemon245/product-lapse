@@ -16,7 +16,7 @@ class UsersManagementController extends Controller
      */
     public function index()
     {
-        $subscribers = User::whereIn('type', ['subscriber', null])->where(function ($q) {
+        $subscribers = User::whereNot('type', 'member')->where(function ($q) {
                 if (request()->query('search') == 'banned') {
                     $q->whereNotNull('banned_at');
                 }

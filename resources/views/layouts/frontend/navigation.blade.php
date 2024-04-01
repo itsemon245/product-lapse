@@ -49,7 +49,7 @@
             <form action="{{ route('lang.toggle') }}" method="post">
                 @csrf
                 @if (app()->getLocale() == 'ar')
-                    <button class="nav-link w-full text-start rtl:text-end">
+                    <button class="nav-link w-full text-start rtl:text-start">
                         English
                     </button>
                 @else

@@ -27,7 +27,8 @@
                         <div class="col-md-6">
                             <h6 class="title2">@__('feature/delivery.link')</h6>
                             <p class="f_400 mb-30 text-font">
-                                <a href="{{ $delivery->link }}" target="_blank">{{ $delivery->link }}</a>
+                                <a href="{{ $delivery->link }}"
+                                    onclick="window.open('{{ $delivery->link }}', '_blank', 'width=800, height=600'); return false;">{{ $delivery->link }}</a>
                             </p>
                         </div>
                         <div class="col-md-6">

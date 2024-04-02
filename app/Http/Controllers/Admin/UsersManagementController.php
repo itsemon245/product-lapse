@@ -17,6 +17,7 @@ class UsersManagementController extends Controller
     public function index()
     {
         $subscribers = User::where('type', 'subscriber')->orWhere('type', null)->latest()->paginate();
+       
         if(!empty(request()->query('search'))){
             $subscribers = User::where(function ($q){
                 if (request()->query('search') == 'banned') {

@@ -6,6 +6,7 @@ return [
     'add' => 'اضف تقرير',
     'search' => 'البحث عن تقرير',
     'showing' => 'نوع التقرير',
+    'delete' => 'حذف',
 
     //add page + edit page
     'label' => [

@@ -20,12 +20,15 @@
             <div class="col-lg-8 blog_sidebar_left">
                 <div class="blog_single mb_50">
                     <div class="row">
-                        <h5 class="f_size_20 f_500 col-md-12 flex items-center">{{ $delivery->name }}<img class=" {{ $delivery->is_agreed == null ? 'd-none' : '' }} deliver-img"
+                        <h5 class="f_size_20 f_500 col-md-12 flex items-center">{{ $delivery->name }}<img
+                                class=" {{ $delivery->is_agreed == null ? 'd-none' : '' }} deliver-img"
                                 src="{{ $delivery->is_agreed == 1 ? asset('img/done.png') : asset('img/cancel.png') }}"
                                 title="Approved"></h5>
                         <div class="col-md-6">
                             <h6 class="title2">@__('feature/delivery.link')</h6>
-                            <p class="f_400 mb-30 text-font">{{ $delivery->link }}</p>
+                            <p class="f_400 mb-30 text-font">
+                                <a href="{{ $delivery->link }}" target="_blank">{{ $delivery->link }}</a>
+                            </p>
                         </div>
                         <div class="col-md-6">
                             <h6 class="title2">@__('feature/delivery.date')</h6>

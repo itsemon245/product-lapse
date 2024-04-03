@@ -42,7 +42,7 @@ class SocialController extends Controller
             if (!$is_user) {
                 $saveUser = User::updateOrCreate([
                     'google_id' => $user->getId(),
-                ], 
+                ],
                 [
                     'name' => $user->user['name'],
                     'email' => $user->getEmail(),
@@ -57,7 +57,7 @@ class SocialController extends Controller
                 $saveUser = User::where('email', $user->getEmail())->first();
             }
             Auth::loginUsingId($saveUser->id);
-            return back();
+            return redirect(route('dashboard'));
         } catch (\Throwable $th) {
             throw $th;
         }

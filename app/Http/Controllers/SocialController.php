@@ -18,6 +18,10 @@ class SocialController extends Controller
     }
     public function callbackLinkedin()
     {
+        $error = !empty(request()->query('error'));
+        if ($error) {
+            abort(403, request()->query('description'));
+        }
         if (!empty(Socialite::driver('linkedin')->stateless()->user()))
         {
             $linkedinuser = Socialite::driver('linkedin')->stateless()->user();

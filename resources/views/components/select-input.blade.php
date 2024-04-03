@@ -1,14 +1,14 @@
 @php
     $name = $attributes->get('name');
     $label = $attributes->get('label');
-    $placeholder = $attributes->has('placeholder') ? $attributes->get('placeholder') : 'Select one...';
+    $placeholder = $attributes->has('placeholder') ? __($attributes->get('placeholder')) : __('Select one');
 @endphp
 <div class="relative">
     @if ($label)
         <label class="text_c f_500">{{ $label }}</label>
     @endif
     <select {{ $attributes->merge(['class' => 'selectpickers']) }}>
-        <option selected disabled>{{ __($placeholder) }}</option>
+        <option selected disabled>{{ $placeholder }}</option>
         {{ $slot }}
     </select>
     @if ($attributes->has('required'))

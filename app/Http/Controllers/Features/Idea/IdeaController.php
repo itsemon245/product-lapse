@@ -35,8 +35,8 @@ class IdeaController extends Controller
         $stages     = Stage::cases();
         return view('features.idea.partials.create', compact('priorities', 'stages'));
     }
- 
-    /** 
+
+    /**
      * Store a newly created resource in storage.
      */
     public function store(IdeaRequest $request)
@@ -63,7 +63,7 @@ class IdeaController extends Controller
 
     public function upadatePriority(Request $request, Idea $idea)
     {
-        $idea->update(['priority' => $request->priority]);
+        $idea->update(['stage' => $request->stage]);
 
         notify()->success(trans('Updated successfully!'));
         return redirect()->route('idea.show', $idea);

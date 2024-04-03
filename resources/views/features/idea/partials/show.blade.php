@@ -40,7 +40,7 @@
                 <div class="blog-sidebar box-sidebar">
                     <div class="widget sidebar_widget widget_recent_post mt_60">
                         <div class="media post_author mt_60">
-                           
+
                             <img class="rounded-circle" src="{{ favicon($creator->image) }}" alt="">
                             <div class="media-body">
                                 <h5 class=" t_color3 f_size_18 f_500">{{ $creator->name }}</h5>
@@ -54,17 +54,17 @@
                                         @csrf
                                         @method('PUT')
                                         <div class="form-group">
-                                            <x-select-input label="{{ __('feature/idea.label.priority') }}" id="priority"
-                                                placeholder="{{ __('feature/idea.label.priority') }}" name="priority" required
+                                            <x-select-input label="{{ __('feature/idea.label.stage') }}" id="stage"
+                                                placeholder="{{ __('feature/idea.label.stage') }}" name="stage" required
                                                 autofocus>
 
-                                                @forelse ($priorities as $priority)
-                                                    <option value="{{ $priority->id }}"
-                                                        @if ($idea->priority == $priority->id ) selected @endif>
-                                                        {{ $priority->value->{app()->getLocale()} }}
+                                                @forelse ($stages as $stage)
+                                                    <option value="{{ $stage->value }}"
+                                                        @if ($idea->stage == $stage->value ) selected @endif>
+                                                        {{ trans($stage->value) }}
                                                     </option>
                                                 @empty
-                                                    <option disabled>{{ __('No Priority available') }}</option>
+                                                    <option disabled>{{ __('No Stages Available') }}</option>
                                                 @endforelse
 
                                             </x-select-input>

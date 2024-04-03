@@ -87,7 +87,7 @@
                                             <div class="checkbox remember">
                                                 <label class="">
                                                     <input name="products[]" class="cursor-pointer" value="{{ $product->id }}"
-                                                        @if ($team?->products?->find($product->id) != null)
+                                                        @if ($team?->myProducts()?->find($product->id) != null)
                                                             checked
                                                         @endif type="checkbox" />
                                                 </label>

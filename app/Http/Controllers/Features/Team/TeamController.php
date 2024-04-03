@@ -57,7 +57,7 @@ class TeamController extends Controller
     public function store(TeamInvitationRequest $request)
     {
         $teamStore = InvitationService::store($request);
-        
+
         if ($teamStore) {
             notify()->success(__('notify/success.create'));
             return redirect()->route('team.index');
@@ -70,11 +70,12 @@ class TeamController extends Controller
     public function update(Request $request, User $team)
     {
         $user = $team;
-        $user->roles()->delete();
+        $user->roles()->detach();
         $user->assignRole($request->role);
-        $user->products()->delete();
+        $user->myProducts()->detach();
         foreach ($request->products as $product) {
-            Product::find($product)->user()->attach($user->id);
+            $user->myProducts()->attach($product);
+            // Product::find($product)->user()->attach($user->id);
         }
         notify()->success(__('notify/success.update'));
         return redirect()->route('team.index');

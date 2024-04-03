@@ -67,7 +67,7 @@
     "Historical Images" : "الصور التاريخية",
     "Product Delivery" : "ايصال المنتج",
     "High" : "يعمل على",
-    "Low" : "قيد الانتظار", 
+    "Low" : "قيد الانتظار",
     "Medium" : "توقفت",
     "Dashboard" : "لوحة القيادة",
     "Admin" : "مسؤل",
@@ -101,7 +101,7 @@
     "Title (Arabic)" : "العنوان (عربي)",
     "Caption (English)" : "تسمية توضيحية (الإنجليزية)",
     "Caption (Arabic)" : "التسمية التوضيحية (العربية)",
-    "Button Text (English)" : "نص الزر (الإنجليزية)", 
+    "Button Text (English)" : "نص الزر (الإنجليزية)",
     "Button Text (Arabic)" : "نص الزر (عربي)",
     "Package Caption (Arabic)" : "التسمية التوضيحية للحزمة (العربية)",
     "Package Caption (English)" : "التسمية التوضيحية للحزمة (الإنجليزية)",
@@ -294,7 +294,9 @@
     "Ban" : "المنع",
     "Not verified" : "لم يتم التحقق منها",
     "Profile" : "حساب تعريفي",
-    "Settings" : "إعدادات"
+    "Settings" : "إعدادات",
+    "Select Category": "اختر الفئة",
+    "Select Status": "حدد الحالة"
 
- 
+
 }

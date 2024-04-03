@@ -46,7 +46,7 @@
                         class="absolute {{ app()->getLocale() == 'en' ? 'right-0' : 'left-0 text-end' }} w-56 p-2 mt-2 space-y-2 text-gray-600 bg-white border border-gray-100 rounded-md shadow-md dark:text-gray-300 dark:border-gray-700 dark:bg-gray-700">
                         @forelse (auth()->user()->notifications as $notification)
                             <li class="flex">
-                                <a class="inline-flex items-center {{app()->getLocale()== "ar" ? 'justify-center' : ''}} w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
+                                <a class="inline-flex items-center {{ app()->getLocale() == 'ar' ? 'justify-center' : '' }} w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
                                     href="#">
                                     <span>{{ $notification?->data?->message }}</span>
                                 </a>
@@ -78,18 +78,18 @@
                         class="absolute {{ app()->getLocale() == 'en' ? 'right-0' : 'left-0 text-end' }} w-56 p-2 mt-2 space-y-2 text-gray-600 bg-white border border-gray-100 rounded-md shadow-md dark:border-gray-700 dark:text-gray-300 dark:bg-gray-700"
                         aria-label="submenu">
                         <li class="flex">
-                            <a class="inline-flex {{app()->getLocale()== "ar" ? 'justify-end' : ''}} items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
+                            <a class="inline-flex {{ app()->getLocale() == 'ar' ? 'justify-end' : '' }} items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
                                 href="{{ route('admin.profile.index') }}">
                                 <svg class="w-4 h-4 mx-3" aria-hidden="true" fill="none" stroke-linecap="round"
                                     stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                                     <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z">
                                     </path>
                                 </svg>
-                                <span>Profile</span>
+                                <span>@__('Profile')</span>
                             </a>
                         </li>
                         <li class="flex">
-                            <a class="inline-flex {{app()->getLocale()== "ar" ? 'justify-end' : ''}} items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
+                            <a class="inline-flex {{ app()->getLocale() == 'ar' ? 'justify-end' : '' }} items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
                                 href="{{ route('settings.edit') }}">
                                 <svg class="w-4 h-4 mx-3" aria-hidden="true" fill="none" stroke-linecap="round"
                                     stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -98,12 +98,12 @@
                                     </path>
                                     <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg>
-                                <span>Settings</span>
+                                <span>@__('Settings')</span>
                             </a>
                         </li>
                         <li class="flex">
                             <form
-                                class="inline-flex {{app()->getLocale()== "ar" ? 'justify-end' : ''}} items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
+                                class="inline-flex {{ app()->getLocale() == 'ar' ? 'justify-end' : '' }} items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
                                 action="{{ route('logout') }}" method="POST">
                                 @csrf
                                 <button type="submit" class="flex items-center">

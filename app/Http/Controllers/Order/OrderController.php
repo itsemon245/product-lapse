@@ -124,7 +124,6 @@ class OrderController extends Controller
 
     public function freePackage(Order $order)
     {
-        $expireDate = now()->add($order->package->unit, $order->package->validity);
         $activePlan = User::find($order->user_id)->activePlan()->first();
         if ($activePlan) {
             $activePlan->update([
@@ -138,7 +137,7 @@ class OrderController extends Controller
             'name' => $order->package->name,
             'price' => $order->amount,
             'active' => true,
-            'expired_at' => $expireDate,
+            'expired_at' => null,
             'product_limit' => $order->package->product_limit,
         ]);
         $order = tap($order)->update([

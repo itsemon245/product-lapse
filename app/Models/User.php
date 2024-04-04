@@ -11,6 +11,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -46,7 +47,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     #---Relations---#
 
-    public function plans()
+    public function plans(): HasMany
     {
         return $this->hasMany(Plan::class);
     }
@@ -76,7 +77,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Address::class)->where('type', 'shipping')->first();
     }
-    public function orders()
+    /**
+     * @return HasMany
+     */
+    public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
     }
@@ -84,75 +88,115 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->roles->first();
     }
-    public function packages()
+    /**
+     * @return HasMany
+     */
+    public function packages(): HasMany
     {
         return $this->hasMany(Package::class, 'owner_id', 'id');
     }
-
-    public function productUsers()
+    /**
+     * @return HasMany
+     */
+    public function productUsers(): HasMany
     {
         return $this->hasMany(ProductUser::class, 'owner_id', 'id');
     }
-
-    public function products()
+    /**
+     * @return HasMany
+     */
+    public function products(): HasMany
     {
         return $this->hasMany(Product::class, 'owner_id', 'id');
     }
-    public function myProducts()
+    /**
+     * @return BelongsToMany
+     */
+    public function myProducts(): BelongsToMany
     {
         return $this->belongsToMany(Product::class, 'product_users');
     }
-
-    public function changes()
+    /**
+     * @return HasMany
+     */
+    public function changes(): HasMany
     {
         return $this->hasMany(Change::class, 'owner_id', 'id');
     }
-
-    public function ideas()
+    /**
+     * @return HasMany
+     */
+    public function ideas(): HasMany
     {
         return $this->hasMany(Idea::class, 'owner_id', 'id');
     }
-
-    public function tasks()
+    /**
+     * @return HasMany
+     */
+    public function tasks(): HasMany
     {
         return $this->hasMany(Task::class, 'owner_id', 'id');
     }
-    public function reports()
+    /**
+     * @return HasMany
+     */
+    public function reports(): HasMany
     {
         return $this->hasMany(Report::class, 'owner_id', 'id');
     }
-    public function supports()
+    /**
+     * @return HasMany
+     */
+    public function supports(): HasMany
     {
         return $this->hasMany(Support::class, 'owner_id', 'id');
     }
-
-    public function documents()
+    /**
+     * @return HasMany
+     */
+    public function documents(): HasMany
     {
         return $this->hasMany(Document::class, 'owner_id', 'id');
     }
-    public function releases()
+    /**
+     * @return HasMany
+     */
+    public function releases(): HasMany
     {
         return $this->hasMany(Release::class, 'owner_id', 'id');
     }
-    public function certificates()
+    /**
+     * @return HasMany
+     */
+    public function certificates(): HasMany
     {
         return $this->hasMany(Certificate::class, 'owner_id', 'id');
     }
-    public function addresses()
+    /**
+     * @return HasMany
+     */
+    public function addresses(): HasMany
     {
         return $this->hasMany(Address::class, 'user_id', 'id');
     }
-    public function comments()
+    /**
+     * @return HasMany
+     */
+    public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
     }
-
-    public function banks()
+    /**
+     * @return HasMany
+     */
+    public function banks(): HasMany
     {
         return $this->hasMany(Bank::class, 'user_id', 'id');
     }
-
-    public function creditCards()
+    /**
+     * @return HasMany
+     */
+    public function creditCards(): HasMany
     {
         return $this->hasMany(CreditCard::class, 'user_id', 'id');
     }
@@ -205,7 +249,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     #---Scopes---#
 
-    public function scopeAdmin(Builder $q)
+    public function scopeAdmin(Builder $q): void
     {
         $q->where('type', 'admin');
     }

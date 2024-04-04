@@ -60,6 +60,10 @@ class PaymentController extends Controller
     public function callback(Request $request)
     {
         $orderUuid = $request->cart_id;
+        if(!$orderUuid){
+            notify()->success(trans('Order Cancelled!'));
+            return redirect('/');
+        }
         $order     = Order::where('uuid', $orderUuid)->with('package')->first();
         if ($order->payment_method == PaymentMethodEnum::BANK_ACCOUNT->value) {
             $expireDate  = null;

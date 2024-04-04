@@ -33,6 +33,7 @@
                                             </div>
                                         @endif
                                     </div>
+
                                     <ul class="list-unstyled profile-details">
                                         @if ($user->getRole() != null)
                                             <li class="!flex items-center gap-2">
@@ -40,13 +41,15 @@
                                                 <div class="capitalize">{{ $user->getRole()->name }}</div>
                                             </li>
                                         @endif
+                                                                            @if($user->type == 'subscriber')
                                         @if ($user->activePlan()->first() != null)
                                             <li><span>{{ $user->activePlanName() }}</span></li>
                                             <li><a href="{{ route('package.upgrade') }}"
                                                     class="flex items-center gap-2"><img
                                                         src="{{ asset('img/crown.png') }}">@__('profile.profile.upgrade')</a>
-                                        @endif
                                         </li>
+                                        @endif
+                                    @endif
                                     </ul>
                                     <ul class="list-unstyled">
                                         <li><span>@__('profile.profile.email') :</span> {{ $user->email }}</li>

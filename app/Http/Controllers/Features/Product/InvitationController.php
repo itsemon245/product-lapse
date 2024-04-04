@@ -22,6 +22,7 @@ class InvitationController extends Controller
     public function index()
     {
         $invitations = Invitation::where('owner_id', auth()->user()->id)->get();
+
         return view('features.product.invitation.index', compact('invitations'));
     }
 
@@ -31,21 +32,22 @@ class InvitationController extends Controller
     public function create()
     {
         $products = Product::get();
-        $roles    = Role::where('name', '!=', 'admin')
-        ->where('name', '!=', 'account holder')
-        ->get();
+        $roles = Role::where('name', '!=', 'admin')
+            ->where('name', '!=', 'account holder')
+            ->get();
         $invitation = null;
+
         return view('features.product.invitation.create', compact('products', 'roles', 'invitation'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-
     public function store(TeamInvitationRequest $request)
     {
         $invitation = InvitationService::store($request);
         notify()->success(__('notify/success.invitation_sent'));
+
         return redirect()->route('invitation.index');
     }
 
@@ -55,9 +57,10 @@ class InvitationController extends Controller
     public function edit(Invitation $invitation)
     {
         $products = Product::get();
-        $roles    = Role::where('name', '!=', 'admin')
-        ->where('name', '!=', 'account holder')
-        ->get();
+        $roles = Role::where('name', '!=', 'admin')
+            ->where('name', '!=', 'account holder')
+            ->get();
+
         return view('features.product.invitation.create', compact('products', 'roles', 'invitation'));
     }
 
@@ -67,7 +70,7 @@ class InvitationController extends Controller
     public function accept($token)
     {
         $invitation = Invitation::withoutGlobalScope(OwnerScope::class)->where('token', $token)->first();
-        $user       = User::where('email', $invitation->email)->first();
+        $user = User::where('email', $invitation->email)->first();
         if ($user) {
             Auth::guard('web')->logout();
             request()->session()->invalidate();
@@ -75,10 +78,12 @@ class InvitationController extends Controller
             Auth::login($user);
             $this->assignToUser($invitation, $user);
             notify()->success('You have already accepted the invitation!');
+
             return redirect(route('home'));
         }
         if ($invitation == null) {
             notify()->error('Invitation expired or invalid token!');
+
             return redirect()->route('home');
         }
 
@@ -92,7 +97,7 @@ class InvitationController extends Controller
 
         $request->validate([
             'password' => 'required|string|min:6|same:confirm_password',
-         ]);
+        ]);
         Auth::guard('web')->logout();
         request()->session()->invalidate();
         request()->session()->regenerateToken();
@@ -102,20 +107,21 @@ class InvitationController extends Controller
         // dd($invitation);
         if ($invitation == null) {
             notify()->error('Invitation expired or invalid token!');
+
             return redirect()->route('home');
         }
         $user = User::create([
-            'name'              => $invitation->first_name,
-            'email'             => $invitation->email,
+            'name' => $invitation->first_name,
+            'email' => $invitation->email,
             'email_verified_at' => now(),
-            'password'          => Hash::make($request->password),
-            'first_name'        => $invitation->first_name,
-            'last_name'         => $invitation->last_name,
-            'phone'             => $invitation->phone,
-            'position'          => $invitation->role,
-            'owner_id'          => $invitation->owner_id,
-            'type'              => 'member',
-         ]);
+            'password' => Hash::make($request->password),
+            'first_name' => $invitation->first_name,
+            'last_name' => $invitation->last_name,
+            'phone' => $invitation->phone,
+            'position' => $invitation->role,
+            'owner_id' => $invitation->owner_id,
+            'type' => 'member',
+        ]);
         $this->assignToUser($invitation, $user);
         Auth::login($user, true);
 
@@ -129,6 +135,7 @@ class InvitationController extends Controller
     {
         $invitation = InvitationService::update($request, $invitation);
         notify()->success(__('notify/success.update'));
+
         return redirect()->route('invitation.index');
     }
 
@@ -137,7 +144,7 @@ class InvitationController extends Controller
      */
     public function destroy($id)
     {
-        $id         = base64_decode($id);
+        $id = base64_decode($id);
         $invitation = Invitation::find($id);
         if ($invitation == null || $invitation->owner_id != auth()->user()->id) {
             return redirect()->back();
@@ -150,12 +157,13 @@ class InvitationController extends Controller
 
     public function assignToUser(Invitation $invitation, User $user): void
     {
+        $user->myProducts()->detach();
         foreach ($invitation->products as $product) {
-            $product->users()->attach($user->id);
-            $invitation->products()->updateExistingPivot($product->id, [ 'is_accepted' => true ]);
+            $user->myProducts()->attach($product->id);
+            $invitation->products()->updateExistingPivot($product->id, ['is_accepted' => true]);
         }
         $user->owner_id = $invitation->owner_id;
-        $user->type     = 'member';
+        $user->type = 'member';
         if ($invitation->role) {
             $user->assignRole($invitation->role);
         }

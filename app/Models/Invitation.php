@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\OwnerScope;
 use App\Traits\HasCreator;
 use App\Traits\HasOwner;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,6 +15,6 @@ class Invitation extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'invitation_products', 'invitation_id', 'product_id');
+        return $this->belongsToMany(Product::class, 'invitation_products')->withoutGlobalScope(OwnerScope::class);
     }
 }

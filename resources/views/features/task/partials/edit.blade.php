@@ -24,8 +24,7 @@
                             placeholder="{{ __('feature/task.label.category') }}" name="category" required autofocus>
 
                             @forelse ($categories as $category)
-                                <option value="{{ $category->id }}"
-                                    @if ($task->category == $category->id || $category->id == old('category') ) selected @endif>
+                                <option value="{{ $category->id }}" @if ($task->category == $category->id || $category->id == old('category')) selected @endif>
                                     {{ $category->value->{app()->getLocale()} }}
                                 </option>
                             @empty
@@ -38,8 +37,7 @@
                             placeholder="{{ __('feature/task.label.status') }}" name="status" required autofocus>
 
                             @forelse ($statuses as $status)
-                                <option value="{{ $status->id }}"
-                                    @if ($task->status == $status->id || $status->id == old('status')) selected @endif>
+                                <option value="{{ $status->id }}" @if ($task->status == $status->id || $status->id == old('status')) selected @endif>
                                     {{ $status->value->{app()->getLocale()} }}
                                 </option>
                             @empty
@@ -53,7 +51,8 @@
                                 <div class="checkbox remember">
                                     <label>
                                         @__('feature/task.label.mvp')
-                                        <input type="checkbox" name="choose_mvp">
+                                        <input type="checkbox" name="choose_mvp"
+                                            @if ($task->choose_mvp == 1) checked @endif>
                                     </label>
                                     @error('choose_mvp')
                                         <div class="alert alert-danger">{{ $message }}</div>
@@ -65,7 +64,7 @@
                     <div class="form-group text_box col-lg-12 col-md-12">
                         <x-input-label for="details" value="{{ __('feature/task.label.details') }}" />
                         <x-textarea id="details" class="block mt-1 w-full" name="details" required
-                            placeholder="{{ __('feature/task.placeholder.details') }}" 
+                            placeholder="{{ __('feature/task.placeholder.details') }}"
                             autofocus>{!! $task->details !!}</x-textarea>
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-12">
@@ -85,7 +84,7 @@
                             type="date" name="ending_date"
                             value="{{ \Carbon\Carbon::parse($task->ending_date)->format('Y-m-d') }}" required autofocus />
                     </div>
-                    <div class="form-group text_box col-lg-6 col-md-6">
+                    <div class="form-group text_box col-lg-12 col-md-12">
                         <x-select-input label="{{ __('feature/task.label.administrator') }}" id="administrator"
                             placeholder="{{ __('feature/task.placeholder.administrator') }}" name="administrator" required
                             autofocus>
@@ -105,6 +104,18 @@
                         <x-attach label="{{ __('feature/task.label.attach') }}" class="block mt-1 w-full"
                             name="add_attachments[]" />
                     </div>
+                    @if ($task->file)
+                        <div class="form-group text_box col-lg-6 col-md-6">
+                            <div class="checkbox remember">
+                                <div class="">
+                                    <label class=" text_c f_500">@__('feature/report.delete')</label>
+                                </div>
+                                <label class="">
+                                    <input name="delete" class="cursor-pointer" type="checkbox" />
+                                </label>
+                            </div>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="d-flex align-items-center text-center">

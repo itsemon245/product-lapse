@@ -51,7 +51,8 @@
                                                             <label class=" text_c f_500">@__('feature/productHistory.images')</label>
                                                             <div class="verify-sub-box">
                                                                 <div class="file-loading">
-                                                                    <x-attach id="fileinput-{{ $history->id }}" data-images="{{$history->images}}"
+                                                                    <x-attach id="fileinput-{{ $history->id }}"
+                                                                        data-images="{{ $history->images }}"
                                                                         class="old-fileinput" autofocus
                                                                         label="{{ __('feature/productHistory.images') }}"
                                                                         name="image[]" />
@@ -65,7 +66,7 @@
                                                 <!-- Modal footer -->
                                                 <div class="modal-footer">
                                                     <button type="submit"
-                                                        class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">@__('feature/productHistory.modal-btn')</button>
+                                                        class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">@__('feature/productHistory.update')</button>
                                                 </div>
                                             </form>
 
@@ -195,8 +196,8 @@
                     }
                 });
                 $(".old-fileinput").each((i, input) => {
-                    let preview = JSON.parse(input.dataset.images).map(image=>{
-                        
+                    let preview = JSON.parse(input.dataset.images).map(image => {
+
                         return `<img src='${image.url}' class='file-preview-image w-100' alt='${image.name}' title='${image.name}'>`
                     })
                     let previewConfig = JSON.parse(input.dataset.images).map(image => {

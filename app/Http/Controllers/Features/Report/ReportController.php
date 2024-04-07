@@ -82,10 +82,17 @@ class ReportController extends Controller
         $report = Report::find($report->id);
 
         if ($request->has('file')) {
-            $file = $report->updateFile($request->file);
+            if ($report->file) {
+                $file = $report->updateFile($request->file);
+            } else {
+                $file = $report->storeFile($request->file);
+            }
+        }
+        if ($request->has('delete')) {
+            $report->deleteFile();
         }
 
-        $data = $request->except('_token', 'file');
+        $data = $request->except('_token', 'file', 'delete');
         $report->update($data);
 
         notify()->success(__('Updated successfully!'));

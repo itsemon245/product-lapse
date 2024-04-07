@@ -12,4 +12,5 @@ return [
     'edit' => 'Edit',
     'cancel' => 'Cancel',
     'attach' => 'Attach',
+    'update' => 'Update',
 ];

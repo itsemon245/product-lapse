@@ -36,6 +36,7 @@ class InvitationService
             'last_name'  => $request->last_name,
             'phone'      => $request->phone,
             'role'       => $request->role,
+            'tasks'      => $request->tasks,
             'token'      => $token,
          ]);
         // Create invitation products for every product
@@ -69,6 +70,7 @@ class InvitationService
             'last_name'  => $request->last_name,
             'phone'      => $request->phone,
             'role'       => $request->role,
+            'tasks'      => $request->tasks,
             'token'      => $token,
          ]);
          // Create invitation products for every product

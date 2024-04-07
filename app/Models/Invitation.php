@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\Utils\JsonCast;
 use App\Models\Scopes\OwnerScope;
 use App\Traits\HasCreator;
 use App\Traits\HasOwner;
@@ -12,6 +13,9 @@ class Invitation extends Model
 {
     use HasFactory, HasOwner, HasCreator;
     protected $guarded = [];
+    protected $casts = [
+        'tasks' => JsonCast::class
+    ];
 
     public function products()
     {

@@ -20,7 +20,7 @@ class TeamInvitationRequest extends FormRequest
             'last_name'  => 'sometimes|required|string|max:255',
             'phone'      => 'sometimes|required|string|max:20',
             'role'   => 'required|string|max:255|exists:roles,name',
-            'task'       => 'sometimes|required|string|max:255',
+            'tasks'       => 'sometimes|required|array',
             'products'   => 'required',
             'update_token' => 'sometimes',
             'resend_invitation'=> 'sometimes'

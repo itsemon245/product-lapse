@@ -44,7 +44,7 @@
                                 autofocus />
                         </div>
                         <div class="form-group text_box col-lg-4 col-md-6">
-                            <x-select-input :label="__('feature/team.label.task')" class="selectpickers" id="task" name="task"
+                            <x-select-input :label="__('feature/team.label.task')" class="selectpickers" id="tasks[]" name="task"
                                 placeholder="Choose one" autofocus>
                                 @if ($tasks)
                                     @forelse ($tasks as $task)

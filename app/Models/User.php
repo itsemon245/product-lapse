@@ -122,6 +122,13 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany(Product::class, 'product_users');
     }
     /**
+     * @return BelongsToMany
+     */
+    public function tasks(): BelongsToMany
+    {
+        return $this->belongsToMany(Task::class, 'task_user');
+    }
+    /**
      * @return HasMany
      */
     public function changes(): HasMany
@@ -135,13 +142,13 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Idea::class, 'owner_id', 'id');
     }
-    /**
-     * @return HasMany
-     */
-    public function tasks(): HasMany
-    {
-        return $this->hasMany(Task::class, 'owner_id', 'id');
-    }
+    // /**
+    //  * @return HasMany
+    //  */
+    // public function tasks(): HasMany
+    // {
+    //     return $this->hasMany(Task::class, 'owner_id', 'id');
+    // }
     /**
      * @return HasMany
      */

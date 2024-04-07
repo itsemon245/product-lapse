@@ -32,7 +32,7 @@ class InvitationController extends Controller
     public function create()
     {
         $products = Product::get();
-        $roles = Role::where('name', '!=', 'admin')
+        $roles    = Role::where('name', '!=', 'admin')
             ->where('name', '!=', 'account holder')
             ->get();
         $invitation = null;
@@ -57,7 +57,7 @@ class InvitationController extends Controller
     public function edit(Invitation $invitation)
     {
         $products = Product::get();
-        $roles = Role::where('name', '!=', 'admin')
+        $roles    = Role::where('name', '!=', 'admin')
             ->where('name', '!=', 'account holder')
             ->get();
 
@@ -70,7 +70,7 @@ class InvitationController extends Controller
     public function accept($token)
     {
         $invitation = Invitation::withoutGlobalScope(OwnerScope::class)->where('token', $token)->first();
-        $user = User::where('email', $invitation->email)->first();
+        $user       = User::where('email', $invitation->email)->first();
         if ($user) {
             Auth::guard('web')->logout();
             request()->session()->invalidate();
@@ -79,7 +79,7 @@ class InvitationController extends Controller
             $this->assignToUser($invitation, $user);
             notify()->success('You have already accepted the invitation!');
 
-            return redirect(route('home'));
+            return redirect(route('dashboard'));
         }
         if ($invitation == null) {
             notify()->error('Invitation expired or invalid token!');
@@ -97,7 +97,7 @@ class InvitationController extends Controller
 
         $request->validate([
             'password' => 'required|string|min:6|same:confirm_password',
-        ]);
+         ]);
         Auth::guard('web')->logout();
         request()->session()->invalidate();
         request()->session()->regenerateToken();
@@ -111,17 +111,17 @@ class InvitationController extends Controller
             return redirect()->route('home');
         }
         $user = User::create([
-            'name' => $invitation->first_name,
-            'email' => $invitation->email,
+            'name'              => $invitation->first_name,
+            'email'             => $invitation->email,
             'email_verified_at' => now(),
-            'password' => Hash::make($request->password),
-            'first_name' => $invitation->first_name,
-            'last_name' => $invitation->last_name,
-            'phone' => $invitation->phone,
-            'position' => $invitation->role,
-            'owner_id' => $invitation->owner_id,
-            'type' => 'member',
-        ]);
+            'password'          => Hash::make($request->password),
+            'first_name'        => $invitation->first_name,
+            'last_name'         => $invitation->last_name,
+            'phone'             => $invitation->phone,
+            'position'          => $invitation->role,
+            'owner_id'          => $invitation->owner_id,
+            'type'              => 'member',
+         ]);
         $this->assignToUser($invitation, $user);
         Auth::login($user, true);
 
@@ -144,7 +144,7 @@ class InvitationController extends Controller
      */
     public function destroy($id)
     {
-        $id = base64_decode($id);
+        $id         = base64_decode($id);
         $invitation = Invitation::find($id);
         if ($invitation == null || $invitation->owner_id != auth()->user()->id) {
             return redirect()->back();
@@ -160,10 +160,15 @@ class InvitationController extends Controller
         $user->myProducts()->detach();
         foreach ($invitation->products as $product) {
             $user->myProducts()->attach($product->id);
-            $invitation->products()->updateExistingPivot($product->id, ['is_accepted' => true]);
+            $invitation->products()->updateExistingPivot($product->id, [ 'is_accepted' => true ]);
+        }
+
+        $user->tasks()->detach();
+        foreach ($invitation->tasks as $task) {
+            $user->tasks()->attach($task);
         }
         $user->owner_id = $invitation->owner_id;
-        $user->type = 'member';
+        $user->type     = 'member';
         $user->roles()->detach();
         if ($invitation->role) {
             $user->assignRole($invitation->role);

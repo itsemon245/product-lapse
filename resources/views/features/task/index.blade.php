@@ -28,6 +28,20 @@
         </x-slot:actions>
 
         <x-slot:filter>
+            <form action="{{ url()->current() }}" class="flex">
+                <label
+                    class="inline-flex cursor-pointer items-center px-2 py-1 rounded {{ request()->query('mvp') == 'true' ? '!bg-primary text-white' : '!text-gray-500 bg-white border' }}">
+                    <input onchange="this.form.submit()" class="hidden" type="checkbox" name="mvp" value="true"
+                        id="" />
+                    <span class="mb-0">MVP</span>
+                </label>
+                <label
+                    class="inline-flex cursor-pointer items-center px-2 py-1 rounded {{ request()->query('my_task') == 'true' ? '!bg-primary text-white' : '!text-gray-500 bg-white border' }} mx-4">
+                    <input onchange="this.form.submit()" class="hidden" type="checkbox" value="true" name="my_task"
+                        id="" />
+                    <span class="mb-0">My Tasks</span>
+                </label>
+            </form>
             <h5>@__('feature/task.showing2')</h5>
             <x-filter :route="route('task.search')" :columns="['status']" model="task" :options="$priorities" />
         </x-slot:filter>
@@ -37,7 +51,7 @@
                 <div class="col-md-6">
                     <div class="item lon new">
                         <div class="list_item">
-                             <figure><a href="#"><img src="{{ favicon($task->image) }}" alt=""></a></figure>
+                            <figure><a href="#"><img src="{{ favicon($task->image) }}" alt=""></a></figure>
                             <div class="joblisting_text">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell">

@@ -87,7 +87,7 @@ class IdeaController extends Controller
     public function edit(Idea $idea)
     {
         $priorities = Select::of('idea')->type('priority')->get();
-        $stages     = Select::of('product')->type('stage')->get();
+        $stages     = Stage::cases();
         return view('features.idea.partials.edit', compact('idea', 'priorities', 'stages'));
     }
 

@@ -86,12 +86,12 @@
                                             </form>
                                         </div>
                                     </div>
-                                    <div class="jobsearch-table-cell">
+                                    {{-- <div class="jobsearch-table-cell">
                                         <div class="jobsearch-job-userlist">
                                             <a href="#" title="edit" data-toggle="modal" data-target="#myModal1"
                                                 data-id="{{ $order->plan->id }}"><i class="ti-pencil"></i></a>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -102,7 +102,7 @@
             @endforelse
         </x-slot:list>
     </x-feature.index>
-    <div class="modal fade" id="myModal1">
+    {{-- <div class="modal fade" id="myModal1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
@@ -154,7 +154,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
 @push('scripts')
     <script>

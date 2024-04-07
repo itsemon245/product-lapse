@@ -86,31 +86,31 @@
                                                 @csrf
                                                 <button type="submit">
                                                     @if ($subscriber->banned_at == null)
-                                                        <i class="ti-na"></i>
+                                                        <i class="ti-na" title="@__('Ban User')"></i>
                                                     @else
-                                                        <i class="ti-check"></i>
+                                                        <i class="ti-check" title="@__('Unban User')"></i>
                                                     @endif
                                                 </button>
                                             </form>
                                         </div>
                                     </div>
-                                    @if ($subscriber->type == null)
+                                    {{-- @if ($subscriber->type == null) --}}
                                         <div class="jobsearch-table-cell !w-full">
                                             <div class="jobsearch-job-userlist !float-start">
                                                 <form action="{{ route('user.active', $subscriber) }}" method="post"
                                                     class="like-btn">
                                                     @csrf
                                                     <button type="submit">
-                                                        @if ($subscriber->banned_at == null)
-                                                            <i class="ti-check" title="@__('Active')"></i>
+                                                        @if ($subscriber->email_verified_at == null)
+                                                            <i class="ti-check" title="@__('Verify Email')"></i>
                                                         @else
-                                                            <i class="ti-check" title="@__('Inactive')"></i>
+                                                            <i class="ti-na" title="@__('Unverify Email')"></i>
                                                         @endif
                                                     </button>
                                                 </form>
                                             </div>
                                         </div>
-                                    @endif
+                                    {{-- @endif --}}
                                 </div>
                             </div>
                         </div>

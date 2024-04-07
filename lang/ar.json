@@ -298,7 +298,10 @@
     "Select Category": "اختر الفئة",
     "Select status": "حدد الحالة",
     "Delete": "يمسح",
-    "No attatchments here": "لا يوجد مرفقات هنا"
+    "No attatchments here": "لا يوجد مرفقات هنا",
+    "Ban User": "حجب المستخدم",
+    "Unban User": "إلغاء حظر المستخدم",
+    "Unverify Email": "إلغاء التحقق من البريد الإلكتروني"
 
 
 }

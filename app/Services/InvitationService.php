@@ -11,9 +11,8 @@ use Illuminate\Support\Str;
 
 class InvitationService
 {
-    public function __construct(protected TeamInvitationRequest $request, protected $extraData)
+    public function __construct(protected TeamInvitationRequest $request)
     {
-        $this->extraData = $extraData;
     }
 
     /**
@@ -23,15 +22,15 @@ class InvitationService
      *  @param $extraData
      * @return Invitation
      */
-    public static function store(TeamInvitationRequest $request = null, $extraData = null): Invitation
+    public static function store(TeamInvitationRequest $request = null): Invitation
     {
         // dd($extraData);
         if ($request == null) {
             $request = self::$request;
         }
         $token      = (string) Str::uuid();
-        $invitation = Invitation::create([
-            'owner_id'   => auth()->user()->id,
+        $invitation = Invitation::updateOrCreate(['email' => $request->email],[
+            'owner_id'   => auth()->user()->type == 'admin' ? auth()->id() : auth()->user()?->owner_id,
             'email'      => $request->email,
             'first_name' => $request->first_name,
             'last_name'  => $request->last_name,
@@ -60,13 +59,11 @@ class InvitationService
      */
     public static function update(TeamInvitationRequest $request = null, Invitation $invitation): Invitation
     {
-        // dd($extraData);
         if ($request == null) {
             $request = self::$request;
         }
         $token      = $request->boolean('update_token') ? (string) Str::uuid() : $invitation->token;
         $invitation = tap($invitation)->update([
-            'owner_id'   => auth()->user()->id,
             'email'      => $request->email,
             'first_name' => $request->first_name,
             'last_name'  => $request->last_name,

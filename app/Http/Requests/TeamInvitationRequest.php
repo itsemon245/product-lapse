@@ -15,7 +15,7 @@ class TeamInvitationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email'      => [ 'sometimes', 'required', 'email', 'unique:users,email'],
+            'email'      => [ 'sometimes', 'required', 'email'],
             'first_name' => 'sometimes|required|string|max:255',
             'last_name'  => 'sometimes|required|string|max:255',
             'phone'      => 'sometimes|required|string|max:20',

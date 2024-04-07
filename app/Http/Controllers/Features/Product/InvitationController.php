@@ -164,6 +164,7 @@ class InvitationController extends Controller
         }
         $user->owner_id = $invitation->owner_id;
         $user->type = 'member';
+        $user->roles()->detach();
         if ($invitation->role) {
             $user->assignRole($invitation->role);
         }

@@ -20,4 +20,9 @@ class Plan extends Model
     {
         return $this->belongsTo(Order::class, 'order_id', 'id');
     }
+    public function package()
+    {
+        return $this->belongsTo(Package::class);
+    }
+
 }

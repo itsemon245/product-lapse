@@ -17,6 +17,30 @@
                     <form method="POST" action="{{ route('users.store') }}" class="login-form sign-in-form"
                         enctype="multipart/form-data"> @csrf
                         <div class="row">
+                            <div class="col-md-6">
+                                <x-select-input label="Select Package" id="selectPackage" name="package_id">
+                                    @foreach ($packages as $package)
+                                        <option value="{{ $package?->id }}" @selected(old('package') == $package?->id || $package?->id == $activePackage?->id)>
+                                            {{ $package?->name->{app()->getLocale()} }}</option>
+                                    @endforeach
+                                </x-select-input>
+                            </div>
+                            <div class="form-group text_box col-md-6" id="hx-target">
+                                <div class="flex items-end">
+                                    <div>
+                                        <x-input-label class="mb-1" for="validity" value="{{ __('Validity') }}" />
+                                        <x-input id="validity" class="block mt-1 w-full" type="text"
+                                            placeholder="{{ __('Validity') }}" name="validity" :value="$activePlan?->validity ?? $activePackage?->validity"
+                                            autofocus />
+                                    </div>
+                                    <x-select-input name="unit" class="!mb-[24px] !w-[120px]">
+                                        <option value="day" @selected($activePackage?->unit == 'day')>{{ __('Day') }}</option>
+                                        <option value="month" @selected($activePackage?->unit == 'month')>{{ __('Month') }}</option>
+                                        <option value="year" @selected($activePackage?->unit == 'year')>{{ __('Year') }}</option>
+                                    </x-select-input>
+                                </div>
+                            </div>
+
                             <div class="form-group text_box col-md-6">
                                 <label class=" text_c f_500">@__('singup.label.fname')</label>
                                 <input type="text" placeholder="{{ __('singup.placeholder.fname') }}" name="first_name"
@@ -136,3 +160,27 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            let target = $('#hx-target')
+            console.log('changed')
+            $('#selectPackage').on('change', (e) => {
+                let package = e.target.value
+                $.ajax({
+                    type: "get",
+                    url: "{{ url()->current() }}" + '?package_id=' + package,
+                    success: function(response) {
+                        let data = $(response).find('#hx-target')
+                        console.log(data)
+                        target.html(data.html());
+                        $('#hx-target .selectpickers').each((i, el) => {
+                            $(el).niceSelect()
+                        })
+                    }
+                });
+            })
+        });
+    </script>
+@endpush

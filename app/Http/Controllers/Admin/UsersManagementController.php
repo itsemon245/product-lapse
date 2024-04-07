@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Plan;
 use App\Models\User;
-use App\Notifications\WelcomeNotification;
+use App\Models\Package;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use App\Notifications\WelcomeNotification;
 
 class UsersManagementController extends Controller
 {
@@ -39,20 +41,29 @@ class UsersManagementController extends Controller
 
     public function create()
     {
-        return view('pages.users.create');
+        $packages      = Package::get();
+        $activePlan    = null;
+        $activePackage = null;
+        $packageId     = request()->query('package_id');
+        if (!empty($packageId)) {
+            $activePackage = Package::find($packageId);
+        }
+        return view('pages.users.create', compact('packages', 'activePlan', 'activePackage'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'email'            => [ 'required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class ],
+            'email'            => [ 'required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email' ],
             'password'         => [ 'required', Rules\Password::defaults() ],
-            'first_name'       => [ 'nullable', 'string', 'max:40' ],
-            'last_name'        => [ 'nullable', 'string', 'max:40' ],
+            'first_name'       => [ 'nullable', 'string' ],
+            'last_name'        => [ 'nullable', 'string' ],
             'phone'            => [ 'nullable', 'string', 'max:40' ],
             'workplace'        => [ 'nullable', 'string', 'max:40' ],
             'position'         => [ 'nullable', 'string', 'max:40' ],
             'promotional_code' => [ 'nullable', 'string', 'max:40' ],
+            'unit'             => "string|nullable",
+            'validity'         => "integer|nullable",
          ]);
         $admin = User::admin()->first();
 
@@ -69,7 +80,20 @@ class UsersManagementController extends Controller
             'owner_id'          => $admin?->id,
             "email_verified_at" => now(),
          ]);
-        $user->notify(new WelcomeNotification($user));
+
+        $activePlan = $user->activePlan()->first();
+        $package    = Package::find($request->package_id);
+        $expireDate = $request->validity != null ? now()->add($request->unit, $request->validity) : null;
+        Plan::updateOrCreate([ 'id' => $activePlan?->id ], [
+            'user_id'       => $user->id,
+            'package_id'    => $package->id,
+            'name'          => $package->name,
+            'price'         => $package->price,
+            'product_limit' => $package->product_limit,
+            'expired_at'    => $expireDate,
+            'validity'      => $request->validity,
+            'active'        => true,
+         ]);
         notify()->success(__('Created successfully!'));
 
         return redirect()->route('users.index');
@@ -84,7 +108,7 @@ class UsersManagementController extends Controller
         $user = tap($user)->update([
             'banned_at' => $user->banned_at == null ? now() : null,
          ]);
-         $user->refresh();
+        $user->refresh();
         if ($user->banned_at == null) {
             $message = __('User has been unbanned!');
         }{
@@ -123,7 +147,56 @@ class UsersManagementController extends Controller
     }
     public function edit(User $user)
     {
-        return view('pages.users.edit', compact('user'));
+        $packages      = Package::get();
+        $activePlan    = $user->activePlan()->first();
+        $activePackage = $user->activePackage();
+        $packageId     = request()->query('package_id');
+        if (!empty($packageId)) {
+            $activePackage = Package::find($packageId);
+        }
+        return view('pages.users.edit', compact('user', 'packages', 'activePlan', 'activePackage'));
+    }
+
+    public function update(Request $request, User $user)
+    {
+        $request->validate([
+            'email'            => [ 'required', 'lowercase', 'email', 'max:255', "unique:users,email,{$user->id}" ],
+            // 'password'         => [ 'required', Rules\Password::defaults() ],
+            'first_name'       => [ 'nullable', 'string' ],
+            'last_name'        => [ 'nullable', 'string' ],
+            'phone'            => [ 'nullable', 'string' ],
+            'workplace'        => [ 'nullable', 'string', 'max:40' ],
+            'position'         => [ 'nullable', 'string', 'max:40' ],
+            'promotional_code' => [ 'nullable', 'string', 'max:40' ],
+            'unit'             => "string|nullable",
+            'validity'         => "integer|nullable",
+         ]);
+        $user = tap($user)->update([
+            'email'            => $request->email,
+            // 'password'          => $request->has('password') ? Hash::make($request->password): $user->password,
+            'name'             => $request->first_name . " " . $request->last_name,
+            'first_name'       => $request->first_name,
+            'last_name'        => $request->last_name,
+            'phone'            => $request->phone,
+            'workplace'        => $request->workplace,
+            'promotional_code' => $request->promotional_code,
+         ]);
+        $activePlan = $user->activePlan()->first();
+        $package    = Package::find($request->package_id);
+        $expireDate = $request->validity != null ? now()->add($request->unit, $request->validity) : null;
+        Plan::updateOrCreate([ 'id' => $activePlan?->id ], [
+            'user_id'       => $user->id,
+            'package_id'    => $package->id,
+            'name'          => $package->name,
+            'price'         => $package->price,
+            'product_limit' => $package->product_limit,
+            'expired_at'    => $expireDate,
+            'validity'      => $request->validity,
+            'active'        => true,
+         ]);
+        notify()->success('Updated Successfully!');
+        return back();
+
     }
 
     public function filter(Request $request)

@@ -64,6 +64,11 @@ class User extends Authenticatable implements MustVerifyEmail
             ->limit(1);
     }
 
+    public function activePackage()
+    {
+        return $this->activePlan()->first()?->package;
+    }
+
     public function activePlanName()
     {
         return $this->activePlan()->first()->name->{app()->getLocale()};

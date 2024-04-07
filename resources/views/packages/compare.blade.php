@@ -50,8 +50,7 @@
                         </div>
                         @foreach ($packages as $p)
                             <div class="price_item" data-title="{{ $package->name->{app()->getLocale()} }}">
-                                @if (auth()->user()?->activePlan()->first()?->order?->package_id == $package->id &&
-                                        auth()->user()?->type == 'subscriber')
+                                @if (auth()->user()?->activePackage()?->id == $package->id)
                                     <a href="#" class="price_btn btn_hover">
                                         <i class="ti-check"></i>
                                     </a>

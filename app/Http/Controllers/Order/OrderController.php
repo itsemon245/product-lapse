@@ -134,6 +134,7 @@ class OrderController extends Controller
         $plan = Plan::create([
             'order_id' => $order->id,
             'user_id' => $order->user_id,
+            'package_id' => $order->package_id,
             'name' => $order->package->name,
             'price' => $order->amount,
             'active' => true,
@@ -177,6 +178,7 @@ class OrderController extends Controller
             'order_id' => $old->order_id,
             'user_id' => $old->user_id,
             'name' => $package->name,
+            'package_id' => $package->id,
             'price' => $package->price,
             'active' => true,
             'expired_at' => $request->expiration_date,

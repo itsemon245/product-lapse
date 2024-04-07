@@ -36,6 +36,7 @@ class PaymentController extends Controller
              ]);
             $plan = Plan::create([
                 'order_id'      => $order->id,
+                'package_id'    => $order->package_id,
                 'user_id'       => $order->user_id,
                 'name'          => $order->package->name,
                 'price'         => $order->amount,
@@ -70,9 +71,10 @@ class PaymentController extends Controller
             $active      = false;
             $orderStatus = 'pending';
             $completedAt = null;
-            session()->put('payment-message', __('Waiting for approval'));
+            session()->flash('payment-message', __('Waiting for approval'));
             $plan = Plan::create([
                 'order_id'      => $order->id,
+                'package_id'    => $order->package_id,
                 'user_id'       => $order->user_id,
                 'name'          => $order->package->name,
                 'price'         => $order->amount,
@@ -105,6 +107,7 @@ class PaymentController extends Controller
             $plan = Plan::create([
                 'order_id'      => $order->id,
                 'user_id'       => $order->user_id,
+                'package_id'    => $order->package_id,
                 'name'          => $order->package->name,
                 'price'         => $order->amount,
                 'active'        => $active,
@@ -112,6 +115,8 @@ class PaymentController extends Controller
                 'product_limit' => $order->package->product_limit,
              ]);
             Mail::to($order->user->billingAddress()->email)->send(new InvoiceMail($order));
+            session()->flash('payment-message', __('Payment Success'));
+
 
             return redirect(route('payment.success'));
         } else {
@@ -120,6 +125,7 @@ class PaymentController extends Controller
                 'status'    => 'failed',
                 'failed_at' => now(),
              ]);
+            session()->flash('payment-message', __('Payment Failed!'));
             return redirect(route('payment.failed'));
         }
 

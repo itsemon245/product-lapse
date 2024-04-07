@@ -50,8 +50,8 @@
                                                         <div class="form-group text_box col-lg-12 col-md-12">
                                                             <label class=" text_c f_500">@__('feature/productHistory.images')</label>
                                                             <div class="verify-sub-box">
-                                                                <div class="file-loading">
-                                                                    <x-attach id="fileinput-{{ $history->id }}"
+                                                                <div class="">
+                                                                    <input type="file" multiple id="fileinput-{{ $history->id }}"
                                                                         data-images="{{ $history->images }}"
                                                                         class="old-fileinput" autofocus
                                                                         label="{{ __('feature/productHistory.images') }}"
@@ -150,8 +150,8 @@
                             <div class="form-group text_box col-lg-12 col-md-12">
                                 <label class=" text_c f_500">@__('feature/productHistory.images')</label>
                                 <div class="verify-sub-box">
-                                    <div class="file-loading">
-                                        <x-attach id="multiplefileupload" required autofocus
+                                    <div class="">
+                                        <input type="file" multiple id="multiplefileupload" required autofocus
                                             label="{{ __('feature/productHistory.images') }}" name="image[]" />
                                     </div>
                                 </div>

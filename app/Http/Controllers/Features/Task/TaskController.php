@@ -97,10 +97,20 @@ class TaskController extends Controller
         if (!Storage::disk('public')->exists($filePath)) {
             notify()->error(__('File not found!'));
 
-            return redirect()->route('$task.show', $task);
+            return redirect()->route('task.show', $task);
         }
 
         return Storage::download('public/' . $filePath);
+    }
+    public function deleteFile(File $file)
+    {
+        $filePath = $file->path;
+        if (Storage::disk('public')->exists($filePath)) {
+            Storage::delete("storage/".$filePath);
+            $file->delete();
+        }
+        notify()->success('Deleted Successfully!');
+        return back();
     }
 
     public function changeStatus(Request $request, Task $task)

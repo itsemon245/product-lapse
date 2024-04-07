@@ -24,8 +24,7 @@
                             placeholder="{{ __('feature/task.label.category') }}" name="category" required autofocus>
 
                             @forelse ($categories as $category)
-                                <option value="{{ $category->id }}"
-                                    @if ($task->category == $category->id || $category->id == old('category') ) selected @endif>
+                                <option value="{{ $category->id }}" @if ($task->category == $category->id || $category->id == old('category')) selected @endif>
                                     {{ $category->value->{app()->getLocale()} }}
                                 </option>
                             @empty
@@ -38,8 +37,7 @@
                             placeholder="{{ __('feature/task.label.status') }}" name="status" required autofocus>
 
                             @forelse ($statuses as $status)
-                                <option value="{{ $status->id }}"
-                                    @if ($task->status == $status->id || $status->id == old('status')) selected @endif>
+                                <option value="{{ $status->id }}" @if ($task->status == $status->id || $status->id == old('status')) selected @endif>
                                     {{ $status->value->{app()->getLocale()} }}
                                 </option>
                             @empty
@@ -65,7 +63,7 @@
                     <div class="form-group text_box col-lg-12 col-md-12">
                         <x-input-label for="details" value="{{ __('feature/task.label.details') }}" />
                         <x-textarea id="details" class="block mt-1 w-full" name="details" required
-                            placeholder="{{ __('feature/task.placeholder.details') }}" 
+                            placeholder="{{ __('feature/task.placeholder.details') }}"
                             autofocus>{!! $task->details !!}</x-textarea>
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-12">
@@ -105,6 +103,50 @@
                         <x-attach label="{{ __('feature/task.label.attach') }}" class="block mt-1 w-full"
                             name="add_attachments[]" />
                     </div>
+                    @if ($task->files)
+                        <div class="col-md-12">
+                            <h6 class="title2">@__('feature/task.attach')</h6>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>@__('feature/task.name')</th>
+                                            <th>@__('Actions')</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @forelse ($task->files as $file)
+                                            <tr>
+                                                <td>1</td>
+                                                <td>{{ $file->name }}</td>
+                                                <td>
+                                                    <div class="flex items-center gap-2">
+                                                        <a class="btn_hover agency_banner_btn btn-bg btn-table"
+                                                            href="{{ route('task.file.download', ['task' => $task, 'file' => $file]) }}">@__('feature/task.view')</a>
+                                                        </a>
+                                                        <form
+                                                            action="{{ route('task.file.delete', ['task' => $task, 'file' => $file]) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button
+                                                                class="btn_hover agency_banner_btn btn-table !bg-red-600 hover:!bg-red-400">@__('Delete')</button>
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            @empty
+                                            <tr>
+                                                <td colspan="3" class="text-center text-gray-500">@__('No attatchments here')</td>
+                                            </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="d-flex align-items-center text-center">

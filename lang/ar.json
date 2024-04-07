@@ -32,7 +32,7 @@
     "Submit" : "يُقدِّم",
     "Contact massage show" : "عرض تدليك الاتصال",
     "Idea owner :" : "Idea البحث :",
-    "Actions" : "Actions",
+    "Actions" : "أجراءات",
     "Status :" : "البحث :",
     "Choose one..." : "Choose one...",
     "Attach file" : "Attach file",
@@ -296,7 +296,9 @@
     "Profile" : "حساب تعريفي",
     "Settings" : "إعدادات",
     "Select Category": "اختر الفئة",
-    "Select status": "حدد الحالة"
+    "Select status": "حدد الحالة",
+    "Delete": "يمسح",
+    "No attatchments here": "لا يوجد مرفقات هنا"
 
 
 }

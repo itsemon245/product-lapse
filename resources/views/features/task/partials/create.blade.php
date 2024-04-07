@@ -98,7 +98,7 @@
 
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-attach label="{{ __('feature/task.label.attach') }}" required class="block mt-1 w-full"
+                        <x-attach label="{{ __('feature/task.label.attach') }}" class="block mt-1 w-full"
                             name="add_attachments[]" />
                     </div>
                 </div>

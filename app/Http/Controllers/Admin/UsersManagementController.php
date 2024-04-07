@@ -100,7 +100,7 @@ class UsersManagementController extends Controller
             'email_verified_at' => $user->email_verified_at == null ? now() : null,
          ]);
         $user->refresh();
-        if ($user->email_verified_at) {
+        if ($user->email_verified_at != null) {
             $message = __('The user email has been verified!');
         }{
             $message = __('The user email has been unverified!');

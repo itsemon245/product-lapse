@@ -17,9 +17,9 @@ class UsersManagementController extends Controller
     public function index()
     {
         $subscribers = User::where('type', 'subscriber')->orWhere('type', null)->latest()->paginate();
-       
-        if(!empty(request()->query('search'))){
-            $subscribers = User::where(function ($q){
+
+        if (!empty(request()->query('search'))) {
+            $subscribers = User::where(function ($q) {
                 if (request()->query('search') == 'banned') {
                     $q->whereNotNull('banned_at');
                 }
@@ -57,17 +57,17 @@ class UsersManagementController extends Controller
         $admin = User::admin()->first();
 
         $user = User::create([
-            'email'            => $request->email,
-            'password'         => Hash::make($request->password),
-            'name'             => $request->first_name . " " . $request->last_name,
-            'first_name'       => $request->first_name,
-            'last_name'        => $request->last_name,
-            'phone'            => $request->phone,
-            'workplace'        => $request->workplace,
-            'position'         => $request->position,
-            'promotional_code' => $request->promotional_code,
-            'owner_id'         => $admin?->id,
-            "email_verified_at"=> now()
+            'email'             => $request->email,
+            'password'          => Hash::make($request->password),
+            'name'              => $request->first_name . " " . $request->last_name,
+            'first_name'        => $request->first_name,
+            'last_name'         => $request->last_name,
+            'phone'             => $request->phone,
+            'workplace'         => $request->workplace,
+            'position'          => $request->position,
+            'promotional_code'  => $request->promotional_code,
+            'owner_id'          => $admin?->id,
+            "email_verified_at" => now(),
          ]);
         $user->notify(new WelcomeNotification($user));
         notify()->success(__('Created successfully!'));
@@ -84,6 +84,7 @@ class UsersManagementController extends Controller
         $user = tap($user)->update([
             'banned_at' => $user->banned_at == null ? now() : null,
          ]);
+         $user->refresh();
         if ($user->banned_at == null) {
             $message = __('User has been unbanned!');
         }{
@@ -96,8 +97,9 @@ class UsersManagementController extends Controller
     public function active(Request $request, User $user)
     {
         $user = tap($user)->update([
-            'email_verified_at' =>  $user->email_verified_at == null ? now() : null,
+            'email_verified_at' => $user->email_verified_at == null ? now() : null,
          ]);
+        $user->refresh();
         if ($user->email_verified_at) {
             $message = __('The user email has been verified!');
         }{

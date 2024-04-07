@@ -59,8 +59,10 @@
                                                 class="f_500 t_color3">{{ $order->package->name->{app()->getLocale()} . ' ' . __('Order by') . ' ' . $user->name }}</a>
                                         </h4>
                                         <ul class="list-unstyled">
-                                            <li> {{ __('Status:') }} <span class="p_color4">{{ $order->status }}</span> </li>
-                                            <li> {{ __('Amount:') }} <span class="p_color4">{{ $order->amount }}</span> </li>
+                                            <li> {{ __('Status:') }} <span class="p_color4">{{ $order->status }}</span>
+                                            </li>
+                                            <li> {{ __('Amount:') }} <span class="p_color4">{{ $order->amount }}</span>
+                                            </li>
                                             @if ($order->plan)
                                                 <li>
                                                     {{ __('Expiration date') }} <span
@@ -78,18 +80,18 @@
                                                 <button type="submit"
                                                     class="{{ $order->status == 'pending' ? '' : 'd-none' }}"
                                                     {{ $order->status == 'pending' ? '' : 'disabled' }}>
-                                                    <i class="ti-check" ></i>
+                                                    <i class="ti-check"></i>
 
                                                 </button>
                                             </form>
                                         </div>
                                     </div>
-                                    {{-- <div class="jobsearch-table-cell">
+                                    <div class="jobsearch-table-cell">
                                         <div class="jobsearch-job-userlist">
                                             <a href="#" title="edit" data-toggle="modal" data-target="#myModal1"
                                                 data-id="{{ $order->plan->id }}"><i class="ti-pencil"></i></a>
                                         </div>
-                                    </div> --}}
+                                    </div>
                                 </div>
                             </div>
                         </div>

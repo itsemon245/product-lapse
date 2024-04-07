@@ -36,14 +36,17 @@
                 <div class="col-md-6">
                     <div class="item lon new">
                         <div class="list_item">
-                            <figure><a href="#"><img src="{{ favicon($delivery->image) }}" alt=""></a></figure>
+                            <figure><a href="#"><img src="{{ favicon($delivery->image) }}" alt=""></a>
+                            </figure>
                             <div class="joblisting_text document-list">
                                 <div class="job_list_table">
-                                      <div class="jobsearch-table-cell">
-                                        <h4 class="f_size_20 f_500 col-md-12 flex items-center"><a href="{{ route('delivery.show', $delivery) }}" target="_blank"
-                                            class="f_500 t_color3">{{ $delivery->name }}</a><img class=" {{ $delivery->is_agreed == null ? 'd-none' : '' }} deliver-img"
-                                            src="{{ $delivery->is_agreed == 1 ? asset('img/done.png') : asset('img/cancel.png') }}"
-                                            title="Approved"></h4>
+                                    <div class="jobsearch-table-cell">
+                                        <h4 class="f_size_20 f_500 col-md-12 flex items-center"><a
+                                                href="{{ route('delivery.show', $delivery) }}" target="_blank"
+                                                class="f_500 t_color3">{{ $delivery->name }}</a><img
+                                                class=" {{ $delivery->is_agreed == null ? 'd-none' : '' }} deliver-img"
+                                                src="{{ $delivery->is_agreed == 1 ? asset('img/done.png') : asset('img/cancel.png') }}"
+                                                title="Approved"></h4>
                                         {{-- <h4><a href="{{ route('delivery.show', $delivery) }}" onclick="window.open('{{ route('delivery.show', $delivery) }}','name','width=600,height=600')" target="popup"
                                                 class="f_500 t_color3">{{ $delivery->name }}</a></h4> --}}
                                         <ul class="list-unstyled">

@@ -51,7 +51,8 @@
                                 <div class="checkbox remember">
                                     <label>
                                         @__('feature/task.label.mvp')
-                                        <input type="checkbox" name="choose_mvp">
+                                        <input type="checkbox" name="choose_mvp"
+                                            @if ($task->choose_mvp == 1) checked @endif>
                                     </label>
                                     @error('choose_mvp')
                                         <div class="alert alert-danger">{{ $message }}</div>
@@ -83,7 +84,7 @@
                             type="date" name="ending_date"
                             value="{{ \Carbon\Carbon::parse($task->ending_date)->format('Y-m-d') }}" required autofocus />
                     </div>
-                    <div class="form-group text_box col-lg-6 col-md-6">
+                    <div class="form-group text_box col-lg-12 col-md-12">
                         <x-select-input label="{{ __('feature/task.label.administrator') }}" id="administrator"
                             placeholder="{{ __('feature/task.placeholder.administrator') }}" name="administrator" required
                             autofocus>

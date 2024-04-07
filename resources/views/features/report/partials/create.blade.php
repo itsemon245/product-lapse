@@ -30,10 +30,10 @@
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
                         <x-input label="{{ __('feature/report.label.date') }}" id="report_date" class="block mt-1 w-full"
-                            type="date" vaule="{{ old('report_date') }}" name="report_date" required autofocus />
+                            type="date" vaule="{{ old('report_date') }}" name="report_date" required autofo />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-attach label="{{ __('feature/report.label.upload') }}" required name='file' />
+                        <x-attach label="{{ __('feature/report.label.upload') }}" name='file' />
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-12">
                         <x-textarea label="{{ __('feature/report.label.description') }}" required autofocus rows="5"

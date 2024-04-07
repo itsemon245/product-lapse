@@ -165,7 +165,15 @@ class TaskController extends Controller
             }
         }
 
-        $data = $request->except('_token', 'add_attachments');
+        if ($request->has('delete')) {
+            if ($task->files) {
+                foreach ($task->files as $file) {
+                    $task->deleteFile($file);
+                }
+            }
+        }
+
+        $data = $request->except('_token', 'add_attachments', 'delete');
 
         $task->update([
             'name' => $request->name,

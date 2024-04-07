@@ -29,14 +29,26 @@
                             @endforelse
                         </x-select-input>
                     </div>
-                    <div class="form-group text_box col-lg-6 col-md-6">
+                    <div class="form-group text_box col-lg-12 col-md-12">
                         <x-input label="{{ __('feature/report.label.date') }}" id="report_date" class="block mt-1 w-full"
                             type="date" name="report_date"
                             value="{{ \Carbon\Carbon::parse($report->report_date)->format('Y-m-d') }}" required autofocus />
                     </div>
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-attach label="{{ __('feature/report.label.upload') }}" required autofocus name='file' />
+                        <x-attach label="{{ __('feature/report.label.upload') }}" name='file' />
                     </div>
+                    @if ($report->file)
+                        <div class="form-group text_box col-lg-6 col-md-6">
+                            <div class="checkbox remember">
+                                <div class="">
+                                    <label class=" text_c f_500">@__('feature/report.delete')</label>
+                                </div>
+                                <label class="">
+                                    <input name="delete" class="cursor-pointer" type="checkbox" />
+                                </label>
+                            </div>
+                        </div>
+                    @endif
                     <div class="form-group text_box col-lg-12 col-md-12">
                         <x-textarea placeholder="{{ __('feature/report.placeholder.description') }}" rows="5"
                             cols="10" requrired autofocus name="description"

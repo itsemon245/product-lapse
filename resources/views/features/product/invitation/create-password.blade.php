@@ -1,17 +1,17 @@
-@extends('layouts.subscriber.app', ['title'=> __('Create Password')])
+@extends('layouts.subscriber.app', ['title' => __('Create Password')])
 
 @section('main')
-<section class="breadcrumb_area mt-6">
-    <div class="container d-flex">
-        <div class="breadcrumb_content text-center ml-auto">
-            <ul class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item active">@__('Create Password')</li>
-            </ul>
-        </div>
+    <section class="breadcrumb_area mt-6">
+        <div class="container d-flex">
+            <div class="breadcrumb_content text-center ml-auto">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active">@__('Create Password')</li>
+                </ul>
+            </div>
 
-    </div>
-</section>
+        </div>
+    </section>
     <section class="sign_in_area bg_color sec_pad">
         <div class="container">
             <div class="sign_info">
@@ -23,15 +23,13 @@
                             <div class="form-group text_box col-lg-4 col-md-6">
                                 <label for="" class="text_c f_500">@__('Create Password')</label>
 
-                                <x-input id="password"
-                                    class="block mt-1 w-full" type="text"
+                                <x-input id="password" class="block mt-1 w-full" type="password"
                                     placeholder="{{ __('feature/delivery.placeholder.password') }}" name="password"
                                     :value="old('password')" required autofocus />
                             </div>
                             <div class="form-group text_box col-lg-4 col-md-6">
                                 <label for="" class="text_c f_500">@__('Confirm Password')</label>
-                                <x-input id="password_confirmation"
-                                    class="block mt-1 w-full" type="text"
+                                <x-input id="password_confirmation" class="block mt-1 w-full" type="password"
                                     placeholder="{{ __('feature/delivery.placeholder.password') }}" name="confirm_password"
                                     :value="old('password')" required autofocus />
                             </div>

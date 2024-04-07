@@ -6,6 +6,7 @@ return [
     'add' => 'Add report',
     'search' => 'Search report',
     'showing' => 'Report type',
+    'delete' => 'Delete',
 
     //add page + edit page
     'label' => [

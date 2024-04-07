@@ -1,6 +1,6 @@
 @extends('layouts.subscriber.app', ['title' => @__('feature/task.add')])
 
-@section('main') 
+@section('main')
     <x-feature.create>
         <x-slot:breadcrumb>
             <x-breadcrumb :list="[['label' => @__('feature/task.add'), 'route' => route('task.create')]]" />
@@ -37,7 +37,7 @@
                             placeholder="Select status" name="status" required autofocus>
                             @if ($statuses)
                                 @forelse ($statuses as $status)
-                                    <option value="<?= $status->id ?>" @selected($status->id == old('status')) >
+                                    <option value="<?= $status->id ?>" @selected($status->id == old('status'))>
                                         <?= $status->value->{app()->getLocale()} ?>
                                     </option>
                                 @empty
@@ -87,7 +87,7 @@
                             autofocus>
                             @if ($users)
                                 @forelse ($users as $user)
-                                    <option value="{{ $user->id }}" @selected($user->id == old('classification') || $user->id == auth()->id()) > 
+                                    <option value="{{ $user->id }}" @selected($user->id == old('classification') || $user->id == auth()->id())>
                                         {{ $user->name }}
                                     </option>
                                 @empty
@@ -107,10 +107,10 @@
                     <button type="submit"
                         class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">@__('feature/task.submit')</button>
             </form>
-                    <a href="{{ route('task.index') }}"
-                        class="btn_hover agency_banner_btn btn-bg btn-bg-grey">@__('feature/task.cancel')</a>
-                </div>
-           
+            <a href="{{ route('task.index') }}"
+                class="btn_hover agency_banner_btn btn-bg btn-bg-grey">@__('feature/task.cancel')</a>
+            </div>
+
         </x-slot:from>
     </x-feature.create>
 @endsection

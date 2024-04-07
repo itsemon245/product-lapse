@@ -96,13 +96,12 @@ class UsersManagementController extends Controller
     public function active(Request $request, User $user)
     {
         $user = tap($user)->update([
-            'email_verified_at' => now(),
-            'type'              => 'subscriber',
+            'email_verified_at' =>  $user->email_verified_at == null ? now() : null,
          ]);
-        if ($user->banned_at == null) {
-            $message = __('The user has been activated !');
+        if ($user->email_verified_at) {
+            $message = __('The user email has been verified!');
         }{
-            $message = __('The user has been unactive !');
+            $message = __('The user has email been unverified!');
         }
         notify()->success($message);
         return back();
@@ -119,6 +118,10 @@ class UsersManagementController extends Controller
     public function show(User $user)
     {
         return view('pages.users.show', compact('user'));
+    }
+    public function edit(User $user)
+    {
+        return view('pages.users.edit', compact('user'));
     }
 
     public function filter(Request $request)

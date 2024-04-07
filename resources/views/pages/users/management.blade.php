@@ -31,8 +31,9 @@
                     <option selected>@__('All')</option>
                     <option value="active" @selected(request()->query('search') == 'active')>@__('Active')</option>
                     <option value="banned" @selected(request()->query('search') == 'banned') ">@__('Banned')</option>
-                                <option value="verified" @selected(request()->query('search') == 'verified')>@__('Verified')</option>
-                                <option value="unverified" @selected(request()->query('search') == 'unverified') ">@__('Unverified')</option>
+                                                <option value="verified" @selected(request()->query('search') == 'verified')>@__('Verified')</option>
+                                                <option value="unverified" @selected(request()->query('search') == 'unverified') ">@__('Unverified')
+                    </option>
                 </select>
             </form>
         </x-slot:filter>
@@ -81,6 +82,14 @@
                                     </div>
                                     <div class="jobsearch-table-cell !w-full mr-2">
                                         <div class="jobsearch-job-userlist !float-start">
+                                            <a href="{{ route('users.edit', ['user' => $subscriber]) }}"
+                                                class="like-btn text-black">
+                                                <span class="ti-pencil"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="jobsearch-table-cell !w-full mr-2">
+                                        <div class="jobsearch-job-userlist !float-start">
                                             <form action="{{ route('user.ban', $subscriber) }}" method="post"
                                                 class="like-btn">
                                                 @csrf
@@ -95,21 +104,21 @@
                                         </div>
                                     </div>
                                     {{-- @if ($subscriber->type == null) --}}
-                                        <div class="jobsearch-table-cell !w-full">
-                                            <div class="jobsearch-job-userlist !float-start">
-                                                <form action="{{ route('user.active', $subscriber) }}" method="post"
-                                                    class="like-btn">
-                                                    @csrf
-                                                    <button type="submit">
-                                                        @if ($subscriber->email_verified_at == null)
-                                                            <i class="ti-check" title="@__('Verify Email')"></i>
-                                                        @else
-                                                            <i class="ti-na" title="@__('Unverify Email')"></i>
-                                                        @endif
-                                                    </button>
-                                                </form>
-                                            </div>
+                                    <div class="jobsearch-table-cell !w-full">
+                                        <div class="jobsearch-job-userlist !float-start">
+                                            <form action="{{ route('user.active', $subscriber) }}" method="post"
+                                                class="like-btn">
+                                                @csrf
+                                                <button type="submit">
+                                                    @if ($subscriber->email_verified_at == null)
+                                                        <i class="ti-check" title="@__('Verify Email')"></i>
+                                                    @else
+                                                        <i class="ti-na" title="@__('Unverify Email')"></i>
+                                                    @endif
+                                                </button>
+                                            </form>
                                         </div>
+                                    </div>
                                     {{-- @endif --}}
                                 </div>
                             </div>

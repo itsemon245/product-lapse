@@ -103,7 +103,7 @@ class UsersManagementController extends Controller
         if ($user->email_verified_at) {
             $message = __('The user email has been verified!');
         }{
-            $message = __('The user has email been unverified!');
+            $message = __('The user email has been unverified!');
         }
         notify()->success($message);
         return back();

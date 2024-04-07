@@ -10,8 +10,8 @@ return [
     //add page + edit page
     'label' => [
         'name' => 'عنوان المهمة',
-        'category' => 'حالة المهمة', 
-        'status' => 'تصنيف المهمة', 
+        'category' => 'فئة المهمة',
+        'status' => 'حالة المهمة',
         'mvp' => 'اختيار ضمن MVP',
         'details' => 'تفاصيل المهمة',
         'steps' => 'خطوات انجاز المهمة',

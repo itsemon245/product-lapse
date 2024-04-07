@@ -41,7 +41,7 @@
                         <x-select-input :label="__('feature/invitation.label.role')" id="role" placeholder="Choose one" name="role" autofocus>
                             @if ($roles)
                                 @forelse ($roles as $role)
-                                    <option value="{{ $role->name }}" @selected($role->name == old('role') || $invitation?->role) class="capitalize">
+                                    <option value="{{ $role->name }}" @if($role->name == old('role') || $invitation?->role == $role->name) selected @endif class="capitalize">
                                         @lang($role->name)
                                     </option>
                                 @empty
@@ -95,7 +95,7 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    
+
                 </div>
 
 

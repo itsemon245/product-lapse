@@ -257,6 +257,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(User::class, 'owner_id');
     }
 
+    public function workspaces(): HasMany
+    {
+        return $this->hasMany(User::class, 'main_account_id');
+    }
     #---Relations---#
 
     #---Scopes---#

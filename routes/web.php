@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Faq;
-use App\Models\User;
 use App\Models\Contact;
 use App\Models\Feature;
 use App\Models\Package;
@@ -13,6 +12,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Features\Change\ChangeController;
+use App\Http\Controllers\Features\Product\InvitationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,29 +26,27 @@ use App\Http\Controllers\Features\Change\ChangeController;
  */
 
 Route::get('/', function () {
-    $info = LandingPage::first();
-    $faqs = Faq::where('status', true)->get();
+    $info     = LandingPage::first();
+    $faqs     = Faq::where('status', true)->get();
     $features = Feature::where('status', true)->get();
-    $contact = Contact::first();
+    $contact  = Contact::first();
     $packages = Package::get();
+    // dd(auth()->id(), auth()->user()->workspaces);
 
     return view('welcome', compact('info', 'faqs', 'features', 'contact', 'packages'));
 })->name('home');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
-    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile/delete', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::post('address', [ProfileController::class, 'address'])->name('address.update');
+    Route::get('/profile', [ ProfileController::class, 'index' ])->name('profile.index');
+    Route::get('/profile/edit', [ ProfileController::class, 'edit' ])->name('profile.edit');
+    Route::patch('/profile/update/{id}', [ ProfileController::class, 'update' ])->name('profile.update');
+    Route::delete('/profile/delete', [ ProfileController::class, 'destroy' ])->name('profile.destroy');
+    Route::post('address', [ ProfileController::class, 'address' ])->name('address.update');
 });
 //Super admin Routes
 
-
-
-
-Route::put('change/status/{change}', [ChangeController::class, 'updateStatus'])->name('change.update.status');
-Route::get('change-search', [ChangeController::class, 'search'])->name('change.search');
+Route::put('change/status/{change}', [ ChangeController::class, 'updateStatus' ])->name('change.update.status');
+Route::get('change-search', [ ChangeController::class, 'search' ])->name('change.search');
 // Route::resource('delivery', DeliveryController::class);
 // Route::get('delivery-search', [DeliveryController::class, 'search'])->name('delivery.search');
 Route::post('set-locale', function (Request $request) {
@@ -65,22 +63,25 @@ Route::post('set-locale', function (Request $request) {
 
 })->name('lang.toggle');
 
-Route::get('artisan/', function(Request $request){
+Route::get('artisan/', function (Request $request) {
     $command = $request->command;
     if (Str::contains($command, 'seed')) {
-        setEnv(['SEEDING' => "true"]);
+        setEnv([ 'SEEDING' => "true" ]);
     }
     echo Artisan::call($command);
-    setEnv(['SEEDING' => "false"]);
+    setEnv([ 'SEEDING' => "false" ]);
 });
-Route::get('fresh', function(){
-    setEnv(['SEEDING' => "true"]);
+Route::get('fresh', function () {
+    setEnv([ 'SEEDING' => "true" ]);
     echo Artisan::call('migrate:fresh --seed');
-    setEnv(['SEEDING' => "false"]);
+    setEnv([ 'SEEDING' => "false" ]);
 });
+
+//Product Invitations
+Route::get('invitation/accept/{token}', [ InvitationController::class, 'accept' ])->name('invitation.accept');
 require __DIR__ . '/auth.php';
 require __DIR__ . '/frontend.php';
 require __DIR__ . '/editable.php';
 require __DIR__ . '/admin.php';
-require __DIR__.'/order.php';
+require __DIR__ . '/order.php';
 require __DIR__ . '/bank.php';

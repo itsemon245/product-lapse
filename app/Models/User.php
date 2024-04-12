@@ -55,12 +55,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function activePlan()
     {
         return $this->plans()
-            ->whereDate('expired_at', '>=', now()->format('Y-m-d'))
-            ->orWhere(function (Builder $b) {
-                $b->where('expired_at', null);
-                $b->where('price', '<', 1);
-            })
-            ->where('active', true)
+            ->active()
             ->limit(1);
     }
 
@@ -261,6 +256,11 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(User::class, 'main_account_id');
     }
+
+    public function mainAccount(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'main_account_id');
+    }
     #---Relations---#
 
     #---Scopes---#
@@ -271,5 +271,11 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     #---Scopes---#
+
+    #--- Methods ---#
+    public function activeWorkspaceName()
+    {
+        return $this->type == 'member' ? $this->owner()->first()->name : trans('My Workspace');
+    }
 
 }

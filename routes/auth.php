@@ -41,8 +41,6 @@ Route::middleware('guest')->group(function () {
     Route::post('reset-password', [NewPasswordController::class, 'store'])
                 ->name('password.store');
 
-    //Product Invitations
-    Route::get('invitation/accept/{token}', [InvitationController::class, 'accept'])->name('invitation.accept');
 
     Route::post('invitation/password-store/{id}', [InvitationController::class, 'passwordStore'])->name('invitation.password-store');
 });

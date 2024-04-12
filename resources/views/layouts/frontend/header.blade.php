@@ -10,7 +10,8 @@
             @auth
                 @if (auth()->user()->type != 'admin')
                     @php
-                        $workspaces = auth()->user()?->workspaces;
+                        $mainAccount = auth()->user()->main_account_id != null ? auth()->user()->mainAccount : auth()->user();
+                        $workspaces = $mainAccount?->workspaces;
                     @endphp
                     <div class="max-md:ms-auto inline-flex">
                         <button id="states-button" data-dropdown-toggle="dropdown-states"
@@ -24,7 +25,7 @@
                             </div>
                             <div class="text-start leading-tight">
                                 <div>@lang('Workspace')</div>
-                                <small class="!text-primary font-bold">Admin</small>
+                                <small class="!text-primary font-bold">{{ auth()->user()->activeWorkspaceName() }}</small>
                             </div>
                             @if ($workspaces?->count() > 0)
                                 <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -36,32 +37,47 @@
                         </button>
                         @if ($workspaces)
                             <div id="dropdown-states"
-                                class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="states-button">
+                                class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-max dark:bg-gray-700">
+                                <ul class=" mb-0 py-2 text-sm text-gray-700 dark:text-gray-200"
+                                    aria-labelledby="states-button">
+                                    <li>
+                                        <form method="POST" action="{{ route('workspace.change', ['user' => $mainAccount]) }}">
+                                            @csrf
+                                            <button type="submit"
+                                                class="inline-flex w-full px-4 py-2 text-sm text-gray-700 {{ auth()->id() == $mainAccount->id ? 'bg-gray-100' : '' }} hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                <div class="inline-flex items-center gap-2">
+                                                    <img class="w-6 h-6 rounded-full"
+                                                        src="{{ $mainAccount?->image->url ?? avatar($mainAccount->name) }}"
+                                                        alt="{{ $mainAccount->first_name . "'s avatar" }}">
+                                                    <div class="text-start leading-tight">
+                                                        <div>{{ $mainAccount->name }}</div>
+                                                        <small
+                                                            class="!text-primary font-bold">{{ $mainAccount->activeWorkspaceName() }}</small>
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        </form>
+                                    </li>
                                     @forelse ($workspaces as $workspace)
                                         <li>
-                                            <button type="button"
-                                                class="inline-flex w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
-                                                <div class="inline-flex items-center">
-                                                    <img class="w-3.5 h-3.5 rounded-full"
-                                                        src="{{ $workspace?->image->url ?? avatar($workspace?->name) }}"
-                                                        alt="{{ $workspace?->name . "'s avatar" }}">
-                                                    <span>{{ $workspace?->name }}</span>
-                                                </div>
-                                            </button>
+                                            <form method="POST" action="{{ route('workspace.change', ['user' => $workspace]) }}">
+                                                @csrf
+                                                <button type="submit"
+                                                    class="inline-flex w-full px-4 py-2 text-sm text-gray-700 {{ auth()->id() == $workspace->id ? 'bg-gray-100' : '' }} hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                    <div class="inline-flex items-center gap-2">
+                                                        <img class="w-6 h-6 rounded-full"
+                                                            src="{{ $workspace?->image->url ?? avatar($workspace?->name) }}"
+                                                            alt="{{ $workspace?->first_name . "'s avatar" }}">
+                                                        <div class="text-start leading-tight">
+                                                            <div>{{ $workspace->name }}</div>
+                                                            <small
+                                                                class="!text-primary font-bold">{{ $workspace->activeWorkspaceName() }}</small>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                            </form>
                                         </li>
                                     @empty
-                                        <li>
-                                            <button type="button"
-                                                class="inline-flex w-full px-4 py-2 text-sm text-gray-700 bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
-                                                <div class="inline-flex items-center">
-                                                    <img class="w-3.5 h-3.5 rounded-full"
-                                                        src="{{ auth()->user()?->image->url ?? avatar(auth()->user()->name) }}"
-                                                        alt="{{ auth()->user()->name . "'s avatar" }}">
-                                                    <span>{{ auth()->user()?->name }}</span>
-                                                </div>
-                                            </button>
-                                        </li>
                                     @endforelse
                                 </ul>
                             </div>

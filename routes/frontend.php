@@ -3,6 +3,7 @@
 use App\Models\Page;
 use App\Models\User;
 use App\Models\Package;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PackageController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactMessageController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Frontend\LandingPageController;
+use Illuminate\Support\Facades\Hash;
 
 Route::prefix('frontend')
     ->group(function () {
@@ -31,6 +33,18 @@ Route::prefix('/')
             $packages = Package::get();
             return view('packages.index', compact('packages'));
         })->name('package.upgrade');
+
+        Route::post('workspace/{user}/change', function (Request $request, User $user) {
+            // $main = $user->mainAccount;
+            // $passMatched = Hash::check($request->password, $main->password);
+            // if (!$passMatched) {
+            //     notify()->error(trans('auth.password'));
+            //     return back();
+            // }
+            Auth::login($user, true);
+            notify()->success('Switched Workspace!');
+            return redirect('dashboard');
+        })->name('workspace.change');
     });
 
 // Extra pages

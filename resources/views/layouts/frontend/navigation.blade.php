@@ -1,5 +1,5 @@
 <div class="navbar-collapse collapse " id="navbarSupportedContent">
-    <ul class="navbar-nav menu pl_120">
+    <ul class="navbar-nav menu mx-auto">
         <li class="nav-item">
             <a class="nav-link" href="/#tolink-1">
                 @__('navigation.navbar.home')

@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers\Features\Product;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\TeamInvitationRequest;
-use App\Models\Invitation;
-use App\Models\Product;
-use App\Models\Scopes\OwnerScope;
 use App\Models\User;
-use App\Services\InvitationService;
+use App\Models\Product;
+use App\Models\Invitation;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\Scopes\OwnerScope;
+use Spatie\Permission\Models\Role;
+use App\Services\InvitationService;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Spatie\Permission\Models\Role;
+use App\Http\Requests\TeamInvitationRequest;
 
 class InvitationController extends Controller
 {
@@ -71,7 +72,27 @@ class InvitationController extends Controller
     {
         $invitation = Invitation::withoutGlobalScope(OwnerScope::class)->where('token', $token)->first();
         $user       = User::where('email', $invitation->email)->first();
+        $id         = base64_encode($invitation->id);
+
         if ($user) {
+            if ($user->owner_id != $invitation->owner_id) {
+                $newUser = User::create([
+                    'name'              => $invitation->first_name ." ". $invitation->last_name,
+                    'email_verified_at' => now(),
+                    'password'          => Hash::make(Str::random()),
+                    'first_name'        => $invitation->first_name,
+                    'last_name'         => $invitation->last_name,
+                    'phone'             => $invitation->phone,
+                    'position'          => $invitation->role,
+                    'owner_id'          => $invitation->owner_id,
+                    'main_account_id'   => $user->main_account_id ?? $user->id,
+                    'type'              => 'member',
+                 ]);
+                $this->assignToUser($invitation, $newUser);
+                Auth::login($newUser, true);
+                notify()->success(trans('A new workspace has been created!'));
+                return to_route('dashboard');
+            }
             Auth::guard('web')->logout();
             request()->session()->invalidate();
             request()->session()->regenerateToken();
@@ -86,8 +107,6 @@ class InvitationController extends Controller
 
             return redirect()->route('home');
         }
-
-        $id = base64_encode($invitation->id);
 
         return view('features.product.invitation.create-password', compact('id'));
     }
@@ -111,7 +130,7 @@ class InvitationController extends Controller
             return redirect()->route('home');
         }
         $user = User::create([
-            'name'              => $invitation->first_name,
+            'name'              => $invitation->first_name . " ". $invitation->last_name,
             'email'             => $invitation->email,
             'email_verified_at' => now(),
             'password'          => Hash::make($request->password),

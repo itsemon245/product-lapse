@@ -197,22 +197,27 @@ function transferInformationIfMember(Order $order): User
     if ($user->type == 'member') {
         $email = $user->email;
         $user->update([
-            'email' => null
-        ]);
-        $newUser = User::create([
-            'name'              => $user->first_name . " " . $user->last_name,
-            'email'             => $email,
-            'email_verified_at' => now(),
-            'password'          => $user->password,
-            'first_name'        => $user->first_name,
-            'last_name'         => $user->last_name,
-            'phone'             => $user->phone,
-            'workplace'         => $user->workplace,
-            'promotional_code'  => $user->promotional_code,
-            'flag'              => $user->flag,
-            'position'          => $user->position,
-            'type'              => 'subscriber',
+            'email' => null,
          ]);
+        $mainAccount = $user->mainAccount;
+        if ($mainAccount) {
+            $newUser = $mainAccount;
+        } else {
+            $newUser = User::create([
+                'name'              => $user->first_name . " " . $user->last_name,
+                'email'             => $email,
+                'email_verified_at' => now(),
+                'password'          => $user->password,
+                'first_name'        => $user->first_name,
+                'last_name'         => $user->last_name,
+                'phone'             => $user->phone,
+                'workplace'         => $user->workplace,
+                'promotional_code'  => $user->promotional_code,
+                'flag'              => $user->flag,
+                'position'          => $user->position,
+                'type'              => 'subscriber',
+             ]);
+        }
 
         // Update Old User Information
         $user->update([
@@ -228,10 +233,10 @@ function transferInformationIfMember(Order $order): User
         if ($billingAddress) {
             $billingAddress->update([
                 'user_id' => $newUser->id,
-            ]);
+             ]);
         }
-        $user->banks()->update(['user_id'=> $newUser->id]);
-        $user->creditCards()->update(['user_id'=> $newUser->id]);
+        $user->banks()->update([ 'user_id' => $newUser->id ]);
+        $user->creditCards()->update([ 'user_id' => $newUser->id ]);
         $order->update([
             'user_id' => $newUser->id,
          ]);

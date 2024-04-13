@@ -25,7 +25,7 @@
                                 <li><a href="#"><img src="{{ asset('img/crown.png') }}">@__('profile.profile.upgrade')</a></li>
                             </ul>
                             <ul class="list-unstyled">
-                                <li><span>@__('profile.profile.email') :</span>{{ $user->email }}</li>
+                                <li><span>@__('profile.profile.email') :</span>{{ $user->email ?? $user->mainAccount->email}}</li>
                                 <li><span>@__('profile.profile.phone') :</span> <span class="profile-num">{{ $user->phone }}</span></li>
                                 <li><span>@__('profile.profile.employer') :</span> The ministry of investment</li>
                             </ul>

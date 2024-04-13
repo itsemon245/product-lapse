@@ -52,7 +52,7 @@
                                     @endif
                                     </ul>
                                     <ul class="list-unstyled">
-                                        <li><span>@__('profile.profile.email') :</span> {{ $user->email }}</li>
+                                        <li><span>@__('profile.profile.email') :</span> {{ $user->email ?? $user->mainAccount->email}}</li>
                                         <li><span>@__('profile.profile.phone') :</span> <span
                                                 class="profile-num">{{ $user->phone }}</span></li>
                                         @if ($user->type == 'member')

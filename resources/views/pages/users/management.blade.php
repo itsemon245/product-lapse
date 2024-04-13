@@ -51,7 +51,7 @@
                                             <a href="{{ route('users.show', $subscriber) }}"
                                                 class="f_500 t_color3">{{ $subscriber->name }}</a>
                                         </h4>
-                                        @if ($subscriber->type != null)
+                                        @if ($subscriber->type == 'subscriber')
                                             <div
                                                 class="bg-emerald-200 text-blue-500 font-bold px-2 py-1 rounded-full text-sm inline-flex items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"

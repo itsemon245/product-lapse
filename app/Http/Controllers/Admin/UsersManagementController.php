@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
+use App\Models\Package;
 use App\Models\Plan;
 use App\Models\User;
-use App\Models\Package;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rules;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use App\Notifications\WelcomeNotification;
+use Illuminate\Validation\Rules;
 
 class UsersManagementController extends Controller
 {
@@ -21,20 +20,23 @@ class UsersManagementController extends Controller
         $subscribers = User::where('type', 'subscriber')->orWhere('type', null)->latest()->paginate();
 
         if (!empty(request()->query('search'))) {
-            $subscribers = User::where(function ($q) {
-                if (request()->query('search') == 'banned') {
-                    $q->whereNotNull('banned_at');
-                }
-                if (request()->query('search') == 'active') {
-                    $q->where('banned_at', null);
-                }
-                if (request()->query('search') == 'verified') {
-                    $q->whereNotNull('email_verified_at');
-                }
-                if (request()->query('search') == 'unverified') {
-                    $q->where('email_verified_at', null);
-                }
-            })->latest()->paginate();
+            $subscribers = User::whereNot('type', 'admin')
+                ->whereNot('type', 'member')
+                ->where('main_account_id', null)
+                ->where(function ($q) {
+                    if (request()->query('search') == 'banned') {
+                        $q->whereNotNull('banned_at');
+                    }
+                    if (request()->query('search') == 'active') {
+                        $q->where('banned_at', null);
+                    }
+                    if (request()->query('search') == 'verified') {
+                        $q->whereNotNull('email_verified_at');
+                    }
+                    if (request()->query('search') == 'unverified') {
+                        $q->where('email_verified_at', null);
+                    }
+                })->latest()->paginate();
         }
         return view('pages.users.management', compact('subscribers'));
     }
@@ -160,7 +162,7 @@ class UsersManagementController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'email'            => [ 'required', 'lowercase', 'email', 'max:255', "unique:users,email,{$user->id}" ],
+            // 'email'            => [ 'required', 'lowercase', 'email', 'max:255', "unique:users,email,{$user->id}" ],
             // 'password'         => [ 'required', Rules\Password::defaults() ],
             'first_name'       => [ 'nullable', 'string' ],
             'last_name'        => [ 'nullable', 'string' ],
@@ -172,7 +174,7 @@ class UsersManagementController extends Controller
             'validity'         => "integer|nullable",
          ]);
         $user = tap($user)->update([
-            'email'            => $request->email,
+            // 'email'            => $request->email,
             // 'password'          => $request->has('password') ? Hash::make($request->password): $user->password,
             'name'             => $request->first_name . " " . $request->last_name,
             'first_name'       => $request->first_name,

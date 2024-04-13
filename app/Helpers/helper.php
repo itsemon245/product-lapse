@@ -1,12 +1,14 @@
 <?php
 
-use Carbon\Carbon;
-use App\Models\User;
 use App\Models\Image;
+use App\Models\Order;
 use App\Models\Product;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -173,11 +175,69 @@ function setEnv($values)
 {
     $envFile = base_path('.env');
     foreach ($values as $key => $value) {
-        $envContent = File::get($envFile);
+        $envContent        = File::get($envFile);
         $pattern           = "/^({$key}=)(.*)$/m";
         $updatedEnvContent = preg_replace($pattern, "$1\"{$value}\"", $envContent);
         File::put($envFile, $updatedEnvContent);
     }
     Artisan::call('config:clear');
 
+}
+/**
+ * - Transfers information when purchasing a subscription as member
+ * - Updates users order and address and changes the auth user to the new user
+ * - **`auth()->user()` will return the newly created user instead. So use with caution**
+ *
+ * @param Order $order
+ * @return User
+ */
+function transferInformationIfMember(Order $order): User
+{
+    $user = User::find($order->user_id);
+    if ($user->type == 'member') {
+        $email = $user->email;
+        $user->update([
+            'email' => null
+        ]);
+        $newUser = User::create([
+            'name'              => $user->first_name . " " . $user->last_name,
+            'email'             => $email,
+            'email_verified_at' => now(),
+            'password'          => $user->password,
+            'first_name'        => $user->first_name,
+            'last_name'         => $user->last_name,
+            'phone'             => $user->phone,
+            'workplace'         => $user->workplace,
+            'promotional_code'  => $user->promotional_code,
+            'flag'              => $user->flag,
+            'position'          => $user->position,
+            'type'              => 'subscriber',
+         ]);
+
+        // Update Old User Information
+        $user->update([
+            'email'           => null,
+            'main_account_id' => $newUser->id,
+         ]);
+        $image = $user->image;
+        if ($image) {
+            $image->imageable_id = $newUser->id;
+            $image->update();
+        }
+        $billingAddress = $user->billingAddress();
+        if ($billingAddress) {
+            $billingAddress->update([
+                'user_id' => $newUser->id,
+            ]);
+        }
+        $user->banks()->update(['user_id'=> $newUser->id]);
+        $user->creditCards()->update(['user_id'=> $newUser->id]);
+        $order->update([
+            'user_id' => $newUser->id,
+         ]);
+        $order->refresh();
+        $newUser->refresh();
+        Auth::login($user, true);
+        return $newUser;
+    }
 }

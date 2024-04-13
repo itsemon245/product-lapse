@@ -10,38 +10,40 @@
             @auth
                 @if (auth()->user()->type != 'admin')
                     @php
-                        $mainAccount = auth()->user()->main_account_id != null ? auth()->user()->mainAccount : auth()->user();
+                        $mainAccount =
+                            auth()->user()->main_account_id != null ? auth()->user()->mainAccount : auth()->user();
                         $workspaces = $mainAccount?->workspaces;
                     @endphp
-                    <div class="max-md:ms-auto inline-flex">
-                        <button id="states-button" data-dropdown-toggle="dropdown-states"
-                            class="flex-shrink-0 z-10 inline-flex gap-2 items-center py-2.5 text-sm font-medium "
-                            type="button">
-                            <div class="!text-primary">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-                                    <path fill="currentColor"
-                                        d="M5 21q-.825 0-1.412-.587T3 19v-6.25h7V21zm7 0v-8.25h9V19q0 .825-.587 1.413T19 21zM3 10.75V5q0-.825.588-1.412T5 3h14q.825 0 1.413.588T21 5v5.75z" />
-                                </svg>
-                            </div>
-                            <div class="text-start leading-tight">
-                                <div>@lang('Workspace')</div>
-                                <small class="!text-primary font-bold">{{ auth()->user()->activeWorkspaceName() }}</small>
-                            </div>
-                            @if ($workspaces?->count() > 0)
+                    @if ($workspaces?->count() > 0)
+                        <div class="max-md:ms-auto inline-flex">
+                            <button id="states-button" data-dropdown-toggle="dropdown-states"
+                                class="flex-shrink-0 z-10 inline-flex gap-2 items-center py-2.5 text-sm font-medium "
+                                type="button">
+                                <div class="!text-primary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                        viewBox="0 0 24 24">
+                                        <path fill="currentColor"
+                                            d="M5 21q-.825 0-1.412-.587T3 19v-6.25h7V21zm7 0v-8.25h9V19q0 .825-.587 1.413T19 21zM3 10.75V5q0-.825.588-1.412T5 3h14q.825 0 1.413.588T21 5v5.75z" />
+                                    </svg>
+                                </div>
+                                <div class="text-start leading-tight">
+                                    <div>@lang('Workspace')</div>
+                                    <small
+                                        class="!text-primary font-bold">{{ auth()->user()->activeWorkspaceName() }}</small>
+                                </div>
                                 <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     fill="none" viewBox="0 0 10 6">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                         stroke-width="2" d="m1 1 4 4 4-4" />
                                 </svg>
-                            @endif
-                        </button>
-                        @if ($workspaces)
+                            </button>
                             <div id="dropdown-states"
                                 class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-max dark:bg-gray-700">
                                 <ul class=" mb-0 py-2 text-sm text-gray-700 dark:text-gray-200"
                                     aria-labelledby="states-button">
                                     <li>
-                                        <form method="POST" action="{{ route('workspace.change', ['user' => $mainAccount]) }}">
+                                        <form method="POST"
+                                            action="{{ route('workspace.change', ['user' => $mainAccount]) }}">
                                             @csrf
                                             <button type="submit"
                                                 class="inline-flex w-full px-4 py-2 text-sm text-gray-700 {{ auth()->id() == $mainAccount->id ? 'bg-gray-100' : '' }} hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
@@ -60,7 +62,8 @@
                                     </li>
                                     @forelse ($workspaces as $workspace)
                                         <li>
-                                            <form method="POST" action="{{ route('workspace.change', ['user' => $workspace]) }}">
+                                            <form method="POST"
+                                                action="{{ route('workspace.change', ['user' => $workspace]) }}">
                                                 @csrf
                                                 <button type="submit"
                                                     class="inline-flex w-full px-4 py-2 text-sm text-gray-700 {{ auth()->id() == $workspace->id ? 'bg-gray-100' : '' }} hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
@@ -81,8 +84,8 @@
                                     @endforelse
                                 </ul>
                             </div>
-                        @endif
-                    </div>
+                        </div>
+                    @endif
                 @endif
             @endauth
 

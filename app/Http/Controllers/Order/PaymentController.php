@@ -66,6 +66,7 @@ class PaymentController extends Controller
             return redirect('/');
         }
         $order     = Order::where('uuid', $orderUuid)->with('package')->first();
+        $user = transferInformationIfMember($order);
         if ($order->payment_method == PaymentMethodEnum::BANK_ACCOUNT->value) {
             $expireDate  = null;
             $active      = false;
@@ -75,7 +76,7 @@ class PaymentController extends Controller
             $plan = Plan::create([
                 'order_id'      => $order->id,
                 'package_id'    => $order->package_id,
-                'user_id'       => $order->user_id,
+                'user_id'       => $user->id,
                 'name'          => $order->package->name,
                 'price'         => $order->amount,
                 'active'        => $active,
@@ -106,7 +107,7 @@ class PaymentController extends Controller
             }
             $plan = Plan::create([
                 'order_id'      => $order->id,
-                'user_id'       => $order->user_id,
+                'user_id'       => $user->id,
                 'package_id'    => $order->package_id,
                 'name'          => $order->package->name,
                 'price'         => $order->amount,

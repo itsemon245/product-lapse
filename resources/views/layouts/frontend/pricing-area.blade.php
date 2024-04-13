@@ -45,8 +45,6 @@
                             @else
                                 @if (auth()->user()?->type == 'admin')
                                     <a href="#" class="price_btn btn_hover">@__('You are admin')</a>
-                                @elseif(auth()->user()?->type == 'member')
-                                    <a href="#" class="price_btn btn_hover">@__('You are member')</a>
                                 @else
                                     <a href="{{ route('order.create', ['package' => $package]) }}"
                                         class="price_btn btn_hover">@lang('welcome.subscribe')</a>

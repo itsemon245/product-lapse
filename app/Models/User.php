@@ -271,4 +271,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->type == 'member' ? $this->owner()->first()->name : trans('My Workspace');
     }
 
+    public function isSubAccount(): bool {
+        return $this->main_account_id != null;
+    }
+
 }

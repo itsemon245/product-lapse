@@ -244,5 +244,7 @@ function transferInformationIfMember(Order $order): User
         $newUser->refresh();
         Auth::login($user, true);
         return $newUser;
+    }else{
+        return $user;
     }
 }

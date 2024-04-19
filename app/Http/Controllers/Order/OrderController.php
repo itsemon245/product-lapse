@@ -12,6 +12,7 @@ use App\Models\Plan;
 // use Paytabscom\Laravel_paytabs\paypage;
 
 use App\Models\User;
+use App\Services\SelectService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -123,6 +124,7 @@ class OrderController extends Controller
     public function freePackage(Order $order)
     {
         $user       = transferInformationIfMember($order);
+        SelectService::createDefaults($user);
         $activePlan = $user->activePlan()->first();
         if ($activePlan) {
             $activePlan->update([

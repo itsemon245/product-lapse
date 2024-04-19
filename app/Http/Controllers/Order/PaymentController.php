@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Order;
 
-use App\Enums\PaymentMethodEnum;
-use App\Http\Controllers\Controller;
-use App\Mail\InvoiceMail;
-use App\Models\Order;
-use App\Models\Package;
 use App\Models\Plan;
 use App\Models\User;
+use App\Models\Order;
+use App\Models\Package;
+use App\Mail\InvoiceMail;
 use Illuminate\Http\Request;
+use App\Services\SelectService;
+use App\Enums\PaymentMethodEnum;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 
 class PaymentController extends Controller
@@ -67,6 +68,7 @@ class PaymentController extends Controller
         }
         $order     = Order::where('uuid', $orderUuid)->with('package')->first();
         $user = transferInformationIfMember($order);
+        SelectService::createDefaults($user);
         if ($order->payment_method == PaymentMethodEnum::BANK_ACCOUNT->value) {
             $expireDate  = null;
             $active      = false;

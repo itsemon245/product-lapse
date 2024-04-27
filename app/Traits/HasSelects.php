@@ -32,8 +32,10 @@ trait HasSelects
             $types   = self::getTypes($model);
             foreach ($types as $type) {
                 if ($request->input($type) != null) {
-                    $id = $model->selects()->where('type', $type)->first()->id;
-                    $model->selects()->toggle($id);
+                    $id = $model->selects()->where('type', $type)->first()?->id;
+                    if ($id) {
+                        $model->selects()->toggle($id);
+                    }
                 }
             }
             foreach ($ids as $id) {

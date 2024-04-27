@@ -196,6 +196,8 @@ class InvitationController extends Controller
         if ($invitation->role) {
             $user->assignRole($invitation->role);
         }
+        $invitation->accepted_at = now();
+        $invitation->saveQuietly();
         $user->saveQuietly();
 
     }

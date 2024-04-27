@@ -31,7 +31,7 @@ return [
     'submit' => 'اضافة مهمة',
 
     //details page
-    'classification' => 'تصنيف المهمة',
+    'category' => 'تصنيف المهمة',
     'details' => 'تفاصيل المهمة',
     'task' => 'تفاصيل المهمة',
     'name' => 'الاسم',

@@ -1,4 +1,5 @@
 <?php
+
 return [
 
     //list page
@@ -32,7 +33,7 @@ return [
     'submit' => 'Add task',
 
     //details page
-    'classification' => 'Classification',
+    'category' => 'Category',
     'details' => 'Task details',
     'task' => 'Task details',
     'name' => 'Name',
@@ -49,6 +50,6 @@ return [
 
     //show page
     'show' => 'Show Task',
-    'steps' => "Task Steps",
-    'mvp' => 'MVP'
+    'steps' => 'Task Steps',
+    'mvp' => 'MVP',
 ];

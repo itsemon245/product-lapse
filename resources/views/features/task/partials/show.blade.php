@@ -12,8 +12,9 @@
                         <div class="entry_post_info">
                             {{ \Carbon\Carbon::parse($task->created_at)->format('l, j F Y') }}
                         </div>
-                        <h6 class="title2">@__('feature/task.classification')</h6>
-                        <p class="f_400 mb-30 text-font">{{ $task->category }}</p>
+                        <h6 class="title2">@__('feature/task.category')</h6>
+                        <p class="f_400 mb-30 text-font">
+                            {{ $task->getSelect('category')->value->{app()->getLocale()} }}</p>
                         <h6 class="title2">@__('feature/task.details')</h6>
                         <p class="f_400 mb-30 text-font">
                             {{ $task->details }}

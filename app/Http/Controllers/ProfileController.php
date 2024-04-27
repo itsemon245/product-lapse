@@ -68,9 +68,9 @@ class ProfileController extends Controller
                 'phone'           => $request->phone,
                 'street'          => $request->street,
                 'city'            => $request->city,
-                'state'           => $request->state,
+                // 'state'           => $request->state,
                 'country'         => $request->country,
-                'zip'             => $request->zip,
+                // 'zip'             => $request->zip,
                 'ip'              => $request->ip(),
              ]);
         } else {
@@ -81,9 +81,9 @@ class ProfileController extends Controller
                 'phone'           => $request->phone,
                 'street'          => $request->street,
                 'city'            => $request->city,
-                'state'           => $request->state,
+                // 'state'           => $request->state,
                 'country'         => $request->country,
-                'zip'             => $request->zip,
+                // 'zip'             => $request->zip,
                 'ip'              => $request->ip(),
              ]);
         }

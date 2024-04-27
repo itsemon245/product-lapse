@@ -70,7 +70,7 @@
                             <x-input required id="country" class="block mt-1 w-full" type="text"
                                 placeholder="{{ __('profile.address.country') }}" name="country" :value="auth()?->user()?->billingAddress()->country ?? old('country')" />
                         </div>
-                        <div class="form-group mb-2 text_box col-md-6">
+                        {{-- <div class="form-group mb-2 text_box col-md-6">
                             <div class="flex justify-between">
                                 <x-input-label class="flex-shrink" for="zip"
                                     value="{{ __('profile.address.zip') }}" />
@@ -85,7 +85,7 @@
                             </div>
                             <x-input required id="state" class="block mt-1 w-full" type="text"
                                 placeholder="{{ __('profile.address.state') }}" name="state" :value="auth()?->user()?->billingAddress()->state ?? old('state')" />
-                        </div>
+                        </div> --}}
                     </div>
                     <x-button>{{ __('profile.password.save') }}</x-button>
                 </form>

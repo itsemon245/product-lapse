@@ -118,7 +118,7 @@ function productId()
         return Product::first()->id;
     }
 
-    return auth()->user()->active_product_id;
+    return auth()->user()->active_product_id ?? null;
 }
 
 function demoSub()

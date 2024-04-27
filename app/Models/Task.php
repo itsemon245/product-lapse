@@ -21,8 +21,4 @@ class Task extends Model
     protected $casts = [
         'choose_mvp' => 'boolean',
     ];
-    public function products()
-    {
-        return $this->belongsToMany(Product::class, 'invitation_products', 'task_id', 'product_id');
-    }
 }

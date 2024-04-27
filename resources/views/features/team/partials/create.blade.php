@@ -6,7 +6,7 @@
         </x-slot:breadcrumb>
 
         <x-slot:from>
-            <h2 class=" f_600 f_size_24 t_color3 mb_40">{{ $team ? __('feature/team.update') : __('feature/team.add')}}</h2>
+            <h2 class=" f_600 f_size_24 t_color3 mb_40">{{ $team ? __('feature/team.update') : __('feature/team.add') }}</h2>
             <form action="{{ $team ? route('team.update', $team) : route('team.store') }}" method="POST"
                 class="login-form sign-in-form">
                 @csrf
@@ -44,11 +44,12 @@
                                 autofocus />
                         </div>
                         <div class="form-group text_box col-lg-4 col-md-6">
-                            <x-select-input :label="__('feature/team.label.task')" class="selectpickers" id="tasks[]" name="task"
+                            <x-select-input :label="__('feature/team.label.task')" class="selectpickers" id="task" name="tasks[]"
                                 placeholder="Choose one" autofocus>
                                 @if ($tasks)
                                     @forelse ($tasks as $task)
-                                        <option value="{{ $task->name }}" class="capitalize">{{ $task->name }}</option>
+                                        <option value="{{ $task->name }}" class="capitalize">{{ $task->name }}
+                                        </option>
                                     @empty
                                         <option disabled>
                                             @lang('No items available')
@@ -62,9 +63,25 @@
                         <x-select-input :label="__('feature/team.label.position')" id="role" placeholder="Choose one" name="role" autofocus>
                             @if ($roles)
                                 @forelse ($roles as $role)
-                                    <option value="{{ $role->name }}" class="capitalize" @if($role->name == $team?->getRole()->name) selected @endif>
+                                    <option value="{{ $role->name }}" class="capitalize"
+                                        @if ($role->name == $team?->getRole()->name) selected @endif>
                                         @lang($role->name)
                                     </option>
+                                @empty
+                                    <option disabled>
+                                        @lang('No items available')
+                                    </option>
+                                @endforelse
+                            @endif
+                        </x-select-input>
+                    </div>
+                    <div class="form-group text_box col-lg-4 col-md-6">
+                        <x-select-input :label="__('feature/team.label.task')" class="selectpickers" id="task" name="tasks[]"
+                            placeholder="Choose one" autofocus>
+                            @if ($tasks)
+                                @forelse ($tasks as $task)
+                                    <option value="{{ $task->id }}" class="capitalize"
+                                        @if ($team?->tasks()->find($task->id) != null) selected @endif>{{ $task->name }}</option>
                                 @empty
                                     <option disabled>
                                         @lang('No items available')
@@ -86,10 +103,9 @@
                                         <div class="media post_author flex items-center">
                                             <div class="checkbox remember">
                                                 <label class="">
-                                                    <input name="products[]" class="cursor-pointer" value="{{ $product->id }}"
-                                                        @if ($team?->myProducts()?->find($product->id) != null)
-                                                            checked
-                                                        @endif type="checkbox" />
+                                                    <input name="products[]" class="cursor-pointer"
+                                                        value="{{ $product->id }}"
+                                                        @if ($team?->myProducts()?->find($product->id) != null) checked @endif type="checkbox" />
                                                 </label>
                                             </div>
                                             <img class="rounded-circle" src="{{ $product->image?->url }}" alt="">

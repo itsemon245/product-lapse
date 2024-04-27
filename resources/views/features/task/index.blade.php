@@ -28,7 +28,7 @@
         </x-slot:actions>
 
         <x-slot:filter>
-            <form action="{{ url()->current() }}" class="flex">
+            <form action="{{ route('task.index') }}" class="flex">
                 <label
                     class="inline-flex cursor-pointer items-center px-2 py-1 rounded {{ request()->query('mvp') == 'true' ? '!bg-primary text-white' : '!text-gray-500 bg-white border' }}">
                     <input onchange="this.form.submit()" class="hidden" type="checkbox" name="mvp" value="true"

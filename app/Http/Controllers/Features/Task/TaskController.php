@@ -2,40 +2,38 @@
 
 namespace App\Http\Controllers\Features\Task;
 
-use App\Models\File;
-use App\Models\Idea;
-use App\Models\Task;
-use App\Models\User;
-use App\Models\Select;
-use App\Models\Product;
-use Illuminate\Http\Request;
-use App\Services\SearchService;
-use App\Http\Requests\TaskRequest;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SearchRequest;
-use Illuminate\Database\QueryException;
+use App\Http\Requests\TaskRequest;
+use App\Models\File;
+use App\Models\Idea;
+use App\Models\Product;
+use App\Models\Select;
+use App\Models\Task;
+use App\Models\User;
+use App\Services\SearchService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class TaskController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $tasks = Product::find(productId())->tasks()
-        ->where(function($q){
-            if (request()->query('mvp') == 'true') {
-                $q->where('choose_mvp', 1);
-            }
-        })
-        ->latest()->paginate();
+            ->where(function ($q) {
+                if (request()->query('mvp') == 'true') {
+                    $q->where('choose_mvp', 1);
+                }
+            })
+            ->latest()->paginate();
         if (request()->query('my_task') == 'true') {
             $tasks = User::find(auth()->id())->tasks()->latest()->paginate();
         }
         $priorities = Select::of('task')->type('status')->get();
+
         return view('features.task.index', compact('tasks', 'priorities'));
     }
 
@@ -56,7 +54,6 @@ class TaskController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-
     public function store(TaskRequest $request)
     {
 
@@ -80,6 +77,7 @@ class TaskController extends Controller
         }
 
         notify()->success(__('Created Successfully!'));
+
         return redirect()->route('task.index');
 
     }
@@ -103,22 +101,24 @@ class TaskController extends Controller
     public function downloadFIle(Task $task, File $file)
     {
         $filePath = $file->path;
-        if (!Storage::disk('public')->exists($filePath)) {
+        if (! Storage::disk('public')->exists($filePath)) {
             notify()->error(__('File not found!'));
 
             return redirect()->route('task.show', $task);
         }
 
-        return Storage::download('public/' . $filePath);
+        return Storage::download('public/'.$filePath);
     }
+
     public function deleteFile(File $file)
     {
         $filePath = $file->path;
         if (Storage::disk('public')->exists($filePath)) {
-            Storage::delete("storage/".$filePath);
+            Storage::delete('storage/'.$filePath);
             $file->delete();
         }
         notify()->success('Deleted Successfully!');
+
         return back();
     }
 
@@ -135,6 +135,7 @@ class TaskController extends Controller
         $task->update($data);
 
         notify()->success(__('Updated Successfully!'));
+
         return redirect()->route('task.show', $task);
     }
 
@@ -197,6 +198,7 @@ class TaskController extends Controller
         ]);
 
         notify()->success(__('Updated Successfully!'));
+
         return redirect()->route('task.index');
     }
 
@@ -216,8 +218,8 @@ class TaskController extends Controller
         $taskk->delete();
 
         notify()->success(__('Deleted successfully!'));
-        return redirect()->route('task.index');
 
+        return redirect()->route('task.index');
 
     }
 
@@ -225,6 +227,7 @@ class TaskController extends Controller
     {
         $tasks = SearchService::items($request);
         $priorities = Select::of('task')->type('status')->get();
+
         return view('features.task.index', compact('tasks', 'priorities'));
     }
 }

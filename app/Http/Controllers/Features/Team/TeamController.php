@@ -20,6 +20,7 @@ class TeamController extends Controller
     public function index()
     {
         $teams = Product::find(productId())->users()->with('roles')->paginate(10);
+
         return view('features.team.index', compact('teams'));
     }
 
@@ -29,11 +30,12 @@ class TeamController extends Controller
     public function create()
     {
         $products = Product::with('image')->get();
-        $roles    = Role::where('name', '!=', 'admin')
+        $roles = Role::where('name', '!=', 'admin')
             ->where('name', '!=', 'account holder')
             ->get();
         $tasks = Product::find(productId())->tasks;
-        $team  = null;
+        $team = null;
+
         return view('features.team.partials.create', compact('products', 'roles', 'tasks', 'team'));
     }
 
@@ -43,11 +45,12 @@ class TeamController extends Controller
     public function edit(string $id)
     {
         $products = Product::with('image')->get();
-        $roles    = Role::where('name', '!=', 'admin')
+        $roles = Role::where('name', '!=', 'admin')
             ->where('name', '!=', 'account holder')
             ->get();
         $tasks = Product::find(productId())->tasks;
-        $team  = Product::find(productId())->users()->find($id);
+        $team = Product::find(productId())->users()->find($id);
+
         return view('features.team.partials.create', compact('products', 'roles', 'tasks', 'team'));
     }
 
@@ -60,10 +63,12 @@ class TeamController extends Controller
 
         if ($teamStore) {
             notify()->success(__('notify/success.create'));
+
             return redirect()->route('team.index');
         }
 
     }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -72,6 +77,9 @@ class TeamController extends Controller
         $user = $team;
         $user->roles()->detach();
         $user->assignRole($request->role);
+        foreach ($request->tasks as $task) {
+            $user->tasks()->attach($task);
+        }
         // $user->myProducts()->detach();
         $user->myProducts()->sync($request->products);
         // foreach ($request->products as $product) {
@@ -79,9 +87,11 @@ class TeamController extends Controller
         //     // Product::find($product)->user()->attach($user->id);
         // }
         notify()->success(__('notify/success.update'));
+
         return redirect()->route('team.index');
 
     }
+
     /**
      * Remove the specified resource from storage.
      */
@@ -91,6 +101,7 @@ class TeamController extends Controller
         $delete = $team->delete();
         if ($delete) {
             notify()->success(__('notify/success.delete'));
+
             return redirect()->route('team.index');
         }
 
@@ -99,6 +110,7 @@ class TeamController extends Controller
     public function search(SearchRequest $request)
     {
         $teams = SearchService::items($request);
+
         return view('features.team.index', compact('teams'));
     }
 }

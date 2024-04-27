@@ -2,12 +2,12 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\CheckAdmin;
-use App\Http\Middleware\CheckUserType;
-use App\Http\Middleware\CheckSubscriber;
 use App\Http\Middleware\AddProductQueryString;
+use App\Http\Middleware\CheckActiveProduct;
+use App\Http\Middleware\CheckAdmin;
 use App\Http\Middleware\CheckBillingAddress;
 use App\Http\Middleware\CheckProductLimit;
+use App\Http\Middleware\CheckSubscriber;
 use App\Http\Middleware\ValidateRequestForCertificate;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -76,6 +76,7 @@ class Kernel extends HttpKernel
         'check.admin' => CheckAdmin::class,
         'check.address' => CheckBillingAddress::class,
         'check.limit' => CheckProductLimit::class,
-        'certificate.validate' => ValidateRequestForCertificate::class
+        'certificate.validate' => ValidateRequestForCertificate::class,
+        'check.active.product' => CheckActiveProduct::class,
     ];
 }

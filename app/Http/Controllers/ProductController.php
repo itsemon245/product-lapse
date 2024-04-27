@@ -39,6 +39,7 @@ class ProductController extends Controller
     {
         $categories = Select::of('product')->type('category')->get();
         $stages = Select::of('product')->type('stage')->get();
+
         return view('features.product.partials.create', compact('categories', 'stages'));
     }
 
@@ -70,13 +71,12 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        // Set Cookie for the selected product
-        $cookie = Cookie::forever('product_id', $id);
+        setActiveProduct($id);
         $product = Product::find($id);
         $products = User::find(auth()->id())->myProducts;
         $features = $this->getFeatureList($id);
 
-        return response(view('features.product.home', compact('product', 'features', 'products')))->withCookie($cookie);
+        return response(view('features.product.home', compact('product', 'features', 'products')));
     }
 
     /**
@@ -85,12 +85,12 @@ class ProductController extends Controller
     public function filter(Request $request)
     {
         // Set Cookie for the selected product
-        $cookie = Cookie::forever('product_id', $request->product_id);
+        setActiveProduct($request->product_id);
         $product = Product::find($request->product_id);
         $products = User::find(auth()->id())->myProducts()->paginate(10);
         $features = $this->getFeatureList($request->product_id);
 
-        return response(view('features.product.home', compact('product', 'features', 'products')))->withCookie($cookie);
+        return response(view('features.product.home', compact('product', 'features', 'products')));
     }
 
     /**
@@ -243,6 +243,6 @@ class ProductController extends Controller
         $product->loadComments();
         $comments = $product->comments;
 
-        return view('features.product.partials.show', compact('data', 'owner', 'product', 'comments'));
+        return view('features.product.partia    ls.show', compact('data', 'owner', 'product', 'comments'));
     }
 }

@@ -243,6 +243,6 @@ class ProductController extends Controller
         $product->loadComments();
         $comments = $product->comments;
 
-        return view('features.product.partia    ls.show', compact('data', 'owner', 'product', 'comments'));
+        return view('features.product.partials.show', compact('data', 'owner', 'product', 'comments'));
     }
 }

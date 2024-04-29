@@ -126,15 +126,14 @@
                                                         <a class="btn_hover agency_banner_btn btn-bg btn-table"
                                                             href="{{ route('task.file.download', ['task' => $task, 'file' => $file]) }}">@__('feature/task.view')</a>
                                                         </a>
-                                                        <form
-                                                            action="{{ route('task.file.delete', ['task' => $task, 'file' => $file]) }}"
-                                                            method="post">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button
-                                                                class="btn_hover agency_banner_btn btn-table !bg-red-600 hover:!bg-red-400">@__('Delete')</button>
-                                                            </button>
-                                                        </form>
+                                                        <button
+                                                        hx-post="{{ route('task.file.delete', ['task' => $task, 'file' => $file]) }}"
+                                                        hx-swap="delete"
+                                                        hx-vals='{"_method": "DELETE", "_token": "{{csrf_token()}}"}'
+                                                        hx-target="closest tr"
+                                                        type="button"
+                                                        class="btn_hover agency_banner_btn btn-table !bg-red-600 hover:!bg-red-400">@__('Delete')</button>
+                                                        </button>
                                                     </div>
                                                 </td>
                                             </tr>

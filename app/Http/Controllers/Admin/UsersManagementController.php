@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Package;
 use App\Models\Plan;
 use App\Models\User;
+use App\Models\Package;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use App\Services\SelectService;
 use Illuminate\Validation\Rules;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class UsersManagementController extends Controller
 {
@@ -96,6 +97,7 @@ class UsersManagementController extends Controller
             'validity'      => $request->validity,
             'active'        => true,
          ]);
+        SelectService::createDefaults($user);
         notify()->success(__('Created successfully!'));
 
         return redirect()->route('users.index');

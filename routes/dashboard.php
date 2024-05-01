@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Features\Change\ChangeController;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +19,14 @@ Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 require __DIR__.'/product.php';
 require __DIR__.'/select.php';
 require __DIR__.'/certificate.php';
+
+// Workspace switch route
+Route::post('workspace/{user}/change', function (Request $request, User $user) {
+    Auth::login($user, true);
+    notify()->success('Switched Workspace!');
+
+    return redirect('dashboard');
+})->name('workspace.change');
 
 Route::middleware('check.active.product')
     ->group(function () {

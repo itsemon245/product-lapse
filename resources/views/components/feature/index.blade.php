@@ -1,21 +1,24 @@
 {{ $breadcrumb ?? '' }}
 <section class="sign_in_area bg_color sec_pad">
-    <div class="container">
-        <div class="row align-items-center mb_20">
-            <div class="col-lg-8 col-md-7 products-order1">
-                <div class="shop_menu_right d-flex align-items-center">
+    <div class="px-3 xl:px-0 xl:container xl:mx-auto">
+        <div class="lg:grid grid-cols-12 align-items-center mb_20">
+            <div class="md:col-span-7 lg:col-span-8 products-order1 mb-3">
+                <div class="shop_menu_right d-flex align-items-center max-lg:justify-center">
                     <div class="blog-sidebar main-search the-search">
                         <div class="widget sidebar_widget widget_search">
                             {{ $search ?? '' }}
                         </div>
                     </div>
-                    <div class="flex gap-2 items-center">
+                    <div class="inline-flex gap-2 items-center">
                         {{ $actions ?? '' }}
+                        <div class="">
+                            <x-workspace-switcher />
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-5 products-order2">
-                <div class="shop_menu_left d-flex align-items-center justify-content-end">
+            <div class="md:col-span-5 lg:col-span-4 products-order2">
+                <div class="shop_menu_left flex items-center justify-center lg:justify-end">
                     {{ $filter ?? '' }}
                 </div>
             </div>

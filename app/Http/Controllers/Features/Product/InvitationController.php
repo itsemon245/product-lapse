@@ -33,7 +33,7 @@ class InvitationController extends Controller
     public function create()
     {
         $products = Product::get();
-        $roles    = Role::where('name', '!=', 'admin')
+        $roles = Role::where('name', '!=', 'admin')
             ->where('name', '!=', 'account holder')
             ->get();
         $invitation = null;
@@ -58,7 +58,7 @@ class InvitationController extends Controller
     public function edit(Invitation $invitation)
     {
         $products = Product::get();
-        $roles    = Role::where('name', '!=', 'admin')
+        $roles = Role::where('name', '!=', 'admin')
             ->where('name', '!=', 'account holder')
             ->get();
 
@@ -74,26 +74,27 @@ class InvitationController extends Controller
         request()->session()->invalidate();
         request()->session()->regenerateToken();
         $invitation = Invitation::withoutGlobalScope(OwnerScope::class)->where('token', $token)->first();
-        $user       = User::where('email', $invitation->email)->first();
-        $id         = base64_encode($invitation->id);
+        $user = User::where('email', $invitation->email)->first();
+        $id = base64_encode($invitation->id);
 
         if ($user) {
             if ($user->owner_id != $invitation->owner_id) {
                 $newUser = User::create([
-                    'name'              => $invitation->first_name . " " . $invitation->last_name,
+                    'name' => $invitation->first_name.' '.$invitation->last_name,
                     'email_verified_at' => now(),
-                    'password'          => Hash::make(Str::random()),
-                    'first_name'        => $invitation->first_name,
-                    'last_name'         => $invitation->last_name,
-                    'phone'             => $invitation->phone,
-                    'position'          => $invitation->role,
-                    'owner_id'          => $invitation->owner_id,
-                    'main_account_id'   => $user->main_account_id ?? $user->id,
-                    'type'              => 'member',
-                 ]);
+                    'password' => Hash::make(Str::random()),
+                    'first_name' => $invitation->first_name,
+                    'last_name' => $invitation->last_name,
+                    'phone' => $invitation->phone,
+                    'position' => $invitation->role,
+                    'owner_id' => $invitation->owner_id,
+                    'main_account_id' => $user->main_account_id ?? $user->id,
+                    'type' => 'member',
+                ]);
                 $this->assignToUser($invitation, $newUser);
                 Auth::login($newUser, true);
                 notify()->success(trans('A new workspace has been created!'));
+
                 return to_route('dashboard');
             }
             Auth::login($user);
@@ -116,7 +117,7 @@ class InvitationController extends Controller
 
         $request->validate([
             'password' => 'required|string|min:6|same:confirm_password',
-         ]);
+        ]);
         Auth::guard('web')->logout();
         request()->session()->invalidate();
         request()->session()->regenerateToken();
@@ -130,17 +131,17 @@ class InvitationController extends Controller
             return redirect()->route('home');
         }
         $user = User::create([
-            'name'              => $invitation->first_name . " " . $invitation->last_name,
-            'email'             => $invitation->email,
+            'name' => $invitation->first_name.' '.$invitation->last_name,
+            'email' => $invitation->email,
             'email_verified_at' => now(),
-            'password'          => Hash::make($request->password),
-            'first_name'        => $invitation->first_name,
-            'last_name'         => $invitation->last_name,
-            'phone'             => $invitation->phone,
-            'position'          => $invitation->role,
-            'owner_id'          => $invitation->owner_id,
-            'type'              => 'member',
-         ]);
+            'password' => Hash::make($request->password),
+            'first_name' => $invitation->first_name,
+            'last_name' => $invitation->last_name,
+            'phone' => $invitation->phone,
+            'position' => $invitation->role,
+            'owner_id' => $invitation->owner_id,
+            'type' => 'member',
+        ]);
         $this->assignToUser($invitation, $user);
         Auth::login($user, true);
 
@@ -163,7 +164,7 @@ class InvitationController extends Controller
      */
     public function destroy($id)
     {
-        $id         = base64_decode($id);
+        $id = base64_decode($id);
         $invitation = Invitation::find($id);
         if ($invitation == null || $invitation->owner_id != auth()->user()->id) {
             return redirect()->back();
@@ -180,7 +181,7 @@ class InvitationController extends Controller
             $user->myProducts()->detach();
             foreach ($invitation->products as $product) {
                 $user->myProducts()->attach($product->id);
-                $invitation->products()->updateExistingPivot($product->id, [ 'is_accepted' => true ]);
+                $invitation->products()->updateExistingPivot($product->id, ['is_accepted' => true]);
             }
         }
 
@@ -191,7 +192,7 @@ class InvitationController extends Controller
             }
         }
         $user->owner_id = $invitation->owner_id;
-        $user->type     = 'member';
+        $user->type = 'member';
         $user->roles()->detach();
         if ($invitation->role) {
             $user->assignRole($invitation->role);

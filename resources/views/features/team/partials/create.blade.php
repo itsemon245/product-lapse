@@ -48,7 +48,7 @@
                                 placeholder="Choose one" autofocus>
                                 @if ($tasks)
                                     @forelse ($tasks as $task)
-                                        <option value="{{ $task->name }}" class="capitalize">{{ $task->name }}
+                                        <option value="{{ $task->id }}" class="capitalize">{{ $task->name }}
                                         </option>
                                     @empty
                                         <option disabled>
@@ -75,21 +75,23 @@
                             @endif
                         </x-select-input>
                     </div>
-                    <div class="form-group text_box col-lg-4 col-md-6">
-                        <x-select-input :label="__('feature/team.label.task')" class="selectpickers" id="task" name="tasks[]"
-                            placeholder="Choose one" autofocus>
-                            @if ($tasks)
-                                @forelse ($tasks as $task)
-                                    <option value="{{ $task->id }}" class="capitalize"
-                                        @if ($team?->tasks()->find($task->id) != null) selected @endif>{{ $task->name }}</option>
-                                @empty
-                                    <option disabled>
-                                        @lang('No items available')
-                                    </option>
-                                @endforelse
-                            @endif
-                        </x-select-input>
-                    </div>
+                    @if ($team)
+                        <div class="form-group text_box col-lg-4 col-md-6">
+                            <x-select-input :label="__('feature/team.label.task')" class="selectpickers" id="task" name="tasks[]"
+                                placeholder="Choose one" autofocus>
+                                @if ($tasks)
+                                    @forelse ($tasks as $task)
+                                        <option value="{{ $task->id }}" class="capitalize"
+                                            @if ($team?->tasks()->find($task->id) != null) selected @endif>{{ $task->name }}</option>
+                                    @empty
+                                        <option disabled>
+                                            @lang('No items available')
+                                        </option>
+                                    @endforelse
+                                @endif
+                            </x-select-input>
+                        </div>
+                    @endif
 
 
                     <div class="col-md-12 form-group text_box">

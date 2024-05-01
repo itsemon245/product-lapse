@@ -1,17 +1,17 @@
 <?php
+
 namespace App\Http\Controllers\Features\Idea;
 
 use App\Enums\Stage;
-use App\Models\Idea;
-use App\Models\User;
-use App\Models\Select;
-use App\Models\Product;
-use Illuminate\Http\Request;
-use App\Services\SearchService;
-use App\Http\Requests\IdeaRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\IdeaRequest;
 use App\Http\Requests\SearchRequest;
-use App\Notifications\NotificationSystem;
+use App\Models\Idea;
+use App\Models\Product;
+use App\Models\Select;
+use App\Models\User;
+use App\Services\SearchService;
+use Illuminate\Http\Request;
 
 class IdeaController extends Controller
 {
@@ -32,7 +32,8 @@ class IdeaController extends Controller
     public function create()
     {
         $priorities = Select::of('idea')->type('priority')->get();
-        $stages     = Stage::cases();
+        $stages = Stage::cases();
+
         return view('features.idea.partials.create', compact('priorities', 'stages'));
     }
 
@@ -44,6 +45,7 @@ class IdeaController extends Controller
         $data = $request->except('_token');
         $idea = Idea::create($data);
         notify()->success(trans('Created successfully!'));
+
         return redirect()->route('idea.index');
     }
 
@@ -66,6 +68,7 @@ class IdeaController extends Controller
         $idea->update(['stage' => $request->stage]);
 
         notify()->success(trans('Updated successfully!'));
+
         return redirect()->route('idea.show', $idea);
     }
 
@@ -87,7 +90,8 @@ class IdeaController extends Controller
     public function edit(Idea $idea)
     {
         $priorities = Select::of('idea')->type('priority')->get();
-        $stages     = Stage::cases();
+        $stages = Stage::cases();
+
         return view('features.idea.partials.edit', compact('idea', 'priorities', 'stages'));
     }
 
@@ -100,6 +104,7 @@ class IdeaController extends Controller
         $idea->update($data);
 
         notify()->success(trans('Updated successfully!'));
+
         return redirect()->route('idea.index');
     }
 
@@ -110,6 +115,7 @@ class IdeaController extends Controller
     {
         $idea->delete();
         notify()->success(trans('Deleted successfully!'));
+
         return redirect()->route('idea.index');
     }
 
@@ -117,7 +123,9 @@ class IdeaController extends Controller
     {
         $ideas = SearchService::items($request);
         $stages = Select::of('idea')->type('stage')->get();
-        return view('features.idea.index', compact('ideas', 'stages'));
+        $priorities = Select::of('idea')->type('priority')->get();
+
+        return view('features.idea.index', compact('ideas', 'stages', 'priorities'));
     }
 
     // public function notify()

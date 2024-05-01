@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Order;
 use App\Models\Plan;
 use App\Models\User;
 use App\Models\Order;
-use App\Models\Package;
 use App\Mail\InvoiceMail;
 use Illuminate\Http\Request;
 use App\Services\SelectService;
@@ -17,8 +16,8 @@ class PaymentController extends Controller
 {
     public function ipn(Request $request)
     {
-        $orderUuid = $request->cart_id;
-        $status    = $request->payment_result->response_status;
+        $orderUuid = $request->cartId;
+        $status    = $request->respStatus;
         $order     = Order::where('uuid', $orderUuid)->with('package')->first();
 
         if ($status == 'A') {
@@ -61,7 +60,8 @@ class PaymentController extends Controller
 
     public function callback(Request $request)
     {
-        $orderUuid = $request->cart_id;
+        // dd($request->all());
+        $orderUuid = $request->cartId;
         if(!$orderUuid){
             notify()->success(trans('Order Cancelled!'));
             return redirect('/');
@@ -89,7 +89,7 @@ class PaymentController extends Controller
 
             return redirect(route('payment.success'));
         }
-        $status      = $request->payment_result->response_status;
+        $status      = $request->respStatus;
         $orderStatus = 'completed';
         $completedAt = now();
         $expireDate  = now()->add($order->package->unit, $order->package->validity);
@@ -149,3 +149,4 @@ class PaymentController extends Controller
 
     }
 }
+

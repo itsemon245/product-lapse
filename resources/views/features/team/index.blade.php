@@ -7,11 +7,12 @@
 
         <x-slot:search>
 
-            <form method="GET" hx-get="{{ route('team.search') }}" hx-trigger="submit" hx-target="#search-results"
+            <form method="GET" hx-get="{{ route('team.index') }}" hx-trigger="submit" hx-target="#search-results"
                 hx-select="#search-results" class="search-form input-group">
                 <input type="hidden" name="columns[]" value="email">
                 <input type="hidden" name="columns[]" value="first_name">
-                <input type="hidden" name="model" value="invitation">
+                <input type="hidden" name="columns[]" value="last_name">
+                <input type="hidden" name="model" value="productUser">
                 <input type="search" name="search" class="form-control widget_input"
                     placeholder="{{ __('feature/team.search') }}" hx-vals="#search-results">
                 <button type="submit"><i class="ti-search"></i></button>

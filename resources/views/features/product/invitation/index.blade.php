@@ -6,8 +6,14 @@
         </x-slot:breadcrumb>
 
         <x-slot:search>
-            <form action="#" class="search-form input-group">
-                <input type="search" class="form-control widget_input" placeholder="{{ __('feature/invitation.search') }}">
+            <form method="GET" hx-get="{{ route('invitation.index') }}" hx-trigger="submit" hx-target="#search-results"
+                hx-select="#search-results" class="search-form input-group">
+                <input type="hidden" name="columns[]" value="first_name">
+                <input type="hidden" name="columns[]" value="last_name">
+                <input type="hidden" name="columns[]" value="email">
+                <input type="hidden" name="model" value="invitation">
+                <input type="search" name="search" class="form-control widget_input" placeholder="{{ __('Search') }}"
+                    hx-vals="#search-results">
                 <button type="submit"><i class="ti-search"></i></button>
             </form>
         </x-slot:search>
@@ -32,8 +38,8 @@
                             <div class="joblisting_text">
                                 <div class="job_list_table">
                                     <div class="jobsearch-table-cell">
-                                        <h4><a href="#" class="f_500 t_color3">{{ $invitation->id }}-
-                                                {{ $invitation->first_name }} {{ $invitation->last_name }}</a>
+                                        <h4><a href="#" class="f_500 t_color3">{{ $invitation->first_name }}
+                                                {{ $invitation->last_name }}</a>
                                         </h4>
                                         <ul class="list-unstyled">
                                             <li class="p_color4">{{ $invitation->email }}</li>
@@ -41,7 +47,7 @@
                                             <li class="p_color4">{{ $invitation->position }}</li>
                                             <li class="p_color4">{{ $invitation->role }}</li>
                                             <li class="p_color4">
-                                                {{ $invitation->accepted_at == null ? __('Not Accepted yet') : __("Accepted at") . " : " . $invitation->accepted_at }}
+                                                {{ $invitation->accepted_at == null ? __('Not Accepted yet') : __('Accepted') . ' : ' . Carbon\Carbon::parse($invitation->accepted_at)->diffForHumans() }}
                                             </li>
 
                                         </ul>
@@ -77,7 +83,7 @@
                     </div>
                 </div>
             @empty
-            <x-feature.not-found />
+                <x-feature.not-found />
             @endforelse
         </x-slot:list>
     </x-feature.index>

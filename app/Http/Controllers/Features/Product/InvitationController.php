@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Features\Product;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SearchRequest;
 use App\Http\Requests\TeamInvitationRequest;
 use App\Models\Invitation;
 use App\Models\Product;
 use App\Models\Scopes\OwnerScope;
+use App\Models\Select;
 use App\Models\User;
 use App\Services\InvitationService;
+use App\Services\SearchService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -20,10 +23,9 @@ class InvitationController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(SearchRequest $request)
     {
-        $invitations = Invitation::where('owner_id', auth()->user()->id)->get();
-
+        $invitations = $request->has('search') ? SearchService::items($request, 20) : Invitation::paginate(20);
         return view('features.product.invitation.index', compact('invitations'));
     }
 
@@ -174,7 +176,6 @@ class InvitationController extends Controller
 
         return redirect()->route('invitation.index')->with('success', 'Invitation deleted successfully');
     }
-
     protected function assignToUser(Invitation $invitation, User $user): void
     {
         if ($invitation->products) {

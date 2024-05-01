@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\Features\Team;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\SearchRequest;
 use App\Http\Requests\TeamInvitationRequest;
 use App\Models\Product;
 use App\Models\User;
 use App\Services\InvitationService;
-use App\Services\SearchService;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
@@ -19,7 +18,17 @@ class TeamController extends Controller
      */
     public function index()
     {
-        $teams = Product::find(productId())->users()->with('roles')->paginate(10);
+        $teams = Product::find(productId())->users()
+            ->where(function (Builder $q) {
+                if (request()->has('search')) {
+                    $columns = request()->columns;
+                    $search = request()->search;
+                    foreach ($columns as $column) {
+                        $q->orWhere($column, 'like', '%'.$search.'%');
+                    }
+                }
+            })
+            ->with('roles')->latest()->paginate(10);
 
         return view('features.team.index', compact('teams'));
     }
@@ -105,12 +114,5 @@ class TeamController extends Controller
             return redirect()->route('team.index');
         }
 
-    }
-
-    public function search(SearchRequest $request)
-    {
-        $teams = SearchService::items($request);
-
-        return view('features.team.index', compact('teams'));
     }
 }

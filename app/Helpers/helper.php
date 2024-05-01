@@ -226,7 +226,7 @@ function transferInformationIfMember(Order $order): User
                 'workplace' => $user->workplace,
                 'promotional_code' => $user->promotional_code,
                 'flag' => $user->flag,
-                'position' => $user->position,
+                'job_title' => $user->job_title,
                 'type' => 'subscriber',
             ]);
         }

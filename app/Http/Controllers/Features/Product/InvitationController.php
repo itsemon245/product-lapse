@@ -88,7 +88,7 @@ class InvitationController extends Controller
                     'first_name' => $invitation->first_name,
                     'last_name' => $invitation->last_name,
                     'phone' => $invitation->phone,
-                    'position' => $invitation->role,
+                    'job_title' => $invitation->job_title,
                     'owner_id' => $invitation->owner_id,
                     'main_account_id' => $user->main_account_id ?? $user->id,
                     'type' => 'member',
@@ -140,7 +140,7 @@ class InvitationController extends Controller
             'first_name' => $invitation->first_name,
             'last_name' => $invitation->last_name,
             'phone' => $invitation->phone,
-            'position' => $invitation->role,
+            'job_title' => $invitation->job_title,
             'owner_id' => $invitation->owner_id,
             'type' => 'member',
         ]);

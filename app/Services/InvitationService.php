@@ -34,6 +34,7 @@ class InvitationService
             'last_name' => $request->last_name,
             'phone' => $request->phone,
             'role' => $request->role,
+            'job_title' => $request->job_title,
             'tasks' => $request->tasks,
             'token' => $token,
         ]);

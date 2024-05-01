@@ -57,6 +57,7 @@
                                                 class="profile-num">{{ $user->phone }}</span></li>
                                         @if ($user->type == 'member')
                                             <li><span>@__('profile.profile.employer') :</span> {{ $user->owner?->name }}</li>
+                                            <li><span>@__('Job Title') :</span> {{ $user->job_title }}</li>
                                         @endif
                                     </ul>
                                     <div class="btn_info d-flex gap-2 items-center">

@@ -1,4 +1,5 @@
 <?php
+
 return [
 
     //list page
@@ -11,15 +12,15 @@ return [
     'label' => [
         'fname' => 'الاسم الأول',
         'lname' => 'اسم العائلة',
-        'email' => 'بريد إلكتروني', 
-        'task' => 'حدد المهمة', 
+        'email' => 'بريد إلكتروني',
+        'task' => 'حدد المهمة',
         'phone' => 'هاتف',
         'position' => 'موضع',
     ],
     'placeholder' => [
         'fname' => 'الاسم الأول',
         'lname' => 'اسم العائلة',
-        'email' => 'بريد إلكتروني', 
+        'email' => 'بريد إلكتروني',
         'phone' => 'هاتف',
         'position' => 'موضع',
     ],
@@ -27,6 +28,7 @@ return [
     'submit' => 'إضافة مستخدم',
     //Edit page
     'edit' => 'تعديل الدعوة',
+    'update' => 'تحديث المستخدم',
     // //details page
     // 'version' => 'Release version',
     // 'date' => 'Release date',

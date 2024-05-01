@@ -43,7 +43,7 @@ class ProfileController extends Controller
         $user = User::find($id);
         $user->update([
             'name' => $request->first_name . " " .$request->last_name,
-            ...$request->only('first_name', 'last_name', 'email', 'phone', 'workplace'),
+            ...$request->only('first_name', 'last_name', 'email', 'phone', 'workplace', 'job_title'),
          ]);
         $image = $user->storeImage($request->avatar);
         notify()->success(__('Updated successfully!'));

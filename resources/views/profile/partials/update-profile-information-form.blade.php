@@ -23,9 +23,10 @@
                         @enderror"
                             type="file" id="imagefile" name="avatar" hidden>
                         <div class="relative">
-                            <img loading="lazy" class="rounded-circle border border-primary" style="height: 18rem; width:18rem;"
-                                class="border border-5 border-primary" id="liveImage"
-                                src="{{ $user->image->url ?? avatar($user->name) }}" alt="{{ auth()->user()->name }}">
+                            <img loading="lazy" class="rounded-circle border border-primary"
+                                style="height: 18rem; width:18rem;" class="border border-5 border-primary"
+                                id="liveImage" src="{{ $user->image->url ?? avatar($user->name) }}"
+                                alt="{{ auth()->user()->name }}">
                             <div class="d-flex justify-content-center">
                                 <span
                                     style="
@@ -44,20 +45,17 @@
                 <div class="col-md-6">
                     <x-input-label for="name" :value="__('profile.profile.first_name')" />
                     <x-input placeholder="{{ __('profile.profile.namef') }}" id="name" name="first_name"
-                        type="text" class="mt-1 block w-full" :value="old('first_name', $user->first_name)" required
-                        autocomplete="name" />
+                        type="text" class="mt-1 block w-full" :value="old('first_name', $user->first_name)" required autocomplete="name" />
                 </div>
                 <div class="col-md-6">
                     <x-input-label for="name" :value="__('profile.profile.last_name')" />
                     <x-input placeholder="{{ __('profile.profile.namef') }}" id="name" name="last_name"
-                        type="text" class="mt-1 block w-full" :value="old('last_name', $user->last_name)" required
-                        autocomplete="name" />
+                        type="text" class="mt-1 block w-full" :value="old('last_name', $user->last_name)" required autocomplete="name" />
                 </div>
                 <div class="col-md-6">
                     <x-input-label for="email" :value="__('profile.profile.email')" />
                     <x-input placeholder="{{ __('profile.profile.email') }}" id="email" name="email"
-                        type="text" class="mt-1 block w-full" :value="old('email', $user->email)" required
-                        autocomplete="email" />
+                        type="text" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="email" />
                     <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
                     @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())
@@ -82,17 +80,23 @@
                 <div class="col-md-6">
                     <x-input-label for="phone" :value="__('profile.profile.phone')" />
                     <x-input placeholder="{{ __('profile.profile.phone') }}" id="phone" name="phone"
-                        type="text" class="mt-1 block w-full" :value="old('phone', $user->phone)" required
-                        autocomplete="phone" />
+                        type="text" class="mt-1 block w-full" :value="old('phone', $user->phone)" required autocomplete="phone" />
                     <x-input-error class="mt-2" :messages="$errors->get('phone')" />
                 </div>
                 @if ($user->type != 'admin')
                     <div class="col-md-6">
                         <x-input-label for="workplace" :value="__('profile.profile.workplace')" />
                         <x-input placeholder="{{ __('profile.profile.workplace') }}" id="workplace" name="workplace"
-                            type="text" class="mt-1 block w-full" :value="old('workplace', $user->workplace)" required
-                            autocomplete="workplace" />
+                            type="text" class="mt-1 block w-full" :value="old('workplace', $user->workplace)" autocomplete="workplace" />
                         <x-input-error class="mt-2" :messages="$errors->get('workplace')" />
+                    </div>
+                @endif
+                @if ($user->type == 'member')
+                    <div class="col-md-6">
+                        <x-input-label for="job_title" :value="__('Job Title')" />
+                        <x-input placeholder="{{ __('Job Title') }}" id="job_title" name="job_title" type="text"
+                            class="mt-1 block w-full" :value="old('job_title', $user->job_title)" autocomplete="job_title" />
+                        <x-input-error class="mt-2" :messages="$errors->get('job_title')" />
                     </div>
                 @endif
                 <div class="col-12">

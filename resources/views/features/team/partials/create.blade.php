@@ -44,7 +44,12 @@
                                 autofocus />
                         </div>
                         <div class="form-group text_box col-lg-4 col-md-6">
-                            <x-select-input :label="__('feature/team.label.task')" class="selectpickers" id="task" name="tasks[]"
+                            <x-input-label for="job_title" value="{{ __('Job Title') }}"
+                                class=" text_c f_500" />
+                            <x-input type="text" id="job_title" class="block mt-1 w-full" type="text"
+                                placeholder="{{ __('Job Title') }}" name="job_title" :value="old('job_title')"
+                                autofocus />
+                            {{-- <x-select-input :label="__('feature/team.label.task')" class="selectpickers" id="task" name="tasks[]"
                                 placeholder="Choose one" autofocus>
                                 @if ($tasks)
                                     @forelse ($tasks as $task)
@@ -56,11 +61,11 @@
                                         </option>
                                     @endforelse
                                 @endif
-                            </x-select-input>
+                            </x-select-input> --}}
                         </div>
                     @endif
                     <div class="form-group text_box col-lg-4 col-md-6">
-                        <x-select-input :label="__('feature/team.label.position')" id="role" placeholder="Choose one" name="role" autofocus>
+                        <x-select-input :label="__('Role')" id="role" placeholder="Choose one" name="role" autofocus>
                             @if ($roles)
                                 @forelse ($roles as $role)
                                     <option value="{{ $role->name }}" class="capitalize"
@@ -75,7 +80,7 @@
                             @endif
                         </x-select-input>
                     </div>
-                    @if ($team)
+                    {{-- @if ($team)
                         <div class="form-group text_box col-lg-4 col-md-6">
                             <x-select-input :label="__('feature/team.label.task')" class="selectpickers" id="task" name="tasks[]"
                                 placeholder="Choose one" autofocus>
@@ -91,7 +96,7 @@
                                 @endif
                             </x-select-input>
                         </div>
-                    @endif
+                    @endif --}}
 
 
                     <div class="col-md-12 form-group text_box">

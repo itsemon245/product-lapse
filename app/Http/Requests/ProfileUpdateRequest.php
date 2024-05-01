@@ -21,6 +21,7 @@ class ProfileUpdateRequest extends FormRequest
             'first_name' => 'sometimes|required|string|max:255',
             'last_name' => 'sometimes|required|string|max:255',
             'email' => 'sometimes|required|email|max:255',
+            'job_title' => 'sometimes|nullable|max:255',
         ];
     }
 }

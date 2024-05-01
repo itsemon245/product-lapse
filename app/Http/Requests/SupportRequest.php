@@ -27,7 +27,7 @@ class SupportRequest extends FormRequest
             'priority' => 'required',
             'status' => 'required',
             'description' => 'sometimes|required|string |max:255',
-            'administrator' => 'required|string|max:40',
+            'administrator' => 'required|integer',
             'completion_date' => 'sometimes|required|date',
         ];
     }

@@ -28,7 +28,7 @@
         </x-slot:actions>
 
         <x-slot:filter>
-            {{-- Empty --}}
+            <x-my-filter :route="route('delivery.search')" :columns="['administrator']" model="delivery" />
         </x-slot:filter>
 
         <x-slot:list>

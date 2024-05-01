@@ -35,13 +35,15 @@
                         id="" />
                     <span class="mb-0">MVP</span>
                 </label>
-                <label
+                {{-- <label
                     class="inline-flex cursor-pointer items-center px-2 py-1 rounded {{ request()->query('my_task') == 'true' ? '!bg-primary text-white' : '!text-gray-500 bg-white border' }} mx-4">
                     <input onchange="this.form.submit()" class="hidden" type="checkbox" value="true" name="my_task"
                         id="" />
                     <span class="mb-0">My Tasks</span>
-                </label>
+                </label> --}}
             </form>
+            <x-my-filter :route="route('task.search')" :columns="['administrator']" model="task" />
+
             <h5>@__('feature/task.showing2')</h5>
             <x-filter :route="route('task.search')" :columns="['status']" model="task" :options="$priorities" />
         </x-slot:filter>

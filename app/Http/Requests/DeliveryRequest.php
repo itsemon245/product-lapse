@@ -27,7 +27,7 @@ class DeliveryRequest extends FormRequest
             'items' => 'sometimes|required|string|max:255',
             'link' => 'sometimes|required|string|max:255',
             'password' => 'sometimes|required|string|max:255',
-            'administrator' => 'required|string|max:255',
+            'administrator' => 'required|integer',
             'add_attachments[]' => 'sometimes|required',
         ];
     }

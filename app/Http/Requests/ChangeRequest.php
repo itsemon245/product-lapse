@@ -27,7 +27,7 @@ class ChangeRequest extends FormRequest
             'priority' => 'required',
             'status' => 'required',
             'details' => 'sometimes|required',
-            'administrator' => 'required',
+            'administrator' => 'required|integer',
             'required_completion_date' => 'sometimes|required|date',
         ];
     }

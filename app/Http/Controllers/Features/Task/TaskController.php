@@ -27,11 +27,11 @@ class TaskController extends Controller
                 if (request()->query('mvp') == 'true') {
                     $q->where('choose_mvp', 1);
                 }
+                if (request()->query('my_task') == 'true') {
+                    $q->where('administrator', auth()->id());
+                }
             })
             ->latest()->paginate();
-        if (request()->query('my_task') == 'true') {
-            $tasks = User::find(auth()->id())->tasks()->latest()->paginate();
-        }
         $priorities = Select::of('task')->type('status')->get();
 
         return view('features.task.index', compact('tasks', 'priorities'));

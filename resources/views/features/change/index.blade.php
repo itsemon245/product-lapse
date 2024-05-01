@@ -26,6 +26,8 @@
         </x-slot:actions>
 
         <x-slot:filter>
+            <x-my-filter :route="route('change.search')" :columns="['administrator']" model="change" />
+
             <h5>@__('feature/change.showing')</h5>
             <x-filter :route="route('change.search')" :columns="['status']" model="change" :options="$statuses" />
         </x-slot:filter>
@@ -42,7 +44,9 @@
                                         <h4><a href="{{ route('change.show', $change) }}"
                                                 class="f_500 t_color3">{{ $change->title }}</a></h4>
                                         <ul class="list-unstyled">
-                                            @include('components.feature-select-list', ['model'=>$change])
+                                            @include('components.feature-select-list', [
+                                                'model' => $change,
+                                            ])
                                             <li class="text-muted">
                                                 {{ \Carbon\Carbon::parse($change->created_at)->format('l, j F Y') }}</li>
                                         </ul>

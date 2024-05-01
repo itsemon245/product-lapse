@@ -24,6 +24,7 @@
             @endcan
         </x-slot:actions>
         <x-slot:filter>
+            <x-my-filter :route="route('support.search')" :columns="['administrator']" model="support" />
             <h5>@__('Status')</h5>
             <x-filter :route="route('support.search')" :columns="['status']" model="support" :options="$statuses" />
         </x-slot:filter>
@@ -41,7 +42,9 @@
                                                 class="f_500 t_color3">{{ $support->name }}</a>
                                         </h4>
                                         <ul class="list-unstyled">
-                                            @include('components.feature-select-list', ['model'=>$support])
+                                            @include('components.feature-select-list', [
+                                                'model' => $support,
+                                            ])
                                             <li>
                                                 {{ \Carbon\Carbon::parse($support->created_at)->format('l, j F Y') }}
                                             </li>

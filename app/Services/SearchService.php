@@ -31,16 +31,20 @@ class SearchService
                 $q->where('user_id', auth()->id());
             })
                 ->where(function (Builder $q) use ($columns, $search) {
-                    foreach ($columns as $column) {
-                        $q->orWhere($column, 'like', '%'.$search.'%');
+                    if (! empty($search)) {
+                        foreach ($columns as $column) {
+                            $q->orWhere($column, 'like', '%'.$search.'%');
+                        }
                     }
                 })->latest()->paginate($limit);
         } else {
             $items = $model::whereHas('products', function (Builder $q) {
                 $q->where('product_id', productId());
             })->where(function (Builder $q) use ($columns, $search) {
-                foreach ($columns as $column) {
-                    $q->orWhere($column, 'like', '%'.$search.'%');
+                if (! empty($search)) {
+                    foreach ($columns as $column) {
+                        $q->orWhere($column, 'like', '%'.$search.'%');
+                    }
                 }
             })->latest()->paginate($limit);
         }

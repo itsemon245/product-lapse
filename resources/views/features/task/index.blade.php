@@ -28,11 +28,11 @@
         </x-slot:actions>
 
         <x-slot:filter>
-            <form action="{{ route('task.index') }}" class="flex">
+            <form action="{{ route('task.index') }}" class="flex" x-data="{ mvp: '{{ !empty(request()->query('mvp')) ? '' : 'true' }}' }">
                 <label
                     class="inline-flex cursor-pointer items-center px-2 py-1 rounded {{ request()->query('mvp') == 'true' ? '!bg-primary text-white' : '!text-gray-500 bg-white border' }}">
-                    <input onchange="this.form.submit()" class="hidden" type="checkbox" name="mvp" value="true"
-                        id="" />
+                    <input onchange="this.form.submit()" class="hidden" type="checkbox" name="mvp"
+                        :value="mvp" id="" />
                     <span class="mb-0">MVP</span>
                 </label>
                 {{-- <label

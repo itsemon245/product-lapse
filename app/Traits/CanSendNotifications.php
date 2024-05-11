@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Traits;
 
 use App\Notifications\CreateNotification;
@@ -8,17 +9,16 @@ use Illuminate\Support\Facades\Notification;
 
 trait CanSendNotifications
 {
-
     /**
      * The "booted" method of the model.
      */
     protected static function bootCanSendNotifications(): void
     {
         static::created(function ($model) {
-            if (!env('SEEDING', false)) {
+            if (! env('SEEDING', false)) {
                 if (str($model)->contains('product')) {
                     $productId = $model->id;
-                }else{
+                } else {
                     $productId = null;
                 }
                 [$users, $initiator, $feature] = getNotificationData($model, $productId);
@@ -26,10 +26,10 @@ trait CanSendNotifications
             }
         });
         static::updated(function ($model) {
-            if (!env('SEEDING', false)) {
+            if (! env('SEEDING', false)) {
                 if (str($model)->contains('product')) {
                     $productId = $model->id;
-                }else{
+                } else {
                     $productId = null;
                 }
                 [$users, $initiator, $feature] = getNotificationData($model, $productId);
@@ -37,10 +37,10 @@ trait CanSendNotifications
             }
         });
         static::deleting(function ($model) {
-            if (!env('SEEDING', false)) {
+            if (! env('SEEDING', false)) {
                 if (str($model)->contains('product')) {
                     $productId = $model->id;
-                }else{
+                } else {
                     $productId = null;
                 }
                 [$users, $initiator, $feature] = getNotificationData($model, $productId);

@@ -148,7 +148,7 @@ function getNotificationData($model, $productId = null)
         $users = [];
     }
     // dd($model);
-    $feature = explode('\\', $model);
+    $feature = explode('\\', get_class($model));
     $feature = array_pop($feature);
 
     return [$users, $initiator, $feature];

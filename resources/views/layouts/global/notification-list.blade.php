@@ -4,13 +4,13 @@
         <i class="ti-bell"></i><span class="notifi-num px-2">{{ count(auth()->user()->notifications) }}</span>
     </a>
     <ul class="dropdown-menu">
-        @forelse (auth()->user()->notifications as $notification)
+        @forelse (auth()->user()->notifications()->limit(10)->get() as $notification)
             <li class="nav-item {{ $notification->read_at == null ? 'bg-light' : '' }}">
                 @php
                     $user = App\Models\User::with('image')->find($notification->data['initiator_id']);
                     // dd($user)
                 @endphp
-                <a href="blog-grid.html" class="nav-link">
+                <a href="{{ route('notifications') }}" class="nav-link">
                     <div class="feedback_item">
                         <div class="feed_back_author">
                             <div class="media">
@@ -33,6 +33,6 @@
             </li>
         @endforelse
         <li class="nav-item text-center {{ count(auth()->user()->notifications) > 0 ? '' : 'd-none' }} "><a
-                href="{{route('notifications')}}" class="nav-link ">@__('navigation.notifications.view')</a></li>
+                href="{{ route('notifications') }}" class="nav-link ">@__('navigation.notifications.view')</a></li>
     </ul>
 </li>

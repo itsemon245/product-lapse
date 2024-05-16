@@ -52,7 +52,7 @@ class RegisteredUserController extends Controller
             'last_name'        => $request->last_name,
             'phone'            => $request->phone,
             'workplace'        => $request->workplace,
-            'position'         => $request->position,
+            'job_title'         => $request->position,
             'promotional_code' => $request->promotional_code,
             'owner_id'         => $admin?->id,
          ]);

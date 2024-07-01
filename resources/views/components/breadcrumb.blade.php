@@ -6,7 +6,7 @@
     <div class="container d-flex">
         <div class="breadcrumb_content text-center ml-auto">
             <ul class="breadcrumb">
-                @if (str(url()->current())->contains('dashboard'))
+                @if (str(url()->current())->contains(['dashboard']))
                     <li class="breadcrumb-item {{ request()->routeIs('dashboard') ? 'active' : '' }} ">
                         <a href="{{ route('dashboard') }}">@__('root.dashboard')</a>
                     </li>
@@ -16,7 +16,11 @@
                     </li>
                 @else
                     <li class="breadcrumb-item {{ request()->routeIs('home') ? 'active' : '' }} ">
-                        <a href="{{ route('home') }}">@__('Home')</a>
+                        @if (request()->routeIs('profile.*'))
+                            <a href="{{ route('dashboard') }}">@__('Home')</a>
+                        @else
+                            <a href="{{ route('home') }}">@__('Home')</a>
+                        @endif
                     </li>
                 @endif
                 @if (productId() != null &&
@@ -25,7 +29,8 @@
                         str(url()->current())->contains('dashboard') &&
                         !str(url()->current())->contains(['certificate', 'select']))
                     <li class="breadcrumb-item {{ request()->routeIs('product.show') ? 'active' : '' }} ">
-                        <a href="{{ request()->routeIs('product.index') ? '#' : (request()->routeIs('product.show') || request()->routeIs('product.home.filter') ? url()->current() : route('product.show', productId())) }}">
+                        <a
+                            href="{{ request()->routeIs('product.index') ? '#' : (request()->routeIs('product.show') || request()->routeIs('product.home.filter') ? url()->current() : route('product.show', productId())) }}">
                             @if (request()->routeIs('product.index'))
                                 @__('Products')
                             @else

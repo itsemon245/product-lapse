@@ -40,8 +40,11 @@
                 <div class="modal-footer">
                     @empty($footer)
                         <!-- Modal Header -->
-                        <button type="button" class="btn_hover agency_banner_btn btn-bg agency_banner_btn2"
-                            data-dismiss="modal">@__('Save')</button>
+                        <button
+                            @if (request()->routeIs('idea.show')) type="button" data-dismiss="modal" 
+                        @else
+                        type="submit" @endif
+                            class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">@__('Save')</button>
                         <button type="button" class="btn_hover agency_banner_btn btn-bg btn-bg-grey"
                             data-dismiss="modal">@__('Cancel')</button>
                     @else

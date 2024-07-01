@@ -56,7 +56,7 @@
 
                                     <div class="jobsearch-table-cell">
                                         <div class="jobsearch-job-userlist">
-                                            @if (auth()->id() != $team->id)
+                                            @if (auth()->id() != $team->id && auth()->owner_id != $team->id)
                                                 @can('delete member')
                                                     <div class="like-btn">
                                                         <form action="{{ route('team.destroy', $team) }}" method="POST">

@@ -2,17 +2,21 @@
 
 namespace App\Models;
 
-use App\Models\User;
-use App\Traits\CanSendNotifications;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Comment extends Model
 {
-    use HasFactory, CanSendNotifications;
+    use HasFactory;
+
     protected $guarded = [];
+
+    public function commentable()
+    {
+        return $this->morphTo('commentable');
+    }
 
     public function user()
     {
@@ -23,9 +27,9 @@ class Comment extends Model
     {
         return $this->belongsTo(Comment::class, 'parent_id');
     }
+
     public function replies(): HasMany
     {
         return $this->hasMany(Comment::class, 'parent_id');
     }
-
 }

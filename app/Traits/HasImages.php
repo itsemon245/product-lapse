@@ -3,10 +3,11 @@
 namespace App\Traits;
 
 use App\Models\Image;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait HasImages
 {
@@ -16,6 +17,9 @@ trait HasImages
      */
     public function image(): MorphOne
     {
+        /**
+         * @var Model $this
+         */
         return $this->morphOne(Image::class, 'imageable');
     }
 
@@ -24,6 +28,9 @@ trait HasImages
      */
     public function images(): MorphMany
     {
+        /**
+         * @var Model $this
+         */
         return $this->morphMany(Image::class, 'imageable');
     }
     /**

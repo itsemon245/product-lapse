@@ -30,9 +30,11 @@
                 <select onchange="this.form.submit()" name="search" class="selectpickers selectpickers2">
                     <option selected>@__('All')</option>
                     <option value="active" @selected(request()->query('search') == 'active')>@__('Active')</option>
-                    <option value="banned" @selected(request()->query('search') == 'banned') ">@__('Banned')</option>
-                                                <option value="verified" @selected(request()->query('search') == 'verified')>@__('Verified')</option>
-                                                <option value="unverified" @selected(request()->query('search') == 'unverified') ">@__('Unverified')
+                    <option value="banned"
+                        @selected(request()->query('search') == 'banned') ">@__('Banned')</option>
+                                                                            <option value="verified" @selected(request()->query('search') == 'verified')>@__('Verified')</option>
+                                                                            <option value="unverified" @selected(request()->query('search') == 'unverified') ">
+                        @__('Unverified')
                     </option>
                 </select>
             </form>
@@ -115,6 +117,18 @@
                                                     @else
                                                         <i class="ti-na" title="@__('Unverify Email')"></i>
                                                     @endif
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="jobsearch-table-cell !w-full">
+                                        <div class="jobsearch-job-userlist !float-start">
+                                            <form action="{{ route('users.destroy', $subscriber) }}" method="post"
+                                                class="like-btn">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit">
+                                                    <i class="ti-trash" title="@__('Delete')"></i>
                                                 </button>
                                             </form>
                                         </div>

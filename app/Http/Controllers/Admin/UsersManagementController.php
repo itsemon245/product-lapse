@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
+use App\Models\Package;
 use App\Models\Plan;
 use App\Models\User;
-use App\Models\Package;
-use Illuminate\Http\Request;
+use App\Models\UserBackup;
 use App\Services\SelectService;
-use Illuminate\Validation\Rules;
-use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
 
 class UsersManagementController extends Controller
 {
@@ -18,9 +21,14 @@ class UsersManagementController extends Controller
      */
     public function index()
     {
-        $subscribers = User::where('type', 'subscriber')->orWhere('type', null)->latest()->paginate();
+        $subscribers = User::where(function (Builder $builder) {
+            $builder->where('type', 'subscriber')
+                ->orWhere('type', null);
+        })
+            ->where('main_account_id', null)
+            ->latest()->paginate();
 
-        if (!empty(request()->query('search'))) {
+        if (! empty(request()->query('search'))) {
             $subscribers = User::whereNot('type', 'admin')
                 ->whereNot('type', 'member')
                 ->where('main_account_id', null)
@@ -39,64 +47,66 @@ class UsersManagementController extends Controller
                     }
                 })->latest()->paginate();
         }
+
         return view('pages.users.management', compact('subscribers'));
     }
 
     public function create()
     {
-        $packages      = Package::get();
-        $activePlan    = null;
+        $packages = Package::get();
+        $activePlan = null;
         $activePackage = null;
-        $packageId     = request()->query('package_id');
-        if (!empty($packageId)) {
+        $packageId = request()->query('package_id');
+        if (! empty($packageId)) {
             $activePackage = Package::find($packageId);
         }
+
         return view('pages.users.create', compact('packages', 'activePlan', 'activePackage'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'email'            => [ 'required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email' ],
-            'password'         => [ 'required', Rules\Password::defaults() ],
-            'first_name'       => [ 'nullable', 'string' ],
-            'last_name'        => [ 'nullable', 'string' ],
-            'phone'            => [ 'nullable', 'string', 'max:40' ],
-            'workplace'        => [ 'nullable', 'string', 'max:40' ],
-            'position'         => [ 'nullable', 'string', 'max:40' ],
-            'promotional_code' => [ 'nullable', 'string', 'max:40' ],
-            'unit'             => "string|nullable",
-            'validity'         => "integer|nullable",
-         ]);
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email'],
+            'password' => ['required', Rules\Password::defaults()],
+            'first_name' => ['nullable', 'string'],
+            'last_name' => ['nullable', 'string'],
+            'phone' => ['nullable', 'string', 'max:40'],
+            'workplace' => ['nullable', 'string', 'max:40'],
+            'position' => ['nullable', 'string', 'max:40'],
+            'promotional_code' => ['nullable', 'string', 'max:40'],
+            'unit' => 'string|nullable',
+            'validity' => 'integer|nullable',
+        ]);
         $admin = User::admin()->first();
 
         $user = User::create([
-            'email'             => $request->email,
-            'password'          => Hash::make($request->password),
-            'name'              => $request->first_name . " " . $request->last_name,
-            'first_name'        => $request->first_name,
-            'last_name'         => $request->last_name,
-            'phone'             => $request->phone,
-            'workplace'         => $request->workplace,
-            'position'          => $request->position,
-            'promotional_code'  => $request->promotional_code,
-            'owner_id'          => $admin?->id,
-            "email_verified_at" => now(),
-         ]);
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'name' => $request->first_name.' '.$request->last_name,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'phone' => $request->phone,
+            'workplace' => $request->workplace,
+            'position' => $request->position,
+            'promotional_code' => $request->promotional_code,
+            'owner_id' => $admin?->id,
+            'email_verified_at' => now(),
+        ]);
 
         $activePlan = $user->activePlan()->first();
-        $package    = Package::find($request->package_id);
+        $package = Package::find($request->package_id);
         $expireDate = $request->validity != null ? now()->add($request->unit, $request->validity) : null;
-        Plan::updateOrCreate([ 'id' => $activePlan?->id ], [
-            'user_id'       => $user->id,
-            'package_id'    => $package->id,
-            'name'          => $package->name,
-            'price'         => $package->price,
+        Plan::updateOrCreate(['id' => $activePlan?->id], [
+            'user_id' => $user->id,
+            'package_id' => $package->id,
+            'name' => $package->name,
+            'price' => $package->price,
             'product_limit' => $package->product_limit,
-            'expired_at'    => $expireDate,
-            'validity'      => $request->validity,
-            'active'        => true,
-         ]);
+            'expired_at' => $expireDate,
+            'validity' => $request->validity,
+            'active' => true,
+        ]);
         SelectService::createDefaults($user);
         notify()->success(__('Created successfully!'));
 
@@ -111,14 +121,15 @@ class UsersManagementController extends Controller
     {
         $user = tap($user)->update([
             'banned_at' => $user->banned_at == null ? now() : null,
-         ]);
+        ]);
         $user->refresh();
         if ($user->banned_at == null) {
             $message = __('User has been unbanned!');
-        }{
-            $message = __('User has been banned!');
         }
+        $message = __('User has been banned!');
+
         notify()->success($message);
+
         return back();
     }
 
@@ -126,38 +137,55 @@ class UsersManagementController extends Controller
     {
         $user = tap($user)->update([
             'email_verified_at' => $user->email_verified_at == null ? now() : null,
-         ]);
+        ]);
         $user->refresh();
         if ($user->email_verified_at != null) {
             $message = __('The user email has been verified!');
-        }{
-            $message = __('The user email has been unverified!');
         }
+        $message = __('The user email has been unverified!');
+
         notify()->success($message);
+
         return back();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        $children = DB::table('users')->where('owner_id', $user->id)->get();
+        $array = [];
+        foreach ($children as $child) {
+            $array[] = [
+                'data' => json_encode($child),
+                'created_at' => now()->toDateTimeString(),
+            ];
+        }
+        foreach (array_chunk($array, 1000) as $chunk) {
+            UserBackup::insert($chunk);
+        }
+        $user->delete();
+        notify()->success(__('notify/success.delete'));
+
+        return back();
     }
 
     public function show(User $user)
     {
         return view('pages.users.show', compact('user'));
     }
+
     public function edit(User $user)
     {
-        $packages      = Package::get();
-        $activePlan    = $user->activePlan()->first();
+        $packages = Package::get();
+        $activePlan = $user->activePlan()->first();
         $activePackage = $user->activePackage();
-        $packageId     = request()->query('package_id');
-        if (!empty($packageId)) {
+        $packageId = request()->query('package_id');
+        if (! empty($packageId)) {
             $activePackage = Package::find($packageId);
         }
+
         return view('pages.users.edit', compact('user', 'packages', 'activePlan', 'activePackage'));
     }
 
@@ -166,39 +194,40 @@ class UsersManagementController extends Controller
         $request->validate([
             // 'email'            => [ 'required', 'lowercase', 'email', 'max:255', "unique:users,email,{$user->id}" ],
             // 'password'         => [ 'required', Rules\Password::defaults() ],
-            'first_name'       => [ 'nullable', 'string' ],
-            'last_name'        => [ 'nullable', 'string' ],
-            'phone'            => [ 'nullable', 'string' ],
-            'workplace'        => [ 'nullable', 'string', 'max:40' ],
-            'position'         => [ 'nullable', 'string', 'max:40' ],
-            'promotional_code' => [ 'nullable', 'string', 'max:40' ],
-            'unit'             => "string|nullable",
-            'validity'         => "integer|nullable",
-         ]);
+            'first_name' => ['nullable', 'string'],
+            'last_name' => ['nullable', 'string'],
+            'phone' => ['nullable', 'string'],
+            'workplace' => ['nullable', 'string', 'max:40'],
+            'position' => ['nullable', 'string', 'max:40'],
+            'promotional_code' => ['nullable', 'string', 'max:40'],
+            'unit' => 'string|nullable',
+            'validity' => 'integer|nullable',
+        ]);
         $user = tap($user)->update([
             // 'email'            => $request->email,
             // 'password'          => $request->has('password') ? Hash::make($request->password): $user->password,
-            'name'             => $request->first_name . " " . $request->last_name,
-            'first_name'       => $request->first_name,
-            'last_name'        => $request->last_name,
-            'phone'            => $request->phone,
-            'workplace'        => $request->workplace,
+            'name' => $request->first_name.' '.$request->last_name,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'phone' => $request->phone,
+            'workplace' => $request->workplace,
             'promotional_code' => $request->promotional_code,
-         ]);
+        ]);
         $activePlan = $user->activePlan()->first();
-        $package    = Package::find($request->package_id);
+        $package = Package::find($request->package_id);
         $expireDate = $request->validity != null ? now()->add($request->unit, $request->validity) : null;
-        Plan::updateOrCreate([ 'id' => $activePlan?->id ], [
-            'user_id'       => $user->id,
-            'package_id'    => $package->id,
-            'name'          => $package->name,
-            'price'         => $package->price,
+        Plan::updateOrCreate(['id' => $activePlan?->id], [
+            'user_id' => $user->id,
+            'package_id' => $package->id,
+            'name' => $package->name,
+            'price' => $package->price,
             'product_limit' => $package->product_limit,
-            'expired_at'    => $expireDate,
-            'validity'      => $request->validity,
-            'active'        => true,
-         ]);
+            'expired_at' => $expireDate,
+            'validity' => $request->validity,
+            'active' => true,
+        ]);
         notify()->success('Updated Successfully!');
+
         return back();
 
     }
@@ -207,16 +236,19 @@ class UsersManagementController extends Controller
     {
         // dd($request->search);
         if ($request->search == null) {
-//active
+            //active
             $subscribers = User::where('banned_at', null)
                 ->where('type', '=', 'subscriber')->latest()->paginate(10);
+
             return view('pages.users.management', compact('subscribers'));
         } elseif ($request->search == 'all') {
             $subscribers = User::where('type', 'subscriber')->orWhere('type', null)->paginate(10);
+
             return view('pages.users.management', compact('subscribers'));
         } else {
-            $subscribers = User::where('banned_at', !null)
+            $subscribers = User::where('banned_at', ! null)
                 ->where('type', '=', 'subscriber')->latest()->paginate(10);
+
             return view('pages.users.management', compact('subscribers'));
         }
 
@@ -226,22 +258,24 @@ class UsersManagementController extends Controller
     {
         if ($request->search == null) {
             $subscribers = User::where('type', 'subscriber')->orWhere('type', null)->latest()->paginate(10);
+
             return view('pages.users.management', compact('subscribers'));
         } else {
             $searchTerm = $request->input('search');
 
-            $subscribers = User::where(function ($query) use ($searchTerm) {
+            $subscribers = User::where(function ($query) {
                 $query->where('type', 'subscriber')
                     ->orWhereNull('type');
             })->when($searchTerm, function ($query) use ($searchTerm) {
                 $query->where(function ($subQuery) use ($searchTerm) {
-                    $subQuery->where('name', 'like', '%' . $searchTerm . '%')
-                        ->orWhere('email', 'like', '%' . $searchTerm . '%')
-                        ->orWhere('phone', 'like', '%' . $searchTerm . '%');
+                    $subQuery->where('name', 'like', '%'.$searchTerm.'%')
+                        ->orWhere('email', 'like', '%'.$searchTerm.'%')
+                        ->orWhere('phone', 'like', '%'.$searchTerm.'%');
                 });
             })
                 ->latest()
                 ->paginate(10);
+
             return view('pages.users.management', compact('subscribers'));
         }
 

@@ -3,9 +3,9 @@
         <div class="sec_title text-center">
             <h2 class="f_size_30 l_height50 f_700 t_color2 wow fadeInUp" data-wow-delay="0.2s">@lang('welcome.packages')
             </h2>
-            @isset ($info)
-            <p class="f_400 f_size_16 l_height30 mb-0 wow fadeInUp" data-wow-delay="0.2s">
-                <?= $info?->package?->{app()->getLocale()} ?></p>
+            @isset($info)
+                <p class="f_400 f_size_16 l_height30 mb-0 wow fadeInUp" data-wow-delay="0.2s">
+                    <?= $info?->package?->{app()->getLocale()} ?></p>
             @endisset
         </div>
         <div class="price_content">

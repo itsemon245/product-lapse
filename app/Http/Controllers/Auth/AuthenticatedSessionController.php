@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
-use Illuminate\View\View;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Auth\Events\Registered;
-use App\Providers\RouteServiceProvider;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -19,6 +17,10 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
+        if (url()->previous() != url('/').'/') {
+            session()->put('before-auth-url', url()->previous());
+        }
+
         return view('auth.login');
     }
 
@@ -34,6 +36,9 @@ class AuthenticatedSessionController extends Controller
 
         if ($request->user()?->type == null) {
             return redirect(route('home'));
+        }
+        if (session('before-auth-url')) {
+            return redirect(session('before-auth-url'));
         }
         if ($request->user()?->type == 'admin') {
             return redirect(route('admin'));

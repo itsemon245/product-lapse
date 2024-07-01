@@ -44,7 +44,6 @@ class DatabaseSeeder extends Seeder
             'phone' => '123456789',
             'workplace' => 'Admin',
             'promotional_code' => 'Admin',
-            'position' => 'manager',
             'type' => 'admin',
         ]);
         $subscriber = \App\Models\User::factory(1)->create([
@@ -55,7 +54,6 @@ class DatabaseSeeder extends Seeder
             'phone' => '123456789',
             'workplace' => 'hello',
             'promotional_code' => 'Admin',
-            'position' => 'manager',
             'type' => 'subscriber',
             'owner_id' => $admin[0]->id,
         ]);
@@ -95,7 +93,6 @@ class DatabaseSeeder extends Seeder
             'phone' => '123456789',
             'workplace' => 'hello',
             'promotional_code' => 'subscriber',
-            'position' => 'manager',
             'type' => 'member',
             'owner_id' => $subscriber[0]->id,
         ]);

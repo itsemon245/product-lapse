@@ -14,10 +14,7 @@ return new class extends Migration
     public function up(): void
     {
         foreach ($this->tableNames as $tableName) {
-            Schema::table($tableName, function (Blueprint $table) use ($tableName) {
-                if ($tableName == 'changes') {
-                    $table->dropForeign(['administrator']);
-                }
+            Schema::table($tableName, function (Blueprint $table) {
                 $table->dropColumn('administrator');
             });
             Schema::table($tableName, function (Blueprint $table) {

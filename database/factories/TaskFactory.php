@@ -29,7 +29,7 @@ class TaskFactory extends Factory
             'status' => fake()->randomElement(['Working on', 'Pending', 'Stopped']),
             'details' => fake()->paragraph,
             'steps' => fake()->paragraph,
-            'administrator' => fake()->name,
+            'administrator' => 1,
         ];
     }
 }

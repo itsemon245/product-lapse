@@ -192,7 +192,7 @@ class UsersManagementController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            // 'email'            => [ 'required', 'lowercase', 'email', 'max:255', "unique:users,email,{$user->id}" ],
+            'email' => ['required', 'lowercase', 'email', 'max:255', "unique:users,email,{$user->id}"],
             // 'password'         => [ 'required', Rules\Password::defaults() ],
             'first_name' => ['nullable', 'string'],
             'last_name' => ['nullable', 'string'],
@@ -204,7 +204,7 @@ class UsersManagementController extends Controller
             'validity' => 'integer|nullable',
         ]);
         $user = tap($user)->update([
-            // 'email'            => $request->email,
+            'email' => $request->email,
             // 'password'          => $request->has('password') ? Hash::make($request->password): $user->password,
             'name' => $request->first_name.' '.$request->last_name,
             'first_name' => $request->first_name,

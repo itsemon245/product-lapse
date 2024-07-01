@@ -8,7 +8,7 @@
 
         <x-slot:details>
             <div class="container mb_20">
-            <ul class="step d-flex flex-nowrap">
+                <ul class="step d-flex flex-nowrap">
                     @foreach ($stages as $stage)
                         <li class="step-item {{ $idea->stage == $stage->value ? 'active' : '' }}">
                             <a href="#" class="">@lang('Idea ' . $stage->value)</a>
@@ -47,6 +47,16 @@
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-12">
+                                <div class="flex gap-3 items-center">
+                                    @php
+                                        $priority = $idea->getSelect('priority');
+                                    @endphp
+                                    <div>@__('Priority'):</div>
+                                    <div style="color: {{ $priority?->color }};">
+                                        {{ $priority?->value->{app()->getLocale()} }}</div>
+                                </div>
+                            </div>
                             @can('update idea')
                                 <div class="col-12">
                                     <form action="{{ route('idea.priority.update', $idea) }}" method="POST"
@@ -60,7 +70,7 @@
 
                                                 @forelse ($stages as $stage)
                                                     <option value="{{ $stage->value }}"
-                                                        @if ($idea->stage == $stage->value ) selected @endif>
+                                                        @if ($idea->stage == $stage->value) selected @endif>
                                                         {{ trans($stage->value) }}
                                                     </option>
                                                 @empty

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Traits;
 
 use App\Enums\SelectType;
@@ -23,13 +24,13 @@ trait HasSelects
     protected static function bootHasSelects(): void
     {
         static::created(function ($model) {
-            $ids     = self::getIdsFromRequest($model);
+            $ids = self::getIdsFromRequest($model);
             $model->selects()->attach($ids);
         });
         static::updated(function ($model) {
             $request = request();
-            $ids     = self::getIdsFromRequest($model);
-            $types   = self::getTypes($model);
+            $ids = self::getIdsFromRequest($model);
+            $types = self::getTypes($model);
             foreach ($types as $type) {
                 if ($request->input($type) != null) {
                     $id = $model->selects()->where('type', $type)->first()?->id;
@@ -52,30 +53,32 @@ trait HasSelects
     /**
      * Get the ids from requested field for the specified model
      *
-     * @param mixed $model
+     * @param  mixed  $model
      * @return array
      */
     public static function getIdsFromRequest($model)
     {
-        $feature = explode("\\", get_class($model));
+        $feature = explode('\\', get_class($model));
         $feature = Str::lower(array_pop($feature));
-        $types   = array_column(SelectType::map($feature), 'value');
-        $ids     = collect($types)->map(fn($t) => request()->{$t})->toArray();
+        $types = array_column(SelectType::map($feature), 'value');
+        $ids = collect($types)->map(fn ($t) => request()->{$t})->toArray();
+
         return $ids;
     }
+
     /**
      * Get the ids from requested field for the specified model
      *
-     * @param mixed $model
+     * @param  mixed  $model
      * @return array
      */
     public static function getTypes($model)
     {
 
-        $feature = explode("\\", get_class($model));
+        $feature = explode('\\', get_class($model));
         $feature = Str::lower(array_pop($feature));
-        $types   = array_column(SelectType::map($feature), 'value');
+        $types = array_column(SelectType::map($feature), 'value');
+
         return $types;
     }
-
 }

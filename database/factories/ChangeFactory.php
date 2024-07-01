@@ -21,7 +21,7 @@ class ChangeFactory extends Factory
             'owner_id' => function () {
                 return User::inRandomOrder()->first()->id;
             },
-            'creator_id' => function(){
+            'creator_id' => function () {
                 return User::inRandomOrder()->first()->id;
             },
             'title' => fake()->name,
@@ -29,9 +29,9 @@ class ChangeFactory extends Factory
             'priority' => 'two',
             'status' => fake()->randomElement(['Working on', 'Pending', 'Stopped']),
             'details' => fake()->paragraph,
-            'administrator' => fake()->name,
+            'administrator' => 1,
             'required_completion_date' => fake()->dateTime,
-            
+
         ];
     }
 }

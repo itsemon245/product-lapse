@@ -13,6 +13,12 @@
     <h3>Status: {{ $order->status }}</h3>
     @if ($order->status == 'pending')
         <h3>Link to payment: {{ $order->link }}</h3>
+    @elseif($order->status == 'completed')
+        <div>Package has been enabled!</div>
+        <div>
+            شكراً لانضمامك لمنصة ProductLapse
+            تم تفعيل باقتك بنجاح
+        </div>
     @endif
 </body>
 

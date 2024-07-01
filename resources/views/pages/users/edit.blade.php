@@ -54,8 +54,8 @@
                             </div>
                             <div class="form-group text_box col-md-6">
                                 <label class=" text_c f_500">@__('singup.label.email')</label>
-                                <x-input class="cursor-not-allowed" type="email" placeholder="{{ __('singup.placeholder.email') }}" name="email"
-                                    value="{{ old('email') ?? $user->email ?? $user->mainAccount->email}}" disabled />
+                                <x-input type="email" placeholder="{{ __('singup.placeholder.email') }}" name="email"
+                                    value="{{ old('email') ?? ($user->email ?? $user->mainAccount->email) }}" />
                             </div>
                             {{-- <div class="form-group text_box col-md-6">
                                 <label class=" text_c f_500">@__('singup.label.password')</label>

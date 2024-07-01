@@ -55,7 +55,7 @@
                                     <div>@__('Priority'):</div>
                                     <div style="color: {{ $priority?->color }};">
                                         {{ $priority?->value->{app()->getLocale()} }}</div>
-                                </div>
+                                </div>  
                             </div>
                             @can('update idea')
                                 <div class="col-12">

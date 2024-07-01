@@ -45,13 +45,14 @@ class RegisteredUserController extends Controller
         $admin = User::admin()->first();
 
         $user = User::create([
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'name' => $request->first_name.' '.$request->last_name,
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'phone' => $request->phone,
-            'workplace' => $request->workplace,
+            'email'            => $request->email,
+            'password'         => Hash::make($request->password),
+            'name'             => $request->first_name . " " . $request->last_name,
+            'first_name'       => $request->first_name,
+            'last_name'        => $request->last_name,
+            'phone'            => $request->phone,
+            'workplace'        => $request->workplace,
+            'job_title'         => $request->position,
             'promotional_code' => $request->promotional_code,
             'owner_id' => $admin?->id,
         ]);

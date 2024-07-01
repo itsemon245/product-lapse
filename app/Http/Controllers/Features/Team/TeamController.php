@@ -28,7 +28,7 @@ class TeamController extends Controller
                     }
                 }
             })
-            ->with('roles')->latest()->paginate(10);
+            ->with('roles', 'mainAccount')->latest()->paginate(10);
 
         return view('features.team.index', compact('teams'));
     }

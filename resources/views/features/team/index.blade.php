@@ -46,7 +46,8 @@
                                     <div class="jobsearch-table-cell">
                                         <h4 class="mb-0"><a href="#"
                                                 class="f_500 t_color3"></a>{{ $team->name ?? 'Name' }}</h4>
-                                        <p class="mb-0 p-0 h-auto text-green-500">{{ $team->email }}</p>
+                                        <p class="mb-0 p-0 h-auto text-green-500">
+                                            {{ $team->email ?? $team->mainAccount->email }}</p>
                                         <ul class="list-unstyled">
                                             <li class="text-capitalize">
                                                 {{ $team?->getRole()?->name ? str($team?->getRole()?->name)->title() : 'Guest' }}
@@ -56,7 +57,7 @@
 
                                     <div class="jobsearch-table-cell">
                                         <div class="jobsearch-job-userlist">
-                                            @if (auth()->id() != $team->id && auth()->owner_id != $team->id)
+                                            @if (auth()->id() != $team->id && auth()->user()->owner_id != $team->id)
                                                 @can('delete member')
                                                     <div class="like-btn">
                                                         <form action="{{ route('team.destroy', $team) }}" method="POST">

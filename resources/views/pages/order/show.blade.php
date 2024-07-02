@@ -98,22 +98,26 @@
                                             <p class="text-muted">@__('Email:') {{ $findOrder->user->email }}</p>
                                             <p class="text-muted">@__('Phone:') {{ $findOrder->user->phone }}</p>
 
-                                            <form action="{{ route('admin.order.approve', $findOrder) }}" method="post"
-                                                class="like-btn w-full">
-                                                @csrf
-                                                @method('PATCH')
-                                                <button
-                                                    class="mt-3 w-full btn_hover agency_banner_btn btn-bg {{ $findOrder->status == 'pending' ? '' : 'd-none disabled' }}"
-                                                    type="submit">
-                                                    @__('Approve')
-                                                    <i class="ti-check"></i>
-                                                </button>
-                                                <button class="mt-3 w-full btn_hover agency_banner_btn btn-bg-secondary"
+                                            @if ($findOrder->status == 'pending')
+                                                <form action="{{ route('admin.order.approve', $findOrder) }}"
+                                                    method="post" class="like-btn w-full">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <button
+                                                        class="mt-3 w-full btn_hover agency_banner_btn btn-bg {{ $findOrder->status == 'pending' ? '' : 'd-none disabled' }}"
+                                                        type="submit">
+                                                        @__('Approve')
+                                                        <i class="ti-check"></i>
+                                                    </button>
+                                                </form>
+                                            @else
+                                                <div style="cursor: default!important;"
+                                                    class="mt-3 w-full text-center p-3 rounded-md bg-green-200 text-green-500 font-bold"
                                                     type="button">
                                                     @__('Approved')
-                                                    <i class="ti-check"></i>
-                                                </button>
-                                            </form>
+                                                </div>
+                                            @endif
+
                                         </div>
                                     </div>
 

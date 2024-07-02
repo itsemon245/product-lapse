@@ -8,7 +8,6 @@ use App\Http\Requests\TeamInvitationRequest;
 use App\Models\Invitation;
 use App\Models\Product;
 use App\Models\Scopes\OwnerScope;
-use App\Models\Select;
 use App\Models\User;
 use App\Services\InvitationService;
 use App\Services\SearchService;
@@ -26,6 +25,7 @@ class InvitationController extends Controller
     public function index(SearchRequest $request)
     {
         $invitations = $request->has('search') ? SearchService::items($request, 20) : Invitation::paginate(20);
+
         return view('features.product.invitation.index', compact('invitations'));
     }
 
@@ -72,10 +72,15 @@ class InvitationController extends Controller
      */
     public function accept($token)
     {
+        $invitation = Invitation::withoutGlobalScope(OwnerScope::class)->where('token', $token)->first();
+        if ($invitation->accepted_at) {
+            notify()->success(trans('Invitation has already been accepted'));
+
+            return back();
+        }
         Auth::guard('web')->logout();
         request()->session()->invalidate();
         request()->session()->regenerateToken();
-        $invitation = Invitation::withoutGlobalScope(OwnerScope::class)->where('token', $token)->first();
         $user = User::where('email', $invitation->email)->first();
         $id = base64_encode($invitation->id);
 
@@ -176,6 +181,7 @@ class InvitationController extends Controller
 
         return redirect()->route('invitation.index')->with('success', 'Invitation deleted successfully');
     }
+
     protected function assignToUser(Invitation $invitation, User $user): void
     {
         if ($invitation->products) {

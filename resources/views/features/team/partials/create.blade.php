@@ -2,7 +2,10 @@
 @section('main')
     <x-feature.create>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => $team ? @__('feature/team.update') : @__('feature/team.add'), 'route' => route('team.create')]]" />
+            <x-breadcrumb :list="[
+                ['label' => @__('feature/team.title'), 'route' => route('team.index')],
+                ['label' => $team ? @__('feature/team.update') : @__('feature/team.add'), 'route' => route('team.create')],
+            ]" />
         </x-slot:breadcrumb>
 
         <x-slot:from>
@@ -44,11 +47,9 @@
                                 autofocus />
                         </div>
                         <div class="form-group text_box col-lg-4 col-md-6">
-                            <x-input-label for="job_title" value="{{ __('Job Title') }}"
-                                class=" text_c f_500" />
+                            <x-input-label for="job_title" value="{{ __('Job Title') }}" class=" text_c f_500" />
                             <x-input type="text" id="job_title" class="block mt-1 w-full" type="text"
-                                placeholder="{{ __('Job Title') }}" name="job_title" :value="old('job_title')"
-                                autofocus />
+                                placeholder="{{ __('Job Title') }}" name="job_title" :value="old('job_title')" autofocus />
                             {{-- <x-select-input :label="__('feature/team.label.task')" class="selectpickers" id="task" name="tasks[]"
                                 placeholder="Choose one" autofocus>
                                 @if ($tasks)

@@ -2,7 +2,10 @@
 @section('main')
     <x-feature.create>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => @__('feature/release.add'), 'route' => route('release.create')]]" />
+            <x-breadcrumb :list="[
+                ['label' => @__('feature/release.title'), 'route' => route('release.index')],
+                ['label' => @__('feature/release.add'), 'route' => route('release.create')],
+            ]" />
         </x-slot:breadcrumb>
         <x-slot:from>
             <h2 class=" f_600 f_size_24 t_color3 mb_40">@__('feature/release.add')</h2>
@@ -20,10 +23,10 @@
                         <x-input id="inputField" class="block mt-1 w-full" type="text"
                             placeholder="{{ __('feature/release.placeholder.version') }}" name="version" :value="old('version') ?? 0"
                             required autofocus />
-                            <div class="input-group-append">
-                                <span class="btn btn-success" id="incrementButton">+</span>
-                                <span class="btn btn-warning" style="margin-left: 1rem;" id="decrimentButton">-</span>
-                            </div> 
+                        <div class="input-group-append">
+                            <span class="btn btn-success" id="incrementButton">+</span>
+                            <span class="btn btn-warning" style="margin-left: 1rem;" id="decrimentButton">-</span>
+                        </div>
                     </div>
 
                     <div class="form-group text_box col-lg-6 col-md-6">
@@ -34,7 +37,8 @@
                     </div>
                     <div class="form-group text_box col-lg-12 col-md-6">
                         <x-textarea label="{{ __('feature/release.label.details') }}" name="description"
-                            placeholder="{{ __('feature/release.label.details') }}" required autfocus > {!! old('description') !!} </x-textarea>
+                            placeholder="{{ __('feature/release.label.details') }}" required autfocus>
+                            {!! old('description') !!} </x-textarea>
                     </div>
                 </div>
                 <div class="d-flex align-items-center text-center">
@@ -49,29 +53,26 @@
     </x-feature.create>
 @endsection
 @push('customJs')
-
-
     <script>
         var inputValue = document.getElementById("inputField").value;
-      var incrementBTN = document.getElementById("incrementButton")
-      var decrimentBTN = document.getElementById("decrimentButton")
-      incrementBTN.addEventListener("click", function () {
-            if(inputValue => 1){
+        var incrementBTN = document.getElementById("incrementButton")
+        var decrimentBTN = document.getElementById("decrimentButton")
+        incrementBTN.addEventListener("click", function() {
+            if (inputValue => 1) {
                 inputValue++;
                 document.getElementById("inputField").value = inputValue;
                 decrimentBTN.style.display = "";
             }
         });
 
-        decrimentBTN.addEventListener("click", function () {
-                    if(inputValue > 0){
-                        inputValue--;
-                        document.getElementById("inputField").value = inputValue;
-                    }else if(inputValue == 0){
-                        decrimentBTN.style.display = "none";
-                    }
+        decrimentBTN.addEventListener("click", function() {
+            if (inputValue > 0) {
+                inputValue--;
+                document.getElementById("inputField").value = inputValue;
+            } else if (inputValue == 0) {
+                decrimentBTN.style.display = "none";
+            }
 
-                });
+        });
     </script>
 @endpush
-

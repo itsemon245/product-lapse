@@ -2,7 +2,10 @@
 @section('main')
     <x-feature.show>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => @__('feature/idea.details'), 'route' => route('idea.show', base64_encode($idea->id))]]" />
+            <x-breadcrumb :list="[
+                ['label' => @__('feature/idea.title'), 'route' => route('idea.index')],
+                ['label' => @__('feature/idea.details'), 'route' => route('idea.show', base64_encode($idea->id))],
+            ]" />
         </x-slot:breadcrumb>
 
 
@@ -55,7 +58,7 @@
                                     <div>@__('Priority'):</div>
                                     <div style="color: {{ $priority?->color }};">
                                         {{ $priority?->value->{app()->getLocale()} }}</div>
-                                </div>  
+                                </div>
                             </div>
                             @can('update idea')
                                 <div class="col-12">

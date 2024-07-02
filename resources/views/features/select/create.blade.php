@@ -2,7 +2,7 @@
 @section('main')
     <x-feature.create>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => @__('Select Menus'), 'route' => route('product.create')]]" />
+            <x-breadcrumb :list="[['label' => @__('Select Menus'), 'route' => route('select.index')],['label' => @__('Create'), 'route' => route('product.create')]]" />
         </x-slot:breadcrumb>
 
         <x-slot:from>

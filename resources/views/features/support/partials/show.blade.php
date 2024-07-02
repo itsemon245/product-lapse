@@ -2,7 +2,10 @@
 @section('main')
     <x-feature.show>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => @__('Ticket details'), 'route' => route('support.show', $support)]]" />
+            <x-breadcrumb :list="[
+                ['label' => @__('feature/support.title'), 'route' => route('support.index')],
+                ['label' => @__('Ticket details'), 'route' => route('support.show', $support)],
+            ]" />
         </x-slot:breadcrumb>
         <x-slot:details>
             <div class="col-lg-8 blog_sidebar_left">
@@ -61,7 +64,16 @@
                                 @method('put')
                                 <div class="row">
                                     <div class="col-6">
-                                        <x-modal title="{{ __('Update Support Status') }}" label="Change">
+                                        @php
+                                            $modalID = uniqid('modal-');
+                                        @endphp
+                                        <x-modal :id="$modalID" title="{{ __('Update Support Status') }}">
+                                            <x-slot:trigger>
+                                                <button type="button" class="button-1 btn-bg-1" data-toggle="modal"
+                                                    data-target="#{{ $modalID }}">
+                                                    {{ $support->getSelect('status')?->value?->{app()->getLocale()} }}
+                                                </button>
+                                            </x-slot:trigger>
                                             <div>
                                                 <div class="row">
                                                     @forelse ($statuses as $status)
@@ -91,8 +103,8 @@
                                         </x-modal>
                                     </div>
                                     <div class="col-6">
-                                        <button type="submit" class="button-1 btn-bg-2"><i
-                                                class="ti-reload"></i>@__('Update')</button>
+                                        <a href="{{ route('support.edit', ['support' => $support]) }}"
+                                            class="button-1 btn-bg-2"><i class="ti-reload"></i>@__('Update')</a>
                                     </div>
                                 </div>
                             </form>

@@ -3,7 +3,10 @@
 @section('main')
     <x-feature.create>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => @__('feature/task.edit'), 'route' => route('task.create')]]" />
+            <x-breadcrumb :list="[
+                ['label' => @__('feature/task.title'), 'route' => route('task.index')],
+                ['label' => @__('feature/task.edit'), 'route' => route('task.create')],
+            ]" />
         </x-slot:breadcrumb>
 
         <x-slot:from>
@@ -127,17 +130,16 @@
                                                             href="{{ route('task.file.download', ['task' => $task, 'file' => $file]) }}">@__('feature/task.view')</a>
                                                         </a>
                                                         <button
-                                                        hx-post="{{ route('task.file.delete', ['task' => $task, 'file' => $file]) }}"
-                                                        hx-swap="delete"
-                                                        hx-vals='{"_method": "DELETE", "_token": "{{csrf_token()}}"}'
-                                                        hx-target="closest tr"
-                                                        type="button"
-                                                        class="btn_hover agency_banner_btn btn-table !bg-red-600 hover:!bg-red-400">@__('Delete')</button>
+                                                            hx-post="{{ route('task.file.delete', ['task' => $task, 'file' => $file]) }}"
+                                                            hx-swap="delete"
+                                                            hx-vals='{"_method": "DELETE", "_token": "{{ csrf_token() }}"}'
+                                                            hx-target="closest tr" type="button"
+                                                            class="btn_hover agency_banner_btn btn-table !bg-red-600 hover:!bg-red-400">@__('Delete')</button>
                                                         </button>
                                                     </div>
                                                 </td>
                                             </tr>
-                                            @empty
+                                        @empty
                                             <tr>
                                                 <td colspan="3" class="text-center text-gray-500">@__('No attatchments here')</td>
                                             </tr>

@@ -2,7 +2,9 @@
 @section('main')
     <x-feature.show>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => @__('feature/task.show'), 'route' => route('task.show', $task)]]" />
+            <x-breadcrumb :list="[
+                ['label' => @__('feature/task.title'), 'route' => route('task.index')],
+                ['label' => @__('feature/task.show'), 'route' => route('task.show', $task)]]" />
         </x-slot:breadcrumb>
         <x-slot:details>
             <div class="col-lg-8 blog_sidebar_left">
@@ -124,10 +126,10 @@
                                         </x-modal>
                                     </div>
                                     <div class="col-6">
-                                        <button type="submit" class="button-1 btn-bg-2"><i
+                                        <a href="{{ route('task.edit', $task) }}" class="button-1 btn-bg-2"><i
                                                 class="ti-reload"></i>@__('feature/task.update')
-                                        </button>
-                                    </div>
+                                        </a>
+                                    </div>  
                                 </div>
                             </form>
                         @endcan

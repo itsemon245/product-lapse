@@ -3,7 +3,7 @@
 @section('main')
     <x-feature.create>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => @__('feature/task.add'), 'route' => route('task.create')]]" />
+            <x-breadcrumb :list="[['label' => @__('feature/task.title'), 'route' => route('task.index')],['label' => @__('feature/task.add'), 'route' => route('task.create')]]" />
         </x-slot:breadcrumb>
 
         <x-slot:from>

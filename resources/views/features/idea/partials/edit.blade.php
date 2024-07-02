@@ -4,7 +4,7 @@
     <x-feature.edit>
 
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => @__('feature/idea.edit'), 'route' => route('idea.edit', $idea)]]" />
+            <x-breadcrumb :list="[['label' => @__('feature/idea.title'), 'route' => route('idea.index')],['label' => @__('feature/idea.edit'), 'route' => route('idea.edit', $idea)]]" />
         </x-slot:breadcrumb>
 
         <x-slot:from>

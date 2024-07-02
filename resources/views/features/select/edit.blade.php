@@ -2,11 +2,14 @@
 @section('main')
     <x-feature.create>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => 'Select Menu', 'route' => route('product.index')]]" />
+            <x-breadcrumb :list="[
+                ['label' => __('Select Menus'), 'route' => route('select.index')],
+                ['label' => __('Edit'), 'route' => route('product.index')],
+            ]" />
         </x-slot:breadcrumb>
 
         <x-slot:from>
-            <h2 class=" f_600 f_size_24 t_color3 mb_40">Edit Select Item</h2>
+            <h2 class=" f_600 f_size_24 t_color3 mb_40">@__('Edit Select Item')</h2>
             <form action="{{ route('select.update', $select) }}" method="POST" class="login-form sign-in-form"
                 enctype="multipart/form-data">
                 @csrf

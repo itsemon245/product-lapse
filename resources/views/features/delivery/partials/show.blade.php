@@ -13,7 +13,10 @@
 @section('main')
     <x-feature.show>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => @__('feature/delivery.show'), 'route' => route('change.show', base64_encode($delivery->id))]]" />
+            <x-breadcrumb :list="[
+                ['label' => @__('feature/delivery.title'), 'route' => route('change.index')],
+                ['label' => @__('feature/delivery.show'), 'route' => route('change.show', base64_encode($delivery->id))],
+            ]" />
         </x-slot:breadcrumb>
 
         <x-slot:details>

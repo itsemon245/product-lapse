@@ -6,10 +6,13 @@
     <x-feature.edit>
 
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => @__('feature/productHistory.edit'), 'route' => route('product-history.edit', $productHistory)]]" />
+            <x-breadcrumb :list="[
+                ['label' => @__('feature/productHistory.title'), 'route' => route('product-history.index')],
+                ['label' => @__('feature/productHistory.edit'), 'route' => route('product-history.edit', $productHistory)],
+            ]" />
         </x-slot:breadcrumb>
 
-        <x-slot:from> 
+        <x-slot:from>
             <h2 class=" f_600 f_size_24 t_color3 mb_40">@__('feature/productHistory.edit')</h2>
             <form action="{{ route('product-history.update', $productHistory) }}" method="POST"
                 class="login-form sign-in-form" enctype="multipart/form-data">

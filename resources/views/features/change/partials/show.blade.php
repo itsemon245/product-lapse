@@ -2,7 +2,10 @@
 @section('main')
     <x-feature.show>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => @__('feature/change.show'), 'route' => route('change.show', base64_encode($change->id))]]" />
+            <x-breadcrumb :list="[
+                ['label' => @__('feature/change.title'), 'route' => route('change.index')],
+                ['label' => @__('feature/change.show'), 'route' => route('change.show', base64_encode($change->id))],
+            ]" />
         </x-slot:breadcrumb>
 
         <x-slot:details>
@@ -15,11 +18,13 @@
                         </div>
                         <div class="col-lg-6 col-md-6">
                             <h6 class="title2">@__('feature/change.priority')</h6>
-                            <p class="f_400 mb-30 text-font">{{ $change->getSelect('priority')->value->{app()->getLocale()} }}</p>
+                            <p class="f_400 mb-30 text-font">
+                                {{ $change->getSelect('priority')->value->{app()->getLocale()} }}</p>
                         </div>
                         <div class="col-lg-6 col-md-6">
                             <h6 class="title2">@__('feature/change.classification')</h6>
-                            <p class="f_400 mb-30 text-font">{{ $change->getSelect('classification')->value->{app()->getLocale()} }}</p>
+                            <p class="f_400 mb-30 text-font">
+                                {{ $change->getSelect('classification')->value->{app()->getLocale()} }}</p>
                         </div>
                         <div class="col-md-12">
                             <h6 class="title2">@__('feature/change.details')</h6>
@@ -38,8 +43,7 @@
                 <div class="blog-sidebar box-sidebar">
                     <div class="widget sidebar_widget widget_recent_post mt_60">
                         <div class="media post_author mt_60">
-                            <img class="rounded-circle" src="{{ favicon($creator->image) }}"
-                                alt="">
+                            <img class="rounded-circle" src="{{ favicon($creator->image) }}" alt="">
                             <div class="media-body">
                                 <h5 class=" t_color3 f_size_18 f_500">{{ $creator->name }}</h5>
                             </div>
@@ -47,14 +51,25 @@
                         @can('update change')
                             <div class="row">
                                 <div class="col-12">
-                                    <h6 class="title2 the-priority">@__('Status :')<span>{{ $change->getSelect('status')->value->{app()->getLocale()} }}</span></h6>
+                                    <h6 class="title2 the-priority">
+                                        @__('Status :')<span>{{ $change->getSelect('status')->value->{app()->getLocale()} }}</span>
+                                    </h6>
                                 </div>
                                 <div class="col-6">
                                     <form action="{{ route('change.update.status', $change) }}" method="post"
                                         enctype="multipart/form-data">
                                         @csrf
                                         @method('put')
-                                        <x-modal title="Update Change Status" label="feature/change.working">
+                                        @php
+                                            $modalID = uniqid('modal-');
+                                        @endphp
+                                        <x-modal :id="$modalID" title="Update Change Status">
+                                            <x-slot:trigger>
+                                                <button type="button" class="button-1 btn-bg-1" data-toggle="modal"
+                                                    data-target="#{{ $modalID }}">
+                                                    {{ $change->getSelect('status')?->value?->{app()->getLocale()} }}
+                                                </button>
+                                            </x-slot:trigger>
                                             <div>
                                                 <div class="row">
                                                     @forelse ($statuses as $status)
@@ -84,14 +99,16 @@
                                         </x-modal>
                                 </div>
                                 <div class="col-6">
-                                    <button type="submit" class="button-1 btn-bg-2"><i
-                                            class="ti-reload"></i>@__('feature/change.update')</button>
+                                    <a href="{{ route('change.edit', ['change' => $change]) }}" class="button-1 btn-bg-2"><i
+                                            class="ti-reload"></i>@__('feature/change.update')</a>
                                     </form>
                                 </div>
                             </div>
                         @else
                             <div class="row text-center">
-                                <h6 class="title2 the-priority">@__('Status :') <span>{{ $change->getSelect('status')->value->{app()->getLocale()} }}</span></h6>
+                                <h6 class="title2 the-priority">@__('Status :')
+                                    <span>{{ $change->getSelect('status')->value->{app()->getLocale()} }}</span>
+                                </h6>
                             </div>
                         @endcan
 

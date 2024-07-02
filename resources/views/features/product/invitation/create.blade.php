@@ -2,7 +2,10 @@
 @section('main')
     <x-feature.create>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => @__('feature/invitation.label.title'), 'route' => route('invitation.create')]]" />
+            <x-breadcrumb :list="[
+                ['label' => @__('feature/invitation.title'), 'route' => route('invitation.index')],
+                ['label' => @__('feature/invitation.label.title'), 'route' => route('invitation.create')],
+            ]" />
         </x-slot:breadcrumb>
         <x-slot:from>
 
@@ -41,7 +44,8 @@
                         <x-select-input :label="__('feature/invitation.label.role')" id="role" placeholder="Choose one" name="role" autofocus>
                             @if ($roles)
                                 @forelse ($roles as $role)
-                                    <option value="{{ $role->name }}" @if($role->name == old('role') || $invitation?->role == $role->name) selected @endif class="capitalize">
+                                    <option value="{{ $role->name }}" @if ($role->name == old('role') || $invitation?->role == $role->name) selected @endif
+                                        class="capitalize">
                                         @lang($role->name)
                                     </option>
                                 @empty
@@ -101,13 +105,12 @@
 
 
                 <div class="d-flex align-items-center text-center">
-                    <button type="submit"
-                        class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">
-                    @if ($invitation)
-                    @__('Update')
-                    @else
-                    @__('feature/invitation.submit')
-                    @endif
+                    <button type="submit" class="btn_hover agency_banner_btn btn-bg agency_banner_btn2">
+                        @if ($invitation)
+                            @__('Update')
+                        @else
+                            @__('feature/invitation.submit')
+                        @endif
                     </button>
                 </div>
             </form>

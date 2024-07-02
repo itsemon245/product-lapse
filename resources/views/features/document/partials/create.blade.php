@@ -2,7 +2,10 @@
 @section('main')
     <x-feature.create>
         <x-slot:breadcrumb>
-            <x-breadcrumb :list="[['label' => @__('feature/document.add'), 'route' => route('document.create')]]" />
+            <x-breadcrumb :list="[
+                ['label' => @__('feature/document.title'), 'route' => route('document.index')],
+                ['label' => @__('feature/document.add'), 'route' => route('document.create')],
+            ]" />
         </x-slot:breadcrumb>
 
         <x-slot:from>
@@ -19,10 +22,10 @@
                     </div>
 
                     <div class="form-group text_box col-lg-6 col-md-6">
-                        <x-select-input label="{{ __('feature/document.label.type') }}" id="type"
-                            name="type" required autofocus>
+                        <x-select-input label="{{ __('feature/document.label.type') }}" id="type" name="type"
+                            required autofocus>
                             @foreach ($type as $category)
-                                <option value="{{ $category->id }}" @selected($category->id == old('type')) >
+                                <option value="{{ $category->id }}" @selected($category->id == old('type'))>
                                     {{ $category->value->{app()->getLocale()} }}
                                 </option>
                             @endforeach

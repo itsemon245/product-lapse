@@ -14,9 +14,11 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-
     public function index()
     {
+        if (auth()->user()->main_account_id) {
+            Auth::login(User::find(auth()->user()->main_account_id), true);
+        }
         $user = User::with('image')->find(auth()->id());
 
         return view('profile.index', compact('user'));
@@ -31,7 +33,7 @@ class ProfileController extends Controller
 
         return view('profile.edit', [
             'user' => $request->user(),
-         ]);
+        ]);
 
     }
 
@@ -42,18 +44,20 @@ class ProfileController extends Controller
     {
         $user = User::find($id);
         $user->update([
-            'name' => $request->first_name . " " .$request->last_name,
+            'name' => $request->first_name.' '.$request->last_name,
             ...$request->only('first_name', 'last_name', 'email', 'phone', 'workplace', 'job_title'),
-         ]);
+        ]);
         $image = $user->storeImage($request->avatar);
         notify()->success(__('Updated successfully!'));
+
         return back();
     }
 
-    public function editAddress() {
+    public function editAddress()
+    {
         return view('profile.update-address', [
             'user' => request()->user(),
-         ]);
+        ]);
     }
 
     public function address(AddressRequest $request)
@@ -61,38 +65,40 @@ class ProfileController extends Controller
         $user = Address::where('user_id', auth()->id())->first();
         if ($user == null) {
             Address::create([
-                'name'            => $request->name,
-                'user_id'         => auth()->id(),
-                'type'            => $request->type ?? 'billing',
-                'email'           => $request->email,
-                'phone'           => $request->phone,
-                'street'          => $request->street,
-                'city'            => $request->city,
+                'name' => $request->name,
+                'user_id' => auth()->id(),
+                'type' => $request->type ?? 'billing',
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'street' => $request->street,
+                'city' => $request->city,
                 // 'state'           => $request->state,
-                'country'         => $request->country,
+                'country' => $request->country,
                 // 'zip'             => $request->zip,
-                'ip'              => $request->ip(),
-             ]);
+                'ip' => $request->ip(),
+            ]);
         } else {
             $user->update([
-                'name'            => $request->name,
-                'type'            => $request->type ?? 'billing',
-                'email'           => $request->email,
-                'phone'           => $request->phone,
-                'street'          => $request->street,
-                'city'            => $request->city,
+                'name' => $request->name,
+                'type' => $request->type ?? 'billing',
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'street' => $request->street,
+                'city' => $request->city,
                 // 'state'           => $request->state,
-                'country'         => $request->country,
+                'country' => $request->country,
                 // 'zip'             => $request->zip,
-                'ip'              => $request->ip(),
-             ]);
+                'ip' => $request->ip(),
+            ]);
         }
         notify()->success(__('Updated Successfully!'));
         if (session()->has('package-url')) {
             $url = session('package-url');
             session()->forget('package-url');
+
             return redirect($url);
         }
+
         return back();
     }
 
@@ -102,8 +108,8 @@ class ProfileController extends Controller
     public function destroy(Request $request): RedirectResponse
     {
         $request->validateWithBag('userDeletion', [
-            'password' => [ 'required', 'current_password' ],
-         ]);
+            'password' => ['required', 'current_password'],
+        ]);
 
         $user = $request->user();
 

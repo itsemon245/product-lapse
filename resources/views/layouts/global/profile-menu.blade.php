@@ -1,7 +1,5 @@
 <ul class="dropdown-menu">
-    @if(!auth()->user()->isSubAccount())
     <li class="nav-item"><a href="{{ route('profile.index') }}" class="nav-link">@__('navigation.profile.profile')</a></li>
-    @endif
     <li class="nav-item"><a href="{{ route('dashboard') }}" class="nav-link">
             @if (auth()->user()->type == 'admin')
                 @__('navigation.profile.dashboard')

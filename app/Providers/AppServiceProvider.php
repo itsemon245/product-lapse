@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -21,6 +20,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $appUrl = rtrim(url('/'), '/');
+        if ($appUrl != env('APP_URL')) {
+            setEnv([
+                'APP_URL' => $appUrl,
+            ]);
+        }
+
         Blueprint::macro('hasCreator', function () {
             $table = $this;
             $table->unsignedBigInteger('creator_id')->nullable();

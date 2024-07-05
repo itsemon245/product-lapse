@@ -189,14 +189,20 @@ function avatar(?string $seed = null)
 function setEnv($values)
 {
     $envFile = base_path('.env');
-    foreach ($values as $key => $value) {
-        $envContent = File::get($envFile);
-        $pattern = "/^({$key}=)(.*)$/m";
-        $updatedEnvContent = preg_replace($pattern, "$1\"{$value}\"", $envContent);
-        File::put($envFile, $updatedEnvContent);
-    }
-    Artisan::call('config:clear');
+    $envContent = File::get($envFile);
 
+    foreach ($values as $key => $value) {
+        $pattern = "/^{$key}=.*$/m";
+        if (preg_match($pattern, $envContent)) {
+            // If the key exists, update it
+            $envContent = preg_replace($pattern, "{$key}=\"{$value}\"", $envContent);
+        } else {
+            // If the key does not exist, append it
+            $envContent .= PHP_EOL."{$key}=\"{$value}\"";
+        }
+    }
+    File::put($envFile, $envContent);
+    Artisan::call('config:clear');
 }
 /**
  * - Transfers information when purchasing a subscription as member

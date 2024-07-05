@@ -23,6 +23,8 @@ class InstallController extends Controller
             notify('Database configuration successful!');
             setEnv([
                 'APP_INSTALLED' => 'true',
+                'APP_DEBUG'=> 'false',
+                'APP_URL'=> rtrim(url('/'), '/')
             ]);
         } catch (\Throwable $th) {
             //throw $th;

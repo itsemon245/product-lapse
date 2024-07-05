@@ -7,6 +7,7 @@
             <h2 class=" f_600 f_size_24 t_color3">@__('Configure Database')</h2>
             <hr class="bg-gray-300">
             <div class="flex flex-col w-full">
+                <x-input class="block mt-1 w-full" type="text" :label="__('App Name')" :placeholder="__('App Name')" name="APP_NAME" value="ProductLapse" />
                 <x-input class="block mt-1 w-full" type="text" :label="__('Database Name')" :placeholder="__('Database Name')" name="DB_DATABASE" />
                 <x-input class="block mt-1 w-full" type="text" :label="__('Database Username')" :placeholder="__('Database Username')" name="DB_USERNAME" />
                 <x-input class="block mt-1 w-full" type="text" :label="__('Database Password')" :placeholder="__('Database Password')" name="DB_PASSWORD" />

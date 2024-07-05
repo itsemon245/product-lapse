@@ -8,6 +8,7 @@ use App\Http\Middleware\CheckAdmin;
 use App\Http\Middleware\CheckBillingAddress;
 use App\Http\Middleware\CheckProductLimit;
 use App\Http\Middleware\CheckSubscriber;
+use App\Http\Middleware\EnsureIsNotInstalled;
 use App\Http\Middleware\ValidateRequestForCertificate;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -43,6 +44,8 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            // User defined global middlewares
+            \App\Http\Middleware\EnsureDatabaseConnection::class,
         ],
 
         'api' => [
@@ -78,5 +81,6 @@ class Kernel extends HttpKernel
         'check.limit' => CheckProductLimit::class,
         'certificate.validate' => ValidateRequestForCertificate::class,
         'check.active.product' => CheckActiveProduct::class,
+        'app.not.installed' => EnsureIsNotInstalled::class,
     ];
 }

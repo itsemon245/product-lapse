@@ -13,6 +13,7 @@ class BookDemoController extends Controller
 {
     public function create()
     {
+        abort(500);
         return view('book-a-demo');
     }
 
@@ -26,6 +27,7 @@ class BookDemoController extends Controller
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollBack();
+
             notify()->error(__('Something went wrong!'));
         }
 

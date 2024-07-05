@@ -13,9 +13,9 @@ use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Package\PackageFeatureController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ProfileController;
-use App\Models\DemoRequest;
 use Illuminate\Support\Facades\Route;
 
+require __DIR__.'/install.php';
 Route::prefix('admin')
     ->middleware('auth', 'verified', 'check.admin')
     ->group(function () {
@@ -74,3 +74,4 @@ Route::prefix('admin')
             'destroy',
         ]);
     });
+    

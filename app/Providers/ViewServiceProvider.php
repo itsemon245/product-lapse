@@ -21,18 +21,20 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::composer("*", function () {
+        View::composer('*', function () {
             $locale = request()->cookie('locale');
             if ($locale) {
                 app()->setLocale(request()->cookie('locale'));
             }
         });
-        View::composer("layouts.frontend.footer", function ($view) {
-            $extraPages = Page::where('type', 'footer')->get([ 'id', 'slug', 'title' ]);
-            $view->with([
-                'extraPages' => $extraPages,
-             ]);
-        });
+        if (env('APP_INSTALLED')) {
+            View::composer('layouts.frontend.footer', function ($view) {
+                $extraPages = Page::where('type', 'footer')->get(['id', 'slug', 'title']);
+                $view->with([
+                    'extraPages' => $extraPages,
+                ]);
+            });
+        }
 
     }
 }

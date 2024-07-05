@@ -10,14 +10,26 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     @include('layouts.global.styles')
 </head>
+@php
+    try {
+        \DB::getPdo();
+        $dbOk = true;
+    } catch (\Throwable $e) {
+        $dbOk = false;
+    }
+@endphp
 
 <body class="relative overflow-x-hidden min-h-screen" x-data>
-    {{-- Preloader --}}
-    @include('layouts.frontend.preloader')
+    @if (($preheader ?? 'on') == 'on')
+        {{-- Preloader --}}
+        @include('layouts.frontend.preloader')
+    @endif
     <div class="" id="tolink-1 mb-auto">
         <div class="top-link"><a href="#tolink-1"><i class="ti-angle-up"></i></a></div>
 
-        @include('layouts.frontend.header')
+        @if ($dbOk)
+            @include('layouts.frontend.header')
+        @endif
 
         <div class="flex bg-gray-50 dark:bg-gray-900">
             @yield('sidebar')
@@ -29,7 +41,10 @@
             </div>
         </div>
     </div>
-    @include('layouts.frontend.footer')
+
+    @if ($dbOk)
+        @include('layouts.frontend.footer')
+    @endif
     {{-- Include Script --}}
     @include('layouts.frontend.script')
     @stack('scripts')

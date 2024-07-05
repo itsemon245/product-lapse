@@ -13,7 +13,7 @@ class BookDemoController extends Controller
 {
     public function create()
     {
-        return new DemoRequestMail(DemoRequest::first());
+        return view('book-a-demo');
     }
 
     public function store(BookDemoRequest $request)

@@ -6,8 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class BankRequest extends FormRequest
 {
-
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -16,12 +14,11 @@ class BankRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'sometimes|required',
-            'name' => 'sometimes|required',
-            'iban' => 'sometimes|required',
-            'number' => 'sometimes|required',
-            'expiry_date' => 'sometimes|required',
-            'cvv' => 'sometimes|required',
+            'sender_name' => ['required', 'string', 'max:255'],
+            'sent_date' => ['required', 'date'],
+            'sent_time' => ['nullable', 'string', 'max:255'],
+            'attachment' => ['file', 'mimetypes:image/*,application/pdf'],
+            'payment_receipt' => ['nullable'],
         ];
     }
 }

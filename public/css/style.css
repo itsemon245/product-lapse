@@ -12495,6 +12495,7 @@ button:focus {
 
 .text_box input[type="text"],
 .text_box input[type="date"],
+.text_box input[type="time"],
 .text_box textarea,
 .text_box input[type="password"],
 .text_box input[type="email"] {
@@ -12512,6 +12513,7 @@ button:focus {
 
 .text_box input[type="text"].placeholder,
 .text_box input[type="date"].placeholder,
+.text_box input[type="time"].placeholder,
 .text_box textarea.placeholder,
 .text_box input[type="password"].placeholder,
 .text_box input[type="email"].placeholder {
@@ -12520,6 +12522,7 @@ button:focus {
 
 .text_box input[type="text"]:-moz-placeholder,
 .text_box input[type="date"]:-moz-placeholder,
+.text_box input[type="time"]:-moz-placeholder,
 .text_box textarea:-moz-placeholder,
 .text_box input[type="password"]:-moz-placeholder,
 .text_box input[type="email"]:-moz-placeholder {
@@ -12528,6 +12531,7 @@ button:focus {
 
 .text_box input[type="text"]::-moz-placeholder,
 .text_box input[type="date"]::-moz-placeholder,
+.text_box input[type="time"]::-moz-placeholder,
 .text_box textarea::-moz-placeholder,
 .text_box input[type="password"]::-moz-placeholder,
 .text_box input[type="email"]::-moz-placeholder {

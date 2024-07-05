@@ -40,20 +40,36 @@
                                         <div class="row">
                                             @if ($findOrder->payment_method == 'bank account')
                                                 <div class="col-md-6">
-                                                    <h6 class="title2">{{ __('Bank Name:') }}</h6>
-                                                    <p class="f_400 mb-30 text-font">{{ $findOrder->bank_details->name }}
-                                                    </p>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <h6 class="title2">{{ __('Bank Account ID:') }}</h6>
+                                                    <h6 class="title2">{{ __('Sender Name') }}</h6>
                                                     <p class="f_400 mb-30 text-font">
-                                                        {{ $findOrder->bank_details->account_id }}</p>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <h6 class="title2">{{ __('Bank IBAN:') }}</h6>
-                                                    <p class="f_400 mb-30 text-font">{{ $findOrder->bank_details->iban }}
+                                                        {{ $findOrder->bank_details->sender_name ?? '' }}
                                                     </p>
                                                 </div>
+                                                <div class="col-md-6">
+                                                    <h6 class="title2">{{ __('Sent Date') }}</h6>
+                                                    <p class="f_400 mb-30 text-font">
+                                                        @isset($findOrder->bank_details->sent_date)
+                                                            {{ \Carbon\Carbon::parse($findOrder->bank_details->sent_date)->format('l, j F Y') }}
+                                                        @endisset
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <h6 class="title2">{{ __('Sent Time') }}</h6>
+                                                    <p class="f_400 mb-30 text-font">
+                                                        @isset($findOrder->bank_details->sent_time)
+                                                            {{ $findOrder->bank_details->sent_time }}
+                                                        @endisset
+                                                    </p>
+                                                </div>
+                                                @isset($findOrder->bank_details->attachment)
+                                                    <div class="col-12 mb-3">
+                                                        <h6 class="title2">{{ __('Attachment') }}</h6>
+                                                        <div class="max-w-[400px] mb-3">
+                                                            <img src="{{ asset('storage/' . $findOrder->bank_details->attachment) }}"
+                                                                alt="Bank attachment">
+                                                        </div>
+                                                    </div>
+                                                @endisset
                                             @endif
                                             <div class="col-md-6">
                                                 <h6 class="title2">@__('Street')</h6>

@@ -44,6 +44,14 @@ class User extends Authenticatable implements MustVerifyEmail
         'flag' => JsonCast::class,
     ];
 
+    //---Attributes---#
+
+    public function getFullNameAttribute(): string
+    {
+        return $this->first_name.' '.$this->last_name;
+    }
+    //---Attributes---#
+
     //---Relations---#
 
     public function plans(): HasMany

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DemoRequestController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\UsersManagementController;
 use App\Http\Controllers\AdminController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Package\PackageFeatureController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ProfileController;
+use App\Models\DemoRequest;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')
@@ -66,4 +68,9 @@ Route::prefix('admin')
         Route::get('browse-logs', function () {
             return redirect(url('/admin/logs?file=7d8cb50c-laravel.log'));
         })->name('admin.logs');
+
+        Route::resource('demo-request', DemoRequestController::class)->only([
+            'index',
+            'destroy',
+        ]);
     });

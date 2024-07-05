@@ -13,7 +13,7 @@
                             </h2>
                             <p class="f_500 l_height28 wow fadeInLeft" data-wow-delay="0.4s">
                                 <?= $info?->home?->caption?->{app()->getLocale()} ?></p>
-                            <div class="action_btn d-flex align-items-center mt_60">
+                            <div class="action_btn d-flex gap-3 align-items-center mt_60">
                                 @auth
                                     <a href="#tolink-4" class="btn_hover agency_banner_btn wow fadeInLeft btn-bg"
                                         data-wow-delay="0.5s">@__('Browse Packages')</a>
@@ -21,6 +21,10 @@
                                     <a href="{{ route('register') }}" class="btn_hover agency_banner_btn wow fadeInLeft btn-bg"
                                         data-wow-delay="0.5s"> <?= $info?->home?->button?->{app()->getLocale()} ?></a>
                                 @endauth
+                                <a href="/book-demo" class="btn_hover agency_banner_btn wow fadeInLeft btn-bg"
+                                    data-wow-delay="0.5s">
+                                    @__('Book a demo')
+                                </a>
                             </div>
                         </div>
                     </div>

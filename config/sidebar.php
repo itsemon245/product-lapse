@@ -93,6 +93,11 @@ return [
         'icon' => '<span class="ti-stats-up"></span>',
         'hasSubMenu' => false,
     ],
+    'Demo Requests' => (object) [
+        'name' => 'demo-request.index',
+        'icon' => '<span class="ti-archive"></span>',
+        'hasSubMenu' => false,
+    ],
     'Logs' => (object) [
         'name' => 'admin.logs',
         'icon' => '<span class="ti-server"></span>',

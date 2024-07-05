@@ -16,31 +16,20 @@ class InstallController extends Controller
 
     public function store(InstallRequest $request)
     {
-        setEnv($request->validated());
-        Artisan::call('config:clear');
+        setEnv([
+            ...$request->validated(),
+            'APP_INSTALLED' => 'true',
+            'APP_DEBUG'=> 'false',
+            'APP_URL'=> rtrim(url('/'), '/')
+        ]);
         try {
             DB::getPdo();
             notify('Database configuration successful!');
-            setEnv([
-                'APP_INSTALLED' => 'true',
-                'APP_DEBUG'=> 'false',
-                'APP_URL'=> rtrim(url('/'), '/')
-            ]);
         } catch (\Throwable $th) {
             //throw $th;
             notify()->error('Invalid database configuration!');
 
             return back();
-        }
-
-        if ($request->fresh) {
-            setEnv([
-                'SEEDING' => 'true',
-            ]);
-            Artisan::call('migrate:fresh --seed');
-            setEnv([
-                'SEEDING' => 'false',
-            ]);
         }
 
         return redirect(route('home'));

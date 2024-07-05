@@ -24,7 +24,10 @@ class EnsureIsNotInstalled
             $installed = false;
         }
         if ($installed) {
-            notify()->warning('Application is already installed!');
+            setEnv([
+                'APP_INSTALLED'=> "true"
+                ]);
+            notify()->success('Application is installed!');
 
             return redirect('/');
         }

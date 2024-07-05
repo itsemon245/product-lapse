@@ -1,21 +1,21 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FaqController;
+use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\UsersManagementController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ContactMessageController;
+use App\Http\Controllers\FaqController;
 use App\Http\Controllers\FeatureController;
+use App\Http\Controllers\Features\Certificate\CertificateController;
+use App\Http\Controllers\Frontend\LandingPageController;
+use App\Http\Controllers\Order\OrderController;
+use App\Http\Controllers\Package\PackageFeatureController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Admin\PageController;
-use App\Http\Controllers\Order\OrderController;
-use App\Http\Controllers\ContactMessageController;
-use App\Http\Controllers\Frontend\LandingPageController;
-use App\Http\Controllers\Admin\UsersManagementController;
-use App\Http\Controllers\Package\PackageFeatureController;
-use App\Http\Controllers\Features\Certificate\CertificateController;
+use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')
-    ->middleware('auth', 'verified', 'check.admin', )
+    ->middleware('auth', 'verified', 'check.admin')
     ->group(function () {
         Route::get('/', [AdminController::class, 'admin'])->name('admin');
         Route::match(['put', 'patch'], '/settings', [AdminController::class, 'settings'])->name('settings.update');
@@ -62,4 +62,8 @@ Route::prefix('admin')
         Route::delete('contact-massage-delete/{id}', [ContactMessageController::class, 'destroy'])->name('admin.contact.message.delete');
 
         Route::resource('page', PageController::class);
+
+        Route::get('browse-logs', function () {
+            return redirect(url('/admin/logs?file=7d8cb50c-laravel.log'));
+        })->name('admin.logs');
     });

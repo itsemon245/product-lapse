@@ -19,15 +19,13 @@
 
         @include('layouts.frontend.header')
 
-        <div class="flex bg-gray-50 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
+        <div class="flex bg-gray-50 dark:bg-gray-900">
             @yield('sidebar')
             <div class="flex flex-col flex-1 w-full">
                 @yield('header')
-                {{-- This is main content --}}
                 <main>
                     @yield('main')
                 </main>
-                {{-- Include Footer Section --}}
             </div>
         </div>
     </div>

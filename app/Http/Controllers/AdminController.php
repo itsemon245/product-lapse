@@ -10,10 +10,11 @@ class AdminController extends Controller
 {
     public function admin()
     {
-        $subscribers   = User::where('type', 'subscriber')->count();
-        $revenue       = Order::whereNot('status', 'completed')->sum('amount');
-        $todaysSales   = Order::whereDate('completed_at', today())->whereNot('status', 'completed')->count();
+        $subscribers = User::where('type', 'subscriber')->count();
+        $revenue = Order::whereNot('status', 'completed')->sum('amount');
+        $todaysSales = Order::whereDate('completed_at', today())->whereNot('status', 'completed')->count();
         $pendingOrders = Order::where('status', 'pending')->count();
+
         return view('dashboard.admin', compact('subscribers', 'revenue', 'todaysSales', 'pendingOrders'));
     }
 
@@ -21,11 +22,13 @@ class AdminController extends Controller
     {
         return view('admin.settings');
     }
+
     public function settings(Request $request)
     {
         $variables = $request->except('_token', '_method');
         setEnv($variables);
         notify()->success(__('notify/success.update'));
+
         return redirect(route('settings.edit'));
     }
 }
